@@ -1,0 +1,2 @@
+rootProject.name='StoryTallers2020'
+include ':app'
