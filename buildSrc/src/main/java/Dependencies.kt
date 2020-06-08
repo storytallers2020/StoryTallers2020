@@ -1,7 +1,7 @@
 import org.gradle.api.JavaVersion
 
 object Config {
-    const val application_id = "geekbrains.ru.translator"
+    const val application_id = "cz.vasic2000.storytallers2020"
     const val compile_sdk = 29
     const val min_sdk = 21
     const val target_sdk = 29
@@ -13,6 +13,7 @@ object Releases {
     const val version_name = "1.0"
 }
 
+/*
 object Modules {
     const val app = ":app"
     const val model = ":model"
@@ -22,6 +23,7 @@ object Modules {
     //Features
     const val historyScreen = ":historyScreen"
 }
+ */
 
 object Versions {
     //Tools
