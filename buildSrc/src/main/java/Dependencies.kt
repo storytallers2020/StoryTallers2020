@@ -69,6 +69,10 @@ object Versions {
     //Timber
     const val timber = "4.7.1"
 
+    //RxJava
+    const val rxjava = "3.0.1"
+    const val rxandroid = "3.0.0"
+
     //Test
     const val jUnit = "4.12"
     const val runner = "1.2.0"
@@ -100,6 +104,11 @@ object Kotlin {
 
 object Timber{
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+}
+
+object RxJava{
+    const val rxjava = "io.reactivex.rxjava3:rxjava:${Versions.rxjava}"
+    const val rxandroid = "io.reactivex.rxjava3:rxandroid:${Versions.rxandroid}"
 }
 
 object Retrofit {
