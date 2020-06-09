@@ -66,6 +66,9 @@ object Versions {
     const val runtime = "2.2.0-alpha01"
     const val roomCompiler = "2.2.0-alpha01"
 
+    //Timber
+    const val timber = "4.7.1"
+
     //Test
     const val jUnit = "4.12"
     const val runner = "1.2.0"
@@ -93,6 +96,10 @@ object Kotlin {
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.stdlib}"
     const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesCore}"
     const val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesAndroid}"
+}
+
+object Timber{
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 }
 
 object Retrofit {
