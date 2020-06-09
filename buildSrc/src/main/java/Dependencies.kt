@@ -33,6 +33,7 @@ object Versions {
     const val appcompat = "1.1.0-rc01"
     const val material = "1.0.0"
     const val swiperefreshlayout = "1.0.0"
+    const val constraintlayout = "1.1.3"
 
     //Kotlin
     const val core = "1.0.2"
@@ -80,6 +81,7 @@ object Design {
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
+    const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
 }
 
 object GooglePlay {
@@ -111,9 +113,6 @@ object Glide {
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glideCompiler}"
 }
 
-object Picasso {
-    const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
-}
 
 object Room {
     const val runtime = "androidx.room:room-runtime:${Versions.runtime}"
