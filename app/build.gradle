@@ -36,7 +36,7 @@ dependencies {
     implementation Design.material
     implementation Design.swiperefreshlayout
     implementation Design.constraintlayout
-    
+
     //Cicerone
     implementation Cicerone.cicerone
 
