@@ -59,6 +59,9 @@ dependencies {
     implementation Glide.glide
     kapt Glide.glide_compiler
 
+    //Timber
+    implementation Timber.timber
+
     //Test
     testImplementation TestImpl.junit
     androidTestImplementation TestImpl.runner
