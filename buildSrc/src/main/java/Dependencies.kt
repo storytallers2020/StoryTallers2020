@@ -29,6 +29,9 @@ object Versions {
     //Tools
     const val multidex = "1.0.3"
 
+    //Cicerone
+    const val cicerone="5.0.0"
+
     //Design
     const val appcompat = "1.1.0-rc01"
     const val material = "1.0.0"
@@ -82,6 +85,11 @@ object Versions {
 
 object Tools {
     const val multidex = "com.android.support:multidex:${Versions.multidex}"
+}
+
+object Cicerone{
+    const val cicerone="ru.terrakok.cicerone:cicerone:${Versions.cicerone}"
+
 }
 
 object Design {
