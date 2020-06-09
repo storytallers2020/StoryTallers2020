@@ -35,6 +35,7 @@ dependencies {
     //You should not use the com.android.support and com.google.android.material dependencies in your app at the same time
     implementation Design.material
     implementation Design.swiperefreshlayout
+    implementation Design.constraintlayout
 
     //Kotlin
     implementation Kotlin.core
@@ -48,6 +49,10 @@ dependencies {
 
     //Google Play libraries
     implementation GooglePlay.googlePlayCore
+
+    //RxJava
+    implementation RxJava.rxjava
+    implementation RxJava.rxandroid
 
     //Room
     implementation Room.runtime
