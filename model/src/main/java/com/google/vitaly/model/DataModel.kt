@@ -1,6 +1,6 @@
-package com.google.vitaly.model.data
+package com.google.vitaly.model
 
-import com.google.vitaly.model.data.userdata.Result
+
 
 sealed class DataModel {
 
