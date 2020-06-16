@@ -1,4 +1,7 @@
 package com.google.vitaly.model.userdata
 
-class Personage {
-}
+data class Personage(
+    val persId: Int?,
+    val persName: String?,
+    val persAvatarUrl: String?
+)
