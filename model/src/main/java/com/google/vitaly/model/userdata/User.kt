@@ -1,8 +1,8 @@
 package com.google.vitaly.model.userdata
 
 data class User(
-    val id: Int?,
+    val userId: Int?,
     val userName: String?,
-    val avatarUrl: String?,
-    val S
+    val userAvatarUrl: String?,
+    val userStory: List<Story> = listOf()
 )
