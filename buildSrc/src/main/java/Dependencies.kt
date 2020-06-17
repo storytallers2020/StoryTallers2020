@@ -13,26 +13,30 @@ object Releases {
     const val version_name = "1.0"
 }
 
-/*
+
 object Modules {
     const val app = ":app"
     const val model = ":model"
-    const val core = ":core"
-    const val repository = ":repository"
-    const val utils = ":utils"
+   // const val core = ":core"
+   // const val repository = ":repository"
+   // const val utils = ":utils"
     //Features
-    const val historyScreen = ":historyScreen"
+   // const val historyScreen = ":historyScreen"
 }
- */
+
 
 object Versions {
     //Tools
     const val multidex = "1.0.3"
 
+    //Cicerone
+    const val cicerone="5.0.0"
+
     //Design
     const val appcompat = "1.1.0-rc01"
     const val material = "1.0.0"
     const val swiperefreshlayout = "1.0.0"
+    const val constraintlayout = "1.1.3"
 
     //Kotlin
     const val core = "1.0.2"
@@ -65,6 +69,13 @@ object Versions {
     const val runtime = "2.2.0-alpha01"
     const val roomCompiler = "2.2.0-alpha01"
 
+    //Timber
+    const val timber = "4.7.1"
+
+    //RxJava
+    const val rxjava = "3.0.1"
+    const val rxandroid = "3.0.0"
+
     //Test
     const val jUnit = "4.12"
     const val runner = "1.2.0"
@@ -76,10 +87,16 @@ object Tools {
     const val multidex = "com.android.support:multidex:${Versions.multidex}"
 }
 
+object Cicerone{
+    const val cicerone="ru.terrakok.cicerone:cicerone:${Versions.cicerone}"
+
+}
+
 object Design {
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
+    const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
 }
 
 object GooglePlay {
@@ -91,6 +108,15 @@ object Kotlin {
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.stdlib}"
     const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesCore}"
     const val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesAndroid}"
+}
+
+object Timber{
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+}
+
+object RxJava{
+    const val rxjava = "io.reactivex.rxjava3:rxjava:${Versions.rxjava}"
+    const val rxandroid = "io.reactivex.rxjava3:rxandroid:${Versions.rxandroid}"
 }
 
 object Retrofit {
@@ -111,9 +137,6 @@ object Glide {
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glideCompiler}"
 }
 
-object Picasso {
-    const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
-}
 
 object Room {
     const val runtime = "androidx.room:room-runtime:${Versions.runtime}"
