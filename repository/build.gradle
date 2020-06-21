@@ -1,0 +1,34 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation project(Modules.model)
+
+    implementation Design.appcompat
+
+    //Kotlin
+    implementation Kotlin.core
+    implementation Kotlin.stdlib
+
+    //Retrofit 2
+    implementation Retrofit.retrofit
+    implementation Retrofit.converter_gson
+    implementation Retrofit.adapter_coroutines
+    implementation Retrofit.logging_interceptor
+
+    //Room
+    implementation Room.runtime
+    kapt Room.compiler
+    implementation Room.room_ktx
+
+    //Test
+    testImplementation TestImpl.junit
+    androidTestImplementation TestImpl.runner
+    androidTestImplementation TestImpl.espresso
+
+}
