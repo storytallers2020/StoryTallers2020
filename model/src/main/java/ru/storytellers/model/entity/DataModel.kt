@@ -1,4 +1,4 @@
-package com.google.vitaly.model
+package ru.storytellers.model.entity
 
 
 
