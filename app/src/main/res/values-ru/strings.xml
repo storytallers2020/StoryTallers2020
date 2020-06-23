@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>Сказочники 2020</resources>
+<resources>
+    <string name="app_name">Сказочники 2020</string>
+    <string name="launch_welcome">Добро пожаловать\nв сказку!</string>
+    <string name="launch_create_tale">Сочинить сказку</string>
+    <string name="launch_help"><u>Как создать сказку?</u></string>
+</resources>
