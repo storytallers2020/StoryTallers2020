@@ -34,6 +34,12 @@ dependencies {
     implementation Kotlin.core
     implementation Kotlin.stdlib
 
+    //Room
+    implementation Room.runtime
+    kapt Room.compiler
+    kapt Room.room_ktx
+
+
     //Retrofit 2
     //implementation Retrofit.converter_gson
 
