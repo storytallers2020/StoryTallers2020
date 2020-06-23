@@ -1,7 +1,7 @@
 package com.google.vitaly.model.userdata
 
 class Location(
-    val locationId: Int?,
-    val locationName: String?,
-    val locationImgUrl: String?
+    val id: Int?,
+    val name: String?,
+    val imgUrl: String?
 )
