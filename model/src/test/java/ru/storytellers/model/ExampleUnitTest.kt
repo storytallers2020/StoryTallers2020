@@ -1,4 +1,4 @@
-package ru.google.vitaly.model
+package ru.storytellers.model
 
 import org.junit.Test
 
