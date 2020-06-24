@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 @Entity
 class RoomStory (
     @PrimaryKey
-    val id: String,
+    val id: Long,
     val name: String,
     val authors: String,
     val coverUrl: String,
-    val locationId: String
+    val locationId: Long
 )

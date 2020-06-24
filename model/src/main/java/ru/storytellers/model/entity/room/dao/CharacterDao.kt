@@ -12,7 +12,7 @@ interface CharacterDao {
     fun getAll(): List<RoomCharacter>
 
     @Query("SELECT * FROM RoomCharacter WHERE id = :characterId LIMIT 1")
-    fun getCharacterById(characterId: String): RoomCharacter?
+    fun getCharacterById(characterId: Long): RoomCharacter?
 
     //endregion Select
 

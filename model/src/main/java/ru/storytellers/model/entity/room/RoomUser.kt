@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 class RoomUser (
     @PrimaryKey
-    val id: String,
+    val id: Long,
     val nickName: String,
     val login: String,
     val pass: String,

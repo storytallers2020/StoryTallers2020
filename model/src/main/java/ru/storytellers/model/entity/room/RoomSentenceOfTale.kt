@@ -13,9 +13,9 @@ import androidx.room.PrimaryKey
 )
 class RoomSentenceOfTale (
     @PrimaryKey
-    val id: String,
-    val storyId: String,
-    val characterId: String,
+    val id: Long,
+    val storyId: Long,
+    val characterId: Long,
     val step: Int,
     val content: String,
     val contentType: String

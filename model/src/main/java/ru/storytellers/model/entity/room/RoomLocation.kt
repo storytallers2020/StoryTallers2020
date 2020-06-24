@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 class RoomLocation (
     @PrimaryKey
-    val id: String,
+    val id: Long,
     val imageUrl: String,
     val description: String
 )

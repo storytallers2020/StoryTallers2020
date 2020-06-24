@@ -39,6 +39,9 @@ dependencies {
     kapt Room.compiler
     kapt Room.room_ktx
 
+    //RxJava
+    implementation RxJava.rxjava
+    implementation RxJava.rxandroid
 
     //Retrofit 2
     //implementation Retrofit.converter_gson
