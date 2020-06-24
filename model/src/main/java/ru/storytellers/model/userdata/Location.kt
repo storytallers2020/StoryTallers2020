@@ -1,6 +1,6 @@
 package ru.storytellers.model.userdata
 
-class Location(
+class LocationOld(
     val id: Int?,
     val name: String?,
     val imgUrl: String?

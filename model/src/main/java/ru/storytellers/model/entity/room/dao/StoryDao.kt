@@ -11,10 +11,10 @@ interface StoryDao {
     //region Select
 
     @Query("SELECT * FROM RoomStory")
-    fun getAll(): List<RoomStory>
+    fun getAll(): List<RoomStory>?
 
     @Query("SELECT * FROM RoomStory WHERE id = :storyId LIMIT 1")
-    fun getStoryById(storyId: String): RoomStory?
+    fun getStoryById(storyId: Long): RoomStory?
 
     //endregion Select
 

@@ -12,7 +12,7 @@ interface UserDao {
     fun getAll(): List<RoomUser>
 
     @Query("SELECT * FROM RoomUser WHERE id = :userId LIMIT 1")
-    fun getUserById(userId: String): RoomUser?
+    fun getUserById(userId: Long): RoomUser?
 
     @Query("SELECT * FROM RoomUser WHERE login = :login LIMIT 1")
     fun getUserByLogin(login: String): RoomUser?

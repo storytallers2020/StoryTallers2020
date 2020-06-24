@@ -15,10 +15,10 @@ interface SentenceOfTaleDao {
     fun getAll(): List<RoomSentenceOfTale>
 
     @Query("SELECT * FROM RoomSentenceOfTale WHERE id = :sentenceId LIMIT 1")
-    fun getSentenceById(sentenceId: String): RoomSentenceOfTale?
+    fun getSentenceById(sentenceId: Long): RoomSentenceOfTale?
 
     @Query("SELECT * FROM RoomSentenceOfTale WHERE storyId = :storyId")
-    fun getAllStorySentence(storyId: String): List<RoomSentenceOfTale>?
+    fun getAllStorySentence(storyId: Long): List<RoomSentenceOfTale>?
 
     //endregion Select
 

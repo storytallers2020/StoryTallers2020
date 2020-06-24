@@ -10,10 +10,10 @@ interface LocationDao {
     //region Select
 
     @Query("SELECT * FROM RoomLocation")
-    fun getAll(): List<RoomLocation>
+    fun getAll(): List<RoomLocation>?
 
     @Query("SELECT * FROM RoomLocation WHERE id = :locationId LIMIT 1")
-    fun getLocationById(locationId: String): RoomLocation?
+    fun getLocationById(locationId: Long): RoomLocation?
 
     //endregion Select
 

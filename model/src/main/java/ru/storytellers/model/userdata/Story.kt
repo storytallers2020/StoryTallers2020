@@ -1,8 +1,8 @@
 package ru.storytellers.model.userdata
 
-class Story(
+class StoryOld(
     val id: Int?,
     val name: String?,
-    val location: Location?,
-    val personage: List<Personage> = listOf()
+    val location: LocationOld?,
+    val personage: List<PersonageOld> = listOf()
 )
