@@ -1,4 +1,6 @@
-package ru.storytallers.ui.fragments
+package ru.storytallers.ui.fragments.basefragment
 
-class BaseFragment {
+import androidx.fragment.app.Fragment
+
+abstract class BaseFragment: Fragment() {
 }
