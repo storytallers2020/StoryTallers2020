@@ -34,10 +34,10 @@ class LocationDataSource(private val database: AppDatabase): ILocationDataSource
             }
         }
 
-    override fun getAll(locationId: Long): Single<List<Location>> =
+    override fun getAll(): Single<List<Location>> =
         Single.create { emitter ->
             database.locationDao.getAll()?.let { roomLocationList ->
-                val LocationList = roomLocationList.map {
+                val locationList = roomLocationList.map {
                     Location(
                         it.id,
                         it.name,
@@ -45,7 +45,7 @@ class LocationDataSource(private val database: AppDatabase): ILocationDataSource
                         it.description
                     )
                 }
-                emitter.onSuccess(LocationList)
+                emitter.onSuccess(locationList)
             } ?: let {
                 emitter.onError(RuntimeException("No such location in database"))
             }
