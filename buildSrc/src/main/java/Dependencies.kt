@@ -80,11 +80,20 @@ object Versions {
     const val jUnit = "4.12"
     const val runner = "1.2.0"
     const val espressoCore = "3.2.0"
+
+    //Fragment
+    const val lifecycle = "2.2.0"
+    const val fragment = "1.2.5"
 }
 
 
 object Tools {
     const val multidex = "com.android.support:multidex:${Versions.multidex}"
+}
+
+object Android_x{
+    const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
 }
 
 object Cicerone{
