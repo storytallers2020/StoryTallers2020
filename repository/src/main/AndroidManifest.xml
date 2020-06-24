@@ -1,5 +1,3 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cz.vasic2000.storytallers2020.repository">
-
-    /
+    package="ru.storytallers.repository">
 </manifest>

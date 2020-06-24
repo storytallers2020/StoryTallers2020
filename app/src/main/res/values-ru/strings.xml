@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>Сказочники 2020</resources>
+<resources>
+    <string name="app_name">Сказочники 2020</string>
+    <string name="launch_welcome">Добро пожаловать\nв сказку!</string>
+    <string name="launch_create_tale">Сочинить сказку</string>
+    <string name="launch_help"><u>Как создать сказку?</u></string>
+    <string name="level_level">Уровень</string>
+    <string name="level_hint">Возможность видеть всю\nранее написаную сказку\nна протяжении всей игры</string>
+    <string name="level_easy">Легкий</string>
+    <string name="level_medium">Средний</string>
+    <string name="level_hard">Сложный</string>
+    <string name="level_next">Далее</string>
+    <string name="character_create_character">Персонаж</string>
+    <string name="character_create_choose_character">Выберите героя:</string>
+    <string name="character_create_add_user"><u>Добавить игрока +</u></string>
+</resources>

@@ -1,7 +1,7 @@
 import org.gradle.api.JavaVersion
 
 object Config {
-    const val application_id = "cz.vasic2000.storytallers2020"
+    const val application_id = "ru.storytallers"
     const val compile_sdk = 29
     const val min_sdk = 21
     const val target_sdk = 29
@@ -65,9 +65,9 @@ object Versions {
     const val picasso = "2.5.2"
 
     //Room
-    const val roomKtx = "2.2.0-alpha01"
-    const val runtime = "2.2.0-alpha01"
-    const val roomCompiler = "2.2.0-alpha01"
+    const val roomKtx = "2.2.5"
+    const val runtime = "2.2.5"
+    const val roomCompiler = "2.2.5"
 
     //Timber
     const val timber = "4.7.1"
