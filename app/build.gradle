@@ -60,9 +60,13 @@ dependencies {
     implementation RxJava.rxjava
     implementation RxJava.rxandroid
 
+    //Fragment
+    implementation Android_x.lifecycle
+    implementation Android_x.fragment
+
     //Room
     implementation Room.runtime
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+
     kapt Room.compiler
     implementation Room.room_ktx
 
