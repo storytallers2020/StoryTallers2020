@@ -3,4 +3,13 @@
     <string name="launch_welcome">Welcome to the fairy tale!</string>
     <string name="launch_create_tale">Create a fairy tale</string>
     <string name="launch_help"><u>How to create a fairy tale?</u></string>
+    <string name="level_level">Level</string>
+    <string name="level_hint">The ability to see\nall the previously written fairy\ntale throughout the game</string>
+    <string name="level_easy">Easy</string>
+    <string name="level_medium">Medium</string>
+    <string name="level_hard">Hard</string>
+    <string name="level_next">Next</string>
+    <string name="character_create_character">Character</string>
+    <string name="character_create_choose_character">Choose a hero:</string>
+    <string name="character_create_add_user"><u>Add player +</u></string>
 </resources>
