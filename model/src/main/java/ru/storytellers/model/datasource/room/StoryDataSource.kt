@@ -2,6 +2,7 @@ package ru.storytellers.model.datasource.room
 
 import io.reactivex.rxjava3.core.Single
 import ru.storytellers.model.datasource.IStoryDataSource
+import ru.storytellers.model.entity.Location
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.entity.room.RoomStory
 import ru.storytellers.model.entity.room.db.AppDatabase
@@ -47,12 +48,15 @@ class StoryDataSource(
         Single.create { emitter ->
             database.storyDao.getAll()?.let { roomStoryList ->
                 val storyList = roomStoryList.map { roomStory ->
+                    val location = database.locationDao.getLocationById(roomStory.locationId)?.let {
+                        Location(it.id, it.name, it.description, it.imageUrl)
+                    }
                     Story(
                         roomStory.id,
                         roomStory.name,
                         roomStory.authors,
                         roomStory.coverUrl,
-                        null //TODO: Нужно как-то придумать, как это заполнить.
+                        location
                     )
                 }
                 emitter.onSuccess(storyList)
