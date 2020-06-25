@@ -16,7 +16,7 @@ class CharacterDataSource(private val database: AppDatabase): ICharacterDataSour
         database.characterDao.insert(roomCharacter)
     }
 
-    override fun getLocationById(characterId: Long): Single<Character> =
+    override fun getCharacterById(characterId: Long): Single<Character> =
         Single.create { emitter ->
             database.characterDao.getCharacterById(characterId)?.let { roomCharacter ->
                 emitter.onSuccess(
