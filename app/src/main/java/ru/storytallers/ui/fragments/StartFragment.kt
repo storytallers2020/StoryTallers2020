@@ -6,7 +6,7 @@ import ru.storytallers.viewmodels.AuthViewModel
 import ru.storytellers.model.DataModel
 
 class AuthFragment: BaseFragment<DataModel>() {
-    override val layoutRes = R.layout.fragment_auth
+    override val layoutRes = R.layout.fragment_start
     override lateinit var model: AuthViewModel
     companion object {
         fun newInstance() = AuthFragment()
