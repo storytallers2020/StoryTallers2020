@@ -1,15 +1,17 @@
 package ru.storytellers.utils
 
+import kotlin.reflect.full.declaredMemberProperties
+
 // Вывод полей в строку для записи в лог
-fun Unit.fieldsToLogString(): String {
+fun Any.fieldsToLogString(): String {
     var logString = ""
 
-    val fields = this::class.java.declaredFields
-    fields.forEach {field ->
-        try {
-            logString += "${field.name}: ${field.get(this)} "
+    val clazz = this.javaClass.kotlin.declaredMemberProperties
+    clazz.forEach { field ->
+        logString += try {
+            "${field.name}: [${field.get(this)}], "
         } catch (e: Exception) {
-            logString += "[can't get some name or value of field],\r\n "
+            "[can't get some name or value of field], "
         }
     }
 

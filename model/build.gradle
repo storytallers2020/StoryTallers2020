@@ -46,10 +46,13 @@ dependencies {
     //Retrofit 2
     //implementation Retrofit.converter_gson
 
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
+
     //Test
     testImplementation TestImpl.junit
     androidTestImplementation TestImpl.runner
     androidTestImplementation TestImpl.espresso
+
 
 }
 
