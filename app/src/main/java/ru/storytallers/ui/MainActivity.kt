@@ -1,8 +1,9 @@
-package ru.storytallers
+package ru.storytallers.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import org.koin.android.ext.android.inject
+import ru.storytallers.R
 import ru.storytallers.di.injectDependencies
 import ru.storytallers.navigation.Screens
 import ru.terrakok.cicerone.NavigatorHolder
