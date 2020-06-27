@@ -1,4 +1,4 @@
-package com.google.vitaly.appvk.ui
+package ru.storytallers.ui
 
 interface BackButtonListener {
     fun backClicked(): Boolean
