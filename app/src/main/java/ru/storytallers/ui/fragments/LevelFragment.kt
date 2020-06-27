@@ -12,4 +12,7 @@ class LevelFragment: BaseFragment<DataModel>() {
     companion object {
         fun newInstance() = LevelFragment()
     }
+    override fun backClicked(): Boolean {
+        TODO("Not yet implemented")
+    }
 }
