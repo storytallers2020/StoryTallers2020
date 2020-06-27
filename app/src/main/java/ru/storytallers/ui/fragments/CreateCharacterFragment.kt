@@ -8,7 +8,12 @@ import ru.storytellers.model.DataModel
 class CreateCharacterFragment: BaseFragment<DataModel>() {
     override lateinit var model: CreateCharacterViewModel
     override val layoutRes= R.layout.fragment_character_create
+
     companion object {
         fun newInstance() = CreateCharacterFragment()
+    }
+
+    override fun backClicked(): Boolean {
+        TODO("Not yet implemented")
     }
 }
