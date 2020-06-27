@@ -39,4 +39,13 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         navigatorHolder.removeNavigator()
     }
+
+    override fun onBackPressed() {
+        supportFragmentManager.fragments.forEach {
+            if(it is BackButtonListener && it.backClicked()){
+                return
+            }
+        }
+        router.exit()
+    }
 }
