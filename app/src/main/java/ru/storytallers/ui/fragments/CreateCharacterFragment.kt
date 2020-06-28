@@ -5,8 +5,7 @@ import org.koin.android.scope.currentScope
 import ru.storytallers.R
 import ru.storytallers.ui.fragments.basefragment.BaseFragment
 import ru.storytallers.viewmodels.CreateCharacterViewModel
-import ru.storytallers.viewmodels.StartViewModel
-import ru.storytellers.model.DataModel
+import ru.storytallers.model.DataModel
 
 class CreateCharacterFragment: BaseFragment<DataModel>() {
     override lateinit var model: CreateCharacterViewModel

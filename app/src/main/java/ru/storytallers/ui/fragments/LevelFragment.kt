@@ -9,7 +9,7 @@ import ru.storytallers.R
 import ru.storytallers.navigation.Screens
 import ru.storytallers.ui.fragments.basefragment.BaseFragment
 import ru.storytallers.viewmodels.LevelViewModel
-import ru.storytellers.model.DataModel
+import ru.storytallers.model.DataModel
 
 class LevelFragment: BaseFragment<DataModel>() {
     override lateinit var model: LevelViewModel

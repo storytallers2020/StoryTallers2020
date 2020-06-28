@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StoryTallers 2020</string>
+    <string name="app_name">StoryTellers 2020</string>
     <string name="auth_welcome">Welcome to the fairy tale!</string>
     <string name="auth_create_tale">Create a fairy tale</string>
     <string name="auth_help"><u>How to create a fairy tale?</u></string>
