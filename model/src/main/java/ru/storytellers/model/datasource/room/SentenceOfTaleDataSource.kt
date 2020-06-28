@@ -1,5 +1,7 @@
 package ru.storytellers.model.datasource.room
 
+import io.reactivex.rxjava3.annotations.NonNull
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import ru.storytellers.model.datasource.ISentenceOfTaleDataSource
 import ru.storytellers.model.entity.Character
@@ -12,17 +14,18 @@ class SentenceOfTaleDataSource(
     private val characterDataSource: CharacterDataSource
 ) : ISentenceOfTaleDataSource {
 
-    override fun insertOrReplace(sentenceOfTale: SentenceOfTale) {
-        val roomSentence = RoomSentenceOfTale(
-            sentenceOfTale.id,
-            sentenceOfTale.storyId,
-            sentenceOfTale.character?.id ?: 0,
-            sentenceOfTale.step,
-            sentenceOfTale.content,
-            sentenceOfTale.contentType
-        )
-        database.sentenceOfTaleDao.insert(roomSentence)
-    }
+    override fun insertOrReplace(sentenceOfTale: SentenceOfTale): @NonNull Completable =
+        Completable.fromAction {
+            val roomSentence = RoomSentenceOfTale(
+                sentenceOfTale.id,
+                sentenceOfTale.storyId,
+                sentenceOfTale.character?.id ?: 0,
+                sentenceOfTale.step,
+                sentenceOfTale.content,
+                sentenceOfTale.contentType
+            )
+            database.sentenceOfTaleDao.insert(roomSentence)
+        }
 
     override fun getSentenceById(sentenceId: Long): Single<SentenceOfTale> =
         Single.create { emitter ->

@@ -1,5 +1,7 @@
 package ru.storytellers.model.datasource.room
 
+import io.reactivex.rxjava3.annotations.NonNull
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import ru.storytellers.model.datasource.IStoryDataSource
 import ru.storytellers.model.entity.Location
@@ -11,16 +13,17 @@ class StoryDataSource(
     private val database: AppDatabase,
     private val locationDataSource: LocationDataSource
 ) : IStoryDataSource {
-    override fun insertOrReplace(story: Story) {
-        val roomStory = RoomStory(
-            story.id,
-            story.name,
-            story.authors,
-            story.coverUrl,
-            story.location?.id ?: 0
-        )
-        database.storyDao.insert(roomStory)
-    }
+    override fun insertOrReplace(story: Story): @NonNull Completable =
+        Completable.fromAction {
+            val roomStory = RoomStory(
+                story.id,
+                story.name,
+                story.authors,
+                story.coverUrl,
+                story.location?.id ?: 0
+            )
+            database.storyDao.insert(roomStory)
+        }
 
     override fun getStoryById(storyId: Long): Single<Story> =
 
