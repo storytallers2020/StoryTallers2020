@@ -33,4 +33,6 @@ abstract class BaseFragment<T:DataModel>: Fragment(), BackButtonListener {
   val rout: Router by inject()
   router=rout
  }
+
+ protected abstract fun iniViewModel()
  }
