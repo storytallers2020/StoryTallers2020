@@ -5,7 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import ru.storytallers.R
 import ru.storytallers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.model.DataModel
+import ru.storytallers.model.DataModel
 import org.koin.android.scope.currentScope
 import ru.storytallers.viewmodels.LocationViewModel
 

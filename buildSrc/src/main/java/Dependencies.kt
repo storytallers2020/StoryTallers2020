@@ -1,7 +1,7 @@
 import org.gradle.api.JavaVersion
 
 object Config {
-    const val application_id = "ru.storytallers"
+    const val application_id = "ru.storytellers"
     const val compile_sdk = 29
     const val min_sdk = 21
     const val target_sdk = 29

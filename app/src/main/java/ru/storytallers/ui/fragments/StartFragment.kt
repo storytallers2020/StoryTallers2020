@@ -7,7 +7,7 @@ import com.google.android.material.button.MaterialButton
 import ru.storytallers.R
 import ru.storytallers.ui.fragments.basefragment.BaseFragment
 import ru.storytallers.viewmodels.StartViewModel
-import ru.storytellers.model.DataModel
+import ru.storytallers.model.DataModel
 import kotlinx.android.synthetic.main.fragment_start.start_button
 import org.koin.android.scope.currentScope
 import ru.storytallers.navigation.Screens

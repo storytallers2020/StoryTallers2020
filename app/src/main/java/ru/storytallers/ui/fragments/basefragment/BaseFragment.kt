@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import org.koin.android.ext.android.inject
 import ru.storytallers.ui.BackButtonListener
 import ru.storytallers.viewmodels.baseviewmodel.BaseViewModel
-import ru.storytellers.model.DataModel
+import ru.storytallers.model.DataModel
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 

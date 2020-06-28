@@ -13,7 +13,7 @@ import ru.storytallers.viewmodels.CreateCharacterViewModel
 import ru.storytallers.viewmodels.LevelViewModel
 import ru.storytallers.viewmodels.LocationViewModel
 import ru.storytallers.viewmodels.StartViewModel
-import ru.storytellers.model.entity.room.db.AppDatabase
+import ru.storytallers.model.entity.room.db.AppDatabase
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 
