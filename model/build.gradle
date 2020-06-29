@@ -3,30 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-android {
-    compileSdkVersion 29
 
-    defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-}
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    //implementation project(Modules.utils)
+    implementation project(Modules.resources)
 
     implementation Design.appcompat
 
@@ -44,7 +25,13 @@ dependencies {
     implementation RxJava.rxandroid
 
     //Retrofit 2
-    //implementation Retrofit.converter_gson
+    implementation Retrofit.converter_gson
+    implementation Retrofit.adapter_rxjava
+    implementation Retrofit.retrofit
+
+    //Glide
+    implementation Glide.glide
+    kapt Glide.glide_compiler
 
     //Test
     testImplementation TestImpl.junit

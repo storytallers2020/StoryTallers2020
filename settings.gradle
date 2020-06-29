@@ -1,3 +1,4 @@
+include ':resources'
 include ':repository'
 include ':model'
 rootProject.name='StoryTallers2020'
