@@ -16,4 +16,12 @@
     <string name="tale_begins">Your tale begins here:</string>
     <string name="royal_palace">Royal Palace</string>
     <string name="to_begin">To begin</string>
+    <string name="rules">Rules</string>
+    <string name="rules_create_tale">How to create a fairy tale?</string>
+    <string name="choosing_cover">Choosing a cover</string>
+    <string name="choosing_cover_choose">Come up with a name and choose\n a cover for your fairy tale</string>
+    <string name="save">Save</string>
+    <string name="library">Library</string>
+    <string name="my_tales">My Fairy Tales</string>
+    <string name="share">Share:</string>
 </resources>
