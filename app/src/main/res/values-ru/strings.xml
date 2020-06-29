@@ -17,4 +17,12 @@
     <string name="tale_begins">Ваша сказка начинается тут:</string>
     <string name="royal_palace">Королевский дворец</string>
     <string name="to_begin">Начать</string>
+    <string name="rules">Правила</string>
+    <string name="rules_create_tale">Как создать сказку?</string>
+    <string name="choosing_cover">Выбор обложки</string>
+    <string name="choosing_cover_choose">Придумайте название и выберите\n обложку для своей сказки</string>
+    <string name="save">Сохранить</string>
+    <string name="library">Библиотека</string>
+    <string name="my_tales">Мои сказки</string>
+    <string name="share">Поделиться:</string>
 </resources>
