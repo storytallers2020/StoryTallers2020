@@ -7,7 +7,7 @@
     android:background="@drawable/ic_background_1">
 
     <ImageView
-        android:id="@+id/back_button"
+        android:id="@+id/back_button_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -152,12 +152,12 @@
 
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/description_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
         android:gravity="center_horizontal"
-        android:text="@string/level_hint"
+        android:text="@string/easy_description"
         android:textColor="@color/yellow"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -170,9 +170,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/description_level">
 
         <TextView
+            android:id="@+id/easy_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -182,6 +183,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/medium_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -191,6 +193,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/hard_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -201,7 +204,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatSeekBar
-        android:id="@+id/appCompatSeekBar"
+        android:id="@+id/seekBar_lvl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -216,11 +219,12 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/next_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="54dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="54dp"
         android:backgroundTint="@color/yellow"
         android:text="@string/next"
         android:textAllCaps="false"
@@ -229,7 +233,10 @@
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar_lvl"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,6 +39,7 @@ class StartFragment: BaseFragment<DataModel>() {
     }
 
     override fun backClicked(): Boolean {
-        TODO("Not yet implemented")
+        router.exit()
+        return true
     }
 }
