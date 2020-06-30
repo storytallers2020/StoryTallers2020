@@ -1,13 +1,14 @@
-package ru.storytallers.model.datasource.room
+package ru.storytellers.model.datasource.room
 
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import ru.storytallers.model.datasource.IUserDataSource
-import ru.storytallers.model.entity.User
-import ru.storytallers.model.entity.room.RoomUser
-import ru.storytallers.model.entity.room.db.AppDatabase
+import ru.storytellers.model.datasource.IUserDataSource
+import ru.storytellers.model.entity.User
+import ru.storytellers.model.entity.room.RoomUser
+import ru.storytellers.model.entity.room.db.AppDatabase
 
 class UserRoomDataSource(private val database: AppDatabase): IUserDataSource {
 
