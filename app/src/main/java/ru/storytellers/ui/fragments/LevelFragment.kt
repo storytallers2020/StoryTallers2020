@@ -8,6 +8,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSeekBar
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_level.*
@@ -128,8 +129,8 @@ class LevelFragment: BaseFragment<DataModel>() {
     }
 
     private fun setTextColorChoiceLvl(){
-        val colorYellow=context?.resources?.getColor(R.color.yellow)
-        val colorWhite=context?.resources?.getColor(R.color.white)
+        val colorYellow=context?.let {ContextCompat.getColor(it,R.color.yellow)}
+        val colorWhite=context?.let {ContextCompat.getColor(it,R.color.white)}
         when(levelGame){
              3 -> {
                  descriptionLvl?.text=context?.resources?.getString(R.string.hard_description)
