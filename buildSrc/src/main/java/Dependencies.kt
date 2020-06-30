@@ -18,7 +18,6 @@ object Modules {
     const val app = ":app"
     const val model = ":model"
     const val resources = ":resources"
-    const val repository = ":repository"
 }
 
 
