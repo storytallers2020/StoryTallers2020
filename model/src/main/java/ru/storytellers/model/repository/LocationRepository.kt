@@ -4,7 +4,6 @@ import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import org.jetbrains.annotations.NotNull
 import ru.storytellers.model.datasource.ILocationDataSource
 import ru.storytellers.model.entity.Location
 
