@@ -14,3 +14,6 @@
 /captures
 .externalNativeBuild
 .cxx
+*.tab
+*.tab.values.at
+misc.xml
