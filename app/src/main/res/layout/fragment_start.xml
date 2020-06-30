@@ -15,7 +15,7 @@
         android:layout_marginEnd="66dp"
         android:layout_marginTop="100dp"
         android:gravity="center_horizontal"
-        android:text="@string/launch_welcome"
+        android:text="@string/auth_welcome"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/start_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -30,7 +31,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginTop="380dp"
         android:backgroundTint="@color/yellow"
-        android:text="@string/launch_create_tale"
+        android:text="@string/auth_create_tale"
         android:textAllCaps="false"
         android:textColor="@color/blueDark"
         android:textSize="20sp"
@@ -44,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="40dp"
-        android:text="@string/launch_help"
+        android:text="@string/auth_help"
         android:textColor="@color/yellow"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
