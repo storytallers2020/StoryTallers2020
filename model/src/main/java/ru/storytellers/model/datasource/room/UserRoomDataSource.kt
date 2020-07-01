@@ -2,7 +2,6 @@ package ru.storytellers.model.datasource.room
 
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.storytellers.model.datasource.IUserDataSource
