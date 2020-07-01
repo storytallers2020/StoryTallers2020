@@ -28,10 +28,9 @@ class LevelFragment: BaseFragment<DataModel>() {
     private var descriptionLvl: TextView?=null
     private var seekBar: AppCompatSeekBar?=null
     private var nextScrnBtn: MaterialButton?=null
-    private val STATE_LVL_KEY="stateLevel"
     private val seekBarListener = object: OnSeekBarChangeListener{
         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-            val a =5
+            val a =5 // заглушка
         }
 
         override fun onStartTrackingTouch(seekBar: SeekBar?) {
