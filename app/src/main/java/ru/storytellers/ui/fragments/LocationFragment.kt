@@ -3,10 +3,12 @@ package ru.storytellers.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.fragment_character_create.*
 import ru.storytellers.R
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.model.DataModel
 import org.koin.android.scope.currentScope
+import ru.storytellers.navigation.Screens
 import ru.storytellers.viewmodels.LocationViewModel
 
 class LocationFragment: BaseFragment<DataModel>() {
@@ -18,9 +20,11 @@ class LocationFragment: BaseFragment<DataModel>() {
         fun newInstance() = LocationFragment()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun init() {
         iniViewModel()
+        btn_next.setOnClickListener {
+            router.navigateTo(Screens.GameScreen())
+        }
     }
 
     override fun iniViewModel() {
@@ -31,6 +35,7 @@ class LocationFragment: BaseFragment<DataModel>() {
     }
 
     override fun backClicked(): Boolean {
-        TODO("Not yet implemented")
+        router.exit()
+        return true
     }
 }

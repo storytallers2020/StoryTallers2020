@@ -28,4 +28,9 @@
     <string name="library">Библиотека</string>
     <string name="my_tales">Мои сказки</string>
     <string name="share">Поделиться:</string>
+    <string name="game_hint">Каждый игрок ходит\nстрого по очереди и\nможет придумать\nтолько одно\n предложение</string>
+    <string name="game_hint_location">Начинай сказку,\nне забывай, что твой герой\nнаходится в королевском дворце!</string>
+    <string name="game_resume">Продолжить игру</string>
+    <string name="select_cover">Выбрать оболжку</string>
+    <string name="end_tale">Завершить сказку</string>
 </resources>

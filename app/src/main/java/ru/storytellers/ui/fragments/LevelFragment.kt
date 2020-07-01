@@ -1,7 +1,5 @@
 package ru.storytellers.ui.fragments
 
-import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
@@ -55,11 +53,13 @@ class LevelFragment: BaseFragment<DataModel>() {
         return true
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun init() {
         initUiComponents()
         setBtnClickListener()
         setSeekBarListener()
+        btn_next.setOnClickListener {
+            router.navigateTo(Screens.CreateCharacterScreen())
+        }
     }
 
     private fun setBtnClickListener() {
@@ -98,7 +98,7 @@ class LevelFragment: BaseFragment<DataModel>() {
         hardBtn = hard_button
         backBtn = back_button_level
         descriptionLvl = description_level
-        nextScrnBtn=next_button
+        nextScrnBtn=btn_next
         seekBar=seekBar_lvl
         seekBar?.max=30
     }
