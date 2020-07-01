@@ -3,6 +3,7 @@ package ru.storytellers.model.datasource.room
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import ru.storytellers.model.datasource.ICharacterDataSource
 import ru.storytellers.model.datasource.ISentenceOfTaleDataSource
 import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.SentenceOfTale
@@ -11,7 +12,7 @@ import ru.storytellers.model.entity.room.db.AppDatabase
 
 class SentenceOfTaleDataSource(
     private val database: AppDatabase,
-    private val characterDataSource: CharacterDataSource
+    private val characterDataSource: ICharacterDataSource
 ) : ISentenceOfTaleDataSource {
 
     override fun insertOrReplace(sentenceOfTale: SentenceOfTale): @NonNull Completable =
