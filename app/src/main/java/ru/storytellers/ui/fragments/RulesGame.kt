@@ -26,7 +26,7 @@ class RulesGame: Fragment(),BackButtonListener {
         savedInstanceState: Bundle?
     ): View? {
         injectRouter()
-        return inflater.inflate(R.layout.fragment_rules_v2, container, false)
+        return inflater.inflate(R.layout.fragment_rules, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
