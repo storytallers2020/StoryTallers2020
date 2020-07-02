@@ -3,6 +3,7 @@ package ru.storytellers.model.datasource.room
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import ru.storytellers.model.datasource.ILocationDataSource
 import ru.storytellers.model.datasource.IStoryDataSource
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.entity.Story
@@ -11,7 +12,7 @@ import ru.storytellers.model.entity.room.db.AppDatabase
 
 class StoryDataSource(
     private val database: AppDatabase,
-    private val locationDataSource: LocationDataSource
+    private val locationDataSource: ILocationDataSource
 ) : IStoryDataSource {
     override fun insertOrReplace(story: Story): @NonNull Completable =
         Completable.fromAction {
