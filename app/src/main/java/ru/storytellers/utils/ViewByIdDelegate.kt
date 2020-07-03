@@ -1,4 +1,4 @@
-package com.google.vitaly.utils.ui
+package ru.storytellers.utils
 
 import android.app.Activity
 import android.view.View
