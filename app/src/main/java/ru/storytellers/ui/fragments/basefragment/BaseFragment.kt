@@ -16,27 +16,19 @@ import ru.terrakok.cicerone.Router
 abstract class BaseFragment<T : DataModel> : Fragment(), BackButtonListener {
     abstract val model: BaseViewModel<T>
     abstract val layoutRes: Int
-    lateinit var navigatorHolder: NavigatorHolder
-    lateinit var router: Router
+
+    protected val router: Router by inject()
+    private val navigatorHolder: NavigatorHolder by inject()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        injectRouter()
-        return inflater.inflate(layoutRes, container, false)
-    }
+    ): View? = inflater.inflate(layoutRes, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-    }
-
-    private fun injectRouter() {
-        val navigHold: NavigatorHolder by inject()
-        navigatorHolder = navigHold
-        val rout: Router by inject()
-        router = rout
     }
 
     protected abstract fun init()
