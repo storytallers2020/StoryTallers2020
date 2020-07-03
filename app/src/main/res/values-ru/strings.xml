@@ -7,8 +7,11 @@
     <string name="level">Уровень</string>
     <string name="level_hint">Возможность видеть всю\nранее написанную сказку\nна протяжении всей игры</string>
     <string name="easy">Легкий</string>
+    <string name="easy_description">Все ранее сочинённые предложения\nвидны всем участникам\nигры в любой момент времени</string>
     <string name="medium">Средний</string>
+    <string name="medium_description">Игрок видит только последнее\nпредложение игрока\nкоторый ходил перед ним</string>
     <string name="hard">Сложный</string>
+    <string name="hard_description">Игрок видит только последнее\nпредложение игрока который ходил\nперед ним. В своём предложении\nигрок должен использовать\nобязательное слово которое\nгенерируется игрой в случайном порядке</string>
     <string name="next">Далее</string>
     <string name="character">Персонаж</string>
     <string name="choose_character">Выберите героя:</string>
