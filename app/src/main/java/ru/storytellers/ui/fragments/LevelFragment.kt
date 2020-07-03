@@ -71,6 +71,7 @@ class LevelFragment: BaseFragment<DataModel>() {
 
     private fun setClickListenerNextBtn() {
         nextScrnBtn?.setOnClickListener {
+            model.setLevelGame(levelGame)
             toCreateCharacterScrn() }
     }
 
