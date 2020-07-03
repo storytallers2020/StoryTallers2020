@@ -12,23 +12,16 @@ import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var navigatorHolder: NavigatorHolder
-    val navigator = SupportAppNavigator(this, R.id.container)
-    lateinit var router: Router
+    private val navigatorHolder: NavigatorHolder by inject()
+    private val navigator = SupportAppNavigator(this, R.id.container)
+    private val router: Router by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        injection()
-        router.replaceScreen(Screens.StartScreen())
-    }
 
-    private fun injection(){
         injectDependencies()
-        val rout: Router by inject()
-        router=rout
-        val navigHold: NavigatorHolder by inject()
-        navigatorHolder=navigHold
+        router.replaceScreen(Screens.StartScreen())
     }
 
     override fun onResumeFragments() {
