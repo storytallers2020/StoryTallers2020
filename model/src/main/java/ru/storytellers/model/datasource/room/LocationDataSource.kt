@@ -1,22 +1,25 @@
 package ru.storytellers.model.datasource.room
 
+import io.reactivex.rxjava3.annotations.NonNull
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import ru.storytellers.model.datasource.ILocationDataSource
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.entity.room.RoomLocation
 import ru.storytellers.model.entity.room.db.AppDatabase
 
-class LocationDataSource(private val database: AppDatabase): ILocationDataSource {
+class LocationDataSource(private val database: AppDatabase) : ILocationDataSource {
 
-    override fun insertOrReplace(location: Location) {
-        val roomLocation = RoomLocation(
-            location.id,
-            location.name,
-            location.imageUrl,
-            location.descriptions
-        )
-        database.locationDao.insert(roomLocation)
-    }
+    override fun insertOrReplace(location: Location): @NonNull Completable =
+        Completable.fromAction {
+            val roomLocation = RoomLocation(
+                location.id,
+                location.name,
+                location.imageUrl,
+                location.descriptions
+            )
+            database.locationDao.insert(roomLocation)
+        }
 
     override fun getLocationById(locationId: Long): Single<Location> =
         Single.create { emitter ->

@@ -1,13 +1,17 @@
 package ru.storytellers.model.datasource.room
 
+import io.reactivex.rxjava3.annotations.NonNull
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.storytellers.model.datasource.IUserDataSource
 import ru.storytellers.model.entity.User
 import ru.storytellers.model.entity.room.RoomUser
 import ru.storytellers.model.entity.room.db.AppDatabase
 
 class UserRoomDataSource(private val database: AppDatabase): IUserDataSource {
-    override fun insertOrReplace(user: User) {
+
+    override fun insertOrReplace(user: User): @NonNull Completable = Completable.fromAction {
         val roomUser = RoomUser(
             user.id,
             user.nickName,
@@ -17,7 +21,7 @@ class UserRoomDataSource(private val database: AppDatabase): IUserDataSource {
             user.avatarUrl
         )
         database.userDao.insert(roomUser)
-    }
+    }.subscribeOn(Schedulers.io())
 
     override fun getUserById(userId: Long): Single<User> =
 

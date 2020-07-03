@@ -1,8 +1,6 @@
 package ru.storytellers.model.entity.room.dao
 
 import androidx.room.*
-import ru.storytellers.model.entity.room.RoomCharacter
-import ru.storytellers.model.entity.room.RoomLocation
 import ru.storytellers.model.entity.room.RoomStory
 
 @Dao

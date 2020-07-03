@@ -7,6 +7,7 @@
     android:background="@drawable/ic_background_1">
 
     <ImageView
+        android:id="@+id/back_button_character"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -194,6 +195,7 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

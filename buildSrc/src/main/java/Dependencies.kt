@@ -1,7 +1,7 @@
 import org.gradle.api.JavaVersion
 
 object Config {
-    const val application_id = "ru.storytallers"
+    const val application_id = "ru.storytellers"
     const val compile_sdk = 29
     const val min_sdk = 21
     const val target_sdk = 29
@@ -17,11 +17,7 @@ object Releases {
 object Modules {
     const val app = ":app"
     const val model = ":model"
-   // const val core = ":core"
-    const val repository = ":repository"
-   // const val utils = ":utils"
-    //Features
-   // const val historyScreen = ":historyScreen"
+    const val resources = ":resources"
 }
 
 
@@ -49,6 +45,7 @@ object Versions {
     const val converterGson = "2.6.0"
     const val interceptor = "3.12.1"
     const val adapterCoroutines = "0.9.2"
+    const val adapter_rxjava = "3.0.0"
 
     //Koin
     const val koinAndroid = "2.0.1"
@@ -134,6 +131,8 @@ object Retrofit {
     const val adapter_coroutines =
         "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.adapterCoroutines}"
     const val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.interceptor}"
+    const val adapter_rxjava = "com.github.akarnokd:rxjava3-retrofit-adapter:${Versions.adapter_rxjava}"
+
 }
 
 object Koin {
