@@ -7,7 +7,7 @@
     android:background="@drawable/ic_background_1">
 
     <ImageView
-        android:id="@+id/back_button_rules"
+        android:id="@+id/back_button_rules_v2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

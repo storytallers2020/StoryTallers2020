@@ -20,37 +20,37 @@ import ru.terrakok.cicerone.Router
 fun injectDependencies() = loadModules
 private val loadModules by lazy {
     loadKoinModules(listOf(
-        cicerone,
+        ciceroneModule,
         database,
-        startmodel,
-        levelmodel,
-        charactermodel,
-        locationmodel))
+        startModel,
+        levelModel,
+        characterModel,
+        locationModel))
 }
 
-val cicerone = module {
+val ciceroneModule = module {
     single { Cicerone.create() }
     single { get<Cicerone<Router>>().router}
     single { get<Cicerone<Router>>().navigatorHolder}
 }
 
-val startmodel =  module {
+val startModel =  module {
     scope(named<StartFragment>()) {
         viewModel { StartViewModel() }
     }
 }
-val levelmodel =  module {
+val levelModel =  module {
     scope(named<LevelFragment>()) {
         viewModel { LevelViewModel() }
     }
 }
-val charactermodel =  module {
+val characterModel =  module {
     scope(named<CreateCharacterFragment>()) {
         viewModel { CreateCharacterViewModel() }
     }
 }
 
-val locationmodel =  module {
+val locationModel =  module {
     scope(named<LocationFragment>()) {
         viewModel { LocationViewModel() }
     }
