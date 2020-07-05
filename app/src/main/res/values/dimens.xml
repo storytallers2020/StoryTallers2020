@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mainTextSize">24sp</dimen>
+    <dimen name="buttonSideMargin">24dp</dimen>
+    <dimen name="buttonCornerRadius">30dp</dimen>
+    <dimen name="auxillaryTextSize">12sp</dimen>
+</resources>
