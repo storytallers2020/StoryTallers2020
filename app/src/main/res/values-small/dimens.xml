@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mainTextSize">20sp</dimen>
+    <dimen name="buttonSideMargin">20dp</dimen>
+    <dimen name="buttonCornerRadius">24dp</dimen>
+    <dimen name="auxillaryTextSize">12sp</dimen>
+    <dimen name="marginManualWindows">16dp</dimen>
+    <dimen name="textSideMargin">30dp</dimen>
+</resources>
