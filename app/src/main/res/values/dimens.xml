@@ -5,5 +5,5 @@
     <dimen name="buttonCornerRadius">30dp</dimen>
     <dimen name="auxillaryTextSize">16sp</dimen>
     <dimen name="marginManualWindows">16dp</dimen>
-    <dimen name="textSideMargin">58dp</dimen>
+    <dimen name="textSideMargin">20dp</dimen>
 </resources>

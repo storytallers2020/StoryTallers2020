@@ -1,14 +1,13 @@
 package ru.storytellers.ui.fragments
 
-import android.os.Bundle
-import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
+import kotlinx.android.synthetic.main.fragment_start.*
 import ru.storytellers.R
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.viewmodels.StartViewModel
 import ru.storytellers.model.DataModel
-import kotlinx.android.synthetic.main.fragment_start.start_button
 import org.koin.android.scope.currentScope
 import ru.storytellers.navigation.Screens
 
@@ -16,6 +15,7 @@ class StartFragment: BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_start
     override lateinit var model: StartViewModel
     private lateinit var startButton: MaterialButton
+    private lateinit var rulesButton: TextView
 
     companion object {
         fun newInstance() = StartFragment()
@@ -27,6 +27,10 @@ class StartFragment: BaseFragment<DataModel>() {
         startButton.setOnClickListener{
             router.navigateTo(Screens.LevelScreen())
 
+        }
+        rulesButton=rules_button
+        rulesButton.setOnClickListener() {
+            router.navigateTo(Screens.RulesScreen())
         }
     }
 
