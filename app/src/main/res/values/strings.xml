@@ -27,10 +27,10 @@
     <string name="library">Library</string>
     <string name="my_tales">My Fairy Tales</string>
     <string name="share">Share:</string>
-    <string name="end_tale">End</string>
+    <string name="end_tale">Finish the tale</string>
     <string name="select_cover">Select cover</string>
-    <string name="game_resume">Game resume</string>
-    <string name="game_hint">I dont know</string>
+    <string name="game_resume">Continue game</string>
+    <string name="game_hint">Each player walks\n in turn and can\n only come up\n with one sentence</string>
     <string name="game_hint_location">Game hint location</string>
     <string name="rules_game">The game can play from 2 to 8 people.\n- Each player walks strictly in turn.\n- The order is determined at the very\nbeginning of the game and corresponds\nto the order in which the player’s\name is written when he is added\nto the game.\n- A player can come up with only one sentence.\n- The sentence is limited to 60 characters.\n- Any player can finish the game after\neach of the participants in the game\nhas made at least 1 move.\nThere are three levels of difficulty for the game:\n1. Easy. All previously composed sentences are visible\nto all participants in the game at any given time.\n2. Medium. The player sees only the last sentence\nof the player who went in front of him.\n3. Hard. The player sees only the last sentence\nof the player who went in front of him.\nIn his proposal, the player must use\na mandatory word that is generated\nby the game in a random order.</string>
 </resources>
