@@ -15,7 +15,6 @@
             android:id="@+id/back_button_rules"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/back_button_rules"
             android:layout_marginStart="@dimen/returnButtonMarginLeft"
             android:layout_marginTop="@dimen/returnButtonMarginTop"
             android:scaleX="1.5"
