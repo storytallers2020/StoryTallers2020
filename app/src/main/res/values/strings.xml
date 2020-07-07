@@ -3,8 +3,8 @@
     <string name="auth_welcome">Welcome to the fairy tale!</string>
     <string name="auth_create_tale">Create a fairy tale</string>
     <string name="auth_help"><u>How to create a fairy tale?</u></string>
-    <string name="level_hint">The ability to see\nall the previously written fairy\ntale throughout the game</string>
     <string name="level">Level</string>
+    <string name="level_hint">The ability to see\nall the previously written fairy\ntale throughout the game</string>
     <string name="easy">Easy</string>
     <string name="easy_description">All previously composed sentences\nare visible to all game\nparticipants at any given time</string>
     <string name="medium">Medium</string>
