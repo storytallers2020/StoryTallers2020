@@ -1,18 +1,21 @@
 package ru.storytellers.ui.fragments
 
+import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.fragment_character_create.*
 import org.koin.android.scope.currentScope
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
+import ru.storytellers.model.entity.Character
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.ChooseCharacterAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.viewById
 import ru.storytellers.viewmodels.CreateCharacterViewModel
+import timber.log.Timber
 
 class CreateCharacterFragment: BaseFragment<DataModel>() {
     override lateinit var model: CreateCharacterViewModel
@@ -32,11 +35,31 @@ class CreateCharacterFragment: BaseFragment<DataModel>() {
     override fun iniViewModel() {
         val viewModel: CreateCharacterViewModel by currentScope.inject()
         model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
+        model.run {
+            getAllCharacters()
+            handlerOnSuccessResult(this)
+            handlerOnErrorResult(this)
+        }
+    }
+
+    private fun handlerOnErrorResult(viewModel:CreateCharacterViewModel) {
+        viewModel.subscribeOnError().observe(viewLifecycleOwner, Observer {
+            Timber.e(it.error)
+        })
+    }
+
+    private fun handlerOnSuccessResult(viewModel:CreateCharacterViewModel) {
+        viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
+            it.let {
+                if (it.data!!.isNotEmpty()) {
+                    characterAdapter.setData(it.data)
+                }
+            }
+        })
     }
 
     override fun init() {
+        iniViewModel()
         btn_next.setOnClickListener { navigateToLocationScreen() }
         back_button_character.setOnClickListener {backClicked()}
         initRecycler()
@@ -47,11 +70,15 @@ class CreateCharacterFragment: BaseFragment<DataModel>() {
     }
 
     private fun initRecycler(){
-       val staggeredGridLayoutManager = StaggeredGridLayoutManager(
+       val gridLayoutManager = GridLayoutManager(
+           context,
            2,
-           LinearLayoutManager.HORIZONTAL)
-           .apply {reverseLayout=true}
-        rv_characters.layoutManager=staggeredGridLayoutManager
-        rv_characters.adapter=characterAdapter
+           LinearLayoutManager.HORIZONTAL,
+           true
+           )
+        characterRecyclerView.apply {
+            layoutManager=gridLayoutManager
+            adapter=characterAdapter
+        }
     }
 }
