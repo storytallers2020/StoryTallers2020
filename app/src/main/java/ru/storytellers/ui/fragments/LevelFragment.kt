@@ -5,7 +5,6 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSeekBar
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_level.*
@@ -15,18 +14,17 @@ import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.viewmodels.LevelViewModel
 import ru.storytellers.model.DataModel
+import ru.storytellers.utils.ResourceProviderLevelFragment
 
 class LevelFragment: BaseFragment<DataModel>() {
     override lateinit var model: LevelViewModel
     override val layoutRes= R.layout.fragment_level
+    private val resourceProvider: ResourceProviderLevelFragment by lazy { ResourceProviderLevelFragment(this.context) }
     private val MAX_VALUE_RANGE_SEEK_BAR=2
-    private val MIN_VALUE_PROGRESS_SEEK_BAR=0
-    private val MEDIUM_VALUE_PROGRESS_SEEK_BAR=1
-    private val MAX_VALUE_PROGRESS_SEEK_BAR=2
-    private val LEVEL_GAME_EASY=1
-    private val LEVEL_GAME_MEDIUM=2
-    private val LEVEL_GAME_HARD=3
-    private var levelGame=LEVEL_GAME_EASY //по умолчанию установлен легкий уровень
+    private val LEVEL_GAME_EASY=0
+    private val LEVEL_GAME_MEDIUM=1
+    private val LEVEL_GAME_HARD=2
+    private var levelGame=0
     private var backBtn: ImageView?=null
     private var easyBtn: TextView?=null
     private var mediumBtn: TextView?=null
@@ -39,69 +37,29 @@ class LevelFragment: BaseFragment<DataModel>() {
         }
         override fun onStartTrackingTouch(seekBar: SeekBar?) {
         }
-
         override fun onStopTrackingTouch(seekBar: SeekBar?) {
             val progressLocal = seekBar?.progress
             setLevel(progressLocal)
         }
     }
-
     companion object {
         fun newInstance() = LevelFragment()
     }
 
-    override fun backClicked(): Boolean {
-        router.exit()
-        return true
-    }
 
     override fun init() {
+        iniViewModel()
         initUiComponents()
         setClickListeners()
         setSeekBarListener()
     }
-
-    private fun setClickListeners() {
-        setClickListenerBackButton()
-        setClickListenerEasyBtn()
-        setClickListenerMediumBtn()
-        setClickListenerHardBtn()
-        setClickListenerNextBtn()
+    override fun iniViewModel() {
+        val viewModel: LevelViewModel by currentScope.inject()
+        model = viewModel
+        model.subscribeOnLevelGame().observe(viewLifecycleOwner, Observer {
+            levelGame=it
+        })
     }
-
-    private fun setClickListenerNextBtn() {
-        nextScrnBtn?.setOnClickListener {
-            toCreateCharacterScrn() }
-    }
-
-    private fun setClickListenerHardBtn() {
-        hardBtn?.setOnClickListener {
-            levelGame = LEVEL_GAME_HARD
-            seekBar?.progress = MAX_VALUE_PROGRESS_SEEK_BAR
-            setTextColorChoiceLevel()
-        }
-    }
-
-    private fun setClickListenerMediumBtn() {
-        mediumBtn?.setOnClickListener {
-            levelGame = LEVEL_GAME_MEDIUM
-            seekBar?.progress = MEDIUM_VALUE_PROGRESS_SEEK_BAR
-            setTextColorChoiceLevel()
-        }
-    }
-
-    private fun setClickListenerEasyBtn() {
-        easyBtn?.setOnClickListener {
-            levelGame = LEVEL_GAME_EASY
-            seekBar?.progress = MIN_VALUE_PROGRESS_SEEK_BAR
-            setTextColorChoiceLevel()
-        }
-    }
-
-    private fun setClickListenerBackButton() {
-        backBtn?.setOnClickListener { backClicked() }
-    }
-
     private fun initUiComponents() {
         easyBtn = easy_button
         mediumBtn = medium_button
@@ -110,62 +68,104 @@ class LevelFragment: BaseFragment<DataModel>() {
         descriptionLvl = description_level
         nextScrnBtn=btn_next
         seekBar=seekBar_lvl
-        seekBar?.max=MAX_VALUE_RANGE_SEEK_BAR
+        seekBar?.apply {
+            max=MAX_VALUE_RANGE_SEEK_BAR
+            setSeekBarProgress()
+            setTextColorChoiceLevel()
+        }
+    }
+    private fun setClickListeners() {
+        setClickListenerBackButton()
+        setClickListenerEasyBtn()
+        setClickListenerMediumBtn()
+        setClickListenerHardBtn()
+        setClickListenerNextBtn()
+    }
+    private fun setSeekBarListener(){
+        seekBar?.setOnSeekBarChangeListener(seekBarListener)
+    }
+
+    private fun setClickListenerNextBtn() {
+        nextScrnBtn?.setOnClickListener {
+            toCreateCharacterScrn() }
+    }
+    private fun setClickListenerHardBtn() {
+        hardBtn?.setOnClickListener {
+            model.setLevelGame(LEVEL_GAME_HARD)
+            setSeekBarProgress()
+            setTextColorChoiceLevel()
+        }
+    }
+    private fun setClickListenerMediumBtn() {
+        mediumBtn?.setOnClickListener {
+            model.setLevelGame(LEVEL_GAME_MEDIUM)
+            setSeekBarProgress()
+            setTextColorChoiceLevel()
+        }
+    }
+    private fun setClickListenerEasyBtn() {
+        easyBtn?.setOnClickListener {
+            model.setLevelGame(LEVEL_GAME_EASY)
+            setSeekBarProgress()
+            setTextColorChoiceLevel()
+        }
+    }
+    private fun setClickListenerBackButton() {
+        backBtn?.setOnClickListener { backClicked() }
+    }
+    private fun setSeekBarProgress() {
+        seekBar?.progress=levelGame
     }
 
     private fun setLevel(progress: Int?){
         when(progress)
         {
-            MAX_VALUE_PROGRESS_SEEK_BAR -> {
-                levelGame=LEVEL_GAME_HARD //3 - level Hard
-                setTextColorChoiceLevel()
-            }
-            MEDIUM_VALUE_PROGRESS_SEEK_BAR -> {
-                levelGame=LEVEL_GAME_MEDIUM //2 - level Medium
-                setTextColorChoiceLevel()
-            }
-            else -> {
-                levelGame=LEVEL_GAME_EASY //1 - level Easy
-                setTextColorChoiceLevel()
-            }
-        }
-    }
-
-    private fun setTextColorChoiceLevel(){
-        val colorYellow= getColorYellow()
-        val colorWhite= getColorWhite()
-        when(levelGame){
             LEVEL_GAME_HARD -> {
-                setDescriptionLevel(getTextDescriptionHardLvl())
-                setTextColorLevelHard(colorWhite,colorYellow)
-             }
-            LEVEL_GAME_MEDIUM-> {
-                setDescriptionLevel(getTextDescriptionMediumLvl())
-                setTextColorLevelMedium(colorWhite,colorYellow)
+                //2 - level Hard
+                model.setLevelGame(LEVEL_GAME_HARD)
+                setTextColorChoiceLevel()
+            }
+            LEVEL_GAME_MEDIUM -> {
+                 //1 - level Medium
+                model.setLevelGame(LEVEL_GAME_MEDIUM)
+                setTextColorChoiceLevel()
             }
             else -> {
-                setDescriptionLevel(getTextDescriptionEasyLvl())
-                setTextColorLevelEasy(colorWhite,colorYellow)
+                 //0 - level Easy
+                model.setLevelGame(LEVEL_GAME_EASY)
+                setTextColorChoiceLevel()
             }
         }
     }
+    private fun setTextColorChoiceLevel(){
+        val colorYellow= resourceProvider.getColorYellow()
+        val colorWhite= resourceProvider.getColorWhite()
+        val descriptionHardLvl=resourceProvider.getTextDescriptionHardLvl()
+        val descriptionMediumLvl=resourceProvider.getTextDescriptionMediumLvl()
+        val descriptionEasyLvl=resourceProvider.getTextDescriptionEasyLvl()
+                when (levelGame) {
+                    LEVEL_GAME_HARD -> {
+                        setDescriptionLevel(descriptionHardLvl)
+                        setTextColorLevelHard(colorWhite, colorYellow)
+                    }
+                    LEVEL_GAME_MEDIUM -> {
+                        setDescriptionLevel(descriptionMediumLvl)
+                        setTextColorLevelMedium(colorWhite, colorYellow)
+                    }
+                    else -> {
+                        setDescriptionLevel(descriptionEasyLvl)
+                        setTextColorLevelEasy(colorWhite, colorYellow)
+                    }
+                }
 
-    private fun getColorWhite() =
-        context?.let { ContextCompat.getColor(it, R.color.white) }
+
+    }
 
 
-    private fun getColorYellow() =
-        context?.let { ContextCompat.getColor(it, R.color.yellow) }
 
 
-    private fun getTextDescriptionMediumLvl() =
-        context?.resources?.getString(R.string.medium_description)
 
-    private fun getTextDescriptionEasyLvl() =
-        context?.resources?.getString(R.string.easy_description)
-
-    private fun getTextDescriptionHardLvl() = context?.resources?.getString(R.string.hard_description)
-
+    // изменение цвета текста всех кнопок в зависимости от выбранного уровня
     private fun setTextColorLevelEasy(colorWhite:Int?,colorYellow:Int?) {
         colorWhite?.let{
             setTextColorHardBtn(it)
@@ -187,6 +187,8 @@ class LevelFragment: BaseFragment<DataModel>() {
         }
         colorYellow?.let {setTextColorHardBtn(it)}
     }
+
+    // установка цвета текста конретной кнопки
     private fun setTextColorHardBtn(color:Int?){
         color?.let { hardBtn?.setTextColor(it) }
     }
@@ -196,21 +198,17 @@ class LevelFragment: BaseFragment<DataModel>() {
     private fun setTextColorEasyBtn(color:Int?){
         color?.let { easyBtn?.setTextColor(it) }
     }
+
+
     private fun setDescriptionLevel(description:String?){
         description?.let {descriptionLvl?.text=it}
     }
 
-    private fun setSeekBarListener(){
-        seekBar?.setOnSeekBarChangeListener(seekBarListener)
-    }
     private fun toCreateCharacterScrn(){
         router.navigateTo(Screens.CreateCharacterScreen())
     }
-
-    override fun iniViewModel() {
-        val viewModel: LevelViewModel by currentScope.inject()
-        model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
+    override fun backClicked(): Boolean {
+        router.exit()
+        return true
     }
 }

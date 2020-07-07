@@ -24,4 +24,7 @@ sealed class Screens {
     class LocationlScreen : SupportAppScreen(){
         override fun getFragment() = LocationFragment.newInstance()
     }
+    class RulesGameScreen : SupportAppScreen() {
+        override fun getFragment() = RulesGame.newInstance()
+    }
 }

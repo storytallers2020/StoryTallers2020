@@ -9,7 +9,6 @@ import ru.storytellers.utils.resourceToString
 import ru.storytellers.model.entity.*
 
 class CharacterResDataSource(context: Context) : ICharacterDataSource {
-
     //region characterList...
     private val characterList: MutableList<Character> = mutableListOf(
         Character(
@@ -60,7 +59,7 @@ class CharacterResDataSource(context: Context) : ICharacterDataSource {
         Character(
             10,
             context.getString(R.string.character_space_girl_name),
-            resourceToString(context, R.drawable.spase_girl)
+            resourceToString(context, R.drawable.space_girl)
         ),
         Character(
             11,

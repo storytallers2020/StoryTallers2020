@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_rules.*
-import kotlinx.android.synthetic.main.fragment_rules.rules_game_cv
-import kotlinx.android.synthetic.main.fragment_rules_v2.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.navigation.Screens
@@ -19,6 +17,9 @@ import ru.terrakok.cicerone.Screen
 class RulesGame: Fragment(),BackButtonListener {
     lateinit var navigatorHolder: NavigatorHolder
     lateinit var router: Router
+    companion object {
+        fun newInstance() = RulesGame()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +32,7 @@ class RulesGame: Fragment(),BackButtonListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        back_button_rules_v2.setOnClickListener { backClicked() }
+        back_button_rules.setOnClickListener { backClicked() }
 
     }
     private fun injectRouter() {

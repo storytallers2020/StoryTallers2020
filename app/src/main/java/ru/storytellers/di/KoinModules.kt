@@ -5,6 +5,9 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.model.datasource.ICharacterDataSource
+import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
 import ru.storytellers.engine.Game
 import ru.storytellers.engine.level.Level
 import ru.storytellers.engine.level.Levels
@@ -20,6 +23,8 @@ import ru.storytellers.viewmodels.LevelViewModel
 import ru.storytellers.viewmodels.LocationViewModel
 import ru.storytellers.viewmodels.StartViewModel
 import ru.storytellers.model.entity.room.db.AppDatabase
+import ru.storytellers.model.repository.CharacterRepository
+import ru.storytellers.model.repository.ICharacterRepository
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 
@@ -44,23 +49,25 @@ val ciceroneModule = module {
     single { get<Cicerone<Router>>().navigatorHolder }
 }
 
-val startModel = module {
+val startModel =  module {
     scope(named<StartFragment>()) {
         viewModel { StartViewModel() }
     }
 }
-val levelModel = module {
+val levelModel =  module {
     scope(named<LevelFragment>()) {
         viewModel { LevelViewModel() }
     }
 }
-val characterModel = module {
+val characterModel =  module {
+    single<ICharacterDataSource>{CharacterResDataSource(get()) }
+    single<ICharacterRepository>{CharacterRepository(get()) }
     scope(named<CreateCharacterFragment>()) {
-        viewModel { CreateCharacterViewModel() }
+        viewModel { CreateCharacterViewModel(get()) }
     }
 }
 
-val locationModel = module {
+val locationModel =  module {
     scope(named<LocationFragment>()) {
         viewModel { LocationViewModel() }
     }
