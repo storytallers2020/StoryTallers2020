@@ -1,7 +1,5 @@
 package ru.storytellers.ui.fragments
 
-import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_character_create.*
 import ru.storytellers.R

@@ -12,7 +12,6 @@ import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.BackButtonListener
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.Screen
 
 class RulesGame: Fragment(),BackButtonListener {
     lateinit var navigatorHolder: NavigatorHolder
