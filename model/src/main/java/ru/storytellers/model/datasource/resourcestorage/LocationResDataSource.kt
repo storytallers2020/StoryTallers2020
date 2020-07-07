@@ -15,26 +15,14 @@ class LocationResDataSource(context: Context) : ILocationDataSource {
         Location(
             1,
             context.getString(R.string.location_kingdom1_name),
-            resourceToString(context, R.drawable.location_kingdom1),
+            resourceToString(context, R.drawable.ic_kingdom_place),
             "В далеком далеком королевстве..."
         ),
         Location(
             2,
             context.getString(R.string.location_kingdom2_name),
-            resourceToString(context, R.drawable.fairy),
+            resourceToString(context, R.drawable.ic_space_place),
             "Давным давно в нашем королевстве..."
-        ),
-        Location(
-            3,
-            context.getString(R.string.location_space1_name),
-            resourceToString(context, R.drawable.girl),
-            "В бескрайних просторах космоса..."
-        ),
-        Location(
-            4,
-            context.getString(R.string.location_space2_name),
-            resourceToString(context, R.drawable.knight),
-            "Эта история произошла на планете Захадум..."
         )
     )
     //endregion
