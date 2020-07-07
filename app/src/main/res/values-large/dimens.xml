@@ -6,4 +6,6 @@
     <dimen name="auxillaryTextSize">20sp</dimen>
     <dimen name="marginManualWindows">16dp</dimen>
     <dimen name="textSideMargin">24dp</dimen>
+    <dimen name="returnButtonMarginLeft">24dp</dimen>
+    <dimen name="returnButtonMarginTop">24dp</dimen>
 </resources>
