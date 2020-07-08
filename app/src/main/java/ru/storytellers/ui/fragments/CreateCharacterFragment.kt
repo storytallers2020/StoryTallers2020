@@ -17,14 +17,14 @@ import ru.storytellers.utils.viewById
 import ru.storytellers.viewmodels.CreateCharacterViewModel
 import timber.log.Timber
 
-class CreateCharacterFragment: BaseFragment<DataModel>() {
+class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel>() {
     override lateinit var model: CreateCharacterViewModel
     private val characterRecyclerView by viewById<RecyclerView>(R.id.rv_characters)
     private val characterAdapter: ChooseCharacterAdapter by lazy { ChooseCharacterAdapter() }
     override val layoutRes= R.layout.fragment_character_create
 
     companion object {
-        fun newInstance() = CreateCharacterFragment()
+        fun newInstance(levelGame:Int) = CreateCharacterFragment(levelGame)
     }
 
     override fun backClicked(): Boolean {
