@@ -9,8 +9,8 @@ sealed class Screens {
         override fun getFragment() = StartFragment.newInstance()
     }
 
-    class CreateCharacterScreen : SupportAppScreen(){
-        override fun getFragment() = CreateCharacterFragment.newInstance()
+    class CreateCharacterScreen( private val levelGame:Int) : SupportAppScreen(){
+        override fun getFragment() = CreateCharacterFragment.newInstance(levelGame)
     }
 
     class LevelScreen : SupportAppScreen(){
