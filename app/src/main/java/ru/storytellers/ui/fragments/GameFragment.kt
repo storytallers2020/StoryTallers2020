@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.fragment_game.*
 import org.koin.android.scope.currentScope
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
+import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.viewmodels.GameViewModel
 
@@ -30,42 +31,39 @@ class GameFragment: BaseFragment<DataModel>() {
     }
 
     override fun init() {
-        firstClickListener()
-        endClickListener()
-        resumeClickListener()
+        showHintAndHideGameScreen()
+        setEndClickListener()
     }
 
-    private fun firstClickListener() {
-        layout_main.setOnClickListener {
-            tv_hint.visibility = View.GONE
-            layout_tale.visibility = View.VISIBLE
-            et_step.visibility = View.VISIBLE
-            iv_step_avatar.visibility = View.VISIBLE
-            tv_step.visibility = View.VISIBLE
-            tv_end.visibility = View.VISIBLE
-            layout_main.setOnClickListener(null)
-        }
-    }
-
-    private fun endClickListener() {
+    private fun setEndClickListener() {
         tv_end.setOnClickListener {
-            et_step.visibility = View.GONE
-            iv_step_avatar.visibility = View.GONE
-            tv_step.visibility = View.GONE
-            tv_end.visibility = View.GONE
-            tv_resume.visibility = View.VISIBLE
-            btn_select_cover.visibility = View.VISIBLE
+            router.navigateTo(Screens.GameEndScreen())
         }
     }
 
-    private fun resumeClickListener() {
-        tv_resume.setOnClickListener {
-            et_step.visibility = View.VISIBLE
-            iv_step_avatar.visibility = View.VISIBLE
-            tv_step.visibility = View.VISIBLE
-            tv_end.visibility = View.VISIBLE
-            tv_resume.visibility = View.GONE
-            btn_select_cover.visibility = View.GONE
+    private fun showHintAndHideGameScreen() {
+        tv_hint.visibility = View.VISIBLE
+
+        layout_tale.visibility = View.GONE
+        layout_step_by.visibility = View.GONE
+        tv_end.visibility = View.GONE
+        et_step.visibility = View.GONE
+
+        layout_main.setOnClickListener {
+            showGameScreenAndHideHint()
         }
     }
+
+    private fun showGameScreenAndHideHint() {
+        tv_hint.visibility = View.GONE
+
+        layout_tale.visibility = View.VISIBLE
+        layout_step_by.visibility = View.VISIBLE
+        tv_end.visibility = View.VISIBLE
+        et_step.visibility = View.VISIBLE
+
+        layout_main.setOnClickListener(null)
+    }
+
+
 }

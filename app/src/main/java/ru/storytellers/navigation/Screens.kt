@@ -1,6 +1,5 @@
 package ru.storytellers.navigation
 
-import androidx.fragment.app.Fragment
 import ru.storytellers.ui.fragments.*
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
@@ -19,6 +18,10 @@ sealed class Screens {
 
     class GameScreen : SupportAppScreen() {
         override fun getFragment() = GameFragment.newInstance()
+    }
+
+    class GameEndScreen : SupportAppScreen() {
+        override fun getFragment() = GameEndFragment.newInstance()
     }
 
     class LocationlScreen : SupportAppScreen(){
