@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.item_image_character_create.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Character
 import ru.storytellers.utils.loadImage
+import ru.storytellers.utils.resourceToUri
 import timber.log.Timber
 
 class ChooseCharacterAdapter():RecyclerView.Adapter<ChooseCharacterAdapter.ViewHolder>() {
@@ -46,14 +47,11 @@ class ChooseCharacterAdapter():RecyclerView.Adapter<ChooseCharacterAdapter.ViewH
     inner class ViewHolder(container: View) : RecyclerView.ViewHolder(container) {
         fun bind(character:Character) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
-                loadImage(character.avatarUrl,itemView.image_character_iv)
+                resourceToUri(character.avatarUrl)?.let {
+                    loadImage(it, itemView.image_character_iv)
+                }
                 itemView.name_character_tv.text = character.name
                 itemView.setOnClickListener {
-                    Toast.makeText( // тост отладочный для наглядности
-                        itemView.context,
-                        "Выбран персонаж: ${character.name} id: ${character.id}",
-                        Toast.LENGTH_LONG
-                    ).show()
                     Timber.d("Выбран персонаж: ${character.name} id: ${character.id}")
                 }
 
