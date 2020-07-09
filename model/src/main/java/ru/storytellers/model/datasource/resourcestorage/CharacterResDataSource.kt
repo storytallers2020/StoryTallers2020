@@ -14,62 +14,62 @@ class CharacterResDataSource(context: Context) : ICharacterDataSource {
         Character(
             1,
             context.getString(R.string.character_boy_name),
-            resourceToString(context, R.drawable.boy)
+            resourceToString(context, R.drawable.ic_boy)
         ),
         Character(
             2,
             context.getString(R.string.character_fairy_name),
-            resourceToString(context, R.drawable.fairy)
+            resourceToString(context, R.drawable.ic_fairy)
         ),
         Character(
             3,
             context.getString(R.string.character_girl_name),
-            resourceToString(context, R.drawable.girl)
+            resourceToString(context, R.drawable.ic_girl)
         ),
         Character(
             4,
             context.getString(R.string.character_knight_name),
-            resourceToString(context, R.drawable.knight)
+            resourceToString(context, R.drawable.ic_knight)
         ),
         Character(
             5,
             context.getString(R.string.character_prince_name),
-            resourceToString(context, R.drawable.prince)
+            resourceToString(context, R.drawable.ic_prince)
         ),
         Character(
             6,
             context.getString(R.string.character_princess_name),
-            resourceToString(context, R.drawable.princess)
+            resourceToString(context, R.drawable.ic_princess)
         ),
         Character(
             7,
             context.getString(R.string.character_robot_boy_name),
-            resourceToString(context, R.drawable.robot_boy)
+            resourceToString(context, R.drawable.ic_robot_boy)
         ),
         Character(
             8,
             context.getString(R.string.character_robot_girl_name),
-            resourceToString(context, R.drawable.robot_girl)
+            resourceToString(context, R.drawable.ic_robot_girl)
         ),
         Character(
             9,
             context.getString(R.string.character_space_boy_name),
-            resourceToString(context, R.drawable.space_boy)
+            resourceToString(context, R.drawable.ic_space_boy)
         ),
         Character(
             10,
             context.getString(R.string.character_space_girl_name),
-            resourceToString(context, R.drawable.space_girl)
+            resourceToString(context, R.drawable.ic_space_girl)
         ),
         Character(
             11,
             context.getString(R.string.character_step_mother_name),
-            resourceToString(context, R.drawable.stepmother)
+            resourceToString(context, R.drawable.ic_stepmother)
         ),
         Character(
             12,
             context.getString(R.string.character_wizard_name),
-            resourceToString(context, R.drawable.wizard)
+            resourceToString(context, R.drawable.ic_wizard)
         )
     )
     //endregion
