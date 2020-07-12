@@ -7,14 +7,14 @@
 
     <ImageView
         android:id="@+id/image_character_iv"
-        android:layout_width="50dp"
-        android:background="@color/colorAccent"
-        android:layout_height="50dp" />
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
     <TextView
         android:id="@+id/name_character_tv"
-        android:autoSizeMaxTextSize="10sp"
+        android:textSize="12sp"
         android:hint="Name"
-        android:layout_width="50dp"
-        android:layout_height="15dp"/>
+        android:textColor="@color/yellow"
+        android:layout_width="70dp"
+        android:layout_height="20dp"/>
 
 </LinearLayout>

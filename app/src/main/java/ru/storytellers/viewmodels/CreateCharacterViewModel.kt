@@ -1,15 +1,12 @@
 package ru.storytellers.viewmodels
 
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Character
-import ru.storytellers.model.repository.CharacterRepository
 import ru.storytellers.model.repository.ICharacterRepository
 
 class CreateCharacterViewModel(private val characterRepository: ICharacterRepository) : BaseViewModel<DataModel>() {
@@ -37,9 +34,6 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
             },{
                 onErrorliveData.value=DataModel.Error(it)
             })
-
-
-
     }
 
     override fun subscribe(): LiveData<DataModel> {

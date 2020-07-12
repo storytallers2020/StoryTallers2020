@@ -205,7 +205,7 @@ class LevelFragment: BaseFragment<DataModel>() {
     }
 
     private fun toCreateCharacterScrn(){
-        router.navigateTo(Screens.CreateCharacterScreen())
+        router.navigateTo(Screens.CreateCharacterScreen(levelGame))
     }
     override fun backClicked(): Boolean {
         router.exit()
