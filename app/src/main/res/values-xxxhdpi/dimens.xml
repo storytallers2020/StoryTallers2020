@@ -13,7 +13,8 @@
     <dimen name="textMarginTop">30dp</dimen>
     <dimen name="smallTextSize">24sp</dimen>
     <dimen name="TitleMarginTop">42dp</dimen>
-    <dimen name="verySmallTextSize">20sp</dimen>
+    <dimen name="verySmallTextSize">16sp</dimen>
     <dimen name="pitureMarginTop">20dp</dimen>
     <dimen name="verySmallPictureMarginTop">8dp</dimen>
+    <dimen name="mainMenuMarginSyde">32dp</dimen>
 </resources>

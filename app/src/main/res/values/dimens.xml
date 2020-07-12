@@ -16,4 +16,5 @@
     <dimen name="verySmallTextSize">14sp</dimen>
     <dimen name="pitureMarginTop">12dp</dimen>
     <dimen name="verySmallPictureMarginTop">4dp</dimen>
+    <dimen name="mainMenuMarginSyde">24dp</dimen>
 </resources>
