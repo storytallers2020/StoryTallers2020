@@ -53,33 +53,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/level"
-                android:textSize="12sp"
+                android:layout_marginTop="@dimen/verySmallPictureMarginTop"
                 android:textColor="@color/yellow"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/verySmallPictureMarginTop"
                 android:src="@drawable/ic_cup"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.4"
+            android:layout_weight="1.3"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/yellow"/>
+                android:layout_marginTop="@dimen/verySmallPictureMarginTop"
+               android:textColor="@color/yellow"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/verySmallPictureMarginTop"
                 android:src="@drawable/ic_line_yellow"/>
         </LinearLayout>
 
@@ -95,33 +95,33 @@
                 android:layout_height="wrap_content"
                 android:text="@string/character"
                 android:alpha="0.5"
-                android:textSize="12sp"
+                android:layout_marginTop="@dimen/verySmallPictureMarginTop"
                 android:textColor="@color/white"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/verySmallPictureMarginTop"
                 android:src="@drawable/ic_queen"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.4"
+            android:layout_weight="1.3"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:layout_marginTop="@dimen/verySmallPictureMarginTop"
                 android:textColor="@color/yellow"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/verySmallPictureMarginTop"
                 android:src="@drawable/ic_line_gray"/>
         </LinearLayout>
 
@@ -137,13 +137,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/location"
                 android:alpha="0.5"
-                android:textSize="12sp"
+                android:layout_marginTop="@dimen/verySmallPictureMarginTop"
                 android:textColor="@color/white"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/verySmallPictureMarginTop"
                 android:src="@drawable/ic_mounts"/>
         </LinearLayout>
 
@@ -155,14 +155,16 @@
         android:id="@+id/description_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
         android:gravity="center_horizontal"
         android:text="@string/easy_description"
         android:textColor="@color/yellow"
-        android:textSize="16sp"
+        android:textSize="@dimen/smallTextSize"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -180,7 +182,7 @@
             android:gravity="center_horizontal"
             android:text="@string/easy"
             android:textColor="@color/yellow"
-            android:textSize="16sp" />
+            android:textSize="@dimen/smallTextSize" />
 
         <TextView
             android:id="@+id/medium_button"
@@ -190,7 +192,7 @@
             android:gravity="center_horizontal"
             android:text="@string/medium"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/smallTextSize" />
 
         <TextView
             android:id="@+id/hard_button"
@@ -200,21 +202,21 @@
             android:gravity="center_horizontal"
             android:text="@string/hard"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/smallTextSize" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/seekBar_lvl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="59dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="@dimen/buttonSideMargin"
+        android:layout_marginEnd="@dimen/buttonSideMargin"
         android:progress="1"
         android:progressBackgroundTint="@color/blue"
         android:progressTint="@color/blue"
         android:thumb="@drawable/ic_cup"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
@@ -222,21 +224,19 @@
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="54dp"
         android:backgroundTint="@color/yellow"
+        android:layout_marginStart="@dimen/buttonSideMargin"
+        android:layout_marginEnd="@dimen/buttonSideMargin"
         android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/blueDark"
-        android:textSize="20sp"
-        app:cornerRadius="30dp"
+        android:textSize="@dimen/mainTextSize"
+        app:cornerRadius="@dimen/buttonCornerRadius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar_lvl"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.925"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
