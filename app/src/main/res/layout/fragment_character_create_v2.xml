@@ -163,20 +163,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Введите имя игрока1">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_name_field1_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/yellow"
-                android:focusedByDefault="true"
                 android:maxLength="10"
                 android:focusableInTouchMode="true"
                 android:gravity="start"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:inputType="text"
-                android:textSize="@dimen/smallTextSize" />
+                android:textSize="@dimen/smallTextSize" >
+                <requestFocus/>
+            </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
