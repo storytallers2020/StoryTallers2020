@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="mainTextSize">30sp</dimen>
-    <dimen name="buttonSideMargin">30dp</dimen>
+    <dimen name="buttonSideMargin">60dp</dimen>
     <dimen name="buttonCornerRadius">42dp</dimen>
     <dimen name="auxillaryTextSize">24sp</dimen>
     <dimen name="marginManualWindows">16dp</dimen>
     <dimen name="textSideMargin">26dp</dimen>
     <dimen name="returnButtonMarginLeft">30dp</dimen>
     <dimen name="returnButtonMarginTop">30dp</dimen>
+    <dimen name="marginStartText">30dp</dimen>
+    <dimen name="marginLeftText">30dp</dimen>
+    <dimen name="textMarginTop">30dp</dimen>
+    <dimen name="smallTextSize">24sp</dimen>
+    <dimen name="TitleMarginTop">42dp</dimen>
+    <dimen name="verySmallTextSize">20sp</dimen>
+    <dimen name="pitureMarginTop">20dp</dimen>
+    <dimen name="verySmallPictureMarginTop">8dp</dimen>
 </resources>
