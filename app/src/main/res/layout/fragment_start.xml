@@ -47,7 +47,7 @@
         android:layout_marginBottom="40dp"
         android:text="@string/auth_help"
         android:textColor="@color/yellow"
-        android:textSize="@dimen/auxillaryTextSize"
+        android:textSize="@dimen/standardTextSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"

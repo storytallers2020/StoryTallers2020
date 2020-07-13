@@ -4,226 +4,188 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="40dp"
     android:background="@drawable/ic_background_1">
 
     <ImageView
         android:id="@+id/back_button_character"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/ic_arrow_back_white_24"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:src="@drawable/ic_arrow_left_white_16"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/creation_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/creation_header"
+        tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/creation_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="@string/character"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="@dimen/headerTextSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="horizontal"
         android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        tools:layout_editor_absoluteX="24dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/creation_header">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/level"
+            android:alpha="0.5"
+            android:textSize="@dimen/smallTextSize"
+            android:drawableBottom="@drawable/cup"
+            android:textColor="@color/yellow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_line_yellow_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/hero"
+            app:layout_constraintStart_toEndOf="@id/difficulty"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.65"
+            tools:ignore="ContentDescription" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/level"
-                android:alpha="0.5"
-                android:textSize="12sp"
-                android:textColor="@color/yellow" />
+        <TextView
+            android:id="@+id/hero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/character"
+            android:textSize="@dimen/smallTextSize"
+            android:textColor="@color/yellow"
+            android:drawableBottom="@drawable/ic_queen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_cup" />
-        </LinearLayout>
-
-        <LinearLayout
+        <ImageView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.4"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_line_yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/location"
+            app:layout_constraintStart_toEndOf="@id/hero"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.65"
+            tools:ignore="ContentDescription" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/yellow" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_line_yellow_light" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/character"
-                android:textSize="12sp"
-                android:textColor="@color/yellow" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_queen" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.4"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/yellow" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_line_yellow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/location"
-                android:textSize="12sp"
-                android:alpha="0.5"
-                android:textColor="@color/white" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_mounts" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/location"
+            android:textSize="@dimen/smallTextSize"
+            android:alpha="0.5"
+            android:gravity="end"
+            android:drawableBottom="@drawable/ic_mounts"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/player_list_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/rv_characters"
+        android:layout_marginTop="@dimen/marginStartText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:layout_constraintVertical_bias="0.174"
-        tools:itemCount="8" />
+        android:minHeight="150dp"
+        app:layout_constraintTop_toBottomOf="@id/slider"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_user_character_create" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/enter_name_et_layout1"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:theme="@style/OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:hint="@string/insert_players_name"
+        android:gravity="start"
+        android:layout_marginTop="@dimen/marginStartText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player_list_rv"
-        android:hint="Введите имя игрока">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/player_list_rv">
+
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/enter_name_player_et"
+            android:id="@+id/input_name_field1_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/yellow"
-            android:maxLength="10"
             android:focusableInTouchMode="true"
-            android:gravity="start"
+            android:maxLength="25"
+            android:layout_margin="@dimen/editTextMargin"
             android:maxLines="1"
+            android:textColor="@color/white"
             android:singleLine="true"
             android:inputType="text"
-            android:textSize="@dimen/smallTextSize" >
-            <requestFocus/>
+            android:textSize="@dimen/standardTextSize"
+            tools:text="1-2-3-4-5-6-7-8-9-0-1-2-3-4-5">
+
+            <requestFocus />
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textView4"
-        android:text="Выбери персонаж"
+        android:text="@string/choose_hero"
         android:textColor="@color/yellow"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:textSize="12sp"
-        android:layout_marginTop="112dp"
+        android:textSize="@dimen/standardTextSize"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player_list_rv" />
+        app:layout_constraintTop_toBottomOf="@+id/enter_name_et_layout1" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_characters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_next"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:itemCount="3" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:spanCount="2"
+        tools:itemCount="20"
+        tools:listitem="@layout/item_image_character_create" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
         android:backgroundTint="@color/yellow"
+        android:padding="@dimen/button_padding"
         android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/blueDark"
-        android:textSize="20sp"
-        app:cornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/buttonTextSize"
+        android:layout_marginTop="@dimen/textMarginTop"
+        app:cornerRadius="@dimen/next_button_corner_radius"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_characters" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

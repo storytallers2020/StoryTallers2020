@@ -11,10 +11,17 @@
     <dimen name="marginStartText">30dp</dimen>
     <dimen name="marginLeftText">30dp</dimen>
     <dimen name="textMarginTop">30dp</dimen>
-    <dimen name="smallTextSize">24sp</dimen>
-    <dimen name="TitleMarginTop">42dp</dimen>
+    <dimen name="titleMarginTop">42dp</dimen>
     <dimen name="verySmallTextSize">14sp</dimen>
-    <dimen name="pitureMarginTop">20dp</dimen>
+    <dimen name="pictureMarginTop">20dp</dimen>
     <dimen name="verySmallPictureMarginTop">8dp</dimen>
-    <dimen name="mainMenuMarginSyde">24dp</dimen>
+    <dimen name="mainMenuMarginSide">24dp</dimen>
+    <dimen name="next_button_corner_radius">30dp</dimen>
+    <dimen name="next_button_margin_horizontal">24dp</dimen>
+    <dimen name="next_button_margin_bottom">40dp</dimen>
+    <dimen name="headerTextSize">20sp</dimen>
+    <dimen name="standardTextSize">16sp</dimen>
+    <dimen name="button_padding">14dp</dimen>
+    <dimen name="buttonTextSize">20sp</dimen>
+    <dimen name="editTextMargin">8dp</dimen>
 </resources>

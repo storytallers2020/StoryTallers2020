@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_margin="5dp"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/iconMargin"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:background="@color/blueDark">
 
     <ImageView
         android:id="@+id/image_character_iv"
-        android:layout_width="70dp"
-        android:layout_height="70dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/iconsRecyclerMargin"
+        tools:src="@drawable/ic_bear"
+        tools:ignore="ContentDescription" />
+
     <TextView
         android:id="@+id/name_character_tv"
-        android:textSize="12sp"
-        android:hint="Name"
-        android:textColor="@color/yellow"
-        android:layout_width="70dp"
-        android:layout_height="20dp"/>
+        android:textSize="@dimen/boxHintTextSize"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Медведь" />
 
 </LinearLayout>

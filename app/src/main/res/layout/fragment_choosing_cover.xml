@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/creation_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choosing_cover"
@@ -37,7 +37,7 @@
         android:gravity="center_horizontal"
         android:text="@string/choosing_cover_choose"
         android:textColor="@color/white"
-        android:textSize="@dimen/smallTextSize"
+        android:textSize="@dimen/standardTextSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

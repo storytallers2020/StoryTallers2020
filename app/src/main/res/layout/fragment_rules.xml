@@ -24,7 +24,7 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
          <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/creation_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -39,14 +39,14 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/TitleMarginTop"
+            android:layout_marginTop="@dimen/titleMarginTop"
             android:gravity="center_horizontal"
             android:text="@string/rules_create_tale"
             android:textColor="@color/white"
             android:textSize="24sp"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/textView5" />
+            card_view:layout_constraintTop_toBottomOf="@+id/creation_header" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
