@@ -52,10 +52,7 @@ class ChooseCharacterAdapter():RecyclerView.Adapter<ChooseCharacterAdapter.ViewH
                 itemView.setOnClickListener {
                     Timber.d("Выбран персонаж: ${character.name} id: ${character.id}")
                 }
-
-
             }
-
         }
     }
 }
