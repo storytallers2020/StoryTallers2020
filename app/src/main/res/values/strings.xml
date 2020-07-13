@@ -58,4 +58,5 @@
         the randomly generated mandatory word.</string>
     <string name="insert_players_name">Enter the player\'s name</string>
     <string name="choose_hero">Choose a hero</string>
+    <string name="enter_name_hint">Ввeдите имя и нажмите Enter</string>
 </resources>
