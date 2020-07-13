@@ -36,4 +36,5 @@
     <string name="game_hint">Каждый игрок ходит\nстрого по очереди и\nможет придумать\nтолько одно\nпредложение</string>
     <string name="insert_players_name">Введите имя</string>
     <string name="choose_hero">Выберите героя</string>
+    <string name="enter_name_hint">Ввeдите имя и нажмите Enter</string>
 </resources>
