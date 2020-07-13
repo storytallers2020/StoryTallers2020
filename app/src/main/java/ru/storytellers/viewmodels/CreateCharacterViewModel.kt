@@ -14,16 +14,20 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
     private val onSuccessliveData = MutableLiveData<DataModel.Success<Character>>()
     private val onErrorliveData = MutableLiveData<DataModel.Error>()
     private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
+    private val playersLiveData = MutableLiveData<List<String>>()
+    private val listNamePlayers= mutableListOf<String>()
 
 
-     fun subscribeOnSuccess(): LiveData<DataModel.Success<Character>>{
-        return onSuccessliveData
-     }
-    fun subscribeOnError(): LiveData<DataModel.Error>{
+     fun subscribeOnSuccess():LiveData<DataModel.Success<Character>>{
+         return onSuccessliveData}
+    fun subscribeOnError():LiveData<DataModel.Error>{
         return onErrorliveData
     }
-    fun subscribeOnLoading(): LiveData<DataModel.Loading>{
+    fun subscribeOnLoading():LiveData<DataModel.Loading>{
         return onLoadingliveData
+    }
+    fun subscribePlayersLiveData():LiveData<List<String>>{
+        return playersLiveData
     }
 
     fun getAllCharacters(){
@@ -34,6 +38,11 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
             },{
                 onErrorliveData.value=DataModel.Error(it)
             })
+    }
+
+    fun addNamePlayerToList(name: String){
+        if (name.isNotEmpty()) listNamePlayers.add(name)
+        playersLiveData.value=listNamePlayers
     }
 
     override fun subscribe(): LiveData<DataModel> {
