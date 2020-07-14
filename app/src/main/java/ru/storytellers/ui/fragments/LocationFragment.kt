@@ -23,6 +23,7 @@ class LocationFragment: BaseFragment<DataModel>() {
         btn_next.setOnClickListener {
             router.navigateTo(Screens.GameScreen())
         }
+        back_from_location.setOnClickListener {backClicked()}
     }
 
     override fun iniViewModel() {
