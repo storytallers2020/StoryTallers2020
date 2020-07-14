@@ -10,8 +10,8 @@ import ru.storytellers.model.entity.SentenceOfTale
 class SentenceOfTaleRepository(private val localDataSource: ISentenceOfTaleDataSource) :
     ISentenceOfTaleRepository {
 
-        override fun insertOrReplace(sentenceOfTale: SentenceOfTale): @NonNull Completable =
-            localDataSource.insertOrReplace(sentenceOfTale)
+        override fun insertOrReplace(storyId: Long, sentenceOfTale: SentenceOfTale): @NonNull Completable =
+            localDataSource.insertOrReplace(storyId, sentenceOfTale)
                 .subscribeOn(Schedulers.io())
 
         override fun getSentenceById(sentenceId: Long): Single<SentenceOfTale> =

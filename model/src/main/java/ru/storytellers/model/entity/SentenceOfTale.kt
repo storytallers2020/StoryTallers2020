@@ -1,10 +1,9 @@
 package ru.storytellers.model.entity
 
-class SentenceOfTale (
+data class SentenceOfTale (
     val id: Long,
-    val storyId: Long,
-    val character: Character?,
+    val player: Player,
     val step: Int,
     val content: String,
-    val contentType: String
+    val contentType: ContentTypeEnum
 )

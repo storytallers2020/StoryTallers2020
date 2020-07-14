@@ -1,6 +1,6 @@
 package ru.storytellers.model.entity
 
-class User (
+data class User (
     val id: Long,
     val nickName: String,
     val login: String,

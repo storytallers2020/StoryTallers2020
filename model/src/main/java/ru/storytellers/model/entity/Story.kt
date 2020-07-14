@@ -1,6 +1,6 @@
 package ru.storytellers.model.entity
 
-class Story (
+data class Story (
     val id: Long,
     val name: String,
     val authors: String,
