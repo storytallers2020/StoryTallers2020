@@ -6,7 +6,7 @@ import io.reactivex.rxjava3.core.Single
 import ru.storytellers.model.entity.SentenceOfTale
 
 interface ISentenceOfTaleDataSource {
-    fun insertOrReplace(sentenceOfTale: SentenceOfTale): @NonNull Completable
+    fun insertOrReplace(storyId: Long, sentenceOfTale: SentenceOfTale): @NonNull Completable
     fun getSentenceById(sentenceId: Long): Single<SentenceOfTale>
     fun getAllStorySentence(storyId: Long): Single<List<SentenceOfTale>>
 }

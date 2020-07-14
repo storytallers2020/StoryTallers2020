@@ -5,6 +5,5 @@ data class Story (
     val name: String,
     val authors: String,
     val coverUrl: String,
-    val location: Location?,
-    val sentenceOfTale: SentenceOfTale?
+    val location: Location?
 )
