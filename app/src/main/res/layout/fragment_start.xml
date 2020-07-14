@@ -1,57 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="100dp"
+    android:paddingBottom="40dp"
     android:background="@drawable/ic_background_1"
     android:orientation="vertical">
 
-
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/subHeader"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/auth_welcome"
         android:textColor="@color/white"
-        android:textSize="@dimen/mainTextSize"
-        app:layout_constraintBottom_toTopOf="@+id/start_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/start_button"
+        android:id="@+id/new_tale_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="@dimen/buttonSideMargin"
-        android:layout_marginEnd="@dimen/buttonSideMargin"
         android:backgroundTint="@color/yellow"
         android:text="@string/auth_create_tale"
         android:textAllCaps="false"
         android:textColor="@color/blueDark"
-        android:textSize="@dimen/mainTextSize"
+        android:textSize="20sp"
+        android:padding="14dp"
+        app:layout_goneMarginBottom="200dp"
+        android:layout_marginBottom="40dp"
+        app:cornerRadius="@dimen/buttonCornerRadius"
+        app:layout_constraintBottom_toTopOf="@id/library_button" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/library_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/yellow"
+        android:text="@string/auth_create_library"
+        android:textAllCaps="false"
+        android:layout_marginBottom="200dp"
+        android:textColor="@color/blueDark"
+        android:visibility="gone"
+        android:textSize="20sp"
+        android:padding="14dp"
         app:cornerRadius="@dimen/buttonCornerRadius"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="24dp" />
 
     <TextView
         android:id="@+id/rules_game_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="40dp"
         android:text="@string/auth_help"
         android:textColor="@color/yellow"
-        android:textSize="@dimen/auxillaryTextSize"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_button"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

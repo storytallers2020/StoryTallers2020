@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="mainTextSize">24sp</dimen>
     <dimen name="buttonSideMargin">40dp</dimen>
     <dimen name="buttonCornerRadius">30dp</dimen>
-    <dimen name="auxillaryTextSize">16sp</dimen>
-    <dimen name="marginManualWindows">16dp</dimen>
-    <dimen name="textSideMargin">20dp</dimen>
+    <dimen name="titleMarginTop">30dp</dimen>
+    <dimen name="next_button_corner_radius">30dp</dimen>
     <dimen name="returnButtonMarginLeft">24dp</dimen>
     <dimen name="returnButtonMarginTop">24dp</dimen>
     <dimen name="marginStartText">24dp</dimen>
     <dimen name="marginLeftText">24dp</dimen>
-    <dimen name="smallTextSize">16sp</dimen>
     <dimen name="textMarginTop">24dp</dimen>
-    <dimen name="TitleMarginTop">30dp</dimen>
-    <dimen name="verySmallTextSize">14sp</dimen>
-    <dimen name="pitureMarginTop">12dp</dimen>
+    <dimen name="mainMenuMarginSide">24dp</dimen>
+    <dimen name="textSideMargin">20dp</dimen>
+    <dimen name="marginManualWindows">16dp</dimen>
+    <dimen name="button_padding">14dp</dimen>
+    <dimen name="pictureMarginTop">12dp</dimen>
+    <dimen name="box_corner_radius">10dp</dimen>
+    <dimen name="iconsRecyclerMargin">10dp</dimen>
+    <dimen name="editTextMargin">8dp</dimen>
     <dimen name="verySmallPictureMarginTop">4dp</dimen>
-    <dimen name="mainMenuMarginSyde">24dp</dimen>
+    <dimen name="iconMargin">4dp</dimen>
+
+    <dimen name="mainTextSize">24sp</dimen>
+    <dimen name="headerTextSize">20sp</dimen>
+    <dimen name="standardTextSize">16sp</dimen>
+    <dimen name="smallTextSize">12sp</dimen>
+    <dimen name="verySmallTextSize">12sp</dimen>
+    <dimen name="boxHintTextSize">12sp</dimen>
+    <dimen name="buttonTextSize">20sp</dimen>
+    <dimen name="line_spacing_extra">4dp</dimen>
 </resources>
