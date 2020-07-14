@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="24dp"
@@ -10,7 +11,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/subHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -20,18 +21,35 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/start_button"
+        android:id="@+id/new_tale_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/yellow"
         android:text="@string/auth_create_tale"
         android:textAllCaps="false"
-        android:layout_marginBottom="200dp"
         android:textColor="@color/blueDark"
         android:textSize="20sp"
         android:padding="14dp"
+        app:layout_goneMarginBottom="200dp"
+        android:layout_marginBottom="40dp"
         app:cornerRadius="@dimen/buttonCornerRadius"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@id/library_button" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/library_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/yellow"
+        android:text="@string/auth_create_library"
+        android:textAllCaps="false"
+        android:layout_marginBottom="200dp"
+        android:textColor="@color/blueDark"
+        android:visibility="gone"
+        android:textSize="20sp"
+        android:padding="14dp"
+        app:cornerRadius="@dimen/buttonCornerRadius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="24dp" />
 
     <TextView
         android:id="@+id/rules_game_text_view"

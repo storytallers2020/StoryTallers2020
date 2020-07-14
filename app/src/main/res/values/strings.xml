@@ -37,29 +37,19 @@
     <string name="rules_game">
         The game can be played by 2 to 8 people.\n
         - Players make their moves in turns.\n
-        - The order is determined at the very\n
-        beginning of the game and corresponds\n
-        to the order in which the player’s\n
-        name is written when he is added\n
-        to the game.\n
+        - The order is determined in the beginning of the game and corresponds to the order in which the players were added to the game.\n
         - A player can come up with only one sentence.\n
         - The sentence is limited to 60 characters.\n
-        - Any player can finish the game after\n
-        each of the participants in the game\n
-        has made at least 1 move.\n
-        There are three levels of difficulty for the game:\n
-        1. Easy. All previously composed sentences are visible\n
-        to all participants in the game at any time.\n
-        2. Medium. The player sees only the last sentence\n
-        composed by the player before him.\n
-        3. Hard. The player sees only the last sentence\n
-        composed by the player before him.\n
-        In his turn the player must use\n
-        the randomly generated mandatory word.</string>
+        - Any player can finish the game after each of the participants in the game has made at least 1 move.\n\n
+        There are 3 difficulty modes int the game:\n
+        1. Easy. All previously composed sentences are visible to all participants in the game at any time.\n
+        2. Medium. The player sees only the last sentence composed by the player before him.\n
+        3. Hard. The player sees only the last sentence composed by the player before him. In his turn the player must use the randomly generated mandatory word.</string>
     <string name="insert_players_name">Enter the player\'s name</string>
     <string name="choose_hero">Choose a hero</string>
     <string name="enter_name_hint">Ввeдите имя и нажмите Enter</string>
     <string name="arrow_back" translatable="false"><![CDATA[<<<]]></string>
     <string name="dots_line" translatable="false">..............</string>
-    <string name="arrow_forward"><![CDATA[>>>]]></string>
+    <string name="arrow_forward" translatable="false"><![CDATA[>>>]]></string>
+    <string name="auth_create_library">My Tales Library</string>
 </resources>
