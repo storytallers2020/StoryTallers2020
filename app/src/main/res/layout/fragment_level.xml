@@ -18,10 +18,10 @@
         android:scaleY="2"
         android:src="@drawable/ic_arrow_left_white_16"
         android:layout_marginStart="8dp"
+        android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/creation_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/creation_header"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="@id/creation_header" />
 
     <TextView
         android:id="@+id/creation_header"
@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:text="@string/level"
             android:textSize="12sp"
+            android:gravity="center"
             android:drawableBottom="@drawable/cup"
             android:textColor="@color/yellow"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +74,7 @@
             android:text="@string/character"
             android:textSize="12sp"
             android:alpha="0.5"
+            android:gravity="center"
             android:textColor="@color/white"
             android:drawableBottom="@drawable/ic_queen"
             app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +99,7 @@
             android:text="@string/location"
             android:textSize="12sp"
             android:alpha="0.5"
-            android:gravity="end"
+            android:gravity="center"
             android:drawableBottom="@drawable/ic_mounts"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
