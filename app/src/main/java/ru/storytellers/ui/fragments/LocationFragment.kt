@@ -1,7 +1,7 @@
 package ru.storytellers.ui.fragments
 
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.fragment_character_create.*
+import kotlinx.android.synthetic.main.fragment_location.*
 import ru.storytellers.R
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.model.DataModel

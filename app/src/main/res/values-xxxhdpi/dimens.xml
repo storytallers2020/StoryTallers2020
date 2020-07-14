@@ -1,27 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="mainTextSize">30sp</dimen>
-    <dimen name="buttonSideMargin">60dp</dimen>
-    <dimen name="buttonCornerRadius">42dp</dimen>
-    <dimen name="auxillaryTextSize">24sp</dimen>
-    <dimen name="marginManualWindows">16dp</dimen>
-    <dimen name="textSideMargin">26dp</dimen>
-    <dimen name="returnButtonMarginLeft">30dp</dimen>
-    <dimen name="returnButtonMarginTop">30dp</dimen>
-    <dimen name="marginStartText">30dp</dimen>
-    <dimen name="marginLeftText">30dp</dimen>
-    <dimen name="textMarginTop">30dp</dimen>
-    <dimen name="titleMarginTop">42dp</dimen>
-    <dimen name="verySmallTextSize">16sp</dimen>
-    <dimen name="pictureMarginTop">20dp</dimen>
-    <dimen name="verySmallPictureMarginTop">8dp</dimen>
-    <dimen name="mainMenuMarginSide">32dp</dimen>
-    <dimen name="next_button_corner_radius">30dp</dimen>
-    <dimen name="next_button_margin_horizontal">24dp</dimen>
-    <dimen name="next_button_margin_bottom">40dp</dimen>
-    <dimen name="headerTextSize">20sp</dimen>
-    <dimen name="standardTextSize">16sp</dimen>
-    <dimen name="button_padding">14dp</dimen>
-    <dimen name="buttonTextSize">20sp</dimen>
-    <dimen name="editTextMargin">8dp</dimen>
+
 </resources>
