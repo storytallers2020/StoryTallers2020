@@ -9,6 +9,7 @@ import org.koin.android.scope.currentScope
 import ru.storytellers.navigation.Screens
 import ru.storytellers.viewmodels.LocationViewModel
 
+
 class LocationFragment: BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_location
     override lateinit var model: LocationViewModel
