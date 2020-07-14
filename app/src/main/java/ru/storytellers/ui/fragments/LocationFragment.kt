@@ -9,7 +9,6 @@ import org.koin.android.scope.currentScope
 import ru.storytellers.navigation.Screens
 import ru.storytellers.viewmodels.LocationViewModel
 
-
 class LocationFragment: BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_location
     override lateinit var model: LocationViewModel
@@ -24,6 +23,7 @@ class LocationFragment: BaseFragment<DataModel>() {
         btn_next.setOnClickListener {
             router.navigateTo(Screens.GameScreen())
         }
+        back_from_location.setOnClickListener {backClicked()}
     }
 
     override fun iniViewModel() {
