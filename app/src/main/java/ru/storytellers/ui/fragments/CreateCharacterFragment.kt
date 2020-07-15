@@ -1,6 +1,7 @@
 package ru.storytellers.ui.fragments
 
 import android.content.Context
+import android.opengl.Visibility
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -55,7 +56,16 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
             handlerOnSuccessResult(this)
             handlerOnErrorResult(this)
             handlerPlayerList(this)
+            handlerFlagActive(this)
         }
+    }
+    private fun handlerFlagActive(viewModel:CreateCharacterViewModel) {
+        viewModel.subscribeOnFlagActive().observe(viewLifecycleOwner, Observer {
+            if (it){
+                makeEditexiActive(enter_name_field_et)
+                characterRecyclerView.makeInvisible()
+            model.setFlagActive(false)}
+        })
     }
 
     private fun handlerOnErrorResult(viewModel:CreateCharacterViewModel) {
@@ -96,17 +106,27 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
         editTextView.setOnEditorActionListener { v, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_DONE)
             {
-                playerCreator.setNamePlayer(editTextView.text.toString())
-                editTextView.setText("")
-                //editTextView.isEnabled=false
-                enter_name_et_layout1.alpha = 0.1f
-                hideKeyBoard(editTextView)
-               // enter_name_et_layout1.visibility=View.GONE
-
-                return@setOnEditorActionListener true
+                val name=editTextView.text.toString()
+                if(name!="") {
+                    playerCreator.setNamePlayer(name)
+                    editTextView.setText("")
+                    makeEditexiInactive(editTextView)
+                    characterRecyclerView.makeVisible()
+                    hideKeyBoard(editTextView)
+                    return@setOnEditorActionListener true
+                } else enter_name_et_layout1.error="Имя не может быть пустым"
             }
             return@setOnEditorActionListener false
         }
+    }
+
+    private fun makeEditexiInactive(editTextView: TextInputEditText) {
+        editTextView.isEnabled = false
+        enter_name_et_layout1.alpha = 0.3f
+    }
+    fun makeEditexiActive(editTextView: TextInputEditText) {
+        editTextView.isEnabled = true
+        enter_name_et_layout1.alpha = 1f
     }
 
     private fun hideKeyBoard(view: TextInputEditText){
@@ -128,6 +148,8 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
                 false
             )
             adapter=characterAdapter
+            makeInvisible()
+
         }
         playerRecyclerView.apply {
             layoutManager=LinearLayoutManager(
@@ -138,4 +160,14 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
             adapter=playerAdapter
         }
     }
+
+    private fun RecyclerView.makeInvisible() {
+        visibility = View.GONE
+        textView4.visibility= View.GONE
+    }
+    private fun RecyclerView.makeVisible() {
+        visibility = View.VISIBLE
+        textView4.visibility = View.VISIBLE
+    }
+
 }
