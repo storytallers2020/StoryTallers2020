@@ -8,17 +8,18 @@ import kotlinx.android.synthetic.main.item_image_character_create.view.*
 import kotlinx.android.synthetic.main.item_user_character_create.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Character
+import ru.storytellers.model.entity.Player
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 import timber.log.Timber
 
 
-class PlayerAdapter:RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>(){
+class PlayerAdapter():RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>(){
 
-    private val playersList = mutableListOf<String>()
+    private val playersList = mutableListOf<Player>()
 
-    fun setDataToPlayerAdapter(namePlayerList: List<String>?) {
-        namePlayerList?.let {
+    fun setPlayersListData(listPlayer: List<Player>) {
+        listPlayer?.let {
             playersList.clear()
             playersList.addAll(it)
         }
@@ -43,9 +44,14 @@ class PlayerAdapter:RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>(){
     }
 
     inner class PlayerViewHolder(container: View) : RecyclerView.ViewHolder(container){
-        fun bind(namePlayer:String) {
+        fun bind(player:Player) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
-                itemView.player_name_tv.text=namePlayer
+                itemView.player_name_tv.text=player.name
+                player.character.avatarUrl.let {url->
+                    resourceToUri(url)?.let {uri->
+                        loadImage(uri, itemView.character)
+                        }
+                    }
             }
         }
     }
