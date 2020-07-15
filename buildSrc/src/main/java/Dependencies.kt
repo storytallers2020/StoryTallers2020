@@ -55,8 +55,8 @@ object Versions {
     const val googlePlayCore = "1.6.3"
 
     //Glide
-    const val glide = "4.9.0"
-    const val glideCompiler = "4.9.0"
+    const val glide = "4.11.0"
+    const val glideCompiler = "4.11.0"
 
     //Picasso
     const val picasso = "2.5.2"
