@@ -1,6 +1,9 @@
 package ru.storytellers.ui.fragments
 
+import android.content.Context
+import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +19,7 @@ import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.ChooseCharacterAdapter
 import ru.storytellers.ui.adapters.PlayerAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.utils.viewById
 import ru.storytellers.viewmodels.CreateCharacterViewModel
 import timber.log.Timber
@@ -24,13 +28,18 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     override lateinit var model: CreateCharacterViewModel
     private val characterRecyclerView by viewById<RecyclerView>(R.id.rv_characters)
     private val playerRecyclerView by viewById<RecyclerView>(R.id.player_list_rv)
-    private val characterAdapter: ChooseCharacterAdapter by lazy { ChooseCharacterAdapter() }
+    private lateinit var characterAdapter: ChooseCharacterAdapter
     private val playerAdapter: PlayerAdapter by lazy { PlayerAdapter() }
+    private val playerCreator: PlayerCreator by lazy { PlayerCreator() }
     override val layoutRes= R.layout.fragment_character_create_v3
+    private var imm: Any?= null
+
 
     companion object {
         fun newInstance(levelGame:Int) = CreateCharacterFragment(levelGame)
+
     }
+
 
     override fun backClicked(): Boolean {
         router.exit()
@@ -41,10 +50,11 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
         val viewModel: CreateCharacterViewModel by currentScope.inject()
         model = viewModel
         model.run {
+            characterAdapter=ChooseCharacterAdapter(this,playerCreator)
             getAllCharacters()
             handlerOnSuccessResult(this)
             handlerOnErrorResult(this)
-            handlerNamePlayerList(this)
+            handlerPlayerList(this)
         }
     }
 
@@ -63,17 +73,18 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
             }
         })
     }
-    private fun handlerNamePlayerList(viewModel:CreateCharacterViewModel) {
-        viewModel.subscribePlayersLiveData().observe(viewLifecycleOwner, Observer {
-            it.let {
-                if (it.isNotEmpty()) {
-                    playerAdapter.setDataToPlayerAdapter(it)
-                }
-            }
-        })
+    private fun handlerPlayerList(viewModel:CreateCharacterViewModel) {
+        viewModel.run {
+            subscribeOnPlayers().observe(viewLifecycleOwner, Observer {
+                playerAdapter.setPlayersListData(it)
+            })
+        }
+
     }
 
     override fun init() {
+        imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
+        creation_header.post{ View.FOCUS_DOWN }
         iniViewModel()
         setOnEditorActionListener(enter_name_field_et)
         btn_next.setOnClickListener { navigateToLocationScreen() }
@@ -85,14 +96,22 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
         editTextView.setOnEditorActionListener { v, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_DONE)
             {
-                model.addNamePlayerToList(editTextView.text.toString())
+                playerCreator.setNamePlayer(editTextView.text.toString())
                 editTextView.setText("")
-               // editTextView.isEnabled=false
+                //editTextView.isEnabled=false
+                enter_name_et_layout1.alpha = 0.1f
+                hideKeyBoard(editTextView)
+               // enter_name_et_layout1.visibility=View.GONE
 
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
         }
+    }
+
+    private fun hideKeyBoard(view: TextInputEditText){
+        (imm as? InputMethodManager)?.hideSoftInputFromWindow(view.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS)
     }
 
 
@@ -101,23 +120,21 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     }
 
     private fun initRecyclers(){
-       val gridLayoutManager = GridLayoutManager(
-           context,
-           2,
-           LinearLayoutManager.HORIZONTAL,
-           false
-           )
         characterRecyclerView.apply {
-            layoutManager=gridLayoutManager
+            layoutManager=GridLayoutManager(
+                context,
+                2,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
             adapter=characterAdapter
         }
-        val linearLayoutManager=LinearLayoutManager(
-            context,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
         playerRecyclerView.apply {
-            layoutManager=linearLayoutManager
+            layoutManager=LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
             adapter=playerAdapter
         }
     }
