@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_character_create.back_button_character
-import kotlinx.android.synthetic.main.fragment_character_create.btn_next
+import kotlinx.android.synthetic.main.fragment_character_create_v3.back_button_character
+import kotlinx.android.synthetic.main.fragment_character_create_v3.btn_next
 import kotlinx.android.synthetic.main.fragment_character_create_v3.*
 import org.koin.android.scope.currentScope
 import ru.storytellers.R

@@ -8,7 +8,7 @@ import ru.storytellers.R
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.viewmodels.StartViewModel
 import ru.storytellers.model.DataModel
-import kotlinx.android.synthetic.main.fragment_start.start_button
+import kotlinx.android.synthetic.main.fragment_start.new_tale_button
 import org.koin.android.scope.currentScope
 import ru.storytellers.navigation.Screens
 
@@ -25,7 +25,7 @@ class StartFragment: BaseFragment<DataModel>() {
     override fun init() {
         iniViewModel()
         rules_game_text_view.setOnClickListener { navigateToRulesGame() }
-        startButton=start_button
+        startButton=new_tale_button
         startButton.setOnClickListener{ navigateToLevelScreen() }
     }
 

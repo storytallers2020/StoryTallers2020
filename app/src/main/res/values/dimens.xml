@@ -27,4 +27,5 @@
     <dimen name="verySmallTextSize">12sp</dimen>
     <dimen name="boxHintTextSize">12sp</dimen>
     <dimen name="buttonTextSize">20sp</dimen>
+    <dimen name="line_spacing_extra">4dp</dimen>
 </resources>

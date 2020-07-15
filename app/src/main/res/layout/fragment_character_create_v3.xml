@@ -15,12 +15,12 @@
         android:layout_height="wrap_content"
         android:scaleX="2"
         android:scaleY="2"
+        android:contentDescription="@string/arrow_back"
         android:src="@drawable/ic_arrow_left_white_16"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@id/creation_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/creation_header"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="@id/creation_header" />
 
     <TextView
         android:id="@+id/creation_header"
@@ -35,7 +35,9 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/creation_header">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,7 +49,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="24dp"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
@@ -57,6 +58,7 @@
                     android:text="@string/level"
                     android:alpha="0.5"
                     android:textSize="12sp"
+                    android:gravity="center"
                     android:drawableBottom="@drawable/cup"
                     android:textColor="@color/yellow"
                     app:layout_constraintStart_toStartOf="parent"
@@ -66,12 +68,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_line_yellow_light"
+                    android:contentDescription="@string/dots_line"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/hero"
                     app:layout_constraintStart_toEndOf="@id/difficulty"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.65"
-                    tools:ignore="ContentDescription" />
+                    app:layout_constraintVertical_bias="0.65" />
 
                 <TextView
                     android:id="@+id/hero"
@@ -79,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/character"
                     android:textSize="12sp"
+                    android:gravity="center"
                     android:textColor="@color/yellow"
                     android:drawableBottom="@drawable/ic_queen"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -89,12 +92,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_line_yellow"
+                    android:contentDescription="@string/dots_line"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/location"
                     app:layout_constraintStart_toEndOf="@id/hero"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.65"
-                    tools:ignore="ContentDescription" />
+                    app:layout_constraintVertical_bias="0.65" />
 
                 <TextView
                     android:id="@+id/location"
@@ -103,7 +106,7 @@
                     android:text="@string/location"
                     android:textSize="12sp"
                     android:alpha="0.5"
-                    android:gravity="end"
+                    android:gravity="center"
                     android:drawableBottom="@drawable/ic_mounts"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -115,10 +118,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/slider"
-                tools:itemCount="1"
+                tools:itemCount="2"
                 tools:listitem="@layout/item_user_character_create" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -126,7 +131,7 @@
                 android:theme="@style/OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/insert_players_name"
+                android:hint="@string/enter_name_hint"
                 android:gravity="start"
                 android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +147,6 @@
                     android:layout_margin="8dp"
                     android:maxLines="1"
                     android:textColor="@color/white"
-                    android:hint="@string/enter_name_hint"
                     android:singleLine="true"
                     android:inputType="text"
                     android:textColorHint="@color/colorAccent"
@@ -189,19 +193,11 @@
                 android:textColor="@color/blueDark"
                 android:textSize="20sp"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="40dp"
                 app:cornerRadius="@dimen/next_button_corner_radius"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_characters"
                 app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.core.widget.NestedScrollView>
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
