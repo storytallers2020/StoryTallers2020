@@ -6,7 +6,8 @@ import ru.storytellers.model.entity.Player
 class PlayerCreator {
 
     private var idPlayer: Long=0
-    private lateinit var namePlayer: String
+    private  var namePlayer: String="Player"
+
     private lateinit var characterOfPlayer: Character
 
     fun createPlayer(): Player {
