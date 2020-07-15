@@ -131,6 +131,7 @@
                 android:theme="@style/OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/yellow"
                 android:hint="@string/enter_name_hint"
                 android:gravity="start"
                 android:layout_marginTop="24dp"
