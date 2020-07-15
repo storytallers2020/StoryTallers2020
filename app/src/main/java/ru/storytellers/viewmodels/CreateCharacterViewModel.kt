@@ -17,7 +17,9 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
     private val onErrorliveData = MutableLiveData<DataModel.Error>()
     private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
     private val playersLiveData = MutableLiveData<List<Player>>()
+    private val flagActiveLiveData = MutableLiveData<Boolean>()
     private val listPlayers= mutableListOf<Player>()
+    private var flagActive: Boolean=false
 
 
      fun subscribeOnSuccess(): LiveData<DataModel.Success<Character>>{
@@ -30,12 +32,19 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
         return onLoadingliveData
     }
     fun subscribeOnPlayers(): LiveData<List<Player>>{
-        playersLiveData.value=listPlayers
         return playersLiveData
+    }
+    fun subscribeOnFlagActive(): LiveData<Boolean>{
+        return flagActiveLiveData
+    }
+    fun setFlagActive(flag:Boolean){
+        flagActive=flag
+        flagActiveLiveData.value=flagActive
     }
 
     fun addPlayer(player:Player){
         listPlayers.add(player)
+        playersLiveData.value=listPlayers
     }
 
 
