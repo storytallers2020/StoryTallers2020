@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_image_character_create.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Character
+import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
+import ru.storytellers.viewmodels.CreateCharacterViewModel
 import timber.log.Timber
 
-class ChooseCharacterAdapter():RecyclerView.Adapter<ChooseCharacterAdapter.ViewHolder>() {
+class ChooseCharacterAdapter(
+    private val characterViewModel: CreateCharacterViewModel,
+    private val playerCreator: PlayerCreator
+):RecyclerView.Adapter<ChooseCharacterAdapter.ViewHolder>() {
 
     private val listCharacters = mutableListOf<Character>()
 
@@ -23,6 +28,7 @@ class ChooseCharacterAdapter():RecyclerView.Adapter<ChooseCharacterAdapter.ViewH
         }
         notifyDataSetChanged()
     }
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -50,9 +56,16 @@ class ChooseCharacterAdapter():RecyclerView.Adapter<ChooseCharacterAdapter.ViewH
                 }
                 itemView.name_character_tv.text = character.name
                 itemView.setOnClickListener {
+                    addPlayer(character)
+                    characterViewModel.setFlagActive(true)
                     Timber.d("Выбран персонаж: ${character.name} id: ${character.id}")
                 }
             }
+        }
+        private fun addPlayer(character:Character){
+            playerCreator.setCharacterOfPlayer(character)
+            val player= playerCreator.createPlayer()
+            characterViewModel.addPlayer(player)
         }
     }
 }
