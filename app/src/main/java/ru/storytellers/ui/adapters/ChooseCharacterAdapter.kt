@@ -10,7 +10,6 @@ import ru.storytellers.model.entity.Character
 import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
-import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.CreateCharacterViewModel
 import timber.log.Timber
 
@@ -58,8 +57,8 @@ class ChooseCharacterAdapter(
                 itemView.name_character_tv.text = character.name
                 itemView.setOnClickListener {
                     addPlayer(character)
+                    characterViewModel.setFlagActive(true)
                     Timber.d("Выбран персонаж: ${character.name} id: ${character.id}")
-                    toastShowLong(itemView.context,"Выбран персонаж: ${character.name}")
                 }
             }
         }
