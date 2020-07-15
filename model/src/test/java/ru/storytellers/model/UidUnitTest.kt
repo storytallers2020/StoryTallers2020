@@ -1,9 +1,7 @@
 package ru.storytellers.model
 
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
-import ru.storytellers.utils.fieldsToLogString
 import ru.storytellers.utils.getUid
 
 class UidUnitTest {
