@@ -5,7 +5,6 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.datasource.ICharacterDataSource
 import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
 import ru.storytellers.engine.Game
