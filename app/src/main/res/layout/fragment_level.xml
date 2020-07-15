@@ -10,8 +10,8 @@
         android:id="@+id/back_button_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="@dimen/returnButtonMarginLeft"
+        android:layout_marginTop="@dimen/returnButtonMarginTop"
         android:src="@drawable/ic_arrow_back_white_24"
         android:scaleX="1.5"
         android:scaleY="1.5"
@@ -158,7 +158,7 @@
         android:gravity="center_horizontal"
         android:text="@string/easy_description"
         android:textColor="@color/yellow"
-        android:textSize="@dimen/standardTextSize"
+        android:textSize="@dimen/smallTextSize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
@@ -182,7 +182,7 @@
             android:gravity="center_horizontal"
             android:text="@string/easy"
             android:textColor="@color/yellow"
-            android:textSize="@dimen/standardTextSize" />
+            android:textSize="@dimen/smallTextSize" />
 
         <TextView
             android:id="@+id/medium_button"
@@ -192,7 +192,7 @@
             android:gravity="center_horizontal"
             android:text="@string/medium"
             android:textColor="@color/white"
-            android:textSize="@dimen/standardTextSize" />
+            android:textSize="@dimen/smallTextSize" />
 
         <TextView
             android:id="@+id/hard_button"
@@ -202,7 +202,7 @@
             android:gravity="center_horizontal"
             android:text="@string/hard"
             android:textColor="@color/white"
-            android:textSize="@dimen/standardTextSize" />
+            android:textSize="@dimen/smallTextSize" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatSeekBar
