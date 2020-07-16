@@ -1,4 +1,7 @@
-package ru.storytellers.application
+package ru.storytellers.engine
 
-class GameSrorage {
+import ru.storytellers.model.entity.Player
+
+class GameStorage {
+     val listPlayers= mutableListOf<Player>()
 }
