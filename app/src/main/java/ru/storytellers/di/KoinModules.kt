@@ -3,8 +3,8 @@ package ru.storytellers.di
 import androidx.room.Room
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import ru.storytellers.engine.GameStorage
 import ru.storytellers.model.datasource.ICharacterDataSource
 import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
 import ru.storytellers.engine.Game
@@ -13,10 +13,6 @@ import ru.storytellers.engine.level.Levels
 import ru.storytellers.engine.rules.NoEmptySentenceRule
 import ru.storytellers.engine.rules.OneSentenceInTextRule
 import ru.storytellers.engine.rules.Rules
-import ru.storytellers.ui.fragments.CreateCharacterFragment
-import ru.storytellers.ui.fragments.LevelFragment
-import ru.storytellers.ui.fragments.LocationFragment
-import ru.storytellers.ui.fragments.StartFragment
 import ru.storytellers.viewmodels.CreateCharacterViewModel
 import ru.storytellers.viewmodels.LevelViewModel
 import ru.storytellers.viewmodels.LocationViewModel
@@ -98,4 +94,5 @@ val gameModel = module {
     }
 
     single { Game() }
+    single { GameStorage() }
 }
