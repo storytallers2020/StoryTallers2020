@@ -157,31 +157,39 @@
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/textView4"
-                android:text="@string/choose_hero"
-                android:textColor="@color/yellow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/enter_name_et_layout1" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_characters"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container_rv_chars"
                 android:layout_width="match_parent"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView4"
-                app:spanCount="2"
-                tools:itemCount="20"
-                tools:listitem="@layout/item_image_character_create" />
+                app:layout_constraintTop_toBottomOf="@id/enter_name_et_layout1">
+
+                <TextView
+                    android:id="@+id/title_rv_characters"
+                    android:text="@string/choose_hero"
+                    android:textColor="@color/yellow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_characters"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/title_rv_characters"
+                    app:spanCount="2"
+                    tools:itemCount="20"
+                    tools:listitem="@layout/item_image_character_create" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_next"
@@ -190,13 +198,15 @@
                 android:backgroundTint="@color/yellow"
                 android:padding="14dp"
                 android:text="@string/next"
+                android:visibility="visible"
                 android:textAllCaps="false"
                 android:textColor="@color/blueDark"
                 android:textSize="20sp"
                 android:layout_marginTop="24dp"
                 app:cornerRadius="@dimen/next_button_corner_radius"
-                app:layout_constraintTop_toBottomOf="@id/rv_characters"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/container_rv_chars"
+                app:layout_goneMarginTop="24dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

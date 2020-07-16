@@ -1,7 +1,6 @@
 package ru.storytellers.ui.fragments
 
 import android.content.Context
-import android.opengl.Visibility
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -163,11 +162,11 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
 
     private fun RecyclerView.makeInvisible() {
         visibility = View.GONE
-        textView4.visibility= View.GONE
+        title_rv_characters.visibility= View.GONE
     }
     private fun RecyclerView.makeVisible() {
         visibility = View.VISIBLE
-        textView4.visibility = View.VISIBLE
+        title_rv_characters.visibility = View.VISIBLE
     }
 
 }
