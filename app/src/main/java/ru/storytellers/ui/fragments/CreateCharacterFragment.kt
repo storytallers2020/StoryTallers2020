@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.fragment_character_create_v3.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
+import ru.storytellers.model.entity.Character
+import ru.storytellers.model.entity.Player
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.ChooseCharacterAdapter
 import ru.storytellers.ui.adapters.PlayerAdapter
@@ -23,9 +25,9 @@ import timber.log.Timber
 
 class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel>() {
     override lateinit var model: CreateCharacterViewModel
-    private val characterAdapter: ChooseCharacterAdapter by inject()
-    private val playerAdapter: PlayerAdapter by inject()
-    private val playerCreator: PlayerCreator by inject()
+    private lateinit var characterAdapter: ChooseCharacterAdapter
+    private lateinit var playerAdapter: PlayerAdapter
+    private lateinit var playerCreator: PlayerCreator
     override val layoutRes= R.layout.fragment_character_create_v3
     private var imm: Any?= null
 
@@ -55,10 +57,15 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     private fun handlerFlagActive(viewModel:CreateCharacterViewModel) {
         viewModel.subscribeOnFlagActive().observe(viewLifecycleOwner, Observer {
             if (it){
+                showFlag(it)
                 makeEditexiActive(enter_name_field_et)
                 rv_characters.makeInvisible()
             model.setFlagActive(false)}
         })
+    }
+    private fun showFlag(flag: Boolean){
+        val fla=flag
+        val sdf="jhb"
     }
 
     private fun handlerOnErrorResult(viewModel:CreateCharacterViewModel) {
@@ -70,22 +77,37 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     private fun handlerOnSuccessResult(viewModel:CreateCharacterViewModel) {
         viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
             it.let {
-                if (it.data!!.isNotEmpty()) {
-                    characterAdapter.setData(it.data)
-                }
+                setDataCharacterAdapter(it)
             }
         })
     }
-    private fun handlerPlayerList(viewModel:CreateCharacterViewModel) {
-        viewModel.run {
-            subscribeOnPlayers().observe(viewLifecycleOwner, Observer {
-                playerAdapter.setPlayersListData(it)
-            })
-        }
 
+    private fun setDataCharacterAdapter(it: DataModel.Success<Character>) {
+        if (it.data!!.isNotEmpty()) {
+            characterAdapter.setData(it.data)
+        }
+    }
+
+    private fun handlerPlayerList(viewModel:CreateCharacterViewModel) {
+        viewModel.subscribeOnPlayers().observe(
+            viewLifecycleOwner,
+            Observer {
+                setPlayersToPlayerAdapter(it)
+            })
+    }
+
+    private fun setPlayersToPlayerAdapter(it: List<Player>) {
+        playerAdapter.setPlayersListData(it)
+        val sdf="jhb"
     }
 
     override fun init() {
+        val charAdapt: ChooseCharacterAdapter by inject()
+        characterAdapter = charAdapt
+        val playAdapt: PlayerAdapter by inject()
+        playerAdapter = playAdapt
+        val playCreat : PlayerCreator by inject()
+        playerCreator = playCreat
         imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
         creation_header.post{ View.FOCUS_DOWN }
         iniViewModel()
@@ -139,7 +161,6 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
             makeInvisible()
         }
         player_list_rv.adapter=playerAdapter
-
     }
 
     private fun RecyclerView.makeInvisible() {
