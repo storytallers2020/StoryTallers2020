@@ -167,7 +167,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/enter_name_et_layout1">
+                app:layout_constraintTop_toBottomOf="@id/enter_name_et_layout1"
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/title_rv_characters"
