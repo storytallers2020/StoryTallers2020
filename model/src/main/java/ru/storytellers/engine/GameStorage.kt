@@ -3,5 +3,9 @@ package ru.storytellers.engine
 import ru.storytellers.model.entity.Player
 
 class GameStorage {
-     val listPlayers= mutableListOf<Player>()
+     private val listPlayers= mutableListOf<Player>()
+
+     fun getListPlayers()=listPlayers
+
+
 }
