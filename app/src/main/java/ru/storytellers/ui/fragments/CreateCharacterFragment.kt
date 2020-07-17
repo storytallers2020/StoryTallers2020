@@ -98,7 +98,6 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
 
     private fun setPlayersToPlayerAdapter(it: List<Player>) {
         playerAdapter.setPlayersListData(it)
-        val sdf="jhb"
     }
 
     override fun init() {
