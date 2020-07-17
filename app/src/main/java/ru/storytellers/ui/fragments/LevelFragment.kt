@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_level.*
+import org.koin.android.ext.android.inject
 import org.koin.android.scope.currentScope
 import ru.storytellers.R
 import ru.storytellers.navigation.Screens
@@ -54,7 +55,7 @@ class LevelFragment: BaseFragment<DataModel>() {
         setSeekBarListener()
     }
     override fun iniViewModel() {
-        val viewModel: LevelViewModel by currentScope.inject()
+        val viewModel: LevelViewModel by inject()
         model = viewModel
         model.subscribeOnLevelGame().observe(viewLifecycleOwner, Observer {
             levelGame=it
