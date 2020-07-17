@@ -4,6 +4,7 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Character
@@ -18,7 +19,9 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
     private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
     private val playersLiveData = MutableLiveData<List<Player>>()
     private val flagActiveLiveData = MutableLiveData<Boolean>()
-    private val listPlayers= mutableListOf<Player>()
+
+    private var listPlayers: MutableList<Player> = StoryTallerApp.instance.gameStorage.getListPlayers()
+    //private var listPlayers= mutableListOf<Player>()
     private var flagActive: Boolean=false
 
 
@@ -43,7 +46,7 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
     }
 
     fun addPlayer(player:Player){
-        listPlayers.add(player)
+       listPlayers.add(player)
         playersLiveData.value=listPlayers
     }
 
