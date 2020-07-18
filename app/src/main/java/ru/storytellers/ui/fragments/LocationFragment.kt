@@ -29,8 +29,6 @@ class LocationFragment: BaseFragment<DataModel>() {
     override fun iniViewModel() {
         val viewModel: LocationViewModel by currentScope.inject()
         model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
     }
 
     override fun backClicked(): Boolean {
