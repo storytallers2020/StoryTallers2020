@@ -6,8 +6,6 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_character_create_v3.back_button_character
@@ -25,10 +23,10 @@ import ru.storytellers.viewmodels.CreateCharacterViewModel
 import timber.log.Timber
 
 class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel>() {
-    override lateinit var model: CreateCharacterViewModel
-    private lateinit var characterAdapter: ChooseCharacterAdapter
-    private val playerAdapter: PlayerAdapter by lazy { PlayerAdapter() }
-    private val playerCreator: PlayerCreator by lazy { PlayerCreator() }
+    override val model: CreateCharacterViewModel by inject()
+    private val characterAdapter: ChooseCharacterAdapter by inject()
+    private val playerAdapter: PlayerAdapter by inject()
+    private val playerCreator: PlayerCreator by inject()
     override val layoutRes= R.layout.fragment_character_create_v3
     private var imm: Any?= null
 
@@ -45,10 +43,8 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     }
 
     override fun iniViewModel() {
-        val viewModel: CreateCharacterViewModel by inject()
-        model = viewModel
         model.run {
-            characterAdapter=ChooseCharacterAdapter(this,playerCreator)
+           // characterAdapter=ChooseCharacterAdapter(this,playerCreator)
             getAllCharacters()
             handlerOnSuccessResult(this)
             handlerOnErrorResult(this)
