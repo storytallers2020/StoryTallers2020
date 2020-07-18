@@ -36,8 +36,6 @@ class StartFragment: BaseFragment<DataModel>() {
     override fun iniViewModel() {
         val viewModel: StartViewModel by currentScope.inject()
         model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
     }
     private fun navigateToRulesGame(){
         router.navigateTo(Screens.RulesGameScreen())
