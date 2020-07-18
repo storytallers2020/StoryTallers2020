@@ -26,8 +26,6 @@ class GameFragment: BaseFragment<DataModel>() {
     override fun iniViewModel() {
         val viewModel: GameViewModel by currentScope.inject()
         model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
     }
 
     override fun init() {
