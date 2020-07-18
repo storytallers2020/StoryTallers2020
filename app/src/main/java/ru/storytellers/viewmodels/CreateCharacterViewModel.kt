@@ -59,11 +59,6 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
                 onErrorliveData.value=DataModel.Error(it)
             })
     }
-
-    override fun subscribe(): LiveData<DataModel> {
-        TODO("Not yet implemented")
-    }
-
 }
 
 
