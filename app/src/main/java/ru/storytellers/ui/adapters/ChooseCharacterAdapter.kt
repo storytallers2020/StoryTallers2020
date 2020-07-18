@@ -59,7 +59,6 @@ class ChooseCharacterAdapter(
                 itemView.setOnClickListener {
                     addPlayer(character)
                     characterViewModel.setFlagActive(true)
-                    toastShowLong(itemView.context,"Выбран персонаж: ${character.name}")
                     Timber.d("Выбран персонаж: ${character.name} id: ${character.id}")
                 }
             }
