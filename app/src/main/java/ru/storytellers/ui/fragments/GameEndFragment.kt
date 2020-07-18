@@ -1,8 +1,7 @@
 package ru.storytellers.ui.fragments
 
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game_end.*
-import org.koin.android.scope.currentScope
+import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
@@ -18,7 +17,7 @@ class GameEndFragment: BaseFragment<DataModel>() {
     }
 
     override fun iniViewModel() {
-        val viewModel: GameEndViewModel by currentScope.inject()
+        val viewModel: GameEndViewModel by inject()
         model = viewModel
     }
 
