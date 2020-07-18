@@ -1,11 +1,10 @@
 package ru.storytellers.ui.fragments
 
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_location.*
+import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.model.DataModel
-import org.koin.android.scope.currentScope
 import ru.storytellers.navigation.Screens
 import ru.storytellers.viewmodels.LocationViewModel
 
@@ -27,7 +26,7 @@ class LocationFragment: BaseFragment<DataModel>() {
     }
 
     override fun iniViewModel() {
-        val viewModel: LocationViewModel by currentScope.inject()
+        val viewModel: LocationViewModel by inject()
         model = viewModel
     }
 
