@@ -18,6 +18,7 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
     private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
     private val playersLiveData = MutableLiveData<List<Player>>()
     private val flagActiveLiveData = MutableLiveData<Boolean>()
+
     private val listPlayers= mutableListOf<Player>()
     private var flagActive: Boolean=false
 
@@ -58,11 +59,6 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
                 onErrorliveData.value=DataModel.Error(it)
             })
     }
-
-    override fun subscribe(): LiveData<DataModel> {
-        TODO("Not yet implemented")
-    }
-
 }
 
 

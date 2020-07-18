@@ -1,9 +1,8 @@
 package ru.storytellers.ui.fragments
 
 import android.view.View
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game.*
-import org.koin.android.scope.currentScope
+import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
@@ -24,10 +23,8 @@ class GameFragment: BaseFragment<DataModel>() {
     }
 
     override fun iniViewModel() {
-        val viewModel: GameViewModel by currentScope.inject()
+        val viewModel: GameViewModel by inject()
         model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
     }
 
     override fun init() {
