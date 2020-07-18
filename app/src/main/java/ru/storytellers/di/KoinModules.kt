@@ -24,6 +24,9 @@ import ru.storytellers.viewmodels.StartViewModel
 import ru.storytellers.model.entity.room.db.AppDatabase
 import ru.storytellers.model.repository.CharacterRepository
 import ru.storytellers.model.repository.ICharacterRepository
+import ru.storytellers.ui.adapters.ChooseCharacterAdapter
+import ru.storytellers.ui.adapters.PlayerAdapter
+import ru.storytellers.utils.PlayerCreator
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 
@@ -57,7 +60,11 @@ val levelModel =  module {
 val characterModel =  module {
     single<ICharacterDataSource>{CharacterResDataSource(get()) }
     single<ICharacterRepository>{CharacterRepository(get()) }
-        viewModel { CreateCharacterViewModel(get()) }
+    single { PlayerAdapter() }
+    single { PlayerCreator() }
+    viewModel { CreateCharacterViewModel(get()) }
+    single { ChooseCharacterAdapter(get(),get()) }
+
 }
 
 val locationModel =  module {
