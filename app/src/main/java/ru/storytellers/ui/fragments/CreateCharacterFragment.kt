@@ -13,7 +13,7 @@ import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_character_create_v3.back_button_character
 import kotlinx.android.synthetic.main.fragment_character_create_v3.btn_next
 import kotlinx.android.synthetic.main.fragment_character_create_v3.*
-import org.koin.android.scope.currentScope
+import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
@@ -45,7 +45,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     }
 
     override fun iniViewModel() {
-        val viewModel: CreateCharacterViewModel by currentScope.inject()
+        val viewModel: CreateCharacterViewModel by inject()
         model = viewModel
         model.run {
             characterAdapter=ChooseCharacterAdapter(this,playerCreator)
