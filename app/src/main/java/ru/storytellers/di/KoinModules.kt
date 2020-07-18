@@ -3,8 +3,8 @@ package ru.storytellers.di
 import androidx.room.Room
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import ru.storytellers.engine.GameStorage
 import ru.storytellers.model.datasource.ICharacterDataSource
 import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
 import ru.storytellers.engine.Game
@@ -13,10 +13,6 @@ import ru.storytellers.engine.level.Levels
 import ru.storytellers.engine.rules.NoEmptySentenceRule
 import ru.storytellers.engine.rules.OneSentenceInTextRule
 import ru.storytellers.engine.rules.Rules
-import ru.storytellers.ui.fragments.CreateCharacterFragment
-import ru.storytellers.ui.fragments.LevelFragment
-import ru.storytellers.ui.fragments.LocationFragment
-import ru.storytellers.ui.fragments.StartFragment
 import ru.storytellers.viewmodels.CreateCharacterViewModel
 import ru.storytellers.viewmodels.LevelViewModel
 import ru.storytellers.viewmodels.LocationViewModel
@@ -24,6 +20,9 @@ import ru.storytellers.viewmodels.StartViewModel
 import ru.storytellers.model.entity.room.db.AppDatabase
 import ru.storytellers.model.repository.CharacterRepository
 import ru.storytellers.model.repository.ICharacterRepository
+import ru.storytellers.ui.adapters.ChooseCharacterAdapter
+import ru.storytellers.ui.adapters.PlayerAdapter
+import ru.storytellers.utils.PlayerCreator
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 
@@ -49,27 +48,22 @@ val ciceroneModule = module {
 }
 
 val startModel =  module {
-    scope(named<StartFragment>()) {
         viewModel { StartViewModel() }
-    }
 }
 val levelModel =  module {
-    scope(named<LevelFragment>()) {
         viewModel { LevelViewModel() }
-    }
 }
 val characterModel =  module {
+    single { PlayerCreator() }
+    single { PlayerAdapter() }
     single<ICharacterDataSource>{CharacterResDataSource(get()) }
     single<ICharacterRepository>{CharacterRepository(get()) }
-    scope(named<CreateCharacterFragment>()) {
-        viewModel { CreateCharacterViewModel(get()) }
-    }
+    viewModel { CreateCharacterViewModel(get()) }
+    single { ChooseCharacterAdapter(get(),get())}
 }
 
 val locationModel =  module {
-    scope(named<LocationFragment>()) {
-        viewModel { LocationViewModel() }
-    }
+    viewModel { LocationViewModel() }
 }
 
 val databaseModel = module {
@@ -100,4 +94,5 @@ val gameModel = module {
     }
 
     single { Game() }
+    single { GameStorage() }
 }
