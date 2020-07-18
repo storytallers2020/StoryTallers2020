@@ -49,27 +49,19 @@ val ciceroneModule = module {
 }
 
 val startModel =  module {
-    scope(named<StartFragment>()) {
         viewModel { StartViewModel() }
-    }
 }
 val levelModel =  module {
-    scope(named<LevelFragment>()) {
         viewModel { LevelViewModel() }
-    }
 }
 val characterModel =  module {
     single<ICharacterDataSource>{CharacterResDataSource(get()) }
     single<ICharacterRepository>{CharacterRepository(get()) }
-    scope(named<CreateCharacterFragment>()) {
         viewModel { CreateCharacterViewModel(get()) }
-    }
 }
 
 val locationModel =  module {
-    scope(named<LocationFragment>()) {
         viewModel { LocationViewModel() }
-    }
 }
 
 val databaseModel = module {
