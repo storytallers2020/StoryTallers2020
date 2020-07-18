@@ -64,7 +64,6 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     }
     private fun showFlag(flag: Boolean){
         val fla=flag
-        val sdf="jhb"
     }
 
     private fun handlerOnErrorResult(viewModel:CreateCharacterViewModel) {
