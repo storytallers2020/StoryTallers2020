@@ -18,6 +18,7 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
     private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
     private val playersLiveData = MutableLiveData<List<Player>>()
     private val flagActiveLiveData = MutableLiveData<Boolean>()
+
     private val listPlayers= mutableListOf<Player>()
     private var flagActive: Boolean=false
 
