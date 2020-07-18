@@ -21,14 +21,11 @@ import ru.storytellers.ui.adapters.ChooseCharacterAdapter
 import ru.storytellers.ui.adapters.PlayerAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.PlayerCreator
-import ru.storytellers.utils.viewById
 import ru.storytellers.viewmodels.CreateCharacterViewModel
 import timber.log.Timber
 
 class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel>() {
     override lateinit var model: CreateCharacterViewModel
-    private val characterRecyclerView by viewById<RecyclerView>(R.id.rv_characters)
-    private val playerRecyclerView by viewById<RecyclerView>(R.id.player_list_rv)
     private lateinit var characterAdapter: ChooseCharacterAdapter
     private val playerAdapter: PlayerAdapter by lazy { PlayerAdapter() }
     private val playerCreator: PlayerCreator by lazy { PlayerCreator() }
@@ -63,7 +60,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
         viewModel.subscribeOnFlagActive().observe(viewLifecycleOwner, Observer {
             if (it){
                 makeEditexiActive(enter_name_field_et)
-                characterRecyclerView.makeInvisible()
+                rv_characters.makeInvisible()
             model.setFlagActive(false)}
         })
     }
@@ -111,7 +108,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
                     playerCreator.setNamePlayer(name)
                     editTextView.setText("")
                     makeEditexiInactive(editTextView)
-                    characterRecyclerView.makeVisible()
+                    rv_characters.makeVisible()
                     hideKeyBoard(editTextView)
                     return@setOnEditorActionListener true
                 } else enter_name_et_layout1.error="Имя не может быть пустым"
@@ -140,25 +137,14 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     }
 
     private fun initRecyclers(){
-        characterRecyclerView.apply {
-            layoutManager=GridLayoutManager(
-                context,
-                2,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
+        rv_characters.apply {
             adapter=characterAdapter
             makeInvisible()
 
         }
-        playerRecyclerView.apply {
-            layoutManager=LinearLayoutManager(
-                context,
-                LinearLayoutManager.VERTICAL,
-                false
-            )
-            adapter=playerAdapter
-        }
+        player_list_rv.
+        adapter=playerAdapter
+
     }
 
     private fun RecyclerView.makeInvisible() {
