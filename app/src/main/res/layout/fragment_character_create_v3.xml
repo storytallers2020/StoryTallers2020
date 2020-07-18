@@ -126,37 +126,55 @@
                 tools:itemCount="2"
                 tools:listitem="@layout/item_user_character_create" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/enter_name_et_layout1"
-                android:theme="@style/OutlinedBox"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/yellow"
-                android:hint="@string/enter_name_hint"
-                android:gravity="start"
                 android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/player_list_rv">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enter_name_field_et"
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/enter_name_et_layout1"
+                    android:theme="@style/OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusableInTouchMode="true"
-                    android:maxLength="25"
-                    android:layout_margin="8dp"
-                    android:maxLines="1"
-                    android:textColor="@color/white"
-                    android:singleLine="true"
-                    android:inputType="text"
-                    android:textColorHint="@color/colorAccent"
-                    android:imeOptions="actionDone"
-                    android:textSize="16sp">
+                    android:textColorHint="@color/yellow"
+                    android:hint="@string/enter_name_hint"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible">
 
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/enter_name_field_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:maxLength="25"
+                        android:maxLines="1"
+                        android:paddingHorizontal="8dp"
+                        android:textColor="@color/white"
+                        android:singleLine="true"
+                        android:inputType="text"
+                        android:textColorHint="@color/colorAccent"
+                        android:imeOptions="actionDone"
+                        android:textSize="16sp">
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
 
+
+                <TextView
+                    android:id="@+id/max_players_notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/yellow"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/maximum_players_reached"
+                    app:layout_constraintTop_toBottomOf="@id/enter_name_et_layout1"
+                    tools:visibility="gone"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -167,7 +185,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/enter_name_et_layout1"
+                app:layout_constraintTop_toBottomOf="@id/container_et"
                 tools:visibility="visible">
 
                 <TextView
