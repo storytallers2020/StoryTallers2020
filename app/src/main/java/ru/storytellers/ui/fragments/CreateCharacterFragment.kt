@@ -24,10 +24,10 @@ import ru.storytellers.viewmodels.CreateCharacterViewModel
 import timber.log.Timber
 
 class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel>() {
-    override lateinit var model: CreateCharacterViewModel
+    override val model: CreateCharacterViewModel by inject()
     private lateinit var characterAdapter: ChooseCharacterAdapter
-    private lateinit var playerAdapter: PlayerAdapter
-    private lateinit var playerCreator: PlayerCreator
+    private val playerAdapter: PlayerAdapter by inject()
+    private val playerCreator: PlayerCreator by inject()
     override val layoutRes= R.layout.fragment_character_create_v3
     private var imm: Any?= null
 
@@ -44,9 +44,8 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     }
 
     override fun iniViewModel() {
-        val viewModel: CreateCharacterViewModel by inject()
-        model = viewModel
         model.run {
+            characterAdapter= ChooseCharacterAdapter(this,playerCreator)
             getAllCharacters()
             handlerOnSuccessResult(this)
             handlerOnErrorResult(this)
@@ -98,16 +97,9 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
 
     private fun setPlayersToPlayerAdapter(it: List<Player>) {
         playerAdapter.setPlayersListData(it)
-        val sdf="jhb"
     }
 
     override fun init() {
-        val charAdapt: ChooseCharacterAdapter by inject()
-        characterAdapter = charAdapt
-        val playAdapt: PlayerAdapter by inject()
-        playerAdapter = playAdapt
-        val playCreat : PlayerCreator by inject()
-        playerCreator = playCreat
         imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
         creation_header.post{ View.FOCUS_DOWN }
         iniViewModel()
