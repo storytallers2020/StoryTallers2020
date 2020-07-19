@@ -94,7 +94,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
 
     override fun init() {
         imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
-        creation_header.post{ View.FOCUS_DOWN }
+        screen_header.post{ View.FOCUS_DOWN }
         iniViewModel()
         //  костыль для принудительного отображения списка игроков в момент создания фрагмента
         // при навигации: экран выбора игроков->экран выбора уровня->экран выбора игроков
@@ -155,11 +155,11 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
 
     private fun RecyclerView.makeInvisible() {
         visibility = View.GONE
-        textView4.visibility= View.GONE
+        title_rv_characters.visibility= View.GONE
     }
     private fun RecyclerView.makeVisible() {
         visibility = View.VISIBLE
-        textView4.visibility = View.VISIBLE
+        title_rv_characters.visibility = View.VISIBLE
     }
 
 }
