@@ -11,10 +11,13 @@ import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Player
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
+import ru.storytellers.viewmodels.CreateCharacterViewModel
 import timber.log.Timber
 
 
-class PlayerAdapter():RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>(){
+class PlayerAdapter(
+    private val characterViewModel: CreateCharacterViewModel
+):RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>(){
 
     private val playersList = mutableListOf<Player>()
 
@@ -52,7 +55,12 @@ class PlayerAdapter():RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>(){
                         loadImage(uri, itemView.character)
                         }
                     }
+                itemView.remove_player_iv.setOnClickListener {removePlayer(player)}
             }
+        }
+
+        private fun removePlayer(player:Player){
+            characterViewModel.removePlayer(player)
         }
     }
 }
