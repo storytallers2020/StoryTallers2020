@@ -58,7 +58,6 @@ val characterModel =  module {
     single<ICharacterDataSource>{CharacterResDataSource(get()) }
     single<ICharacterRepository>{CharacterRepository(get()) }
     viewModel { CreateCharacterViewModel(get()) }
-    single { ChooseCharacterAdapter(get(),get())}
 }
 
 val locationModel =  module {
