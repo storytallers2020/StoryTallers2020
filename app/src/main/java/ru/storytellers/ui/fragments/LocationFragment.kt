@@ -11,7 +11,7 @@ import ru.storytellers.viewmodels.LocationViewModel
 
 class LocationFragment: BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_location
-    override lateinit var model: LocationViewModel
+    override  val model: LocationViewModel by inject()
 
 
     companion object {
@@ -27,10 +27,6 @@ class LocationFragment: BaseFragment<DataModel>() {
     }
 
     override fun iniViewModel() {
-        val viewModel: LocationViewModel by inject()
-        model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
     }
 
     override fun backClicked(): Boolean {
