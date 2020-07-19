@@ -55,7 +55,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
         viewModel.subscribeOnFlagActive().observe(viewLifecycleOwner, Observer {
             if (it){
                 makeEditexiActive(enter_name_field_et)
-                rv_characters.makeInvisible()
+                makeInvisible()
             model.setFlagActive(false)}
         })
     }
@@ -117,7 +117,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
                     playerCreator.setNamePlayer(name)
                     editTextView.setText("")
                     makeEditexiInactive(editTextView)
-                    rv_characters.makeVisible()
+                    makeVisible()
                     hideKeyBoard(editTextView)
                     return@setOnEditorActionListener true
                 } else enter_name_et_layout1.error="Имя не может быть пустым"
@@ -153,13 +153,11 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
         player_list_rv.adapter=playerAdapter
     }
 
-    private fun RecyclerView.makeInvisible() {
-        visibility = View.GONE
-        title_rv_characters.visibility= View.GONE
+    private fun makeInvisible() {
+        container_rv_chars.visibility = View.GONE
     }
-    private fun RecyclerView.makeVisible() {
-        visibility = View.VISIBLE
-        title_rv_characters.visibility = View.VISIBLE
+    private fun makeVisible() {
+        container_rv_chars.visibility = View.VISIBLE
     }
 
 }
