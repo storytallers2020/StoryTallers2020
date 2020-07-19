@@ -40,4 +40,7 @@
     <string name="auth_create_library">Библиотека моих сказок</string>
     <string name="maximum_players_reached">Максимум 8 игроков.</string>
     <string name="edit">изменить</string>
+
+    <string name="location_1">Королевский дворец</string>
+    <string name="loation_2">Далёкий космос</string>
 </resources>

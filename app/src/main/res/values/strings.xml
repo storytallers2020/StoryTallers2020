@@ -47,7 +47,7 @@
         3. Hard. The player sees only the last sentence composed by the player before him. In his turn the player must use the randomly generated mandatory word.</string>
     <string name="insert_players_name">Enter the player\'s name</string>
     <string name="choose_hero">Choose a hero</string>
-    <string name="enter_name_hint">Insert name &amp; click Enter</string>
+    <string name="enter_name_hint">Ввeдите имя и нажмите Enter</string>
     <string name="arrow_back" translatable="false"><![CDATA[<<<]]></string>
     <string name="dots_line" translatable="false">..............</string>
     <string name="arrow_forward" translatable="false"><![CDATA[>>>]]></string>
@@ -56,4 +56,7 @@
     <string name="char_icon" translatable="false">" =) "</string>
     <string name="edit">edit</string>
     <string name="underline" translatable="false">-----------------------</string>
+
+    <string name="location_1">Royal Palace</string>
+    <string name="loation_2">Deep Space</string>
 </resources>
