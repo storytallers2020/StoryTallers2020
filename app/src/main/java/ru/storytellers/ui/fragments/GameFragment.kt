@@ -1,7 +1,6 @@
 package ru.storytellers.ui.fragments
 
 import android.view.View
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -26,8 +25,6 @@ class GameFragment: BaseFragment<DataModel>() {
     override fun iniViewModel() {
         val viewModel: GameViewModel by inject()
         model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
     }
 
     override fun init() {

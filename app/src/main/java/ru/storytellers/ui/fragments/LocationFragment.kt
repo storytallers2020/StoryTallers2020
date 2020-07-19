@@ -1,6 +1,5 @@
 package ru.storytellers.ui.fragments
 
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -29,8 +28,6 @@ class LocationFragment: BaseFragment<DataModel>() {
     override fun iniViewModel() {
         val viewModel: LocationViewModel by inject()
         model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
     }
 
     override fun backClicked(): Boolean {

@@ -1,124 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="24dp"
+    android:paddingBottom="40dp"
     android:background="@drawable/ic_background_1">
 
     <ImageView
+        android:id="@+id/back_button_character"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/ic_arrow_back_white_24"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:src="@drawable/ic_arrow_left_white_16"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:contentDescription="@string/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
 
     <TextView
-        android:id="@+id/creation_header"
+        android:id="@+id/screen_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="@string/library"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_standard_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/subHeader"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="94dp"
+        android:layout_margin="@dimen/margin_standard"
         android:gravity="center_horizontal"
         android:text="@string/my_tales"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="@dimen/text_large"
+        app:layout_constraintBottom_toTopOf="@id/rv_books"
+        app:layout_constraintTop_toBottomOf="@id/screen_header" />
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_books"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/location_castle"
+        android:contentDescription="@string/royal_palace"
         android:orientation="horizontal"
-        android:weightSum="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subHeader">
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/share_title"
+        app:layout_constraintTop_toBottomOf="@id/subHeader"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_book_library" />
 
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="6.6"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:background="@color/transparent"
-            android:orientation="vertical">
+    <ImageView
+        android:id="@+id/scroll_left_button"
+        android:layout_width="@dimen/margin_standard"
+        android:layout_height="0dp"
+        android:contentDescription="@string/arrow_back"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_arrow_left_transparent"
+        app:layout_constraintBottom_toBottomOf="@id/rv_books"
+        app:layout_constraintStart_toStartOf="@id/rv_books"
+        app:layout_constraintTop_toTopOf="@id/rv_books" />
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_arrow_left_white_16" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="86.6"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="188dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                tools:text ="Приключения трех сыновей"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="6.6"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:background="@color/transparent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_arrow_right_white_16"/>
-        </FrameLayout>
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/scroll_right_button"
+        android:layout_width="@dimen/margin_standard"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/arrow_forward"
+        android:src="@drawable/ic_arrow_right_transparent"
+        app:layout_constraintBottom_toBottomOf="@id/rv_books"
+        app:layout_constraintEnd_toEndOf="@id/rv_books"
+        app:layout_constraintTop_toTopOf="@id/rv_books" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/share_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="94dp"
         android:text="@string/share"
         android:textAllCaps="false"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/text_standard"
+        android:paddingVertical="@dimen/margin_small"
+        app:layout_constraintBottom_toTopOf="@id/share_icons" />
+
+    <LinearLayout
+        android:id="@+id/share_icons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:src="@drawable/mail"
+            android:contentDescription="@string/char_icon" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:src="@drawable/whatsapp"
+            android:contentDescription="@string/char_icon" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:src="@drawable/telegram"
+            android:contentDescription="@string/char_icon" />
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

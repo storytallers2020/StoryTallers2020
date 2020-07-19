@@ -1,7 +1,6 @@
 package ru.storytellers.ui.fragments
 
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_start.*
 import ru.storytellers.R
@@ -36,8 +35,6 @@ class StartFragment: BaseFragment<DataModel>() {
     override fun iniViewModel() {
         val viewModel: StartViewModel by inject()
         model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
     }
     private fun navigateToRulesGame(){
         router.navigateTo(Screens.RulesGameScreen())

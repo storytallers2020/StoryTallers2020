@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="24dp"
-    android:paddingTop="24dp"
-    android:paddingBottom="40dp"
+    android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingTop="@dimen/padding_layout_standard"
+    android:paddingBottom="@dimen/padding_layout_bottom"
     android:background="@drawable/ic_background_1">
 
     <ImageView
@@ -17,18 +17,18 @@
         android:scaleY="2"
         android:contentDescription="@string/arrow_back"
         android:src="@drawable/ic_arrow_left_white_16"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/creation_header"
+        android:layout_marginStart="@dimen/margin_xs"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/creation_header" />
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
 
     <TextView
-        android:id="@+id/creation_header"
+        android:id="@+id/screen_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/character"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_standard_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,9 +36,9 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/creation_header">
+        app:layout_constraintTop_toBottomOf="@id/screen_header">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/level"
                     android:alpha="0.5"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_small"
                     android:gravity="center"
                     android:drawableBottom="@drawable/cup"
                     android:textColor="@color/yellow"
@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/character"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_small"
                     android:gravity="center"
                     android:textColor="@color/yellow"
                     android:drawableBottom="@drawable/ic_queen"
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/location"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_small"
                     android:alpha="0.5"
                     android:gravity="center"
                     android:drawableBottom="@drawable/ic_mounts"
@@ -117,93 +117,114 @@
                 android:id="@+id/player_list_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_marginTop="@dimen/margin_standard"
                 android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/slider"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_user_character_create" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/enter_name_et_layout1"
-                android:theme="@style/OutlinedBox"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/yellow"
-                android:hint="@string/enter_name_hint"
-                android:gravity="start"
-                android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/margin_standard"
                 app:layout_constraintTop_toBottomOf="@id/player_list_rv">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enter_name_field_et"
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/enter_name_et_layout1"
+                    android:theme="@style/OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusableInTouchMode="true"
-                    android:maxLength="25"
-                    android:layout_margin="8dp"
-                    android:maxLines="1"
-                    android:textColor="@color/white"
-                    android:singleLine="true"
-                    android:inputType="text"
-                    android:textColorHint="@color/colorAccent"
-                    android:imeOptions="actionDone"
-                    android:textSize="16sp">
+                    android:textColorHint="@color/yellow"
+                    android:hint="@string/enter_name_hint"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible">
 
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/enter_name_field_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:maxLength="25"
+                        android:maxLines="1"
+                        android:paddingHorizontal="@dimen/padding_small"
+                        android:textColor="@color/white"
+                        android:singleLine="true"
+                        android:inputType="text"
+                        android:textColorHint="@color/colorAccent"
+                        android:imeOptions="actionDone"
+                        android:textSize="@dimen/text_standard">
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container_rv_chars"
-            android:layout_width="match_parent"
-            android:layout_marginTop="24dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/enter_name_et_layout1">
 
-            <TextView
-                android:id="@+id/textView4"
-                android:text="@string/choose_hero"
-                android:textColor="@color/yellow"
+                <TextView
+                    android:id="@+id/max_players_notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/yellow"
+                    android:textSize="@dimen/text_standard"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/maximum_players_reached"
+                    app:layout_constraintTop_toBottomOf="@id/enter_name_et_layout1"
+                    tools:visibility="gone"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container_rv_chars"
                 android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_standard"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_characters"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView4"
-                app:spanCount="2"
-                tools:itemCount="20"
-                tools:listitem="@layout/item_image_character_create" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@id/container_et"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/title_rv_characters"
+                    android:text="@string/choose_hero"
+                    android:textColor="@color/yellow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_standard"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_characters"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/margin_small"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/title_rv_characters"
+                    app:spanCount="2"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/item_image_character_create" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/yellow"
-                android:padding="14dp"
+                android:padding="@dimen/padding_small"
                 android:text="@string/next"
+                android:visibility="visible"
                 android:textAllCaps="false"
                 android:textColor="@color/blueDark"
-                android:textSize="20sp"
-                android:layout_marginTop="24dp"
-                app:cornerRadius="@dimen/next_button_corner_radius"
+                android:textSize="@dimen/text_button"
+                android:layout_marginTop="@dimen/margin_standard"
+                app:cornerRadius="@dimen/button_corner_radius"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/container_rv_chars"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_goneMarginTop="@dimen/margin_standard" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
