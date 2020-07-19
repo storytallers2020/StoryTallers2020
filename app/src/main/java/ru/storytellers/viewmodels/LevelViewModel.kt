@@ -10,8 +10,6 @@ class LevelViewModel : BaseViewModel<DataModel>() {
     private val levelGameLiveData= MutableLiveData<Int>()
     private var levelGame:Int=0
 
-
-
     fun subscribeOnLevelGame():LiveData<Int>{
         return levelGameLiveData
     }
@@ -19,10 +17,6 @@ class LevelViewModel : BaseViewModel<DataModel>() {
     fun setLevelGame(levelGame:Int){
         this.levelGame=levelGame
         levelGameLiveData.value=this.levelGame
-    }
-
-    override fun subscribe(): LiveData<DataModel> {
-        TODO("Not yet implemented")
     }
 }
 

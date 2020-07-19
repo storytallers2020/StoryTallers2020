@@ -1,6 +1,5 @@
 package ru.storytellers.ui.fragments
 
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_location.*
@@ -15,7 +14,6 @@ class LocationFragment: BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_location
     override lateinit var model: LocationViewModel
 
-
     companion object {
         fun newInstance() = LocationFragment()
     }
@@ -28,7 +26,7 @@ class LocationFragment: BaseFragment<DataModel>() {
         back_from_location.setOnClickListener {backClicked()}
 
 
-        val recyclerView: RecyclerView = view?.findViewById(R.id.rv_locations)!!
+        val recyclerView: RecyclerView = view?.findViewById(R.id.rv_covers)!!
         val layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
@@ -41,8 +39,6 @@ class LocationFragment: BaseFragment<DataModel>() {
     override fun iniViewModel() {
         val viewModel: LocationViewModel by inject()
         model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
     }
 
     override fun backClicked(): Boolean {

@@ -23,5 +23,5 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@color/yellow"
-        android:textSize="@dimen/standardTextSize" />
+        android:textSize="@dimen/text_standard" />
 </LinearLayout>
