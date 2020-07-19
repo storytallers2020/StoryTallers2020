@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="24dp"
-    android:paddingTop="24dp"
-    android:paddingBottom="40dp"
+    android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingTop="@dimen/padding_layout_standard"
+    android:paddingBottom="@dimen/padding_layout_bottom"
     android:background="@drawable/ic_background_1">
 
     <ImageView
@@ -17,7 +17,7 @@
         android:scaleX="2"
         android:scaleY="2"
         android:src="@drawable/ic_arrow_left_white_16"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/margin_xs"
         android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/creation_header"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="@string/level"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_standard_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/slider"
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintTop_toBottomOf="@id/creation_header"
         app:layout_constraintBottom_toTopOf="@id/description_level">
 
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/level"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_small"
             android:gravity="center"
             android:drawableBottom="@drawable/cup"
             android:textColor="@color/yellow"
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/character"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_small"
             android:alpha="0.5"
             android:gravity="center"
             android:textColor="@color/white"
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/location"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_small"
             android:alpha="0.5"
             android:gravity="center"
             android:drawableBottom="@drawable/ic_mounts"
@@ -113,8 +113,8 @@
         android:gravity="center"
         android:text="@string/easy_description"
         android:textColor="@color/yellow"
-        android:layout_marginVertical="80dp"
-        android:textSize="16sp"
+        android:layout_marginVertical="@dimen/margin_xl"
+        android:textSize="@dimen/text_standard"
         app:layout_constraintBottom_toTopOf="@id/level_buttons"
         app:layout_constraintTop_toBottomOf="@id/slider" />
 
@@ -133,9 +133,8 @@
             android:layout_weight="1"
             android:gravity="start"
             android:text="@string/easy"
-            android:paddingHorizontal="8dp"
             android:textColor="@color/yellow"
-            android:textSize="16sp" />
+            android:textSize="@dimen/text_standard" />
 
         <TextView
             android:id="@+id/medium_button"
@@ -145,7 +144,7 @@
             android:gravity="center_horizontal"
             android:text="@string/medium"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/text_standard" />
 
         <TextView
             android:id="@+id/hard_button"
@@ -154,9 +153,8 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="@string/hard"
-            android:paddingHorizontal="8dp"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/text_standard" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatSeekBar
@@ -169,7 +167,7 @@
         android:progressBackgroundTint="@color/blue"
         android:progressTint="@color/blue"
         android:thumb="@drawable/ic_cup"
-        android:thumbOffset="8dp"
+        android:thumbOffset="@dimen/margin_xs"
         app:layout_constraintBottom_toTopOf="@id/btn_next"
         app:layout_constraintTop_toBottomOf="@id/level_buttons" />
 
@@ -178,13 +176,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/yellow"
-        android:padding="14dp"
+        android:padding="@dimen/padding_small"
         android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/blueDark"
-        android:textSize="20sp"
-        android:layout_marginTop="24dp"
-        app:cornerRadius="@dimen/next_button_corner_radius"
+        android:textSize="@dimen/text_button"
+        android:layout_marginTop="@dimen/margin_standard"
+        app:cornerRadius="@dimen/button_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 

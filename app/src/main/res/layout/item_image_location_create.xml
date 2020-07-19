@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="4dp"
+    android:layout_margin="@dimen/margin_xxs"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -22,7 +22,7 @@
 
     <ImageView
         android:id="@+id/scroll_left_button"
-        android:layout_width="24dp"
+        android:layout_width="@dimen/margin_standard"
         android:layout_height="0dp"
         android:contentDescription="@string/arrow_back"
         android:scaleType="fitXY"
@@ -33,7 +33,7 @@
 
     <ImageView
         android:id="@+id/scroll_right_button"
-        android:layout_width="24dp"
+        android:layout_width="@dimen/margin_standard"
         android:layout_height="0dp"
         android:scaleType="fitXY"
         android:contentDescription="@string/arrow_forward"
@@ -47,8 +47,8 @@
         android:id="@+id/location_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp"
+        android:textSize="@dimen/text_standard"
+        android:layout_marginTop="@dimen/margin_small"
         android:textColor="@color/white"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/location_image"
