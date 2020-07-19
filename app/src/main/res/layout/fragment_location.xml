@@ -133,6 +133,7 @@
         app:layout_constraintTop_toBottomOf="@id/subHeader"
         app:layout_constraintVertical_bias="1.0"
         tools:itemCount="2"
+        tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/item_image_location_create" />
 
     <com.google.android.material.button.MaterialButton
