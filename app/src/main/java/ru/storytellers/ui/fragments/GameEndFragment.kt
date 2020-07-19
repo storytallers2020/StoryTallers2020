@@ -10,7 +10,7 @@ import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.viewmodels.GameEndViewModel
 
 class GameEndFragment: BaseFragment<DataModel>() {
-    override lateinit var model: GameEndViewModel
+    override  val model: GameEndViewModel by inject()
     override val layoutRes = R.layout.fragment_game_end
 
     companion object {
@@ -18,10 +18,6 @@ class GameEndFragment: BaseFragment<DataModel>() {
     }
 
     override fun iniViewModel() {
-        val viewModel: GameEndViewModel by inject()
-        model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
-        } )
     }
 
     override fun init() {
