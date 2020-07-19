@@ -52,4 +52,7 @@
     <string name="dots_line" translatable="false">..............</string>
     <string name="arrow_forward" translatable="false"><![CDATA[>>>]]></string>
     <string name="auth_create_library">My Tales Library</string>
+
+    <string name="location_1">Royal Palace</string>
+    <string name="loation_2">Deep Space</string>
 </resources>

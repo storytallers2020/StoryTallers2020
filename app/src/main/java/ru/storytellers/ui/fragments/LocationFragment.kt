@@ -49,7 +49,7 @@ class LocationFragment: BaseFragment<DataModel>() {
     }
 
     inner class Data {
-        val list: List<String> = listOf("Royal palace", "Deep Space")
+        val list: List<String> = listOf(getString(R.string.location_1), getString(R.string.loation_2))
 
         fun getDataList(): List<String>? {
             return list

@@ -29,6 +29,7 @@ class LocationAdapter(var dataList: List<String>?) : RecyclerView.Adapter<Locati
         RecyclerView.ViewHolder(itemView) {
         private val textView: TextView = itemView.findViewById(R.id.locationDescription)
         private val imageView: ImageView = itemView.findViewById(R.id.locationView)
+
         fun bind(position: Int) {
             textView.text = dataList?.get(position)
             when (position % 2) {
