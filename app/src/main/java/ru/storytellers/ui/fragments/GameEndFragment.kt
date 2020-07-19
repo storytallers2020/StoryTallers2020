@@ -18,6 +18,10 @@ class GameEndFragment: BaseFragment<DataModel>() {
     }
 
     override fun iniViewModel() {
+        val viewModel: GameEndViewModel by inject()
+        model = viewModel
+        model.subscribe().observe(viewLifecycleOwner, Observer<DataModel> {
+        } )
     }
 
     override fun init() {

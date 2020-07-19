@@ -1,7 +1,6 @@
 package ru.storytellers.ui.fragments
 
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_start.*
 import ru.storytellers.R

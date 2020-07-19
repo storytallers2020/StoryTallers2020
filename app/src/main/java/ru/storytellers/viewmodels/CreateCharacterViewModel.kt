@@ -68,5 +68,3 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
             })
     }
 }
-
-
