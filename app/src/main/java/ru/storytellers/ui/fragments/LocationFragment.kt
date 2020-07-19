@@ -15,6 +15,7 @@ class LocationFragment: BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_location
     override lateinit var model: LocationViewModel
 
+
     companion object {
         fun newInstance() = LocationFragment()
     }

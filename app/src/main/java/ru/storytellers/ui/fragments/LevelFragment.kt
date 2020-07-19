@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_level.*
 import org.koin.android.ext.android.inject
-import org.koin.android.scope.currentScope
 import ru.storytellers.R
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
@@ -18,7 +17,7 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.utils.ResourceProviderLevelFragment
 
 class LevelFragment: BaseFragment<DataModel>() {
-    override lateinit var model: LevelViewModel
+    override  val model: LevelViewModel by inject()
     override val layoutRes= R.layout.fragment_level
     private val resourceProvider: ResourceProviderLevelFragment by lazy { ResourceProviderLevelFragment(this.context) }
     private val MAX_VALUE_RANGE_SEEK_BAR=2
@@ -55,8 +54,6 @@ class LevelFragment: BaseFragment<DataModel>() {
         setSeekBarListener()
     }
     override fun iniViewModel() {
-        val viewModel: LevelViewModel by inject()
-        model = viewModel
         model.subscribeOnLevelGame().observe(viewLifecycleOwner, Observer {
             levelGame=it
         })

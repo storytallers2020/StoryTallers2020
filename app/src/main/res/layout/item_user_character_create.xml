@@ -9,7 +9,7 @@
     tools:background="@color/blueDark">
 
     <ImageView
-        android:id="@+id/bin"
+        android:id="@+id/remove_player_iv"
         android:src="@drawable/ic_bin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,24 +23,24 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textColor="@color/white"
-        android:textSize="@dimen/standardTextSize"
+        android:textSize="@dimen/text_standard"
         android:textAlignment="textEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/pencil"
         app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toEndOf="@id/bin"
+        app:layout_constraintStart_toEndOf="@id/remove_player_iv"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Плавалагуна" />
 
     <ImageView
         android:id="@+id/character"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_margin="@dimen/iconMargin"
+        android:layout_height="@dimen/icon_small"
+        android:layout_margin="@dimen/margin_xxs"
+        android:contentDescription="@string/char_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/player_name_tv"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription"
         tools:src="@drawable/ic_alien_girl" />
 
     <ImageView
@@ -48,18 +48,17 @@
         android:src="@drawable/ic_pencil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:contentDescription="@string/edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:background="@drawable/ic_underline"
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="ContentDescription" />
+        android:contentDescription="@string/underline"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

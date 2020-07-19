@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="4dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/margin_xxs"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    >
-
-
-    <ImageView
-        android:id="@+id/scroll_left_button"
-        android:layout_width="24dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/arrow_back"
-        android:src="@drawable/ic_arrow_left_transparent"
-        app:layout_constraintBottom_toBottomOf="@id/location_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/location_image" />
+    android:layout_gravity="center"
+    tools:background="@color/blueDark">
 
     <ImageView
         android:id="@+id/location_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:src="@drawable/location_castle"
-        android:contentDescription="@string/location" />
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/location"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toTopOf="@id/location_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/scroll_left_button"
+        android:layout_width="@dimen/margin_standard"
+        android:layout_height="0dp"
+        android:contentDescription="@string/arrow_back"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_arrow_left_transparent"
+        app:layout_constraintBottom_toBottomOf="@id/location_image"
+        app:layout_constraintStart_toStartOf="@id/location_name"
+        app:layout_constraintTop_toTopOf="@id/location_image" />
 
     <ImageView
         android:id="@+id/scroll_right_button"
-        android:layout_width="24dp"
+        android:layout_width="@dimen/margin_standard"
         android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:contentDescription="@string/arrow_forward"
         android:src="@drawable/ic_arrow_right_transparent"
         app:layout_constraintBottom_toBottomOf="@id/location_image"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/location_name"
         app:layout_constraintTop_toTopOf="@id/location_image" />
 
 
@@ -45,8 +47,8 @@
         android:id="@+id/location_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp"
+        android:textSize="@dimen/text_standard"
+        android:layout_marginTop="@dimen/margin_small"
         android:textColor="@color/white"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/location_image"

@@ -38,6 +38,8 @@
     <string name="choose_hero">Выберите героя</string>
     <string name="enter_name_hint">Ввeдите имя и нажмите Enter</string>
     <string name="auth_create_library">Библиотека моих сказок</string>
+    <string name="maximum_players_reached">Максимум 8 игроков.</string>
+    <string name="edit">изменить</string>
 
     <string name="location_1">Королевский дворец</string>
     <string name="loation_2">Далёкий космос</string>

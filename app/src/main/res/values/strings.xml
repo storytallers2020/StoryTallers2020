@@ -52,6 +52,10 @@
     <string name="dots_line" translatable="false">..............</string>
     <string name="arrow_forward" translatable="false"><![CDATA[>>>]]></string>
     <string name="auth_create_library">My Tales Library</string>
+    <string name="maximum_players_reached">Maximum number of players reached.</string>
+    <string name="char_icon" translatable="false">" =) "</string>
+    <string name="edit">edit</string>
+    <string name="underline" translatable="false">-----------------------</string>
 
     <string name="location_1">Royal Palace</string>
     <string name="loation_2">Deep Space</string>

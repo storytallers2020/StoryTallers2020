@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
 
+
 class LevelViewModel : BaseViewModel<DataModel>() {
     private val levelGameLiveData= MutableLiveData<Int>()
     private var levelGame:Int=0

@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_character_create_v3.btn_next
 import kotlinx.android.synthetic.main.fragment_character_create_v3.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Player
@@ -26,17 +27,13 @@ import timber.log.Timber
 class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel>() {
     override val model: CreateCharacterViewModel by inject()
     private lateinit var characterAdapter: ChooseCharacterAdapter
-    private val playerAdapter: PlayerAdapter by inject()
+    private lateinit var playerAdapter: PlayerAdapter
     private val playerCreator: PlayerCreator by inject()
     override val layoutRes= R.layout.fragment_character_create_v3
     private var imm: Any?= null
-
-
     companion object {
         fun newInstance(levelGame:Int) = CreateCharacterFragment(levelGame)
-
     }
-
 
     override fun backClicked(): Boolean {
         router.exit()
@@ -46,6 +43,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     override fun iniViewModel() {
         model.run {
             characterAdapter= ChooseCharacterAdapter(this,playerCreator)
+            playerAdapter= PlayerAdapter(this)
             getAllCharacters()
             handlerOnSuccessResult(this)
             handlerOnErrorResult(this)
@@ -56,15 +54,10 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     private fun handlerFlagActive(viewModel:CreateCharacterViewModel) {
         viewModel.subscribeOnFlagActive().observe(viewLifecycleOwner, Observer {
             if (it){
-                showFlag(it)
                 makeEditexiActive(enter_name_field_et)
-                rv_characters.makeInvisible()
+                makeInvisible()
             model.setFlagActive(false)}
         })
-    }
-    private fun showFlag(flag: Boolean){
-        val fla=flag
-        val sdf="jhb"
     }
 
     private fun handlerOnErrorResult(viewModel:CreateCharacterViewModel) {
@@ -101,8 +94,13 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
 
     override fun init() {
         imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
-        creation_header.post{ View.FOCUS_DOWN }
+        screen_header.post{ View.FOCUS_DOWN }
         iniViewModel()
+        //  костыль для принудительного отображения списка игроков в момент создания фрагмента
+        // при навигации: экран выбора игроков->экран выбора уровня->экран выбора игроков
+        // иначе при такой навигации при возрате на экран выбора игроков
+        // список игроков не отображается
+        playerAdapter.setPlayersListData(StoryTallerApp.instance.gameStorage.getListPlayers())
         setOnEditorActionListener(enter_name_field_et)
         btn_next.setOnClickListener { navigateToLocationScreen() }
         back_button_character.setOnClickListener {backClicked()}
@@ -110,8 +108,8 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     }
 
     private fun setOnEditorActionListener(editTextView: TextInputEditText){
+        enter_name_et_layout1.isErrorEnabled = false
         editTextView.setOnEditorActionListener { v, actionId, event ->
-            enter_name_et_layout1.isErrorEnabled = false
             if(actionId == EditorInfo.IME_ACTION_DONE)
             {
                 val name=editTextView.text.toString()
@@ -119,7 +117,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
                     playerCreator.setNamePlayer(name)
                     editTextView.setText("")
                     makeEditexiInactive(editTextView)
-                    rv_characters.makeVisible()
+                    makeVisible()
                     hideKeyBoard(editTextView)
                     return@setOnEditorActionListener true
                 } else enter_name_et_layout1.error="Имя не может быть пустым"
@@ -155,13 +153,11 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
         player_list_rv.adapter=playerAdapter
     }
 
-    private fun RecyclerView.makeInvisible() {
-        visibility = View.GONE
-        textView4.visibility= View.GONE
+    private fun makeInvisible() {
+        container_rv_chars.visibility = View.GONE
     }
-    private fun RecyclerView.makeVisible() {
-        visibility = View.VISIBLE
-        textView4.visibility = View.VISIBLE
+    private fun makeVisible() {
+        container_rv_chars.visibility = View.VISIBLE
     }
 
 }

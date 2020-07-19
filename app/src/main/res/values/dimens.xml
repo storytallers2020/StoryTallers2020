@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="buttonSideMargin">40dp</dimen>
-    <dimen name="buttonCornerRadius">30dp</dimen>
-    <dimen name="titleMarginTop">30dp</dimen>
-    <dimen name="next_button_corner_radius">30dp</dimen>
-    <dimen name="returnButtonMarginLeft">24dp</dimen>
-    <dimen name="returnButtonMarginTop">24dp</dimen>
-    <dimen name="marginStartText">24dp</dimen>
-    <dimen name="marginLeftText">24dp</dimen>
-    <dimen name="textMarginTop">24dp</dimen>
-    <dimen name="mainMenuMarginSide">24dp</dimen>
-    <dimen name="textSideMargin">20dp</dimen>
-    <dimen name="marginManualWindows">16dp</dimen>
-    <dimen name="button_padding">14dp</dimen>
-    <dimen name="pictureMarginTop">12dp</dimen>
-    <dimen name="box_corner_radius">10dp</dimen>
-    <dimen name="iconsRecyclerMargin">10dp</dimen>
-    <dimen name="editTextMargin">8dp</dimen>
-    <dimen name="verySmallPictureMarginTop">4dp</dimen>
-    <dimen name="iconMargin">4dp</dimen>
 
-    <dimen name="mainTextSize">24sp</dimen>
-    <dimen name="headerTextSize">20sp</dimen>
-    <dimen name="standardTextSize">16sp</dimen>
-    <dimen name="smallTextSize">12sp</dimen>
-    <dimen name="verySmallTextSize">12sp</dimen>
-    <dimen name="boxHintTextSize">12sp</dimen>
-    <dimen name="buttonTextSize">20sp</dimen>
+    //Margins
+    <dimen name="margin_xxxl">200dp</dimen>
+    <dimen name="margin_xxl">100dp</dimen>
+    <dimen name="margin_xl">80dp</dimen>
+    <dimen name="margin_large">40dp</dimen>
+    <dimen name="margin_medium">32dp</dimen>
+    <dimen name="margin_standard">24dp</dimen>
+    <dimen name="margin_small">12dp</dimen>
+    <dimen name="margin_xs">8dp</dimen>
+    <dimen name="margin_xxs">4dp</dimen>
+
+    //Padding
+    <dimen name="padding_small">14dp</dimen>
+    <dimen name="padding_layout_standard">24dp</dimen>
+    <dimen name="padding_layout_bottom">40dp</dimen>
+
+    //Text size
+    <dimen name="text_tip">10sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_standard">16sp</dimen>
+    <dimen name="text_standard_header">20sp</dimen>
+    <dimen name="text_button">20sp</dimen>
+    <dimen name="text_large">24sp</dimen>
+
+    //Line spacing
     <dimen name="line_spacing_extra">4dp</dimen>
+
+    //Corner radius
+    <dimen name="button_corner_radius">30dp</dimen>
+    <dimen name="box_corner_radius">10dp</dimen>
+    <dimen name="card_corner_radius">10dp</dimen>
+    <dimen name="card_corner_radius_small">5dp</dimen>
+
+    //Icon
+    <dimen name="icon_medium">40dp</dimen>
+    <dimen name="icon_small">30dp</dimen>
+    <dimen name="max_width">75dp</dimen>
+
 </resources>
