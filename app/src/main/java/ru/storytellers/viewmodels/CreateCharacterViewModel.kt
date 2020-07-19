@@ -21,36 +21,42 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
     private val flagActiveLiveData = MutableLiveData<Boolean>()
 
     private var listPlayers: MutableList<Player> = StoryTallerApp.instance.gameStorage.getListPlayers()
-    //private var listPlayers= mutableListOf<Player>()
     private var flagActive: Boolean=false
 
 
      fun subscribeOnSuccess(): LiveData<DataModel.Success<Character>>{
          return onSuccessliveData
      }
+
     fun subscribeOnError(): LiveData<DataModel.Error>{
         return onErrorliveData
     }
     fun subscribeOnLoading() : LiveData<DataModel.Loading>{
         return onLoadingliveData
     }
+
     fun subscribeOnPlayers(): LiveData<List<Player>>{
         return playersLiveData
     }
+
     fun subscribeOnFlagActive(): LiveData<Boolean>{
         return flagActiveLiveData
     }
+
     fun setFlagActive(flag:Boolean){
         flagActive=flag
         flagActiveLiveData.value=flagActive
+    }
+
+    fun removePlayer(player:Player){
+        listPlayers.remove(player)
+        playersLiveData.value=listPlayers
     }
 
     fun addPlayer(player:Player){
        listPlayers.add(player)
         playersLiveData.value=listPlayers
     }
-
-
 
     fun getAllCharacters(){
         characterRepository.getAll()
@@ -61,11 +67,6 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
                 onErrorliveData.value=DataModel.Error(it)
             })
     }
-
-    override fun subscribe(): LiveData<DataModel> {
-        TODO("Not yet implemented")
-    }
-
 }
 
 
