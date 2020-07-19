@@ -1,11 +1,9 @@
 package ru.storytellers.viewmodels
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
-import kotlin.properties.Delegates
 
 class LevelViewModel : BaseViewModel<DataModel>() {
     private val levelGameLiveData= MutableLiveData<Int>()
