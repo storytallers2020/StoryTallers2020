@@ -86,7 +86,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
 
     override fun init() {
         imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
-        creation_header.post{ View.FOCUS_DOWN }
+        screen_header.post{ View.FOCUS_DOWN }
         iniViewModel()
         setOnEditorActionListener(enter_name_field_et)
         btn_next.setOnClickListener { navigateToLocationScreen() }

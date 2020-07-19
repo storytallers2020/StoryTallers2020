@@ -1,128 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="24dp"
+    android:paddingBottom="40dp"
     android:background="@drawable/ic_background_1">
 
     <ImageView
+        android:id="@+id/back_button_character"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginTop="@dimen/margin_standard"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/ic_arrow_back_white_24"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:src="@drawable/ic_arrow_left_white_16"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:contentDescription="@string/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
 
     <TextView
-        android:id="@+id/creation_header"
+        android:id="@+id/screen_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choosing_cover"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/subHeader"
+        android:textSize="@dimen/text_standard_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/subHeader"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/choosing_cover_choose"
         android:textColor="@color/white"
         android:textSize="@dimen/text_standard"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        android:layout_marginVertical="@dimen/margin_large"
+        app:layout_constraintTop_toBottomOf="@id/screen_header"
+        app:layout_constraintBottom_toTopOf="@id/rv_covers"
+        />
 
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="360dp"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal"
-        android:weightSum="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subHeader">
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="6.6"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:background="@color/transparent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_arrow_left_white_16" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="86.6"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="196dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/transparent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="6.6"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:background="@color/transparent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_arrow_right_white_16" />
-        </FrameLayout>
-    </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonSave"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_covers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginEnd="@dimen/margin_standard"
-        android:backgroundTint="@color/yellow"
+        android:src="@drawable/location_castle"
+        android:contentDescription="@string/royal_palace"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_large"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/subHeader"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_image_cover" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparent_4D"
+        android:layout_margin="@dimen/margin_xl"
+        android:elevation="0dp"
+        app:cardCornerRadius="@dimen/card_corner_radius_small"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintBottom_toBottomOf="@id/rv_covers"
+        app:layout_constraintEnd_toEndOf="@id/rv_covers"
+        app:layout_constraintStart_toStartOf="@id/rv_covers"
+        app:layout_constraintTop_toTopOf="@id/rv_covers">
+
+        <EditText
+            android:id="@+id/book_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_standard"
+            android:textColor="@color/white"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:background="@color/no_color"
+            android:maxLength="100"
+            tools:ignore="LabelFor"
+            tools:text="Приключения трёх сыновей" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/scroll_left_button"
+        android:layout_width="@dimen/margin_standard"
+        android:layout_height="0dp"
+        android:contentDescription="@string/arrow_back"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_arrow_left_transparent"
+        app:layout_constraintBottom_toBottomOf="@id/rv_covers"
+        app:layout_constraintStart_toStartOf="@id/rv_covers"
+        app:layout_constraintTop_toTopOf="@id/rv_covers" />
+
+    <ImageView
+        android:id="@+id/scroll_right_button"
+        android:layout_width="@dimen/margin_standard"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/arrow_forward"
+        android:src="@drawable/ic_arrow_right_transparent"
+        app:layout_constraintBottom_toBottomOf="@id/rv_covers"
+        app:layout_constraintEnd_toEndOf="@id/rv_covers"
+        app:layout_constraintTop_toTopOf="@id/rv_covers" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:padding="@dimen/padding_small"
         android:text="@string/save"
         android:textAllCaps="false"
+        android:layout_marginHorizontal="@dimen/padding_layout_standard"
         android:textColor="@color/blueDark"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_button"
+        android:layout_marginTop="@dimen/margin_standard"
         app:cornerRadius="@dimen/button_corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

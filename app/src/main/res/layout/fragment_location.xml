@@ -17,12 +17,12 @@
         android:src="@drawable/ic_arrow_left_white_16"
         android:layout_marginStart="@dimen/margin_medium"
         android:contentDescription="@string/arrow_back"
-        app:layout_constraintBottom_toBottomOf="@id/creation_header"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/creation_header" />
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
 
     <TextView
-        android:id="@+id/creation_header"
+        android:id="@+id/screen_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/location"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/padding_layout_standard"
         android:layout_marginTop="@dimen/margin_standard"
-        app:layout_constraintTop_toBottomOf="@id/creation_header">
+        app:layout_constraintTop_toBottomOf="@id/screen_header">
 
         <TextView
             android:id="@+id/difficulty"
@@ -117,7 +117,7 @@
         app:layout_constraintTop_toBottomOf="@id/slider" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_locations"
+        android:id="@+id/rv_covers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
@@ -135,7 +135,6 @@
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/yellow"
         android:padding="@dimen/padding_small"
         android:text="@string/start"
         android:textAllCaps="false"
@@ -144,7 +143,6 @@
         android:textSize="@dimen/text_button"
         android:layout_marginTop="@dimen/margin_standard"
         app:cornerRadius="@dimen/button_corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="24dp" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

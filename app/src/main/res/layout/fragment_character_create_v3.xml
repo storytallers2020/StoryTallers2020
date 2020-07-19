@@ -18,12 +18,12 @@
         android:contentDescription="@string/arrow_back"
         android:src="@drawable/ic_arrow_left_white_16"
         android:layout_marginStart="@dimen/margin_xs"
-        app:layout_constraintBottom_toBottomOf="@id/creation_header"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/creation_header" />
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
 
     <TextView
-        android:id="@+id/creation_header"
+        android:id="@+id/screen_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/character"
@@ -38,7 +38,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/creation_header">
+        app:layout_constraintTop_toBottomOf="@id/screen_header">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -214,7 +214,6 @@
                 android:id="@+id/btn_next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/yellow"
                 android:padding="@dimen/padding_small"
                 android:text="@string/next"
                 android:visibility="visible"
