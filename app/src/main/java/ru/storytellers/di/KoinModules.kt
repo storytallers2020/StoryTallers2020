@@ -55,7 +55,6 @@ val levelModel =  module {
 }
 val characterModel =  module {
     single { PlayerCreator() }
-    single { PlayerAdapter() }
     single<ICharacterDataSource>{CharacterResDataSource(get()) }
     single<ICharacterRepository>{CharacterRepository(get()) }
     viewModel { CreateCharacterViewModel(get()) }
