@@ -4,6 +4,7 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Character
@@ -19,36 +20,43 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
     private val playersLiveData = MutableLiveData<List<Player>>()
     private val flagActiveLiveData = MutableLiveData<Boolean>()
 
-    private val listPlayers= mutableListOf<Player>()
+    private var listPlayers: MutableList<Player> = StoryTallerApp.instance.gameStorage.getListPlayers()
     private var flagActive: Boolean=false
 
 
      fun subscribeOnSuccess(): LiveData<DataModel.Success<Character>>{
          return onSuccessliveData
      }
+
     fun subscribeOnError(): LiveData<DataModel.Error>{
         return onErrorliveData
     }
     fun subscribeOnLoading() : LiveData<DataModel.Loading>{
         return onLoadingliveData
     }
+
     fun subscribeOnPlayers(): LiveData<List<Player>>{
         return playersLiveData
     }
+
     fun subscribeOnFlagActive(): LiveData<Boolean>{
         return flagActiveLiveData
     }
+
     fun setFlagActive(flag:Boolean){
         flagActive=flag
         flagActiveLiveData.value=flagActive
     }
 
-    fun addPlayer(player:Player){
-        listPlayers.add(player)
+    fun removePlayer(player:Player){
+        listPlayers.remove(player)
         playersLiveData.value=listPlayers
     }
 
-
+    fun addPlayer(player:Player){
+       listPlayers.add(player)
+        playersLiveData.value=listPlayers
+    }
 
     fun getAllCharacters(){
         characterRepository.getAll()
@@ -60,5 +68,3 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
             })
     }
 }
-
-
