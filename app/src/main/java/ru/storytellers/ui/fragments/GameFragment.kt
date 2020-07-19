@@ -1,7 +1,6 @@
 package ru.storytellers.ui.fragments
 
 import android.view.View
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
