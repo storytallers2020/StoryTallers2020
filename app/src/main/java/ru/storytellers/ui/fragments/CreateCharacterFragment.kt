@@ -55,7 +55,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
         viewModel.subscribeOnFlagActive().observe(viewLifecycleOwner, Observer {
             if (it){
                 makeEditexiActive(enter_name_field_et)
-                rv_characters.makeInvisible()
+                makeInvisible()
             model.setFlagActive(false)}
         })
     }
@@ -94,7 +94,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
 
     override fun init() {
         imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
-        creation_header.post{ View.FOCUS_DOWN }
+        screen_header.post{ View.FOCUS_DOWN }
         iniViewModel()
         //  костыль для принудительного отображения списка игроков в момент создания фрагмента
         // при навигации: экран выбора игроков->экран выбора уровня->экран выбора игроков
@@ -117,7 +117,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
                     playerCreator.setNamePlayer(name)
                     editTextView.setText("")
                     makeEditexiInactive(editTextView)
-                    rv_characters.makeVisible()
+                    makeVisible()
                     hideKeyBoard(editTextView)
                     return@setOnEditorActionListener true
                 } else enter_name_et_layout1.error="Имя не может быть пустым"
@@ -153,13 +153,11 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
         player_list_rv.adapter=playerAdapter
     }
 
-    private fun RecyclerView.makeInvisible() {
-        visibility = View.GONE
-        textView4.visibility= View.GONE
+    private fun makeInvisible() {
+        container_rv_chars.visibility = View.GONE
     }
-    private fun RecyclerView.makeVisible() {
-        visibility = View.VISIBLE
-        textView4.visibility = View.VISIBLE
+    private fun makeVisible() {
+        container_rv_chars.visibility = View.VISIBLE
     }
 
 }
