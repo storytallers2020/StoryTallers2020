@@ -18,7 +18,7 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.utils.ResourceProviderLevelFragment
 
 class LevelFragment: BaseFragment<DataModel>() {
-    override lateinit var model: LevelViewModel
+    override  val model: LevelViewModel by inject()
     override val layoutRes= R.layout.fragment_level
     private val resourceProvider: ResourceProviderLevelFragment by lazy { ResourceProviderLevelFragment(this.context) }
     private val MAX_VALUE_RANGE_SEEK_BAR=2
@@ -55,8 +55,6 @@ class LevelFragment: BaseFragment<DataModel>() {
         setSeekBarListener()
     }
     override fun iniViewModel() {
-        val viewModel: LevelViewModel by inject()
-        model = viewModel
         model.subscribeOnLevelGame().observe(viewLifecycleOwner, Observer {
             levelGame=it
         })
