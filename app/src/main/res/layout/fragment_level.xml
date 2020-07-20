@@ -175,13 +175,8 @@
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_small"
         android:text="@string/next"
-        android:textAllCaps="false"
-        android:textColor="@color/blueDark"
-        android:textSize="@dimen/text_button"
         android:layout_marginTop="@dimen/margin_standard"
-        app:cornerRadius="@dimen/button_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 

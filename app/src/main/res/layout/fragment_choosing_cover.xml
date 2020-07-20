@@ -85,7 +85,7 @@
             android:background="@color/no_color"
             android:maxLength="100"
             tools:ignore="LabelFor"
-            tools:text="Приключения трёх сыновей" />
+            tools:text="Сказка про Ивана-дурака и Серого Волка за границей вашего воображения, но в рамках дозволенного законом" />
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -115,15 +115,9 @@
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="false"
-        android:padding="@dimen/padding_small"
         android:text="@string/save"
-        android:textAllCaps="false"
+        android:enabled="false"
         android:layout_marginHorizontal="@dimen/padding_layout_standard"
-        android:textColor="@color/blueDark"
-        android:textSize="@dimen/text_button"
-        android:layout_marginTop="@dimen/margin_standard"
-        app:cornerRadius="@dimen/button_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
