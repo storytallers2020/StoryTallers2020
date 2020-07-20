@@ -1,5 +1,6 @@
 package ru.storytellers.ui.fragments
 
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_location.*
@@ -7,19 +8,26 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.model.DataModel
+import ru.storytellers.model.entity.Location
 import ru.storytellers.navigation.Screens
+import ru.storytellers.ui.adapters.ChooseCharacterAdapter
+import ru.storytellers.ui.adapters.LocationAdapter
 import ru.storytellers.viewmodels.LocationViewModel
+import timber.log.Timber
 
 class LocationFragment: BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_location
-    override lateinit var model: LocationViewModel
+    override val model: LocationViewModel by inject()
+    private lateinit var locationAdapter: LocationAdapter
 
     companion object {
         fun newInstance() = LocationFragment()
     }
 
     override fun init() {
+
         iniViewModel()
+
         btn_next.setOnClickListener {
             router.navigateTo(Screens.GameScreen())
         }
@@ -31,14 +39,16 @@ class LocationFragment: BaseFragment<DataModel>() {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         recyclerView.layoutManager = layoutManager
-        val data = Data()
-        val myAdapter = LocationAdapter(data.getDataList())
-        recyclerView.adapter = myAdapter
+        recyclerView.adapter = LocationAdapter()
     }
 
     override fun iniViewModel() {
-        val viewModel: LocationViewModel by inject()
-        model = viewModel
+        model.run {
+            locationAdapter = LocationAdapter()
+            getAllLocations()
+            handlerOnSuccessResult(this)
+            handlerOnErrorResult(this)
+        }
     }
 
     override fun backClicked(): Boolean {
@@ -46,11 +56,24 @@ class LocationFragment: BaseFragment<DataModel>() {
         return true
     }
 
-    inner class Data {
-        val list: List<String> = listOf(getString(R.string.location_1), getString(R.string.loation_2))
+    private fun handlerOnSuccessResult(viewModel : LocationViewModel) {
+        viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
+            it.let {
+                setLocationAdapter(it)
+            }
+        })
+    }
 
-        fun getDataList(): List<String>? {
-            return list
+    private fun handlerOnErrorResult(viewModel : LocationViewModel) {
+        viewModel.subscribeOnError().observe(viewLifecycleOwner, Observer {
+            Timber.e(it.error)
+        })
+    }
+
+    private fun setLocationAdapter(it: DataModel.Success<Location>) {
+        if (it.data!!.isNotEmpty()) {
+            locationAdapter.setData(it.data)
         }
     }
+
 }
