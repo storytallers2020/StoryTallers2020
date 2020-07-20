@@ -52,7 +52,7 @@
         android:contentDescription="@string/royal_palace"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/share_title"
+        app:layout_constraintBottom_toTopOf="@id/share_title"
         app:layout_constraintTop_toBottomOf="@id/subHeader"
         tools:itemCount="2"
         tools:listitem="@layout/item_book_library" />
@@ -103,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
-            android:src="@drawable/mail"
+            android:src="@drawable/ic_instagram"
             android:contentDescription="@string/char_icon" />
 
         <ImageView
@@ -112,7 +112,6 @@
             android:padding="@dimen/padding_small"
             android:src="@drawable/whatsapp"
             android:contentDescription="@string/char_icon" />
-
 
         <ImageView
             android:layout_width="wrap_content"

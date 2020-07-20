@@ -47,31 +47,20 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@drawable/transparent_background"
+        android:paddingVertical="@dimen/margin_xxs"
         android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/subHeader">
 
-        <androidx.cardview.widget.CardView
+        <TextView
             android:layout_width="match_parent"
-            android:elevation="0dp"
-            android:backgroundTint="@color/transparent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            app:cardPreventCornerOverlap="true">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:layout_marginHorizontal="@dimen/margin_small"
-                android:layout_marginVertical="@dimen/margin_xxs"
-                android:lineSpacingExtra="@dimen/line_spacing_extra"
-                android:text="@string/rules_game"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_standard"
-                android:layout_marginBottom="@dimen/padding_layout_bottom" />
-
-        </androidx.cardview.widget.CardView>
+            android:paddingHorizontal="@dimen/margin_small"
+            android:text="@string/rules_game"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_standard"
+            android:lineSpacingExtra="@dimen/line_spacing_extra" />
 
     </androidx.core.widget.NestedScrollView>
 

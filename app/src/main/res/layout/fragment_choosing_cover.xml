@@ -115,7 +115,7 @@
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="false"
+        android:enabled="true"
         android:padding="@dimen/padding_small"
         android:text="@string/save"
         android:textAllCaps="false"
