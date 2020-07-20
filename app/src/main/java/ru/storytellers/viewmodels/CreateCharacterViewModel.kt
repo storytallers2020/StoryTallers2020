@@ -36,6 +36,7 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
     }
 
     fun subscribeOnPlayers(): LiveData<List<Player>>{
+        playersLiveData.value=listPlayers
         return playersLiveData
     }
 
