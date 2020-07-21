@@ -24,9 +24,8 @@ import ru.storytellers.model.repository.CharacterRepository
 import ru.storytellers.model.repository.ICharacterRepository
 import ru.storytellers.model.repository.ILocationRepository
 import ru.storytellers.model.repository.LocationRepository
-import ru.storytellers.ui.adapters.ChooseCharacterAdapter
-import ru.storytellers.ui.adapters.PlayerAdapter
 import ru.storytellers.utils.PlayerCreator
+import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 
@@ -91,12 +90,13 @@ val gameModel = module {
     }
     single {
         val levels = Levels()
+        levels.addLevel(Level(0, get()))
         levels.addLevel(Level(1, get()))
         levels.addLevel(Level(2, get()))
-        levels.addLevel(Level(3, get()))
         levels
     }
 
     single { Game() }
     single { GameStorage() }
+    viewModel { GameViewModel(get(),get()) }
 }

@@ -2,21 +2,22 @@ package ru.storytellers.engine
 
 import ru.storytellers.engine.level.Level
 import ru.storytellers.model.entity.Character
+import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.utils.getPlayerNumByTurn
 
 class Game() {
 
     lateinit var level: Level
-    private lateinit var players: List<Character>
+    private lateinit var players: List<Player>
     private var turn: Int = 1
 
-    fun getCurrentPlayer(): Character {
+    fun getCurrentPlayer(): Player {
         val playerNum = getPlayerNumByTurn(turn, players.count())
         return players[playerNum-1]
     }
 
-    fun newGame(players: List<Character>, level: Level) {
+    fun newGame(players: List<Player>, level: Level) {
         turn = 1
 
         this.players = players
