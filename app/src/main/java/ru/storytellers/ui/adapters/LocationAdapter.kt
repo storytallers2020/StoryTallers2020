@@ -10,10 +10,11 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.item_location.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Location
+import ru.storytellers.ui.fragments.LocationFragment
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 
-class LocationAdapter : RecyclerView.Adapter<LocationAdapter.MyViewHolder>() {
+class LocationAdapter(val clickListener: OnListItemClickListener) : RecyclerView.Adapter<LocationAdapter.MyViewHolder>() {
     private var locationList = mutableListOf<Location>()
 
     fun setData(dataListCharacters: List<Location>?) {
@@ -55,18 +56,24 @@ class LocationAdapter : RecyclerView.Adapter<LocationAdapter.MyViewHolder>() {
             // Читаем подсказки студии
             imageView.setOnClickListener {
                 val positionIndex: Int = getAdapterPosition()
-                Snackbar.make(it, "Location " + positionIndex + " was choosen", Snackbar.LENGTH_LONG)
-                    .setDuration(3500)
-                    .show()
+                clickListener.onItemClick(locationList[positionIndex])
+//                Snackbar.make(it, "Location " + positionIndex + " was choosen", Snackbar.LENGTH_LONG)
+//                    .setDuration(3500)
+//                    .show()
             }
 
             // Читаем подсказки студии
             itemView.setOnClickListener {
                 val positionIndex: Int = getAdapterPosition()
-                Snackbar.make(it, "Location " + positionIndex + " was choosen", Snackbar.LENGTH_LONG)
-                    .setDuration(3500)
-                    .show()
+                clickListener.onItemClick(locationList[positionIndex])
+//                Snackbar.make(it, "Location " + positionIndex + " was choosen", Snackbar.LENGTH_LONG)
+//                    .setDuration(3500)
+//                    .show()
             }
         }
+    }
+
+    interface OnListItemClickListener {
+        fun onItemClick(location: Location)
     }
 }
