@@ -14,7 +14,7 @@ import ru.storytellers.utils.fieldsToLogString
 import ru.storytellers.viewmodels.LocationViewModel
 import timber.log.Timber
 
-class LocationFragment: BaseFragment<DataModel>() {
+class LocationFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_location
     override val model: LocationViewModel by inject()
 
@@ -39,7 +39,7 @@ class LocationFragment: BaseFragment<DataModel>() {
         val recyclerView: RecyclerView = view?.findViewById(R.id.rv_covers)!!
         recyclerView.adapter = locationAdapter
 
-        back_from_location.setOnClickListener {backClicked()}
+        back_from_location.setOnClickListener { backClicked() }
     }
 
     override fun iniViewModel() {
