@@ -24,7 +24,7 @@ import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.CreateCharacterViewModel
 import timber.log.Timber
 
-class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel>() {
+class CreateCharacterFragment(): BaseFragment<DataModel>() {
     override val model: CreateCharacterViewModel by inject()
     private lateinit var characterAdapter: ChooseCharacterAdapter
     private lateinit var playerAdapter: PlayerAdapter
@@ -32,7 +32,7 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
     override val layoutRes= R.layout.fragment_character_create_v3
     private var imm: Any?= null
     companion object {
-        fun newInstance(levelGame:Int) = CreateCharacterFragment(levelGame)
+        fun newInstance() = CreateCharacterFragment()
     }
 
     override fun backClicked(): Boolean {
@@ -96,11 +96,6 @@ class CreateCharacterFragment(private val levelGame:Int): BaseFragment<DataModel
         imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
         screen_header.post{ View.FOCUS_DOWN }
         iniViewModel()
-        //  костыль для принудительного отображения списка игроков в момент создания фрагмента
-        // при навигации: экран выбора игроков->экран выбора уровня->экран выбора игроков
-        // иначе при такой навигации при возрате на экран выбора игроков
-        // список игроков не отображается
-        playerAdapter.setPlayersListData(StoryTallerApp.instance.gameStorage.getListPlayers())
         setOnEditorActionListener(enter_name_field_et)
         btn_next.setOnClickListener { navigateToLocationScreen() }
         back_button_character.setOnClickListener {backClicked()}

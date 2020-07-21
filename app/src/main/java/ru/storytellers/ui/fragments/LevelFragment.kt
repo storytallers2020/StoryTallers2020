@@ -10,6 +10,7 @@ import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_level.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.viewmodels.LevelViewModel
@@ -203,7 +204,8 @@ class LevelFragment: BaseFragment<DataModel>() {
     }
 
     private fun toCreateCharacterScrn(){
-        router.navigateTo(Screens.CreateCharacterScreen(levelGame))
+        StoryTallerApp.instance.gameStorage.setLevelGame(levelGame)
+        router.navigateTo(Screens.CreateCharacterScreen())
     }
     override fun backClicked(): Boolean {
         router.exit()

@@ -3,10 +3,14 @@ package ru.storytellers.ui.fragments
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
+import ru.storytellers.navigation.Screens
+import ru.storytellers.ui.assistant.GameFragmentAssistant
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.viewmodels.GameViewModel
 
 class GameFragment: BaseFragment<DataModel>() {
+
+    private lateinit var assistantFragment: GameFragmentAssistant
     override val model: GameViewModel by inject()
     override val layoutRes = R.layout.fragment_game
 
@@ -23,14 +27,22 @@ class GameFragment: BaseFragment<DataModel>() {
     }
 
     override fun init() {
+        assistantFragment=GameFragmentAssistant(this)
+        model.createNewGame()
         showIntro()
         setEndClickListener()
     }
+
+
 
     private fun setEndClickListener() {
 //        button_end.setOnClickListener {
 //            router.navigateTo(Screens.GameEndScreen())
 //        }
+    }
+
+    private fun navigateToGameEndScreen() {
+        router.navigateTo(Screens.GameEndScreen())
     }
 
     private fun showIntro() {
