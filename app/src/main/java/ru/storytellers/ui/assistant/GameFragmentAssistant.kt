@@ -1,4 +1,8 @@
-package ru.storytellers.ui
+package ru.storytellers.ui.assistant
 
-class GameFragmentAssistant {
+import ru.storytellers.ui.fragments.GameFragment
+
+class GameFragmentAssistant(
+  private val gameFragment: GameFragment
+) {
 }
