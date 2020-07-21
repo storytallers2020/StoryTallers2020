@@ -10,7 +10,6 @@ import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
 import ru.storytellers.navigation.Screens
-import ru.storytellers.ui.adapters.ChooseCharacterAdapter
 import ru.storytellers.ui.adapters.LocationAdapter
 import ru.storytellers.viewmodels.LocationViewModel
 import timber.log.Timber
