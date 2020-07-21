@@ -13,16 +13,11 @@ import ru.storytellers.engine.level.Levels
 import ru.storytellers.engine.rules.NoEmptySentenceRule
 import ru.storytellers.engine.rules.OneSentenceInTextRule
 import ru.storytellers.engine.rules.Rules
-import ru.storytellers.viewmodels.CreateCharacterViewModel
-import ru.storytellers.viewmodels.LevelViewModel
-import ru.storytellers.viewmodels.LocationViewModel
-import ru.storytellers.viewmodels.StartViewModel
 import ru.storytellers.model.entity.room.db.AppDatabase
 import ru.storytellers.model.repository.CharacterRepository
 import ru.storytellers.model.repository.ICharacterRepository
-import ru.storytellers.ui.adapters.ChooseCharacterAdapter
-import ru.storytellers.ui.adapters.PlayerAdapter
 import ru.storytellers.utils.PlayerCreator
+import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 
@@ -93,4 +88,5 @@ val gameModel = module {
 
     single { Game() }
     single { GameStorage() }
+    viewModel { GameViewModel() }
 }
