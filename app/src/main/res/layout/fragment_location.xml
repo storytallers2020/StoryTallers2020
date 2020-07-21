@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="24dp"
-    android:paddingBottom="40dp"
+    android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingTop="@dimen/padding_layout_standard"
+    android:paddingBottom="@dimen/padding_layout_bottom"
     android:background="@drawable/ic_background_default">
 
     <ImageView
@@ -15,7 +16,7 @@
         android:scaleX="2"
         android:scaleY="2"
         android:src="@drawable/ic_arrow_back"
-        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginStart="@dimen/margin_xs"
         android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,45 +122,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_small"
-        android:src="@drawable/location_castle_small"
+        android:src="@drawable/location_cosmos_small"
         android:contentDescription="@string/royal_palace"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/btn_next"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/subHeader"
         app:layout_constraintVertical_bias="0"
-        tools:itemCount="2"
+        app:spanCount="2"
+        tools:itemCount="4"
         tools:listitem="@layout/item_location" />
 
-    <ImageView
-        android:id="@+id/scroll_left_button"
-        android:layout_height="0dp"
-        android:layout_width="@dimen/margin_standard"
-        android:contentDescription="@string/arrow_back"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_arrow_left_transparent"
-        app:layout_constraintBottom_toBottomOf="@id/rv_covers"
-        app:layout_constraintStart_toStartOf="@id/rv_covers"
-        app:layout_constraintTop_toTopOf="@id/rv_covers" />
-
-    <ImageView
-        android:id="@+id/scroll_right_button"
-        android:layout_height="0dp"
-        android:layout_width="@dimen/margin_standard"
-        android:contentDescription="@string/arrow_forward"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_arrow_right_transparent"
-        app:layout_constraintBottom_toBottomOf="@id/rv_covers"
-        app:layout_constraintEnd_toEndOf="@id/rv_covers"
-        app:layout_constraintTop_toTopOf="@id/rv_covers" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/start"
-        android:layout_marginHorizontal="@dimen/padding_layout_standard"
-        android:layout_marginTop="@dimen/margin_standard"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

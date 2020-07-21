@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:paddingTop="24dp"
-    android:paddingBottom="40dp"
+    android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingTop="@dimen/padding_layout_standard"
+    android:paddingBottom="@dimen/padding_layout_bottom"
     android:background="@drawable/ic_background_default">
 
     <ImageView
@@ -15,7 +16,7 @@
         android:scaleX="2"
         android:scaleY="2"
         android:src="@drawable/ic_arrow_back"
-        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginStart="@dimen/margin_xs"
         android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +50,7 @@
         android:id="@+id/rv_covers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/location_castle_small"
+        android:src="@drawable/location_cosmos_small"
         android:contentDescription="@string/royal_palace"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/margin_large"

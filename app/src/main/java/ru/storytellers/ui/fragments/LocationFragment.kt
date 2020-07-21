@@ -1,13 +1,10 @@
 package ru.storytellers.ui.fragments
 
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_location.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
-import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.model.DataModel
-import ru.storytellers.navigation.Screens
+import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.viewmodels.LocationViewModel
 
 class LocationFragment: BaseFragment<DataModel>() {
@@ -20,17 +17,15 @@ class LocationFragment: BaseFragment<DataModel>() {
 
     override fun init() {
         iniViewModel()
-        btn_next.setOnClickListener {
-            router.navigateTo(Screens.GameScreen())
-        }
-        back_from_location.setOnClickListener {backClicked()}
+//        btn_next.setOnClickListener {                     кнопки на экране больше нет, переход в игру по клику на элемент ресайклера
+//            router.navigateTo(Screens.GameScreen())
+//        }
+//        back_from_location.setOnClickListener {backClicked()}
 
 
         val recyclerView: RecyclerView = view?.findViewById(R.id.rv_covers)!!
-        val layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        recyclerView.layoutManager = layoutManager
+//        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)   УДАЛИТЬ
+//        recyclerView.layoutManager = layoutManager                                                УДАЛИТЬ
         val data = Data()
         val myAdapter = LocationAdapter(data.getDataList())
         recyclerView.adapter = myAdapter
@@ -47,7 +42,7 @@ class LocationFragment: BaseFragment<DataModel>() {
     }
 
     inner class Data {
-        val list: List<String> = listOf(getString(R.string.location_1), getString(R.string.loation_2))
+        val list: List<String> = listOf(getString(R.string.location_1), getString(R.string.location_2))
 
         fun getDataList(): List<String>? {
             return list
