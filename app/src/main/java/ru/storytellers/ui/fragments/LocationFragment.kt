@@ -1,23 +1,32 @@
 package ru.storytellers.ui.fragments
 
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
-import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.LocationAdapter
+import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.fieldsToLogString
 import ru.storytellers.viewmodels.LocationViewModel
 import timber.log.Timber
 
 class LocationFragment: BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_location
     override val model: LocationViewModel by inject()
-    private lateinit var locationAdapter: LocationAdapter
+
+    private val onListItemClickListener = object : LocationAdapter.OnListItemClickListener {
+        override fun onItemClick(location: Location) {
+            Timber.d(location.fieldsToLogString())
+            router.navigateTo(Screens.GameScreen())
+        }
+    }
+
+    // Тут немного по другому. Как на курсе А3
+    private val locationAdapter: LocationAdapter by lazy { LocationAdapter(onListItemClickListener) }
 
     companion object {
         fun newInstance() = LocationFragment()
@@ -30,20 +39,15 @@ class LocationFragment: BaseFragment<DataModel>() {
         btn_next.setOnClickListener {
             router.navigateTo(Screens.GameScreen())
         }
-        back_from_location.setOnClickListener {backClicked()}
+        back_from_location.setOnClickListener { backClicked() }
 
 
         val recyclerView: RecyclerView = view?.findViewById(R.id.rv_covers)!!
-        val layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        recyclerView.layoutManager = layoutManager
         recyclerView.adapter = locationAdapter
     }
 
     override fun iniViewModel() {
         model.apply {
-            locationAdapter = LocationAdapter()
             getAllLocations()
             handlerOnSuccessResult(this)
             handlerOnErrorResult(this)
@@ -70,9 +74,7 @@ class LocationFragment: BaseFragment<DataModel>() {
     }
 
     private fun setLocationAdapter(it: DataModel.Success<Location>) {
-        if (it.data!!.isNotEmpty()) {
             locationAdapter.setData(it.data)
-        }
     }
 
 }
