@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_background_1">
+        android:background="@drawable/ic_background_default">
 
         <FrameLayout
             android:id="@+id/layout_tale"

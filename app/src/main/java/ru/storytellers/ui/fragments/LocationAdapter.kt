@@ -34,8 +34,8 @@ class LocationAdapter(var dataList: List<String>?) : RecyclerView.Adapter<Locati
         fun bind(position: Int) {
             textView.text = dataList?.get(position)
             when (position % 2) {
-                0 -> imageView.setImageResource(R.drawable.location_castle)
-                1 -> imageView.setImageResource(R.drawable.location_cosmos)
+                0 -> imageView.setImageResource(R.drawable.location_castle_small)
+                1 -> imageView.setImageResource(R.drawable.location_cosmos_small)
             }
 
             imageView.setOnClickListener(View.OnClickListener {

@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    android:background="@drawable/ic_background_1">
+    android:background="@drawable/ic_background_default">
 
     <ImageView
         android:id="@+id/back_button_rules"
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:scaleX="2"
         android:scaleY="2"
-        android:src="@drawable/ic_arrow_left_white_16"
+        android:src="@drawable/ic_arrow_back"
         android:layout_marginStart="@dimen/margin_xs"
         android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
@@ -47,7 +47,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/transparent_background"
+        android:background="@drawable/background_transparent"
         android:paddingVertical="@dimen/margin_xxs"
         android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
