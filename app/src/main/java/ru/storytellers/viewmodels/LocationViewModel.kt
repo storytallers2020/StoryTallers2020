@@ -6,32 +6,32 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
-import ru.storytellers.model.entity.Player
 import ru.storytellers.model.repository.ILocationRepository
 
-class LocationViewModel(private val locationRepository: ILocationRepository) : BaseViewModel<DataModel>() {
-    private val locationsLiveData = MutableLiveData<List<Location>>()
-    private val onSuccessliveData = MutableLiveData<DataModel.Success<Location>>()
-    private val onErrorliveData = MutableLiveData<DataModel.Error>()
+class LocationViewModel(private val locationRepository: ILocationRepository) :
+    BaseViewModel<DataModel>() {
+    //Неиспользуемая переменная
+    //private val locationsLiveData = MutableLiveData<List<Location>>()
+    // camelCase onSuccessliveData -> onSuccessLiveData
+    private val onSuccessLiveData = MutableLiveData<DataModel.Success<Location>>()
+    private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 
-    fun getAllLocations(){
+    fun getAllLocations() {
         locationRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                onSuccessliveData.value=DataModel.Success(it)
-            },{
-                onErrorliveData.value=DataModel.Error(it)
+                onSuccessLiveData.value = DataModel.Success(it)
+            }, {
+                onErrorLiveData.value = DataModel.Error(it)
             })
     }
 
     fun subscribeOnSuccess(): LiveData<DataModel.Success<Location>> {
-        return onSuccessliveData
+        return onSuccessLiveData
     }
 
     fun subscribeOnError(): LiveData<DataModel.Error> {
-        return onErrorliveData
+        return onErrorLiveData
     }
 
 }
-
-

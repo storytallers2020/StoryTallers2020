@@ -6,12 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
-import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
 import ru.storytellers.navigation.Screens
-import ru.storytellers.ui.adapters.ChooseCharacterAdapter
 import ru.storytellers.ui.adapters.LocationAdapter
+import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.viewmodels.LocationViewModel
 import timber.log.Timber
 
@@ -35,15 +34,22 @@ class LocationFragment: BaseFragment<DataModel>() {
 
 
         val recyclerView: RecyclerView = view?.findViewById(R.id.rv_covers)!!
-        val layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        //val layoutManager =
+        //    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = LocationAdapter()
+        // Не нужно. Кей это сделала в разметке
+        //recyclerView.layoutManager = layoutManager
+
+        // Ошибка была тут! Ты же уже создал адаптер в iniViewModel и передал его в ViewModel.
+        // Зачем ты тут еще раз создаешь?
+        //recyclerView.adapter = LocationAdapter()
+        recyclerView.adapter = locationAdapter
     }
 
     override fun iniViewModel() {
-        model.run {
+        //model.run {
+        //Run отличается от apply тем, что может возвращать результать. Нам это не нужно.
+        model.apply {
             locationAdapter = LocationAdapter()
             getAllLocations()
             handlerOnSuccessResult(this)
@@ -58,8 +64,9 @@ class LocationFragment: BaseFragment<DataModel>() {
 
     private fun handlerOnSuccessResult(viewModel : LocationViewModel) {
         viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
-            it.let {
-                setLocationAdapter(it)
+            // Знак вопроса забыл
+            it.data?.let {  locationList ->
+                setLocationAdapter(locationList)
             }
         })
     }
@@ -70,10 +77,12 @@ class LocationFragment: BaseFragment<DataModel>() {
         })
     }
 
-    private fun setLocationAdapter(it: DataModel.Success<Location>) {
-        if (it.data!!.isNotEmpty()) {
-            locationAdapter.setData(it.data)
-        }
+    // it плохое имя для входной переменной. Да и DataModel тут уже не нужен.
+    private fun setLocationAdapter(locationList: List<Location>) {
+        // Лишняя проверка. Нет данных, значит пустые установим.
+        //if (it.data!!.isNotEmpty()) {
+            locationAdapter.setData(locationList)
+        //}
     }
 
 }

@@ -27,19 +27,19 @@ class LocationAdapter : RecyclerView.Adapter<LocationAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_location, parent, false)
-        return MyViewHolder(
-            view
-        )
+            LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.item_location, parent, false)
+
+        return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(myViewHolder: MyViewHolder, position: Int) {
         myViewHolder.bind(locationList[position])
     }
 
-    override fun getItemCount(): Int {
-        return locationList.size
-    }
+    // Kotlin style
+    override fun getItemCount() = locationList.size
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textView: TextView = itemView.findViewById(R.id.locationDescription)
@@ -52,19 +52,21 @@ class LocationAdapter : RecyclerView.Adapter<LocationAdapter.MyViewHolder>() {
                 loadImage(it, itemView.locationView)
             }
 
-            imageView.setOnClickListener(View.OnClickListener {
+            // Читаем подсказки студии
+            imageView.setOnClickListener {
                 val positionIndex: Int = getAdapterPosition()
                 Snackbar.make(it, "Location " + positionIndex + " was choosen", Snackbar.LENGTH_LONG)
                     .setDuration(3500)
                     .show()
-            })
+            }
 
-            itemView.setOnClickListener(View.OnClickListener {
+            // Читаем подсказки студии
+            itemView.setOnClickListener {
                 val positionIndex: Int = getAdapterPosition()
                 Snackbar.make(it, "Location " + positionIndex + " was choosen", Snackbar.LENGTH_LONG)
                     .setDuration(3500)
                     .show()
-            })
+            }
         }
     }
 }
