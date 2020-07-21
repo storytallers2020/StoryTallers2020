@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
+import ru.storytellers.ui.adapters.LocationAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.viewmodels.LocationViewModel
 
@@ -27,7 +28,8 @@ class LocationFragment: BaseFragment<DataModel>() {
 //        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)   УДАЛИТЬ
 //        recyclerView.layoutManager = layoutManager                                                УДАЛИТЬ
         val data = Data()
-        val myAdapter = LocationAdapter(data.getDataList())
+        val myAdapter =
+            LocationAdapter(data.getDataList(),router)
         recyclerView.adapter = myAdapter
     }
 
