@@ -6,7 +6,7 @@
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/margin_xxl"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    android:background="@drawable/ic_background_1"
+    android:background="@drawable/ic_background_default"
     android:orientation="vertical">
 
     <TextView
@@ -24,12 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/auth_create_tale"
-        android:textAllCaps="false"
-        android:textColor="@color/blueDark"
-        android:textSize="@dimen/text_standard_header"
-        android:padding="@dimen/padding_small"
         android:layout_marginBottom="@dimen/margin_large"
-        app:cornerRadius="@dimen/button_corner_radius"
         app:layout_constraintBottom_toTopOf="@id/library_button"
         app:layout_goneMarginBottom="@dimen/margin_xxxl" />
 
@@ -38,13 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/auth_create_library"
-        android:textAllCaps="false"
         android:layout_marginBottom="@dimen/margin_xxxl"
-        android:textColor="@color/blueDark"
         android:visibility="gone"
-        android:textSize="@dimen/text_button"
-        android:padding="@dimen/padding_small"
-        app:cornerRadius="@dimen/button_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView

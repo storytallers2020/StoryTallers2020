@@ -2,14 +2,17 @@ package ru.storytellers.engine.level
 
 class Levels() {
 
-    private val rulesList = ArrayList<Level>()
+    private val levelList = ArrayList<Level>()
+
+    fun getLevelById(id: Int): Level? =
+        levelList.first { it.id == id }
 
     fun addLevel(level: Level) {
-        rulesList.add(level)
+        levelList.add(level)
     }
 
-    fun clearRules() {
-        rulesList.clear()
+    fun clearLevels() {
+        levelList.clear()
     }
 
 }

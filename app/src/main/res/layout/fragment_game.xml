@@ -1,132 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fillViewport="true"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_background_1">
-
-        <FrameLayout
-            android:id="@+id/layout_tale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:background="#4DFFFFFF"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Тест"
-                android:textSize="16sp"
-                android:textColor="@color/white" />
-
-        </FrameLayout>
-
+        android:paddingHorizontal="@dimen/padding_layout_standard"
+        android:paddingVertical="@dimen/padding_layout_bottom"
+        android:background="@drawable/ic_background_default">
 
         <TextView
-            android:id="@+id/tv_hint"
-            android:visibility="gone"
+            android:id="@+id/reminder_intro"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:gravity="center"
-            android:text="@string/game_hint"
-            android:textSize="24sp"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/tv_hint_location"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="216dp"
-            android:gravity="center"
-            android:text="@string/game_hint_location"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/et_step" />
+            android:textSize="@dimen/text_standard"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/et_step"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/intro_cosmos" />
 
-        <LinearLayout
-            android:id="@+id/layout_step_by"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/game_field"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="12dp"
-            android:layout_marginStart="24dp"
-            app:layout_constraintVertical_bias="1"
-            app:layout_constraintBottom_toTopOf="@+id/et_step"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_tale">
+            android:layout_marginBottom="@dimen/margin_standard"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible"
+            app:layout_constraintVertical_bias="0">
 
             <TextView
-                android:id="@+id/tv_step"
-                android:layout_width="wrap_content"
+                android:id="@+id/story_body"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ходит"
-                android:layout_marginBottom="1dp"
-                android:layout_gravity="bottom"
+                android:paddingHorizontal="@dimen/margin_small"
+                android:paddingVertical="@dimen/margin_xxs"
+                android:textSize="16sp"
+                android:lineSpacingExtra="@dimen/line_spacing_extra"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="-28dp"
+                tools:text=" В некотором царстве, в некотором государстве жил-был царь, и было у него три сына.
+                В некотором царстве, в некотором государстве жил-был царь, и было у него три сына." />
 
             <ImageView
-                android:id="@+id/iv_step_avatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:src="@drawable/ic_boy" />
+                android:layout_width="match_parent"
+                android:background="@drawable/background_transparent"
+                android:layout_height="0dp"
+                android:contentDescription="@string/rules"
+                app:layout_constraintBottom_toBottomOf="@id/story_body"
+                app:layout_constraintTop_toTopOf="@id/story_body" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/icon_medium"
+            android:text="@string/game_turn"
+            android:maxLines="1"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/et_step"
+            app:layout_constraintEnd_toStartOf="@id/player_name"
+            app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/player_name"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/icon_medium"
+            android:maxLines="1"
+            android:paddingHorizontal="@dimen/margin_xxs"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/et_step"
+            app:layout_constraintEnd_toStartOf="@id/avatar"
+            tools:text="Серый Волк" />
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/icon_medium"
+            android:layout_height="@dimen/icon_medium"
+            android:src="@drawable/ic_wolf"
+            android:contentDescription="@string/char_icon"
+            app:layout_constraintBottom_toTopOf="@id/et_step"
+            app:layout_constraintStart_toEndOf="@id/player_name" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_step"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            android:theme="@style/OutlinedBox"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="40dp"
-            app:boxCornerRadiusBottomEnd="30dp"
-            app:boxCornerRadiusBottomStart="30dp"
-            app:boxCornerRadiusTopEnd="30dp"
-            app:boxCornerRadiusTopStart="30dp"
-            app:boxStrokeColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/tv_end">
+            android:layout_marginBottom="@dimen/margin_standard"
+            android:layout_marginEnd="@dimen/margin_xs"
+            app:boxCornerRadiusBottomEnd="@dimen/box_corner_radius"
+            app:boxCornerRadiusBottomStart="@dimen/box_corner_radius"
+            app:boxCornerRadiusTopEnd="@dimen/box_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/box_corner_radius"
+            app:layout_goneMarginRight="0dp"
+            app:layout_constraintBottom_toTopOf="@id/button_end"
+            app:layout_constraintEnd_toStartOf="@id/btn_send"
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/sentence_line"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:textColor="@color/white"
+                android:padding="@dimen/margin_small"
                 android:textSize="16sp"
-                android:layout_height="wrap_content" />
-
+                android:maxLength="150"
+                android:lineSpacingExtra="@dimen/line_spacing_extra"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <ImageButton
+            android:id="@+id/btn_send"
+            android:layout_width="@dimen/icon_medium"
+            android:layout_height="@dimen/icon_medium"
+            android:visibility="invisible"
+            android:src="@drawable/ic_send_bird"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintBottom_toBottomOf="@id/et_step"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/et_step"
+            android:contentDescription="@string/send" />
+
         <TextView
-            android:id="@+id/tv_end"
+            android:id="@+id/button_end"
+            android:background="@color/no_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
             android:text="@string/end_tale"
             android:textColor="@color/yellow"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
+
+
+

@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="24dp"
-    android:paddingBottom="40dp"
-    android:background="@drawable/ic_background_1">
+    android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingTop="@dimen/padding_layout_standard"
+    android:paddingBottom="@dimen/padding_layout_bottom"
+    android:background="@drawable/ic_background_default">
 
     <ImageView
         android:id="@+id/back_from_location"
@@ -14,8 +15,8 @@
         android:layout_height="wrap_content"
         android:scaleX="2"
         android:scaleY="2"
-        android:src="@drawable/ic_arrow_left_white_16"
-        android:layout_marginStart="@dimen/margin_medium"
+        android:src="@drawable/ic_arrow_back"
+        android:layout_marginStart="@dimen/margin_xs"
         android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +50,7 @@
             android:alpha="0.5"
             android:textSize="@dimen/text_small"
             android:gravity="center"
-            android:drawableBottom="@drawable/cup"
+            android:drawableBottom="@drawable/slider_cup"
             android:textColor="@color/yellow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +58,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_line_yellow_light"
+            android:src="@drawable/slider_line_yellow_fade"
             android:contentDescription="@string/dots_line"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/hero"
@@ -74,7 +75,7 @@
             android:alpha="0.5"
             android:gravity="center"
             android:textColor="@color/yellow"
-            android:drawableBottom="@drawable/ic_queen"
+            android:drawableBottom="@drawable/slider_queen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +83,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_line_yellow_light"
+            android:src="@drawable/slider_line_yellow_fade"
             android:contentDescription="@string/dots_line"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/location"
@@ -97,7 +98,7 @@
             android:text="@string/location"
             android:textSize="@dimen/text_small"
             android:gravity="center"
-            android:drawableBottom="@drawable/ic_mounts"
+            android:drawableBottom="@drawable/slider_mounts"
             android:textColor="@color/yellow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -120,30 +121,16 @@
         android:id="@+id/rv_covers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
-        android:paddingBottom="@dimen/padding_small"
-        android:src="@drawable/location_castle"
+        android:layout_marginVertical="@dimen/margin_small"
+        android:src="@drawable/location_cosmos_small"
         android:contentDescription="@string/royal_palace"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/subHeader"
-        app:layout_constraintVertical_bias="1.0"
-        tools:itemCount="2"
-        tools:layout_editor_absoluteX="0dp"
-        tools:listitem="@layout/item_image_location_create" />
+        app:layout_constraintVertical_bias="0"
+        app:spanCount="2"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_location" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_small"
-        android:text="@string/start"
-        android:textAllCaps="false"
-        android:layout_marginHorizontal="@dimen/padding_layout_standard"
-        android:textColor="@color/blueDark"
-        android:textSize="@dimen/text_button"
-        android:layout_marginTop="@dimen/margin_standard"
-        app:cornerRadius="@dimen/button_corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
