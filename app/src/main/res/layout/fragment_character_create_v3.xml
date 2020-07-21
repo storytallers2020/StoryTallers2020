@@ -7,7 +7,7 @@
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    android:background="@drawable/ic_background_1">
+    android:background="@drawable/ic_background_default">
 
     <ImageView
         android:id="@+id/back_button_character"
@@ -16,7 +16,7 @@
         android:scaleX="2"
         android:scaleY="2"
         android:contentDescription="@string/arrow_back"
-        android:src="@drawable/ic_arrow_left_white_16"
+        android:src="@drawable/ic_arrow_back"
         android:layout_marginStart="@dimen/margin_xs"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_standard"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/screen_header">
 
@@ -59,7 +60,7 @@
                     android:alpha="0.5"
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
-                    android:drawableBottom="@drawable/cup"
+                    android:drawableBottom="@drawable/slider_cup"
                     android:textColor="@color/yellow"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -67,7 +68,7 @@
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_line_yellow_light"
+                    android:src="@drawable/slider_line_yellow_fade"
                     android:contentDescription="@string/dots_line"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/hero"
@@ -83,7 +84,7 @@
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
                     android:textColor="@color/yellow"
-                    android:drawableBottom="@drawable/ic_queen"
+                    android:drawableBottom="@drawable/slider_queen"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -91,7 +92,7 @@
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_line_yellow"
+                    android:src="@drawable/slider_line_yellow"
                     android:contentDescription="@string/dots_line"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/location"
@@ -107,7 +108,7 @@
                     android:textSize="@dimen/text_small"
                     android:alpha="0.5"
                     android:gravity="center"
-                    android:drawableBottom="@drawable/ic_mounts"
+                    android:drawableBottom="@drawable/slider_mounts"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -139,8 +140,12 @@
                     android:theme="@style/OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/yellow"
                     android:hint="@string/enter_name_hint"
+                    android:layout_marginVertical="@dimen/margin_standard"
+                    app:boxCornerRadiusBottomEnd="@dimen/box_corner_radius"
+                    app:boxCornerRadiusBottomStart="@dimen/box_corner_radius"
+                    app:boxCornerRadiusTopEnd="@dimen/box_corner_radius"
+                    app:boxCornerRadiusTopStart="@dimen/box_corner_radius"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:visibility="visible">
 
@@ -151,12 +156,14 @@
                         android:focusableInTouchMode="true"
                         android:maxLength="25"
                         android:maxLines="1"
-                        android:paddingHorizontal="@dimen/padding_small"
                         android:textColor="@color/white"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="@dimen/padding_small"
                         android:singleLine="true"
                         android:inputType="text"
                         android:textColorHint="@color/colorAccent"
                         android:imeOptions="actionDone"
+                        tools:text="@string/game_hint"
                         android:textSize="@dimen/text_standard">
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>

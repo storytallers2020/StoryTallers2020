@@ -42,5 +42,12 @@
     <string name="edit">изменить</string>
 
     <string name="location_1">Королевский дворец</string>
-    <string name="loation_2">Далёкий космос</string>
+    <string name="location_2">Далёкий космос</string>
+    <string name="game_start_title">Сказка начинается…</string>
+    <string name="game_turn">Ходит</string>
+    <string name="send">отправить</string>
+    <string name="intro_castle">Начинай сказку.\n Не забывай, что твой герой \n в замке.</string>
+    <string name="intro_cosmos">Начинай сказку.\n Не забывай, что твой герой \n в космосе.</string>
+
+
 </resources>

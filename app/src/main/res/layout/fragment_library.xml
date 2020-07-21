@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="24dp"
-    android:paddingBottom="40dp"
-    android:background="@drawable/ic_background_1">
+    android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingTop="@dimen/padding_layout_standard"
+    android:paddingBottom="@dimen/padding_layout_bottom"
+    android:background="@drawable/ic_background_default">
 
     <ImageView
         android:id="@+id/back_button_character"
@@ -14,8 +15,8 @@
         android:layout_height="wrap_content"
         android:scaleX="2"
         android:scaleY="2"
-        android:src="@drawable/ic_arrow_left_white_16"
-        android:layout_marginStart="@dimen/margin_medium"
+        android:src="@drawable/ic_arrow_back"
+        android:layout_marginStart="@dimen/margin_xs"
         android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +49,8 @@
         android:id="@+id/rv_books"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/location_castle"
-        android:contentDescription="@string/royal_palace"
+        android:src="@drawable/location_cosmos_small"
+        android:contentDescription="@string/location_2"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/share_title"
@@ -103,21 +104,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
-            android:src="@drawable/ic_instagram"
+            android:src="@drawable/share_instagram"
             android:contentDescription="@string/char_icon" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
-            android:src="@drawable/whatsapp"
+            android:src="@drawable/share_whatsapp"
             android:contentDescription="@string/char_icon" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
-            android:src="@drawable/telegram"
+            android:src="@drawable/share_telegram"
             android:contentDescription="@string/char_icon" />
 
 

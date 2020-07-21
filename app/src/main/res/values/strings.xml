@@ -27,12 +27,11 @@
     <string name="library">Library</string>
     <string name="my_tales">My Fairy Tales</string>
     <string name="share">Share:</string>
-    <string name="end_tale">Finish the tale</string>
+    <string name="end_tale"><u>End the Tale</u></string>
     <string name="select_cover">Select cover</string>
     <string name="game_resume">Continue game</string>
     <string name="game_hint">
-        Players make their moves in turns.\n
-        and can only come up with one sentence</string>
+        Players make their moves in turns and \n can only come up with one sentence</string>
     <string name="game_hint_location">Game hint location</string>
     <string name="rules_game">
         The game can be played by 2 to 8 people.\n
@@ -47,7 +46,7 @@
         3. Hard. The player sees only the last sentence composed by the player before him. In his turn the player must use the randomly generated mandatory word.</string>
     <string name="insert_players_name">Enter the player\'s name</string>
     <string name="choose_hero">Choose a hero</string>
-    <string name="enter_name_hint">Ввeдите имя и нажмите Enter</string>
+    <string name="enter_name_hint">Player\'s name and click Enter</string>
     <string name="arrow_back" translatable="false"><![CDATA[<<<]]></string>
     <string name="dots_line" translatable="false">..............</string>
     <string name="arrow_forward" translatable="false"><![CDATA[>>>]]></string>
@@ -58,5 +57,10 @@
     <string name="underline" translatable="false">-----------------------</string>
 
     <string name="location_1">Royal Palace</string>
-    <string name="loation_2">Deep Space</string>
+    <string name="location_2">Deep Space</string>
+    <string name="game_start_title">The tale is about to begin…</string>
+    <string name="game_turn">"Turn for "</string>
+    <string name="send">send</string>
+    <string name="intro_castle">The tales starts in a castle.</string>
+    <string name="intro_cosmos">Your tale starts in cosmos.</string>
 </resources>
