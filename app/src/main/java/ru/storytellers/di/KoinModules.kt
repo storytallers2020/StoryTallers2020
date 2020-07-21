@@ -80,9 +80,9 @@ val gameModel = module {
     }
     single {
         val levels = Levels()
+        levels.addLevel(Level(0, get()))
         levels.addLevel(Level(1, get()))
         levels.addLevel(Level(2, get()))
-        levels.addLevel(Level(3, get()))
         levels
     }
 
