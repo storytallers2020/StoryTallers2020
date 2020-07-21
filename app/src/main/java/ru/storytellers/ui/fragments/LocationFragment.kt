@@ -2,7 +2,6 @@ package ru.storytellers.ui.fragments
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_location.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -36,12 +35,6 @@ class LocationFragment: BaseFragment<DataModel>() {
 
         iniViewModel()
 
-        btn_next.setOnClickListener {
-            router.navigateTo(Screens.GameScreen())
-        }
-        back_from_location.setOnClickListener { backClicked() }
-
-
         val recyclerView: RecyclerView = view?.findViewById(R.id.rv_covers)!!
         recyclerView.adapter = locationAdapter
     }
@@ -59,7 +52,7 @@ class LocationFragment: BaseFragment<DataModel>() {
         return true
     }
 
-    private fun handlerOnSuccessResult(viewModel : LocationViewModel) {
+    private fun handlerOnSuccessResult(viewModel: LocationViewModel) {
         viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
             it.let {
                 setLocationAdapter(it)
@@ -67,14 +60,14 @@ class LocationFragment: BaseFragment<DataModel>() {
         })
     }
 
-    private fun handlerOnErrorResult(viewModel : LocationViewModel) {
+    private fun handlerOnErrorResult(viewModel: LocationViewModel) {
         viewModel.subscribeOnError().observe(viewLifecycleOwner, Observer {
             Timber.e(it.error)
         })
     }
 
     private fun setLocationAdapter(it: DataModel.Success<Location>) {
-            locationAdapter.setData(it.data)
+        locationAdapter.setData(it.data)
     }
 
 }
