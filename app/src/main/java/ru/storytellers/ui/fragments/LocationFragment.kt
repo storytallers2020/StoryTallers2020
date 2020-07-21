@@ -2,6 +2,7 @@ package ru.storytellers.ui.fragments
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_location.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -37,6 +38,8 @@ class LocationFragment: BaseFragment<DataModel>() {
 
         val recyclerView: RecyclerView = view?.findViewById(R.id.rv_covers)!!
         recyclerView.adapter = locationAdapter
+
+        back_from_location.setOnClickListener {backClicked()}
     }
 
     override fun iniViewModel() {
