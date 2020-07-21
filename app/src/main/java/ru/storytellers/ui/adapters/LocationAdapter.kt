@@ -46,7 +46,7 @@ class LocationAdapter(var dataList: List<String>?) : RecyclerView.Adapter<Locati
             })
 
             itemView.setOnClickListener(View.OnClickListener {
-                val positionIndex: Int = getAdapterPosition()
+                val positionIndex: Int = adapterPosition
                 Snackbar.make(it, "Location " + positionIndex + " was choosen", Snackbar.LENGTH_LONG)
                     .setDuration(3500)
                     .show()
