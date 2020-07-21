@@ -8,18 +8,30 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="materialButtonStyle">@style/YellowButton</item>
+        <item name="buttonStyle">@style/YellowButton</item>
         <item name="fontFamily">@font/roboto_slab</item>
     </style>
 
     <style name="OutlinedBox">
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense</item>
         <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColorHint">@color/white</item>
         <item name="colorAccent">@color/white</item>
         <item name="android:textColor">@color/white</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/box_corner_radius</item>
         <item name="boxCornerRadiusBottomStart">@dimen/box_corner_radius</item>
         <item name="boxCornerRadiusTopEnd">@dimen/box_corner_radius</item>
         <item name="boxCornerRadiusTopStart">@dimen/box_corner_radius</item>
+    </style>
+
+    <style name="YellowButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_button</item>
+        <item name="android:textColor">@color/blueDark</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:padding">@dimen/padding_small</item>
+        <item name="android:backgroundTint">@color/color_states_button</item>
     </style>
 
 </resources>

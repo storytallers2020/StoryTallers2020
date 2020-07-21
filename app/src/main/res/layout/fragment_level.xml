@@ -8,7 +8,7 @@
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    android:background="@drawable/ic_background_1">
+    android:background="@drawable/ic_background_default">
 
     <ImageView
         android:id="@+id/back_button_level"
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:scaleX="2"
         android:scaleY="2"
-        android:src="@drawable/ic_arrow_left_white_16"
+        android:src="@drawable/ic_arrow_back"
         android:layout_marginStart="@dimen/margin_xs"
         android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
@@ -51,7 +51,7 @@
             android:text="@string/level"
             android:textSize="@dimen/text_small"
             android:gravity="center"
-            android:drawableBottom="@drawable/cup"
+            android:drawableBottom="@drawable/slider_cup"
             android:textColor="@color/yellow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_line_yellow"
+            android:src="@drawable/slider_line_yellow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/hero"
             app:layout_constraintStart_toEndOf="@id/difficulty"
@@ -76,7 +76,7 @@
             android:alpha="0.5"
             android:gravity="center"
             android:textColor="@color/white"
-            android:drawableBottom="@drawable/ic_queen"
+            android:drawableBottom="@drawable/slider_queen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +84,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_line_gray"
+            android:src="@drawable/slider_line_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/location"
             app:layout_constraintStart_toEndOf="@id/hero"
@@ -100,7 +100,7 @@
             android:textSize="@dimen/text_small"
             android:alpha="0.5"
             android:gravity="center"
-            android:drawableBottom="@drawable/ic_mounts"
+            android:drawableBottom="@drawable/slider_mounts"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -166,7 +166,7 @@
         android:layout_marginBottom="64dp"
         android:progressBackgroundTint="@color/blue"
         android:progressTint="@color/blue"
-        android:thumb="@drawable/ic_cup"
+        android:thumb="@drawable/slider_cup"
         android:thumbOffset="@dimen/margin_xs"
         app:layout_constraintBottom_toTopOf="@id/btn_next"
         app:layout_constraintTop_toBottomOf="@id/level_buttons" />
@@ -175,13 +175,8 @@
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_small"
         android:text="@string/next"
-        android:textAllCaps="false"
-        android:textColor="@color/blueDark"
-        android:textSize="@dimen/text_button"
         android:layout_marginTop="@dimen/margin_standard"
-        app:cornerRadius="@dimen/button_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 
