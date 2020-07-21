@@ -39,11 +39,11 @@ class LocationFragment: BaseFragment<DataModel>() {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = LocationAdapter()
+        recyclerView.adapter = locationAdapter
     }
 
     override fun iniViewModel() {
-        model.run {
+        model.apply {
             locationAdapter = LocationAdapter()
             getAllLocations()
             handlerOnSuccessResult(this)
