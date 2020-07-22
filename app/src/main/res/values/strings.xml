@@ -63,4 +63,6 @@
     <string name="send">send</string>
     <string name="intro_castle">The tales starts in a castle.</string>
     <string name="intro_cosmos">Your tale starts in cosmos.</string>
+    <string name="choose_location">Choose location</string>
+    <string name="add_new_character">Add new character +</string>
 </resources>

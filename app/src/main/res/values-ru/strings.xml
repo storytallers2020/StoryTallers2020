@@ -48,6 +48,8 @@
     <string name="send">отправить</string>
     <string name="intro_castle">Начинай сказку.\n Не забывай, что твой герой \n в замке.</string>
     <string name="intro_cosmos">Начинай сказку.\n Не забывай, что твой герой \n в космосе.</string>
+    <string name="choose_location">Выбрать локацию</string>
+    <string name="add_new_character">Добавить игрока +</string>
 
 
 </resources>
