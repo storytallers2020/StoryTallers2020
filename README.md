@@ -1,6 +1,5 @@
 # Story-Heroes
 
-
 ![logo](https://github.com/storytallers2020/StoryTallers2020/blob/master/logo.png)
 
 **Story-Heroes** - это мобильное приложение,
@@ -24,6 +23,13 @@
 
   - Телефон с ОС Android
   - Android API не ниже 21 (Jelly Bean)
+  
+## Стек технологий
+
+  - Архитектура MVVM
+  - DI - Koin
+  - Навигация - Cicerone
+  - Изображения - Glide
   
 ## Скриншоты приложения
 
