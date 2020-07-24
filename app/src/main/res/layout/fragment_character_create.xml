@@ -126,7 +126,7 @@
             android:gravity="center_vertical"
             android:paddingHorizontal="@dimen/padding_small"
             android:singleLine="true"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textAutoComplete|textAutoCorrect"
             android:textColorHint="@color/colorAccent"
             android:imeOptions="actionDone"
             android:textSize="@dimen/text_standard">

@@ -39,11 +39,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="@string/rules_create_tale"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_large"
+        android:textSize="@dimen/text_standard_header"
         android:layout_marginTop="@dimen/margin_standard"
-        app:layout_constraintTop_toBottomOf="@id/screen_header" />
+        app:layout_constraintTop_toBottomOf="@id/screen_header"
+        tools:text="Хрустальная гора" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/layout_tale"

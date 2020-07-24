@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@id/screen_header" />
 
     <ImageView
-        android:id="@+id/rv_covers"
+        android:id="@+id/iv_cover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/cover_1_small"
@@ -66,31 +66,34 @@
         android:elevation="0dp"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardPreventCornerOverlap="true"
-        app:layout_constraintBottom_toBottomOf="@id/rv_covers"
-        app:layout_constraintEnd_toEndOf="@id/rv_covers"
-        app:layout_constraintStart_toStartOf="@id/rv_covers"
-        app:layout_constraintTop_toTopOf="@id/rv_covers">
+        app:layout_constraintBottom_toBottomOf="@id/iv_cover"
+        app:layout_constraintEnd_toEndOf="@id/iv_cover"
+        app:layout_constraintStart_toStartOf="@id/iv_cover"
+        app:layout_constraintTop_toTopOf="@id/iv_cover">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:counterEnabled="true"
             android:layout_margin="@dimen/margin_xxs"
-            app:counterMaxLength="75">
+            android:textColorHint="@color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="70"
+            app:counterTextAppearance="@style/WhiteCounter">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/book_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="@dimen/margin_small"
                 android:layout_gravity="center"
+                android:padding="@dimen/margin_xs"
                 android:textSize="@dimen/text_standard"
+                android:textAlignment="center"
                 android:textColor="@color/white"
-                android:inputType="textMultiLine"
+                android:inputType="textMultiLine|textAutoComplete|textAutoCorrect"
                 android:background="@color/no_color"
                 android:maxLength="70"
-                tools:text="Сказка про Ивана-дурака и Серого Волка за границей вашего воображения, но в рамках дозволенного законом" />
+                tools:text="Сказка про Ивана-дурака и Серого Волка за границей вашего воображения,
+                но в рамках дозволенного законом" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.card.MaterialCardView>
