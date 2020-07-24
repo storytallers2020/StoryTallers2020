@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
+    android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    android:background="@drawable/ic_background_default">
+    tools:background="@drawable/ic_background_default">
 
     <ImageView
         android:id="@+id/back_button_character"
@@ -37,59 +38,48 @@
         android:id="@+id/subHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_standard"
-        android:gravity="center_horizontal"
-        android:text="@string/my_tales"
+        android:textAlignment="center"
+        android:text="@string/rules_create_tale"
         android:textColor="@color/white"
         android:textSize="@dimen/text_large"
-        app:layout_constraintBottom_toTopOf="@id/rv_books"
+        android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintTop_toBottomOf="@id/screen_header" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_books"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layout_tale"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/location_cosmos_small"
-        android:contentDescription="@string/location_2"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="0dp"
+        android:background="@drawable/background_transparent"
+        android:paddingVertical="@dimen/margin_xxs"
+        android:layout_marginTop="@dimen/margin_small"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@id/share_title"
-        app:layout_constraintTop_toBottomOf="@id/subHeader"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_book_library" />
+        app:layout_constraintTop_toBottomOf="@id/subHeader">
 
-    <ImageView
-        android:id="@+id/scroll_left_button"
-        android:layout_width="@dimen/margin_standard"
-        android:layout_height="0dp"
-        android:contentDescription="@string/arrow_back"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_arrow_left_transparent"
-        app:layout_constraintBottom_toBottomOf="@id/rv_books"
-        app:layout_constraintStart_toStartOf="@id/rv_books"
-        app:layout_constraintTop_toTopOf="@id/rv_books" />
+        <TextView
+            android:id="@+id/tv_tale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/margin_small"
+            android:paddingBottom="@dimen/margin_small"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_standard"
+            android:lineSpacingExtra="@dimen/line_spacing_extra"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/tale_sample" />
 
-    <ImageView
-        android:id="@+id/scroll_right_button"
-        android:layout_width="@dimen/margin_standard"
-        android:layout_height="0dp"
-        android:scaleType="fitXY"
-        android:contentDescription="@string/arrow_forward"
-        android:src="@drawable/ic_arrow_right_transparent"
-        app:layout_constraintBottom_toBottomOf="@id/rv_books"
-        app:layout_constraintEnd_toEndOf="@id/rv_books"
-        app:layout_constraintTop_toTopOf="@id/rv_books" />
+    </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/share_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/share"
-        android:textAllCaps="false"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/text_standard"
-        android:paddingVertical="@dimen/margin_small"
+        android:paddingTop="@dimen/text_standard"
         app:layout_constraintBottom_toTopOf="@id/share_icons" />
 
     <LinearLayout
