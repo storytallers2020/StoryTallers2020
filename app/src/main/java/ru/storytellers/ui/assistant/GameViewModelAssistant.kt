@@ -1,4 +1,9 @@
 package ru.storytellers.ui.assistant
 
-class GameViewModelAssistant {
+import ru.storytellers.model.repository.SentenceOfTaleRepository
+
+//класс для работы с базой данный и сервером
+class GameViewModelAssistant(
+    //private val sentenceOfTaleRepository: SentenceOfTaleRepository
+) {
 }
