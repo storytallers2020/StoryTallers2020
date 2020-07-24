@@ -11,7 +11,7 @@ class PlayerCreator {
     private lateinit var characterOfPlayer: Character
 
     fun createPlayer(): Player {
-        idPlayer++
+        idPlayer=getUid()
         return Player(idPlayer,namePlayer,characterOfPlayer)
     }
 
