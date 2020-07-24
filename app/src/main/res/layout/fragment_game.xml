@@ -23,7 +23,7 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@id/et_step"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/intro_text" />
+            tools:text="@string/intro_cosmos" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/game_field"
@@ -46,7 +46,9 @@
                 android:lineSpacingExtra="@dimen/line_spacing_extra"
                 android:textColor="@color/white"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/tale_sample" />
+                tools:layout_editor_absoluteX="-28dp"
+                tools:text=" В некотором царстве, в некотором государстве жил-был царь, и было у него три сына.
+                В некотором царстве, в некотором государстве жил-был царь, и было у него три сына." />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -124,14 +126,13 @@
             android:id="@+id/btn_send"
             android:layout_width="@dimen/icon_medium"
             android:layout_height="@dimen/icon_medium"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:src="@drawable/ic_send_bird"
             app:layout_constraintVertical_bias="1"
             app:layout_constraintBottom_toBottomOf="@id/et_step"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/et_step"
-            android:contentDescription="@string/send"
-            tools:visibility="visible" />
+            android:contentDescription="@string/send" />
 
         <TextView
             android:id="@+id/button_end"
@@ -141,10 +142,8 @@
             android:text="@string/end_tale"
             android:textColor="@color/yellow"
             android:textSize="@dimen/text_small"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:visibility="visible" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
