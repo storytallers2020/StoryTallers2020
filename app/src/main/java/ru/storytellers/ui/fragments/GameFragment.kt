@@ -1,13 +1,10 @@
 package ru.storytellers.ui.fragments
 
 import android.content.Context
-import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.fragment_character_create_v3.*
 import kotlinx.android.synthetic.main.fragment_game.*
-import kotlinx.android.synthetic.main.item_image_character_create.view.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
