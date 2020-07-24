@@ -14,6 +14,7 @@ class Game() {
 
     fun getCurrentPlayer(): Player {
         val playerNum = getPlayerNumByTurn(turn, players.count())
+        if (playerNum==0) return players[players.count()-1]
         return players[playerNum-1]
     }
 
@@ -23,6 +24,7 @@ class Game() {
         this.players = players
         this.level = level
     }
+    fun getTurn()=turn
 
     fun nextStep(sentenceOfTale: SentenceOfTale): Boolean {
         val res = level
