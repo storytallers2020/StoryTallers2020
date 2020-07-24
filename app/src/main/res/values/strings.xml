@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StoryTellers 2020</string>
+    <string name="app_name">Story Рукщуы 2020</string>
     <string name="auth_welcome">Welcome to\nthe Fairy Tale</string>
     <string name="auth_create_tale">Create a fairy tale</string>
     <string name="auth_help"><u>How to create a fairy tale?</u></string>
@@ -22,7 +22,8 @@
     <string name="rules">Rules</string>
     <string name="rules_create_tale">How to create a fairy tale?</string>
     <string name="choosing_cover">Choosing a cover</string>
-    <string name="choosing_cover_choose">Come up with a name and choose\n a cover for your fairy tale</string>
+    <string name="choosing_cover_choose">Choose a cover for your fairy tale</string>
+    <string name="choosing_cover_title">Come up with the title</string>
     <string name="save">Save</string>
     <string name="library">Library</string>
     <string name="my_tales">My Fairy Tales</string>
@@ -46,7 +47,7 @@
         3. Hard. The player sees only the last sentence composed by the player before him. In his turn the player must use the randomly generated mandatory word.</string>
     <string name="insert_players_name">Enter the player\'s name</string>
     <string name="choose_hero">Choose a hero</string>
-    <string name="enter_name_hint">Player\'s name and click Enter</string>
+    <string name="enter_name_hint">Name</string>
     <string name="arrow_back" translatable="false"><![CDATA[<<<]]></string>
     <string name="dots_line" translatable="false">..............</string>
     <string name="arrow_forward" translatable="false"><![CDATA[>>>]]></string>
@@ -61,6 +62,15 @@
     <string name="game_start_title">The tale is about to begin…</string>
     <string name="game_turn">"Turn for "</string>
     <string name="send">send</string>
-    <string name="intro_castle">The tales starts in a castle.</string>
-    <string name="intro_cosmos">Your tale starts in cosmos.</string>
+    <string name="intro_text">Start composing your tale…</string>
+    <string name="choose_location">Choose location</string>
+    <string name="add_new_character">Add new character +</string>
+    <string name="tale_sample" translatable="false">В некотором царстве, в некотором государстве жил-был царь, у царя было три сына. Вот дети и говорят ему:\n
+        - Милостивый батюшка! Благослови нас, мы на охоту поедем.\n
+        Отец благословил, и они поехали в разные стороны. Младший сын ездил, ездил и заплутался; выезжает на поляну, на поляне лежит палая лошадь,
+        около этой падали собралось много всяких зверей, птиц и гадов. Поднялся сокол, прилетел к царевичу, сел ему на плечо и говорит:\n
+        - Иван-царевич, раздели нам эту лошадь; лежит она здесь тридцать три года, а мы все спорим, а как поделить - не придумаем.\n
+        Царевич слез с своего доброго коня и разделил падаль: зверям - кости, птицам - мясо, кожа - гадам, а голова - муравьям.\n
+        - Спасибо, Иван-царевич! - сказал сокол, - За эту услугу можешь ты обращаться ясным соколом и муравьем всякий раз, как захочешь.
+    </string>
 </resources>

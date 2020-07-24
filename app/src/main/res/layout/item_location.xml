@@ -1,32 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/margin_xxs"
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/locationView"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent">
-
-    <ImageView
-        android:id="@+id/locationView"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/location"
-        android:scaleType="centerCrop"
-        android:src="@drawable/location_castle_small"
-        app:layout_constraintBottom_toTopOf="@id/locationDescription"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/locationDescription"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_standard"
-        app:layout_constraintTop_toBottomOf="@id/locationView"
-        tools:text="@string/location_1" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:src="@drawable/location_cosmos_small"
+    android:layout_margin="@dimen/margin_xxs"
+    android:contentDescription="@string/location"
+    android:layout_gravity="center"
+    android:adjustViewBounds="true"
+    android:scaleType="fitXY" />

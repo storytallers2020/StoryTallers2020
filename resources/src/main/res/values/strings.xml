@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    // Characters
     <string name="character_boy_name">Мальчик</string>
-    <string name="character_fairy_name">Фея</string>
     <string name="character_girl_name">Девочка</string>
-    <string name="character_knight_name">Рыцарь</string>
     <string name="character_prince_name">Принц</string>
     <string name="character_princess_name">Принцесса</string>
-    <string name="character_robot_boy_name">Робот мальчик</string>
-    <string name="character_robot_girl_name">Робт девочка</string>
-    <string name="character_space_boy_name">Космонавт мальчик</string>
-    <string name="character_space_girl_name">Космонавт девочка</string>
-    <string name="character_step_mother_name">Мачеха</string>
+    <string name="character_knight_name">Рыцарь</string>
+    <string name="character_fairy_name">Фея</string>
     <string name="character_wizard_name">Волшебник</string>
+    <string name="character_step_mother_name">Мачеха</string>
+    <string name="character_robot_boy_name">Робот</string>
+    <string name="character_robot_girl_name">Робот</string>
+    <string name="character_space_boy_name">Космонавт</string>
+    <string name="character_space_girl_name">Космонавт</string>
+
+    // Locations
     <string name="location_kingdom1_name">Королевство 1</string>
     <string name="location_kingdom2_name">Королевство 2</string>
     <string name="location_space1_name">Космос 1</string>
     <string name="location_space2_name">Космос 2</string>
+
 </resources>
