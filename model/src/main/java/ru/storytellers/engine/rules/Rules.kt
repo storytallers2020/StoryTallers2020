@@ -14,9 +14,8 @@ class Rules() {
 
     fun isSentenceCorrect(str: String): Boolean {
         rulesList.forEach {
-            if (it.isCorrect(str)) return false
+            if (!it.isCorrect(str)) return false
         }
-
         return true
     }
 }
