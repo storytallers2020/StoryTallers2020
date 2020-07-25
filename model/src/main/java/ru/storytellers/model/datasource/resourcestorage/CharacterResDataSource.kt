@@ -18,18 +18,19 @@ class CharacterResDataSource(context: Context) : ICharacterDataSource {
         ),
         Character(
             2,
-            context.getString(R.string.character_fairy_name),
-            resourceToString(context, R.drawable.ic_fairy)
-        ),
-        Character(
-            3,
             context.getString(R.string.character_girl_name),
             resourceToString(context, R.drawable.ic_girl)
         ),
         Character(
-            4,
+            3,
             context.getString(R.string.character_knight_name),
             resourceToString(context, R.drawable.ic_knight)
+        ),
+        Character(
+            4,
+
+            context.getString(R.string.character_fairy_name),
+            resourceToString(context, R.drawable.ic_fairy)
         ),
         Character(
             5,
@@ -63,13 +64,13 @@ class CharacterResDataSource(context: Context) : ICharacterDataSource {
         ),
         Character(
             11,
-            context.getString(R.string.character_step_mother_name),
-            resourceToString(context, R.drawable.ic_stepmother)
+            context.getString(R.string.character_wizard_name),
+            resourceToString(context, R.drawable.ic_wizard)
         ),
         Character(
             12,
-            context.getString(R.string.character_wizard_name),
-            resourceToString(context, R.drawable.ic_wizard)
+            context.getString(R.string.character_step_mother_name),
+            resourceToString(context, R.drawable.ic_stepmother)
         )
     )
     //endregion
