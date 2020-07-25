@@ -23,11 +23,14 @@ class GameViewModel(
     private  val listSentenceOfTale= StoryTallerApp.instance.gameStorage.getListSentenceOfTale()
     private  val levelGame= levels.getLevelById(StoryTallerApp.instance.gameStorage.getLevelGame())
     private var stringBuilder=StringBuilder()
+    private var currentPlayer: Player?=null
+    var isCorrectFlag: Boolean=true
+    private var currentSentenceOfTale: SentenceOfTale?=null
 
     private val currentPlayerLiveData = MutableLiveData<Player>()
     private val resultTextLiveData = MutableLiveData<String>()
-    private var currentPlayer: Player?=null
-    private var currentSentenceOfTale: SentenceOfTale?=null
+    private val isCorrectFlagLiveData = MutableLiveData<Boolean>()
+
 
     fun getCurrentPlayer(){
         currentPlayer=game.getCurrentPlayer()
@@ -37,14 +40,9 @@ class GameViewModel(
         levelGame?.let { game.newGame(listPlayer, it ) }
     }
 
-    fun subscribeOnCurrentPlayer(): LiveData<Player> {
-
-        return currentPlayerLiveData
-    }
-    fun subscribeOnResultText(): LiveData<String> {
-
-        return resultTextLiveData
-    }
+    fun subscribeOnCurrentPlayer()=currentPlayerLiveData
+    fun subscribeOnResultText()=resultTextLiveData
+    fun subscribeOnIsCorrectFlag()=isCorrectFlagLiveData
 
     fun createSentenceOfTale(content:String) {
         currentPlayer?.let {
@@ -65,8 +63,9 @@ class GameViewModel(
             if (it){
                 handlerCurrentSentenceOfTale()
             } else{
-                //что делаем если предложение проверку не прошло?
-                //кидаем тост пока что
+                isCorrectFlag=it
+                isCorrectFlagLiveData.value=isCorrectFlag
+
             }
         }
     }
