@@ -104,7 +104,7 @@ val gameModel = module {
     single{ SentenceOfTaleRepository(get()) }
 
     single { Game() }
-    single { GameViewModelAssistant() }
+    single { GameViewModelAssistant(get()) }
     single { GameStorage() }
     viewModel { GameViewModel(get(),get(),get()) }
 }
