@@ -13,6 +13,7 @@ import ru.storytellers.ui.assistant.GameFragmentAssistant
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
+import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.GameViewModel
 
 class GameFragment: BaseFragment<DataModel>() {
@@ -53,6 +54,7 @@ class GameFragment: BaseFragment<DataModel>() {
     private fun assignSubscribers(){
         handlerCurrentPlayerLiveData()
         handlerResultTextLiveData()
+        handlerIsCorrectSentence()
     }
 
     private fun handlerBtnSend(){
@@ -69,6 +71,13 @@ class GameFragment: BaseFragment<DataModel>() {
             player_name.text=it.name
             resourceToUri(it.character.avatarUrl)?.let {uri->
                 loadImage(uri, avatar)}
+        })
+    }
+
+    fun handlerIsCorrectSentence(){
+        model.subscribeOnIsCorrectFlag().observe(viewLifecycleOwner, Observer {
+            context?.let { context -> toastShowLong(context,"Isn`t correct sentence") }
+            model.isCorrectFlag=true
         })
     }
 
