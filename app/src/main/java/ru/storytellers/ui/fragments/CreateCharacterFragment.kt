@@ -6,9 +6,9 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_character_create.back_button_character
-import kotlinx.android.synthetic.main.fragment_character_create.btn_next
-import kotlinx.android.synthetic.main.fragment_character_create.*
+import kotlinx.android.synthetic.main.fragment_character_create_v3.back_button_character
+import kotlinx.android.synthetic.main.fragment_character_create_v3.btn_next
+import kotlinx.android.synthetic.main.fragment_character_create_v3.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -27,7 +27,7 @@ class CreateCharacterFragment(): BaseFragment<DataModel>() {
     private lateinit var characterAdapter: ChooseCharacterAdapter
     private lateinit var playerAdapter: PlayerAdapter
     private val playerCreator: PlayerCreator by inject()
-    override val layoutRes= R.layout.fragment_character_create
+    override val layoutRes= R.layout.fragment_character_create_v3
     private var imm: Any?= null
     companion object {
         fun newInstance() = CreateCharacterFragment()
@@ -143,14 +143,14 @@ class CreateCharacterFragment(): BaseFragment<DataModel>() {
             adapter=characterAdapter
             makeInvisible()
         }
-//        player_list_rv.adapter=playerAdapter
+        player_list_rv.adapter=playerAdapter
     }
 
     private fun makeInvisible() {
-//        container_rv_chars.visibility = View.GONE
+        container_rv_chars.visibility = View.GONE
     }
     private fun makeVisible() {
-//        container_rv_chars.visibility = View.VISIBLE
+        container_rv_chars.visibility = View.VISIBLE
     }
 
 }
