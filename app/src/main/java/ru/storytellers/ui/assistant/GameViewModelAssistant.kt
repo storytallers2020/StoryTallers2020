@@ -4,6 +4,7 @@ import ru.storytellers.model.repository.SentenceOfTaleRepository
 
 //класс для работы с базой данный и сервером
 class GameViewModelAssistant(
-    //private val sentenceOfTaleRepository: SentenceOfTaleRepository
+    private val sentenceOfTaleRepository: SentenceOfTaleRepository
 ) {
+    
 }
