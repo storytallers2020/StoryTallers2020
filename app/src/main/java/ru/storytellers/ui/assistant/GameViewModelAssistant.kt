@@ -6,5 +6,5 @@ import ru.storytellers.model.repository.SentenceOfTaleRepository
 class GameViewModelAssistant(
     private val sentenceOfTaleRepository: SentenceOfTaleRepository
 ) {
-    
+
 }
