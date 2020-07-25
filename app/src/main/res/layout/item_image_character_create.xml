@@ -8,6 +8,7 @@
     android:layout_gravity="center"
     android:clickable="true"
     android:focusable="true"
+    tools:background="@color/blueDark"
     tools:ignore="UseCompoundDrawables">
 
     <ImageView

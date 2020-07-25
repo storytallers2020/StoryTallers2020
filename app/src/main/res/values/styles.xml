@@ -34,9 +34,4 @@
         <item name="android:backgroundTint">@color/color_states_button</item>
     </style>
 
-    <style name="WhiteCounter" parent="TextAppearance.Design.Counter">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/text_tip</item>
-    </style>
-
 </resources>

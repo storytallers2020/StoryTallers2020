@@ -5,12 +5,14 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_character_create_v3.back_button_character
 import kotlinx.android.synthetic.main.fragment_character_create_v3.btn_next
 import kotlinx.android.synthetic.main.fragment_character_create_v3.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Player

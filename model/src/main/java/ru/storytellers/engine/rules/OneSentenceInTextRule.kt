@@ -14,5 +14,4 @@ class OneSentenceInTextRule : IRule {
             }
             return true
     }
-
 }

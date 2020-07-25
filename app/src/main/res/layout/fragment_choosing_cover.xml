@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -34,7 +33,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/subHeader"
         android:layout_width="match_parent"
@@ -43,22 +41,84 @@
         android:text="@string/choosing_cover_choose"
         android:textColor="@color/white"
         android:textSize="@dimen/text_standard"
-        android:layout_marginTop="@dimen/margin_large"
-        app:layout_constraintTop_toBottomOf="@id/screen_header" />
+        android:layout_marginVertical="@dimen/margin_large"
+        app:layout_constraintTop_toBottomOf="@id/screen_header"
+        app:layout_constraintBottom_toTopOf="@id/rv_covers"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_covers"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/location_cosmos_small"
-        android:layout_marginTop="@dimen/margin_small"
         android:contentDescription="@string/royal_palace"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_large"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/subHeader"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:spanCount="2"
-        tools:itemCount="9"
+        tools:itemCount="2"
         tools:listitem="@layout/item_image_cover" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparent_4D"
+        android:layout_margin="@dimen/margin_xl"
+        android:elevation="0dp"
+        app:cardCornerRadius="@dimen/card_corner_radius_small"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintBottom_toBottomOf="@id/rv_covers"
+        app:layout_constraintEnd_toEndOf="@id/rv_covers"
+        app:layout_constraintStart_toStartOf="@id/rv_covers"
+        app:layout_constraintTop_toTopOf="@id/rv_covers">
+
+        <EditText
+            android:id="@+id/book_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_standard"
+            android:textColor="@color/white"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:background="@color/no_color"
+            android:maxLength="100"
+            tools:ignore="LabelFor"
+            tools:text="Сказка про Ивана-дурака и Серого Волка за границей вашего воображения, но в рамках дозволенного законом" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/scroll_left_button"
+        android:layout_width="@dimen/margin_standard"
+        android:layout_height="0dp"
+        android:contentDescription="@string/arrow_back"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_arrow_left_transparent"
+        app:layout_constraintBottom_toBottomOf="@id/rv_covers"
+        app:layout_constraintStart_toStartOf="@id/rv_covers"
+        app:layout_constraintTop_toTopOf="@id/rv_covers" />
+
+    <ImageView
+        android:id="@+id/scroll_right_button"
+        android:layout_width="@dimen/margin_standard"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/arrow_forward"
+        android:src="@drawable/ic_arrow_right_transparent"
+        app:layout_constraintBottom_toBottomOf="@id/rv_covers"
+        app:layout_constraintEnd_toEndOf="@id/rv_covers"
+        app:layout_constraintTop_toTopOf="@id/rv_covers" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:enabled="false"
+        android:layout_marginHorizontal="@dimen/padding_layout_standard"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

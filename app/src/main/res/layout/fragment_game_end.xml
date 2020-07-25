@@ -1,58 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="@dimen/padding_layout_standard"
-    android:paddingHorizontal="@dimen/padding_layout_standard"
-    android:paddingBottom="@dimen/padding_layout_bottom"
-    tools:background="@drawable/ic_background_default">
+    android:fillViewport="true"
+    android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/layout_tale"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/background_transparent"
-        android:paddingVertical="@dimen/margin_xxs"
-        android:layout_marginTop="@dimen/margin_small"
-        android:fillViewport="true"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@id/tv_resume"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_background_default">
 
-        <TextView
-            android:id="@+id/tv_tale"
+        <FrameLayout
+            android:id="@+id/layout_tale"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/margin_small"
-            android:paddingBottom="@dimen/margin_small"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_standard"
-            android:lineSpacingExtra="@dimen/line_spacing_extra"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="50dp"
+            android:background="#4DFFFFFF"
+            app:layout_constrainedHeight="true"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/tale_sample" />
+            app:layout_constraintVertical_bias="0">
 
-    </androidx.core.widget.NestedScrollView>
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Тест"
+                android:textSize="16sp"
+                android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/tv_resume"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/game_resume"
-        android:layout_marginVertical="@dimen/margin_standard"
-        android:textColor="@color/yellow"
-        android:textSize="@dimen/text_small"
-        app:layout_constraintBottom_toTopOf="@id/btn_select_cover"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_tale"/>
+        </FrameLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_select_cover"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/select_cover"
-        android:layout_marginTop="@dimen/margin_standard"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <TextView
+            android:id="@+id/tv_resume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/game_resume"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/yellow"
+            app:layout_constraintVertical_bias="1"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_select_cover"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_tale" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_select_cover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="@color/yellow"
+            android:text="@string/select_cover"
+            android:textAllCaps="false"
+            android:textColor="@color/blueDark"
+            app:cornerRadius="30dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

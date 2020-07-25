@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/margin_xxs"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    tools:background="@color/blueDark">
 
     <ImageView
         android:id="@+id/book_cover_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/location"
         android:adjustViewBounds="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/cover_1_small" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:src="@drawable/cover_1"/>
 
     <TextView
         android:id="@+id/book_name"

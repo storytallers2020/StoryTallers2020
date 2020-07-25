@@ -40,11 +40,11 @@ class LocationAdapter(val clickListener: OnListItemClickListener) :
     override fun getItemCount() = locationList.size
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        private val textView: TextView = itemView.findViewById(R.id.locationDescription)
+        private val textView: TextView = itemView.findViewById(R.id.locationDescription)
         private val imageView: ImageView = itemView.findViewById(R.id.locationView)
 
         fun bind(location: Location) {
-//            textView.text = location.name
+            textView.text = location.name
             resourceToUri(location.imageUrl)?.let {
                 loadImage(it, itemView.locationView)
             }
