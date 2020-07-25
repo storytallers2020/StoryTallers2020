@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/padding_layout_standard"
+    android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingBottom="@dimen/padding_layout_bottom"
+    tools:background="@drawable/ic_background_default">
+
+    <ImageView
+        android:id="@+id/back_button_character"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:src="@drawable/ic_arrow_back"
+        android:layout_marginStart="@dimen/margin_xs"
+        android:contentDescription="@string/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
+
+    <TextView
+        android:id="@+id/screen_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/library"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_standard_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/subHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_standard_header"
+        android:layout_marginTop="@dimen/margin_standard"
+        app:layout_constraintTop_toBottomOf="@id/screen_header"
+        tools:text="Хрустальная гора" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layout_tale"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/background_transparent"
+        android:paddingVertical="@dimen/margin_xxs"
+        android:layout_marginTop="@dimen/margin_small"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/share_title"
+        app:layout_constraintTop_toBottomOf="@id/subHeader">
+
+        <TextView
+            android:id="@+id/tv_tale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/margin_small"
+            android:paddingBottom="@dimen/margin_small"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_standard"
+            android:lineSpacingExtra="@dimen/line_spacing_extra"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/tale_sample" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/share_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/share"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_standard"
+        android:paddingTop="@dimen/text_standard"
+        app:layout_constraintBottom_toTopOf="@id/share_icons" />
+
+    <LinearLayout
+        android:id="@+id/share_icons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:src="@drawable/share_instagram"
+            android:contentDescription="@string/char_icon" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:src="@drawable/share_whatsapp"
+            android:contentDescription="@string/char_icon" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:src="@drawable/share_telegram"
+            android:contentDescription="@string/char_icon" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

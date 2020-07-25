@@ -23,20 +23,20 @@
     <string name="rules">Правила</string>
     <string name="rules_create_tale">Как создать сказку?</string>
     <string name="choosing_cover">Выбор обложки</string>
-    <string name="choosing_cover_choose">Придумайте название и выберите\n обложку для своей сказки</string>
+    <string name="choosing_cover_choose">Выберите  обложку для своей сказки</string>
+    <string name="choosing_cover_title">Придумайте название сказки</string>
     <string name="save">Сохранить</string>
     <string name="library">Библиотека</string>
-    <string name="end_tale">Закончить сказку</string>
-    <string name="game_resume">Продолжить игру</string>
+    <string name="end_tale"><u>Закончить сказку</u></string>
+    <string name="game_resume"><u>Продолжить игру</u></string>
     <string name="game_hint_location">Game hint location</string>
-    <string name="select_cover">Выбор обложки</string>
+    <string name="select_cover">Выбрать обложку</string>
     <string name="my_tales">Мои сказки</string>
     <string name="share">Поделиться:</string>
     <string name="rules_game">- В игру может играть от 2 до 8 человек.\n- Каждый игрок ходит строго по очереди.\n- Очередность определяется в самом\nначале игры и соответствует порядку\nнаписания имени игрока при\nего добавлении в игру.\n- Игрок может придумать только одно предложение.\n- Ограничение количества символов в предложении - 60 символов.\n- Завершить игру может любой игрок\nпосле того как каждый из участников\nигры сделал хотя бы по 1 ходу.\n\nСуществует три уровня сложности игры:\n1. Лёгкий. Все ранее сочинённые предложения видны всем участникам игры в любой момент времени.\n2. Средний. Игрок видит только последнее\nпредложение игрока который ходил перед ним.\n3. Сложный. Игрок видит только последнее\nпредложение игрока который ходил перед ним.\nВ своём предложении игрок должен\nиспользовать обязательное слово которое\nгенерируется игрой в случайном порядке.\n</string>
     <string name="game_hint">Каждый игрок ходит\nстрого по очереди и\nможет придумать\nтолько одно\nпредложение</string>
-    <string name="insert_players_name">Введите имя</string>
     <string name="choose_hero">Выберите героя</string>
-    <string name="enter_name_hint">Ввeдите имя и нажмите Enter</string>
+    <string name="enter_name_hint">Введите имя</string>
     <string name="auth_create_library">Библиотека моих сказок</string>
     <string name="maximum_players_reached">Максимум 8 игроков.</string>
     <string name="edit">изменить</string>
@@ -46,8 +46,9 @@
     <string name="game_start_title">Сказка начинается…</string>
     <string name="game_turn">Ходит</string>
     <string name="send">отправить</string>
-    <string name="intro_castle">Начинай сказку.\n Не забывай, что твой герой \n в замке.</string>
-    <string name="intro_cosmos">Начинай сказку.\n Не забывай, что твой герой \n в космосе.</string>
+    <string name="intro_text">Начинай сказку!</string>
+    <string name="choose_location">Выбрать локацию</string>
+    <string name="add_new_character"><u>Добавить игрока +</u></string>
 
 
 </resources>

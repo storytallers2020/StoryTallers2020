@@ -7,6 +7,7 @@
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
+    android:layout_gravity="center_horizontal"
     android:background="@drawable/ic_background_default">
 
     <ImageView
@@ -38,7 +39,6 @@
         android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/padding_layout_standard"
         android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintTop_toBottomOf="@id/screen_header">
 
@@ -111,7 +111,6 @@
         android:layout_height="wrap_content"
         android:text="@string/tale_begins"
         android:textColor="@color/white"
-        android:layout_marginHorizontal="@dimen/padding_layout_standard"
         android:layout_marginTop="@dimen/margin_standard"
         android:textSize="@dimen/text_standard"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,17 +119,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_covers"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginVertical="@dimen/margin_small"
-        android:src="@drawable/location_cosmos_small"
-        android:contentDescription="@string/royal_palace"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/subHeader"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0"
         app:spanCount="2"
-        tools:itemCount="4"
+        tools:itemCount="7"
         tools:listitem="@layout/item_location" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
