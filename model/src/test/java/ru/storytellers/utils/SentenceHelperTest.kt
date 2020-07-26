@@ -1,10 +1,7 @@
 package ru.storytellers.utils
 
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
-import ru.storytellers.engine.rules.IRule
-import ru.storytellers.engine.rules.OneSentenceInTextRule
 
 class SentenceHelperTest {
 
@@ -55,24 +52,10 @@ class SentenceHelperTest {
     }
 
     @Test
-    fun `collectSentence Test`() {
-        val textList = listOf<String>(
-            "text1.",
-            "text2.",
-            "text3."
-        )
-        val text = textList.collectSentence()
-        val expectedText = "text1.\r\ntext2.\r\ntext3."
-
-        Assert.assertEquals(expectedText, text)
-    }
-
-    @Test
-    fun `addSpaceAfterPunctuationSymbol Test`() {
-        val text = "text1.text2.text3."
-        val expectedText = "text1. text2. text3. "
-
-        val res = text.addSpaceAfterPunctuationSymbol()
+    fun `there are dot in the end of sentence Test`() {
+        val text = "My text."
+        val expectedText = "My text."
+        val res = text.addDotIfNeed()
 
         Assert.assertEquals(expectedText, res)
     }

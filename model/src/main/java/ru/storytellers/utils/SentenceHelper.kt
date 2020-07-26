@@ -2,12 +2,13 @@ package ru.storytellers.utils
 
 import java.lang.StringBuilder
 
+// Вызвать перед сохранением предложения, для убирания лишних пробелов
 fun String.trimSentenceSpace() = this.trim()
 
 fun String.isLastPunctuationSymbol() =
-    this.last().isPunctuationSymbol()
+    this.last().isEndSentencePunctuationSymbol()
 
-fun Char.isPunctuationSymbol() =
+fun Char.isEndSentencePunctuationSymbol() =
     when (this) {
         '.' -> true
         '!' -> true
@@ -15,32 +16,9 @@ fun Char.isPunctuationSymbol() =
         else -> false
     }
 
+// Вызвать перед сохранением предложения, для добавления точки, если игрок ничего не поставил в конце
 fun String.addDotIfNeed(): String =
     if (this.isLastPunctuationSymbol()) this
     else "$this."
-
-fun List<String>.collectSentence(): String {
-    var text = ""
-    this.forEachIndexed() { index, sentence ->
-        text +=
-            if (index < this.count() - 1) "$sentence\r\n"
-            else sentence
-    }
-    return text
-}
-
-fun String.addSpaceAfterPunctuationSymbol(): String {
-    val newStr = StringBuilder()
-    var index = 0
-    while (index < this.count()) {
-        if (this[index].isPunctuationSymbol()) {
-            newStr.append("${this[index]} ")
-        } else {
-            newStr.append(this[index])
-        }
-        index++
-    }
-    return newStr.toString()
-}
 
 
