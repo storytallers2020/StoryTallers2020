@@ -14,16 +14,18 @@ import ru.storytellers.engine.rules.NoEmptySentenceRule
 import ru.storytellers.engine.rules.OneSentenceInTextRule
 import ru.storytellers.engine.rules.Rules
 import ru.storytellers.model.datasource.ILocationDataSource
+import ru.storytellers.model.datasource.IPlayerDataSource
+import ru.storytellers.model.datasource.ISentenceOfTaleDataSource
 import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
+import ru.storytellers.model.datasource.room.PlayerDataSource
+import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
 import ru.storytellers.viewmodels.CreateCharacterViewModel
 import ru.storytellers.viewmodels.LevelViewModel
 import ru.storytellers.viewmodels.LocationViewModel
 import ru.storytellers.viewmodels.StartViewModel
 import ru.storytellers.model.entity.room.db.AppDatabase
-import ru.storytellers.model.repository.CharacterRepository
-import ru.storytellers.model.repository.ICharacterRepository
-import ru.storytellers.model.repository.ILocationRepository
-import ru.storytellers.model.repository.LocationRepository
+import ru.storytellers.model.repository.*
+import ru.storytellers.ui.assistant.GameViewModelAssistant
 import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
@@ -96,7 +98,13 @@ val gameModel = module {
         levels
     }
 
+
+    single<IPlayerDataSource>{ PlayerDataSource(get(),get()) }
+    single<ISentenceOfTaleDataSource>{ SentenceOfTaleDataSource(get(),get()) }
+    single{ SentenceOfTaleRepository(get()) }
+
     single { Game() }
+    single { GameViewModelAssistant(get()) }
     single { GameStorage() }
-    viewModel { GameViewModel(get(),get()) }
+    viewModel { GameViewModel(get(),get(),get()) }
 }
