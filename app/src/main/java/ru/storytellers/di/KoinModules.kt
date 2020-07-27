@@ -41,7 +41,9 @@ private val loadModules by lazy {
             levelModel,
             characterModel,
             locationModel,
-            gameModel
+            gameModel,
+            gameEndModule,
+            selectCoverModule
         )
     )
 }
@@ -83,6 +85,15 @@ val databaseModel = module {
     single { get<AppDatabase>().userDao }
 }
 
+val gameEndModule = module {
+    viewModel { GameEndViewModel() }
+}
+val selectCoverModule = module {
+    viewModel { SelectCoverViewModel() }
+}
+
+
+
 val gameModel = module {
     single {
         val rule = Rules()
@@ -104,7 +115,7 @@ val gameModel = module {
     single{ SentenceOfTaleRepository(get()) }
 
     single { Game() }
-    single { GameViewModelAssistant(get()) }
+    //single { GameViewModelAssistant(get()) }
     single { GameStorage() }
-    viewModel { GameViewModel(get(),get(),get()) }
+    viewModel { GameViewModel(get(),get()) }
 }
