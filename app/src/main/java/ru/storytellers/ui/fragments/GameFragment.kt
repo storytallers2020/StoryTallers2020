@@ -24,6 +24,7 @@ class GameFragment: BaseFragment<DataModel>() {
     var inputMethodManager: Any?= null
     private lateinit var textWatcher: TextWatcher
     var textSentenceOfTale: String?=null
+    private var textResultStoryTaller:String?=null
 
     companion object {
         fun newInstance() = GameFragment()
@@ -83,13 +84,15 @@ class GameFragment: BaseFragment<DataModel>() {
 
     private fun handlerResultTextLiveData(){
         model.subscribeOnResultText().observe(viewLifecycleOwner, Observer {
+            textResultStoryTaller=it
             story_body.text=it
         })
     }
 
 
     private fun navigateToGameEndScreen() {
-        router.navigateTo(Screens.GameEndScreen())
+        textResultStoryTaller?.let { router.navigateTo(Screens.GameEndScreen(it)) }
+        val asghj="dsf"
     }
 
 }
