@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    tools:background="@drawable/ic_background_default">
+    android:background="@drawable/ic_background_default">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/layout_tale"
