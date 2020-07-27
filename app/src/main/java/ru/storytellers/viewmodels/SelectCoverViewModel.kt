@@ -1,4 +1,7 @@
 package ru.storytellers.viewmodels
 
-class SelectCoverViewModel {
+import ru.storytellers.model.DataModel
+import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
+
+class SelectCoverViewModel: BaseViewModel<DataModel>() {
 }
