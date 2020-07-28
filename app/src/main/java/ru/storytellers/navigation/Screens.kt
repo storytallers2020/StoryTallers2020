@@ -38,5 +38,9 @@ sealed class Screens {
         override fun getFragment() = SelectCoverFragment.newInstance()
     }
 
+    class TitleAndSaveStoryScreen : SupportAppScreen() {
+        override fun getFragment() = TitleAndSaveStoryFragment.newInstance()
+    }
+
 
 }
