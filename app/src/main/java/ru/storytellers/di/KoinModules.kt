@@ -13,6 +13,7 @@ import ru.storytellers.engine.rules.NoEmptySentenceRule
 import ru.storytellers.engine.rules.OneSentenceInTextRule
 import ru.storytellers.engine.rules.Rules
 import ru.storytellers.model.datasource.*
+import ru.storytellers.model.datasource.resourcestorage.CoverResDataSource
 import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
 import ru.storytellers.model.datasource.room.PlayerDataSource
 import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
@@ -88,6 +89,8 @@ val gameEndModule = module {
     viewModel { GameEndViewModel() }
 }
 val selectCoverModule = module {
+    single<ICoverDataSource>{CoverResDataSource(get())}
+    single<ICoverRepository>{ CoverRepository(get()) }
     viewModel { SelectCoverViewModel(get()) }
 }
 
