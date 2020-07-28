@@ -20,5 +20,10 @@
     <string name="location_kingdom2_name">Королевство 2</string>
     <string name="location_space1_name">Космос 1</string>
     <string name="location_space2_name">Космос 2</string>
+    <string name="cover1_name">Перышки</string>
+    <string name="cover2_name">Болото</string>
+    <string name="cover3_name">Розочки</string>
+    <string name="cover4_name">Узоры</string>
+    <string name="cover5_name">Планеты</string>
 
 </resources>
