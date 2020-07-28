@@ -1,5 +1,6 @@
 package ru.storytellers.engine
 
+import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
@@ -9,7 +10,7 @@ class GameStorage {
      private var levelGame:Int=0
      private var locationGame:Location?=null
      private val listSentenceOfTale= mutableListOf<SentenceOfTale?>()
-     private var coverStoryTaller:Location?=null
+     private var coverStoryTaller:Cover?=null
      private var titleStoryTaller:String?=null
 
 
@@ -21,7 +22,7 @@ class GameStorage {
           titleStoryTaller=titleStory
      }
      fun getCoverStoryTaller()=coverStoryTaller
-     fun setCoverStoryTaller(coverStory:Location){
+     fun setCoverStoryTaller(coverStory:Cover){
           coverStoryTaller=coverStory
      }
 
