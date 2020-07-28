@@ -4,7 +4,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_choosing_title.*
-import kotlinx.android.synthetic.main.item_image_cover.view.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -27,6 +26,7 @@ class TitleAndSaveStoryFragment:BaseFragment<DataModel>() {
         override fun afterTextChanged(text: Editable) {
             if(text.toString().length>1){
                 model.setTitleStory(text.toString())
+                btn_next.isEnabled=true
             } else {
                 context?.let { toastShowLong(it,"Enter title!") }
             }
@@ -37,6 +37,7 @@ class TitleAndSaveStoryFragment:BaseFragment<DataModel>() {
     override fun init() {
         iniViewModel()
         book_name.addTextChangedListener(textWatcher)
+        back_button_character.setOnClickListener { backClicked() }
     }
 
     override fun iniViewModel() {
