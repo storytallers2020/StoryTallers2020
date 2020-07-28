@@ -5,7 +5,6 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 import ru.storytellers.engine.GameStorage
-import ru.storytellers.model.datasource.ICharacterDataSource
 import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
 import ru.storytellers.engine.Game
 import ru.storytellers.engine.level.Level
@@ -13,19 +12,18 @@ import ru.storytellers.engine.level.Levels
 import ru.storytellers.engine.rules.NoEmptySentenceRule
 import ru.storytellers.engine.rules.OneSentenceInTextRule
 import ru.storytellers.engine.rules.Rules
-import ru.storytellers.model.datasource.ILocationDataSource
-import ru.storytellers.model.datasource.IPlayerDataSource
-import ru.storytellers.model.datasource.ISentenceOfTaleDataSource
+import ru.storytellers.model.datasource.*
 import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
 import ru.storytellers.model.datasource.room.PlayerDataSource
 import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
+import ru.storytellers.model.datasource.room.StoryDataSource
 import ru.storytellers.viewmodels.CreateCharacterViewModel
 import ru.storytellers.viewmodels.LevelViewModel
 import ru.storytellers.viewmodels.LocationViewModel
 import ru.storytellers.viewmodels.StartViewModel
 import ru.storytellers.model.entity.room.db.AppDatabase
 import ru.storytellers.model.repository.*
-import ru.storytellers.ui.assistant.GameViewModelAssistant
+import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
 import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
@@ -43,7 +41,8 @@ private val loadModules by lazy {
             locationModel,
             gameModel,
             gameEndModule,
-            selectCoverModule
+            selectCoverModule,
+            titleAndSaveModule
         )
     )
 }
@@ -89,9 +88,15 @@ val gameEndModule = module {
     viewModel { GameEndViewModel() }
 }
 val selectCoverModule = module {
-    viewModel { SelectCoverViewModel() }
+    viewModel { SelectCoverViewModel(get()) }
 }
 
+val titleAndSaveModule = module {
+    single<IStoryDataSource>{ StoryDataSource(get(),get()) }
+    single<IStoryRepository>{ StoryRepository(get()) }
+    single { TitleAndSaveModelAssistant(get()) }
+    viewModel { TitleAndSaveStoryViewModel(get()) }
+}
 
 
 val gameModel = module {
@@ -115,7 +120,6 @@ val gameModel = module {
     single{ SentenceOfTaleRepository(get()) }
 
     single { Game() }
-    //single { GameViewModelAssistant(get()) }
     single { GameStorage() }
     viewModel { GameViewModel(get(),get()) }
 }
