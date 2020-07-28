@@ -1,6 +1,5 @@
 package ru.storytellers.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.engine.Game
@@ -9,7 +8,6 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.ContentTypeEnum
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
-import ru.storytellers.ui.assistant.GameViewModelAssistant
 import ru.storytellers.utils.addDotIfNeed
 import ru.storytellers.utils.collectSentence
 import ru.storytellers.utils.getUid
@@ -47,17 +45,17 @@ class GameViewModel(
     fun subscribeOnIsCorrectFlag()=isCorrectFlagLiveData
 
     fun createSentenceOfTale(content:String) {
-        content.apply {
-            trimSentenceSpace()
-            addDotIfNeed()
-        }
+        val sentence = content
+            .trimSentenceSpace()
+            .addDotIfNeed()
+
 
         currentPlayer?.let {
             SentenceOfTale(
                 getUid(),
                 it,
                 game.getTurn(),
-                content,
+                sentence,
                 ContentTypeEnum.TEXT
             )
         }.let { currentSentenceOfTale = it }
