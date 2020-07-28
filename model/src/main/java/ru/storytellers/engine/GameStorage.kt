@@ -9,10 +9,21 @@ class GameStorage {
      private var levelGame:Int=0
      private var locationGame:Location?=null
      private val listSentenceOfTale= mutableListOf<SentenceOfTale?>()
+     private var coverStoryTaller:Location?=null
+     private var titleStoryTaller:String?=null
 
 
 
 
+
+     fun getTitleStory()=titleStoryTaller
+     fun setTitleStory(titleStory:String){
+          titleStoryTaller=titleStory
+     }
+     fun getCoverStoryTaller()=coverStoryTaller
+     fun setCoverStoryTaller(coverStory:Location){
+          coverStoryTaller=coverStory
+     }
 
      fun getListPlayers()=listPlayers
      fun getListSentenceOfTale()=listSentenceOfTale
