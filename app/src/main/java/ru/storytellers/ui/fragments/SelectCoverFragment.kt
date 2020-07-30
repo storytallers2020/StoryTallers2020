@@ -4,7 +4,6 @@ import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_choosing_cover.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
-import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Cover
 import ru.storytellers.navigation.Screens
@@ -22,7 +21,7 @@ class SelectCoverFragment: BaseFragment<DataModel>() {
     }
     private val onListItemClickListener = object : CoverAdapter.OnListItemClickListener {
         override fun onItemClick(cover: Cover) {
-            StoryTallerApp.instance.gameStorage.setCoverStoryTaller(cover)
+            model.setCoverStory(cover)
             Timber.d(cover.fieldsToLogString())
             router.navigateTo(Screens.TitleAndSaveStoryScreen())
         }
@@ -30,6 +29,7 @@ class SelectCoverFragment: BaseFragment<DataModel>() {
     private val coverAdapter: CoverAdapter by lazy { CoverAdapter(onListItemClickListener) }
 
     override fun init() {
+        back_button_character.setOnClickListener { backClicked() }
         initRecycler()
         iniViewModel()
     }
