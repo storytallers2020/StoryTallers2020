@@ -1,5 +1,6 @@
 package ru.storytellers.viewmodels
 
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.engine.Game
@@ -8,10 +9,7 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.ContentTypeEnum
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
-import ru.storytellers.utils.addDotIfNeed
-import ru.storytellers.utils.collectSentence
-import ru.storytellers.utils.getUid
-import ru.storytellers.utils.trimSentenceSpace
+import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameViewModel(
@@ -30,6 +28,7 @@ class GameViewModel(
     private val currentPlayerLiveData = MutableLiveData<Player>()
     private val resultTextLiveData = MutableLiveData<String>()
     private val isCorrectFlagLiveData = MutableLiveData<Boolean>()
+    private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
 
 
     fun getCurrentPlayer(){
@@ -39,10 +38,19 @@ class GameViewModel(
     fun createNewGame(){
         levelGame?.let { game.newGame(listPlayer, it ) }
     }
+    fun getUriBackgroundImage(){
+        StoryTallerApp
+            .instance
+            .gameStorage
+            .getLocationGame()?.
+            imageUrl?.
+            let { uriBackgroundImageLiveData.value= resourceToUri(it) }
+    }
 
     fun subscribeOnCurrentPlayer()=currentPlayerLiveData
     fun subscribeOnResultText()=resultTextLiveData
     fun subscribeOnIsCorrectFlag()=isCorrectFlagLiveData
+    fun subscribeOnUriBackgroundImage()=uriBackgroundImageLiveData
 
     fun createSentenceOfTale(content:String) {
         val sentence = content
