@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
 import ru.storytellers.navigation.Screens
@@ -20,6 +21,7 @@ class LocationFragment : BaseFragment<DataModel>() {
 
     private val onListItemClickListener = object : LocationAdapter.OnListItemClickListener {
         override fun onItemClick(location: Location) {
+            StoryTallerApp.instance.gameStorage.setLocationGame(location)
             Timber.d(location.fieldsToLogString())
             router.navigateTo(Screens.GameScreen())
         }
