@@ -13,6 +13,7 @@ import ru.storytellers.ui.assistant.GameFragmentAssistant
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
+import ru.storytellers.utils.setBackgroundImage
 import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.GameViewModel
 
@@ -35,12 +36,12 @@ class GameFragment: BaseFragment<DataModel>() {
         return true
     }
 
-    override fun iniViewModel() {
-    }
+    override fun iniViewModel() {}
 
     override fun init() {
         model.createNewGame()
         model.getCurrentPlayer()
+        model.getUriBackgroundImage()
 
         textWatcher=assistantFragment.getTextWatcher()
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
@@ -56,6 +57,7 @@ class GameFragment: BaseFragment<DataModel>() {
         handlerCurrentPlayerLiveData()
         handlerResultTextLiveData()
         handlerIsCorrectSentence()
+        handlerUriBackgroundImage()
     }
 
     private fun handlerBtnSend(){
@@ -75,7 +77,7 @@ class GameFragment: BaseFragment<DataModel>() {
         })
     }
 
-    fun handlerIsCorrectSentence(){
+    private fun handlerIsCorrectSentence(){
         model.subscribeOnIsCorrectFlag().observe(viewLifecycleOwner, Observer {
             context?.let { context -> toastShowLong(context,"Isn`t correct sentence") }
             model.isCorrectFlag=true
@@ -86,6 +88,11 @@ class GameFragment: BaseFragment<DataModel>() {
         model.subscribeOnResultText().observe(viewLifecycleOwner, Observer {
             textResultStoryTaller=it
             story_body.text=it
+        })
+    }
+    private fun handlerUriBackgroundImage(){
+        model.subscribeOnUriBackgroundImage().observe(viewLifecycleOwner, Observer {
+            setBackgroundImage(it, root_element_game_cl)
         })
     }
 
