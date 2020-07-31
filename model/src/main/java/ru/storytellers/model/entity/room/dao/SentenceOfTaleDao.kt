@@ -22,7 +22,10 @@ interface SentenceOfTaleDao {
     //region Insert
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(sentenceId: RoomSentenceOfTale)
+    fun insert(sentence: RoomSentenceOfTale)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertRange(sentenceList: List<RoomSentenceOfTale>)
 
     //endregion Insert
 
