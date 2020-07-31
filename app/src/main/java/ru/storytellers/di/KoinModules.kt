@@ -95,7 +95,7 @@ val selectCoverModule = module {
 }
 
 val titleAndSaveModule = module {
-    single<IStoryDataSource>{ StoryDataSource(get(),get()) }
+    single<IStoryDataSource>{ StoryDataSource(get(),get(), get(), get()) }
     single<IStoryRepository>{ StoryRepository(get()) }
     single { TitleAndSaveModelAssistant(get()) }
     viewModel { TitleAndSaveStoryViewModel(get()) }
@@ -109,6 +109,7 @@ val gameModel = module {
         rule.addRule(OneSentenceInTextRule())
         rule
     }
+
     single {
         val levels = Levels()
         levels.addLevel(Level(0, get()))
@@ -116,7 +117,6 @@ val gameModel = module {
         levels.addLevel(Level(2, get()))
         levels
     }
-
 
     single<IPlayerDataSource>{ PlayerDataSource(get(),get()) }
     single<ISentenceOfTaleDataSource>{ SentenceOfTaleDataSource(get(),get()) }
