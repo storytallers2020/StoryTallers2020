@@ -77,31 +77,32 @@ class StoryDataSource(
 
         Single.create { emitter ->
             database.storyDao.getStoryById(storyId)?.let { roomStory ->
-                emitter.onSuccess(mapStory(roomStory))
+                mapStory(roomStory).flatMap {story ->
+                    Single.fromCallable {  emitter.onSuccess(story) }
+                }
             } ?: let {
                 emitter.onError(RuntimeException("No such story in database"))
             }
         }
 
-    private fun mapStory(roomStory: RoomStory): @NonNull Story {
+    private fun mapStory(roomStory: RoomStory): @NonNull Single<Story> {
         val locationSingle = locationDataSource.getLocationById(roomStory.locationId)
         val sentenceSingle = sentenceOfTaleDataSource.getAllStorySentence(roomStory.id)
 
-//        return Single.zip(
-//            locationSingle,
-//            sentenceSingle,
-//            BiFunction<Location, List<SentenceOfTale>, Story> { location, sentences ->
-//                Story(
-//                    roomStory.id,
-//                    roomStory.name,
-//                    roomStory.authors,
-//                    roomStory.coverUrl,
-//                    location,
-//                    sentences
-//                )
-//            }
-//        )
-        return Story(0, "", "", "", null, null)
+        return Single.zip(
+            locationSingle,
+            sentenceSingle,
+            BiFunction<Location, List<SentenceOfTale>, Story> { location, sentences ->
+                Story(
+                    roomStory.id,
+                    roomStory.name,
+                    roomStory.authors,
+                    roomStory.coverUrl,
+                    location,
+                    sentences
+                )
+            }
+        )
     }
 
     override fun getAll(): Single<List<Story>> =
