@@ -1,10 +1,12 @@
 package ru.storytellers.utils
 
-import android.content.ContentResolver
-import android.content.Context
+import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 
 
 fun loadImage(url: String, container: ImageView) {
@@ -23,4 +25,19 @@ fun loadImage(uri: Uri, container: ImageView) {
     Glide.with(container.context)
         .load(uri)
         .into(container)
+}
+
+fun setBackgroundImage(uri: Uri, container: View){
+    Glide.with(container.context)
+        .asDrawable()
+        .load(uri)
+        .into(object : CustomTarget<Drawable>(){
+            override fun onLoadCleared(placeholder: Drawable?) {
+                val a=1 //заглушка
+            }
+
+            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+                container.background=resource
+            }
+        })
 }
