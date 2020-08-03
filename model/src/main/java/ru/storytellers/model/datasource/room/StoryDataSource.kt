@@ -9,9 +9,11 @@ import ru.storytellers.model.datasource.ILocationDataSource
 import ru.storytellers.model.datasource.ISentenceOfTaleDataSource
 import ru.storytellers.model.datasource.IStoryDataSource
 import ru.storytellers.model.entity.*
+import ru.storytellers.model.entity.room.RoomPlayer
 import ru.storytellers.model.entity.room.RoomSentenceOfTale
 import ru.storytellers.model.entity.room.RoomStory
 import ru.storytellers.model.entity.room.db.AppDatabase
+import ru.storytellers.utils.getPlayersFromSentences
 
 class StoryDataSource(
     private val database: AppDatabase,
@@ -29,11 +31,11 @@ class StoryDataSource(
                 story.coverUrl,
                 story.location?.id ?: 0
             )
+            database.storyDao.insert(roomStory)
+
             story.sentences?.let {
                 saveSentence(story.id, it)
             }
-
-            database.storyDao.insert(roomStory)
         }
 
     private fun saveSentence(storyId: Long, sentenceList: List<SentenceOfTale>) {
@@ -47,7 +49,25 @@ class StoryDataSource(
                 sentence.contentType
             )
         }
+
+        val roomPlayerList = sentenceList.getPlayersFromSentences().map {
+            mapToRoomPlayer(storyId, it)
+        }
+        savePlayers(roomPlayerList)
+
         database.sentenceOfTaleDao.insertRange(roomSentenceList)
+    }
+
+    private fun mapToRoomPlayer(storyId: Long, player: Player) =
+        RoomPlayer(
+            player.id,
+            player.name,
+            player.character.id,
+            storyId
+        )
+
+    private fun savePlayers(roomPlayers: List<RoomPlayer>) {
+        database.playerDao.insertRange(roomPlayers)
     }
 
     override fun getStoryById(storyId: Long): Single<Story> =
