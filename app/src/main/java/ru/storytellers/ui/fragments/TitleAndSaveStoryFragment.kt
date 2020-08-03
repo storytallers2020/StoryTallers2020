@@ -38,6 +38,7 @@ class TitleAndSaveStoryFragment:BaseFragment<DataModel>() {
         iniViewModel()
         book_name.addTextChangedListener(textWatcher)
         back_button_character.setOnClickListener { backClicked() }
+        btn_next.setOnClickListener { saveStory() }
     }
 
     override fun iniViewModel() {
@@ -46,6 +47,16 @@ class TitleAndSaveStoryFragment:BaseFragment<DataModel>() {
                 loadImage(it, iv_cover)
             }
         })
+
+        model.subscribeOnSuccessSaveFlag().observe(viewLifecycleOwner, Observer {
+            if(it) activity?.let {
+                    context -> toastShowLong(context,"Saved successfully") }
+            else  activity?.let {
+                    context -> toastShowLong(context,"Something went wrong")}
+        })
+    }
+    private fun saveStory(){
+        model.createStoryTaller()
     }
 
     override fun backClicked(): Boolean {
