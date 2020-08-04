@@ -22,8 +22,8 @@ class StartFragment: BaseFragment<DataModel>() {
     }
 
     override fun init() {
-        iniViewModel()
         model.getAllStory()
+        iniViewModel()
         rules_game_text_view.setOnClickListener { navigateToRulesGame() }
         new_tale_button.setOnClickListener{ navigateToLevelScreen() }
         library_button.setOnClickListener { navigateToLibraryScreen() }
