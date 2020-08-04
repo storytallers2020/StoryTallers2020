@@ -16,6 +16,7 @@ class LocationDataSource(private val database: AppDatabase) : ILocationDataSourc
                 location.id,
                 location.name,
                 location.imageUrl,
+                location.imageForRecycler,
                 location.descriptions
             )
             database.locationDao.insert(roomLocation)
@@ -29,6 +30,7 @@ class LocationDataSource(private val database: AppDatabase) : ILocationDataSourc
                         roomLocation.id,
                         roomLocation.name,
                         roomLocation.imageUrl,
+                        roomLocation.imageForRecycler,
                         roomLocation.description
                     )
                 )
@@ -45,6 +47,7 @@ class LocationDataSource(private val database: AppDatabase) : ILocationDataSourc
                         it.id,
                         it.name,
                         it.imageUrl,
+                        it.imageForRecycler,
                         it.description
                     )
                 }

@@ -5,6 +5,7 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game.*
+import kotlinx.android.synthetic.main.sentence_input_layout.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -63,6 +64,7 @@ class GameFragment: BaseFragment<DataModel>() {
     private fun handlerBtnSend(){
         textSentenceOfTale?.let { model.createSentenceOfTale(it) }
         assistantFragment.hideKeyboard()
+        scroll_view.smoothScrollTo(0, story_body.bottom);
         sentence_line.setText("")
         assistantFragment.makeInVisibleBtnSend()
         assistantFragment.showGameField()
