@@ -17,7 +17,7 @@ class StoryRepository(private val localDataSource: IStoryDataSource): IStoryRepo
             .subscribeOn(Schedulers.io())
 
     override fun getStoryWithSentencesById(storyId: Long): Single<Story> =
-        localDataSource.getStoryById(storyId)
+        localDataSource.getStoryWithSentencesById(storyId)
             .subscribeOn(Schedulers.io())
 
     override fun getAll(): Single<List<Story>> =
