@@ -9,5 +9,6 @@ class RoomLocation (
     val id: Long,
     val name: String,
     val imageUrl: String,
+    val imageForRecycler: String,
     val description: String
 )

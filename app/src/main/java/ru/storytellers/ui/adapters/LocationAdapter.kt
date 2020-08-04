@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_location.view.*
 import ru.storytellers.R
@@ -45,7 +44,7 @@ class LocationAdapter(val clickListener: OnListItemClickListener) :
 
         fun bind(location: Location) {
 //            textView.text = location.name
-            resourceToUri(location.imageUrl)?.let {
+            resourceToUri(location.imageForRecycler)?.let {
                 loadImage(it, itemView.locationView)
             }
 
@@ -55,7 +54,7 @@ class LocationAdapter(val clickListener: OnListItemClickListener) :
             }
 
             itemView.setOnClickListener {
-                val positionIndex: Int = getAdapterPosition()
+                val positionIndex: Int = adapterPosition
                 clickListener.onItemClick(locationList[positionIndex])
             }
         }

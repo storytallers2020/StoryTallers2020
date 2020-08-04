@@ -83,4 +83,7 @@ dependencies {
     androidTestImplementation TestImpl.espresso
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    //GifImageView
+    implementation GifImageView.gifImageView
+
 }

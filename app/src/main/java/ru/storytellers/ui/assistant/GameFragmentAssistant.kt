@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_game.*
+import kotlinx.android.synthetic.main.sentence_input_layout.*
 import ru.storytellers.ui.fragments.GameFragment
 
 class GameFragmentAssistant(
@@ -18,7 +19,7 @@ class GameFragmentAssistant(
       InputMethodManager.HIDE_NOT_ALWAYS)
   }
 
-  fun makeEditextActive(editTextView: TextInputEditText,textInputLayout: TextInputLayout) {
+  fun makeEditextActive(editTextView: TextInputEditText, textInputLayout: TextInputLayout) {
     editTextView.isEnabled = true
     textInputLayout.alpha = 1f
   }
