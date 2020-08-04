@@ -10,19 +10,21 @@ import ru.storytellers.model.entity.*
 
 class LocationResDataSource(context: Context) : ILocationDataSource {
 
-    //region characterList...
+    //region locationsList...
     private val locationList: MutableList<Location> = mutableListOf(
         Location(
             1,
             context.getString(R.string.location_kingdom1_name),
-            resourceToString(context, R.drawable.location_castle_full),
-            "В далеком далеком королевстве..."
+            resourceToString(context, R.drawable.location_castle_fade),
+            resourceToString(context, R.drawable.location_castle_small),
+            "В далеком-далеком королевстве..."
         ),
         Location(
             2,
-            context.getString(R.string.location_kingdom2_name),
-            resourceToString(context, R.drawable.location_cosmos_full),
-            "Давным давно в нашем королевстве..."
+            context.getString(R.string.location_space1_name),
+            resourceToString(context, R.drawable.location_cosmos_fade),
+            resourceToString(context, R.drawable.location_cosmos_small),
+            "В далеком-далеком космосе..."
         )
     )
     //endregion

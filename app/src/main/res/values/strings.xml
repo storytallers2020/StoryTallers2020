@@ -21,7 +21,7 @@
 
     // New strings... move them to the corresponding group above
 
-    <string name="app_name">Story Рукщуы 2020</string>
+    <string name="app_name">Story Heroes 2020</string>
     <string name="auth_welcome">Welcome to\nthe Fairy Tale</string>
     <string name="auth_create_tale">Create a fairy tale</string>
     <string name="auth_help"><u>How to create a fairy tale?</u></string>
@@ -94,6 +94,7 @@
         Царевич слез с своего доброго коня и разделил падаль: зверям - кости, птицам - мясо, кожа - гадам, а голова - муравьям.\n
         - Спасибо, Иван-царевич! - сказал сокол, - За эту услугу можешь ты обращаться ясным соколом и муравьем всякий раз, как захочешь.
     </string>
+    <string name="game_loading_msg">The game is loading. Please wait…</string>
 
 
 </resources>

@@ -49,6 +49,7 @@
     <string name="intro_text">Начинай сказку!</string>
     <string name="choose_location">Выбрать локацию</string>
     <string name="add_new_character"><u>Добавить игрока +</u></string>
+    <string name="game_loading_msg">Загрузка...</string>
 
 
 </resources>
