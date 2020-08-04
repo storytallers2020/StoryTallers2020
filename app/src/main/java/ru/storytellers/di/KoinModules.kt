@@ -54,7 +54,7 @@ val libraryModule = module {
     viewModel { LibraryViewModel(get()) }
 }
 val libraryBookModule = module {
-    viewModel { LibraryBookViewModel() }
+    viewModel { LibraryBookViewModel(get()) }
 }
 
 val ciceroneModule = module {
