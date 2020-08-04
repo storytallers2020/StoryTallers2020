@@ -30,8 +30,9 @@ class LibraryFragment: BaseFragment<DataModel>() {
 
     override fun init() {
         rv_books.adapter=libraryAdapter
-        iniViewModel()
         model.getAllStory()
+        iniViewModel()
+
     }
 
     override fun iniViewModel() {
