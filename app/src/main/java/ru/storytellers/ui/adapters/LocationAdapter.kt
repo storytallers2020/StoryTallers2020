@@ -25,7 +25,7 @@ class LocationAdapter(val clickListener: OnListItemClickListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view: View =
+        val view =
             LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.item_location, parent, false)
@@ -50,7 +50,7 @@ class LocationAdapter(val clickListener: OnListItemClickListener) :
             }
 
             imageView.setOnClickListener {
-                val positionIndex: Int = getAdapterPosition()
+                val positionIndex: Int = adapterPosition
                 clickListener.onItemClick(locationList[positionIndex])
             }
 
