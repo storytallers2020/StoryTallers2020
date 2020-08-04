@@ -35,17 +35,22 @@ private val loadModules by lazy {
     loadKoinModules(
         listOf(
             ciceroneModule,
-            databaseModel,
-            startModel,
+            databaseModule,
+            startModule,
             levelModel,
             characterModel,
-            locationModel,
+            locationModule,
             gameModel,
             gameEndModule,
             selectCoverModule,
-            titleAndSaveModule
+            titleAndSaveModule,
+            libraryModule
         )
     )
+}
+
+val libraryModule = module {
+    viewModel { LibraryViewModel() }
 }
 
 val ciceroneModule = module {
@@ -54,8 +59,8 @@ val ciceroneModule = module {
     single { get<Cicerone<Router>>().navigatorHolder }
 }
 
-val startModel =  module {
-        viewModel { StartViewModel() }
+val startModule =  module {
+        viewModel { StartViewModel(get()) }
 }
 val levelModel =  module {
         viewModel { LevelViewModel() }
@@ -67,13 +72,13 @@ val characterModel =  module {
     viewModel { CreateCharacterViewModel(get()) }
 }
 
-val locationModel =  module {
+val locationModule =  module {
     single<ILocationDataSource>{ LocationResDataSource(get()) }
     single<ILocationRepository>{ LocationRepository(get()) }
     viewModel { LocationViewModel(get()) }
 }
 
-val databaseModel = module {
+val databaseModule = module {
     single {
         Room.databaseBuilder(get(), AppDatabase::class.java, "StoryTallersDB")
             .build()
