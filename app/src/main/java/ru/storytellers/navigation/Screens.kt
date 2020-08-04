@@ -43,8 +43,12 @@ sealed class Screens {
         override fun getFragment() = TitleAndSaveStoryFragment.newInstance()
     }
 
-    class LibraryScreen(private val listStory:List<Story>) : SupportAppScreen() {
-        override fun getFragment() = LibraryFragment.newInstance(listStory)
+    class LibraryScreen() : SupportAppScreen() {
+        override fun getFragment() = LibraryFragment.newInstance()
+    }
+
+    class LibraryBookScreen(private val story: Story) : SupportAppScreen() {
+        override fun getFragment() = LibraryBookFragment.newInstance(story)
     }
 
 
