@@ -4,11 +4,13 @@ import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.functions.BiFunction
-import ru.storytellers.model.datasource.ICharacterDataSource
 import ru.storytellers.model.datasource.ILocationDataSource
 import ru.storytellers.model.datasource.ISentenceOfTaleDataSource
 import ru.storytellers.model.datasource.IStoryDataSource
-import ru.storytellers.model.entity.*
+import ru.storytellers.model.entity.Location
+import ru.storytellers.model.entity.Player
+import ru.storytellers.model.entity.SentenceOfTale
+import ru.storytellers.model.entity.Story
 import ru.storytellers.model.entity.room.RoomPlayer
 import ru.storytellers.model.entity.room.RoomSentenceOfTale
 import ru.storytellers.model.entity.room.RoomStory
@@ -18,7 +20,6 @@ import ru.storytellers.utils.getPlayersFromSentences
 class StoryDataSource(
     private val database: AppDatabase,
     private val locationDataSource: ILocationDataSource,
-    private val characterDataSource: ICharacterDataSource,
     private val sentenceOfTaleDataSource: ISentenceOfTaleDataSource
 ) : IStoryDataSource {
 

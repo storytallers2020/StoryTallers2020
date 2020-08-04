@@ -104,7 +104,7 @@ val selectCoverModule = module {
 }
 
 val titleAndSaveModule = module {
-    single<IStoryDataSource>{ StoryDataSource(get(),get(), get(), get()) }
+    single<IStoryDataSource>{ StoryDataSource(get(),get(), get()) }
     single<IStoryRepository>{ StoryRepository(get()) }
     single { TitleAndSaveModelAssistant(get()) }
     viewModel { TitleAndSaveStoryViewModel(get()) }
