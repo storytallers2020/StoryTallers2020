@@ -5,9 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_book_library.view.*
+import kotlinx.android.synthetic.main.item_book_library.view.book_cover_image
+import kotlinx.android.synthetic.main.item_image_cover.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Story
 import ru.storytellers.utils.loadImage
+import ru.storytellers.utils.resourceToUri
 
 class LibraryAdapter(
     val itemClickListener: ItemClickListener
@@ -40,7 +43,9 @@ class LibraryAdapter(
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(story:Story){
-            loadImage(story.coverUrl,itemView.book_cover_image)
+            resourceToUri(story.coverUrl)?.let {
+                loadImage(it,itemView.book_cover_image)
+            }
             itemView.book_name.text=story.name
             itemView.setOnClickListener {
                 itemClickListener.onItemClick(story)
