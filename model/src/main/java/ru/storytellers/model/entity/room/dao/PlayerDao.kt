@@ -21,6 +21,9 @@ interface PlayerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(player: RoomPlayer)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertRange(roomPlayers: List<RoomPlayer>)
+
     //endregion Insert
 
     //region Update

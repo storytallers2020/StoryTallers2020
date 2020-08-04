@@ -64,7 +64,17 @@ class TitleAndSaveStoryViewModel(
         gmStorage.getListSentenceOfTale().forEach { it?.let { list.add(it) } }
         return list.toList()
     }
+//    private fun saveStory(story: Story){
+//        successSaveFlagLiveDate.value=assistantModel.saveStory(story)
+//    }
+
     private fun saveStory(story: Story){
-        successSaveFlagLiveDate.value=assistantModel.saveStory(story)
+        assistantModel.saveStory(story)
+            .subscribe({
+                successSaveFlagLiveDate.value = true
+            },{
+                successSaveFlagLiveDate.value = false
+            })
     }
+
 }
