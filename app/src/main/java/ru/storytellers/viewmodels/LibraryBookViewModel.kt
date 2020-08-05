@@ -2,6 +2,7 @@ package ru.storytellers.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.repository.IStoryRepository
@@ -13,6 +14,7 @@ class LibraryBookViewModel(
 ): BaseViewModel<DataModel>() {
     private val textStoryLiveData = MutableLiveData<String>()
     private val titleStoryLiveData = MutableLiveData<String>()
+    private val onErrorliveData = MutableLiveData<DataModel.Error>()
 
     fun subscribeOnTextStory(): LiveData<String>{
         return textStoryLiveData
@@ -20,13 +22,28 @@ class LibraryBookViewModel(
     fun subscribeOnTitleStory(): LiveData<String>{
         return titleStoryLiveData
     }
+    fun subscribeOnError(): LiveData<DataModel.Error>{
+        return onErrorliveData
+    }
 
      fun getTextStory(story: Story){
-        val textStory= StringBuilder()
+         storyRepository.getStoryWithSentencesById(story.id)
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe({
+                 val textStory = extractTextFromStory(it)
+                 textStoryLiveData.value= textStory
+             },{
+                 onErrorliveData.value=DataModel.Error(it)
+             })
+
+    }
+
+    private fun extractTextFromStory(story: Story): String{
+        val textStory = StringBuilder()
         story.sentences?.forEach {
             textStory.append(it.content)
         }
-        textStoryLiveData.value= textStory.toString()
+        return textStory.toString()
     }
 
     fun getTitleStory(story: Story){
