@@ -45,4 +45,24 @@ class PlayerDataSource(
             }
         }
 
+    override fun getAll(): Single<List<Player>> =
+        Single.create { emitter ->
+            characterDataSource.getAll().flatMap { characterList ->
+                database.playerDao.getAll()?.let { playerList ->
+                    val filledList = playerList.map { roomPlayer ->
+                        val character =
+                            characterList.find { it.id == roomPlayer.characterId }!!
+                        Player(
+                            roomPlayer.id,
+                            roomPlayer.name,
+                            character
+                        )
+                    }
+                    Single.fromCallable { emitter.onSuccess(filledList) }
+                } ?: let {
+                    Single.fromCallable { emitter.onError(RuntimeException("No players in database")) }
+                }
+            }
+        }
+
 }

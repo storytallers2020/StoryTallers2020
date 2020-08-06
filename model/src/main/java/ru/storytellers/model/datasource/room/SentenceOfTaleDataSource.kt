@@ -6,6 +6,7 @@ import io.reactivex.rxjava3.core.Single
 import ru.storytellers.model.datasource.IPlayerDataSource
 import ru.storytellers.model.datasource.ISentenceOfTaleDataSource
 import ru.storytellers.model.entity.SentenceOfTale
+import ru.storytellers.model.entity.Story
 import ru.storytellers.model.entity.room.RoomSentenceOfTale
 import ru.storytellers.model.entity.room.db.AppDatabase
 
@@ -22,7 +23,7 @@ class SentenceOfTaleDataSource(
             val roomSentence = RoomSentenceOfTale(
                 sentenceOfTale.id,
                 storyId,
-                sentenceOfTale.player.id,
+                sentenceOfTale.player?.id ?: 0,
                 sentenceOfTale.step,
                 sentenceOfTale.content,
                 sentenceOfTale.contentType
@@ -54,31 +55,31 @@ class SentenceOfTaleDataSource(
 
     override fun getAllStorySentence(storyId: Long): Single<List<SentenceOfTale>> =
         Single.create { emitter ->
-            val sentenceList = ArrayList<SentenceOfTale>()
-
             database.sentenceOfTaleDao.getAllStorySentence(storyId)?.let { roomSentenceList ->
-                roomSentenceList.map { roomSentence ->
-                    playerDataSource.getPlayerById(roomSentence.playerId)
-                        .flatMap { player ->
-                            return@flatMap Single.fromCallable {
-                                SentenceOfTale(
-                                    roomSentence.id,
-                                    player,
-                                    roomSentence.turn,
-                                    roomSentence.content,
-                                    roomSentence.contentType
-                                )
-                            }
-                        }.map {
-                            sentenceList.add(it)
-                        }
+                mapSentences(roomSentenceList).flatMap { sentences ->
+                    return@flatMap Single.fromCallable { emitter.onSuccess(sentences) }
+                } ?: let {
+                    emitter.onError(RuntimeException("No such sentences in database"))
                 }
-
-                emitter.onSuccess(sentenceList)
-            } ?: let {
-                emitter.onError(RuntimeException("No such sentence in database"))
             }
         }
 
+    private fun mapSentences(roomSentenceList: List<RoomSentenceOfTale>):
+            @NonNull Single<List<SentenceOfTale>> =
+        playerDataSource.getAll().flatMap { playerList ->
+            val sentences = roomSentenceList?.map { roomSentence ->
+                val player =
+                    playerList.find { it.id == roomSentence.playerId }!!
+
+                SentenceOfTale(
+                    roomSentence.id,
+                    player,
+                    roomSentence.turn,
+                    roomSentence.content,
+                    roomSentence.contentType
+                )
+            }
+            return@flatMap Single.fromCallable { sentences }
+        }
 
 }
