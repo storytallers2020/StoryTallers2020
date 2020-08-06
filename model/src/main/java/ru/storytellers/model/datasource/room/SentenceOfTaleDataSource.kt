@@ -31,7 +31,7 @@ class SentenceOfTaleDataSource(
         }
 
     override fun getSentenceById(sentenceId: Long): Single<SentenceOfTale> =
-        Single.create { emitter ->
+        Single.create {emitter ->
             database.sentenceOfTaleDao.getSentenceById(sentenceId)?.let { roomSentence ->
                 playerDataSource.getPlayerById(roomSentence.playerId)
                     .flatMap { player ->
