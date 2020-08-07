@@ -88,7 +88,7 @@ val locationModule =  module {
 
 val databaseModule = module {
     single {
-        Room.databaseBuilder(get(), AppDatabase::class.java, "StoryTellers.DB")
+        Room.databaseBuilder(get(), AppDatabase::class.java, "StoryTellers.db")
             .build()
     }
     single { get<AppDatabase>().characterDao }
