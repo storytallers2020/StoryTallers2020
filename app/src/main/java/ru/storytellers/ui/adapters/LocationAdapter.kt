@@ -3,7 +3,6 @@ package ru.storytellers.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_location.view.*
 import ru.storytellers.R
@@ -11,7 +10,7 @@ import ru.storytellers.model.entity.Location
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 
-class LocationAdapter(val clickListener: OnListItemClickListener) :
+class LocationAdapter(val clickListener: (location: Location) -> Unit) :
     RecyclerView.Adapter<LocationAdapter.MyViewHolder>() {
     private var locationList = mutableListOf<Location>()
 
@@ -39,29 +38,13 @@ class LocationAdapter(val clickListener: OnListItemClickListener) :
     override fun getItemCount() = locationList.size
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        private val textView: TextView = itemView.findViewById(R.id.locationDescription)  // это поле отсутствует в новом item_location
-        private val imageView: ImageView = itemView.findViewById(R.id.locationView)
-
         fun bind(location: Location) {
-//            textView.text = location.name
             resourceToUri(location.imageForRecycler)?.let {
                 loadImage(it, itemView.locationView)
             }
-
-            imageView.setOnClickListener {
-                val positionIndex: Int = adapterPosition
-                clickListener.onItemClick(locationList[positionIndex])
-            }
-
             itemView.setOnClickListener {
-                val positionIndex: Int = adapterPosition
-                clickListener.onItemClick(locationList[positionIndex])
+                clickListener(location)
             }
         }
     }
-
-    interface OnListItemClickListener {
-        fun onItemClick(location: Location)
-    }
-
 }
