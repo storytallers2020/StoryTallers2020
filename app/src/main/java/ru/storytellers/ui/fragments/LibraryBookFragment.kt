@@ -17,9 +17,11 @@ class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
     }
 
     override fun init() {
+        iniViewModel()
+
         model.getTextStory(story)
         model.getTitleStory(story)
-        iniViewModel()
+
         back_button_character.setOnClickListener {backClicked()}
     }
 
