@@ -1,5 +1,6 @@
 package ru.storytellers.navigation
 
+import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.fragments.*
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
@@ -40,6 +41,14 @@ sealed class Screens {
 
     class TitleAndSaveStoryScreen : SupportAppScreen() {
         override fun getFragment() = TitleAndSaveStoryFragment.newInstance()
+    }
+
+    class LibraryScreen() : SupportAppScreen() {
+        override fun getFragment() = LibraryFragment.newInstance()
+    }
+
+    class LibraryBookScreen(private val story: Story) : SupportAppScreen() {
+        override fun getFragment() = LibraryBookFragment.newInstance(story)
     }
 
 

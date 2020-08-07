@@ -1,18 +1,16 @@
 package ru.storytellers.viewmodels
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
-import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.repository.IStoryRepository
+import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
-class StartViewModel(
+class LibraryViewModel(
     private val storyRepository: IStoryRepository
-) : BaseViewModel<DataModel>() {
+): BaseViewModel<DataModel>() {
     private val onSuccessliveData = MutableLiveData<DataModel.Success<Story>>()
     private val onErrorliveData = MutableLiveData<DataModel.Error>()
     private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
@@ -37,7 +35,4 @@ class StartViewModel(
                 onErrorliveData.value=DataModel.Error(it)
             })
     }
-
 }
-
-

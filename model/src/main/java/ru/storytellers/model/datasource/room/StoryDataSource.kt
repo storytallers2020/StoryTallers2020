@@ -4,11 +4,13 @@ import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.functions.BiFunction
-import ru.storytellers.model.datasource.ICharacterDataSource
 import ru.storytellers.model.datasource.ILocationDataSource
 import ru.storytellers.model.datasource.ISentenceOfTaleDataSource
 import ru.storytellers.model.datasource.IStoryDataSource
-import ru.storytellers.model.entity.*
+import ru.storytellers.model.entity.Location
+import ru.storytellers.model.entity.Player
+import ru.storytellers.model.entity.SentenceOfTale
+import ru.storytellers.model.entity.Story
 import ru.storytellers.model.entity.room.RoomPlayer
 import ru.storytellers.model.entity.room.RoomSentenceOfTale
 import ru.storytellers.model.entity.room.RoomStory
@@ -18,7 +20,6 @@ import ru.storytellers.utils.getPlayersFromSentences
 class StoryDataSource(
     private val database: AppDatabase,
     private val locationDataSource: ILocationDataSource,
-    private val characterDataSource: ICharacterDataSource,
     private val sentenceOfTaleDataSource: ISentenceOfTaleDataSource
 ) : IStoryDataSource {
 
@@ -43,7 +44,7 @@ class StoryDataSource(
             RoomSentenceOfTale(
                 sentence.id,
                 storyId,
-                sentence.player.id,
+                sentence.player?.id ?: 0,
                 sentence.step,
                 sentence.content,
                 sentence.contentType
@@ -93,37 +94,86 @@ class StoryDataSource(
             }
         }
 
+    override fun getStoryWithSentencesByIdLite(storyId: Long): Single<Story> =
+        Single.create { emitter ->
+            database.storyDao.getStoryById(storyId)?.let { roomStory ->
+                val story = mapStoryLite(roomStory)
+                emitter.onSuccess(story)
+            } ?: let {
+                emitter.onError(RuntimeException("No such story in database"))
+            }
+        }
+
+    private fun mapStoryLite(roomStory: RoomStory): @NonNull Story {
+        val roomSentences = database.sentenceOfTaleDao.getAllStorySentence(roomStory.id)
+        val sortedRoomSentence = roomSentences?.sortedWith(compareBy { it.turn })
+        val sentences = mapSentencesLite(sortedRoomSentence)
+        return Story(
+            roomStory.id,
+            roomStory.name,
+            roomStory.authors,
+            roomStory.coverUrl,
+            null,
+            sentences
+        )
+    }
+
+    private fun mapSentencesLite(roomSentences: List<RoomSentenceOfTale>?): List<SentenceOfTale>? =
+        roomSentences?.map {roomSentence ->
+            SentenceOfTale(
+                roomSentence.id,
+                null,
+                roomSentence.turn,
+                roomSentence.content,
+                roomSentence.contentType
+            )
+        }
+
     override fun getStoryWithSentencesById(storyId: Long): Single<Story> =
 
         Single.create { emitter ->
             database.storyDao.getStoryById(storyId)?.let { roomStory ->
                 mapStory(roomStory).flatMap {story ->
-                    Single.fromCallable {  emitter.onSuccess(story) }
+                    return@flatMap Single.fromCallable {  emitter.onSuccess(story) }
                 }
             } ?: let {
                 emitter.onError(RuntimeException("No such story in database"))
             }
         }
 
-    private fun mapStory(roomStory: RoomStory): @NonNull Single<Story> {
-        val locationSingle = locationDataSource.getLocationById(roomStory.locationId)
-        val sentenceSingle = sentenceOfTaleDataSource.getAllStorySentence(roomStory.id)
-
-        return Single.zip(
-            locationSingle,
-            sentenceSingle,
-            BiFunction<Location, List<SentenceOfTale>, Story> { location, sentences ->
-                Story(
-                    roomStory.id,
-                    roomStory.name,
-                    roomStory.authors,
-                    roomStory.coverUrl,
-                    location,
-                    sentences
-                )
+    private fun mapStory(roomStory: RoomStory): @NonNull Single<Story> =
+//        locationDataSource.getLocationById(roomStory.locationId).flatMap {location ->
+            sentenceOfTaleDataSource.getAllStorySentence(roomStory.id).flatMap { sentences ->
+                return@flatMap Single.fromCallable {
+                    Story(
+                        roomStory.id,
+                        roomStory.name,
+                        roomStory.authors,
+                        roomStory.coverUrl,
+                        null,
+                        sentences
+                    )
+                }
             }
-        )
-    }
+//        }
+//        val locationSingle = locationDataSource.getLocationById(roomStory.locationId)
+//        val sentenceSingle = sentenceOfTaleDataSource.getAllStorySentence(roomStory.id)
+//
+//        return Single.zip(
+//            locationSingle,
+//            sentenceSingle,
+//            BiFunction<Location, List<SentenceOfTale>, Story> { location, sentences ->
+//                Story(
+//                    roomStory.id,
+//                    roomStory.name,
+//                    roomStory.authors,
+//                    roomStory.coverUrl,
+//                    location,
+//                    sentences
+//                )
+//            }
+//        )
+//    }
 
     override fun getAll(): Single<List<Story>> =
         Single.create { emitter ->

@@ -101,7 +101,6 @@ class GameFragment: BaseFragment<DataModel>() {
 
     private fun navigateToGameEndScreen() {
         textResultStoryTaller?.let { router.navigateTo(Screens.GameEndScreen(it)) }
-        val asghj="dsf"
     }
 
 }

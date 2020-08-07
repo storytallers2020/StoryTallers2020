@@ -3,10 +3,10 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.repository.ILocationRepository
+import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class LocationViewModel(private val locationRepository: ILocationRepository) :
     BaseViewModel<DataModel>() {

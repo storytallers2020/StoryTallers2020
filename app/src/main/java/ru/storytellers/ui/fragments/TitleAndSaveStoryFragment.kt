@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.fragment_choosing_title.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
+import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
@@ -49,14 +50,22 @@ class TitleAndSaveStoryFragment:BaseFragment<DataModel>() {
         })
 
         model.subscribeOnSuccessSaveFlag().observe(viewLifecycleOwner, Observer {
-            if(it) activity?.let {
+            if(it) {
+                activity?.let {
                     context -> toastShowLong(context,"Saved successfully") }
+                navigateToLibraryScreen()
+            }
+
+
             else  activity?.let {
                     context -> toastShowLong(context,"Something went wrong")}
         })
     }
     private fun saveStory(){
         model.createStoryTaller()
+    }
+    private fun navigateToLibraryScreen(){
+        router.navigateTo(Screens.LibraryScreen())
     }
 
     override fun backClicked(): Boolean {
