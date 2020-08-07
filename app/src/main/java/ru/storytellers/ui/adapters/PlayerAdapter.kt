@@ -17,7 +17,7 @@ import timber.log.Timber
 
 class PlayerAdapter(
     private val characterViewModel: CreateCharacterViewModel
-):RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>(){
+) : RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>() {
 
     private val playersList = mutableListOf<Player>()
 
@@ -40,27 +40,28 @@ class PlayerAdapter(
         )
     }
 
-    override fun getItemCount()=playersList.size
+    override fun getItemCount() = playersList.size
 
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
         holder.bind(playersList[position])
     }
 
-    inner class PlayerViewHolder(container: View) : RecyclerView.ViewHolder(container){
-        fun bind(player:Player) {
+    inner class PlayerViewHolder(container: View) : RecyclerView.ViewHolder(container) {
+        fun bind(player: Player) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
-                itemView.player_name_tv.text=player.name
-                player.character.avatarUrl.let {url->
-                    resourceToUri(url)?.let {uri->
+                itemView.player_name_tv.text = player.name
+                player.character?.let {
+                    resourceToUri(it.avatarUrl)?.let { uri ->
                         loadImage(uri, itemView.character)
-                        }
                     }
-                itemView.remove_player_iv.setOnClickListener {removePlayer(player)}
+                }
+                itemView.remove_player_iv.setOnClickListener { removePlayer(player) }
             }
         }
+    }
 
-        private fun removePlayer(player:Player){
-            characterViewModel.removePlayer(player)
-        }
+    private fun removePlayer(player: Player) {
+        characterViewModel.removePlayer(player)
     }
 }
+

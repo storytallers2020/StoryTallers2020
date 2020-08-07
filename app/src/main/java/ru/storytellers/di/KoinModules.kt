@@ -15,6 +15,8 @@ import ru.storytellers.engine.rules.Rules
 import ru.storytellers.model.datasource.*
 import ru.storytellers.model.datasource.resourcestorage.CoverResDataSource
 import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
+import ru.storytellers.model.datasource.resourcestorage.storage.CharacterStorage
+import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
 import ru.storytellers.model.datasource.room.PlayerDataSource
 import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
 import ru.storytellers.model.datasource.room.StoryDataSource
@@ -77,6 +79,8 @@ val characterModel =  module {
 }
 
 val locationModule =  module {
+    single { CharacterStorage(get()) }
+    single { LocationStorage(get()) }
     single<ILocationDataSource>{ LocationResDataSource(get()) }
     single<ILocationRepository>{ LocationRepository(get()) }
     viewModel { LocationViewModel(get()) }
