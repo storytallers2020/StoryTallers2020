@@ -32,8 +32,7 @@ class LocationFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         iniViewModel()
-        val recyclerView: RecyclerView = view?.findViewById(R.id.rv_covers)!!
-        recyclerView.adapter = locationAdapter
+        rv_covers.adapter = locationAdapter
         back_from_location.setOnClickListener { backClicked() }
     }
 
