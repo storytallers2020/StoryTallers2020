@@ -37,7 +37,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
-            android:descendantFocusability="blocksDescendants"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
@@ -50,7 +49,6 @@
                 android:gravity="bottom"
                 android:lineSpacingExtra="@dimen/line_spacing_extra"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/tale_sample"/>
 
         </androidx.core.widget.NestedScrollView>
