@@ -81,8 +81,10 @@ object Versions {
     //Fragment
     const val lifecycle = "2.2.0"
     const val fragment = "1.2.5"
-}
 
+    //GifImageView
+    const val gifImageView = "1.2.19"
+}
 
 object Tools {
     const val multidex = "com.android.support:multidex:${Versions.multidex}"
@@ -156,4 +158,8 @@ object TestImpl {
     const val junit = "junit:junit:${Versions.jUnit}"
     const val runner = "androidx.test:runner:${Versions.runner}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+}
+
+object GifImageView {
+    const val gifImageView = "pl.droidsonroids.gif:android-gif-drawable:${Versions.gifImageView}"
 }

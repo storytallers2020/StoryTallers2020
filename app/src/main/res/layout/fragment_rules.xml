@@ -50,13 +50,16 @@
         android:background="@drawable/background_transparent"
         android:paddingVertical="@dimen/margin_xxs"
         android:layout_marginTop="@dimen/margin_small"
+        android:clipToPadding="true"
         android:fillViewport="true"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/subHeader">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipToPadding="true"
             android:paddingHorizontal="@dimen/margin_small"
             android:text="@string/rules_game"
             android:textColor="@color/white"

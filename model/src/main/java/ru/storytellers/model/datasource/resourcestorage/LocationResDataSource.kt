@@ -1,55 +1,30 @@
 package ru.storytellers.model.datasource.resourcestorage
 
-import android.content.Context
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
-import ru.storytellers.resources.R
+import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.storytellers.model.datasource.ILocationDataSource
-import ru.storytellers.utils.resourceToString
-import ru.storytellers.model.entity.*
+import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
+import ru.storytellers.model.entity.Location
 
-class LocationResDataSource(context: Context) : ILocationDataSource {
-
-    //region characterList...
-    private val locationList: MutableList<Location> = mutableListOf(
-        Location(
-            1,
-            context.getString(R.string.location_kingdom1_name),
-            resourceToString(context, R.drawable.location_castle_full),
-            "В далеком далеком королевстве..."
-        ),
-        Location(
-            2,
-            context.getString(R.string.location_kingdom2_name),
-            resourceToString(context, R.drawable.location_cosmos_full),
-            "Давным давно в нашем королевстве..."
-        )
-    )
-    //endregion
+class LocationResDataSource(private val locationStorage: LocationStorage) : ILocationDataSource {
 
     override fun insertOrReplace(location: Location): Completable =
-
         Completable.fromAction {
-            locationList.find { it.id == location.id }?.let { foundLocation ->
-                locationList.remove(foundLocation)
-            }
-            locationList.add(location)
-        }
+            locationStorage.insertOrReplace(location)
+        }.subscribeOn(Schedulers.io())
 
     override fun getLocationById(locationId: Long): Single<Location> =
-        Single.create { emitter ->
-            locationList.find { location ->
-                location.id == locationId
-            }?.let {
-                emitter.onSuccess(it)
-            } ?: let {
-                emitter.onError(RuntimeException("No such character in database"))
-            }
+    Single.create<Location> { emitter ->
+        locationStorage.getLocationById(locationId)?.let {
+            emitter.onSuccess(it)
+        } ?: let {
+            emitter.onError(RuntimeException("No such location in res"))
         }
+    }.subscribeOn(Schedulers.io())
 
     override fun getAll(): Single<List<Location>> =
-        Single.create { emitter ->
-            emitter.onSuccess(locationList)
-        }
+        Single.fromCallable { locationStorage.getAll() }
+            .subscribeOn(Schedulers.io())
 
 }

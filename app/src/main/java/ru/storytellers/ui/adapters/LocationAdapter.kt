@@ -3,8 +3,6 @@ package ru.storytellers.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_location.view.*
 import ru.storytellers.R
@@ -12,7 +10,7 @@ import ru.storytellers.model.entity.Location
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 
-class LocationAdapter(val clickListener: OnListItemClickListener) :
+class LocationAdapter(val clickListener: (location: Location) -> Unit) :
     RecyclerView.Adapter<LocationAdapter.MyViewHolder>() {
     private var locationList = mutableListOf<Location>()
 
@@ -25,7 +23,7 @@ class LocationAdapter(val clickListener: OnListItemClickListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view: View =
+        val view =
             LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.item_location, parent, false)
@@ -40,29 +38,13 @@ class LocationAdapter(val clickListener: OnListItemClickListener) :
     override fun getItemCount() = locationList.size
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textView: TextView = itemView.findViewById(R.id.locationDescription)
-        private val imageView: ImageView = itemView.findViewById(R.id.locationView)
-
         fun bind(location: Location) {
-            textView.text = location.name
-            resourceToUri(location.imageUrl)?.let {
+            resourceToUri(location.imageForRecycler)?.let {
                 loadImage(it, itemView.locationView)
             }
-
-            imageView.setOnClickListener {
-                val positionIndex: Int = getAdapterPosition()
-                clickListener.onItemClick(locationList[positionIndex])
-            }
-
             itemView.setOnClickListener {
-                val positionIndex: Int = getAdapterPosition()
-                clickListener.onItemClick(locationList[positionIndex])
+                clickListener(location)
             }
         }
     }
-
-    interface OnListItemClickListener {
-        fun onItemClick(location: Location)
-    }
-
 }

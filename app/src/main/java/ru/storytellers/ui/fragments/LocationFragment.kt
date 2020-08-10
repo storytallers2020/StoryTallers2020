@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
 import ru.storytellers.navigation.Screens
@@ -18,14 +19,11 @@ class LocationFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_location
     override val model: LocationViewModel by inject()
 
-    private val onListItemClickListener = object : LocationAdapter.OnListItemClickListener {
-        override fun onItemClick(location: Location) {
-            Timber.d(location.fieldsToLogString())
-            router.navigateTo(Screens.GameScreen())
-        }
+    private val onListItemClickListener = { location: Location ->
+        StoryTallerApp.instance.gameStorage.setLocationGame(location)
+        Timber.d(location.fieldsToLogString())
+        router.navigateTo(Screens.GameScreen())
     }
-
-    // Тут немного по другому. Как на курсе А3
     private val locationAdapter: LocationAdapter by lazy { LocationAdapter(onListItemClickListener) }
 
     companion object {
@@ -33,12 +31,9 @@ class LocationFragment : BaseFragment<DataModel>() {
     }
 
     override fun init() {
-
         iniViewModel()
-
         val recyclerView: RecyclerView = view?.findViewById(R.id.rv_covers)!!
         recyclerView.adapter = locationAdapter
-
         back_from_location.setOnClickListener { backClicked() }
     }
 

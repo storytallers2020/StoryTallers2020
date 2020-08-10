@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_element_game_cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="@drawable/ic_background_default"
+    android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingVertical="@dimen/padding_layout_bottom">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/reminder_intro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/padding_layout_standard"
-        android:paddingVertical="@dimen/padding_layout_bottom"
-        android:background="@drawable/ic_background_default">
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_standard"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sentence_input_layout"
+        tools:text="@string/intro_text" />
 
-        <TextView
-            android:id="@+id/reminder_intro"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/game_field"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sentence_input_layout"
+        tools:visibility="visible">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_standard"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/et_step"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/intro_cosmos" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/game_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_standard"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/avatar"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible"
-            app:layout_constraintVertical_bias="0">
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:id="@+id/story_body"
@@ -43,111 +46,26 @@
                 android:paddingHorizontal="@dimen/margin_small"
                 android:paddingVertical="@dimen/margin_xxs"
                 android:textSize="16sp"
+                android:gravity="bottom"
                 android:lineSpacingExtra="@dimen/line_spacing_extra"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="-28dp"
-                tools:text=" В некотором царстве, в некотором государстве жил-был царь, и было у него три сына.
-                В некотором царстве, в некотором государстве жил-был царь, и было у него три сына." />
+                tools:text="@string/tale_sample"/>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:background="@drawable/background_transparent"
-                android:layout_height="0dp"
-                android:contentDescription="@string/rules"
-                app:layout_constraintBottom_toBottomOf="@id/story_body"
-                app:layout_constraintTop_toTopOf="@id/story_body" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/icon_medium"
-            android:text="@string/game_turn"
-            android:maxLines="1"
-            android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/et_step"
-            app:layout_constraintEnd_toStartOf="@id/player_name"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/player_name"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/icon_medium"
-            android:maxLines="1"
-            android:paddingHorizontal="@dimen/margin_xxs"
-            android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/et_step"
-            app:layout_constraintEnd_toStartOf="@id/avatar"
-            tools:text="Серый Волк" />
+        </androidx.core.widget.NestedScrollView>
 
         <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="@dimen/icon_medium"
-            android:layout_height="@dimen/icon_medium"
-            android:src="@drawable/ic_wolf"
-            android:contentDescription="@string/char_icon"
-            app:layout_constraintBottom_toTopOf="@id/et_step"
-            app:layout_constraintStart_toEndOf="@id/player_name" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/et_step"
-            android:theme="@style/OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_standard"
-            android:layout_marginEnd="@dimen/margin_xs"
-            app:boxCornerRadiusBottomEnd="@dimen/box_corner_radius"
-            app:boxCornerRadiusBottomStart="@dimen/box_corner_radius"
-            app:boxCornerRadiusTopEnd="@dimen/box_corner_radius"
-            app:boxCornerRadiusTopStart="@dimen/box_corner_radius"
-            app:layout_goneMarginRight="0dp"
-            app:layout_constraintBottom_toTopOf="@id/button_end"
-            app:layout_constraintEnd_toStartOf="@id/btn_send"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/sentence_line"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:textColor="@color/white"
-                android:padding="@dimen/margin_small"
-                android:textSize="16sp"
-                android:maxLength="150"
-                android:lineSpacingExtra="@dimen/line_spacing_extra"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageButton
-            android:id="@+id/btn_send"
-            android:layout_width="@dimen/icon_medium"
-            android:layout_height="@dimen/icon_medium"
-            android:visibility="invisible"
-            android:src="@drawable/ic_send_bird"
-            app:layout_constraintVertical_bias="1"
-            app:layout_constraintBottom_toBottomOf="@id/et_step"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/et_step"
-            android:contentDescription="@string/send" />
-
-        <TextView
-            android:id="@+id/button_end"
-            android:background="@color/no_color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/end_tale"
-            android:textColor="@color/yellow"
-            android:textSize="@dimen/text_small"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/background_transparent"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/rules"
+            app:layout_constraintBottom_toBottomOf="@id/scroll_view"
+            app:layout_constraintTop_toTopOf="@id/scroll_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+    <include
+        android:id="@+id/sentence_input_layout"
+        layout="@layout/sentence_input_layout"/>
 
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>

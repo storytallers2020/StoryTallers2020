@@ -9,7 +9,8 @@
     <color name="white">#FFFFFF</color>
     <color name="blue">#188EFA</color>
     <color name="no_color">#00FFFFFF</color>
-    <color name="transparent">#1Effffff</color>
-    <color name="transparent_4D">#4DFFFFFF</color>
+    <color name="transparent_12">#1Effffff</color>
+    <color name="transparent_30">#4DFFFFFF</color>
+    <color name="transparent_50">#80FFFFFF</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#fff</color>
 </resources>
