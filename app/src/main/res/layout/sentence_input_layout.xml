@@ -43,6 +43,36 @@
         app:layout_constraintBottom_toTopOf="@id/et_step"
         app:layout_constraintStart_toEndOf="@id/player_name" />
 
+    <LinearLayout
+        android:id="@+id/mandatory_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/margin_xxs"
+        app:layout_constraintBottom_toTopOf="@id/player_name"
+        tools:visibility="visible"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            android:textColor="@color/transparent_50"
+            android:textSize="@dimen/text_small"
+            android:text="@string/mandatory_word" />
+
+        <TextView
+            android:id="@+id/mandatory_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            android:textColor="@color/yellow"
+            android:textSize="@dimen/text_standard"
+            tools:text="Батюшка" />
+
+    </LinearLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_step"
         android:theme="@style/OutlinedBox"
