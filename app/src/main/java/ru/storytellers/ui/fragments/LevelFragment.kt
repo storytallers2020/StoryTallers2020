@@ -205,7 +205,7 @@ class LevelFragment: BaseFragment<DataModel>() {
 
     private fun toCreateCharacterScrn(){
         StoryTallerApp.instance.gameStorage.setLevelGame(levelGame)
-        router.navigateTo(Screens.CreateCharacterScreen())
+        router.navigateTo(Screens.CharacterCreateScreen())
     }
     override fun backClicked(): Boolean {
         router.exit()
