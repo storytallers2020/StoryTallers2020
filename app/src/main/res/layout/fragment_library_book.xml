@@ -45,6 +45,16 @@
         app:layout_constraintTop_toBottomOf="@id/screen_header"
         tools:text="Хрустальная гора" />
 
+    <TextView
+        android:id="@+id/btn_copy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_outline_file_copy_24"
+        android:contentDescription="@string/copy_all"
+        app:layout_constraintBottom_toBottomOf="@id/subHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/subHeader" />
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/layout_tale"
         android:layout_width="match_parent"
