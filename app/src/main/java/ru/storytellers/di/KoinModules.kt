@@ -38,7 +38,7 @@ private val loadModules by lazy {
             databaseModule,
             startModule,
             levelModel,
-            characterModel,
+            characterCreateModule,
             locationModule,
             gameModel,
             gameEndModule,
@@ -69,12 +69,21 @@ val startModule =  module {
 val levelModel =  module {
         viewModel { LevelViewModel() }
 }
+val characterCreateModule=  module {
+    single { PlayerCreator() }
+    single<ICharacterDataSource>{CharacterResDataSource(get()) }
+    single<ICharacterRepository>{CharacterRepository(get()) }
+    viewModel { CharacterCreateViewModel(get(),get()) }
+}
+
+/*
 val characterModel =  module {
     single { PlayerCreator() }
     single<ICharacterDataSource>{CharacterResDataSource(get()) }
     single<ICharacterRepository>{CharacterRepository(get()) }
     viewModel { CreateCharacterViewModel(get()) }
 }
+ */
 
 val locationModule =  module {
     single<ILocationDataSource>{ LocationResDataSource(get()) }
