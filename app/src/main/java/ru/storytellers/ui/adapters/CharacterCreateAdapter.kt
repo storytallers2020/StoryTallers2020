@@ -12,15 +12,16 @@ import ru.storytellers.utils.resourceToUri
 
 class CharacterCreateAdapter(val itemClickListener: (character: Character,itemRecycler:View, position:Int ) -> Unit?)
     : RecyclerView.Adapter<CharacterCreateAdapter.CCViewHolder>(){
-    private val listCharacters = mutableListOf<Character>()
+
+    private var listCharacters = mutableListOf<Character>()
+    var selectedPosition = -1
+
     fun setData(dataListCharacters: List<Character>?) {
         dataListCharacters?.let {
-            listCharacters.clear()
-            listCharacters.addAll(it)
+            this.listCharacters = it as MutableList<Character>
+            notifyDataSetChanged()
         }
-        notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CCViewHolder {
         return CCViewHolder(
@@ -33,20 +34,24 @@ class CharacterCreateAdapter(val itemClickListener: (character: Character,itemRe
         )
     }
 
-    override fun getItemCount()=listCharacters.count()
+    override fun getItemCount()= listCharacters.count()
 
     override fun onBindViewHolder(holder: CCViewHolder, position: Int) {
+        if (selectedPosition == position)
+            holder.itemView.setBackgroundResource(R.color.yellow)
+        else
+            holder.itemView.setBackgroundResource(R.color.no_color)
         holder.bind(listCharacters[position])
     }
 
     inner class CCViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(character: Character) {
+            with(itemView) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
-                resourceToUri(character.avatarUrl)?.let {
-                    loadImage(it, itemView.image_character_iv)
+                resourceToUri(character.avatarUrl)?.let { loadImage(it, image_character_iv) }
+                name_character_tv.text = character.name
+                setOnClickListener {itemClickListener.invoke(character, this, layoutPosition)}
                 }
-                itemView.name_character_tv.text = character.name
-                itemView.setOnClickListener {itemClickListener(character,itemView,layoutPosition)}
             }
         }
     }

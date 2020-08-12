@@ -23,22 +23,12 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
     override val model: CharacterCreateViewModel by inject()
     private var inputMethodManager: Any? = null
     override val layoutRes = R.layout.fragment_character_create
+    private val characterAdapter: CharacterCreateAdapter by lazy { CharacterCreateAdapter(onItemClickListener) }
 
-    //  private val yellowColor=ResourcesCompat.getColor(resources,R.color.yellow,null)
-    //private val yellowColor=Color.parseColor(R.color.yellow.toString())
-    // private val yellowColor= context?.let {ContextCompat.getColor(it,R.color.yellow)  }
-    //private val noColor=context?.let {ContextCompat.getColor(it,R.color.no_color)}
     private val onItemClickListener = { character: Character, itemRecycler: View, position: Int ->
         model.setCharacterOfPlayer(character)
-        //yellowColor?.let { itemRecycler.setBackgroundColor(it) }
-        // itemRecycler.setBackgroundColor(Color.parseColor(R.color.yellow.toString()))
-        itemRecycler.alpha = 0.3f
-        characterAdapter.notifyItemChanged(position)
-    }
-    private val characterAdapter: CharacterCreateAdapter by lazy {
-        CharacterCreateAdapter(
-            onItemClickListener
-        )
+        characterAdapter.selectedPosition = position
+        characterAdapter.notifyDataSetChanged()
     }
 
     companion object {
