@@ -106,6 +106,6 @@ class CharacterCreateFragment: BaseFragment<DataModel>() {
         model.run{
            addPlayer(createPlayer())
         }
-        //router.navigateTo()
+        router.navigateTo(Screens.TeamCharacterScreen())
     }
 }
