@@ -47,7 +47,7 @@ class CharacterCreateViewModel(private val characterRepository: ICharacterReposi
         playerCreator.setCharacterOfPlayer(character)
     }
 
-    fun createPlayer()=playerCreator.createPlayer()
+    fun getPlayer()=playerCreator.getPlayer()
 
 
     fun getAllCharacters(){
