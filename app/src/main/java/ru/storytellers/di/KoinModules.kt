@@ -18,7 +18,6 @@ import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
 import ru.storytellers.model.datasource.room.PlayerDataSource
 import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
 import ru.storytellers.model.datasource.room.StoryDataSource
-import ru.storytellers.viewmodels.CreateCharacterViewModel
 import ru.storytellers.viewmodels.LevelViewModel
 import ru.storytellers.viewmodels.LocationViewModel
 import ru.storytellers.viewmodels.StartViewModel
