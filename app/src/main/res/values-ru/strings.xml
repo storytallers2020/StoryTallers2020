@@ -52,6 +52,7 @@
     <string name="game_loading_msg">Загрузка…</string>
     <string name="mandatory_word">Обязательное слово:</string>
     <string name="copy_all">Копировать текст</string>
+    <string name="copy_file">Копировать</string>
 
 
 </resources>

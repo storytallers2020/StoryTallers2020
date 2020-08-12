@@ -53,6 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableEnd="@drawable/ic_outline_file_copy_24"
+        android:textColor="@color/yellow"
+        android:text="@string/copy_file"
         android:contentDescription="@string/copy_all"
         app:layout_constraintBottom_toBottomOf="@id/tv_resume"
         app:layout_constraintEnd_toEndOf="parent"
