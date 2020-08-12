@@ -45,10 +45,10 @@ class TeamCharacterAdapter(
         fun bind(player: Player) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 itemView.player_name_tv.text = player.name
-                player.character.avatarUrl.let { url ->
-                    resourceToUri(url)?.let { uri ->
+                player.character?.avatarUrl.let { url ->
+                    url?.let { resourceToUri(url)?.let { uri ->
                         loadImage(uri, itemView.character)
-                    }
+                    } }
                 }
                 itemView.remove_player_iv.setOnClickListener { onRemovePlayerListener(player) }
             }
