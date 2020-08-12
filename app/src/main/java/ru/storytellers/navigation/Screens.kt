@@ -51,5 +51,9 @@ sealed class Screens {
         override fun getFragment() = LibraryBookFragment.newInstance(story)
     }
 
+    class TeamCharacterScreen() : SupportAppScreen(){
+        override fun getFragment() = TeamCharacterFragment.newInstance()
+    }
+
 
 }
