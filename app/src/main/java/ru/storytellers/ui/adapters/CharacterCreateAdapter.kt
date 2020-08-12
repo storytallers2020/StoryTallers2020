@@ -10,7 +10,7 @@ import ru.storytellers.model.entity.Character
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 
-class CharacterCreateAdapter(val itemClickListener: (character: Character ) -> Unit)
+class CharacterCreateAdapter(val itemClickListener: (character: Character,itemRecycler:View, position:Int ) -> Unit?)
     : RecyclerView.Adapter<CharacterCreateAdapter.CCViewHolder>(){
     private val listCharacters = mutableListOf<Character>()
     fun setData(dataListCharacters: List<Character>?) {
@@ -46,7 +46,7 @@ class CharacterCreateAdapter(val itemClickListener: (character: Character ) -> U
                     loadImage(it, itemView.image_character_iv)
                 }
                 itemView.name_character_tv.text = character.name
-                itemView.setOnClickListener {itemClickListener(character)}
+                itemView.setOnClickListener {itemClickListener(character,itemView,layoutPosition)}
             }
         }
     }
