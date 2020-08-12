@@ -3,6 +3,7 @@ package ru.storytellers.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_image_character_create.view.*
 import ru.storytellers.R
@@ -20,6 +21,7 @@ class CharacterCreateAdapter(val itemClickListener: (character: Character,itemRe
         dataListCharacters?.let {
             this.listCharacters = it as MutableList<Character>
             notifyDataSetChanged()
+            Toast.LENGTH_LONG
         }
     }
 
@@ -37,21 +39,17 @@ class CharacterCreateAdapter(val itemClickListener: (character: Character,itemRe
     override fun getItemCount()= listCharacters.count()
 
     override fun onBindViewHolder(holder: CCViewHolder, position: Int) {
-        if (selectedPosition == position)
-            holder.itemView.setBackgroundResource(R.color.yellow)
-        else
-            holder.itemView.setBackgroundResource(R.color.no_color)
+        holder.itemView.isSelected = selectedPosition == position
         holder.bind(listCharacters[position])
     }
 
     inner class CCViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(character: Character) {
             with(itemView) {
-            if (layoutPosition != RecyclerView.NO_POSITION) {
-                resourceToUri(character.avatarUrl)?.let { loadImage(it, image_character_iv) }
+                val avatar = if (isSelected) character.avatarUrlSelected else character.avatarUrl
+                resourceToUri(avatar)?.let { loadImage(it, image_character_iv) }
                 name_character_tv.text = character.name
-                setOnClickListener {itemClickListener.invoke(character, this, layoutPosition)}
-                }
+                setOnClickListener { itemClickListener.invoke(character, this, layoutPosition) }
             }
         }
     }
