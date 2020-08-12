@@ -3,6 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/default_splash_background"
-    android:src="@drawable/splash_gif"
+    android:src="@drawable/splash_logo"
     android:scaleType="fitXY"
     android:contentDescription="@string/game_loading_msg" />

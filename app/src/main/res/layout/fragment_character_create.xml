@@ -120,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
-            android:maxLength="25"
+            android:maxLength="15"
             android:maxLines="1"
             android:textColor="@color/white"
             android:gravity="center_vertical"
@@ -163,6 +163,8 @@
         android:text="@string/save"
         android:enabled="false"
         android:layout_marginTop="@dimen/margin_standard"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintTop_toBottomOf="@id/rv_characters"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

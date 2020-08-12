@@ -19,7 +19,7 @@ class PlayerDataSource(
             val roomPlayer = RoomPlayer(
                 player.id,
                 player.name,
-                player.character.id,
+                player.character?.id ?: 0,
                 storyId
             )
             database.playerDao.insert(roomPlayer)

@@ -32,7 +32,7 @@ class LibraryBookViewModel(
 
     //TODO: Поменять на StoryId
     fun getTextStory(story: Story) {
-        storyRepository.getStoryWithSentencesByIdLite(story.id)
+        storyRepository.getStoryWithSentencesById(story.id)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 //val textStory = extractTextFromStory(it)
