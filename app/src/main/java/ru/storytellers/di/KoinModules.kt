@@ -45,7 +45,8 @@ private val loadModules by lazy {
             selectCoverModule,
             titleAndSaveModule,
             libraryModule,
-            libraryBookModule
+            libraryBookModule,
+            teamCharacterModule
         )
     )
 }
@@ -76,14 +77,10 @@ val characterCreateModule=  module {
     viewModel { CharacterCreateViewModel(get(),get()) }
 }
 
-/*
-val characterModel =  module {
-    single { PlayerCreator() }
-    single<ICharacterDataSource>{CharacterResDataSource(get()) }
-    single<ICharacterRepository>{CharacterRepository(get()) }
-    viewModel { CreateCharacterViewModel(get()) }
+val teamCharacterModule=  module {
+    viewModel { TeamCharacterViewModel() }
 }
- */
+
 
 val locationModule =  module {
     single<ILocationDataSource>{ LocationResDataSource(get()) }
