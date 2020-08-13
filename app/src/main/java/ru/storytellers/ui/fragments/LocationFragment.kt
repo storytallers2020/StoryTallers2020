@@ -22,7 +22,7 @@ class LocationFragment : BaseFragment<DataModel>() {
     private val onListItemClickListener = { location: Location ->
         StoryTallerApp.instance.gameStorage.setLocationGame(location)
         Timber.d(location.fieldsToLogString())
-        router.navigateTo(Screens.GameScreen())
+        router.navigateTo(Screens.GameStartScreen())
     }
     private val locationAdapter: LocationAdapter by lazy { LocationAdapter(onListItemClickListener) }
 
@@ -32,8 +32,7 @@ class LocationFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         iniViewModel()
-        val recyclerView: RecyclerView = view?.findViewById(R.id.rv_covers)!!
-        recyclerView.adapter = locationAdapter
+        rv_covers.adapter = locationAdapter
         back_from_location.setOnClickListener { backClicked() }
     }
 

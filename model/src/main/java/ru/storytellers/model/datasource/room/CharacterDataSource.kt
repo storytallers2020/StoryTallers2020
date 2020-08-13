@@ -14,7 +14,8 @@ class CharacterDataSource(private val database: AppDatabase) : ICharacterDataSou
             val roomCharacter = RoomCharacter(
                 character.id,
                 character.name,
-                character.avatarUrl
+                character.avatarUrl,
+                character.avatarUrlSelected
             )
             database.characterDao.insert(roomCharacter)
         }
@@ -26,7 +27,8 @@ class CharacterDataSource(private val database: AppDatabase) : ICharacterDataSou
                     Character(
                         roomCharacter.id,
                         roomCharacter.name,
-                        roomCharacter.avatarUrl
+                        roomCharacter.avatarUrl,
+                        roomCharacter.avatarUrlSelected
                     )
                 )
             } ?: let {
@@ -41,7 +43,8 @@ class CharacterDataSource(private val database: AppDatabase) : ICharacterDataSou
                     Character(
                         it.id,
                         it.name,
-                        it.avatarUrl
+                        it.avatarUrl,
+                        it.avatarUrlSelected
                     )
                 }
                 emitter.onSuccess(characterList)

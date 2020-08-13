@@ -1,18 +1,18 @@
 package ru.storytellers.viewmodels
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import ru.storytellers.application.StoryTallerApp
-import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.repository.ICharacterRepository
+import ru.storytellers.utils.PlayerCreator
+import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
-class CreateCharacterViewModel(private val characterRepository: ICharacterRepository) : BaseViewModel<DataModel>() {
-
+class CharacterCreateViewModel(private val characterRepository: ICharacterRepository,private val playerCreator: PlayerCreator) :
+    BaseViewModel<DataModel>() {
 
     private val onSuccessliveData = MutableLiveData<DataModel.Success<Character>>()
     private val onErrorliveData = MutableLiveData<DataModel.Error>()
@@ -23,41 +23,32 @@ class CreateCharacterViewModel(private val characterRepository: ICharacterReposi
     private var listPlayers: MutableList<Player> = StoryTallerApp.instance.gameStorage.getListPlayers()
     private var flagActive: Boolean=false
 
+    fun subscribeOnSuccess(): LiveData<DataModel.Success<Character>> {
+        return onSuccessliveData
+    }
 
-     fun subscribeOnSuccess(): LiveData<DataModel.Success<Character>>{
-         return onSuccessliveData
-     }
-
-    fun subscribeOnError(): LiveData<DataModel.Error>{
+    fun subscribeOnError(): LiveData<DataModel.Error> {
         return onErrorliveData
     }
-    fun subscribeOnLoading() : LiveData<DataModel.Loading>{
+    fun subscribeOnLoading() : LiveData<DataModel.Loading> {
         return onLoadingliveData
     }
 
-    fun subscribeOnPlayers(): LiveData<List<Player>>{
-        playersLiveData.value=listPlayers
-        return playersLiveData
-    }
-
-    fun subscribeOnFlagActive(): LiveData<Boolean>{
-        return flagActiveLiveData
-    }
-
-    fun setFlagActive(flag:Boolean){
-        flagActive=flag
-        flagActiveLiveData.value=flagActive
-    }
-
-    fun removePlayer(player:Player){
-        listPlayers.remove(player)
-        playersLiveData.value=listPlayers
-    }
-
     fun addPlayer(player:Player){
-       listPlayers.add(player)
-        playersLiveData.value=listPlayers
+        listPlayers.add(player)
     }
+
+    fun setNamePlayer(name: String) {
+        playerCreator.setNamePlayer(name)
+    }
+
+    fun setCharacterOfPlayer(character: Character )
+    {
+        playerCreator.setCharacterOfPlayer(character)
+    }
+
+    fun getPlayer()=playerCreator.getPlayer()
+
 
     fun getAllCharacters(){
         characterRepository.getAll()

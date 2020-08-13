@@ -20,7 +20,6 @@ import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
 import ru.storytellers.model.datasource.room.PlayerDataSource
 import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
 import ru.storytellers.model.datasource.room.StoryDataSource
-import ru.storytellers.viewmodels.CreateCharacterViewModel
 import ru.storytellers.viewmodels.LevelViewModel
 import ru.storytellers.viewmodels.LocationViewModel
 import ru.storytellers.viewmodels.StartViewModel
@@ -40,14 +39,16 @@ private val loadModules by lazy {
             databaseModule,
             startModule,
             levelModel,
-            characterModel,
+            characterCreateModule,
             locationModule,
-            gameModel,
+            gameModule,
             gameEndModule,
             selectCoverModule,
             titleAndSaveModule,
             libraryModule,
-            libraryBookModule
+            libraryBookModule,
+            teamCharacterModule,
+            gameStartModule
         )
     )
 }
@@ -71,12 +72,21 @@ val startModule =  module {
 val levelModel =  module {
         viewModel { LevelViewModel() }
 }
-val characterModel =  module {
+val gameStartModule =  module {
+    viewModel { GameStartViewModel() }
+}
+
+val characterCreateModule=  module {
     single { PlayerCreator() }
     single<ICharacterDataSource>{CharacterResDataSource(get()) }
     single<ICharacterRepository>{CharacterRepository(get()) }
-    viewModel { CreateCharacterViewModel(get()) }
+    viewModel { CharacterCreateViewModel(get(),get()) }
 }
+
+val teamCharacterModule=  module {
+    viewModel { TeamCharacterViewModel() }
+}
+
 
 val locationModule =  module {
     single { CharacterStorage(get()) }
@@ -115,7 +125,7 @@ val titleAndSaveModule = module {
 }
 
 
-val gameModel = module {
+val gameModule = module {
     single {
         val rule = Rules()
         rule.addRule(NoEmptySentenceRule())

@@ -8,11 +8,20 @@ class PlayerCreator {
     private var idPlayer: Long=0
     private  var namePlayer: String="Player"
 
-    private lateinit var characterOfPlayer: Character
+    private  var characterOfPlayer: Character?=null
+    private  var player:Player?=null
 
-    fun createPlayer(): Player {
+    fun getPlayer():Player?{
+        return if (createPlayer()) player
+        else null
+    }
+    private fun createPlayer(): Boolean {
         idPlayer=getUid()
-        return Player(idPlayer,namePlayer,characterOfPlayer)
+        characterOfPlayer?.let {player=Player(idPlayer,namePlayer,it)
+            idPlayer=0
+            namePlayer="Player"
+            characterOfPlayer=null
+            return true} ?: return false
     }
 
     fun setNamePlayer(name: String){
