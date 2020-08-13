@@ -22,7 +22,7 @@ class LocationFragment : BaseFragment<DataModel>() {
     private val onListItemClickListener = { location: Location ->
         StoryTallerApp.instance.gameStorage.setLocationGame(location)
         Timber.d(location.fieldsToLogString())
-        router.navigateTo(Screens.GameScreen())
+        router.navigateTo(Screens.GameStartScreen())
     }
     private val locationAdapter: LocationAdapter by lazy { LocationAdapter(onListItemClickListener) }
 
