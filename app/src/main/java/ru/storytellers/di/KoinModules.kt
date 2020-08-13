@@ -129,7 +129,7 @@ val titleAndSaveModule = module {
 }
 
 
-val gameModel = module {
+val gameModule = module {
     single {
         val rule = Rules()
         rule.addRule(NoEmptySentenceRule())

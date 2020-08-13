@@ -9,8 +9,8 @@ sealed class Screens {
         override fun getFragment() = StartFragment.newInstance()
     }
 
-    class CreateCharacterScreen() : SupportAppScreen(){
-        override fun getFragment() = CreateCharacterFragment.newInstance()
+    class CharacterCreateScreen() : SupportAppScreen(){
+        override fun getFragment() = CharacterCreateFragment.newInstance()
     }
 
     class LevelScreen : SupportAppScreen(){
@@ -56,5 +56,8 @@ sealed class Screens {
         override fun getFragment() = LibraryBookFragment.newInstance(story)
     }
 
+    class TeamCharacterScreen() : SupportAppScreen() {
+        override fun getFragment() = TeamCharacterFragment.newInstance()
+    }
 
 }
