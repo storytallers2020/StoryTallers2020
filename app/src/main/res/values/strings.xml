@@ -95,6 +95,9 @@
         - Спасибо, Иван-царевич! - сказал сокол, - За эту услугу можешь ты обращаться ясным соколом и муравьем всякий раз, как захочешь.
     </string>
     <string name="game_loading_msg">The game is loading. Please wait…</string>
+    <string name="mandatory_word">"Mandatory word:"</string>
+    <string name="copy_all">Copy All</string>
+    <string name="copy_file">Copy</string>
 
 
 </resources>

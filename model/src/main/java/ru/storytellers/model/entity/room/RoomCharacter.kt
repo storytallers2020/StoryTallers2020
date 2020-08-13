@@ -8,5 +8,6 @@ class RoomCharacter (
     @PrimaryKey
     val id: Long,
     val name: String,
-    val avatarUrl: String
+    val avatarUrl: String,
+    val avatarUrlSelected: String
 )

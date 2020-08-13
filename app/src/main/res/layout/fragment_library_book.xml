@@ -71,46 +71,62 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <TextView
+    <LinearLayout
         android:id="@+id/share_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/share"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_standard"
-        android:paddingTop="@dimen/text_standard"
-        app:layout_constraintBottom_toTopOf="@id/share_icons" />
-
-    <LinearLayout
-        android:id="@+id/share_icons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
+        <TextView
+            android:id="@+id/btn_copy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
-            android:src="@drawable/share_instagram"
-            android:contentDescription="@string/char_icon" />
+            android:text="@string/copy_file"
+            android:textColor="@color/yellow"
+            android:drawableEnd="@drawable/ic_outline_file_copy_24"
+            android:contentDescription="@string/copy_all" />
 
-        <ImageView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/share"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:paddingTop="@dimen/padding_small"
+            android:textSize="@dimen/text_standard" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
-            android:src="@drawable/share_whatsapp"
-            android:contentDescription="@string/char_icon" />
+            android:visibility="gone">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
-            android:src="@drawable/share_telegram"
-            android:contentDescription="@string/char_icon" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_small"
+                android:src="@drawable/share_instagram"
+                android:contentDescription="@string/char_icon" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_small"
+                android:src="@drawable/share_whatsapp"
+                android:contentDescription="@string/char_icon" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_small"
+                android:src="@drawable/share_telegram"
+                android:contentDescription="@string/char_icon" />
+
+        </LinearLayout>
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

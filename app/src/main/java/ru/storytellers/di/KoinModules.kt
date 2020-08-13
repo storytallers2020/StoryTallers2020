@@ -24,7 +24,6 @@ import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
 import ru.storytellers.model.datasource.room.PlayerDataSource
 import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
 import ru.storytellers.model.datasource.room.StoryDataSource
-import ru.storytellers.viewmodels.CreateCharacterViewModel
 import ru.storytellers.viewmodels.LevelViewModel
 import ru.storytellers.viewmodels.LocationViewModel
 import ru.storytellers.viewmodels.StartViewModel
@@ -44,14 +43,16 @@ private val loadModules by lazy {
             databaseModule,
             startModule,
             levelModel,
-            characterModel,
+            characterCreateModule,
             locationModule,
-            gameModel,
+            gameModule,
             gameEndModule,
             selectCoverModule,
             titleAndSaveModule,
             libraryModule,
-            libraryBookModule
+            libraryBookModule,
+            teamCharacterModule,
+            gameStartModule
         )
     )
 }
@@ -69,24 +70,33 @@ val ciceroneModule = module {
     single { get<Cicerone<Router>>().navigatorHolder }
 }
 
-val startModule = module {
-    viewModel { StartViewModel(get()) }
+val startModule =  module {
+        viewModel { StartViewModel(get()) }
 }
-val levelModel = module {
-    viewModel { LevelViewModel() }
+val levelModel =  module {
+        viewModel { LevelViewModel() }
 }
-val characterModel = module {
-    single { PlayerCreator() }
-    single<ICharacterDataSource> { CharacterResDataSource(get()) }
-    single<ICharacterRepository> { CharacterRepository(get()) }
-    viewModel { CreateCharacterViewModel(get()) }
+val gameStartModule =  module {
+    viewModel { GameStartViewModel() }
 }
 
-val locationModule = module {
+val characterCreateModule=  module {
+    single { PlayerCreator() }
+    single<ICharacterDataSource>{CharacterResDataSource(get()) }
+    single<ICharacterRepository>{CharacterRepository(get()) }
+    viewModel { CharacterCreateViewModel(get(),get()) }
+}
+
+val teamCharacterModule=  module {
+    viewModel { TeamCharacterViewModel() }
+}
+
+
+val locationModule =  module {
     single { CharacterStorage(get()) }
     single { LocationStorage(get()) }
-    single<ILocationDataSource> { LocationResDataSource(get()) }
-    single<ILocationRepository> { LocationRepository(get()) }
+    single<ILocationDataSource>{ LocationResDataSource(get()) }
+    single<ILocationRepository>{ LocationRepository(get()) }
     viewModel { LocationViewModel(get()) }
 }
 
@@ -106,14 +116,14 @@ val gameEndModule = module {
     viewModel { GameEndViewModel() }
 }
 val selectCoverModule = module {
-    single<ICoverDataSource> { CoverResDataSource(get()) }
-    single<ICoverRepository> { CoverRepository(get()) }
+    single<ICoverDataSource>{CoverResDataSource(get())}
+    single<ICoverRepository>{ CoverRepository(get()) }
     viewModel { SelectCoverViewModel(get()) }
 }
 
 val titleAndSaveModule = module {
-    single<IStoryDataSource> { StoryDataSource(get(), get(), get()) }
-    single<IStoryRepository> { StoryRepository(get()) }
+    single<IStoryDataSource>{ StoryDataSource(get(),get(), get()) }
+    single<IStoryRepository>{ StoryRepository(get()) }
     single { TitleAndSaveModelAssistant(get()) }
     viewModel { TitleAndSaveStoryViewModel(get()) }
 }
@@ -137,11 +147,11 @@ val gameModel = module {
         }
     }
 
-    single<IPlayerDataSource> { PlayerDataSource(get(), get()) }
-    single<ISentenceOfTaleDataSource> { SentenceOfTaleDataSource(get(), get()) }
-    single { SentenceOfTaleRepository(get()) }
+    single<IPlayerDataSource>{ PlayerDataSource(get(),get()) }
+    single<ISentenceOfTaleDataSource>{ SentenceOfTaleDataSource(get(),get()) }
+    single{ SentenceOfTaleRepository(get()) }
 
     single { Game() }
     single { GameStorage() }
-    viewModel { GameViewModel(get(), get()) }
+    viewModel { GameViewModel(get(),get()) }
 }

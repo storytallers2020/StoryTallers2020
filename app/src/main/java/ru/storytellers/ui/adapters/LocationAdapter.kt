@@ -42,7 +42,7 @@ class LocationAdapter(val clickListener: (location: Location) -> Unit) :
             resourceToUri(location.imageForRecycler)?.let {
                 loadImage(it, itemView.locationView)
             }
-            itemView.setOnClickListener {
+            itemView.setOnClickListener{
                 clickListener(location)
             }
         }
