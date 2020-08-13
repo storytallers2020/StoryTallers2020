@@ -11,19 +11,20 @@ import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
+import timber.log.Timber
 
 class GameViewModel(
     private val game: Game,
     levels: Levels
 
-): BaseViewModel<DataModel>() {
-    private  val listPlayer= StoryTallerApp.instance.gameStorage.getListPlayers()
-    private  val listSentenceOfTale= StoryTallerApp.instance.gameStorage.getListSentenceOfTale()
-    private  val levelGame= levels.getLevelById(StoryTallerApp.instance.gameStorage.getLevelGame())
-    private var currentPlayer: Player?=null
-    var isCorrectFlag: Boolean=true
-    private var currentSentenceOfTale: SentenceOfTale?=null
-    private val textResult= mutableListOf<String>()
+) : BaseViewModel<DataModel>() {
+    private val listPlayer = StoryTallerApp.instance.gameStorage.getListPlayers()
+    private val listSentenceOfTale = StoryTallerApp.instance.gameStorage.getListSentenceOfTale()
+    private val levelGame = levels.getLevelById(StoryTallerApp.instance.gameStorage.getLevelGame())
+    private var currentPlayer: Player? = null
+    var isCorrectFlag: Boolean = true
+    private var currentSentenceOfTale: SentenceOfTale? = null
+    //private val textResult = mutableListOf<String>()
 
     private val currentPlayerLiveData = MutableLiveData<Player>()
     private val resultTextLiveData = MutableLiveData<String>()
@@ -31,28 +32,30 @@ class GameViewModel(
     private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
 
 
-    fun getCurrentPlayer(){
-        currentPlayer=game.getCurrentPlayer()
-        currentPlayerLiveData.value=currentPlayer
+    fun getCurrentPlayer() {
+        currentPlayer = game.getCurrentPlayer()
+        currentPlayerLiveData.value = currentPlayer
     }
-    fun createNewGame(){
-        levelGame?.let { game.newGame(listPlayer, it ) }
+
+    fun createNewGame() {
+        levelGame?.let { game.newGame(listPlayer, it) }
     }
-    fun getUriBackgroundImage(){
+
+    fun getUriBackgroundImage() {
         StoryTallerApp
             .instance
             .gameStorage
-            .getLocationGame()?.
-            imageUrl?.
-            let { uriBackgroundImageLiveData.value= resourceToUri(it) }
+            .getLocationGame()?.imageUrl?.let {
+                uriBackgroundImageLiveData.value = resourceToUri(it)
+            }
     }
 
-    fun subscribeOnCurrentPlayer()=currentPlayerLiveData
-    fun subscribeOnResultText()=resultTextLiveData
-    fun subscribeOnIsCorrectFlag()=isCorrectFlagLiveData
-    fun subscribeOnUriBackgroundImage()=uriBackgroundImageLiveData
+    fun subscribeOnCurrentPlayer() = currentPlayerLiveData
+    fun subscribeOnResultText() = resultTextLiveData
+    fun subscribeOnIsCorrectFlag() = isCorrectFlagLiveData
+    fun subscribeOnUriBackgroundImage() = uriBackgroundImageLiveData
 
-    fun createSentenceOfTale(content:String) {
+    fun createSentenceOfTale(content: String) {
         val sentence = content
             .trimSentenceSpace()
             .addDotIfNeed()
@@ -70,26 +73,41 @@ class GameViewModel(
         checkCurrentSentenceOfTale()
     }
 
-    private fun checkCurrentSentenceOfTale(){
-       val checkResult= currentSentenceOfTale?.let { game.nextStep(it) }
+    private fun checkCurrentSentenceOfTale() {
+        val checkResult = currentSentenceOfTale?.let { game.nextStep(it) }
         checkResult?.let {
-            if (it){
+            if (it) {
                 handlerCurrentSentenceOfTale()
-            } else{
-                isCorrectFlag=it
-                isCorrectFlagLiveData.value=isCorrectFlag
+            } else {
+                isCorrectFlag = it
+                isCorrectFlagLiveData.value = isCorrectFlag
 
             }
         }
     }
 
-    private fun handlerCurrentSentenceOfTale(){
-        listSentenceOfTale.apply {
-            add(currentSentenceOfTale)
-            textResult.clear()
-            forEach {textResult.add(it!!.content)}
+    private fun handlerCurrentSentenceOfTale() {
+        currentSentenceOfTale?.let { listSentenceOfTale.add(it) }
+
+        getCurrentLevel()?.let { level ->
+
+            val listOfStrings = listSentenceOfTale
+                .toList()
+                .getSortedList()
+                .toListOfStrings()
+
+            resultTextLiveData.value =
+                level
+                    .showRule
+                    .convert(game.getTurn(), listOfStrings)
         }
-        resultTextLiveData.value = textResult.collectSentence()
+
+//        listSentenceOfTale.apply {
+//            add(currentSentenceOfTale)
+//            textResult.clear()
+//            forEach {textResult.add(it!!.content)}
+//        }
+//        resultTextLiveData.value = textResult.collectSentence()
 
     }
 }

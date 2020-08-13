@@ -3,6 +3,7 @@ package ru.storytellers.di
 import androidx.room.Room
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.storytellers.engine.GameStorage
 import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
@@ -12,6 +13,9 @@ import ru.storytellers.engine.level.Levels
 import ru.storytellers.engine.rules.NoEmptySentenceRule
 import ru.storytellers.engine.rules.OneSentenceInTextRule
 import ru.storytellers.engine.rules.Rules
+import ru.storytellers.engine.showRules.IShowRule
+import ru.storytellers.engine.showRules.ShowAllSentencesRule
+import ru.storytellers.engine.showRules.ShowLastSentenceRule
 import ru.storytellers.model.datasource.*
 import ru.storytellers.model.datasource.resourcestorage.CoverResDataSource
 import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
@@ -65,24 +69,24 @@ val ciceroneModule = module {
     single { get<Cicerone<Router>>().navigatorHolder }
 }
 
-val startModule =  module {
-        viewModel { StartViewModel(get()) }
+val startModule = module {
+    viewModel { StartViewModel(get()) }
 }
-val levelModel =  module {
-        viewModel { LevelViewModel() }
+val levelModel = module {
+    viewModel { LevelViewModel() }
 }
-val characterModel =  module {
+val characterModel = module {
     single { PlayerCreator() }
-    single<ICharacterDataSource>{CharacterResDataSource(get()) }
-    single<ICharacterRepository>{CharacterRepository(get()) }
+    single<ICharacterDataSource> { CharacterResDataSource(get()) }
+    single<ICharacterRepository> { CharacterRepository(get()) }
     viewModel { CreateCharacterViewModel(get()) }
 }
 
-val locationModule =  module {
+val locationModule = module {
     single { CharacterStorage(get()) }
     single { LocationStorage(get()) }
-    single<ILocationDataSource>{ LocationResDataSource(get()) }
-    single<ILocationRepository>{ LocationRepository(get()) }
+    single<ILocationDataSource> { LocationResDataSource(get()) }
+    single<ILocationRepository> { LocationRepository(get()) }
     viewModel { LocationViewModel(get()) }
 }
 
@@ -102,14 +106,14 @@ val gameEndModule = module {
     viewModel { GameEndViewModel() }
 }
 val selectCoverModule = module {
-    single<ICoverDataSource>{CoverResDataSource(get())}
-    single<ICoverRepository>{ CoverRepository(get()) }
+    single<ICoverDataSource> { CoverResDataSource(get()) }
+    single<ICoverRepository> { CoverRepository(get()) }
     viewModel { SelectCoverViewModel(get()) }
 }
 
 val titleAndSaveModule = module {
-    single<IStoryDataSource>{ StoryDataSource(get(),get(), get()) }
-    single<IStoryRepository>{ StoryRepository(get()) }
+    single<IStoryDataSource> { StoryDataSource(get(), get(), get()) }
+    single<IStoryRepository> { StoryRepository(get()) }
     single { TitleAndSaveModelAssistant(get()) }
     viewModel { TitleAndSaveStoryViewModel(get()) }
 }
@@ -123,19 +127,21 @@ val gameModel = module {
         rule
     }
 
+    single<IShowRule>(named("ShowAllSentencesRule")) { ShowAllSentencesRule() }
+    single<IShowRule>(named("ShowLastSentenceRule")) { ShowLastSentenceRule() }
     single {
-        val levels = Levels()
-        levels.addLevel(Level(0, get()))
-        levels.addLevel(Level(1, get()))
-        levels.addLevel(Level(2, get()))
-        levels
+        Levels().apply {
+            addLevel(Level(0, get(), get(named("ShowAllSentencesRule"))))
+            addLevel(Level(1, get(), get(named("ShowLastSentenceRule"))))
+            addLevel(Level(2, get(), get(named("ShowLastSentenceRule"))))
+        }
     }
 
-    single<IPlayerDataSource>{ PlayerDataSource(get(),get()) }
-    single<ISentenceOfTaleDataSource>{ SentenceOfTaleDataSource(get(),get()) }
-    single{ SentenceOfTaleRepository(get()) }
+    single<IPlayerDataSource> { PlayerDataSource(get(), get()) }
+    single<ISentenceOfTaleDataSource> { SentenceOfTaleDataSource(get(), get()) }
+    single { SentenceOfTaleRepository(get()) }
 
     single { Game() }
     single { GameStorage() }
-    viewModel { GameViewModel(get(),get()) }
+    viewModel { GameViewModel(get(), get()) }
 }
