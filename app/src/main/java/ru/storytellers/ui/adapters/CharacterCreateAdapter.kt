@@ -10,7 +10,7 @@ import ru.storytellers.model.entity.Character
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 
-class CharacterCreateAdapter(val itemClickListener: (character: Character,itemRecycler:View, position:Int ) -> Unit?)
+class CharacterCreateAdapter(val itemClickListener: (character: Character, position:Int ) -> Unit?)
     : RecyclerView.Adapter<CharacterCreateAdapter.CCViewHolder>(){
 
     private var listCharacters = mutableListOf<Character>()
@@ -49,7 +49,7 @@ class CharacterCreateAdapter(val itemClickListener: (character: Character,itemRe
                     val avatar = if (isSelected) character.avatarUrlSelected else character.avatarUrl
                     resourceToUri(avatar)?.let { loadImage(it, image_character_iv) }
                     name_character_tv.text = character.name
-                    setOnClickListener { itemClickListener.invoke(character, this, layoutPosition) }
+                    setOnClickListener { itemClickListener(character, layoutPosition) }
                 }
             }
         }
