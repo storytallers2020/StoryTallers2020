@@ -25,7 +25,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_character_create
     private val characterAdapter: CharacterCreateAdapter by lazy { CharacterCreateAdapter(onItemClickListener) }
 
-    private val onItemClickListener = { character: Character, itemRecycler: View, position: Int ->
+    private val onItemClickListener = { character: Character, position: Int ->
         model.setCharacterOfPlayer(character)
         characterAdapter.selectedPosition = position
         characterAdapter.notifyDataSetChanged()
