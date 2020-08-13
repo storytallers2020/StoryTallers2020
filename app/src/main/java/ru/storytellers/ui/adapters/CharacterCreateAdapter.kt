@@ -3,7 +3,6 @@ package ru.storytellers.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_image_character_create.view.*
 import ru.storytellers.R
@@ -21,7 +20,7 @@ class CharacterCreateAdapter(val itemClickListener: (character: Character,itemRe
         dataListCharacters?.let {
             this.listCharacters = it as MutableList<Character>
             notifyDataSetChanged()
-            Toast.LENGTH_LONG
+            selectedPosition = -1
         }
     }
 
@@ -46,10 +45,12 @@ class CharacterCreateAdapter(val itemClickListener: (character: Character,itemRe
     inner class CCViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(character: Character) {
             with(itemView) {
-                val avatar = if (isSelected) character.avatarUrlSelected else character.avatarUrl
-                resourceToUri(avatar)?.let { loadImage(it, image_character_iv) }
-                name_character_tv.text = character.name
-                setOnClickListener { itemClickListener.invoke(character, this, layoutPosition) }
+                if (layoutPosition != RecyclerView.NO_POSITION) {
+                    val avatar = if (isSelected) character.avatarUrlSelected else character.avatarUrl
+                    resourceToUri(avatar)?.let { loadImage(it, image_character_iv) }
+                    name_character_tv.text = character.name
+                    setOnClickListener { itemClickListener.invoke(character, this, layoutPosition) }
+                }
             }
         }
     }
