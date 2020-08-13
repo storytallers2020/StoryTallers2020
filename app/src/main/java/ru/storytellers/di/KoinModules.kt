@@ -41,13 +41,14 @@ private val loadModules by lazy {
             levelModel,
             characterCreateModule,
             locationModule,
-            gameModel,
+            gameModule,
             gameEndModule,
             selectCoverModule,
             titleAndSaveModule,
             libraryModule,
             libraryBookModule,
-            teamCharacterModule
+            teamCharacterModule,
+            gameStartModule
         )
     )
 }
@@ -71,6 +72,10 @@ val startModule =  module {
 val levelModel =  module {
         viewModel { LevelViewModel() }
 }
+val gameStartModule =  module {
+    viewModel { GameStartViewModel() }
+}
+
 val characterCreateModule=  module {
     single { PlayerCreator() }
     single<ICharacterDataSource>{CharacterResDataSource(get()) }
@@ -120,7 +125,7 @@ val titleAndSaveModule = module {
 }
 
 
-val gameModel = module {
+val gameModule = module {
     single {
         val rule = Rules()
         rule.addRule(NoEmptySentenceRule())
