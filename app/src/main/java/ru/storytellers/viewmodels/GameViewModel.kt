@@ -11,7 +11,6 @@ import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
-import timber.log.Timber
 
 class GameViewModel(
     private val game: Game,
@@ -24,12 +23,12 @@ class GameViewModel(
     private var currentPlayer: Player? = null
     var isCorrectFlag: Boolean = true
     private var currentSentenceOfTale: SentenceOfTale? = null
-    //private val textResult = mutableListOf<String>()
 
     private val currentPlayerLiveData = MutableLiveData<Player>()
     private val resultTextLiveData = MutableLiveData<String>()
     private val isCorrectFlagLiveData = MutableLiveData<Boolean>()
     private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
+    private val wordLiveData = MutableLiveData<String>()
 
 
     fun getCurrentPlayer() {
@@ -54,22 +53,20 @@ class GameViewModel(
     fun subscribeOnResultText() = resultTextLiveData
     fun subscribeOnIsCorrectFlag() = isCorrectFlagLiveData
     fun subscribeOnUriBackgroundImage() = uriBackgroundImageLiveData
+    fun subscribeOnWord() = wordLiveData
 
     fun createSentenceOfTale(content: String) {
         val sentence = content
             .trimSentenceSpace()
             .addDotIfNeed()
 
-
-        currentPlayer?.let {
-            SentenceOfTale(
-                getUid(),
-                it,
-                game.getTurn(),
-                sentence,
-                ContentTypeEnum.TEXT
-            )
-        }.let { currentSentenceOfTale = it }
+        currentSentenceOfTale = SentenceOfTale(
+            getUid(),
+            currentPlayer,
+            game.getTurn(),
+            sentence,
+            ContentTypeEnum.TEXT
+        )
         checkCurrentSentenceOfTale()
     }
 
@@ -81,7 +78,6 @@ class GameViewModel(
             } else {
                 isCorrectFlag = it
                 isCorrectFlagLiveData.value = isCorrectFlag
-
             }
         }
     }
@@ -100,14 +96,15 @@ class GameViewModel(
                 level
                     .showRule
                     .convert(game.getTurn(), listOfStrings)
+
+            onStartTurn()
         }
+    }
 
-//        listSentenceOfTale.apply {
-//            add(currentSentenceOfTale)
-//            textResult.clear()
-//            forEach {textResult.add(it!!.content)}
-//        }
-//        resultTextLiveData.value = textResult.collectSentence()
-
+    fun onStartTurn() {
+        getCurrentLevel()?.let {level ->
+            if (level.wordRule.isNeedUseWord())
+                wordLiveData.value = level.wordRule.getRandomWord()
+        }
     }
 }

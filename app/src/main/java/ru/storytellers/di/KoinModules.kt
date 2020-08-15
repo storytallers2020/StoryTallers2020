@@ -16,11 +16,14 @@ import ru.storytellers.engine.rules.Rules
 import ru.storytellers.engine.showRules.IShowRule
 import ru.storytellers.engine.showRules.ShowAllSentencesRule
 import ru.storytellers.engine.showRules.ShowLastSentenceRule
+import ru.storytellers.engine.wordRules.IWordRule
+import ru.storytellers.engine.wordRules.RandomWordRule
 import ru.storytellers.model.datasource.*
 import ru.storytellers.model.datasource.resourcestorage.CoverResDataSource
 import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
 import ru.storytellers.model.datasource.resourcestorage.storage.CharacterStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
+import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
 import ru.storytellers.model.datasource.room.PlayerDataSource
 import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
 import ru.storytellers.model.datasource.room.StoryDataSource
@@ -70,33 +73,33 @@ val ciceroneModule = module {
     single { get<Cicerone<Router>>().navigatorHolder }
 }
 
-val startModule =  module {
-        viewModel { StartViewModel(get()) }
+val startModule = module {
+    viewModel { StartViewModel(get()) }
 }
-val levelModel =  module {
-        viewModel { LevelViewModel() }
+val levelModel = module {
+    viewModel { LevelViewModel() }
 }
-val gameStartModule =  module {
+val gameStartModule = module {
     viewModel { GameStartViewModel() }
 }
 
-val characterCreateModule=  module {
+val characterCreateModule = module {
     single { PlayerCreator() }
-    single<ICharacterDataSource>{CharacterResDataSource(get()) }
-    single<ICharacterRepository>{CharacterRepository(get()) }
-    viewModel { CharacterCreateViewModel(get(),get()) }
+    single<ICharacterDataSource> { CharacterResDataSource(get()) }
+    single<ICharacterRepository> { CharacterRepository(get()) }
+    viewModel { CharacterCreateViewModel(get(), get()) }
 }
 
-val teamCharacterModule=  module {
+val teamCharacterModule = module {
     viewModel { TeamCharacterViewModel() }
 }
 
 
-val locationModule =  module {
+val locationModule = module {
     single { CharacterStorage(get()) }
     single { LocationStorage(get()) }
-    single<ILocationDataSource>{ LocationResDataSource(get()) }
-    single<ILocationRepository>{ LocationRepository(get()) }
+    single<ILocationDataSource> { LocationResDataSource(get()) }
+    single<ILocationRepository> { LocationRepository(get()) }
     viewModel { LocationViewModel(get()) }
 }
 
@@ -116,14 +119,14 @@ val gameEndModule = module {
     viewModel { GameEndViewModel() }
 }
 val selectCoverModule = module {
-    single<ICoverDataSource>{CoverResDataSource(get())}
-    single<ICoverRepository>{ CoverRepository(get()) }
+    single<ICoverDataSource> { CoverResDataSource(get()) }
+    single<ICoverRepository> { CoverRepository(get()) }
     viewModel { SelectCoverViewModel(get()) }
 }
 
 val titleAndSaveModule = module {
-    single<IStoryDataSource>{ StoryDataSource(get(),get(), get()) }
-    single<IStoryRepository>{ StoryRepository(get()) }
+    single<IStoryDataSource> { StoryDataSource(get(), get(), get()) }
+    single<IStoryRepository> { StoryRepository(get()) }
     single { TitleAndSaveModelAssistant(get()) }
     viewModel { TitleAndSaveStoryViewModel(get()) }
 }
@@ -139,19 +142,45 @@ val gameModule = module {
 
     single<IShowRule>(named("ShowAllSentencesRule")) { ShowAllSentencesRule() }
     single<IShowRule>(named("ShowLastSentenceRule")) { ShowLastSentenceRule() }
+
+    single { WordStorage(get()) }
+    single<IWordRule>(named("NoNeedWord")) { RandomWordRule(false, get()) }
+    single<IWordRule>(named("NeedWord")) { RandomWordRule(true, get()) }
+
     single {
         Levels().apply {
-            addLevel(Level(0, get(), get(named("ShowAllSentencesRule"))))
-            addLevel(Level(1, get(), get(named("ShowLastSentenceRule"))))
-            addLevel(Level(2, get(), get(named("ShowLastSentenceRule"))))
+            addLevel(
+                Level(
+                    0,
+                    get(),
+                    get(named("ShowAllSentencesRule")),
+                    get(named("NoNeedWord"))
+                )
+            )
+            addLevel(
+                Level(
+                    1,
+                    get(),
+                    get(named("ShowLastSentenceRule")),
+                    get(named("NoNeedWord"))
+                )
+            )
+            addLevel(
+                Level(
+                    2,
+                    get(),
+                    get(named("ShowLastSentenceRule")),
+                    get(named("NeedWord"))
+                )
+            )
         }
     }
 
-    single<IPlayerDataSource>{ PlayerDataSource(get(),get()) }
-    single<ISentenceOfTaleDataSource>{ SentenceOfTaleDataSource(get(),get()) }
-    single{ SentenceOfTaleRepository(get()) }
+    single<IPlayerDataSource> { PlayerDataSource(get(), get()) }
+    single<ISentenceOfTaleDataSource> { SentenceOfTaleDataSource(get(), get()) }
+    single { SentenceOfTaleRepository(get()) }
 
     single { Game() }
     single { GameStorage() }
-    viewModel { GameViewModel(get(),get()) }
+    viewModel { GameViewModel(get(), get()) }
 }
