@@ -7,6 +7,8 @@ import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.setTextToClipboard
+import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.LibraryBookViewModel
 
 class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
@@ -23,7 +25,14 @@ class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
         model.getTitleStory(story)
 
         back_button_character.setOnClickListener {backClicked()}
+        btn_copy.setOnClickListener { copyText() }
     }
+
+    private fun copyText() {
+        val res = tv_tale.text.toString().setTextToClipboard(requireContext())
+        if (res) toastShowLong(requireContext(), getString(R.string.text_copied))
+    }
+
 
     override fun iniViewModel() {
         model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer {textStory->

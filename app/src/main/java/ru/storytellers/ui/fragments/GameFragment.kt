@@ -52,6 +52,7 @@ class GameFragment : BaseFragment<DataModel>() {
         sentence_line.addTextChangedListener(textWatcher)
         assignSubscribers()
         assistantFragment.showIntro()
+        model.onStartTurn()
     }
 
     private fun assignSubscribers() {
@@ -59,12 +60,13 @@ class GameFragment : BaseFragment<DataModel>() {
         handlerResultTextLiveData()
         handlerIsCorrectSentence()
         handlerUriBackgroundImage()
+        handlerWordChanged()
     }
 
     private fun handlerBtnSend() {
         textSentenceOfTale?.let { model.createSentenceOfTale(it) }
         assistantFragment.hideKeyboard()
-        scroll_view.smoothScrollTo(0, story_body.bottom);
+        scroll_view.smoothScrollTo(0, story_body.bottom)
         sentence_line.setText("")
         assistantFragment.makeInVisibleBtnSend()
         assistantFragment.showGameField()
@@ -102,9 +104,15 @@ class GameFragment : BaseFragment<DataModel>() {
         })
     }
 
+    private fun handlerWordChanged() {
+        model.subscribeOnWord().observe(viewLifecycleOwner, Observer {
+            mandatory_container.visibility = View.VISIBLE
+            tv_mandatory_word.text = it
+        })
+    }
 
     private fun navigateToGameEndScreen() {
-        textResultStoryTaller?.let { router.navigateTo(Screens.GameEndScreen(it)) }
+        router.navigateTo(Screens.GameEndScreen())
     }
 
 }

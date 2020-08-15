@@ -98,6 +98,7 @@
     <string name="mandatory_word">"Mandatory word:"</string>
     <string name="copy_all">Copy All</string>
     <string name="copy_file">Copy</string>
+    <string name="text_copied">Text of the fairy tale in the clipboard</string>
 
 
 </resources>

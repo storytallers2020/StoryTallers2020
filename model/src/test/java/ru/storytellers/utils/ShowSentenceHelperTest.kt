@@ -61,4 +61,32 @@ class ShowSentenceHelperTest {
         Assert.assertEquals(false, res)
     }
 
+    @Test
+    fun `getPrevSentences Test`() {
+        val textList = listOf(
+            "text1.",
+            "- text2.",
+            "text3.",
+            "text4."
+        )
+        val text = textList.getPrevSentences(3)
+        val expectedText = "- text2."
+
+        Assert.assertEquals(expectedText, text)
+    }
+
+    @Test
+    fun `getPrevSentences less 2 Test`() {
+        val textList = listOf(
+            "text1.",
+            "- text2.",
+            "text3.",
+            "text4."
+        )
+        val text = textList.getPrevSentences(1)
+        val expectedText = ""
+
+        Assert.assertEquals(expectedText, text)
+    }
+
 }
