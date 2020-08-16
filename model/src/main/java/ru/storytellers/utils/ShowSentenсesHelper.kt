@@ -2,16 +2,6 @@ package ru.storytellers.utils
 
 import java.lang.StringBuilder
 
-//fun List<String>.collectSentence(): String {
-//    var text = ""
-//    this.forEachIndexed() { index, sentence ->
-//        text +=
-//            if (index < this.count() - 1) "$sentence\r\n"
-//            else sentence
-//    }
-//    return text
-//}
-
 fun Char.isDashSymbol(): Boolean =
     when (this) {
         '-' -> true
@@ -24,7 +14,7 @@ fun String.isStartFromDash(): Boolean =
 // Вот эту функцию вызывать для сбора прделожений в "красивый текст"
 fun List<String>.collectSentence(): String {
     var text = ""
-    this.forEachIndexed() { index, sentence ->
+    this.forEach { sentence ->
         text +=
             if (sentence.isStartFromDash()) {
                 "\r\n$sentence\r\n"
@@ -33,6 +23,12 @@ fun List<String>.collectSentence(): String {
             }
     }
     return text
+}
+
+// Получить предыдущее предложение (2й и 3й уровни)
+fun List<String>.getPrevSentences(turn: Int): String {
+    if (turn < 2) return ""
+    return this[turn-1-1]
 }
 
 fun String.addSpaceAfterPunctuationSymbol(): String {

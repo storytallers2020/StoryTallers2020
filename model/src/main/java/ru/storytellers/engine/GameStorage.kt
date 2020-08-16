@@ -9,7 +9,7 @@ class GameStorage {
      private val listPlayers= mutableListOf<Player>()
      private var levelGame:Int=0
      private var locationGame:Location?=null
-     private val listSentenceOfTale= mutableListOf<SentenceOfTale?>()
+     private val listSentenceOfTale= mutableListOf<SentenceOfTale>()
      private var coverStoryTaller:Cover?=null
      private var titleStoryTaller:String?=null
 

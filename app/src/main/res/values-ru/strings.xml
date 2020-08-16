@@ -51,6 +51,9 @@
     <string name="add_new_character"><u>Добавить игрока +</u></string>
     <string name="game_loading_msg">Загрузка…</string>
     <string name="mandatory_word">Обязательное слово:</string>
+    <string name="copy_all">Копировать текст</string>
+    <string name="copy_file">Копировать</string>
+    <string name="text_copied">Текст сказки в буфере обмена</string>
 
 
 </resources>

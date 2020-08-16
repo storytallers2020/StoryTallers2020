@@ -26,4 +26,7 @@
     <string name="cover4_name">Узоры</string>
     <string name="cover5_name">Планеты</string>
 
+    // Word
+    <string name="word">Королевство\nПланета\nОпасность\nБудущее\nУжас\nСкандал\nРабота</string>
+
 </resources>

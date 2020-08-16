@@ -63,7 +63,7 @@
             android:text="@string/mandatory_word" />
 
         <TextView
-            android:id="@+id/mandatory_tv"
+            android:id="@+id/tv_mandatory_word"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"

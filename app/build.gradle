@@ -79,11 +79,18 @@ dependencies {
 
     //Test
     testImplementation TestImpl.junit
-    androidTestImplementation TestImpl.runner
+
+    androidTestImplementation TestImpl.ext
     androidTestImplementation TestImpl.espresso
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //GifImageView
     implementation GifImageView.gifImageView
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }

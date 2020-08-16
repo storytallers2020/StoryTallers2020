@@ -37,12 +37,13 @@ dependencies {
 
     //Test
     testImplementation TestImpl.junit
-    androidTestImplementation TestImpl.runner
-    androidTestImplementation TestImpl.espresso
 
+    androidTestImplementation TestImpl.ext
+    androidTestImplementation TestImpl.espresso
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 }
-
 repositories {
     mavenCentral()
 }

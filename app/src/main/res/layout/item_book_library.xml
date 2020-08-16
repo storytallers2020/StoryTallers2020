@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/margin_xxs"
+    android:layout_margin="@dimen/margin_xxs"
     android:layout_gravity="center">
 
     <ImageView
@@ -16,7 +16,7 @@
         android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/cover_1_small" />
+        tools:src="@drawable/cover_5" />
 
     <TextView
         android:id="@+id/book_name"
@@ -24,13 +24,13 @@
         android:layout_height="0dp"
         android:textSize="@dimen/text_standard"
         android:textColor="@color/white"
-        android:layout_marginVertical="@dimen/margin_standard"
         android:gravity="center"
-        android:layout_margin="@dimen/margin_xl"
+        android:textAlignment="center"
+        android:layout_margin="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Приключения трёх сыновей" />
+        tools:text="Приключения трёх сыновей-королевичей в тридесятом царстве-государстве." />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
