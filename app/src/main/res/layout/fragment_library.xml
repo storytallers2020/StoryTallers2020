@@ -47,14 +47,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_books"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginVertical="@dimen/margin_large"
-        android:contentDescription="@string/location_2"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        app:reverseLayout="true"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/share_title"
         app:layout_constraintTop_toBottomOf="@id/subHeader"
-        app:layout_constraintVertical_bias="0"
         tools:itemCount="2"
         tools:listitem="@layout/item_book_library" />
 
@@ -62,6 +61,7 @@
         android:id="@+id/share_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="@string/share"
         android:textAllCaps="false"
         android:textAlignment="center"
@@ -74,6 +74,7 @@
         android:id="@+id/share_icons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
