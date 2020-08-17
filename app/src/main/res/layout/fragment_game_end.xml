@@ -40,7 +40,7 @@
         android:id="@+id/tv_resume"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/game_resume"
+        android:text="@string/btn_resume"
         android:layout_marginVertical="@dimen/margin_standard"
         android:textColor="@color/yellow"
         android:textSize="@dimen/text_small"
@@ -54,8 +54,8 @@
         android:layout_height="wrap_content"
         android:drawableEnd="@drawable/ic_outline_file_copy_24"
         android:textColor="@color/yellow"
-        android:text="@string/copy_file"
-        android:contentDescription="@string/copy_all"
+        android:text="@string/btn_copy"
+        android:contentDescription="@string/btn_copy"
         app:layout_constraintBottom_toBottomOf="@id/tv_resume"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_resume" />
@@ -64,7 +64,7 @@
         android:id="@+id/btn_select_cover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_cover"
+        android:text="@string/btn_select_cover"
         android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent" />
 

@@ -1,8 +1,5 @@
 package ru.storytellers.ui.fragments
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game_end.*
 import org.koin.android.ext.android.inject
@@ -43,7 +40,7 @@ class GameEndFragment: BaseFragment<DataModel>() {
 
     private fun copyText() {
         val res = tv_tale.text.toString().setTextToClipboard(requireContext())
-        if (res) toastShowLong(requireContext(), getString(R.string.text_copied))
+        if (res) toastShowLong(requireContext(), getString(R.string.msg_copy))
     }
 
     private fun handlerTextOfStoryTaller(){

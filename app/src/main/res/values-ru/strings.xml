@@ -1,59 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    // Application scope
     <string name="app_name">Сказочники 2020</string>
-    <string name="auth_welcome">Добро пожаловать\nв сказку!</string>
-    <string name="auth_create_tale">Сочинить сказку</string>
-    <string name="auth_help"><u>Как создать сказку?</u></string>
-    <string name="level">Уровень</string>
-    <string name="level_hint">Возможность видеть всю\nранее написанную сказку\nна протяжении всей игры</string>
-    <string name="easy">Легкий</string>
-    <string name="easy_description">Все ранее сочинённые предложения\nвидны всем участникам\nигры в любой момент времени</string>
-    <string name="medium">Средний</string>
-    <string name="medium_description">Игрок видит только последнее\nпредложение игрока\nкоторый ходил перед ним</string>
-    <string name="hard">Сложный</string>
-    <string name="hard_description">Игрок видит только последнее\nпредложение игрока который ходил\nперед ним. В своём предложении\nигрок должен использовать\nобязательное слово которое\nгенерируется игрой в случайном порядке</string>
-    <string name="next">Далее</string>
-    <string name="character">Персонаж</string>
-    <string name="choose_character">Выберите героя:</string>
-    <string name="add_player"><u>Добавить игрока +</u></string>
-    <string name="location">Локация</string>
+
+    // Welcome screen
+    <string name="game_loading_msg">Загрузка…</string>
+    <string name="title_welcome">Добро пожаловать\nв сказку!</string>
+    <string name="btn_start_game">Сочинить сказку</string>
+    <string name="btn_library">Библиотека моих сказок</string>
+    <string name="btn_help"><u>Как создать сказку?</u></string>
+
+    // Rules screen
+    <string name="title_rules">Правила</string>
+    <string name="subtitle_rules">Как создать сказку?</string>
+    <string name="rules_full_description">
+        В игру может играть от 2 до 8 человек.\n
+        - Игроки ходят по очереди в порядке добавления их в команду в начале игры.\n
+        - Игрок может придумать только одно предложение длиной не более 80 символов.\n
+        - Завершить игру может любой игрок после того, как каждый из участников игры сделал хотя бы по 1 ходу.\n\n
+        Доступно три уровня сложности игры:\n
+        1. Лёгкий. Все ранее сочинённые предложения видны всё время.\n
+        2. Средний. Игрок видит только последнее предложение предыдущего игрока.\n
+        3. Сложный. Игрок видит только последнее предложение предыдущего игрока и должен использовать обязательное слово.</string>
+
+    // Game creation screens
+
+    // Level screen
+    <string name="title_level">Уровень</string>
+    <string name="btn_easy">Легкий</string>
+    <string name="rules_easy_description">Все ранее сочинённые предложения видны всё время.</string>
+    <string name="btn_medium">Средний</string>
+    <string name="rules_medium_description">Игрок видит только последнее предложение предыдущего игрока.</string>
+    <string name="btn_hard">Сложный</string>
+    <string name="rules_hard_description">Игрок видит только последнее предложение предыдущего игрока и должен использовать обязательное слово.</string>
+    <string name="btn_next">Далее</string>
+
+    // Characters screen
+    <string name="title_character">Персонаж</string>
+    <string name="btn_new_character"><u>Добавить игрока +</u></string>
+    <string name="subtitle_heroes">Выберите героя</string>
+    <string name="hint_enter_name">Введите имя</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="msg_team_full">Максимум 8 игроков.</string>
+    <string name="btn_edit">изменить</string>
+    <string name="remove">удалить</string>
+    <string name="btn_choose_location">Выбрать локацию</string>
+
+    // Location screen
+    <string name="title_location">Локация</string>
     <string name="tale_begins">Ваша сказка начинается тут:</string>
-    <string name="royal_palace">Королевский дворец</string>
-    <string name="start">Начать</string>
-    <string name="rules">Правила</string>
-    <string name="rules_create_tale">Как создать сказку?</string>
-    <string name="choosing_cover">Выбор обложки</string>
+
+    // Game process screens
+    <string name="game_start_title">Сказка начинается…</string>
+    <string name="level_rules_short">Игроки по очереди сочиняют сказку предложение за предложением.</string>
+    <string name="intro_text">Начинай сказку!</string>
+    <string name="btn_start">Начать</string>
+    <string name="game_turn">Ходит</string>
+    <string name="mandatory_word">Обязательное слово:</string>
+    <string name="btn_send">отправить</string>
+    <string name="btn_end"><u>Закончить сказку</u></string>
+    <string name="btn_resume"><u>Продолжить игру</u></string>
+    <string name="btn_select_cover">Выбрать обложку</string>
+
+    // Choosing Cover and Title screens
+    <string name="title_choosing_cover">Выбор обложки</string>
     <string name="choosing_cover_choose">Выберите  обложку для своей сказки</string>
     <string name="choosing_cover_title">Придумайте название сказки</string>
-    <string name="save">Сохранить</string>
-    <string name="library">Библиотека</string>
-    <string name="end_tale"><u>Закончить сказку</u></string>
-    <string name="game_resume"><u>Продолжить игру</u></string>
-    <string name="game_hint_location">Game hint location</string>
-    <string name="select_cover">Выбрать обложку</string>
-    <string name="my_tales">Мои сказки</string>
-    <string name="share">Поделиться:</string>
-    <string name="rules_game">- В игру может играть от 2 до 8 человек.\n- Каждый игрок ходит строго по очереди.\n- Очередность определяется в самом\nначале игры и соответствует порядку\nнаписания имени игрока при\nего добавлении в игру.\n- Игрок может придумать только одно предложение.\n- Ограничение количества символов в предложении - 60 символов.\n- Завершить игру может любой игрок\nпосле того как каждый из участников\nигры сделал хотя бы по 1 ходу.\n\nСуществует три уровня сложности игры:\n1. Лёгкий. Все ранее сочинённые предложения видны всем участникам игры в любой момент времени.\n2. Средний. Игрок видит только последнее\nпредложение игрока который ходил перед ним.\n3. Сложный. Игрок видит только последнее\nпредложение игрока который ходил перед ним.\nВ своём предложении игрок должен\nиспользовать обязательное слово которое\nгенерируется игрой в случайном порядке.\n</string>
-    <string name="game_hint">Каждый игрок ходит\nстрого по очереди и\nможет придумать\nтолько одно\nпредложение</string>
-    <string name="choose_hero">Выберите героя</string>
-    <string name="enter_name_hint">Введите имя</string>
-    <string name="auth_create_library">Библиотека моих сказок</string>
-    <string name="maximum_players_reached">Максимум 8 игроков.</string>
-    <string name="edit">изменить</string>
 
-    <string name="location_1">Королевский дворец</string>
-    <string name="location_2">Далёкий космос</string>
-    <string name="game_start_title">Сказка начинается…</string>
-    <string name="game_turn">Ходит</string>
-    <string name="send">отправить</string>
-    <string name="intro_text">Начинай сказку!</string>
-    <string name="choose_location">Выбрать локацию</string>
-    <string name="add_new_character"><u>Добавить игрока +</u></string>
-    <string name="game_loading_msg">Загрузка…</string>
-    <string name="mandatory_word">Обязательное слово:</string>
-    <string name="copy_all">Копировать текст</string>
-    <string name="copy_file">Копировать</string>
-    <string name="text_copied">Текст сказки в буфере обмена</string>
-
+    // Library screens
+    <string name="title_library">Библиотека</string>
+    <string name="subtitle_library">Мои сказки</string>
+    <string name="subtitle_share">Поделиться:</string>
+    <string name="btn_copy">Копировать</string>
+    <string name="msg_copy">Текст сказки в буфере обмена</string>
+    // New strings... move them to the corresponding group above
 
 </resources>

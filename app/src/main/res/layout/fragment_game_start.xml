@@ -41,7 +41,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/text_large"
-        android:text="@string/game_hint"
+        android:text="@string/level_rules_short"
         app:layout_constraintBottom_toTopOf="@id/btn_next"
         app:layout_constraintTop_toBottomOf="@id/screen_header" />
 
@@ -49,7 +49,7 @@
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/start"
+        android:text="@string/btn_start"
         android:layout_marginHorizontal="@dimen/padding_layout_standard"
         android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent" />

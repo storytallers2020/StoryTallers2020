@@ -15,8 +15,8 @@ class ResourceProviderLevelFragment(private val context: Context?) {
 
     // получение описания уровней из ресурсов
      fun getTextDescriptionMediumLvl() =
-        context?.resources?.getString(R.string.medium_description)
+        context?.resources?.getString(R.string.rules_medium_description)
      fun getTextDescriptionEasyLvl() =
-        context?.resources?.getString(R.string.easy_description)
-     fun getTextDescriptionHardLvl() = context?.resources?.getString(R.string.hard_description)
+        context?.resources?.getString(R.string.rules_easy_description)
+     fun getTextDescriptionHardLvl() = context?.resources?.getString(R.string.rules_hard_description)
 }
