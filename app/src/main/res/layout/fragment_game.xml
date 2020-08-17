@@ -15,12 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="@string/intro_text"
         android:textColor="@color/white"
         android:textSize="@dimen/text_standard"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/sentence_input_layout"
-        tools:text="@string/intro_text" />
+        app:layout_constraintBottom_toTopOf="@id/sentence_input_layout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/game_field"
@@ -58,7 +58,7 @@
             android:layout_height="0dp"
             android:background="@drawable/background_transparent"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/rules"
+            android:contentDescription="@string/intro_text"
             app:layout_constraintBottom_toBottomOf="@id/scroll_view"
             app:layout_constraintTop_toTopOf="@id/scroll_view" />
 

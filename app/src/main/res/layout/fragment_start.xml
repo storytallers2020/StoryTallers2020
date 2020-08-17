@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/auth_welcome"
+        android:text="@string/title_welcome"
         android:textColor="@color/white"
         android:textSize="@dimen/text_large"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,13 +35,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_standard"
-            android:text="@string/auth_create_tale" />
+            android:text="@string/btn_start_game" />
 
         <Button
             android:id="@+id/library_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/auth_create_library"
+            android:text="@string/btn_library"
             android:layout_marginTop="@dimen/margin_standard"
             android:visibility="gone" />
 
@@ -51,7 +51,7 @@
         android:id="@+id/rules_game_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/auth_help"
+        android:text="@string/btn_help"
         android:textColor="@color/yellow"
         android:textSize="@dimen/text_small"
         app:layout_constraintBottom_toBottomOf="parent"
