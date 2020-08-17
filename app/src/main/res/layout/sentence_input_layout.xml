@@ -69,6 +69,8 @@
             android:textAlignment="textEnd"
             android:textColor="@color/yellow"
             android:textSize="@dimen/text_standard"
+            android:clickable="true"
+            android:focusable="true"
             tools:text="Батюшка" />
 
     </LinearLayout>
