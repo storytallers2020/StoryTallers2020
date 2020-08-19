@@ -22,8 +22,6 @@ class StartFragment: BaseFragment<DataModel>() {
     }
 
     override fun init() {
-        model.getAllStory()
-        iniViewModel()
         rules_game_text_view.setOnClickListener { navigateToRulesGame() }
         new_tale_button.setOnClickListener{ navigateToLevelScreen() }
         library_button.setOnClickListener { navigateToLibraryScreen() }
@@ -31,6 +29,16 @@ class StartFragment: BaseFragment<DataModel>() {
 
     private fun navigateToLevelScreen() {
         router.navigateTo(Screens.LevelScreen())
+    }
+
+    override fun onStart() {
+        super.onStart()
+        model.getAllStory()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        iniViewModel()
     }
 
     override fun iniViewModel() {
@@ -58,6 +66,6 @@ class StartFragment: BaseFragment<DataModel>() {
 
     override fun backClicked(): Boolean {
         router.exit()
-        return true
+        return false
     }
 }
