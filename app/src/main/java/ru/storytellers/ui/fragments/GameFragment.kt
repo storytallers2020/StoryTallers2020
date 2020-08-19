@@ -33,7 +33,7 @@ class GameFragment : BaseFragment<DataModel>() {
     }
 
     override fun backClicked(): Boolean {
-        router.exit()
+       // router.exit()
         return true
     }
 
