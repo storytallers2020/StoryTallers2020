@@ -36,10 +36,14 @@ class TitleAndSaveStoryFragment:BaseFragment<DataModel>() {
 
 
     override fun init() {
-        iniViewModel()
         book_name.addTextChangedListener(textWatcher)
-        back_button_character.setOnClickListener { backClicked() }
+        back_button_character.setOnClickListener { backToSelectCoverScreen() }
         btn_next.setOnClickListener { saveStory() }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        iniViewModel()
     }
 
     override fun iniViewModel() {
@@ -66,6 +70,10 @@ class TitleAndSaveStoryFragment:BaseFragment<DataModel>() {
     }
     private fun navigateToLibraryScreen(){
         router.navigateTo(Screens.LibraryScreen())
+    }
+
+    private fun backToSelectCoverScreen(){
+        router.backTo(Screens.SelectCoverScreen())
     }
 
     override fun backClicked(): Boolean {
