@@ -19,7 +19,7 @@ class GameStartFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         iniViewModel()
-        back_button_location.setOnClickListener { backClicked() }
+        back_button_location.setOnClickListener { backToLocationScreen() }
     }
 
     override fun iniViewModel() {
@@ -59,6 +59,9 @@ class GameStartFragment : BaseFragment<DataModel>() {
 
     private fun navigateToGameScreen() {
         router.navigateTo(Screens.GameScreen())
+    }
+    private fun backToLocationScreen() {
+        router.backTo(Screens.LocationScreen())
     }
 
     override fun backClicked(): Boolean {
