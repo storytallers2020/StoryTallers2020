@@ -3,6 +3,7 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.repository.ILocationRepository
@@ -32,6 +33,10 @@ class LocationViewModel(private val locationRepository: ILocationRepository) :
 
     fun subscribeOnError(): LiveData<DataModel.Error> {
         return onErrorLiveData
+    }
+
+    fun setLocationGame(location: Location){
+        StoryTallerApp.instance.gameStorage.setLocationGame(location)
     }
 
 }
