@@ -30,9 +30,17 @@ class LibraryFragment: BaseFragment<DataModel>() {
 
     override fun init() {
         rv_books.adapter=libraryAdapter
-        model.getAllStory()
-        iniViewModel()
+        back_button_character.setOnClickListener { toStartScreen() }
+    }
 
+    override fun onStart() {
+        super.onStart()
+        model.getAllStory()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        iniViewModel()
     }
 
     override fun iniViewModel() {
@@ -51,6 +59,10 @@ class LibraryFragment: BaseFragment<DataModel>() {
 
     private fun navigateToLibraryBookScreen(story: Story){
         router.navigateTo(Screens.LibraryBookScreen(story))
+    }
+
+    private fun toStartScreen(){
+        router.newRootScreen(Screens.StartScreen())
     }
 
     override fun backClicked(): Boolean {
