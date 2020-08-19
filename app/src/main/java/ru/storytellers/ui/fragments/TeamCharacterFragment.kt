@@ -31,6 +31,7 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         btn_next.setOnClickListener { navigateToLocationScreen() }
+        back_button_character.setOnClickListener { navigateToLevelScreen() }
         player_list_rv.adapter = teamAdapter
         iniViewModel()
     }
@@ -58,9 +59,13 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
     }
 
     private fun backToCharacterCreateScreen() {
-        router.backTo(Screens.CharacterCreateScreen())
+        router.navigateTo(Screens.CharacterCreateScreen())
     }
 
+    private fun navigateToLevelScreen() {
+        router.navigateTo(Screens.LevelScreen())
+
+    }
     private fun navigateToLocationScreen() {
         router.navigateTo(Screens.LocationScreen())
     }
