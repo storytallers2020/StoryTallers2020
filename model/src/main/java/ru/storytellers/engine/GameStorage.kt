@@ -13,10 +13,6 @@ class GameStorage {
      private var coverStoryTaller:Cover?=null
      private var titleStoryTaller:String?=null
 
-
-
-
-
      fun getTitleStory()=titleStoryTaller
      fun setTitleStory(titleStory:String){
           titleStoryTaller=titleStory
