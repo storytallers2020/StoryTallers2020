@@ -51,7 +51,7 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
                 sizeListPlayer=it.size
                 setPlayersToPlayerAdapter(it)
                 if (it.size >= 8 ) {
-                    context?.let { context -> toastShowLong(context, "Player limit reached") }
+                    context?.let { context -> toastShowLong(context, context.getString(R.string.player_limit_reached)) }
                     btn_add_player.visibility = View.INVISIBLE
                 } else btn_add_player.visibility = View.VISIBLE
             })
@@ -77,7 +77,7 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
 
     private fun navigateToLocationScreen() {
         if (sizeListPlayer < 2 ){
-            context?.let { context -> toastShowLong(context, "Player can't be alone") }
+            context?.let { context -> toastShowLong(context, context.getString(R.string.player_cant_be_alone)) }
         } else router.navigateTo(Screens.LocationScreen())
     }
 }
