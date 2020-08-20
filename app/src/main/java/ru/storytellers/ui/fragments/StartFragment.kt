@@ -51,7 +51,7 @@ class StartFragment: BaseFragment<DataModel>() {
         })
 
         model.subscribeOnError().observe(viewLifecycleOwner, Observer {
-            activity?.let { context -> toastShowLong(context,"Something went wrong") }
+            activity?.let { context -> toastShowLong(context,context.getString(R.string.something_went_wrong)) }
         })
     }
 
