@@ -69,6 +69,8 @@
             android:textAlignment="textEnd"
             android:textColor="@color/yellow"
             android:textSize="@dimen/text_standard"
+            android:clickable="true"
+            android:focusable="true"
             tools:text="Батюшка" />
 
     </LinearLayout>
@@ -106,7 +108,7 @@
         android:layout_height="@dimen/icon_medium"
         android:visibility="gone"
         android:src="@drawable/ic_send_bird"
-        android:contentDescription="@string/send"
+        android:contentDescription="@string/btn_send"
         app:layout_constraintBottom_toBottomOf="@id/et_step"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/et_step"
@@ -118,7 +120,7 @@
         android:background="@color/no_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/end_tale"
+        android:text="@string/btn_end"
         android:textColor="@color/yellow"
         android:textSize="@dimen/text_small"
         android:visibility="invisible"

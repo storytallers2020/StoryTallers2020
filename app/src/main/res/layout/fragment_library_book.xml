@@ -27,7 +27,7 @@
         android:id="@+id/screen_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/library"
+        android:text="@string/title_library"
         android:textColor="@color/white"
         android:textSize="@dimen/text_standard_header"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,15 +84,15 @@
             android:id="@+id/btn_copy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/copy_file"
+            android:text="@string/btn_copy"
             android:textColor="@color/yellow"
             android:drawableEnd="@drawable/ic_outline_file_copy_24"
-            android:contentDescription="@string/copy_all" />
+            android:contentDescription="@string/btn_copy" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/share"
+            android:text="@string/subtitle_share"
             android:visibility="gone"
             android:textAlignment="center"
             android:textColor="@color/white"

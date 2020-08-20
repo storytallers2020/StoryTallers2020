@@ -13,7 +13,7 @@
     <ImageView
         android:id="@+id/back_button_level"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:scaleX="2"
         android:scaleY="2"
         android:src="@drawable/ic_arrow_back"
@@ -27,7 +27,7 @@
         android:id="@+id/screen_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/level"
+        android:text="@string/title_level"
         android:textColor="@color/white"
         android:textSize="@dimen/text_standard_header"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,14 +41,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/margin_standard"
-        app:layout_constraintTop_toBottomOf="@id/screen_header"
-        app:layout_constraintBottom_toTopOf="@id/description_level">
+        app:layout_constraintTop_toBottomOf="@id/screen_header">
 
         <TextView
             android:id="@+id/difficulty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/level"
+            android:text="@string/title_level"
             android:textSize="@dimen/text_small"
             android:gravity="center"
             android:drawableBottom="@drawable/slider_cup"
@@ -71,7 +70,7 @@
             android:id="@+id/hero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/character"
+            android:text="@string/title_character"
             android:textSize="@dimen/text_small"
             android:alpha="0.5"
             android:gravity="center"
@@ -96,7 +95,7 @@
             android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/location"
+            android:text="@string/title_location"
             android:textSize="@dimen/text_small"
             android:alpha="0.5"
             android:gravity="center"
@@ -109,11 +108,11 @@
     <TextView
         android:id="@+id/description_level"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/easy_description"
+        android:text="@string/rules_easy_description"
         android:textColor="@color/yellow"
-        android:layout_marginVertical="@dimen/margin_xl"
+        android:layout_marginVertical="@dimen/margin_standard"
         android:textSize="@dimen/text_standard"
         app:layout_constraintBottom_toTopOf="@id/level_buttons"
         app:layout_constraintTop_toBottomOf="@id/slider" />
@@ -122,37 +121,41 @@
         android:id="@+id/level_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/description_level"
-        app:layout_constraintBottom_toTopOf="@id/seekBar_lvl">
+        android:orientation="vertical"
+        android:layout_marginVertical="@dimen/margin_standard"
+        app:layout_constraintBottom_toTopOf="@id/btn_next"
+        app:layout_constraintTop_toBottomOf="@id/description_level">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
             android:id="@+id/easy_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="start"
-            android:text="@string/easy"
+            android:text="@string/btn_easy"
             android:textColor="@color/yellow"
             android:textSize="@dimen/text_standard" />
-
         <TextView
             android:id="@+id/medium_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="@string/medium"
+            android:text="@string/btn_medium"
             android:textColor="@color/white"
             android:textSize="@dimen/text_standard" />
-
         <TextView
             android:id="@+id/hard_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="@string/hard"
+            android:text="@string/btn_hard"
             android:textColor="@color/white"
             android:textSize="@dimen/text_standard" />
     </LinearLayout>
@@ -161,21 +164,18 @@
         android:id="@+id/seekBar_lvl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:progress="1"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginTop="@dimen/margin_standard"
         android:progressBackgroundTint="@color/blue"
         android:progressTint="@color/blue"
         android:thumb="@drawable/slider_cup"
-        android:thumbOffset="@dimen/margin_xs"
-        app:layout_constraintBottom_toTopOf="@id/btn_next"
-        app:layout_constraintTop_toBottomOf="@id/level_buttons" />
+        android:thumbOffset="@dimen/margin_xs" />
+    </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/next"
+        android:text="@string/btn_next"
         android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent" />
 

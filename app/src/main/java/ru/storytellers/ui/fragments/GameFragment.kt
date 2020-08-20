@@ -122,7 +122,21 @@ class GameFragment : BaseFragment<DataModel>() {
         model.subscribeOnWord().observe(viewLifecycleOwner, Observer {
             mandatory_container.visibility = View.VISIBLE
             tv_mandatory_word.text = it
+            mandatoryClickListener(it)
         })
+    }
+
+    private fun mandatoryClickListener(mandatoryWord: String) {
+        tv_mandatory_word.setOnClickListener {
+            with (
+                with(sentence_line.text.toString()) {
+                    if (this.isNotBlank()) "$this $mandatoryWord" else mandatoryWord
+                }
+            ) {
+                sentence_line.setText(this)
+                sentence_line.setSelection(this.length)
+            }
+        }
     }
 
     private fun navigateToGameEndScreen() {

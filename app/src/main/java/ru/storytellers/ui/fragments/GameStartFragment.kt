@@ -36,20 +36,20 @@ class GameStartFragment : BaseFragment<DataModel>() {
         model.subscribeOnLevelGame().observe(viewLifecycleOwner, Observer {
             when (it) {
                 0 -> {
-                    getRuleFromResources(R.string.easy_description)
+                    getRuleFromResources(R.string.rules_easy_description)
                 }
                 1 -> {
-                    getRuleFromResources(R.string.medium_description)
+                    getRuleFromResources(R.string.rules_medium_description)
                 }
                 else -> {
-                    getRuleFromResources(R.string.hard_description)
+                    getRuleFromResources(R.string.rules_hard_description)
                 }
             }
         })
     }
 
     private fun getRuleFromResources(stringId: Int?) {
-        var rule = stringId?.let { context?.getString(it) }
+        val rule = stringId?.let { context?.getString(it) }
         setRule(rule)
     }
 
