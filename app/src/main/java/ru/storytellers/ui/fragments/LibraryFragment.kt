@@ -62,6 +62,7 @@ class LibraryFragment: BaseFragment<DataModel>() {
     }
 
     private fun toStartScreen(){
+        model.onClearStorage()
         router.newRootScreen(Screens.StartScreen())
     }
 
