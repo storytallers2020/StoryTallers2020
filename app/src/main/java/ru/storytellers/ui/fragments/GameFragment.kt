@@ -33,26 +33,33 @@ class GameFragment : BaseFragment<DataModel>() {
     }
 
     override fun backClicked(): Boolean {
-       // router.exit()
+        // router.exit()
         return true
     }
 
     override fun iniViewModel() {}
 
     override fun init() {
-        model.createNewGame()
-        model.getCurrentPlayer()
-        model.getUriBackgroundImage()
-
         textWatcher = assistantFragment.getTextWatcher()
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
         reminder_intro.post { View.FOCUS_DOWN }
         button_end.setOnClickListener { navigateToGameEndScreen() }
         btn_send.setOnClickListener { handlerBtnSend() }
         sentence_line.addTextChangedListener(textWatcher)
-        assignSubscribers()
         assistantFragment.showIntro()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        model.createNewGame()
+        model.getCurrentPlayer()
+        model.getUriBackgroundImage()
         model.onStartTurn()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        assignSubscribers()
     }
 
     private fun assignSubscribers() {
@@ -61,6 +68,7 @@ class GameFragment : BaseFragment<DataModel>() {
         handlerIsCorrectSentence()
         handlerUriBackgroundImage()
         handlerWordChanged()
+        handlerTurnGame()
     }
 
     private fun handlerBtnSend() {
@@ -71,6 +79,12 @@ class GameFragment : BaseFragment<DataModel>() {
         assistantFragment.makeInVisibleBtnSend()
         assistantFragment.showGameField()
         model.getCurrentPlayer()
+    }
+
+    private fun handlerTurnGame() {
+        model.subscribeOnCheckTurnGame().observe(viewLifecycleOwner, Observer {
+            if(it) button_end.visibility=View.VISIBLE
+        })
     }
 
     private fun handlerCurrentPlayerLiveData() {
