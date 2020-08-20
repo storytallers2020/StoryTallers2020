@@ -116,10 +116,8 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         isNameEntered = false
         model.run {
             getPlayer()?.let { player ->
-                if(sizeListPlayer()<=8) {
                     addPlayer(player)
                     router.navigateTo(Screens.TeamCharacterScreen())
-                } else context?.let{context->toastShowLong(context,"Player limit reached")}
             }
         }
     }
