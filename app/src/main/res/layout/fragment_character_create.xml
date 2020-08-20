@@ -1,137 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/padding_layout_standard"
-    android:paddingTop="@dimen/padding_layout_standard"
-    android:paddingBottom="@dimen/padding_layout_bottom"
-    android:background="@drawable/ic_background_default">
-
-    <ImageView
-        android:id="@+id/back_button_character"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:contentDescription="@string/arrow_back"
-        android:src="@drawable/ic_arrow_back"
-        android:layout_marginStart="@dimen/margin_xs"
-        app:layout_constraintBottom_toBottomOf="@id/screen_header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/screen_header" />
-
-    <TextView
-        android:id="@+id/screen_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_character"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_standard_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_standard"
-        app:layout_constraintTop_toBottomOf="@id/screen_header">
-
-        <TextView
-            android:id="@+id/difficulty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_level"
-            android:alpha="0.5"
-            android:textSize="@dimen/text_small"
-            android:gravity="center"
-            android:drawableBottom="@drawable/slider_cup"
-            android:textColor="@color/yellow"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:paddingHorizontal="@dimen/padding_layout_standard"
+        android:paddingTop="@dimen/padding_layout_standard"
+        android:paddingBottom="@dimen/padding_layout_bottom"
+        android:background="@drawable/ic_background_default">
 
         <ImageView
-            android:layout_width="0dp"
+            android:id="@+id/back_button_character"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/slider_line_yellow_fade"
-            android:contentDescription="@string/dots_line"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/hero"
-            app:layout_constraintStart_toEndOf="@id/difficulty"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.65" />
+            android:scaleX="2"
+            android:scaleY="2"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/arrow_back"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_marginStart="@dimen/margin_xs"
+            app:layout_constraintBottom_toBottomOf="@id/screen_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/screen_header" />
 
         <TextView
-            android:id="@+id/hero"
+            android:id="@+id/screen_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_character"
-            android:textSize="@dimen/text_small"
-            android:gravity="center"
-            android:textColor="@color/yellow"
-            android:drawableBottom="@drawable/slider_queen"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_standard_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/slider_line_yellow"
-            android:contentDescription="@string/dots_line"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/location"
-            app:layout_constraintStart_toEndOf="@id/hero"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.65" />
-
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_location"
-            android:textSize="@dimen/text_small"
-            android:alpha="0.5"
-            android:gravity="center"
-            android:drawableBottom="@drawable/slider_mounts"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/enter_name_et_layout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/OutlinedBox"
-        android:layout_marginVertical="@dimen/margin_large"
-        android:hint="@string/hint_enter_name"
-        app:boxCornerRadiusBottomEnd="@dimen/box_corner_radius"
-        app:boxCornerRadiusBottomStart="@dimen/box_corner_radius"
-        app:boxCornerRadiusTopEnd="@dimen/box_corner_radius"
-        app:boxCornerRadiusTopStart="@dimen/box_corner_radius"
-        app:layout_constraintTop_toBottomOf="@id/slider">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/enter_name_field_et"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
-            android:maxLength="15"
-            android:maxLines="1"
-            android:textColor="@color/white"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="@dimen/padding_small"
-            android:singleLine="true"
-            android:inputType="textPersonName|textAutoComplete|textAutoCorrect"
-            android:textColorHint="@color/colorAccent"
-            android:imeOptions="actionDone"
-            android:textSize="@dimen/text_standard">
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="@dimen/margin_standard"
+            app:layout_constraintTop_toBottomOf="@id/screen_header">
+
+            <TextView
+                android:id="@+id/difficulty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_level"
+                android:alpha="0.5"
+                android:textSize="@dimen/text_small"
+                android:gravity="center"
+                android:drawableBottom="@drawable/slider_cup"
+                android:textColor="@color/yellow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/slider_line_yellow_fade"
+                android:contentDescription="@string/dots_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/hero"
+                app:layout_constraintStart_toEndOf="@id/difficulty"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.65" />
+
+            <TextView
+                android:id="@+id/hero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_character"
+                android:textSize="@dimen/text_small"
+                android:gravity="center"
+                android:textColor="@color/yellow"
+                android:drawableBottom="@drawable/slider_queen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/slider_line_yellow"
+                android:contentDescription="@string/dots_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/location"
+                app:layout_constraintStart_toEndOf="@id/hero"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.65" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_location"
+                android:textSize="@dimen/text_small"
+                android:alpha="0.5"
+                android:gravity="center"
+                android:drawableBottom="@drawable/slider_mounts"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/enter_name_et_layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/OutlinedBox"
+            android:layout_marginVertical="@dimen/margin_large"
+            android:hint="@string/hint_enter_name"
+            app:boxCornerRadiusBottomEnd="@dimen/box_corner_radius"
+            app:boxCornerRadiusBottomStart="@dimen/box_corner_radius"
+            app:boxCornerRadiusTopEnd="@dimen/box_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/box_corner_radius"
+            app:layout_constraintTop_toBottomOf="@id/slider">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/enter_name_field_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/padding_small"
+                android:singleLine="true"
+                android:inputType="textPersonName|textAutoComplete|textAutoCorrect"
+                android:textColorHint="@color/colorAccent"
+                android:textSize="@dimen/text_standard">
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/title_rv_characters"
@@ -144,17 +149,17 @@
         android:layout_marginBottom="@dimen/margin_small"
         app:layout_constraintTop_toBottomOf="@id/enter_name_et_layout1" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_characters"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/margin_small"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/title_rv_characters"
-        app:spanCount="2"
-        tools:itemCount="8"
-        tools:listitem="@layout/item_image_character_create" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_characters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_small"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/title_rv_characters"
+            app:spanCount="2"
+            tools:itemCount="8"
+            tools:listitem="@layout/item_image_character_create" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_next"
@@ -167,4 +172,7 @@
         app:layout_constraintTop_toBottomOf="@id/rv_characters"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

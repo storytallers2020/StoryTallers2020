@@ -28,7 +28,6 @@ class CharacterStorage(context: Context) {
         ),
         Character(
             4,
-
             context.getString(R.string.character_fairy_name),
             resourceToString(context, R.drawable.ic_fairy),
             resourceToString(context, R.drawable.ic_fairy_selected)
@@ -80,6 +79,43 @@ class CharacterStorage(context: Context) {
             context.getString(R.string.character_step_mother_name),
             resourceToString(context, R.drawable.ic_stepmother),
             resourceToString(context, R.drawable.ic_stepmother_selected)
+        ),
+        Character(
+            13,
+            context.getString(R.string.character_fire_bird_name),
+            resourceToString(context, R.drawable.ic_firebird),
+            resourceToString(context, R.drawable.ic_firebird_selected)
+        ),
+        Character(
+            14,
+            context.getString(R.string.character_squirrel_name),
+            resourceToString(context, R.drawable.ic_squirrel),
+            resourceToString(context, R.drawable.ic_squirrel_selected)
+        ),
+        Character(
+            15,
+            context.getString(R.string.character_hare_name),
+            resourceToString(context, R.drawable.ic_hare),
+            resourceToString(context, R.drawable.ic_hare_selected)
+        ),
+        Character(
+            16,
+            context.getString(R.string.character_fox_name),
+            resourceToString(context, R.drawable.ic_fox),
+            resourceToString(context, R.drawable.ic_fox_selected)
+        ),
+
+        Character(
+            17,
+            context.getString(R.string.character_wolf_name),
+            resourceToString(context, R.drawable.ic_wolf),
+            resourceToString(context, R.drawable.ic_wolf_selected)
+        ),
+        Character(
+            18,
+            context.getString(R.string.character_bear_name),
+            resourceToString(context, R.drawable.ic_bear),
+            resourceToString(context, R.drawable.ic_bear_selected)
         )
     )
     //endregion
