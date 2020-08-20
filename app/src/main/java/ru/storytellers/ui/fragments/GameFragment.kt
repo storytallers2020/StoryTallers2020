@@ -100,7 +100,7 @@ class GameFragment : BaseFragment<DataModel>() {
 
     private fun handlerIsCorrectSentence() {
         model.subscribeOnIsCorrectFlag().observe(viewLifecycleOwner, Observer {
-            context?.let { context -> toastShowLong(context, "Isn`t correct sentence") }
+            context?.let { context -> toastShowLong(context, context.getString(R.string.isnt_correct_sentence)) }
             model.isCorrectFlag = true
         })
     }
