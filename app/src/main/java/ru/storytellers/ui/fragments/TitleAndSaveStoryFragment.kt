@@ -29,17 +29,21 @@ class TitleAndSaveStoryFragment:BaseFragment<DataModel>() {
                 model.setTitleStory(text.toString())
                 btn_next.isEnabled=true
             } else {
-                context?.let { toastShowLong(it,"Enter title!") }
+                context?.let { toastShowLong(it,it.getString(R.string.enter_title)) }
             }
         }
     }
 
 
     override fun init() {
-        iniViewModel()
         book_name.addTextChangedListener(textWatcher)
-        back_button_character.setOnClickListener { backClicked() }
+        back_button_character.setOnClickListener { backToSelectCoverScreen() }
         btn_next.setOnClickListener { saveStory() }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        iniViewModel()
     }
 
     override fun iniViewModel() {
@@ -52,13 +56,13 @@ class TitleAndSaveStoryFragment:BaseFragment<DataModel>() {
         model.subscribeOnSuccessSaveFlag().observe(viewLifecycleOwner, Observer {
             if(it) {
                 activity?.let {
-                    context -> toastShowLong(context,"Saved successfully") }
+                    context -> toastShowLong(context,context.getString(R.string.saved_successfully)) }
                 navigateToLibraryScreen()
             }
 
 
             else  activity?.let {
-                    context -> toastShowLong(context,"Something went wrong")}
+                    context -> toastShowLong(context,context.getString(R.string.something_went_wrong))}
         })
     }
     private fun saveStory(){
@@ -66,6 +70,10 @@ class TitleAndSaveStoryFragment:BaseFragment<DataModel>() {
     }
     private fun navigateToLibraryScreen(){
         router.navigateTo(Screens.LibraryScreen())
+    }
+
+    private fun backToSelectCoverScreen(){
+        router.backTo(Screens.SelectCoverScreen())
     }
 
     override fun backClicked(): Boolean {

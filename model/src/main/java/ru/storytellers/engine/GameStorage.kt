@@ -13,21 +13,29 @@ class GameStorage {
      private var coverStoryTaller:Cover?=null
      private var titleStoryTaller:String?=null
 
-
-
-
-
      fun getTitleStory()=titleStoryTaller
      fun setTitleStory(titleStory:String){
           titleStoryTaller=titleStory
+     }
+     fun clearTitleStory(){
+          titleStoryTaller=null
      }
      fun getCoverStoryTaller()=coverStoryTaller
      fun setCoverStoryTaller(coverStory:Cover){
           coverStoryTaller=coverStory
      }
+     fun clearCoverStoryTaller(){
+          coverStoryTaller=null
+     }
 
      fun getListPlayers()=listPlayers
+     fun clearListPlayers(){
+          listPlayers.clear()
+     }
      fun getListSentenceOfTale()=listSentenceOfTale
+     fun clearListSentenceOfTale(){
+          listSentenceOfTale.clear()
+     }
 
      fun getLevelGame()=levelGame
      fun setLevelGame(lvlGame:Int){
@@ -36,6 +44,9 @@ class GameStorage {
      fun getLocationGame()=locationGame
      fun setLocationGame(location:Location){
           locationGame=location
+     }
+     fun clearLocationGame(){
+          locationGame=null
      }
 
 

@@ -29,6 +29,7 @@ class GameViewModel(
     private val isCorrectFlagLiveData = MutableLiveData<Boolean>()
     private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
     private val wordLiveData = MutableLiveData<String>()
+    private val checkTurnGameLiveData = MutableLiveData<Boolean>()
 
 
     fun getCurrentPlayer() {
@@ -54,6 +55,7 @@ class GameViewModel(
     fun subscribeOnIsCorrectFlag() = isCorrectFlagLiveData
     fun subscribeOnUriBackgroundImage() = uriBackgroundImageLiveData
     fun subscribeOnWord() = wordLiveData
+    fun subscribeOnCheckTurnGame() = checkTurnGameLiveData
 
     fun createSentenceOfTale(content: String) {
         val sentence = content
@@ -67,6 +69,7 @@ class GameViewModel(
             sentence,
             ContentTypeEnum.TEXT
         )
+        compareTurnGameWithNumberOfPlayers()
         checkCurrentSentenceOfTale()
     }
 
@@ -107,4 +110,9 @@ class GameViewModel(
                 wordLiveData.value = level.wordRule.getRandomWord()
         }
     }
+
+    private fun compareTurnGameWithNumberOfPlayers(){
+        checkTurnGameLiveData.value=game.getTurn()==listPlayer.size
+    }
+
 }

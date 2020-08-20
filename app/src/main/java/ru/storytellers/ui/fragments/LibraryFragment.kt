@@ -30,9 +30,17 @@ class LibraryFragment: BaseFragment<DataModel>() {
 
     override fun init() {
         rv_books.adapter=libraryAdapter
-        model.getAllStory()
-        iniViewModel()
+        back_button_character.setOnClickListener { toStartScreen() }
+    }
 
+    override fun onStart() {
+        super.onStart()
+        model.getAllStory()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        iniViewModel()
     }
 
     override fun iniViewModel() {
@@ -45,12 +53,17 @@ class LibraryFragment: BaseFragment<DataModel>() {
         })
 
         model.subscribeOnError().observe(viewLifecycleOwner, Observer {
-            activity?.let { context -> toastShowLong(context,"Something went wrong") }
+            activity?.let { context -> toastShowLong(context,context.getString(R.string.something_went_wrong)) }
         })
     }
 
     private fun navigateToLibraryBookScreen(story: Story){
         router.navigateTo(Screens.LibraryBookScreen(story))
+    }
+
+    private fun toStartScreen(){
+        model.onClearStorage()
+        router.newRootScreen(Screens.StartScreen())
     }
 
     override fun backClicked(): Boolean {

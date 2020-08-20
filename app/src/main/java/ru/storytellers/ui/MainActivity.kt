@@ -1,7 +1,7 @@
 package ru.storytellers.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.di.injectDependencies
@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-
         injectDependencies()
         router.replaceScreen(Screens.StartScreen())
     }
@@ -28,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onResumeFragments()
         navigatorHolder.setNavigator(navigator)
     }
+
     override fun onPause() {
         super.onPause()
         navigatorHolder.removeNavigator()
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         supportFragmentManager.fragments.forEach {
-            if(it is BackButtonListener && it.backClicked()){
+            if (it is BackButtonListener && it.backClicked()) {
                 return
             }
         }

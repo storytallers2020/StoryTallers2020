@@ -13,8 +13,8 @@ import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.GameEndViewModel
 
 
-class GameEndFragment: BaseFragment<DataModel>() {
-    override  val model: GameEndViewModel by inject()
+class GameEndFragment : BaseFragment<DataModel>() {
+    override val model: GameEndViewModel by inject()
     override val layoutRes = R.layout.fragment_game_end
 
     companion object {
@@ -23,13 +23,21 @@ class GameEndFragment: BaseFragment<DataModel>() {
 
     override fun iniViewModel() {}
     override fun init() {
-        model.getUriBackgroundImage()
-        model.setTextOfStoryTaller()
-        handlerTextOfStoryTaller()
-        handlerUriBackgroundImage()
         btn_select_cover.setOnClickListener { navigateToSelectCoverScreen() }
         setResumeClickListener()
         btn_copy.setOnClickListener { copyText() }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        model.getUriBackgroundImage()
+        model.setTextOfStoryTaller()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handlerTextOfStoryTaller()
+        handlerUriBackgroundImage()
     }
 
     private fun setResumeClickListener() {
@@ -43,24 +51,24 @@ class GameEndFragment: BaseFragment<DataModel>() {
         if (res) toastShowLong(requireContext(), getString(R.string.msg_copy))
     }
 
-    private fun handlerTextOfStoryTaller(){
+    private fun handlerTextOfStoryTaller() {
         model.subscribeOnTextOfStoryTaller().observe(viewLifecycleOwner, Observer {
-            tv_tale.text=it
+            tv_tale.text = it
         })
     }
 
-    private fun handlerUriBackgroundImage(){
+    private fun handlerUriBackgroundImage() {
         model.subscribeOnUriBackgroundImage().observe(viewLifecycleOwner, Observer {
             setBackgroundImage(it, root_layout_cl)
         })
     }
 
     override fun backClicked(): Boolean {
-        router.exit()
+       // router.exit()
         return true
     }
 
     private fun navigateToSelectCoverScreen() {
-         router.navigateTo(Screens.SelectCoverScreen())
+        router.navigateTo(Screens.SelectCoverScreen())
     }
 }

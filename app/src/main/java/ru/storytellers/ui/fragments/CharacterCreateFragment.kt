@@ -13,9 +13,9 @@ import ru.storytellers.model.entity.Character
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.CharacterCreateAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.CharacterCreateViewModel
 import timber.log.Timber
-
 
 class CharacterCreateFragment : BaseFragment<DataModel>() {
     override val model: CharacterCreateViewModel by inject()
@@ -65,6 +65,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         rv_characters.adapter = characterAdapter
         enter_name_field_et.addTextChangedListener(textWatcher)
         iniViewModel()
+        back_button_character.setOnClickListener { backToLevelScreen() }
         btn_next.setOnClickListener { handlerBtnNext() }
     }
 
@@ -74,13 +75,14 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
     }
 
     override fun onStart() {
+        super.onStart()
         val editable = Editable.Factory.getInstance().newEditable("")
         enter_name_field_et.text = editable
         model.getAllCharacters()
-        super.onStart()
     }
 
     override fun onResume() {
+        super.onResume()
         model.subscribeOnError().observe(viewLifecycleOwner, Observer {
             Timber.e(it.error)
         })
@@ -88,7 +90,6 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         model.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
             setDataCharacterAdapter(it)
         })
-        super.onResume()
     }
 
     private fun statusCheck() {
@@ -101,6 +102,10 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         }
     }
 
+    fun backToLevelScreen(){
+        router.backTo(Screens.LevelScreen())
+    }
+
     override fun backClicked(): Boolean {
         router.exit()
         return true
@@ -110,9 +115,9 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         isCharacterSelected = false
         isNameEntered = false
         model.run {
-            getPlayer()?.let {
-                addPlayer(it)
-                router.navigateTo(Screens.TeamCharacterScreen())
+            getPlayer()?.let { player ->
+                    addPlayer(player)
+                    router.navigateTo(Screens.TeamCharacterScreen())
             }
         }
     }
