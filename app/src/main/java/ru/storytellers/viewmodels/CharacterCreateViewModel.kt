@@ -41,7 +41,6 @@ class CharacterCreateViewModel(private val characterRepository: ICharacterReposi
     fun setNamePlayer(name: String) {
         playerCreator.setNamePlayer(name)
     }
-    fun sizeListPlayer()=listPlayers.count()
 
     fun setCharacterOfPlayer(character: Character )
     {
