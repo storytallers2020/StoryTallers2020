@@ -20,7 +20,7 @@ class LocationFragment : BaseFragment<DataModel>() {
     override val model: LocationViewModel by inject()
 
     private val onListItemClickListener = { location: Location ->
-        StoryTallerApp.instance.gameStorage.setLocationGame(location)
+        model.setLocationGame(location)
         Timber.d(location.fieldsToLogString())
         router.navigateTo(Screens.GameStartScreen())
     }
@@ -31,9 +31,13 @@ class LocationFragment : BaseFragment<DataModel>() {
     }
 
     override fun init() {
-        iniViewModel()
         rv_covers.adapter = locationAdapter
-        back_from_location.setOnClickListener { backClicked() }
+        back_from_location.setOnClickListener { backToTeamScreen() }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        iniViewModel()
     }
 
     override fun iniViewModel() {
@@ -65,6 +69,10 @@ class LocationFragment : BaseFragment<DataModel>() {
 
     private fun setLocationAdapter(it: DataModel.Success<Location>) {
         locationAdapter.setData(it.data)
+    }
+
+    private fun backToTeamScreen(){
+        router.backTo(Screens.TeamCharacterScreen())
     }
 
 }

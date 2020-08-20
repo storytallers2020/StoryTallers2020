@@ -9,6 +9,12 @@
     <string name="btn_start_game">Сочинить сказку</string>
     <string name="btn_library">Библиотека моих сказок</string>
     <string name="btn_help"><u>Как создать сказку?</u></string>
+    <string name="isnt_correct_sentence">Некорректное предложение</string>
+    <string name="something_went_wrong">Что то пошло не так</string>
+    <string name="player_limit_reached">Предельное количество игроков</string>
+    <string name="player_cant_be_alone">Игрок не может быть один</string>
+    <string name="enter_title">Введите заголовок</string>
+    <string name="saved_successfully">Успешно сохранено</string>
 
     // Rules screen
     <string name="title_rules">Правила</string>

@@ -8,6 +8,12 @@
     <string name="btn_start_game">Create a fairy tale</string>
     <string name="btn_library">My Tales Library</string>
     <string name="btn_help"><u>How to create a fairy tale?</u></string>
+    <string name="isnt_correct_sentence">Isn`t correct sentence</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="player_limit_reached">Player limit reached</string>
+    <string name="player_cant_be_alone">Player can not be alone</string>
+    <string name="enter_title">Enter title</string>
+    <string name="saved_successfully">Saved successfully</string>
 
     // Rules screen
     <string name="title_rules">Rules</string>

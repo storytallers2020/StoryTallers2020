@@ -3,6 +3,7 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.repository.IStoryRepository
@@ -14,6 +15,7 @@ class LibraryViewModel(
     private val onSuccessliveData = MutableLiveData<DataModel.Success<Story>>()
     private val onErrorliveData = MutableLiveData<DataModel.Error>()
     private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
+    private val gameStorage= StoryTallerApp.instance.gameStorage
 
     fun subscribeOnSuccess(): LiveData<DataModel.Success<Story>> {
         return onSuccessliveData
@@ -34,5 +36,16 @@ class LibraryViewModel(
             },{
                 onErrorliveData.value=DataModel.Error(it)
             })
+    }
+
+     fun onClearStorage() {
+         gameStorage.apply {
+            clearTitleStory()
+            clearCoverStoryTaller()
+            clearLocationGame()
+            clearListPlayers()
+            clearListSentenceOfTale()
+            setLevelGame(0)
+        }
     }
 }

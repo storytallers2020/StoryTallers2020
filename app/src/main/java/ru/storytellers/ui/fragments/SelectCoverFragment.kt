@@ -13,12 +13,14 @@ import ru.storytellers.utils.fieldsToLogString
 import ru.storytellers.viewmodels.SelectCoverViewModel
 import timber.log.Timber
 
-class SelectCoverFragment: BaseFragment<DataModel>() {
+class SelectCoverFragment : BaseFragment<DataModel>() {
     override val model: SelectCoverViewModel by inject()
-    override val layoutRes= R.layout.fragment_choosing_cover
+    override val layoutRes = R.layout.fragment_choosing_cover
+
     companion object {
         fun newInstance() = SelectCoverFragment()
     }
+
     private val onListItemClickListener = object : CoverAdapter.OnListItemClickListener {
         override fun onItemClick(cover: Cover) {
             model.setCoverStory(cover)
@@ -29,8 +31,12 @@ class SelectCoverFragment: BaseFragment<DataModel>() {
     private val coverAdapter: CoverAdapter by lazy { CoverAdapter(onListItemClickListener) }
 
     override fun init() {
-        back_button_character.setOnClickListener { backClicked() }
+        back_button_character.setOnClickListener { backToGameEndScreen() }
         initRecycler()
+    }
+
+    override fun onStart() {
+        super.onStart()
         iniViewModel()
     }
 
@@ -41,12 +47,14 @@ class SelectCoverFragment: BaseFragment<DataModel>() {
             handlerOnErrorResult(this)
         }
     }
-    private fun initRecycler(){
-        rv_covers.adapter=coverAdapter
+
+    private fun initRecycler() {
+        rv_covers.adapter = coverAdapter
     }
+
     private fun handlerOnSuccessResult(viewModel: SelectCoverViewModel) {
         viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
-                setLocationAdapter(it)
+            setLocationAdapter(it)
         })
     }
 
@@ -58,6 +66,10 @@ class SelectCoverFragment: BaseFragment<DataModel>() {
 
     private fun setLocationAdapter(it: DataModel.Success<Cover>) {
         coverAdapter.setData(it.data)
+    }
+
+    private fun backToGameEndScreen() {
+        router.backTo(Screens.GameEndScreen())
     }
 
     override fun backClicked(): Boolean {

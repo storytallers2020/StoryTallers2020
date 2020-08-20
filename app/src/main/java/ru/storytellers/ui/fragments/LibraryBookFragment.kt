@@ -6,6 +6,7 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
+import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.setTextToClipboard
 import ru.storytellers.utils.toastShowLong
@@ -19,13 +20,19 @@ class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
     }
 
     override fun init() {
-        iniViewModel()
+        back_button_character.setOnClickListener {backToLibraryScreen()}
+        btn_copy.setOnClickListener { copyText() }
+    }
 
+    override fun onStart() {
+        super.onStart()
         model.getTextStory(story)
         model.getTitleStory(story)
+    }
 
-        back_button_character.setOnClickListener {backClicked()}
-        btn_copy.setOnClickListener { copyText() }
+    override fun onResume() {
+        super.onResume()
+        iniViewModel()
     }
 
     private fun copyText() {
@@ -42,6 +49,10 @@ class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
         model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer {titleStory->
             titleStory?.let {title-> subHeader.text=title }
         })
+    }
+
+    private fun backToLibraryScreen(){
+        router.backTo(Screens.LibraryScreen())
     }
 
     override fun backClicked(): Boolean {
