@@ -4,6 +4,8 @@
     android:height="114dp"
     android:viewportWidth="152"
     android:viewportHeight="114">
+  <clip-path
+      android:pathData="M10,0L142,0A10,10 0,0 1,152 10L152,104A10,10 0,0 1,142 114L10,114A10,10 0,0 1,0 104L0,10A10,10 0,0 1,10 0z"/>
   <path
       android:pathData="M152,0H0V114H152V0Z">
     <aapt:attr name="android:fillColor">

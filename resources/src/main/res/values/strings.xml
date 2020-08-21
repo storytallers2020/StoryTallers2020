@@ -14,12 +14,39 @@
     <string name="character_robot_girl_name">Робот</string>
     <string name="character_space_boy_name">Космонавт</string>
     <string name="character_space_girl_name">Космонавт</string>
+    <string name="character_fire_bird_name">Жар-птица</string>
+    <string name="character_squirrel_name">Белка</string>
+    <string name="character_hare_name">Заяц</string>
+    <string name="character_fox_name">Лиса</string>
+    <string name="character_wolf_name">Волк</string>
+    <string name="character_bear_name">Медведь</string>
 
     // Locations
-    <string name="location_kingdom1_name">Королевство 1</string>
-    <string name="location_kingdom2_name">Королевство 2</string>
-    <string name="location_space1_name">Космос 1</string>
-    <string name="location_space2_name">Космос 2</string>
+    <string name="location_amusement_park_name">Парк развлечений</string>
+    <string name="location_beach_name">Пляж</string>
+    <string name="location_castle_name">Замок</string>
+    <string name="location_cave_of_wonders_name">Пещера чудес</string>
+    <string name="location_chamber_of_secrets_name">Тайная комната</string>
+    <string name="location_city_name">Город</string>
+    <string name="location_dwarf_house_name">Домик гнома</string>
+    <string name="location_forest_name">Лес</string>
+    <string name="location_halloween_name">Хелоуин</string>
+    <string name="location_house_of_magic_name">Волшебный дом</string>
+    <string name="location_tree_house_name">Дом на дереве</string>
+    <string name="location_kingdom_name">Королевство</string>
+    <string name="location_lighthouse_name">Маяк</string>
+    <string name="location_magic_oak_name">Волшебный дуб</string>
+    <string name="location_night_city_name">Ночной город</string>
+    <string name="location_paper_name">Бумага</string>
+    <string name="location_pirate_ship_name">Пиратский корабль</string>
+    <string name="location_playground_name">Игровая площадка</string>
+    <string name="location_sea_world_name">Морской мир</string>
+    <string name="location_skeletons_name">Скелеты</string>
+    <string name="location_space_name">Космос</string>
+    <string name="location_spaceship_name">Космический корабль</string>
+    <string name="location_swing_name">Качели</string>
+    <string name="location_waterfall_name">Водопад</string>
+    <string name="location_zombie_name">Зомби</string>
 
     // Covers
     <string name="cover1_name">Перышки</string>

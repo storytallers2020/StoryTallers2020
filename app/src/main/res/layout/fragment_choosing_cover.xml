@@ -50,7 +50,6 @@
         android:id="@+id/rv_covers"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:src="@drawable/location_cosmos_small"
         android:layout_marginTop="@dimen/margin_small"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

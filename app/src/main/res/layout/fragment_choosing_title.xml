@@ -89,7 +89,7 @@
                 android:textSize="@dimen/text_standard"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:inputType="textMultiLine|textAutoComplete|textAutoCorrect"
+                android:inputType="textMultiLine|textCapSentences|textAutoComplete|textAutoCorrect"
                 android:background="@color/no_color"
                 android:maxLength="70"
                 tools:text="Сказка про Ивана-дурака и Серого Волка за границей вашего воображения,

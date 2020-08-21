@@ -17,7 +17,7 @@
         android:layout_margin="@dimen/margin_xs"
         android:layout_gravity="center"
         tools:src="@drawable/ic_bear"
-        tools:ignore="ContentDescription" />
+        android:contentDescription="@string/char_icon" />
 
     <TextView
         android:id="@+id/name_character_tv"
@@ -27,6 +27,7 @@
         android:textColor="@color/white"
         android:layout_gravity="center"
         android:textAlignment="center"
+        android:maxLines="1"
         android:maxWidth="@dimen/max_width"
         tools:text="Медведь Потапыч" />
 

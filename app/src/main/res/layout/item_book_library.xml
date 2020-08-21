@@ -16,7 +16,7 @@
         android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/cover_5" />
+        tools:src="@drawable/cover_waterfall" />
 
     <TextView
         android:id="@+id/book_name"
