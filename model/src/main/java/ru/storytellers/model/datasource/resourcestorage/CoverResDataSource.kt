@@ -12,36 +12,36 @@ class CoverResDataSource(context: Context) : ICoverDataSource {
 
     //region coverList...
     private val coverList: MutableList<Cover> = mutableListOf(
-        Cover(
-            1,
-            context.getString(R.string.cover1_name),
-            resourceToString(context, R.drawable.cover_1),
-            resourceToString(context, R.drawable.cover_1_small)
-        ),
-        Cover(
-            2,
-            context.getString(R.string.cover2_name),
-            resourceToString(context, R.drawable.cover_2),
-            resourceToString(context, R.drawable.cover_2_small)
-        ),
-        Cover(
-            3,
-            context.getString(R.string.cover3_name),
-            resourceToString(context, R.drawable.cover_3),
-            resourceToString(context, R.drawable.cover_3_small)
-        ),
-        Cover(
-            4,
-            context.getString(R.string.cover4_name),
-            resourceToString(context, R.drawable.cover_4),
-            resourceToString(context, R.drawable.cover_4_small)
-        ),
-        Cover(
-            5,
-            context.getString(R.string.cover5_name),
-            resourceToString(context, R.drawable.cover_5),
-            resourceToString(context, R.drawable.cover_5_small)
-        ),
+//        Cover(
+//            1,
+//            context.getString(R.string.cover1_name),
+//            resourceToString(context, R.drawable.cover_1),
+//            resourceToString(context, R.drawable.cover_1_small)
+//        ),
+//        Cover(
+//            2,
+//            context.getString(R.string.cover2_name),
+//            resourceToString(context, R.drawable.cover_2),
+//            resourceToString(context, R.drawable.cover_2_small)
+//        ),
+//        Cover(
+//            3,
+//            context.getString(R.string.cover3_name),
+//            resourceToString(context, R.drawable.cover_3),
+//            resourceToString(context, R.drawable.cover_3_small)
+//        ),
+//        Cover(
+//            4,
+//            context.getString(R.string.cover4_name),
+//            resourceToString(context, R.drawable.cover_4),
+//            resourceToString(context, R.drawable.cover_4_small)
+//        ),
+//        Cover(
+//            5,
+//            context.getString(R.string.cover5_name),
+//            resourceToString(context, R.drawable.cover_5),
+//            resourceToString(context, R.drawable.cover_5_small)
+//        ),
         Cover(
             6,
             context.getString(R.string.location_amusement_park_name),
