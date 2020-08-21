@@ -96,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:textColor="@color/white"
+            android:inputType="textCapSentences|textMultiLine|textAutoComplete|textAutoCorrect"
             android:padding="@dimen/margin_small"
             android:textSize="@dimen/text_standard"
             android:maxLength="150"
