@@ -1,5 +1,6 @@
 package ru.storytellers.ui.fragments
 
+import android.content.Intent
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_library_book.*
 import org.koin.android.ext.android.inject
@@ -22,6 +23,7 @@ class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
     override fun init() {
         back_button_character.setOnClickListener {backToLibraryScreen()}
         btn_copy.setOnClickListener { copyText() }
+        btn_copy.setOnClickListener { shareText() }
     }
 
     override fun onStart() {
@@ -38,6 +40,17 @@ class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
     private fun copyText() {
         val res = tv_tale.text.toString().setTextToClipboard(requireContext())
         if (res) toastShowLong(requireContext(), getString(R.string.msg_copy))
+    }
+
+    private fun shareText() {
+        btn_share.setOnClickListener {
+            val intent= Intent()
+            intent.action= Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,tv_tale.text.toString() +"\n"
+                    +"\n"+ getString(R.string.text_app) + "ссылка на приложение")
+            intent.type="text/plain"
+            startActivity(Intent.createChooser(intent,"Расказать сказку:"))
+        }
     }
 
 
