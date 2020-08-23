@@ -89,6 +89,7 @@
         app:layout_constraintBottom_toTopOf="@id/button_end"
         app:layout_constraintEnd_toStartOf="@id/btn_send"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_goneMarginBottom="@dimen/margin_xxs"
         app:layout_goneMarginRight="0dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -124,7 +125,7 @@
         android:text="@string/btn_end"
         android:textColor="@color/yellow"
         android:textSize="@dimen/text_small"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible" />

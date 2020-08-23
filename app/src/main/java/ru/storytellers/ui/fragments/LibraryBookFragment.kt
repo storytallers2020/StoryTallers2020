@@ -23,7 +23,7 @@ class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
     override fun init() {
         back_button_character.setOnClickListener {backToLibraryScreen()}
         btn_copy.setOnClickListener { copyText() }
-        btn_copy.setOnClickListener { shareText() }
+        btn_share.setOnClickListener { shareText() }
     }
 
     override fun onStart() {
@@ -43,13 +43,12 @@ class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
     }
 
     private fun shareText() {
-        btn_share.setOnClickListener {
-            val intent= Intent()
-            intent.action= Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,tv_tale.text.toString() +"\n"
-                    +"\n"+ getString(R.string.text_app) + "ссылка на приложение")
-            intent.type="text/plain"
-            startActivity(Intent.createChooser(intent,"Расказать сказку:"))
+        with(Intent()){
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT,
+                "${subHeader.text} \n${tv_tale.text} \n${getString(R.string.msg_share)}")
+            type = "text/plain"
+            startActivity(Intent.createChooser(this,"Рассказать сказку..."))
         }
     }
 

@@ -11,6 +11,7 @@
         <item name="materialButtonStyle">@style/YellowButton</item>
         <item name="buttonStyle">@style/YellowButton</item>
         <item name="fontFamily">@font/roboto_slab</item>
+        <item name="colorControlNormal">@color/yellow</item>
     </style>
 
     <style name="OutlinedBox">
