@@ -81,4 +81,9 @@
     <string name="msg_copy">Текст сказки в буфере обмена</string>
     // New strings... move them to the corresponding group above
 
+    // Dialog fragment
+    <string name="dialog_title">Вы уверены что хотите удалить сказку?</string>
+    <string name="positive_answer">Да</string>
+    <string name="negative_answer">Нет</string>
+
 </resources>
