@@ -38,6 +38,10 @@ class LibraryViewModel(
             })
     }
 
+    fun removeStoryTalle(storyId:Long){
+        //
+    }
+
      fun onClearStorage() {
          gameStorage.apply {
             clearTitleStory()
