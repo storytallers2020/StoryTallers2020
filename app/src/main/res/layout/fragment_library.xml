@@ -37,69 +37,33 @@
         android:id="@+id/subHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginVertical="@dimen/margin_large"
         android:gravity="center_horizontal"
         android:text="@string/subtitle_library"
         android:textColor="@color/white"
         android:textSize="@dimen/text_standard_header"
+        app:layout_constraintBottom_toTopOf="@id/scroll_view"
         app:layout_constraintTop_toBottomOf="@id/screen_header" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_books"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="@dimen/margin_large"
-        android:orientation="vertical"
-        app:reverseLayout="true"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/share_title"
-        app:layout_constraintTop_toBottomOf="@id/subHeader"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_book_library" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subHeader">
 
-    <TextView
-        android:id="@+id/share_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="@string/subtitle_share"
-        android:textAllCaps="false"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_standard"
-        android:paddingVertical="@dimen/margin_small"
-        app:layout_constraintBottom_toTopOf="@id/share_icons" />
-
-    <LinearLayout
-        android:id="@+id/share_icons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_books"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
-            android:src="@drawable/share_instagram"
-            android:contentDescription="@string/char_icon" />
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:reverseLayout="true"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_book_library" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
-            android:src="@drawable/share_whatsapp"
-            android:contentDescription="@string/char_icon" />
+    </androidx.core.widget.NestedScrollView>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
-            android:src="@drawable/share_telegram"
-            android:contentDescription="@string/char_icon" />
 
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
