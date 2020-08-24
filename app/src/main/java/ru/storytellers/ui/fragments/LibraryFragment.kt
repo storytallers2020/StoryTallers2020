@@ -25,6 +25,7 @@ class LibraryFragment: BaseFragment<DataModel>() {
             navigateToLibraryBookScreen(story)
         }
     }
+    private val removeClickListener={}
     private val libraryAdapter: LibraryAdapter by lazy { LibraryAdapter(itemClickListener) }
 
 
