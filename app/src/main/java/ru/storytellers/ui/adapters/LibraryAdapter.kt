@@ -13,7 +13,8 @@ import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 
 class LibraryAdapter(
-    val itemClickListener: ItemClickListener
+    val itemClickListener: (story: Story)->Unit,
+    val removeItemClickListener: (storyId:Long)->Unit
 ): RecyclerView.Adapter<LibraryAdapter.MyViewHolder>() {
     private var listStory = mutableListOf<Story>()
 
@@ -48,13 +49,13 @@ class LibraryAdapter(
             }
             itemView.book_name.text=story.name
             itemView.setOnClickListener {
-                itemClickListener.onItemClick(story)
+                itemClickListener(story)
             }
+            // слушатель элемента для удаления сказки
+             itemView.setOnLongClickListener {
+                 removeItemClickListener(story.id)
+             true}
         }
-
     }
 
-    interface ItemClickListener {
-        fun onItemClick(story: Story)
-    }
 }
