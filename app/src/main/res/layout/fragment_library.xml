@@ -11,12 +11,10 @@
 
     <ImageView
         android:id="@+id/back_button_character"
+        style="@style/BackArrow"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleX="2"
-        android:scaleY="2"
+        android:layout_height="0dp"
         android:src="@drawable/ic_arrow_back"
-        android:layout_marginStart="@dimen/margin_xs"
         android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,24 +22,18 @@
 
     <TextView
         android:id="@+id/screen_header"
-        android:layout_width="wrap_content"
+        style="@style/Header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/title_library"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_standard_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/subHeader"
+        style="@style/SubHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/margin_large"
-        android:gravity="center_horizontal"
         android:text="@string/subtitle_library"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_standard_header"
         app:layout_constraintBottom_toTopOf="@id/scroll_view"
         app:layout_constraintTop_toBottomOf="@id/screen_header" />
 

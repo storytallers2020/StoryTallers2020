@@ -80,6 +80,9 @@
     <string name="btn_copy">"Копировать "</string>
     <string name="msg_copy">Сказка в буфере обмена</string>
     <string name="msg_share">Попробуй сочинить свою сказку тут: \n<u>ссылка</u></string>
+    <string name="btn_delete">Удалить</string>
+    <string name="msg_delete">Сказка удалена</string>
+    <string name="btn_menu">меню</string>
     // New strings... move them to the corresponding group above
 
 </resources>
