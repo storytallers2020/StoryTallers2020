@@ -38,8 +38,8 @@ class LibraryViewModel(
             })
     }
 
-    fun removeStoryTalle(storyId:Long){
-        //
+    fun removeStory(storyId:Long){
+        //storyRepository.removeStoryById(storyId)
     }
 
      fun onClearStorage() {
