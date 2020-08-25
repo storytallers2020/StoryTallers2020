@@ -33,7 +33,7 @@ interface StoryDao {
     //region Delete
 
     @Delete
-    fun delete(story: RoomStory)
+    fun delete(story: RoomStory): Int
 
     //endregion Delete
 }

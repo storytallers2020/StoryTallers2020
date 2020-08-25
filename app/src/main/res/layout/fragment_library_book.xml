@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:paddingTop="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -86,46 +86,29 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_copy"
             android:textColor="@color/yellow"
+            android:layout_marginHorizontal="@dimen/margin_large"
             android:drawableEnd="@drawable/ic_outline_file_copy_24"
             android:contentDescription="@string/btn_copy" />
 
         <TextView
+            android:id="@+id/btn_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_share"
+            android:textColor="@color/yellow"
+            android:layout_marginHorizontal="@dimen/margin_large"
+            android:drawableEnd="@drawable/ic_baseline_share_24"
+            android:contentDescription="@string/btn_share" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/subtitle_share"
+            android:text="@string/btn_share"
             android:visibility="gone"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:paddingTop="@dimen/padding_small"
             android:textSize="@dimen/text_standard" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/padding_small"
-                android:src="@drawable/share_instagram"
-                android:contentDescription="@string/char_icon" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/padding_small"
-                android:src="@drawable/share_whatsapp"
-                android:contentDescription="@string/char_icon" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/padding_small"
-                android:src="@drawable/share_telegram"
-                android:contentDescription="@string/char_icon" />
-
-        </LinearLayout>
     </LinearLayout>
 
 

@@ -77,9 +77,10 @@
     // Library screens
     <string name="title_library">Библиотека</string>
     <string name="subtitle_library">Мои сказки</string>
-    <string name="subtitle_share">Поделиться:</string>
-    <string name="btn_copy">Копировать</string>
-    <string name="msg_copy">Текст сказки в буфере обмена</string>
+    <string name="btn_share">"Поделиться "</string>
+    <string name="btn_copy">"Копировать "</string>
+    <string name="msg_copy">Сказка в буфере обмена</string>
+    <string name="msg_share">Попробуй сочинить свою сказку тут: \n<u>ссылка</u></string>
     // New strings... move them to the corresponding group above
 
     // Dialog fragment

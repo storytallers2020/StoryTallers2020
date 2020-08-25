@@ -82,9 +82,10 @@
     // Library screens
     <string name="title_library">Library</string>
     <string name="subtitle_library">My Fairy Tales</string>
-    <string name="subtitle_share">Share:</string>
-    <string name="btn_copy">Copy</string>
-    <string name="msg_copy">Text of the fairy tale in the clipboard</string>
+    <string name="btn_share" translatable="false">"Share "</string>
+    <string name="btn_copy">"Copy "</string>
+    <string name="msg_copy">Copied to clipboard</string>
+    <string name="msg_share">Try to write your own story here: \n<u>link</u></string>
     <string name="tale_sample" translatable="false">В некотором царстве, в некотором государстве жил-был царь, у царя было три сына. Вот дети и говорят ему:\n
         - Милостивый батюшка! Благослови нас, мы на охоту поедем.\n
         Отец благословил, и они поехали в разные стороны. Младший сын ездил, ездил и заплутался; выезжает на поляну, на поляне лежит палая лошадь,
