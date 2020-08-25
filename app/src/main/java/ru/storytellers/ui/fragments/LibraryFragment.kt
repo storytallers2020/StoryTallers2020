@@ -9,9 +9,11 @@ import ru.storytellers.model.entity.Story
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.LibraryAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.AlertDialogFragment
 import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.LibraryViewModel
 
+private const val FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
 class LibraryFragment: BaseFragment<DataModel>() {
 
     override val model: LibraryViewModel by inject ()
@@ -20,14 +22,23 @@ class LibraryFragment: BaseFragment<DataModel>() {
     companion object {
         fun newInstance() = LibraryFragment()
     }
-    private val itemClickListener = object : LibraryAdapter.ItemClickListener {
-        override fun onItemClick(story: Story) {
+    private val itemClickListener =  {story: Story->
             navigateToLibraryBookScreen(story)
         }
-    }
-    private val removeClickListener={}
-    private val libraryAdapter: LibraryAdapter by lazy { LibraryAdapter(itemClickListener) }
 
+    private val removeItemClickListener={storyId:Long->
+        activity?.supportFragmentManager?.let {
+            AlertDialogFragment.newInstance(this,storyId).show(
+                it,
+                FRAGMENT_DIALOG_TAG)
+        }
+        context?.let { toastShowLong(it,it.getString(R.string.removed_successfully)) }
+    }
+    private val libraryAdapter: LibraryAdapter by lazy { LibraryAdapter(
+        itemClickListener,
+        removeItemClickListener as (Long) -> Unit
+    )
+    }
 
     override fun init() {
         rv_books.adapter=libraryAdapter
