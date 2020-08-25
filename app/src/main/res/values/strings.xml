@@ -14,6 +14,7 @@
     <string name="player_cant_be_alone">Player can not be alone</string>
     <string name="enter_title">Enter title</string>
     <string name="saved_successfully">Saved successfully</string>
+    <string name="removed_successfully">Removed successfully</string>
 
     // Rules screen
     <string name="title_rules">Rules</string>
