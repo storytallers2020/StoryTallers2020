@@ -68,6 +68,7 @@
     <string name="btn_end"><u>End the Tale</u></string>
     <string name="btn_resume"><u>Continue game</u></string>
     <string name="btn_select_cover">Select cover</string>
+    <string name="msg_incorrect_sentence">Isn`t correct sentence</string>
 
     // Choosing Cover and Title screens
     <string name="title_choosing_cover">Choosing a cover</string>

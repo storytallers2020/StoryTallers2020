@@ -80,7 +80,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
         model.subscribeRnRemoveStory().observe(viewLifecycleOwner, Observer {
             if (it != 0) {
                 context?.let { context ->
-                    toastShowLong(context, context.getString(R.string.removed_successfully))
+                    toastShowLong(context, context.getString(R.string.msg_delete))
                 }
                 listStory?.toMutableList()?.remove(story)
                 libraryAdapter.setData(listStory)
