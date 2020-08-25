@@ -2,19 +2,14 @@
 <resources>
     // Application scope
     <string name="app_name">Сказочники 2020</string>
+    <string name="something_went_wrong">Что-то пошло не так</string>
 
     // Welcome screen
     <string name="game_loading_msg">Загрузка…</string>
-    <string name="title_welcome">Добро пожаловать\nв сказку!</string>
+    <string name="title_welcome">Добро пожаловать!</string>
     <string name="btn_start_game">Сочинить сказку</string>
-    <string name="btn_library">Библиотека моих сказок</string>
-    <string name="btn_help"><u>Как создать сказку?</u></string>
-    <string name="isnt_correct_sentence">Некорректное предложение</string>
-    <string name="something_went_wrong">Что то пошло не так</string>
-    <string name="player_limit_reached">Предельное количество игроков</string>
-    <string name="player_cant_be_alone">Игрок не может быть один</string>
-    <string name="enter_title">Введите заголовок</string>
-    <string name="saved_successfully">Успешно сохранено</string>
+    <string name="btn_library">Моя библиотека</string>
+    <string name="btn_help"><u>Правила</u></string>
 
     // Rules screen
     <string name="title_rules">Правила</string>
@@ -48,6 +43,7 @@
     <string name="hint_enter_name">Введите имя</string>
     <string name="btn_save">Сохранить</string>
     <string name="msg_team_full">Максимум 8 игроков.</string>
+    <string name="msg_need_more_players">Игрок не может быть один</string>
     <string name="btn_edit">изменить</string>
     <string name="remove">удалить</string>
     <string name="btn_choose_location">Выбрать локацию</string>
@@ -67,11 +63,13 @@
     <string name="btn_end"><u>Закончить сказку</u></string>
     <string name="btn_resume"><u>Продолжить игру</u></string>
     <string name="btn_select_cover">Выбрать обложку</string>
+    <string name="msg_incorrect_sentence">Неверное предложение</string>
 
     // Choosing Cover and Title screens
     <string name="title_choosing_cover">Выбор обложки</string>
     <string name="choosing_cover_choose">Выберите  обложку для своей сказки</string>
     <string name="choosing_cover_title">Придумайте название сказки</string>
+    <string name="enter_title">Введите заголовок</string>
 
     // Library screens
     <string name="title_library">Библиотека</string>
@@ -82,6 +80,7 @@
     <string name="msg_share">Попробуй сочинить свою сказку тут: \n<u>ссылка</u></string>
     <string name="btn_delete">Удалить</string>
     <string name="msg_delete">Сказка удалена</string>
+    <string name="msg_saved_successfully">Успешно сохранено</string>
     <string name="btn_menu">меню</string>
     // New strings... move them to the corresponding group above
 

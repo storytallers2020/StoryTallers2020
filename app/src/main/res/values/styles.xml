@@ -9,7 +9,8 @@
         <item name="android:windowFullscreen">true</item>
         <item name="materialButtonStyle">@style/YellowButton</item>
         <item name="buttonStyle">@style/YellowButton</item>
-        <item name="fontFamily">@font/roboto_slab</item>
+        <item name="android:fontFamily">@font/phil_fam</item>
+        <item name="fontFamily">@font/phil_fam</item>
         <item name="colorControlNormal">@color/yellow</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
     </style>
@@ -61,16 +62,15 @@
     </style>
 
     <style name="Header" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textStyle">normal</item>
         <item name="android:textSize">@dimen/text_standard_header</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="SubHeader" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textSize">@dimen/text_large</item>
-        <item name="android:textAlignment">center</item>
+    <style name="SubHeader" parent="Header">
+        <item name="android:textStyle">italic</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textColor">@color/white</item>
         <item name="android:layout_marginTop">@dimen/margin_standard</item>
         <item name="android:layout_marginBottom">@dimen/margin_small</item>
     </style>

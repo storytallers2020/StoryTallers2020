@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:app="http://schemas.android.com/apk/res-auto">
+    <font
+        app:font="@font/philosopher_bold"
+        app:fontStyle="italic" />
+    <font
+        app:font="@font/philosopher"
+        app:fontStyle="normal" />
+</font-family>
