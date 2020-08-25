@@ -33,4 +33,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Приключения трёх сыновей-королевичей в тридесятом царстве-государстве." />
 
+    <ImageButton
+        android:id="@+id/btn_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_xs"
+        android:src="@drawable/ic_menu"
+        android:tint="@color/blueDark"
+        android:backgroundTint="@color/menu_button"
+        android:background="@drawable/ic_circle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/btn_menu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

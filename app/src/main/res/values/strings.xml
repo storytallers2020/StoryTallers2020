@@ -82,10 +82,12 @@
     // Library screens
     <string name="title_library">Library</string>
     <string name="subtitle_library">My Fairy Tales</string>
-    <string name="btn_share" translatable="false">"Share "</string>
     <string name="btn_copy">"Copy "</string>
     <string name="msg_copy">Copied to clipboard</string>
+    <string name="btn_share">"Share "</string>
     <string name="msg_share">Try to write your own story here: \n<u>link</u></string>
+    <string name="btn_delete" translatable="false">Delete</string>
+    <string name="msg_delete" translatable="false">Tale deleted<u>link</u></string>
     <string name="tale_sample" translatable="false">В некотором царстве, в некотором государстве жил-был царь, у царя было три сына. Вот дети и говорят ему:\n
         - Милостивый батюшка! Благослови нас, мы на охоту поедем.\n
         Отец благословил, и они поехали в разные стороны. Младший сын ездил, ездил и заплутался; выезжает на поляну, на поляне лежит палая лошадь,
@@ -94,6 +96,7 @@
         Царевич слез с своего доброго коня и разделил падаль: зверям - кости, птицам - мясо, кожа - гадам, а голова - муравьям.\n
         - Спасибо, Иван-царевич! - сказал сокол, - За эту услугу можешь ты обращаться ясным соколом и муравьем всякий раз, как захочешь.
     </string>
+    <string name="btn_menu" translatable="false">menu</string>
     // New strings... move them to the corresponding group above
 
     // Dialog fragment

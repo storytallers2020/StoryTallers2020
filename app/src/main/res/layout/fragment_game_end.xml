@@ -52,7 +52,7 @@
         android:id="@+id/btn_copy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableEnd="@drawable/ic_outline_file_copy_24"
+        android:drawableEnd="@drawable/ic_copy"
         android:textColor="@color/yellow"
         android:text="@string/btn_copy"
         android:contentDescription="@string/btn_copy"
