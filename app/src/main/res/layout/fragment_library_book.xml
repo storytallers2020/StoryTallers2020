@@ -12,36 +12,39 @@
 
     <ImageView
         android:id="@+id/back_button_character"
+        style="@style/BackArrow"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleX="2"
-        android:scaleY="2"
+        android:layout_height="0dp"
         android:src="@drawable/ic_arrow_back"
-        android:layout_marginStart="@dimen/margin_xs"
         android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/screen_header" />
 
+    <ImageView
+        android:id="@+id/btn_menu"
+        style="@style/BackArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_menu"
+        android:contentDescription="@string/btn_menu"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
+
     <TextView
         android:id="@+id/screen_header"
-        android:layout_width="wrap_content"
+        style="@style/Header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/title_library"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_standard_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/subHeader"
+        style="@style/SubHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_standard_header"
-        android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintTop_toBottomOf="@id/screen_header"
         tools:text="Хрустальная гора" />
 
@@ -78,6 +81,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingTop="@dimen/margin_standard"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
@@ -87,7 +91,7 @@
             android:text="@string/btn_copy"
             android:textColor="@color/yellow"
             android:layout_marginHorizontal="@dimen/margin_large"
-            android:drawableEnd="@drawable/ic_outline_file_copy_24"
+            android:drawableEnd="@drawable/ic_copy"
             android:contentDescription="@string/btn_copy" />
 
         <TextView
@@ -97,18 +101,9 @@
             android:text="@string/btn_share"
             android:textColor="@color/yellow"
             android:layout_marginHorizontal="@dimen/margin_large"
-            android:drawableEnd="@drawable/ic_baseline_share_24"
+            android:drawableEnd="@drawable/ic_share"
             android:contentDescription="@string/btn_share" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_share"
-            android:visibility="gone"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:paddingTop="@dimen/padding_small"
-            android:textSize="@dimen/text_standard" />
     </LinearLayout>
 
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.MainActivity">
+
+    <item
+        android:id="@+id/btn_share"
+        android:title="@string/btn_share"
+        android:icon="@drawable/ic_share"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/btn_copy"
+        android:title="@string/btn_copy"
+        android:icon="@drawable/ic_copy"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/btn_delete"
+        android:title="@string/btn_delete"
+        android:icon="@drawable/ic_edit_bin" />
+</menu>
