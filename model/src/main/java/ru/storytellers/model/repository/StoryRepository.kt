@@ -12,6 +12,10 @@ class StoryRepository(private val localDataSource: IStoryDataSource): IStoryRepo
         localDataSource.insertOrReplace(story)
             .subscribeOn(Schedulers.io())
 
+    override fun delete(story: Story): Single<Int> =
+        localDataSource.deleteStory(story)
+            .subscribeOn(Schedulers.io())
+
     override fun getStoryById(storyId: Long): Single<Story> =
         localDataSource.getStoryById(storyId)
             .subscribeOn(Schedulers.io())

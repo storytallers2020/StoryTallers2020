@@ -5,16 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_book_library.view.*
-import kotlinx.android.synthetic.main.item_book_library.view.book_cover_image
-import kotlinx.android.synthetic.main.item_image_cover.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Story
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 
 class LibraryAdapter(
-    val itemClickListener: ItemClickListener
-): RecyclerView.Adapter<LibraryAdapter.MyViewHolder>() {
+    val itemClickListener: (story: Story) -> Unit,
+    val btnMenuClickListener: (view: View, story: Story) -> Unit
+) : RecyclerView.Adapter<LibraryAdapter.MyViewHolder>() {
     private var listStory = mutableListOf<Story>()
 
     fun setData(localListStory: List<Story>?) {
@@ -33,7 +32,7 @@ class LibraryAdapter(
         return MyViewHolder(view)
     }
 
-    override fun getItemCount()= listStory.count()
+    override fun getItemCount() = listStory.count()
 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -42,19 +41,16 @@ class LibraryAdapter(
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(story:Story){
+        fun bind(story: Story) {
             resourceToUri(story.coverUrl)?.let {
-                loadImage(it,itemView.book_cover_image)
+                loadImage(it, itemView.book_cover_image)
             }
-            itemView.book_name.text=story.name
+            itemView.book_name.text = story.name
             itemView.setOnClickListener {
-                itemClickListener.onItemClick(story)
+                itemClickListener(story)
             }
+            itemView.btn_menu.setOnClickListener { btnMenuClickListener(it, story) }
         }
-
     }
 
-    interface ItemClickListener {
-        fun onItemClick(story: Story)
-    }
 }

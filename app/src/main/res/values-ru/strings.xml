@@ -82,6 +82,12 @@
     <string name="msg_delete">Сказка удалена</string>
     <string name="msg_saved_successfully">Успешно сохранено</string>
     <string name="btn_menu">меню</string>
+
+    // Dialog fragment
+    <string name="dialog_title">Вы уверены что хотите удалить сказку?</string>
+    <string name="positive_answer">Да</string>
+    <string name="negative_answer">Нет</string>
+
     // New strings... move them to the corresponding group above
 
 </resources>
