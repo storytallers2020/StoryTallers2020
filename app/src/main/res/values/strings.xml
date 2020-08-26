@@ -84,7 +84,7 @@
     <string name="btn_share">"Share "</string>
     <string name="msg_share">Try to write your own story here: \n<u>link</u></string>
     <string name="btn_delete">Delete</string>
-    <string name="msg_delete">Tale deleted<u>link</u></string>
+    <string name="msg_delete">Tale deleted</string>
     <string name="msg_saved_successfully">Saved successfully</string>
     <string name="tale_sample" translatable="false">В некотором царстве, в некотором государстве жил-был царь, у царя было три сына. Вот дети и говорят ему:\n
         - Милостивый батюшка! Благослови нас, мы на охоту поедем.\n

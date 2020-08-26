@@ -118,10 +118,8 @@ class LibraryFragment : BaseFragment<DataModel>() {
     private fun removeStory() {
         activity?.supportFragmentManager?.let { fragMan ->
             story?.let { story ->
-                AlertDialogFragment.newInstance(this, story).show(
-                    fragMan,
-                    FRAGMENT_DIALOG_TAG
-                )
+                AlertDialogFragment.newInstance(this, story)
+                    .show(fragMan, FRAGMENT_DIALOG_TAG)
             }
         }
 

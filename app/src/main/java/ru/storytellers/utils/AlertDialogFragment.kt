@@ -1,9 +1,9 @@
 package ru.storytellers.utils
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentActivity
 import ru.storytellers.R
@@ -26,18 +26,15 @@ class AlertDialogFragment(
     }
 
     private fun getAlertDialog(context: Context) =
-        context?.let { AlertDialog.Builder(it) }
-            .setTitle(R.string.dialog_title)
-            .setCancelable(true)
-            .setNegativeButton(R.string.negative_answer) { dialog, _ ->
-                dialog.dismiss()
-            }
-
-            .setPositiveButton(R.string.positive_answer) { dialog, _ ->
-                libraryFragment.model.removeStory(story)
-                dialog.dismiss()
-            }
-            .setPositiveButtonIcon(context.resources.getDrawable(R.drawable.ic_edit_bin))
-            .create()
+        AlertDialog.Builder(context)
+        .setTitle(R.string.btn_delete)
+        .setMessage(R.string.dialog_title)
+        .setCancelable(true)
+        .setNegativeButton(R.string.negative_answer) { dialog, _ -> dialog.dismiss() }
+        .setPositiveButton(R.string.positive_answer) { dialog, _ ->
+            libraryFragment.model.removeStory(story)
+            dialog.dismiss()
+        }
+        .create()
 
 }
