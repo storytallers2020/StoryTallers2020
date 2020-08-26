@@ -27,14 +27,11 @@ class AlertDialogFragment(
 
     private fun getAlertDialog(context: Context) =
         AlertDialog.Builder(context)
-        .setTitle(R.string.btn_delete)
-        .setMessage(R.string.dialog_title)
-        .setCancelable(true)
-        .setNegativeButton(R.string.negative_answer) { dialog, _ -> dialog.dismiss() }
-        .setPositiveButton(R.string.positive_answer) { dialog, _ ->
-            libraryFragment.model.removeStory(story)
-            dialog.dismiss()
-        }
-        .create()
+            .setTitle(R.string.btn_delete)
+            .setMessage(R.string.dialog_title)
+            .setCancelable(true)
+            .setNegativeButton(R.string.negative_answer) { dialog, _ -> dialog.dismiss() }
+            .setPositiveButton(R.string.positive_answer) { _, _ -> libraryFragment.model.removeStory(story) }
+            .create()
 
 }

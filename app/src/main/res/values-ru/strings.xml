@@ -85,8 +85,8 @@
 
     // Dialog fragment
     <string name="dialog_title">Вы уверены что хотите удалить сказку?</string>
-    <string name="positive_answer">Да</string>
-    <string name="negative_answer">Нет</string>
+    <string name="positive_answer">ОК</string>
+    <string name="negative_answer">Отмена</string>
 
     // New strings... move them to the corresponding group above
 

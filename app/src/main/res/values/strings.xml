@@ -98,8 +98,8 @@
 
     // Dialog fragment
     <string name="dialog_title">Are you sure you want to delete the story?</string>
-    <string name="positive_answer">Yes</string>
-    <string name="negative_answer">No</string>
+    <string name="positive_answer">OK</string>
+    <string name="negative_answer">Cancel</string>
 
     // New strings... move them to the corresponding group above
 
