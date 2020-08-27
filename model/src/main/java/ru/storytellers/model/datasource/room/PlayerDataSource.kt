@@ -6,8 +6,9 @@ import io.reactivex.rxjava3.core.Single
 import ru.storytellers.model.datasource.ICharacterDataSource
 import ru.storytellers.model.datasource.IPlayerDataSource
 import ru.storytellers.model.entity.Player
-import ru.storytellers.model.entity.room.RoomPlayer
 import ru.storytellers.model.entity.room.db.AppDatabase
+import ru.storytellers.utils.toPlayer
+import ru.storytellers.utils.toRoomPlayer
 
 class PlayerDataSource(
     private val database: AppDatabase,
@@ -16,12 +17,7 @@ class PlayerDataSource(
 
     override fun insertOrReplace(storyId: Long, player: Player): @NonNull Completable =
         Completable.fromAction {
-            val roomPlayer = RoomPlayer(
-                player.id,
-                player.name,
-                player.character?.id ?: 0,
-                storyId
-            )
+            val roomPlayer = player.toRoomPlayer(storyId)
             database.playerDao.insert(roomPlayer)
         }
 
@@ -31,13 +27,7 @@ class PlayerDataSource(
                 characterDataSource.getCharacterById(roomPlayer.characterId)
                     .flatMap { character ->
                         return@flatMap Single.fromCallable {
-                            emitter.onSuccess(
-                                Player(
-                                    roomPlayer.id,
-                                    roomPlayer.name,
-                                    character
-                                )
-                            )
+                            emitter.onSuccess(roomPlayer.toPlayer(character))
                         }
                     } ?: let {
                     emitter.onError(RuntimeException("No such character in database"))

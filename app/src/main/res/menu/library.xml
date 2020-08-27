@@ -8,16 +8,17 @@
         android:id="@+id/btn_share"
         android:title="@string/btn_share"
         android:icon="@drawable/ic_share"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="never|withText" />
 
     <item
         android:id="@+id/btn_copy"
         android:title="@string/btn_copy"
         android:icon="@drawable/ic_copy"
-        app:showAsAction="withText" />
+        app:showAsAction="never|withText" />
 
     <item
         android:id="@+id/btn_delete"
         android:title="@string/btn_delete"
-        android:icon="@drawable/ic_edit_bin" />
+        android:icon="@drawable/ic_edit_bin"
+        app:showAsAction="never|withText"/>
 </menu>

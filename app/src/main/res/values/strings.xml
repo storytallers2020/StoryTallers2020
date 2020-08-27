@@ -1,19 +1,14 @@
 <resources>
     // Application scope
     <string name="app_name">Story Heroes 2020</string>
+    <string name="something_went_wrong">Something went wrong</string>
 
     // Welcome screen
     <string name="game_loading_msg">The game is loading. Please wait…</string>
-    <string name="title_welcome">Welcome to\nthe Fairy Tale</string>
+    <string name="title_welcome">Welcome!</string>
     <string name="btn_start_game">Create a fairy tale</string>
-    <string name="btn_library">My Tales Library</string>
-    <string name="btn_help"><u>How to create a fairy tale?</u></string>
-    <string name="isnt_correct_sentence">Isn`t correct sentence</string>
-    <string name="something_went_wrong">Something went wrong</string>
-    <string name="player_limit_reached">Player limit reached</string>
-    <string name="player_cant_be_alone">Player can not be alone</string>
-    <string name="enter_title">Enter title</string>
-    <string name="saved_successfully">Saved successfully</string>
+    <string name="btn_library">My Library</string>
+    <string name="btn_help"><u>Rules</u></string>
 
     // Rules screen
     <string name="title_rules">Rules</string>
@@ -52,6 +47,7 @@
         <string name="hint_enter_name">Name</string>
         <string name="btn_save">Save</string>
         <string name="msg_team_full">Maximum number of players reached.</string>
+        <string name="msg_need_more_players">The game can be played by 2 to 8 players.</string>
         <string name="btn_edit">edit</string>
         <string name="remove">remove</string>
         <string name="rv_players_underline" translatable="false">-----------------------</string>
@@ -72,11 +68,13 @@
     <string name="btn_end"><u>End the Tale</u></string>
     <string name="btn_resume"><u>Continue game</u></string>
     <string name="btn_select_cover">Select cover</string>
+    <string name="msg_incorrect_sentence">Isn`t correct sentence</string>
 
     // Choosing Cover and Title screens
     <string name="title_choosing_cover">Choosing a cover</string>
     <string name="choosing_cover_choose">Choose a cover for your fairy tale</string>
     <string name="choosing_cover_title">Come up with the title</string>
+    <string name="enter_title">Enter title</string>
 
     // Library screens
     <string name="title_library">Library</string>
@@ -86,7 +84,8 @@
     <string name="btn_share">"Share "</string>
     <string name="msg_share">Try to write your own story here: \n<u>link</u></string>
     <string name="btn_delete">Delete</string>
-    <string name="msg_delete">Tale deleted<u>link</u></string>
+    <string name="msg_delete">Tale deleted</string>
+    <string name="msg_saved_successfully">Saved successfully</string>
     <string name="tale_sample" translatable="false">В некотором царстве, в некотором государстве жил-был царь, у царя было три сына. Вот дети и говорят ему:\n
         - Милостивый батюшка! Благослови нас, мы на охоту поедем.\n
         Отец благословил, и они поехали в разные стороны. Младший сын ездил, ездил и заплутался; выезжает на поляну, на поляне лежит палая лошадь,
@@ -96,6 +95,12 @@
         - Спасибо, Иван-царевич! - сказал сокол, - За эту услугу можешь ты обращаться ясным соколом и муравьем всякий раз, как захочешь.
     </string>
     <string name="btn_menu">menu</string>
+
+    // Dialog fragment
+    <string name="dialog_title">Are you sure you want to delete the story?</string>
+    <string name="positive_answer">OK</string>
+    <string name="negative_answer">Cancel</string>
+
     // New strings... move them to the corresponding group above
 
 </resources>

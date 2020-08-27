@@ -51,11 +51,20 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:reverseLayout="true"
-            tools:itemCount="2"
+            tools:itemCount="3"
             tools:listitem="@layout/item_book_library" />
 
     </androidx.core.widget.NestedScrollView>
 
-
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_shadows"
+        android:contentDescription="@string/title_choosing_cover"
+        app:layout_constraintBottom_toBottomOf="@id/scroll_view"
+        app:layout_constraintEnd_toEndOf="@id/scroll_view"
+        app:layout_constraintStart_toStartOf="@id/scroll_view"
+        app:layout_constraintTop_toTopOf="@id/scroll_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

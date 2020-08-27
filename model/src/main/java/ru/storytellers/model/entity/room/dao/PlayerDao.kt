@@ -36,7 +36,10 @@ interface PlayerDao {
     //region Delete
 
     @Delete
-    fun delete(player: RoomPlayer)
+    fun delete(player: RoomPlayer): Int
+
+    @Delete
+    fun delete(players: List<RoomPlayer>): Int
 
     //endregion Delete
 }

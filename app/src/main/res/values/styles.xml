@@ -9,9 +9,12 @@
         <item name="android:windowFullscreen">true</item>
         <item name="materialButtonStyle">@style/YellowButton</item>
         <item name="buttonStyle">@style/YellowButton</item>
-        <item name="fontFamily">@font/roboto_slab</item>
+        <item name="android:fontFamily">@font/phil_fam</item>
+        <item name="fontFamily">@font/phil_fam</item>
         <item name="colorControlNormal">@color/yellow</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:alertDialogTheme">@style/AlertDialog</item>
+
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.NoActionBar">
@@ -60,17 +63,37 @@
         <item name="android:itemBackground">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="AlertDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra</item>
+        <item name="android:textSize">@dimen/text_standard</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/DialogButton</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/DialogButtonPassive</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/DialogButtonPassive</item>
+    </style>
+
+    <style name="DialogButton" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/yellow</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:backgroundTint">@color/no_color</item>
+    </style>
+
+    <style name="DialogButtonPassive" parent="DialogButton">
+        <item name="android:textColor">#B3F9BE40</item>
+    </style>
+
     <style name="Header" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textStyle">normal</item>
         <item name="android:textSize">@dimen/text_standard_header</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="SubHeader" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textSize">@dimen/text_large</item>
-        <item name="android:textAlignment">center</item>
+    <style name="SubHeader" parent="Header">
+        <item name="android:textStyle">italic</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textColor">@color/white</item>
         <item name="android:layout_marginTop">@dimen/margin_standard</item>
         <item name="android:layout_marginBottom">@dimen/margin_small</item>
     </style>
