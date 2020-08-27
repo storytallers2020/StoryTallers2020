@@ -182,5 +182,5 @@ val gameModule = module {
 
     single { Game() }
     single { GameStorage() }
-    viewModel { GameViewModel(get(), get()) }
+    viewModel { GameViewModel(get()) }
 }

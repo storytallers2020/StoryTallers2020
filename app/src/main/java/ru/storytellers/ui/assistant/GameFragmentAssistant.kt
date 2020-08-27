@@ -49,7 +49,7 @@ class GameFragmentAssistant(
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun afterTextChanged(text: Editable) {
                 if (text.toString().length>2) {
-                    gameFragment.textSentenceOfTale = text.toString()
+                    //gameFragment.textSentenceOfTale = text.toString()
                     makeVisibleBtnSend()
                 }
             }

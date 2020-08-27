@@ -15,7 +15,6 @@ class LibraryViewModel(
     private val onSuccessliveData = MutableLiveData<DataModel.Success<Story>>()
     private val onErrorliveData = MutableLiveData<DataModel.Error>()
     private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
-    private val gameStorage= StoryTallerApp.instance.gameStorage
 
     fun subscribeOnSuccess(): LiveData<DataModel.Success<Story>> {
         return onSuccessliveData
@@ -39,13 +38,6 @@ class LibraryViewModel(
     }
 
      fun onClearStorage() {
-         gameStorage.apply {
-            clearTitleStory()
-            clearCoverStoryTaller()
-            clearLocationGame()
-            clearListPlayers()
-            clearListSentenceOfTale()
-            setLevelGame(0)
-        }
+         StoryTallerApp.instance.gameStorage.clear()
     }
 }

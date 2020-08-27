@@ -1,54 +1,55 @@
 package ru.storytellers.engine
 
+import ru.storytellers.engine.level.Level
 import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
+import ru.storytellers.utils.getSortedList
 
 class GameStorage {
-     private val listPlayers= mutableListOf<Player>()
-     private var levelGame:Int=0
-     private var locationGame:Location?=null
-     private val listSentenceOfTale= mutableListOf<SentenceOfTale>()
-     private var coverStoryTaller:Cover?=null
-     private var titleStoryTaller:String?=null
+    private val playerList = mutableListOf<Player>()
+    var location: Location? = null
+    private val sentenceOfTaleList = mutableListOf<SentenceOfTale>()
+    private var cover: Cover? = null
+    private var title: String? = null
 
-     fun getTitleStory()=titleStoryTaller
-     fun setTitleStory(titleStory:String){
-          titleStoryTaller=titleStory
-     }
-     fun clearTitleStory(){
-          titleStoryTaller=null
-     }
-     fun getCoverStoryTaller()=coverStoryTaller
-     fun setCoverStoryTaller(coverStory:Cover){
-          coverStoryTaller=coverStory
-     }
-     fun clearCoverStoryTaller(){
-          coverStoryTaller=null
-     }
+    var level: Level? = null
 
-     fun getListPlayers()=listPlayers
-     fun clearListPlayers(){
-          listPlayers.clear()
-     }
-     fun getListSentenceOfTale()=listSentenceOfTale
-     fun clearListSentenceOfTale(){
-          listSentenceOfTale.clear()
-     }
+    fun getTitleStory() = title
 
-     fun getLevelGame()=levelGame
-     fun setLevelGame(lvlGame:Int){
-          levelGame=lvlGame
-     }
-     fun getLocationGame()=locationGame
-     fun setLocationGame(location:Location){
-          locationGame=location
-     }
-     fun clearLocationGame(){
-          locationGame=null
-     }
+    fun setTitleStory(titleStory: String) {
+        title = titleStory
+    }
 
+    fun clear() {
+        title = null
+        cover = null
+        playerList.clear()
+        location = null
+        sentenceOfTaleList.clear()
+        level = null
+    }
 
+    fun getCoverStoryTaller() = cover
+
+    fun setCoverStoryTaller(coverStory: Cover) {
+        cover = coverStory
+    }
+
+    fun getPlayers() = playerList
+
+    fun getSentences() = sentenceOfTaleList
+
+//    fun getLevelGame() = level
+//    fun setLevelGame(lvlGame: Int) {
+//        level = lvlGame
+//    }
+
+    fun getLocationGame() = location
+
+    fun setLocationGame(location: Location) {
+        this.location = location
+    }
 
 }

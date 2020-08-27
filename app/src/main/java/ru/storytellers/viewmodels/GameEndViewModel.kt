@@ -22,8 +22,8 @@ class GameEndViewModel : BaseViewModel<DataModel>() {
 //    }
 
     fun setTextOfStoryTaller() {
-        val sentences = gameStorage.getListSentenceOfTale()
-        textOfStoryTallerLiveData.value = sentences
+        textOfStoryTallerLiveData.value = gameStorage
+            .getSentences()
             .getSortedList()
             .toListOfStrings()
             .collectSentence()
