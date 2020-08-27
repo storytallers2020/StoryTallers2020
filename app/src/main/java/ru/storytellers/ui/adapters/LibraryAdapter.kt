@@ -49,7 +49,8 @@ class LibraryAdapter(
             itemView.setOnClickListener {
                 itemClickListener(story)
             }
-            itemView.btn_menu.setOnClickListener { btnMenuClickListener(it, story) }
+            itemView.btn_menu.setOnClickListener {
+                btnMenuClickListener(it, story) }
         }
     }
 
