@@ -36,8 +36,8 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
 
     override fun onStart() {
         super.onStart()
-        model.getTextStory(story.id)
-        model.getTitleStory(story.name)
+        story?.let { model.getTextStory(it.id) }
+        story?.let {model.getTitleStory(it.name) }
     }
 
     override fun onResume() {

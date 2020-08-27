@@ -28,7 +28,7 @@ class GameFragment : BaseFragment<DataModel>() {
 
     override fun backClicked(): Boolean = true
 
-    override fun iniViewModel() { }
+    override fun iniViewModel() {}
 
     override fun init() {
         sentence_line.addTextChangedListener(assistantFragment.getTextWatcher())
@@ -93,7 +93,7 @@ class GameFragment : BaseFragment<DataModel>() {
 
     private fun handlerIsCorrectSentence() {
         model.subscribeOnSentenceChecked().observe(viewLifecycleOwner, Observer {
-            if (!it) toastShowLong(context, context?.getString(R.string.isnt_correct_sentence))
+            if (!it) toastShowLong(context, context?.getString(R.string.msg_incorrect_sentence))
         })
     }
 
