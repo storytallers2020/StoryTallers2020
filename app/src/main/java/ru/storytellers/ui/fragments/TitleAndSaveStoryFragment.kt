@@ -56,7 +56,7 @@ class TitleAndSaveStoryFragment:BaseFragment<DataModel>() {
         model.subscribeOnSuccessSaveFlag().observe(viewLifecycleOwner, Observer {
             if(it) {
                 activity?.let {
-                    context -> toastShowLong(context,context.getString(R.string.saved_successfully)) }
+                    context -> toastShowLong(context,context.getString(R.string.msg_saved_successfully)) }
                 navigateToLibraryScreen()
             }
 

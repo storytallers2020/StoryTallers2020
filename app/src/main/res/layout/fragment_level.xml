@@ -118,8 +118,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginVertical="@dimen/margin_standard"
-        app:layout_constraintBottom_toTopOf="@id/btn_next"
-        app:layout_constraintTop_toBottomOf="@id/description_level">
+        app:layout_constraintBottom_toTopOf="@id/btn_next">
 
 
     <LinearLayout

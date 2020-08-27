@@ -64,8 +64,7 @@
             android:id="@+id/tv_tale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/margin_small"
-            android:paddingBottom="@dimen/margin_small"
+            android:padding="@dimen/margin_small"
             android:textColor="@color/white"
             android:textSize="@dimen/text_standard"
             android:lineSpacingExtra="@dimen/line_spacing_extra"
@@ -73,6 +72,17 @@
             tools:text="@string/tale_sample" />
 
     </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_shadows"
+        android:contentDescription="@string/title_choosing_cover"
+        app:layout_constraintBottom_toBottomOf="@id/layout_tale"
+        app:layout_constraintEnd_toEndOf="@id/layout_tale"
+        app:layout_constraintStart_toStartOf="@id/layout_tale"
+        app:layout_constraintTop_toTopOf="@id/layout_tale" />
 
     <LinearLayout
         android:id="@+id/share_title"

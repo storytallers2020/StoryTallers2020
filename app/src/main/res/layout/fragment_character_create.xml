@@ -9,7 +9,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/padding_layout_standard"
         android:paddingTop="@dimen/padding_layout_standard"
         android:paddingBottom="@dimen/padding_layout_bottom"
         android:background="@drawable/ic_background_default">
@@ -19,6 +18,7 @@
             style="@style/BackArrow"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/padding_layout_standard"
             android:contentDescription="@string/arrow_back"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintBottom_toBottomOf="@id/screen_header"
@@ -30,6 +30,7 @@
             style="@style/Header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_standard"
             android:text="@string/title_character"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,6 +38,7 @@
             android:id="@+id/slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_standard"
             android:layout_marginTop="@dimen/margin_standard"
             app:layout_constraintTop_toBottomOf="@id/screen_header">
 
@@ -107,8 +109,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/OutlinedBox"
+            android:layout_marginHorizontal="@dimen/margin_standard"
             android:layout_marginVertical="@dimen/margin_large"
             android:hint="@string/hint_enter_name"
+            android:textColorHint="@color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="15"
+            app:counterTextAppearance="@style/WhiteCounter"
             app:boxCornerRadiusBottomEnd="@dimen/box_corner_radius"
             app:boxCornerRadiusBottomStart="@dimen/box_corner_radius"
             app:boxCornerRadiusTopEnd="@dimen/box_corner_radius"
@@ -138,6 +145,7 @@
         android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_standard"
         android:textSize="@dimen/text_standard"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_small"
@@ -162,6 +170,7 @@
         android:text="@string/btn_save"
         android:enabled="false"
         android:layout_marginTop="@dimen/margin_standard"
+        android:layout_marginHorizontal="@dimen/margin_standard"
         app:layout_constraintVertical_bias="1"
         app:layout_constraintTop_toBottomOf="@id/rv_characters"
         app:layout_constraintBottom_toBottomOf="parent" />

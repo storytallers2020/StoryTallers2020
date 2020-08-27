@@ -32,6 +32,15 @@
         app:layout_constraintBottom_toTopOf="@id/sentence_input_layout"
         tools:visibility="visible">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/background_transparent"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/intro_text"
+            app:layout_constraintBottom_toBottomOf="@id/scroll_view"
+            app:layout_constraintTop_toTopOf="@id/scroll_view" />
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
@@ -54,12 +63,14 @@
         </androidx.core.widget.NestedScrollView>
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/background_transparent"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/intro_text"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_shadows"
+            android:contentDescription="@string/title_choosing_cover"
             app:layout_constraintBottom_toBottomOf="@id/scroll_view"
+            app:layout_constraintEnd_toEndOf="@id/scroll_view"
+            app:layout_constraintStart_toStartOf="@id/scroll_view"
             app:layout_constraintTop_toTopOf="@id/scroll_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

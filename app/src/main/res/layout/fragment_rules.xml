@@ -36,9 +36,11 @@
         android:layout_height="wrap_content"
         android:text="@string/subtitle_rules"
         android:layout_marginTop="@dimen/margin_standard"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/screen_header" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/background_transparent"
@@ -54,12 +56,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="true"
-            android:paddingHorizontal="@dimen/margin_small"
+            android:padding="@dimen/margin_small"
             android:text="@string/rules_full_description"
             android:textColor="@color/white"
             android:textSize="@dimen/text_standard"
             android:lineSpacingExtra="@dimen/line_spacing_extra" />
 
     </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_shadows"
+        android:contentDescription="@string/title_rules"
+        app:layout_constraintBottom_toBottomOf="@id/scroll_view"
+        app:layout_constraintEnd_toEndOf="@id/scroll_view"
+        app:layout_constraintStart_toStartOf="@id/scroll_view"
+        app:layout_constraintTop_toTopOf="@id/scroll_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

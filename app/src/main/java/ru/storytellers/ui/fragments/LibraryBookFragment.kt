@@ -1,6 +1,6 @@
 package ru.storytellers.ui.fragments
 
-import android.content.Intent
+import android.view.View
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_library_book.*
 import org.koin.android.ext.android.inject
@@ -9,27 +9,35 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.setTextToClipboard
-import ru.storytellers.utils.toastShowLong
+import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.LibraryBookViewModel
 
-class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
+private const val FRAGMENT_DIALOG_TAG1 = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092396"
+
+class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>() {
     override val model: LibraryBookViewModel by inject()
-    override val layoutRes= R.layout.fragment_library_book
+    override val layoutRes = R.layout.fragment_library_book
+    private var textStory: String? = null
+    private var titleStory: String? = null
+
     companion object {
         fun newInstance(story: Story) = LibraryBookFragment(story)
     }
 
     override fun init() {
-        back_button_character.setOnClickListener {backToLibraryScreen()}
-        btn_copy.setOnClickListener { copyText() }
-        btn_share.setOnClickListener { shareText() }
+        back_button_character.setOnClickListener { backToLibraryScreen() }
+        //btn_copy.setOnClickListener { copyText() }
+        //btn_share.setOnClickListener { shareText() }
+        btn_copy.visibility = View.GONE
+        btn_share.visibility = View.GONE
+        btn_menu.setOnClickListener { showPopupMenu(it) }
+
     }
 
     override fun onStart() {
         super.onStart()
-        model.getTextStory(story)
-        model.getTitleStory(story)
+        story?.let { model.getTextStory(it) }
+        story?.let { model.getTitleStory(it) }
     }
 
     override fun onResume() {
@@ -37,33 +45,86 @@ class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
         iniViewModel()
     }
 
-    private fun copyText() {
-        val res = tv_tale.text.toString().setTextToClipboard(requireContext())
-        if (res) toastShowLong(requireContext(), getString(R.string.msg_copy))
+    override fun iniViewModel() {
+        model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer { textStoryLocal ->
+            textStoryLocal?.let { text ->
+                textStory = text
+                tv_tale.text = text
+            }
+        })
+
+        model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer { titleStoryLocal ->
+            titleStoryLocal?.let { title ->
+                titleStory = title
+                subHeader.text = title
+            }
+        })
+        model.subscribeOnRemoveStory().observe(viewLifecycleOwner, Observer {
+            if (it != 0) {
+                context?.let { context ->
+                    toastShowLong(context, context.getString(R.string.msg_delete))
+                }
+                backToLibraryScreen()
+            }
+        })
     }
 
-    private fun shareText() {
-        with(Intent()){
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT,
-                "${subHeader.text} \n${tv_tale.text} \n${getString(R.string.msg_share)}")
-            type = "text/plain"
-            startActivity(Intent.createChooser(this,"Рассказать сказку..."))
+    private fun showPopupMenu(view: View) {
+        val popupMenu = context?.let { CustomPopupMenu(it, view) }?.apply {
+            inflate(R.menu.library)
+            show()
+        }
+        popupMenu?.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.btn_share -> {
+                    val resultText = titleStory?.let { title ->
+                        textStory?.let { text ->
+                            concatTitleAndTextStory(
+                                title,
+                                text, getString(R.string.msg_share)
+                            )
+                        }
+                    }
+                    if (resultText != null) {
+                        shareText(this, resultText)
+                    }
+                    true
+                }
+                R.id.btn_copy -> {
+                    val res = textStory?.let { copyText(requireContext(), it) }
+                    if (res!!) toastShowLong(requireContext(), getString(R.string.msg_copy))
+                    true
+                }
+                R.id.btn_delete -> {
+                    removeStory()
+                    story = null
+                    true
+                }
+                else -> false
+            }
+
+
         }
     }
 
+    private fun removeStory() {
+        activity?.supportFragmentManager?.let { fragMan ->
+            story?.let {
+                AlertDialogFragment.newInstance(this, it)
+                    .show(fragMan, FRAGMENT_DIALOG_TAG1)
+            }
 
-    override fun iniViewModel() {
-        model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer {textStory->
-            textStory?.let {text-> tv_tale.text=text }
-        })
+        }
 
-        model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer {titleStory->
-            titleStory?.let {title-> subHeader.text=title }
-        })
     }
 
-    private fun backToLibraryScreen(){
+    override fun onStop() {
+        super.onStop()
+        textStory = null
+        titleStory = null
+    }
+
+    private fun backToLibraryScreen() {
         router.backTo(Screens.LibraryScreen())
     }
 

@@ -41,5 +41,8 @@ interface SentenceOfTaleDao {
     @Delete
     fun delete(sentenceId: RoomSentenceOfTale)
 
+    @Delete
+    fun delete(sentences: List<RoomSentenceOfTale>)
+
     //endregion Delete
 }
