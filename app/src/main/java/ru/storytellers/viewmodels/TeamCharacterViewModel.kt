@@ -22,4 +22,5 @@ class TeamCharacterViewModel : BaseViewModel<DataModel>() {
         listPlayers.remove(player)
         playersLiveData.value = listPlayers
     }
+
 }

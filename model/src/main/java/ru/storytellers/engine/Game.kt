@@ -9,7 +9,7 @@ class Game() {
 
     lateinit var level: Level
     private lateinit var players: List<Player>
-    private var turn: Int = 1
+    var turn: Int = 1
 
     fun getCurrentPlayer(): Player {
         val playerNum = getPlayerNumByTurn(turn, players.count())
@@ -23,8 +23,6 @@ class Game() {
         this.players = players
         this.level = level
     }
-
-    fun getTurn() = turn
 
     fun nextStep(sentenceOfTale: SentenceOfTale): Boolean {
         val res = level

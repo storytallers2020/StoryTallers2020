@@ -15,13 +15,6 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
 
     private val storage = StoryTallerApp.instance.gameStorage
-    //private val listPlayer = StoryTallerApp.instance.gameStorage.getListPlayers()
-    //private val listSentenceOfTale = StoryTallerApp.instance.gameStorage.getListSentenceOfTale()
-    //private val levelGame = levels.getLevelById(StoryTallerApp.instance.gameStorage.getLevelGame())
-    //private var currentPlayer: Player? = null
-
-    //var isCorrectFlag: Boolean = true
-    //private var currentSentenceOfTale: SentenceOfTale? = null
 
     private val currentPlayerLiveData = MutableLiveData<Player>()
     private val storyTextLiveData = MutableLiveData<String>()
@@ -29,18 +22,6 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
     private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
     private val wordLiveData = MutableLiveData<String>()
     private val isEndGamePossible = MutableLiveData<Boolean>()
-
-
-//    fun getCurrentPlayer() {
-//        currentPlayer = game.getCurrentPlayer()
-//        currentPlayerLiveData.value = currentPlayer
-//    }
-
-    fun createNewGame() {
-        storage.level?.let {level ->
-            game.newGame(storage.getPlayers(), level)
-        }
-    }
 
     fun getUriBackgroundImage() {
         storage.location?.let {
@@ -69,25 +50,30 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
         SentenceOfTale(
             getUid(),
             game.getCurrentPlayer(),
-            game.getTurn(),
+            game.turn,
             sentence,
             ContentTypeEnum.TEXT
         )
 
-    // Удалить isCorrectFlag нахер!!!
-    // Прицепить onStartTurn и onEndTurn
-    // Расплести клубок с добавлением предложения
     private fun tryGotoNextTurn(sentence: SentenceOfTale) {
         val result = game.nextStep(sentence)
         if (result) {
             checkIsEndGamePossible()
             storage.getSentences().add(sentence)
-            updateStoryText()
             onStartTurn()
             isSentenceCorrectLiveData.value = true
         } else {
-            //isCorrectFlag = it
             isSentenceCorrectLiveData.value = false
+        }
+    }
+
+    fun onStartTurn() {
+        updateStoryText()
+        currentPlayerLiveData.value = game.getCurrentPlayer()
+
+        storage.level?.let { level ->
+            if (level.wordRule.isNeedUseWord())
+                wordLiveData.value = level.wordRule.getRandomWord()
         }
     }
 
@@ -99,21 +85,12 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
 
             storyTextLiveData.value = level
                 .showRule
-                .getText(game.getTurn(), listOfStrings)
-        }
-    }
-
-    fun onStartTurn() {
-        currentPlayerLiveData.value = game.getCurrentPlayer()
-
-        storage.level?.let { level ->
-            if (level.wordRule.isNeedUseWord())
-                wordLiveData.value = level.wordRule.getRandomWord()
+                .getText(game.turn, listOfStrings)
         }
     }
 
     private fun checkIsEndGamePossible() {
-        isEndGamePossible.value = game.getTurn() > storage.getPlayers().size
+        isEndGamePossible.value = game.turn > storage.getPlayers().size
     }
 
 }

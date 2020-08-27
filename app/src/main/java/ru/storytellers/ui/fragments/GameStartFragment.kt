@@ -23,12 +23,15 @@ class GameStartFragment : BaseFragment<DataModel>() {
     }
 
     override fun iniViewModel() {
-        btn_next.setOnClickListener { navigateToGameScreen() }
+        btn_next.setOnClickListener {
+            model.createNewGame()
+            navigateToGameScreen()
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        model.getLevelGame()
+        model.requestGameLevelFromStorage()
     }
 
     override fun onResume() {

@@ -25,22 +25,12 @@ class GameFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_game
 
     var inputMethodManager: Any? = null
-    //private lateinit var textWatcher: TextWatcher
-
-    //var textSentenceOfTale: String? = null
-    //private var textResultStoryTaller: String? = null
-
-    companion object {
-        fun newInstance() = GameFragment()
-    }
 
     override fun backClicked(): Boolean = true
 
-    override fun iniViewModel() {}
+    override fun iniViewModel() { }
 
     override fun init() {
-        //textWatcher = assistantFragment.getTextWatcher()
-        //sentence_line.addTextChangedListener(textWatcher)
         sentence_line.addTextChangedListener(assistantFragment.getTextWatcher())
 
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
@@ -50,8 +40,6 @@ class GameFragment : BaseFragment<DataModel>() {
         btn_send.setOnClickListener { onButtonSendClicked() }
 
         assistantFragment.showIntro()
-
-        model.createNewGame()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,10 +47,10 @@ class GameFragment : BaseFragment<DataModel>() {
 
         assignSubscribers()
     }
+
     override fun onStart() {
         super.onStart()
 
-        //model.getCurrentPlayer()
         model.getUriBackgroundImage()
         model.onStartTurn()
     }
@@ -77,15 +65,12 @@ class GameFragment : BaseFragment<DataModel>() {
     }
 
     private fun onButtonSendClicked() {
-        //textSentenceOfTale?.let { model.onButtonSendClick(it) }
         model.onButtonSendClicked(sentence_line.text.toString())
 
         assistantFragment.hideKeyboard()
         scroll_view.smoothScrollTo(0, story_body.bottom)
         sentence_line.setText("")
         assistantFragment.makeInVisibleBtnSend()
-        assistantFragment.showGameField()
-        //model.getCurrentPlayer()
     }
 
     private fun handlerEndGamePossible() {
@@ -109,13 +94,12 @@ class GameFragment : BaseFragment<DataModel>() {
     private fun handlerIsCorrectSentence() {
         model.subscribeOnSentenceChecked().observe(viewLifecycleOwner, Observer {
             if (!it) toastShowLong(context, context?.getString(R.string.isnt_correct_sentence))
-            //model.isCorrectFlag = true
         })
     }
 
     private fun handlerResultTextLiveData() {
         model.subscribeOnTextChanged().observe(viewLifecycleOwner, Observer {
-            //textResultStoryTaller = it
+            if (it.isNotEmpty()) assistantFragment.showGameField()
             story_body.text = it
         })
     }
@@ -130,26 +114,20 @@ class GameFragment : BaseFragment<DataModel>() {
         model.subscribeOnWordChanged().observe(viewLifecycleOwner, Observer {
             mandatory_container.visibility = View.VISIBLE
             tv_mandatory_word.text = it
-            mandatoryClickListener(it)
+            mandatoryClickListener()
         })
     }
 
-    private fun mandatoryClickListener(mandatoryWord: String) {
-        tv_mandatory_word.setOnClickListener {
-            var text = sentence_line.text.toString()
-            if (text.isNotBlank()) text += mandatoryWord
-            sentence_line.setText(text)
-            sentence_line.setSelection(text.length)
-
-//            with (
-//                with(sentence_line.text.toString()) {
-//                    if (this.isNotBlank()) "$this $mandatoryWord" else mandatoryWord
-//                }
-//            ) {
-//                sentence_line.setText(this)
-//                sentence_line.setSelection(this.length)
-//            }
-        }
+    private fun mandatoryClickListener() {
+        if (!tv_mandatory_word.hasOnClickListeners())
+            tv_mandatory_word.setOnClickListener {
+                var text = sentence_line.text.toString()
+                val mandatoryWord = tv_mandatory_word.text.toString()
+                text = if (text.isBlank()) mandatoryWord
+                else "$text $mandatoryWord"
+                sentence_line.setText(text)
+                sentence_line.setSelection(text.length)
+            }
     }
 
     private fun onButtonEndClicked() {

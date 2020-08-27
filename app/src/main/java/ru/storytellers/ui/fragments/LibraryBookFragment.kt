@@ -28,8 +28,8 @@ class LibraryBookFragment(private val story: Story):BaseFragment<DataModel>() {
 
     override fun onStart() {
         super.onStart()
-        model.getTextStory(story)
-        model.getTitleStory(story)
+        model.getTextStory(story.id)
+        model.getTitleStory(story.name)
     }
 
     override fun onResume() {

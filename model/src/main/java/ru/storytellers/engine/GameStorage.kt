@@ -41,11 +41,6 @@ class GameStorage {
 
     fun getSentences() = sentenceOfTaleList
 
-//    fun getLevelGame() = level
-//    fun setLevelGame(lvlGame: Int) {
-//        level = lvlGame
-//    }
-
     fun getLocationGame() = location
 
     fun setLocationGame(location: Location) {
