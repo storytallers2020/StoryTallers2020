@@ -11,9 +11,6 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class LocationViewModel(private val locationRepository: ILocationRepository) :
     BaseViewModel<DataModel>() {
-    //Неиспользуемая переменная
-    //private val locationsLiveData = MutableLiveData<List<Location>>()
-    // camelCase onSuccessliveData -> onSuccessLiveData
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Location>>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 

@@ -20,7 +20,7 @@ class CharacterCreateViewModel(private val characterRepository: ICharacterReposi
     private val playersLiveData = MutableLiveData<List<Player>>()
     private val flagActiveLiveData = MutableLiveData<Boolean>()
 
-    private var listPlayers: MutableList<Player> = StoryTallerApp.instance.gameStorage.getListPlayers()
+    private var listPlayers: MutableList<Player> = StoryTallerApp.instance.gameStorage.getPlayers()
     private var flagActive: Boolean=false
 
     fun subscribeOnSuccess(): LiveData<DataModel.Success<Character>> {

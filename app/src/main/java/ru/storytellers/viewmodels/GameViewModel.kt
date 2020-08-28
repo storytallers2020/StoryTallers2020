@@ -1,10 +1,10 @@
 package ru.storytellers.viewmodels
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.engine.Game
-import ru.storytellers.engine.level.Levels
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.ContentTypeEnum
 import ru.storytellers.model.entity.Player
@@ -12,107 +12,85 @@ import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
-class GameViewModel(
-    private val game: Game,
-    levels: Levels
+class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
 
-) : BaseViewModel<DataModel>() {
-    private val listPlayer = StoryTallerApp.instance.gameStorage.getListPlayers()
-    private val listSentenceOfTale = StoryTallerApp.instance.gameStorage.getListSentenceOfTale()
-    private val levelGame = levels.getLevelById(StoryTallerApp.instance.gameStorage.getLevelGame())
-    private var currentPlayer: Player? = null
-    var isCorrectFlag: Boolean = true
-    private var currentSentenceOfTale: SentenceOfTale? = null
+    private val storage = StoryTallerApp.instance.gameStorage
 
     private val currentPlayerLiveData = MutableLiveData<Player>()
-    private val resultTextLiveData = MutableLiveData<String>()
-    private val isCorrectFlagLiveData = MutableLiveData<Boolean>()
+    private val storyTextLiveData = MutableLiveData<String>()
+    private val isSentenceCorrectLiveData = MutableLiveData<Boolean>()
     private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
     private val wordLiveData = MutableLiveData<String>()
-    private val checkTurnGameLiveData = MutableLiveData<Boolean>()
-
-
-    fun getCurrentPlayer() {
-        currentPlayer = game.getCurrentPlayer()
-        currentPlayerLiveData.value = currentPlayer
-    }
-
-    fun createNewGame() {
-        levelGame?.let { game.newGame(listPlayer, it) }
-    }
+    private val isEndGamePossible = MutableLiveData<Boolean>()
 
     fun getUriBackgroundImage() {
-        StoryTallerApp
-            .instance
-            .gameStorage
-            .getLocationGame()?.imageUrl?.let {
-                uriBackgroundImageLiveData.value = resourceToUri(it)
-            }
-    }
-
-    fun subscribeOnCurrentPlayer() = currentPlayerLiveData
-    fun subscribeOnResultText() = resultTextLiveData
-    fun subscribeOnIsCorrectFlag() = isCorrectFlagLiveData
-    fun subscribeOnUriBackgroundImage() = uriBackgroundImageLiveData
-    fun subscribeOnWord() = wordLiveData
-    fun subscribeOnCheckTurnGame() = checkTurnGameLiveData
-
-    fun createSentenceOfTale(content: String) {
-        val sentence = content
-            .trimSentenceSpace()
-            .addDotIfNeed()
-
-        currentSentenceOfTale = SentenceOfTale(
-            getUid(),
-            currentPlayer,
-            game.getTurn(),
-            sentence,
-            ContentTypeEnum.TEXT
-        )
-        compareTurnGameWithNumberOfPlayers()
-        checkCurrentSentenceOfTale()
-    }
-
-    private fun checkCurrentSentenceOfTale() {
-        val checkResult = currentSentenceOfTale?.let { game.nextStep(it) }
-        checkResult?.let {
-            if (it) {
-                handlerCurrentSentenceOfTale()
-            } else {
-                isCorrectFlag = it
-                isCorrectFlagLiveData.value = isCorrectFlag
-            }
+        storage.location?.let {
+            uriBackgroundImageLiveData.value = resourceToUri(it.imageUrl)
         }
     }
 
-    private fun handlerCurrentSentenceOfTale() {
-        currentSentenceOfTale?.let { listSentenceOfTale.add(it) }
+    fun subscribeOnPlayerChanged(): LiveData<Player> = currentPlayerLiveData
+    fun subscribeOnTextChanged(): LiveData<String> = storyTextLiveData
+    fun subscribeOnSentenceChecked(): LiveData<Boolean> = isSentenceCorrectLiveData
+    fun subscribeOnBackgroundImageChanged(): LiveData<Uri> = uriBackgroundImageLiveData
+    fun subscribeOnWordChanged(): LiveData<String> = wordLiveData
+    fun subscribeOnEndGamePossibleChanged(): LiveData<Boolean> = isEndGamePossible
 
-        getCurrentLevel()?.let { level ->
+    fun onButtonSendClicked(content: String) {
 
-            val listOfStrings = listSentenceOfTale
-                .toList()
-                .getSortedList()
-                .toListOfStrings()
+        val text = content
+            .trimSentenceSpace()
+            .addDotIfNeed()
 
-            resultTextLiveData.value =
-                level
-                    .showRule
-                    .convert(game.getTurn(), listOfStrings)
+        val sentence = createSentence(text)
+        tryGotoNextTurn(sentence)
+    }
 
+    private fun createSentence(sentence: String): SentenceOfTale =
+        SentenceOfTale(
+            getUid(),
+            game.getCurrentPlayer(),
+            game.turn,
+            sentence,
+            ContentTypeEnum.TEXT
+        )
+
+    private fun tryGotoNextTurn(sentence: SentenceOfTale) {
+        val result = game.nextStep(sentence)
+        if (result) {
+            checkIsEndGamePossible()
+            storage.getSentences().add(sentence)
             onStartTurn()
+            isSentenceCorrectLiveData.value = true
+        } else {
+            isSentenceCorrectLiveData.value = false
         }
     }
 
     fun onStartTurn() {
-        getCurrentLevel()?.let {level ->
+        updateStoryText()
+        currentPlayerLiveData.value = game.getCurrentPlayer()
+
+        storage.level?.let { level ->
             if (level.wordRule.isNeedUseWord())
                 wordLiveData.value = level.wordRule.getRandomWord()
         }
     }
 
-    private fun compareTurnGameWithNumberOfPlayers(){
-        checkTurnGameLiveData.value=game.getTurn()==listPlayer.size
+    private fun updateStoryText() {
+        storage.level?.let { level ->
+            val listOfStrings = storage.getSentences()
+                .getSortedList()
+                .toListOfStrings()
+
+            storyTextLiveData.value = level
+                .showRule
+                .getText(game.turn, listOfStrings)
+        }
+    }
+
+    private fun checkIsEndGamePossible() {
+        isEndGamePossible.value = game.turn > storage.getPlayers().size
     }
 
 }

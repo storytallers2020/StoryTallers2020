@@ -16,11 +16,9 @@ class TeamCharacterAdapter(
 ) : RecyclerView.Adapter<TeamCharacterAdapter.TeamViewHolder>() {
     private val playersList = mutableListOf<Player>()
 
-    fun setPlayersListData(listPlayer: List<Player>) {
-        listPlayer?.let {
-            playersList.clear()
-            playersList.addAll(it)
-        }
+    fun setPlayersListData(newPlayers: List<Player>) {
+        playersList.clear()
+        playersList.addAll(newPlayers)
         notifyDataSetChanged()
     }
 

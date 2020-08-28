@@ -28,7 +28,7 @@ fun List<String>.collectSentence(): String {
 // Получить предыдущее предложение (2й и 3й уровни)
 fun List<String>.getPrevSentences(turn: Int): String {
     if (turn < 2) return ""
-    return this[turn-1-1]
+    return this[turn-1-1] //-1 - предыдущая, -1 т.к. список от нуля
 }
 
 fun String.addSpaceAfterPunctuationSymbol(): String {

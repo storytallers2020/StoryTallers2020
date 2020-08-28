@@ -17,13 +17,10 @@ class GameEndViewModel : BaseViewModel<DataModel>() {
 
     fun subscribeOnTextOfStoryTaller() = textOfStoryTallerLiveData
     fun subscribeOnUriBackgroundImage() = uriBackgroundImageLiveData
-//    fun setTextOfStoryTaller(textOfStoryTaller:String){
-//        StoryTallerApp.instance.gameStorage.getListSentenceOfTale()
-//    }
 
     fun setTextOfStoryTaller() {
-        val sentences = gameStorage.getListSentenceOfTale()
-        textOfStoryTallerLiveData.value = sentences
+        textOfStoryTallerLiveData.value = gameStorage
+            .getSentences()
             .getSortedList()
             .toListOfStrings()
             .collectSentence()

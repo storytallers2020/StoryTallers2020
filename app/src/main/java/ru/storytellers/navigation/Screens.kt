@@ -18,16 +18,13 @@ sealed class Screens {
     }
 
     class GameScreen : SupportAppScreen() {
-        override fun getFragment() = GameFragment.newInstance()
+        override fun getFragment() = GameFragment()
     }
 
     class GameStartScreen : SupportAppScreen() {
         override fun getFragment() = GameStartFragment.newInstance()
     }
 
-//    class GameEndScreen(private val textResultStoryTaller:String) : SupportAppScreen() {
-//        override fun getFragment() = GameEndFragment.newInstance(textResultStoryTaller)
-//    }
     class GameEndScreen() : SupportAppScreen() {
         override fun getFragment() = GameEndFragment.newInstance()
     }

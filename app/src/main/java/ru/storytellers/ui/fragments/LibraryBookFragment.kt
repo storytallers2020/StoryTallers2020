@@ -36,8 +36,8 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
 
     override fun onStart() {
         super.onStart()
-        story?.let { model.getTextStory(it) }
-        story?.let { model.getTitleStory(it) }
+        story?.let { model.getTextStory(it.id) }
+        story?.let {model.getTitleStory(it.name) }
     }
 
     override fun onResume() {
@@ -124,7 +124,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         titleStory = null
     }
 
-    private fun backToLibraryScreen() {
+    private fun backToLibraryScreen(){
         router.backTo(Screens.LibraryScreen())
     }
 

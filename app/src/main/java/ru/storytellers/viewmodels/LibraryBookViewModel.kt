@@ -16,7 +16,7 @@ class LibraryBookViewModel(
 ) : BaseViewModel<DataModel>() {
     private val textStoryLiveData = MutableLiveData<String>()
     private val titleStoryLiveData = MutableLiveData<String>()
-    private val onErrorliveData = MutableLiveData<DataModel.Error>()
+    private val onErrorLiveData = MutableLiveData<DataModel.Error>()
     private val onRemoveStoryLiveData = MutableLiveData<Int>()
 
     fun subscribeOnTextStory(): LiveData<String> {
@@ -32,20 +32,18 @@ class LibraryBookViewModel(
     }
 
     fun subscribeOnError(): LiveData<DataModel.Error> {
-        return onErrorliveData
+        return onErrorLiveData
     }
 
-    //TODO: Поменять на StoryId
-    fun getTextStory(story: Story) {
-        storyRepository.getStoryWithSentencesById(story.id)
+    fun getTextStory(storyId: Long) {
+        storyRepository.getStoryWithSentencesById(storyId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                //val textStory = extractTextFromStory(it)
                 it.sentences?.let { sentences ->
                     textStoryLiveData.value = mapToList(sentences).collectSentence()
                 }
             }, {
-                onErrorliveData.value = DataModel.Error(it)
+                onErrorLiveData.value = DataModel.Error(it)
             })
 
     }
@@ -53,13 +51,8 @@ class LibraryBookViewModel(
     private fun mapToList(sentences: List<SentenceOfTale>): List<String> =
         sentences.map { it.content }
 
-
-    private fun extractTextFromStory(story: Story): String {
-        val textStory = StringBuilder()
-        story.sentences?.forEach {
-            textStory.append(it.content)
-        }
-        return textStory.toString()
+    fun getTitleStory(title: String) {
+        titleStoryLiveData.value = title
     }
 
     fun getTitleStory(story: Story) {

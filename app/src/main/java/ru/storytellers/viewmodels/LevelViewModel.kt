@@ -8,22 +8,23 @@ import ru.storytellers.model.DataModel
 
 
 class LevelViewModel : BaseViewModel<DataModel>() {
-    private val levelGameLiveData= MutableLiveData<Int>()
+    private val levelGameLiveData = MutableLiveData<Int>()
 
-    fun subscribeOnLevelGame():LiveData<Int>{
+    fun subscribeOnLevelGame(): LiveData<Int> {
         return levelGameLiveData
     }
 
-    fun setLevelGame(levelGame:Int){
-        StoryTallerApp.instance.gameStorage.setLevelGame(levelGame)
-        getLevelGame()
+    fun setLevelGame(level: Int) {
+        with(StoryTallerApp.instance) {
+            gameStorage.level = levels.getLevelById(level)
+        }
     }
 
-    fun getLevelGame(){
-        levelGameLiveData.value=StoryTallerApp.instance.gameStorage.getLevelGame()
+    fun getLevelGame() {
+        levelGameLiveData.value = StoryTallerApp.instance.gameStorage.level?.id ?: 0
     }
 
-    fun listPlayerIsNotEmpty()= StoryTallerApp.instance.gameStorage.getListPlayers().isNotEmpty()
+    fun listPlayerIsNotEmpty() = StoryTallerApp.instance.gameStorage.getPlayers().isNotEmpty()
 
 }
 

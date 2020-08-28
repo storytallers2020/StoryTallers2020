@@ -48,6 +48,7 @@ private val loadModules by lazy {
             levelModel,
             characterCreateModule,
             locationModule,
+            gameEngine,
             gameModule,
             gameEndModule,
             selectCoverModule,
@@ -80,7 +81,7 @@ val levelModel = module {
     viewModel { LevelViewModel() }
 }
 val gameStartModule = module {
-    viewModel { GameStartViewModel() }
+    viewModel { GameStartViewModel(get()) }
 }
 
 val characterCreateModule = module {
@@ -130,9 +131,11 @@ val titleAndSaveModule = module {
     single { TitleAndSaveModelAssistant(get()) }
     viewModel { TitleAndSaveStoryViewModel(get()) }
 }
-
-
 val gameModule = module {
+    viewModel { GameViewModel(get()) }
+}
+
+val gameEngine = module {
     single {
         val rule = Rules()
         rule.addRule(NoEmptySentenceRule())
@@ -182,5 +185,5 @@ val gameModule = module {
 
     single { Game() }
     single { GameStorage() }
-    viewModel { GameViewModel(get(), get()) }
+
 }

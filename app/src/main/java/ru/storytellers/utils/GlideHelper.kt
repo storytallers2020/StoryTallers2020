@@ -32,9 +32,7 @@ fun setBackgroundImage(uri: Uri, container: View){
         .asDrawable()
         .load(uri)
         .into(object : CustomTarget<Drawable>(){
-            override fun onLoadCleared(placeholder: Drawable?) {
-                val a=1 //заглушка
-            }
+            override fun onLoadCleared(placeholder: Drawable?) { }
 
             override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
                 container.background=resource

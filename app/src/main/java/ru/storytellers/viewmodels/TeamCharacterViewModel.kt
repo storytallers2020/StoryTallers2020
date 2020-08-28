@@ -10,7 +10,7 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 class TeamCharacterViewModel : BaseViewModel<DataModel>() {
 
     private var listPlayers: MutableList<Player> =
-        StoryTallerApp.instance.gameStorage.getListPlayers()
+        StoryTallerApp.instance.gameStorage.getPlayers()
     private val playersLiveData = MutableLiveData<List<Player>>()
 
     fun subscribeOnPlayers(): LiveData<List<Player>> {
@@ -22,4 +22,5 @@ class TeamCharacterViewModel : BaseViewModel<DataModel>() {
         listPlayers.remove(player)
         playersLiveData.value = listPlayers
     }
+
 }
