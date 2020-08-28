@@ -15,12 +15,16 @@ import timber.log.Timber
 class LibraryViewModel(
     private val storyRepository: IStoryRepository
 ): BaseViewModel<DataModel>() {
-    private val onSuccessliveData = MutableLiveData<DataModel.Success<Story>>()
-    private val onErrorliveData = MutableLiveData<DataModel.Error>()
-    private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
+    private val onSuccessLiveData = MutableLiveData<DataModel.Success<Story>>()
+    private val onErrorLiveData = MutableLiveData<DataModel.Error>()
+    private val onLoadingLiveData = MutableLiveData<DataModel.Loading>()
+
+    private val onRemoveStoryLiveData = MutableLiveData<Int>()
+    private val textStoryLiveData = MutableLiveData<String>()
+    private val titleStoryLiveData = MutableLiveData<String>()
 
     fun subscribeOnSuccess(): LiveData<DataModel.Success<Story>> {
-        return onSuccessliveData
+        return onSuccessLiveData
     }
 
     fun subscribeRnRemoveStory(): LiveData<Int> {
@@ -28,10 +32,10 @@ class LibraryViewModel(
     }
 
     fun subscribeOnError(): LiveData<DataModel.Error> {
-        return onErrorliveData
+        return onErrorLiveData
     }
     fun subscribeOnLoading() : LiveData<DataModel.Loading> {
-        return onLoadingliveData
+        return onLoadingLiveData
     }
 
     fun subscribeOnTextStory(): LiveData<String> {
@@ -47,9 +51,9 @@ class LibraryViewModel(
         storyRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                onSuccessliveData.value=DataModel.Success(it)
+                onSuccessLiveData.value=DataModel.Success(it)
             },{
-                onErrorliveData.value=DataModel.Error(it)
+                onErrorLiveData.value=DataModel.Error(it)
             })
     }
 
@@ -62,19 +66,16 @@ class LibraryViewModel(
             })
     }
 
-
     fun getTextStory(story: Story) {
         storyRepository.getStoryWithSentencesById(story.id)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                //val textStory = extractTextFromStory(it)
                 it.sentences?.let { sentences ->
                     textStoryLiveData.value = mapToList(sentences).collectSentence()
                 }
             }, {
-                onErrorliveData.value = DataModel.Error(it)
+                onErrorLiveData.value = DataModel.Error(it)
             })
-
     }
 
     private fun mapToList(sentences: List<SentenceOfTale>): List<String> =
@@ -88,4 +89,5 @@ class LibraryViewModel(
      fun onClearStorage() {
          StoryTallerApp.instance.gameStorage.clear()
     }
+
 }

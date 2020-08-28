@@ -121,7 +121,6 @@ class LibraryFragment : BaseFragment<DataModel>() {
                 }
                 R.id.btn_copy -> {
                     val res = textStory?.let { text -> copyText(requireContext(), text) }
-                    val sdf = "sdf"
                     if (res!!) toastShowLong(requireContext(), getString(R.string.msg_copy))
                     true
                 }
