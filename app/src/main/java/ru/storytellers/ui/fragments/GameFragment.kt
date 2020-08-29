@@ -32,20 +32,12 @@ class GameFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         sentence_line.addTextChangedListener(assistantFragment.getTextWatcher())
-
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
         reminder_intro.post { View.FOCUS_DOWN }
-
         button_end.setOnClickListener { onButtonEndClicked() }
         btn_send.setOnClickListener { onButtonSendClicked() }
-
-        assistantFragment.showIntro()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         assignSubscribers()
+        assistantFragment.showIntro()
     }
 
     override fun onStart() {
