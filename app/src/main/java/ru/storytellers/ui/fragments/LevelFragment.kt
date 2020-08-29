@@ -60,6 +60,7 @@ class LevelFragment : BaseFragment<DataModel>() {
         initUiComponents()
         setClickListeners()
         setSeekBarListener()
+        iniViewModel()
     }
 
     override fun iniViewModel() {
@@ -71,11 +72,6 @@ class LevelFragment : BaseFragment<DataModel>() {
     override fun onStart() {
         super.onStart()
         model.getLevelGame()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        iniViewModel()
         setSeekBarProgress()
         setTextColorChoiceLevel()
     }
