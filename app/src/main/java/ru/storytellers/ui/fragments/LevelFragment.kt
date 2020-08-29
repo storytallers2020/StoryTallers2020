@@ -60,7 +60,6 @@ class LevelFragment : BaseFragment<DataModel>() {
         initUiComponents()
         setClickListeners()
         setSeekBarListener()
-        iniViewModel()
     }
 
     override fun iniViewModel() {
@@ -72,6 +71,11 @@ class LevelFragment : BaseFragment<DataModel>() {
     override fun onStart() {
         super.onStart()
         model.getLevelGame()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        iniViewModel()
         setSeekBarProgress()
         setTextColorChoiceLevel()
     }
@@ -225,8 +229,8 @@ class LevelFragment : BaseFragment<DataModel>() {
     }
 
     private fun toCreateCharacterScrn() {
-       if( model.listPlayerIsNotEmpty()) router.navigateTo(Screens.TeamCharacterScreen())
-       else router.navigateTo(Screens.CharacterCreateScreen())
+        if( model.listPlayerIsNotEmpty()) router.navigateTo(Screens.TeamCharacterScreen())
+        else router.navigateTo(Screens.CharacterCreateScreen())
     }
 
     override fun backClicked(): Boolean {
