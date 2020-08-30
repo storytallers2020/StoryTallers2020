@@ -60,7 +60,8 @@ class LibraryBookViewModel(
     }
 
     fun removeStory(story: Story) {
-        storyRepository.delete(story).observeOn(AndroidSchedulers.mainThread())
+        storyRepository.deleteStoryById(story.id)
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 onRemoveStoryLiveData.value = it
             }, {
