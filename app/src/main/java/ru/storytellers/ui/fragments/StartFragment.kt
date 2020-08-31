@@ -23,6 +23,7 @@ class StartFragment: BaseFragment<DataModel>() {
 
     override fun init() {
         rules_game_text_view.setOnClickListener { navigateToRulesGame() }
+        about_button.setOnClickListener { navigateToAboutScreen() }
         new_tale_button.setOnClickListener{ navigateToLevelScreen() }
         library_button.setOnClickListener { navigateToLibraryScreen() }
     }
@@ -58,6 +59,9 @@ class StartFragment: BaseFragment<DataModel>() {
 
     private fun navigateToRulesGame(){
         router.navigateTo(Screens.RulesGameScreen())
+    }
+    private fun navigateToAboutScreen(){
+        router.navigateTo(Screens.AppInfoScreen())
     }
 
     private fun navigateToLibraryScreen(){
