@@ -1,7 +1,6 @@
 package ru.storytellers.ui.fragments
 
 import android.content.Context
-import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game.*
@@ -49,7 +48,7 @@ class GameFragment : BaseFragment<DataModel>() {
 
     private fun assignSubscribers() {
         handlerCurrentPlayerLiveData()
-        handlerResultTextLiveData()
+        handlerTextChangedLiveData()
         handlerIsCorrectSentence()
         handlerUriBackgroundImage()
         handlerWordChanged()
@@ -89,7 +88,7 @@ class GameFragment : BaseFragment<DataModel>() {
         })
     }
 
-    private fun handlerResultTextLiveData() {
+    private fun handlerTextChangedLiveData() {
         model.subscribeOnTextChanged().observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) assistantFragment.showGameField()
             story_body.text = it
