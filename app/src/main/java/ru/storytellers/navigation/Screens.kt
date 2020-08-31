@@ -57,4 +57,8 @@ sealed class Screens {
         override fun getFragment() = TeamCharacterFragment.newInstance()
     }
 
+    class AppInfoScreen : SupportAppScreen(){
+        override fun getFragment() = AppInfoFragment.newInstance()
+    }
+
 }

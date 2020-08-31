@@ -8,6 +8,7 @@
     <string name="title_welcome">Welcome!</string>
     <string name="btn_start_game">Create a fairy tale</string>
     <string name="btn_library">My Library</string>
+    <string name="btn_about">About</string>
     <string name="btn_help"><u>Rules</u></string>
 
     // Rules screen

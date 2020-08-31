@@ -23,6 +23,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
     private var textStory: String? = null
     private var titleStory: String? = null
     private var listStory: List<Story>? = null
+    private var removeStoryFlag =false
 
     companion object {
         fun newInstance() = LibraryFragment()
@@ -128,13 +129,17 @@ class LibraryFragment : BaseFragment<DataModel>() {
                     true
                 }
                 R.id.btn_delete -> {
-                    removeStory()
+                    createAndShowAlertDialog()
                     true
                 }
                 else -> false
             }
 
         }
+    }
+    fun setStateRemoveStoryFlag(){
+        removeStoryFlag=true
+        removeStory()
     }
 
     private fun getTitleStory() {
@@ -146,13 +151,14 @@ class LibraryFragment : BaseFragment<DataModel>() {
     }
 
     private fun removeStory() {
-        activity?.supportFragmentManager?.let { fragMan ->
-            story?.let { story ->
-                AlertDialogFragment.newInstance(this, story)
-                    .show(fragMan, FRAGMENT_DIALOG_TAG)
-            }
-        }
+        story?.let { model.removeStory(it) }
+        removeStoryFlag=false
+    }
 
+    private fun createAndShowAlertDialog() {
+        activity?.supportFragmentManager?.let { fragMan ->
+            AlertDialogFragment.newInstance(this).show(fragMan, FRAGMENT_DIALOG_TAG)
+        }
     }
 
     private fun navigateToLibraryBookScreen(story: Story) {

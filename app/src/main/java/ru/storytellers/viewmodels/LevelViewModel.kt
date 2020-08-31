@@ -18,6 +18,7 @@ class LevelViewModel : BaseViewModel<DataModel>() {
         with(StoryTallerApp.instance) {
             gameStorage.level = levels.getLevelById(level)
         }
+        getLevelGame()
     }
 
     fun getLevelGame() {

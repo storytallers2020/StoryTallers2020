@@ -229,8 +229,8 @@ class LevelFragment : BaseFragment<DataModel>() {
     }
 
     private fun toCreateCharacterScrn() {
-       if( model.listPlayerIsNotEmpty()) router.navigateTo(Screens.TeamCharacterScreen())
-       else router.navigateTo(Screens.CharacterCreateScreen())
+        if( model.listPlayerIsNotEmpty()) router.navigateTo(Screens.TeamCharacterScreen())
+        else router.navigateTo(Screens.CharacterCreateScreen())
     }
 
     override fun backClicked(): Boolean {

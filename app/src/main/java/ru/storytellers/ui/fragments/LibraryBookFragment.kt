@@ -19,6 +19,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     override val layoutRes = R.layout.fragment_library_book
     private var textStory: String? = null
     private var titleStory: String? = null
+    private var removeStoryFlag =false
 
     companion object {
         fun newInstance(story: Story) = LibraryBookFragment(story)
@@ -64,6 +65,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                 context?.let { context ->
                     toastShowLong(context, context.getString(R.string.msg_delete))
                 }
+                story=null
                 backToLibraryScreen()
             }
         })
@@ -96,8 +98,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                     true
                 }
                 R.id.btn_delete -> {
-                    removeStory()
-                    story = null
+                    createAndShowAlertDialog()
                     true
                 }
                 else -> false
@@ -106,16 +107,19 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
 
         }
     }
+    fun setStateRemoveStoryFlag(){
+        removeStoryFlag=true
+        removeStory()
+    }
 
     private fun removeStory() {
+        story?.let { model.removeStory(it) }
+        removeStoryFlag=false
+    }
+    private fun createAndShowAlertDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            story?.let {
-                AlertDialogFragment.newInstance(this, it)
-                    .show(fragMan, FRAGMENT_DIALOG_TAG1)
-            }
-
+            AlertDialogFragment.newInstance(this).show(fragMan, FRAGMENT_DIALOG_TAG1)
         }
-
     }
 
     override fun onStop() {

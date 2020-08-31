@@ -13,8 +13,7 @@ import ru.storytellers.ui.fragments.LibraryBookFragment
 import ru.storytellers.ui.fragments.LibraryFragment
 
 class AlertDialogFragment(
-    private val fragment: Fragment,
-    private val story: Story
+    private val fragment: Fragment
 ) : AppCompatDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -23,8 +22,8 @@ class AlertDialogFragment(
     }
 
     companion object {
-        fun newInstance(fragment: Fragment, story: Story) =
-            AlertDialogFragment(fragment, story)
+        fun newInstance(fragment: Fragment) =
+            AlertDialogFragment(fragment)
     }
 
     private fun getAlertDialog(context: Context) =
@@ -36,10 +35,10 @@ class AlertDialogFragment(
             .setPositiveButton(R.string.positive_answer) { _, _ ->
                 when (fragment) {
                     is LibraryFragment -> {
-                        fragment.model.removeStory(story)
+                        fragment.setStateRemoveStoryFlag()
                     }
                     is LibraryBookFragment -> {
-                        fragment.model.removeStory(story)
+                        fragment.setStateRemoveStoryFlag()
                     }
                 }
             }.create()
