@@ -9,6 +9,7 @@
     <string name="title_welcome">Добро пожаловать!</string>
     <string name="btn_start_game">Сочинить сказку</string>
     <string name="btn_library">Моя библиотека</string>
+    <string name="btn_about">О приложении</string>
     <string name="btn_help"><u>Правила</u></string>
 
     // Rules screen
