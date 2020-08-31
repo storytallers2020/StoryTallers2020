@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_start_about.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.navigation.Screens
@@ -26,12 +27,12 @@ class AppInfoFragment : Fragment(), BackButtonListener {
         savedInstanceState: Bundle?
     ): View? {
         injectRouter()
-        return inflater.inflate(R.layout.fragment_rules, container, false)
+        return inflater.inflate(R.layout.fragment_start_about, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // back_button_rules.setOnClickListener { backClicked() }
+         back_button_about.setOnClickListener { backClicked() }
     }
 
     private fun injectRouter() {
