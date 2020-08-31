@@ -15,18 +15,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/title_welcome"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintBottom_toTopOf="@id/buttons"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_standard"
-        app:layout_constraintBottom_toTopOf="@id/rules_game_text_view"
-        app:layout_constraintTop_toBottomOf="@id/subHeader">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1">
 
         <Button
             android:id="@+id/new_tale_button"
@@ -41,18 +42,22 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_library"
             android:layout_marginTop="@dimen/margin_standard"
-            android:visibility="gone" />
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/about_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_about"
+            android:layout_marginTop="@dimen/margin_standard" />
+
+        <Button
+            android:id="@+id/rules_game_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_help"
+            android:layout_marginTop="@dimen/margin_standard" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/rules_game_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_help"
-        android:textColor="@color/yellow"
-        android:textSize="@dimen/text_small"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
