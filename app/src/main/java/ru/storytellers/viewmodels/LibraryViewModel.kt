@@ -14,7 +14,7 @@ import timber.log.Timber
 
 class LibraryViewModel(
     private val storyRepository: IStoryRepository
-): BaseViewModel<DataModel>() {
+) : BaseViewModel<DataModel>() {
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Story>>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
     private val onLoadingLiveData = MutableLiveData<DataModel.Loading>()
@@ -27,14 +27,15 @@ class LibraryViewModel(
         return onSuccessLiveData
     }
 
-    fun subscribeRnRemoveStory(): LiveData<Int> {
+    fun subscribeOnRemoveStory(): LiveData<Int> {
         return onRemoveStoryLiveData
     }
 
     fun subscribeOnError(): LiveData<DataModel.Error> {
         return onErrorLiveData
     }
-    fun subscribeOnLoading() : LiveData<DataModel.Loading> {
+
+    fun subscribeOnLoading(): LiveData<DataModel.Loading> {
         return onLoadingLiveData
     }
 
@@ -47,20 +48,21 @@ class LibraryViewModel(
     }
 
 
-    fun getAllStory(){
+    fun getAllStory() {
         storyRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                onSuccessLiveData.value=DataModel.Success(it)
-            },{
-                onErrorLiveData.value=DataModel.Error(it)
+                onSuccessLiveData.value = DataModel.Success(it)
+            }, {
+                onErrorLiveData.value = DataModel.Error(it)
             })
     }
 
     fun removeStory(story: Story) {
-        storyRepository.delete(story).observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                onRemoveStoryLiveData.value = it
+        storyRepository.deleteStoryById(story.id)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ storiesRemoved ->
+                onRemoveStoryLiveData.value = storiesRemoved
             }, {
                 Timber.e(it, "Remove story throwable")
             })
@@ -86,8 +88,8 @@ class LibraryViewModel(
         titleStoryLiveData.value = story.name
     }
 
-     fun onClearStorage() {
-         StoryTallerApp.instance.gameStorage.clear()
+    fun onClearStorage() {
+        StoryTallerApp.instance.gameStorage.clear()
     }
 
 }

@@ -46,22 +46,15 @@ class StoryDataSource(
         database.playerDao.insertRange(roomPlayers)
     }
 
-    override fun deleteStory(story: Story): Single<Int> =
+    override fun deleteStoryById(storyId: Long): Single<Int> =
         Single.create<Int> { emitter ->
             try {
-                story.sentences?.let { sentences -> deleteSentences(story.id, sentences) }
-                val count = database.storyDao.delete(story.toRoomStory())
-                Single.fromCallable { emitter.onSuccess(count) }
+                val count = database.storyDao.deleteById(storyId)
+                emitter.onSuccess(count)
             } catch (e: Throwable) {
-                Single.fromCallable { emitter.onError(e) }
+                emitter.onError(e)
             }
         }
-
-    private fun deleteSentences(storyId: Long, sentences: List<SentenceOfTale>) {
-        val players = sentences.getPlayersFromSentences()
-        database.sentenceOfTaleDao.delete(sentences.toRoomSentences(storyId))
-        database.playerDao.delete(players.toRoomPlayers(storyId))
-    }
 
     override fun getStoryById(storyId: Long): Single<Story> =
         Single.create { emitter ->

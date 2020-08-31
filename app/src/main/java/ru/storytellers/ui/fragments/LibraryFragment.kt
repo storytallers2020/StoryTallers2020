@@ -80,13 +80,16 @@ class LibraryFragment : BaseFragment<DataModel>() {
             }
         })
 
-        model.subscribeRnRemoveStory().observe(viewLifecycleOwner, Observer {
-            if (it != 0) {
+        model.subscribeOnRemoveStory().observe(viewLifecycleOwner, Observer {deleted ->
+            if (deleted != 0) {
                 context?.let { context ->
                     toastShowLong(context, context.getString(R.string.msg_delete))
                 }
-                listStory?.toMutableList()?.remove(story)
-                libraryAdapter.setData(listStory)
+                listStory?.let {
+                    val changedList = it.toMutableList()
+                    changedList.remove(story)
+                    libraryAdapter.setData(changedList)
+                }
             }
         })
         model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer { textStoryLocal ->
