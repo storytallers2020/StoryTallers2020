@@ -14,8 +14,8 @@ import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 
 class RulesGame: Fragment(),BackButtonListener {
-    lateinit var navigatorHolder: NavigatorHolder
-    lateinit var router: Router
+    private lateinit var navigatorHolder: NavigatorHolder
+    private lateinit var router: Router
     companion object {
         fun newInstance() = RulesGame()
     }
