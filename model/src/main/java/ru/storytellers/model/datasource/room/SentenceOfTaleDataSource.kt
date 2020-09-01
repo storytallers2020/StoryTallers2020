@@ -8,7 +8,7 @@ import ru.storytellers.model.datasource.ISentenceOfTaleDataSource
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.room.RoomSentenceOfTale
 import ru.storytellers.model.entity.room.db.AppDatabase
-import ru.storytellers.utils.toRoomSentenceOfTale
+import ru.storytellers.utils.toRoomSentence
 import ru.storytellers.utils.toSentence
 
 class SentenceOfTaleDataSource(
@@ -21,7 +21,7 @@ class SentenceOfTaleDataSource(
         sentenceOfTale: SentenceOfTale
     ): @NonNull Completable =
         Completable.fromAction {
-            val roomSentence = sentenceOfTale.toRoomSentenceOfTale(storyId)
+            val roomSentence = sentenceOfTale.toRoomSentence(storyId)
             database.sentenceOfTaleDao.insert(roomSentence)
         }
 
