@@ -1,8 +1,11 @@
 package ru.storytellers.ui.fragments
 
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_library.*
+import kotlinx.android.synthetic.main.item_book_library.view.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -33,7 +36,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
         navigateToLibraryBookScreen(story)
     }
     private val buttonMenuClickListener = { view: View, storyLocal: Story ->
-        showPopupMenu(view)
+        togglePopupMenu(view)
         story = storyLocal
         getTitleStory()
         getTextStory()
@@ -101,42 +104,36 @@ class LibraryFragment : BaseFragment<DataModel>() {
         })
     }
 
-    private fun showPopupMenu(view: View) {
-        val popupMenu = context?.let { CustomPopupMenu(it, view) }?.apply {
-            inflate(R.menu.library)
-            show()
-        }
-        popupMenu?.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.btn_share -> {
-                    val resultText = titleStory?.let { title ->
-                        textStory?.let { text ->
-                            concatTitleAndTextStory(
-                                title,
-                                text,
-                                getString(R.string.msg_share)
-                            )
-                        }
-                    }
-                    if (resultText != null) {
-                        shareText(this, resultText)
-                    }
-                    true
-                }
-                R.id.btn_copy -> {
-                    val res = textStory?.let { text -> copyText(requireContext(), text) }
-                    if (res!!) toastShowLong(requireContext(), getString(R.string.msg_copy))
-                    true
-                }
-                R.id.btn_delete -> {
-                    createAndShowAlertDialog()
-                    true
-                }
-                else -> false
-            }
-
+    private fun togglePopupMenu(view: View) {
+        with(view.popup_menu) {
+            setMenuItemsClickListeners(view)
+            visibility = if(visibility == GONE) VISIBLE else GONE
         }
     }
+
+    private fun setMenuItemsClickListeners(view: View) {
+        with(view) {
+            btn_share.setOnClickListener {
+                titleStory?.let { title ->
+                    textStory?.let { text ->
+                        with(concatTitleAndTextStory(title, text, getString(R.string.msg_share))) {
+                            if (this.isNotBlank()) shareText(this@LibraryFragment, this)
+                        }
+                    }
+                }
+            }
+            btn_copy.setOnClickListener {
+                textStory?.let { text ->
+                    copyText(requireContext(), text)
+                    toastShowLong(requireContext(), getString(R.string.msg_copy))
+                }
+            }
+            btn_delete.setOnClickListener {
+                createAndShowAlertDialog()
+            }
+        }
+    }
+
     fun setStateRemoveStoryFlag(){
         removeStoryFlag=true
         removeStory()

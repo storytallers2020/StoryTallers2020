@@ -57,7 +57,7 @@
         android:layout_marginTop="@dimen/margin_small"
         android:fillViewport="true"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@id/share_title"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/subHeader">
 
         <TextView
@@ -83,38 +83,5 @@
         app:layout_constraintEnd_toEndOf="@id/layout_tale"
         app:layout_constraintStart_toStartOf="@id/layout_tale"
         app:layout_constraintTop_toTopOf="@id/layout_tale" />
-
-    <LinearLayout
-        android:id="@+id/share_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/margin_standard"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <TextView
-            android:id="@+id/btn_copy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_copy"
-            android:textColor="@color/yellow"
-            android:layout_marginHorizontal="@dimen/margin_large"
-            android:drawableEnd="@drawable/ic_copy"
-            android:contentDescription="@string/btn_copy" />
-
-        <TextView
-            android:id="@+id/btn_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_share"
-            android:textColor="@color/yellow"
-            android:layout_marginHorizontal="@dimen/margin_large"
-            android:drawableEnd="@drawable/ic_share"
-            android:contentDescription="@string/btn_share" />
-
-    </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
