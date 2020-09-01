@@ -62,7 +62,7 @@
     </style>
 
     <style name="myPopupMenuTextAppearanceLarge" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Large">
-        <item name="android:textColor">@color/yellow</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/text_standard</item>
     </style>
 
