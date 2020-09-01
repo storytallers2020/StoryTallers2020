@@ -38,7 +38,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         statusCheck()
         characterAdapter.selectedPosition = position
         characterAdapter.notifyDataSetChanged()
-        enter_name_field_et.isFocusable=false
+        hideKeyboard()
     }
 
     companion object {
@@ -68,17 +68,8 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
     override fun init() {
         rv_characters.adapter = characterAdapter
         with( enter_name_field_et){
-            /*
-            setOnTouchListener { v, event ->
-                v.isFocusable=true
-            false}
-             */
             addTextChangedListener(textWatcher)
-            setOnFocusChangeListener { _, hasFocus ->
-                if(!hasFocus) hideKeyboard()
-            }
         }
-      //  enter_name_field_et.addTextChangedListener(textWatcher)
         iniViewModel()
         back_button_character.setOnClickListener { backToLevelScreen() }
         btn_next.setOnClickListener { handlerBtnNext() }
@@ -121,8 +112,6 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
             enter_name_field_et.windowToken,
             InputMethodManager.HIDE_NOT_ALWAYS
         )
-        enter_name_field_et.isFocusable=true
-
     }
 
     private fun backToLevelScreen(){
