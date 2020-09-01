@@ -58,13 +58,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_tale"/>
 
-    <TextView
+    <ImageView
         android:id="@+id/btn_copy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableEnd="@drawable/ic_copy"
-        android:textColor="@color/yellow"
-        android:text="@string/btn_copy"
+        android:src="@drawable/ic_copy"
         android:contentDescription="@string/btn_copy"
         app:layout_constraintBottom_toBottomOf="@id/tv_resume"
         app:layout_constraintEnd_toEndOf="parent"
