@@ -42,15 +42,19 @@ class LibraryAdapter(
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(story: Story) {
-            resourceToUri(story.coverUrl)?.let {
-                loadImage(it, itemView.book_cover_image)
+            with(itemView) {
+                resourceToUri(story.coverUrl)?.let {
+                    loadImage(it, book_cover_image)
+                }
+                book_name.text = story.name
+                popup_menu.visibility = View.GONE
+                setOnClickListener {
+                    itemClickListener(story)
+                }
+                btn_menu.setOnClickListener {
+                    btnMenuClickListener(this, story)
+                }
             }
-            itemView.book_name.text = story.name
-            itemView.setOnClickListener {
-                itemClickListener(story)
-            }
-            itemView.btn_menu.setOnClickListener {
-                btnMenuClickListener(it, story) }
         }
     }
 

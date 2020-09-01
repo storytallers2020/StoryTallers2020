@@ -2,6 +2,7 @@
     // Application scope
     <string name="app_name">Story Heroes 2020</string>
     <string name="something_went_wrong">Something went wrong</string>
+    <string name="intent_text_plain" translatable="false">text/plain</string>
 
     // Welcome screen
     <string name="game_loading_msg">The game is loading. Please wait…</string>
@@ -9,7 +10,7 @@
     <string name="btn_start_game">Create a fairy tale</string>
     <string name="btn_library">My Library</string>
     <string name="btn_about">About</string>
-    <string name="btn_help"><u>Rules</u></string>
+    <string name="btn_help">Rules</string>
 
     // Rules screen
     <string name="title_rules">Rules</string>
@@ -83,6 +84,7 @@
     <string name="btn_copy">"Copy "</string>
     <string name="msg_copy">Copied to clipboard</string>
     <string name="btn_share">"Share "</string>
+    <string name="share_bottom_sheet_title">Share your story…</string>
     <string name="msg_share">Try to write your own story here: \n<u>link</u></string>
     <string name="btn_delete">Delete</string>
     <string name="msg_delete">Tale deleted</string>

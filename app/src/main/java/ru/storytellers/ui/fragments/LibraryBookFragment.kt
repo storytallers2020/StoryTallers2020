@@ -27,12 +27,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
 
     override fun init() {
         back_button_character.setOnClickListener { backToLibraryScreen() }
-        //btn_copy.setOnClickListener { copyText() }
-        //btn_share.setOnClickListener { shareText() }
-        btn_copy.visibility = View.GONE
-        btn_share.visibility = View.GONE
         btn_menu.setOnClickListener { showPopupMenu(it) }
-
     }
 
     override fun onStart() {
@@ -72,41 +67,39 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     }
 
     private fun showPopupMenu(view: View) {
-        val popupMenu = context?.let { CustomPopupMenu(it, view) }?.apply {
-            inflate(R.menu.library)
-            show()
-        }
-        popupMenu?.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.btn_share -> {
-                    val resultText = titleStory?.let { title ->
-                        textStory?.let { text ->
-                            concatTitleAndTextStory(
-                                title,
-                                text, getString(R.string.msg_share)
-                            )
+        context?.let {
+            CustomPopupMenu(it, view, R.menu.library)
+        }?.apply {
+            start()
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.btn_share -> {
+                        titleStory?.let { title ->
+                            textStory?.let { text ->
+                                with(concatTitleAndTextStory(title, text, getString(R.string.msg_share))) {
+                                    if (this.isNotBlank()) shareText(this@LibraryBookFragment, this)
+                                }
+                            }
                         }
+                        true
                     }
-                    if (resultText != null) {
-                        shareText(this, resultText)
+                    R.id.btn_copy -> {
+                        textStory?.let { text ->
+                            copyText(requireContext(), text)
+                            toastShowLong(requireContext(), getString(R.string.msg_copy))
+                        }
+                        true
                     }
-                    true
+                    R.id.btn_delete -> {
+                        createAndShowAlertDialog()
+                        true
+                    }
+                    else -> false
                 }
-                R.id.btn_copy -> {
-                    val res = textStory?.let { copyText(requireContext(), it) }
-                    if (res!!) toastShowLong(requireContext(), getString(R.string.msg_copy))
-                    true
-                }
-                R.id.btn_delete -> {
-                    createAndShowAlertDialog()
-                    true
-                }
-                else -> false
             }
-
-
         }
     }
+
     fun setStateRemoveStoryFlag(){
         removeStoryFlag=true
         removeStory()

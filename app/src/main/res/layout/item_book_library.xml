@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_xxs"
+    android:layout_marginVertical="@dimen/margin_xxs"
     android:layout_gravity="center">
 
     <ImageView
@@ -37,13 +37,52 @@
         android:id="@+id/btn_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_xs"
         android:src="@drawable/ic_menu"
-        android:tint="@color/blueDark"
-        android:backgroundTint="@color/menu_button"
-        android:background="@drawable/ic_circle"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/no_color"
+        android:layout_margin="@dimen/margin_xs"
+        android:contentDescription="@string/btn_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/btn_menu" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/popup_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginVertical="@dimen/margin_xxs"
+        android:layout_marginHorizontal="@dimen/margin_xs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_menu">
+
+        <ImageButton
+            android:id="@+id/btn_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_share"
+            android:background="@color/no_color"
+            android:layout_marginVertical="@dimen/margin_xxs"
+            android:contentDescription="@string/btn_share" />
+
+        <ImageButton
+            android:id="@+id/btn_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_copy"
+            android:background="@color/no_color"
+            android:layout_marginVertical="@dimen/margin_xxs"
+            android:contentDescription="@string/btn_copy" />
+
+        <ImageButton
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete"
+            android:background="@color/no_color"
+            android:layout_marginVertical="@dimen/margin_xxs"
+            android:contentDescription="@string/btn_delete" />
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
