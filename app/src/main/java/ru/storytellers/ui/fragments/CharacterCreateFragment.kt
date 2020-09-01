@@ -4,8 +4,11 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_character_create.*
+import kotlinx.android.synthetic.main.sentence_input_layout.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -35,6 +38,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         statusCheck()
         characterAdapter.selectedPosition = position
         characterAdapter.notifyDataSetChanged()
+        enter_name_field_et.isFocusable=false
     }
 
     companion object {
@@ -63,7 +67,18 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         rv_characters.adapter = characterAdapter
-        enter_name_field_et.addTextChangedListener(textWatcher)
+        with( enter_name_field_et){
+            /*
+            setOnTouchListener { v, event ->
+                v.isFocusable=true
+            false}
+             */
+            addTextChangedListener(textWatcher)
+            setOnFocusChangeListener { _, hasFocus ->
+                if(!hasFocus) hideKeyboard()
+            }
+        }
+      //  enter_name_field_et.addTextChangedListener(textWatcher)
         iniViewModel()
         back_button_character.setOnClickListener { backToLevelScreen() }
         btn_next.setOnClickListener { handlerBtnNext() }
@@ -71,7 +86,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
     override fun iniViewModel() {
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
-        screen_header.post { View.FOCUS_DOWN }
+        //screen_header.post { View.FOCUS_DOWN }
     }
 
     override fun onStart() {
@@ -101,8 +116,16 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
             characterAdapter.setData(it.data)
         }
     }
+    private fun hideKeyboard() {
+        (inputMethodManager as? InputMethodManager)?.hideSoftInputFromWindow(
+            enter_name_field_et.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
+        enter_name_field_et.isFocusable=true
 
-    fun backToLevelScreen(){
+    }
+
+    private fun backToLevelScreen(){
         router.backTo(Screens.LevelScreen())
     }
 
