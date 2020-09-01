@@ -12,9 +12,9 @@
         <item name="android:fontFamily">@font/phil_fam</item>
         <item name="fontFamily">@font/phil_fam</item>
         <item name="colorControlNormal">@color/yellow</item>
-        <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="android:alertDialogTheme">@style/AlertDialog</item>
-
+        <item name="popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.NoActionBar">
@@ -54,13 +54,16 @@
         <item name="android:scaleType">centerInside</item>
         <item name="android:scaleX">1.8</item>
         <item name="android:scaleY">1.8</item>
-        <item name="android:layout_marginStart">@dimen/margin_xs</item>
-        <item name="tint">@color/white</item>
+        <item name="android:layout_margin">@dimen/margin_xs</item>
     </style>
 
-    <style name="PopupMenu" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="android:textColor">@color/yellow</item>
-        <item name="android:itemBackground">@color/colorPrimaryDark</item>
+    <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/popup_background</item>
+    </style>
+
+    <style name="myPopupMenuTextAppearanceLarge" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Large">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_standard</item>
     </style>
 
     <style name="AlertDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">

@@ -14,8 +14,8 @@
         style="@style/BackArrow"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:contentDescription="@string/arrow_back"
         android:src="@drawable/ic_arrow_back"
+        android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/screen_header" />

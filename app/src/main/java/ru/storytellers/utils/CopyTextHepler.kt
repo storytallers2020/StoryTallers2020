@@ -4,7 +4,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import ru.storytellers.R
 import timber.log.Timber
@@ -26,8 +25,8 @@ fun shareText(fragment: Fragment, resultText: String) {
     with(Intent()) {
         action = Intent.ACTION_SEND
         putExtra(Intent.EXTRA_TEXT, resultText)
-        type = "text/plain"
-        fragment.startActivity(Intent.createChooser(this, "Рассказать сказку..."))
+        type = fragment.getString(R.string.intent_text_plain)
+        fragment.startActivity(Intent.createChooser(this, fragment.getString(R.string.share_bottom_sheet_title)))
     }
 }
 

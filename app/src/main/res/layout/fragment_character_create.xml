@@ -18,9 +18,8 @@
             style="@style/BackArrow"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:paddingHorizontal="@dimen/padding_layout_standard"
-            android:contentDescription="@string/arrow_back"
             android:src="@drawable/ic_arrow_back"
+            android:contentDescription="@string/arrow_back"
             app:layout_constraintBottom_toBottomOf="@id/screen_header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/screen_header" />
@@ -160,7 +159,7 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/title_rv_characters"
             app:spanCount="2"
-            tools:itemCount="8"
+            tools:itemCount="12"
             tools:listitem="@layout/item_image_character_create" />
 
     <com.google.android.material.button.MaterialButton
@@ -176,6 +175,5 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </ScrollView>
