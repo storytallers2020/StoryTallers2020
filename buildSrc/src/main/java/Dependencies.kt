@@ -85,6 +85,9 @@ object Versions {
 
     //GifImageView
     const val gifImageView = "1.2.19"
+
+    //Amplitude
+    const val amplitudeVer = "2.23.2"
 }
 
 object Tools {
@@ -164,4 +167,8 @@ object TestImpl {
 
 object GifImageView {
     const val gifImageView = "pl.droidsonroids.gif:android-gif-drawable:${Versions.gifImageView}"
+}
+
+object Amplitude {
+    const val amplitude = "com.amplitude:android-sdk:${Versions.amplitudeVer}"
 }
