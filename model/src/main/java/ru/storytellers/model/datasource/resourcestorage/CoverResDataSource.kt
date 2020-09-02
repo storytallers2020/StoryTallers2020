@@ -12,143 +12,198 @@ class CoverResDataSource(context: Context) : ICoverDataSource {
 
     //region coverList...
     private val coverList: MutableList<Cover> = mutableListOf(
-//        Cover(
-//            1,
-//            context.getString(R.string.cover1_name),
-//            resourceToString(context, R.drawable.cover_1),
-//            resourceToString(context, R.drawable.cover_1_small)
-//        ),
-//        Cover(
-//            2,
-//            context.getString(R.string.cover2_name),
-//            resourceToString(context, R.drawable.cover_2),
-//            resourceToString(context, R.drawable.cover_2_small)
-//        ),
-//        Cover(
-//            3,
-//            context.getString(R.string.cover3_name),
-//            resourceToString(context, R.drawable.cover_3),
-//            resourceToString(context, R.drawable.cover_3_small)
-//        ),
-//        Cover(
-//            4,
-//            context.getString(R.string.cover4_name),
-//            resourceToString(context, R.drawable.cover_4),
-//            resourceToString(context, R.drawable.cover_4_small)
-//        ),
-//        Cover(
-//            5,
-//            context.getString(R.string.cover5_name),
-//            resourceToString(context, R.drawable.cover_5),
-//            resourceToString(context, R.drawable.cover_5_small)
-//        ),
+
+        Cover(
+            1,
+            context.getString(R.string.location_amusement_park_name),
+            resourceToString(context, R.drawable.cover_amusement_park),
+            resourceToString(context, R.drawable.cover_amusement_park)
+        ),
+        Cover(
+            2,
+            context.getString(R.string.location_beach_name),
+            resourceToString(context, R.drawable.cover_beach),
+            resourceToString(context, R.drawable.cover_beach)
+        ),
+        Cover(
+            3,
+            context.getString(R.string.location_blue_name),
+            resourceToString(context, R.drawable.cover_blue),
+            resourceToString(context, R.drawable.cover_blue)
+        ),
+        Cover(
+            4,
+            context.getString(R.string.location_camp),
+            resourceToString(context, R.drawable.cover_camp),
+            resourceToString(context, R.drawable.cover_camp)
+        ),
+        Cover(
+            5,
+            context.getString(R.string.location_castle_name),
+            resourceToString(context, R.drawable.cover_castle),
+            resourceToString(context, R.drawable.cover_castle)
+        ),
         Cover(
             6,
-            context.getString(R.string.location_amusement_park_name),
-            resourceToString(context, R.drawable.cover_amusementpark),
-            resourceToString(context, R.drawable.cover_amusementpark)
+            context.getString(R.string.location_cave_of_wonders_name),
+            resourceToString(context, R.drawable.cover_cave_of_wonders),
+            resourceToString(context, R.drawable.cover_cave_of_wonders)
         ),
         Cover(
             7,
-            context.getString(R.string.location_cave_of_wonders_name),
-            resourceToString(context, R.drawable.cover_caveofwonders),
-            resourceToString(context, R.drawable.cover_caveofwonders)
+            context.getString(R.string.location_chamber_of_secrets_name),
+            resourceToString(context, R.drawable.cover_chamber_of_secrets),
+            resourceToString(context, R.drawable.cover_chamber_of_secrets)
         ),
         Cover(
             8,
-            context.getString(R.string.location_chamber_of_secrets_name),
-            resourceToString(context, R.drawable.cover_chamberofsecrets),
-            resourceToString(context, R.drawable.cover_chamberofsecrets)
-        ),
-        Cover(
-            9,
             context.getString(R.string.location_city_name),
             resourceToString(context, R.drawable.cover_city),
             resourceToString(context, R.drawable.cover_city)
         ),
         Cover(
-            10,
+            9,
             context.getString(R.string.location_dwarf_house_name),
             resourceToString(context, R.drawable.cover_dwarf_house),
             resourceToString(context, R.drawable.cover_dwarf_house)
         ),
         Cover(
+            10,
+            context.getString(R.string.location_forest_name),
+            resourceToString(context, R.drawable.cover_forest),
+            resourceToString(context, R.drawable.cover_forest)
+        ),
+        Cover(
             11,
+            context.getString(R.string.location_garden_name),
+            resourceToString(context, R.drawable.cover_garden),
+            resourceToString(context, R.drawable.cover_garden)
+        ),
+        Cover(
+            12,
             context.getString(R.string.location_halloween_name),
             resourceToString(context, R.drawable.cover_halloween),
             resourceToString(context, R.drawable.cover_halloween)
         ),
         Cover(
-            12,
+            13,
             context.getString(R.string.location_house_of_magic_name),
             resourceToString(context, R.drawable.cover_house_of_magic),
             resourceToString(context, R.drawable.cover_house_of_magic)
         ),
         Cover(
-            13,
+            14,
             context.getString(R.string.location_kingdom_name),
             resourceToString(context, R.drawable.cover_kingdom),
             resourceToString(context, R.drawable.cover_kingdom)
         ),
         Cover(
-            14,
+            15,
             context.getString(R.string.location_lighthouse_name),
             resourceToString(context, R.drawable.cover_lighthouse),
             resourceToString(context, R.drawable.cover_lighthouse)
         ),
         Cover(
-            15,
+            16,
+            context.getString(R.string.location_magic_oak_name),
+            resourceToString(context, R.drawable.cover_magic_oak),
+            resourceToString(context, R.drawable.cover_magic_oak)
+        ),
+        Cover(
+            17,
             context.getString(R.string.location_night_city_name),
             resourceToString(context, R.drawable.cover_night_city),
             resourceToString(context, R.drawable.cover_night_city)
         ),
         Cover(
-            16,
+            18,
             context.getString(R.string.location_paper_name),
             resourceToString(context, R.drawable.cover_paper),
             resourceToString(context, R.drawable.cover_paper)
         ),
         Cover(
-            17,
+            19,
             context.getString(R.string.location_pirate_ship_name),
             resourceToString(context, R.drawable.cover_pirate_ship),
             resourceToString(context, R.drawable.cover_pirate_ship)
         ),
         Cover(
-            18,
+            20,
+            context.getString(R.string.location_planets_name),
+            resourceToString(context, R.drawable.cover_planets),
+            resourceToString(context, R.drawable.cover_planets)
+        ),
+        Cover(
+            21,
             context.getString(R.string.location_playground_name),
             resourceToString(context, R.drawable.cover_playground),
             resourceToString(context, R.drawable.cover_playground)
         ),
         Cover(
-            19,
+            22,
+            context.getString(R.string.location_roses_name),
+            resourceToString(context, R.drawable.cover_roses),
+            resourceToString(context, R.drawable.cover_roses)
+        ),
+        Cover(
+            23,
+            context.getString(R.string.location_sea_world_name),
+            resourceToString(context, R.drawable.cover_seaworld),
+            resourceToString(context, R.drawable.cover_seaworld)
+        ),
+        Cover(
+            24,
             context.getString(R.string.location_skeletons_name),
             resourceToString(context, R.drawable.cover_skeletons),
             resourceToString(context, R.drawable.cover_skeletons)
         ),
         Cover(
-            20,
+            25,
             context.getString(R.string.location_space_name),
             resourceToString(context, R.drawable.cover_space),
             resourceToString(context, R.drawable.cover_space)
         ),
         Cover(
-            21,
+            26,
             context.getString(R.string.location_spaceship_name),
             resourceToString(context, R.drawable.cover_spaceship),
             resourceToString(context, R.drawable.cover_spaceship)
         ),
         Cover(
-            22,
+            27,
+            context.getString(R.string.location_swamp_name),
+            resourceToString(context, R.drawable.cover_swamp),
+            resourceToString(context, R.drawable.cover_swamp)
+        ),
+        Cover(
+            28,
+            context.getString(R.string.location_swing_name),
+            resourceToString(context, R.drawable.cover_swing),
+            resourceToString(context, R.drawable.cover_swing)
+        ),
+        Cover(
+            29,
             context.getString(R.string.location_tree_house_name),
             resourceToString(context, R.drawable.cover_tree_house),
             resourceToString(context, R.drawable.cover_tree_house)
         ),
         Cover(
-            23,
+            30,
             context.getString(R.string.location_waterfall_name),
             resourceToString(context, R.drawable.cover_waterfall),
             resourceToString(context, R.drawable.cover_waterfall)
+        ),
+        Cover(
+            31,
+            context.getString(R.string.location_witch_room_name),
+            resourceToString(context, R.drawable.cover_witch_room),
+            resourceToString(context, R.drawable.cover_witch_room)
+        ),
+        Cover(
+            32,
+            context.getString(R.string.location_zombie_name),
+            resourceToString(context, R.drawable.cover_zombie),
+            resourceToString(context, R.drawable.cover_zombie)
         )
     )
     //endregion
