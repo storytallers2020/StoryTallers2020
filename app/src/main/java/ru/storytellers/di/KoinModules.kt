@@ -37,6 +37,8 @@ import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
+import com.amplitude.api.Amplitude
+import ru.storytellers.utils.AmplitudeWrapper
 
 fun injectDependencies() = loadModules
 private val loadModules by lazy {
@@ -56,7 +58,8 @@ private val loadModules by lazy {
             libraryModule,
             libraryBookModule,
             teamCharacterModule,
-            gameStartModule
+            gameStartModule,
+            amplitudeModule
         )
     )
 }
@@ -186,4 +189,14 @@ val gameEngine = module {
     single { Game() }
     single { GameStorage() }
 
+}
+
+val amplitudeModule = module {
+    single {
+        Amplitude
+            .getInstance()
+            .initialize(get(), "ab4e83e9cbfca24360e8972402b8a412")
+            .enableForegroundTracking(get())
+    }
+    single { AmplitudeWrapper(get()) }
 }

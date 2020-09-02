@@ -37,7 +37,7 @@ class LevelFragment : BaseFragment<DataModel>() {
     }
 
     private fun setClickListeners() {
-        back_button_level.setOnClickListener { router.backTo(Screens.StartScreen()) }
+        setBackButtonClickListener()
         btn_next.setOnClickListener { toCreateCharacterScreen() }
 
         setEasyButtonClickListener()
@@ -45,7 +45,16 @@ class LevelFragment : BaseFragment<DataModel>() {
         setClickListenerHardBtn()
     }
 
+    private fun setBackButtonClickListener() {
+        back_button_level.setOnClickListener {
+            model.onBackClicked(this.javaClass.name)
+            router.backTo(Screens.StartScreen())
+        }
+    }
+
     private fun toCreateCharacterScreen() {
+        model.onNextScreen()
+
         if (model.isPlayerListNotEmpty()) router.navigateTo(Screens.TeamCharacterScreen())
         else router.navigateTo(Screens.CharacterCreateScreen())
     }
@@ -106,6 +115,8 @@ class LevelFragment : BaseFragment<DataModel>() {
     }
 
     override fun backClicked(): Boolean {
+        model.onBackClicked(this.javaClass.name)
+
         router.exit()
         return true
     }
