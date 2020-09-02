@@ -200,7 +200,7 @@ class LocationStorage(context: Context)  {
         Location(
             28,
             context.getString(R.string.location_zombie_name),
-            resourceToString(context, R.drawable.location_zombie_small),
+            resourceToString(context, R.drawable.location_zombie),
             resourceToString(context, R.drawable.location_zombie_small),
             ""
         )
