@@ -29,16 +29,16 @@
         android:paddingHorizontal="@dimen/margin_xxs"
         android:gravity="center_vertical"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_standard"
         app:layout_constraintBottom_toTopOf="@id/et_step"
         app:layout_constraintEnd_toStartOf="@id/avatar"
-        tools:text="Серый Волк" />
+        tools:text="Инопланетный таракан" />
 
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="@dimen/icon_medium"
         android:layout_height="@dimen/icon_medium"
-        android:src="@drawable/ic_wolf"
+        android:src="@drawable/ic_alien"
         android:contentDescription="@string/char_icon"
         app:layout_constraintBottom_toTopOf="@id/et_step"
         app:layout_constraintStart_toEndOf="@id/player_name" />
