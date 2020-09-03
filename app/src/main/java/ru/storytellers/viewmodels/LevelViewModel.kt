@@ -6,7 +6,6 @@ import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
 import ru.storytellers.utils.*
-import java.util.*
 
 
 class LevelViewModel : BaseViewModel<DataModel>() {
@@ -30,7 +29,7 @@ class LevelViewModel : BaseViewModel<DataModel>() {
     fun onNextScreen() {
         val prop = listOf(
             Pair(StatHelper.levelName, storage.level?.id.toString()),
-            Pair(StatHelper.selectLevelTime, getCurrentDateTime().getString())
+            Pair(StatHelper.time, getCurrentDateTime().getString())
         )
         app.stat.riseEvent(StatHelper.levelScreenNextClicked, prop.toProperties())
     }

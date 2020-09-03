@@ -3,12 +3,9 @@ package ru.storytellers.ui.fragments
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_character_create.*
-import kotlinx.android.synthetic.main.sentence_input_layout.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -16,7 +13,6 @@ import ru.storytellers.model.entity.Character
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.CharacterCreateAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.CharacterCreateViewModel
 import timber.log.Timber
 
@@ -115,19 +111,25 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
     }
 
     private fun backToLevelScreen(){
+        model.onBackClicked(this.javaClass.simpleName)
+
         router.backTo(Screens.LevelScreen())
     }
 
     override fun backClicked(): Boolean {
+        model.onBackClicked(this.javaClass.simpleName)
+
         router.exit()
         return true
     }
 
     private fun handlerBtnNext() {
+
         isCharacterSelected = false
         isNameEntered = false
         model.run {
             getPlayer()?.let { player ->
+                    model.onPlayerAdded(player)
                     addPlayer(player)
                     router.navigateTo(Screens.TeamCharacterScreen())
             }

@@ -8,33 +8,32 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.repository.ICharacterRepository
-import ru.storytellers.utils.PlayerCreator
+import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
-class CharacterCreateViewModel(private val characterRepository: ICharacterRepository,private val playerCreator: PlayerCreator) :
+class CharacterCreateViewModel(
+    private val characterRepository: ICharacterRepository,
+    private val playerCreator: PlayerCreator
+) :
     BaseViewModel<DataModel>() {
 
-    private val onSuccessliveData = MutableLiveData<DataModel.Success<Character>>()
-    private val onErrorliveData = MutableLiveData<DataModel.Error>()
-    private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
-    private val playersLiveData = MutableLiveData<List<Player>>()
-    private val flagActiveLiveData = MutableLiveData<Boolean>()
+    private val app = StoryTallerApp.instance
+    private val storage = app.gameStorage
 
-    private var listPlayers: MutableList<Player> = StoryTallerApp.instance.gameStorage.getPlayers()
-    private var flagActive: Boolean=false
+    private val onSuccessLiveData = MutableLiveData<DataModel.Success<Character>>()
+    private val onErrorLiveData = MutableLiveData<DataModel.Error>()
+
+    private var listPlayers: MutableList<Player> = storage.getPlayers()
 
     fun subscribeOnSuccess(): LiveData<DataModel.Success<Character>> {
-        return onSuccessliveData
+        return onSuccessLiveData
     }
 
     fun subscribeOnError(): LiveData<DataModel.Error> {
-        return onErrorliveData
-    }
-    fun subscribeOnLoading() : LiveData<DataModel.Loading> {
-        return onLoadingliveData
+        return onErrorLiveData
     }
 
-    fun addPlayer(player:Player){
+    fun addPlayer(player: Player) {
         listPlayers.add(player)
     }
 
@@ -42,21 +41,31 @@ class CharacterCreateViewModel(private val characterRepository: ICharacterReposi
         playerCreator.setNamePlayer(name)
     }
 
-    fun setCharacterOfPlayer(character: Character )
-    {
+    fun setCharacterOfPlayer(character: Character) {
         playerCreator.setCharacterOfPlayer(character)
     }
 
-    fun getPlayer()=playerCreator.getPlayer()
+    fun getPlayer() = playerCreator.getPlayer()
 
 
-    fun getAllCharacters(){
+    fun getAllCharacters() {
         characterRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                onSuccessliveData.value=DataModel.Success(it)
-            },{
-                onErrorliveData.value=DataModel.Error(it)
+                onSuccessLiveData.value = DataModel.Success(it)
+            }, {
+                onErrorLiveData.value = DataModel.Error(it)
             })
+    }
+
+    fun onPlayerAdded(player: Player) {
+        val prop = listOf(
+            Pair(StatHelper.playerName, player.name),
+            Pair(StatHelper.playerId, player.id.toString()),
+            Pair(StatHelper.characterName, player.character?.name ?: ""),
+            Pair(StatHelper.time, getCurrentDateTime().getString())
+        )
+        app.stat.riseEvent(StatHelper.onPlayerAdded, prop.toProperties())
+
     }
 }
