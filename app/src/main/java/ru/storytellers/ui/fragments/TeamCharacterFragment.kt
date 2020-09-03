@@ -21,7 +21,7 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
             onRemovePlayerListener
         )
     }
-    private var sizeListPlayer=0
+    private var sizeListPlayer = 0
 
     companion object {
         fun newInstance() = TeamCharacterFragment()
@@ -48,10 +48,15 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
         model.subscribeOnPlayers().observe(
             viewLifecycleOwner,
             Observer {
-                sizeListPlayer=it.size
+                sizeListPlayer = it.size
                 setPlayersToPlayerAdapter(it)
-                if (it.size >= 8 ) {
-                    context?.let { context -> toastShowLong(context, context.getString(R.string.msg_team_full)) }
+                if (it.size >= 8) {
+                    context?.let { context ->
+                        toastShowLong(
+                            context,
+                            context.getString(R.string.msg_team_full)
+                        )
+                    }
                     btn_add_player.visibility = View.INVISIBLE
                 } else btn_add_player.visibility = View.VISIBLE
             })
@@ -62,22 +67,35 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
     }
 
     override fun backClicked(): Boolean {
+        model.onBackClicked(this.javaClass.simpleName)
+
         router.exit()
         return true
     }
 
     private fun backToCharacterCreateScreen() {
+        model.onGotoCharacterScreen()
+
         router.navigateTo(Screens.CharacterCreateScreen())
     }
 
     private fun navigateToLevelScreen() {
-        router.navigateTo(Screens.LevelScreen())
+        model.onBackClicked(this.javaClass.simpleName)
 
+        router.navigateTo(Screens.LevelScreen())
     }
 
     private fun navigateToLocationScreen() {
-        if (sizeListPlayer < 2 ){
-            context?.let { context -> toastShowLong(context, context.getString(R.string.msg_need_more_players)) }
-        } else router.navigateTo(Screens.LocationScreen())
+        if (sizeListPlayer < 2) {
+            context?.let { context ->
+                toastShowLong(
+                    context,
+                    context.getString(R.string.msg_need_more_players)
+                )
+            }
+        } else {
+            model.onGotoLocationScreen()
+            router.navigateTo(Screens.LocationScreen())
+        }
     }
 }
