@@ -35,6 +35,7 @@
   - Базы данных - Room
   - Сетевые запросы Retrofit
   - Material Design 
+  - Amplitude
   
 ## Скриншоты приложения
 
