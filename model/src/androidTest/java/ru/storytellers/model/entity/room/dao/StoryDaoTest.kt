@@ -18,13 +18,14 @@ class StoryDaoTest {
     private lateinit var storyDao: StoryDao
     private lateinit var db: AppDatabase
     private val testId: Long = 99
+    private val testLocation: Long = 0
     private val storyForTests =
-        RoomStory(testId, "Тестовая сказка", "Тестировщик", "Тестовая обложка", 0)
+        RoomStory(testId, "Тестовая сказка", "Тестировщик", "Тестовая обложка", testLocation)
     private val listStories = listOf(
-        RoomStory(1, "name1", "author1", "cover1", 0),
-        RoomStory(2, "name2", "author2", "cover2", 0),
-        RoomStory(3, "name3", "author3", "cover3", 0),
-        RoomStory(4, "name4", "author4", "cover4", 0)
+        RoomStory(1, "name1", "author1", "cover1", testLocation),
+        RoomStory(2, "name2", "author2", "cover2", testLocation),
+        RoomStory(3, "name3", "author3", "cover3", testLocation),
+        RoomStory(4, "name4", "author4", "cover4", testLocation)
     )
 
     @Before
@@ -67,10 +68,12 @@ class StoryDaoTest {
     @Test
     fun updateStoryThroughInsert() {
         storyDao.insert(storyForTests)
-        val storyUpdate = RoomStory(testId, "Тестировочная сказка", storyForTests.authors, storyForTests.coverUrl, 0)
+        val update = "Тестировочная сказка"
+        val storyUpdate =
+            RoomStory(testId, update, storyForTests.authors, storyForTests.coverUrl, 0)
         storyDao.insert(storyUpdate)
         val storyFromDatabase = storyDao.getStoryById(testId)
-        Assert.assertEquals(storyUpdate,storyFromDatabase)
+        Assert.assertEquals(storyUpdate, storyFromDatabase)
     }
 
     @Test
@@ -95,9 +98,7 @@ class StoryDaoTest {
     fun checkAppContext() {
         // Context of the app under test.
         val appContext = ApplicationProvider.getApplicationContext<Context>()
-        Assert.assertEquals(
-            "ru.storytellers.model.test",
-            appContext.packageName
-        )
+        val testPackageName = "ru.storytellers.model.test"
+        Assert.assertEquals(testPackageName, appContext.packageName)
     }
 }
