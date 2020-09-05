@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -18,9 +17,17 @@ import java.io.IOException
 class StoryDaoTest {
     private lateinit var storyDao: StoryDao
     private lateinit var db: AppDatabase
+    private val testId:Long = 99
+    private val storyForTests = RoomStory(testId, "Тестовая сказка", "Тестировщик", "Тестовая обложка", 0)
+    private val listStories = listOf(
+        RoomStory(1, "name1", "author1", "cover1", 0),
+        RoomStory(2, "name2", "author2", "cover2", 0),
+        RoomStory(3, "name3", "author3", "cover3", 0),
+        RoomStory(4, "name4", "author4", "cover4", 0)
+    )
 
     @Before
-    fun createDb(){
+    fun createDb() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         storyDao = db.storyDao
@@ -28,41 +35,49 @@ class StoryDaoTest {
 
     @After
     @Throws(IOException::class)
-    fun closeDb(){
+    fun closeDb() {
         db.close()
     }
 
     @Test
-    fun saveStoryToDatabase() {
-        val story = RoomStory(99,"Тестовая сказка", "Тестировщик", "Тестовая обложка", 0)
-        storyDao.insert(story)
-        val storyFromDatabase = storyDao.getStoryById(99)
-        assert(story.equals(storyFromDatabase))
+    fun getAllStoryFromDatabase() {
+        for (storyItem in listStories) {
+            storyDao.insert(storyItem)
+        }
+        val list = storyDao.getAll()
+        Assert.assertEquals(listStories, list)
     }
 
     @Test
-    fun deleteStoryFromDatabase(){
-        val story = RoomStory(99,"Тестовая сказка", "Тестировщик", "Тестовая обложка", 0)
-        storyDao.insert(story)
-        storyDao.deleteById(99)
-        var storyFromDatabase = storyDao.getStoryById(99)
-        Assert.assertNotEquals(story, storyFromDatabase)
-
-        storyDao.insert(story)
-        storyDao.deleteById(98)
-        storyFromDatabase = storyDao.getStoryById(99)
-        Assert.assertEquals(story, storyFromDatabase)
-
-        storyDao.delete(story)
-        storyFromDatabase = storyDao.getStoryById(99)
-        Assert.assertNotEquals(story, storyFromDatabase)
+    fun getStoryById(){
+        storyDao.insert(storyForTests)
+        val storyByIdFromDatabase = storyDao.getStoryById(testId)
+        Assert.assertEquals(storyForTests, storyByIdFromDatabase)
     }
 
-//    @Test
-//    fun updateStory(){
-//        val story = RoomStory(99,"Тестовая сказка", "Тестировщик", "Тестовая обложка", 0)
-//        storyDao.insert(story)
-//    }
+
+    @Test
+    fun insertStory() {
+        storyDao.insert(storyForTests)
+        val storyFromDatabase = storyDao.getStoryById(testId)
+        assert(storyForTests.equals(storyFromDatabase))
+    }
+
+    @Test
+    fun deleteStoryByIdFromDatabase() {
+        storyDao.insert(storyForTests)
+        storyDao.deleteById(testId)
+        val storyFromDatabase = storyDao.getStoryById(testId)
+        Assert.assertNotEquals(storyForTests, storyFromDatabase)
+    }
+
+    @Test
+    fun deleteStoryFromDatabase() {
+        storyDao.insert(storyForTests)
+        storyDao.delete(storyForTests)
+        val storyFromDatabase = storyDao.getStoryById(testId)
+        Assert.assertNotEquals(storyForTests, storyFromDatabase)
+    }
 
     @Test
     fun checkAppContext() {
