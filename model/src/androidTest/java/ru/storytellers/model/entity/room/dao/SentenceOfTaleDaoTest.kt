@@ -126,4 +126,15 @@ class SentenceOfTaleDaoTest {
         val notDeletedList = listOf(listSentence[2], listSentence[3])
         Assert.assertEquals(notDeletedList, sentenceDao.getAll())
     }
+
+    @Test
+    fun getAllByStoryId() {
+        for (story in listStories) {
+            storyDao.insert(story)
+        }
+        sentenceDao.insertRange(listSentence)
+
+        val amountStory = sentenceDao.getAllStorySentence(listSentence[0].storyId)?.size
+        Assert.assertEquals(1, amountStory)
+    }
 }
