@@ -17,8 +17,9 @@ import java.io.IOException
 class StoryDaoTest {
     private lateinit var storyDao: StoryDao
     private lateinit var db: AppDatabase
-    private val testId:Long = 99
-    private val storyForTests = RoomStory(testId, "Тестовая сказка", "Тестировщик", "Тестовая обложка", 0)
+    private val testId: Long = 99
+    private val storyForTests =
+        RoomStory(testId, "Тестовая сказка", "Тестировщик", "Тестовая обложка", 0)
     private val listStories = listOf(
         RoomStory(1, "name1", "author1", "cover1", 0),
         RoomStory(2, "name2", "author2", "cover2", 0),
@@ -49,7 +50,7 @@ class StoryDaoTest {
     }
 
     @Test
-    fun getStoryById(){
+    fun getStoryById() {
         storyDao.insert(storyForTests)
         val storyByIdFromDatabase = storyDao.getStoryById(testId)
         Assert.assertEquals(storyForTests, storyByIdFromDatabase)
@@ -64,11 +65,22 @@ class StoryDaoTest {
     }
 
     @Test
+    fun updateStoryThroughInsert() {
+        storyDao.insert(storyForTests)
+        val storyUpdate = RoomStory(testId, "Тестировочная сказка", storyForTests.authors, storyForTests.coverUrl, 0)
+        storyDao.insert(storyUpdate)
+        val storyFromDatabase = storyDao.getStoryById(testId)
+        Assert.assertEquals(storyUpdate,storyFromDatabase)
+    }
+
+    @Test
     fun deleteStoryByIdFromDatabase() {
         storyDao.insert(storyForTests)
-        storyDao.deleteById(testId)
+        val amountRecordNeedDelete = 1
+        val amountRecordsWasDeleted = storyDao.deleteById(testId)
         val storyFromDatabase = storyDao.getStoryById(testId)
         Assert.assertNotEquals(storyForTests, storyFromDatabase)
+        Assert.assertEquals(amountRecordNeedDelete, amountRecordsWasDeleted)
     }
 
     @Test
