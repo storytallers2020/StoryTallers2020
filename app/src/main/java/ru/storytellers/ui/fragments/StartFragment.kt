@@ -29,6 +29,7 @@ class StartFragment: BaseFragment<DataModel>() {
     }
 
     private fun navigateToLevelScreen() {
+        model.createTaleStatistics()
         router.navigateTo(Screens.LevelScreen())
     }
 
@@ -58,13 +59,16 @@ class StartFragment: BaseFragment<DataModel>() {
 
 
     private fun navigateToRulesGame(){
+        model.toRulesScreenStatistics()
         router.navigateTo(Screens.RulesGameScreen())
     }
     private fun navigateToAboutScreen(){
+        model.onAboutScreenStatistics()
         router.navigateTo(Screens.AppInfoScreen())
     }
 
     private fun navigateToLibraryScreen(){
+        model.onLibraryScreenStatistics()
         router.navigateTo(Screens.LibraryScreen())
     }
 
