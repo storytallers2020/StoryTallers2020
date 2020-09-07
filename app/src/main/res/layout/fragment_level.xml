@@ -159,10 +159,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_standard"
-        android:progressBackgroundTint="@color/blue"
-        android:progressTint="@color/blue"
+        android:progressBackgroundTint="@color/white"
+        android:progressTint="@color/yellow"
         android:thumb="@drawable/slider_cup"
-        android:thumbOffset="@dimen/margin_xs" />
+        android:thumbOffset="@dimen/margin_xs"
+        tools:progress="50" />
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton

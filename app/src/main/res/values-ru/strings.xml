@@ -86,7 +86,9 @@
     <string name="btn_menu">меню</string>
 
     // Dialog fragment
-    <string name="dialog_title">Вы уверены что хотите удалить сказку?</string>
+    <string name="dialog_title">Удалить?</string>
+    <string name="dialog_story">Удалить сказку?</string>
+    <string name="dialog_character">Удалить персонажа?</string>
     <string name="positive_answer">ОК</string>
     <string name="negative_answer">Отмена</string>
 

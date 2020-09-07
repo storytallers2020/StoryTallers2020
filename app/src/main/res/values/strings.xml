@@ -100,7 +100,9 @@
     <string name="btn_menu">menu</string>
 
     // Dialog fragment
-    <string name="dialog_title">Are you sure you want to delete the story?</string>
+    <string name="dialog_title">Delete?</string>
+    <string name="dialog_story">Delete the story?</string>
+    <string name="dialog_character">Delete the character?</string>
     <string name="positive_answer">OK</string>
     <string name="negative_answer">Cancel</string>
 

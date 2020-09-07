@@ -10,12 +10,16 @@ import ru.storytellers.model.entity.Player
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.TeamCharacterAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.AlertDialogFragment
 import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.TeamCharacterViewModel
+
+private const val FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
 
 class TeamCharacterFragment : BaseFragment<DataModel>() {
     override val model: TeamCharacterViewModel by inject()
     override val layoutRes = R.layout.fragment_character_team
+    private var character: Player? = null
     private val teamAdapter: TeamCharacterAdapter by lazy {
         TeamCharacterAdapter(
             onRemovePlayerListener
@@ -28,7 +32,8 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
     }
 
     private val onRemovePlayerListener = { player: Player ->
-        model.removePlayer(player)
+        character = player
+        createAndShowAlertDialog()
     }
 
 
@@ -68,20 +73,17 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
 
     override fun backClicked(): Boolean {
         model.onBackClicked(this.javaClass.simpleName)
-
         router.exit()
         return true
     }
 
     private fun backToCharacterCreateScreen() {
         model.onGotoCharacterScreen()
-
         router.navigateTo(Screens.CharacterCreateScreen())
     }
 
     private fun navigateToLevelScreen() {
         model.onBackClicked(this.javaClass.simpleName)
-
         router.navigateTo(Screens.LevelScreen())
     }
 
@@ -96,6 +98,16 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
         } else {
             model.onGotoLocationScreen()
             router.navigateTo(Screens.LocationScreen())
+        }
+    }
+
+    fun removeCharacter() {
+        character?.let { model.removePlayer(it) }
+    }
+
+    private fun createAndShowAlertDialog() {
+        activity?.supportFragmentManager?.let { fragMan ->
+            AlertDialogFragment.newInstance(this, R.string.dialog_character).show(fragMan, FRAGMENT_DIALOG_TAG)
         }
     }
 }
