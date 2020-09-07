@@ -28,6 +28,12 @@ class StatHelper {
         const val onAboutScreen = "onAboutScreen"
         const val onLibraryScreen = "toLibraryScreen"
         const val timeToLibraryScreen = "timeToLibraryScreen"
+        //LocationScreen
+        const val onLocationChoice = "onLocationChoice"
+        const val locationName = "locationName"
+        const val timeLocationChoice = "timeLocationChoice"
+        const val locationId = "locationId"
+
 
 
     }
