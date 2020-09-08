@@ -55,7 +55,7 @@
                     android:alpha="0.5"
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
-                    android:drawableBottom="@drawable/slider_cup"
+                    android:drawableBottom="@drawable/slider_level"
                     android:textColor="@color/yellow"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +79,7 @@
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
                     android:textColor="@color/yellow"
-                    android:drawableBottom="@drawable/slider_queen"
+                    android:drawableBottom="@drawable/slider_team"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -103,7 +103,7 @@
                     android:textSize="@dimen/text_small"
                     android:alpha="0.5"
                     android:gravity="center"
-                    android:drawableBottom="@drawable/slider_mounts"
+                    android:drawableBottom="@drawable/slider_location"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -120,20 +120,22 @@
                 app:layout_constraintTop_toBottomOf="@id/slider"
                 app:layout_constraintVertical_bias="0"
                 app:layout_goneMarginBottom="24dp"
-                tools:itemCount="5"
+                tools:itemCount="6"
                 tools:listitem="@layout/item_user_character_create" />
 
-            <TextView
+            <ImageButton
                 android:id="@+id/btn_add_player"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_new_character"
-                android:textColor="@color/yellow"
-                android:textSize="@dimen/text_standard"
-                android:layout_marginVertical="@dimen/margin_standard"
+                android:src="@drawable/ic_add"
+                android:background="@color/no_color"
+                android:layout_width="@dimen/icon_medium"
+                android:layout_height="@dimen/icon_medium"
+                android:layout_marginVertical="@dimen/margin_small"
+                android:contentDescription="@string/btn_new_character"
                 app:layout_constraintBottom_toTopOf="@id/btn_next"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/player_list_rv"
-                tools:visibility="visible" />
+                app:layout_constraintVertical_bias="0"
+                tools:visibility="gone" />
 
 
             <TextView
@@ -142,11 +144,13 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/yellow"
                 android:textSize="@dimen/text_standard"
+                android:textAlignment="center"
                 android:visibility="gone"
+                android:layout_marginVertical="@dimen/margin_standard"
                 android:text="@string/msg_team_full"
                 app:layout_constraintBottom_toTopOf="@id/btn_next"
                 app:layout_constraintTop_toBottomOf="@id/player_list_rv"
-                tools:visibility="gone" />
+                tools:visibility="visible" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_next"

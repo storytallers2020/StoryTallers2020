@@ -9,8 +9,8 @@
     <string name="title_welcome">Welcome!</string>
     <string name="btn_start_game">Create a fairy tale</string>
     <string name="btn_library">My Library</string>
-    <string name="btn_about">About</string>
-    <string name="btn_help">Rules</string>
+    <string name="btn_about"><u>About</u></string>
+    <string name="btn_help"><u>Rules</u></string>
 
     // Rules screen
     <string name="title_rules">Rules</string>
@@ -100,7 +100,9 @@
     <string name="btn_menu">menu</string>
 
     // Dialog fragment
-    <string name="dialog_title">Are you sure you want to delete the story?</string>
+    <string name="dialog_title">Delete?</string>
+    <string name="dialog_story">Delete the story?</string>
+    <string name="dialog_character">Delete the character?</string>
     <string name="positive_answer">OK</string>
     <string name="negative_answer">Cancel</string>
 

@@ -3,14 +3,13 @@ package ru.storytellers.ui.fragments
 import android.view.View
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_start.*
-import ru.storytellers.R
-import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.viewmodels.StartViewModel
-import ru.storytellers.model.DataModel
-import kotlinx.android.synthetic.main.fragment_start.new_tale_button
 import org.koin.android.ext.android.inject
+import ru.storytellers.R
+import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
+import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.toastShowLong
+import ru.storytellers.viewmodels.StartViewModel
 
 class StartFragment: BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_start
@@ -22,7 +21,7 @@ class StartFragment: BaseFragment<DataModel>() {
     }
 
     override fun init() {
-        rules_game_text_view.setOnClickListener { navigateToRulesGame() }
+        rules_button.setOnClickListener { navigateToRulesGame() }
         about_button.setOnClickListener { navigateToAboutScreen() }
         new_tale_button.setOnClickListener{ navigateToLevelScreen() }
         library_button.setOnClickListener { navigateToLibraryScreen() }

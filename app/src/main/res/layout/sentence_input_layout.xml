@@ -109,7 +109,8 @@
         android:layout_width="@dimen/icon_medium"
         android:layout_height="@dimen/icon_medium"
         android:visibility="gone"
-        android:src="@drawable/ic_send_bird"
+        android:src="@drawable/ic_send"
+        android:background="@color/no_color"
         android:contentDescription="@string/btn_send"
         app:layout_constraintBottom_toBottomOf="@id/et_step"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +128,7 @@
         android:textSize="@dimen/text_small"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
