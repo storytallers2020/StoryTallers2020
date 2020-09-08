@@ -24,6 +24,8 @@ class SelectCoverFragment : BaseFragment<DataModel>() {
     private val onListItemClickListener = object : CoverAdapter.OnListItemClickListener {
         override fun onItemClick(cover: Cover) {
             model.setCoverStory(cover)
+            model.coverSelectedStatistics()
+            model.coverStatistics(cover)
             Timber.d(cover.fieldsToLogString())
             router.navigateTo(Screens.TitleAndSaveStoryScreen())
         }
