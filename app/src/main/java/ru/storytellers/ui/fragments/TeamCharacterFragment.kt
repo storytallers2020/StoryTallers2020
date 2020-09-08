@@ -31,7 +31,6 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
         model.removePlayer(player)
     }
 
-
     override fun init() {
         btn_next.setOnClickListener { navigateToLocationScreen() }
         back_button_character.setOnClickListener { navigateToLevelScreen() }
@@ -68,20 +67,17 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
 
     override fun backClicked(): Boolean {
         model.onBackClicked(this.javaClass.simpleName)
-
         router.exit()
         return true
     }
 
     private fun backToCharacterCreateScreen() {
         model.onGotoCharacterScreen()
-
         router.navigateTo(Screens.CharacterCreateScreen())
     }
 
     private fun navigateToLevelScreen() {
         model.onBackClicked(this.javaClass.simpleName)
-
         router.navigateTo(Screens.LevelScreen())
     }
 
