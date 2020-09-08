@@ -25,6 +25,7 @@ class GameStartFragment : BaseFragment<DataModel>() {
     override fun iniViewModel() {
         btn_next.setOnClickListener {
             model.createNewGame()
+            model.buttonStartClickedStatistic()
             navigateToGameScreen()
         }
     }
