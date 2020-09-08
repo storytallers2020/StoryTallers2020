@@ -13,8 +13,9 @@ import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
-
-    private val storage = StoryTallerApp.instance.gameStorage
+    private val app = StoryTallerApp.instance
+    private val storage = app.gameStorage
+    private val stat = app.stat
 
     private val currentPlayerLiveData = MutableLiveData<Player>()
     private val storyTextLiveData = MutableLiveData<String>()
@@ -37,7 +38,7 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
     fun subscribeOnEndGamePossibleChanged(): LiveData<Boolean> = isEndGamePossible
 
     fun onButtonSendClicked(content: String) {
-
+        stat.riseEvent(StatHelper.buttonSendClicked)
         val text = content
             .trimSentenceSpace()
             .addDotIfNeed()
@@ -62,6 +63,7 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
             storage.getSentences().add(sentence)
             onStartTurn()
             isSentenceCorrectLiveData.value = true
+            onGameStatistic(sentence)
         } else {
             isSentenceCorrectLiveData.value = false
         }
@@ -91,6 +93,16 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
 
     private fun checkIsEndGamePossible() {
         isEndGamePossible.value = game.turn > storage.getPlayers().size
+    }
+
+    private fun onGameStatistic(sentence: SentenceOfTale) {
+        val prop = listOf(
+            StatHelper.gamePlayerId to sentence.player?.id.toString(),
+            StatHelper.gamePlayerName to sentence.player?.name,
+            StatHelper.createSentenceTime to getCurrentDateTime().getString(),
+            StatHelper.turn to sentence.step.toString()
+        )
+        stat.riseEvent(StatHelper.onGameScreen, (prop as List<Pair<String, String>>).toProperties())
     }
 
 }
