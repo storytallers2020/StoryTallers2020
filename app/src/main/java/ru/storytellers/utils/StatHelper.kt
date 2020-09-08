@@ -2,19 +2,17 @@ package ru.storytellers.utils
 
 class StatHelper {
     companion object {
-
+        //LevelScreen
         const val levelScreenBackClicked = "levelScreenBackClicked"
-
         const val levelScreenNextClicked = "levelScreenNextClicked"
         const val levelName = "levelName"
         const val time = "selectLevelTime"
-
+        //CharacterCreateScreen
         const val playerName = "playerName"
         const val characterName = "characterName"
-
+        //TeamCharacterScreen
         const val playerId = "playerId"
         const val playerCount = "playerCount"
-
         const val addPlayerClicked = "addPlayerClicked"
         const val onPlayerAdded = "onPlayerAdded"
         const val characterScreenNextClicked = "characterScreenNextClicked"
@@ -52,5 +50,12 @@ class StatHelper {
         const val numberOfPlayersGame = "NumberOfPlayersGame"
         const val selectedLevelGame = "SelectedLevelGame"
         const val createGameTime = "CreateGameTime"
+        //TitleAndSaveStoryScreen
+        const val onTitleAndSaveStoryScreen = "TitleAndSaveStoryScreen"
+        const val storyId = "StoryId"
+        const val storyName = "StoryName"
+        const val saveStoryTime = "SaveStoryTime"
+        const val saveStoryFailed = "SaveStoryFailed"
+        const val buttonSaveStoryClicked = "ButtonSaveStoryClicked"
     }
 }
