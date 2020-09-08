@@ -16,7 +16,6 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 class SelectCoverViewModel(
     private val coverRepository: ICoverRepository
 ): BaseViewModel<DataModel>() {
-    private val stat = StoryTallerApp.instance.stat
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Cover>>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 
