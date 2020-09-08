@@ -33,7 +33,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     override fun onStart() {
         super.onStart()
         story?.let { model.getTextStory(it.id) }
-        story?.let {model.getTitleStory(it.name) }
+        story?.let { model.getTitleStory(it.name) }
     }
 
     override fun onResume() {
@@ -109,9 +109,10 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         story?.let { model.removeStory(it) }
         removeStoryFlag=false
     }
+
     private fun createAndShowAlertDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this).show(fragMan, FRAGMENT_DIALOG_TAG1)
+            AlertDialogFragment.newInstance(this, R.string.dialog_story).show(fragMan, FRAGMENT_DIALOG_TAG1)
         }
     }
 

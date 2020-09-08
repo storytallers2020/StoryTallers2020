@@ -24,9 +24,10 @@
     <ImageView
         android:id="@+id/btn_menu"
         style="@style/BackArrow"
+        android:layout_margin="@dimen/margin_xxs"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:src="@drawable/ic_menu"
+        android:src="@drawable/ic_menu_24"
         android:contentDescription="@string/btn_menu"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintEnd_toEndOf="parent"

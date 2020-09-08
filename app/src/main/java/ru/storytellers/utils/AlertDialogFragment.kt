@@ -8,28 +8,25 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import ru.storytellers.R
-import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.fragments.LibraryBookFragment
 import ru.storytellers.ui.fragments.LibraryFragment
+import ru.storytellers.ui.fragments.TeamCharacterFragment
 
-class AlertDialogFragment(
-    private val fragment: Fragment
-) : AppCompatDialogFragment() {
+class AlertDialogFragment(private val fragment: Fragment, private val title: Int) : AppCompatDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = fragment.activity as FragmentActivity
-        return getAlertDialog(context)
+        return getAlertDialog(context, title)
     }
 
     companion object {
-        fun newInstance(fragment: Fragment) =
-            AlertDialogFragment(fragment)
+        fun newInstance(fragment: Fragment, title: Int = R.string.dialog_title) =
+            AlertDialogFragment(fragment, title)
     }
 
-    private fun getAlertDialog(context: Context) =
+    private fun getAlertDialog(context: Context, header: Int) =
         AlertDialog.Builder(context)
-            .setTitle(R.string.btn_delete)
-            .setMessage(R.string.dialog_title)
+            .setTitle(header)
             .setCancelable(true)
             .setNegativeButton(R.string.negative_answer) { dialog, _ -> dialog.dismiss() }
             .setPositiveButton(R.string.positive_answer) { _, _ ->
@@ -39,6 +36,9 @@ class AlertDialogFragment(
                     }
                     is LibraryBookFragment -> {
                         fragment.setStateRemoveStoryFlag()
+                    }
+                    is TeamCharacterFragment -> {
+                        fragment.removeCharacter()
                     }
                 }
             }.create()
