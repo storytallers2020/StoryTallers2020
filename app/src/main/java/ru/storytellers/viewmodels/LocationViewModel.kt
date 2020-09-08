@@ -16,7 +16,6 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class LocationViewModel(private val locationRepository: ILocationRepository) :
     BaseViewModel<DataModel>() {
-    private val stat = StoryTallerApp.instance.stat
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Location>>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 
