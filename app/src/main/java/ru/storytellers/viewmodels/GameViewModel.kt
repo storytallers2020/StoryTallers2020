@@ -13,9 +13,7 @@ import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
-    private val app = StoryTallerApp.instance
-    private val storage = app.gameStorage
-    private val stat = app.stat
+    private val storage = StoryTallerApp.instance.gameStorage
 
     private val currentPlayerLiveData = MutableLiveData<Player>()
     private val storyTextLiveData = MutableLiveData<String>()
