@@ -7,6 +7,7 @@ import ru.storytellers.utils.StatHelper
 
 abstract class BaseViewModel<T : DataModel>(
 ): ViewModel() {
+    val stat = StoryTallerApp.instance.stat
     fun onBackClicked(fragmentName: String) {
         StoryTallerApp.instance
             .stat.riseEvent("$fragmentName ${StatHelper.levelScreenBackClicked}")
