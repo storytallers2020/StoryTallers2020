@@ -8,9 +8,8 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
-import ru.storytellers.utils.getUid
+import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
-import java.lang.StringBuilder
 
 
 class TitleAndSaveStoryViewModel(
@@ -33,15 +32,18 @@ class TitleAndSaveStoryViewModel(
     }
 
     fun createStoryTaller() {
+        var story: Story
         val gameStorage = StoryTallerApp.instance.gameStorage
-        val story = Story(
-            getUid(),
-            getTitle(gameStorage),
-            getAuthors(gameStorage),
-            gameStorage.getCoverStoryTaller()?.imageUrl!!,
-            gameStorage.getLocationGame(),
-            gameStorage.getSentences()
-        )
+        with(gameStorage) {
+            story = Story(
+                getUid(),
+                getTitle(this),
+                getAuthors(this),
+                this.getCoverStoryTaller()?.imageUrl!!,
+                this.getLocationGame(),
+                this.getSentences()
+            )
+        }
         saveStory(story)
     }
 
@@ -63,10 +65,35 @@ class TitleAndSaveStoryViewModel(
     private fun saveStory(story: Story) {
         assistantModel.saveStory(story)
             .subscribe({
+                saveStorySuccessStatistic(story)
                 successSaveFlagLiveDate.value = true
             }, {
+                saveStoryFailedStatistic(story, it)
                 successSaveFlagLiveDate.value = false
             })
+    }
+
+    private fun saveStorySuccessStatistic(story: Story) {
+        val prop = listOf(
+            StatHelper.storyName to story.name,
+            StatHelper.storyId to story.id.toString(),
+            StatHelper.saveStoryTime to getCurrentDateTime().getString()
+        )
+        stat.riseEvent(StatHelper.onTitleAndSaveStoryScreen, prop.toProperties())
+    }
+
+    private fun saveStoryFailedStatistic(story: Story, throwable: Throwable) {
+        val prop = listOf(
+            StatHelper.saveStoryFailed to throwable.toString(),
+            StatHelper.storyName to story.name,
+            StatHelper.storyId to story.id.toString(),
+            StatHelper.saveStoryTime to getCurrentDateTime().getString()
+        )
+        stat.riseEvent(StatHelper.onTitleAndSaveStoryScreen, prop.toProperties())
+    }
+
+    fun buttonSaveStoryClickedStatistic() {
+        stat.riseEvent(StatHelper.buttonSaveStoryClicked)
     }
 
 }
