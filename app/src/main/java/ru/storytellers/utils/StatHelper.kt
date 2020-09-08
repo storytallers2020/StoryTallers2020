@@ -40,8 +40,11 @@ class StatHelper {
         const val createSentenceTime = "CreateSentenceTime"
         const val buttonSendClicked = "ButtonSendClicked"
         const val turn = "Turn"
-
-
-
+        //SelectCoverScreen
+        const val onSelectCoverScreen = "SelectCoverScreen"
+        const val coverSelected="CoverSelected"
+        const val selectCoverTime = "SelectCoverTime"
+        const val coverName = "CoverName"
+        const val coverId = "CoverId"
     }
 }
