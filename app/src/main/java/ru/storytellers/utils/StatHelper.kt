@@ -33,6 +33,13 @@ class StatHelper {
         const val locationName = "locationName"
         const val timeLocationChoice = "timeLocationChoice"
         const val locationId = "locationId"
+        //GameScreen
+        const val onGameScreen = "GameScreen"
+        const val gamePlayerId = "GamePlayerId"
+        const val gamePlayerName = "GamePlayerName"
+        const val createSentenceTime = "CreateSentenceTime"
+        const val buttonSendClicked = "ButtonSendClicked"
+        const val turn = "Turn"
 
 
 
