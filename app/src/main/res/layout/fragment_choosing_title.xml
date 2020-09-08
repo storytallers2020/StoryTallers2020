@@ -69,7 +69,7 @@
             android:layout_margin="@dimen/margin_xxs"
             android:textColorHint="@color/white"
             app:counterEnabled="true"
-            app:counterMaxLength="70"
+            app:counterMaxLength="@integer/max_length_title"
             app:counterTextAppearance="@style/WhiteCounter">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -83,7 +83,7 @@
                 android:textColor="@color/white"
                 android:inputType="textMultiLine|textCapSentences|textAutoComplete|textAutoCorrect"
                 android:background="@color/no_color"
-                android:maxLength="70"
+                android:maxLength="@integer/max_length_title"
                 tools:text="Сказка про Ивана-дурака и Серого Волка за границей вашего воображения,
                 но в рамках дозволенного законом" />
 
