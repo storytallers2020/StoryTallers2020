@@ -18,7 +18,6 @@ import ru.storytellers.utils.toProperties
 class StartViewModel(
     private val storyRepository: IStoryRepository
 ) : BaseViewModel<DataModel>() {
-    private val stat = StoryTallerApp.instance.stat
     private val onSuccessliveData = MutableLiveData<DataModel.Success<Story>>()
     private val onErrorliveData = MutableLiveData<DataModel.Error>()
     private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
