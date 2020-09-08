@@ -100,6 +100,15 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ImageButton
+        android:id="@+id/btn_help"
+        android:layout_width="@dimen/icon_small"
+        android:layout_height="@dimen/icon_small"
+        android:background="@drawable/ic_help"
+        app:layout_constraintBottom_toTopOf="@id/description_level"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/btn_help" />
+
     <TextView
         android:id="@+id/description_level"
         android:layout_width="match_parent"
