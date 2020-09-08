@@ -7,18 +7,18 @@
     <item
         android:id="@+id/btn_share"
         android:title="@string/btn_share"
-        android:icon="@drawable/ic_share"
+        android:icon="@drawable/ic_share_24"
         app:showAsAction="never|withText" />
 
     <item
         android:id="@+id/btn_copy"
         android:title="@string/btn_copy"
-        android:icon="@drawable/ic_copy"
+        android:icon="@drawable/ic_copy_24"
         app:showAsAction="never|withText" />
 
     <item
         android:id="@+id/btn_delete"
         android:title="@string/btn_delete"
-        android:icon="@drawable/ic_delete"
+        android:icon="@drawable/ic_delete_24"
         app:showAsAction="never|withText"/>
 </menu>

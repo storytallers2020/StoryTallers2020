@@ -36,8 +36,9 @@
     <dimen name="card_corner_radius_small">5dp</dimen>
 
     //Icon
+    <dimen name="icon_small">28dp</dimen>
     <dimen name="icon_medium">40dp</dimen>
-    <dimen name="icon_small">30dp</dimen>
-    <dimen name="max_width">75dp</dimen>
+    <dimen name="icon_large">64dp</dimen>
+    <dimen name="max_width">88dp</dimen>
 
 </resources>

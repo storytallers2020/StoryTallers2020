@@ -9,8 +9,8 @@
     <string name="title_welcome">Добро пожаловать!</string>
     <string name="btn_start_game">Сочинить сказку</string>
     <string name="btn_library">Моя библиотека</string>
-    <string name="btn_about">О приложении</string>
-    <string name="btn_help">Правила</string>
+    <string name="btn_about"><u>О приложении</u></string>
+    <string name="btn_help"><u>Правила</u></string>
 
     // Rules screen
     <string name="title_rules">Правила</string>
@@ -61,7 +61,7 @@
     <string name="game_turn">Ходит</string>
     <string name="mandatory_word">Обязательное слово:</string>
     <string name="btn_send">отправить</string>
-    <string name="btn_end"><u>Закончить сказку</u></string>
+    <string name="btn_end"><u>Завершить сказку</u></string>
     <string name="btn_resume"><u>Продолжить игру</u></string>
     <string name="btn_select_cover">Выбрать обложку</string>
     <string name="msg_incorrect_sentence">Неверное предложение</string>

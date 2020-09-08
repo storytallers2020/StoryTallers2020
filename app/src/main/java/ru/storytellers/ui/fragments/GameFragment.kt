@@ -117,7 +117,7 @@ class GameFragment : BaseFragment<DataModel>() {
                 text = if (text.isBlank()) mandatoryWord
                 else "$text $mandatoryWord"
                 sentence_line.setText(text)
-                sentence_line.setSelection(text.length)
+                sentence_line.setSelection(text.length) // ошибка     java.lang.IndexOutOfBoundsException: setSpan (159 ... 159) ends beyond length 150
             }
     }
 

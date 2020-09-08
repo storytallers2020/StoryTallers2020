@@ -49,7 +49,7 @@
                 android:alpha="0.5"
                 android:textSize="@dimen/text_small"
                 android:gravity="center"
-                android:drawableBottom="@drawable/slider_cup"
+                android:drawableBottom="@drawable/slider_level"
                 android:textColor="@color/yellow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -73,7 +73,7 @@
                 android:textSize="@dimen/text_small"
                 android:gravity="center"
                 android:textColor="@color/yellow"
-                android:drawableBottom="@drawable/slider_queen"
+                android:drawableBottom="@drawable/slider_team"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -97,7 +97,7 @@
                 android:textSize="@dimen/text_small"
                 android:alpha="0.5"
                 android:gravity="center"
-                android:drawableBottom="@drawable/slider_mounts"
+                android:drawableBottom="@drawable/slider_location"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

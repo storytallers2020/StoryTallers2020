@@ -56,14 +56,12 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
                 sizeListPlayer = it.size
                 setPlayersToPlayerAdapter(it)
                 if (it.size >= 8) {
-                    context?.let { context ->
-                        toastShowLong(
-                            context,
-                            context.getString(R.string.msg_team_full)
-                        )
-                    }
-                    btn_add_player.visibility = View.INVISIBLE
-                } else btn_add_player.visibility = View.VISIBLE
+                    btn_add_player.visibility = View.GONE
+                    max_players_notification.visibility = View.VISIBLE
+                } else {
+                    btn_add_player.visibility = View.VISIBLE
+                    max_players_notification.visibility = View.GONE
+                }
             })
     }
 
