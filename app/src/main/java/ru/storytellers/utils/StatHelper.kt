@@ -46,5 +46,11 @@ class StatHelper {
         const val selectCoverTime = "SelectCoverTime"
         const val coverName = "CoverName"
         const val coverId = "CoverId"
+        //GameStartScreen
+        const val onGameStartScreen = "GameStartScreen"
+        const val buttonStartClicked = "ButtonStartGameClicked"
+        const val numberOfPlayersGame = "NumberOfPlayersGame"
+        const val selectedLevelGame = "SelectedLevelGame"
+        const val createGameTime = "CreateGameTime"
     }
 }
