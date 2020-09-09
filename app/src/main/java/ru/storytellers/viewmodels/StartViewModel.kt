@@ -37,23 +37,23 @@ class StartViewModel(
             StatHelper.userId to "userId", // заглушка пока что
             StatHelper.timeOnRulesGame to getCurrentDateTime().getString()
         )
-        stat.riseEvent(StatHelper.onRulesGame, prop.toProperties())
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.onRulesGame, prop.toProperties())
     }
     fun createTaleStatistics(){
         val prop = listOf(
             StatHelper.userId to "userId", // заглушка пока что
             StatHelper.timeStartCreateTale to getCurrentDateTime().getString()
         )
-        stat.riseEvent(StatHelper.startCreateTale, prop.toProperties())
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.startCreateTale, prop.toProperties())
     }
     fun onLibraryScreenStatistics(){
         val prop = listOf(
             StatHelper.timeToLibraryScreen to getCurrentDateTime().getString()
         )
-        stat.riseEvent(StatHelper.onLibraryScreen,prop.toProperties())
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.onLibraryScreen,prop.toProperties())
     }
     fun onAboutScreenStatistics(){
-        stat.riseEvent(StatHelper.onAboutScreen)
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.onAboutScreen)
     }
 
     fun getAllStory(){
