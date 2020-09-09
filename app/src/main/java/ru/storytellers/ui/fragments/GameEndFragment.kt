@@ -23,9 +23,13 @@ class GameEndFragment : BaseFragment<DataModel>() {
 
     override fun iniViewModel() {}
     override fun init() {
-        btn_select_cover.setOnClickListener { navigateToSelectCoverScreen() }
+        btn_select_cover.setOnClickListener {
+            model.buttonSelectCoverClickedStat()
+            navigateToSelectCoverScreen() }
         setResumeClickListener()
-        btn_copy.setOnClickListener { copyText() }
+        btn_copy.setOnClickListener {
+            model.buttonCopyClickedStat()
+            copyText() }
     }
 
     override fun onStart() {
@@ -42,6 +46,7 @@ class GameEndFragment : BaseFragment<DataModel>() {
 
     private fun setResumeClickListener() {
         tv_resume.setOnClickListener {
+            model.buttonContinueClickedStat()
             router.backTo(Screens.GameScreen())
         }
     }
