@@ -3,11 +3,13 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.repository.IStoryRepository
-import ru.storytellers.utils.collectSentence
+import ru.storytellers.utils.*
+import ru.storytellers.utils.StatHelper.Companion.itemClickedStat
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import timber.log.Timber
 
@@ -67,5 +69,14 @@ class LibraryBookViewModel(
             }, {
                 Timber.e(it, "Remove story throwable")
             })
+    }
+    fun itemCopyClickedStat(){
+        itemClickedStat(StatHelper.menuItemCopy, StatHelper.libraryBookScreen)
+    }
+    fun itemDeleteClickedStat(){
+        itemClickedStat(StatHelper.menuItemDelete, StatHelper.libraryBookScreen)
+    }
+    fun itemShareClickedStat(){
+        itemClickedStat(StatHelper.menuItemShare, StatHelper.libraryBookScreen)
     }
 }
