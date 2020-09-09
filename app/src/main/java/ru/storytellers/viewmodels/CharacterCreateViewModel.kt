@@ -65,7 +65,6 @@ class CharacterCreateViewModel(
             Pair(StatHelper.characterName, player.character?.name ?: ""),
             Pair(StatHelper.time, getCurrentDateTime().getString())
         )
-        stat.riseEvent(StatHelper.onPlayerAdded, prop.toProperties())
-
+        app.stat.riseEvent(StatHelper.onPlayerAdded, prop.toProperties())
     }
 }
