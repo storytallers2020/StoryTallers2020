@@ -46,9 +46,9 @@ class SelectCoverViewModel(
             StatHelper.coverId to cover.id.toString(),
             StatHelper.selectCoverTime to getCurrentDateTime().getString()
         )
-        stat.riseEvent(StatHelper.onSelectCoverScreen, prop.toProperties())
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.onSelectCoverScreen, prop.toProperties())
     }
     fun coverSelectedStatistics(){
-        stat.riseEvent(StatHelper.coverSelected)
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.coverSelected)
     }
 }
