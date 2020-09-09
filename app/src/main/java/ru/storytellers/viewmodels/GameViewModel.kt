@@ -13,7 +13,8 @@ import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
-    private val storage = StoryTallerApp.instance.gameStorage
+    private val app = StoryTallerApp.instance
+    private val storage = app.gameStorage
 
     private val currentPlayerLiveData = MutableLiveData<Player>()
     private val storyTextLiveData = MutableLiveData<String>()
@@ -36,7 +37,7 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
     fun subscribeOnEndGamePossibleChanged(): LiveData<Boolean> = isEndGamePossible
 
     fun onButtonSendClicked(content: String) {
-        stat.riseEvent(StatHelper.buttonSendClicked)
+        app.stat.riseEvent(StatHelper.buttonSendClicked)
         val text = content
             .trimSentenceSpace()
             .addDotIfNeed()
@@ -100,7 +101,7 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
             StatHelper.createSentenceTime to getCurrentDateTime().getString(),
             StatHelper.turn to sentence.step.toString()
         )
-        stat.riseEvent(StatHelper.onGameScreen, (prop as List<Pair<String, String>>).toProperties())
+        app.stat.riseEvent(StatHelper.onGameScreen, (prop as List<Pair<String, String>>).toProperties())
     }
 
 }
