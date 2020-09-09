@@ -11,7 +11,8 @@ import ru.storytellers.utils.toProperties
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameStartViewModel(private val game: Game) : BaseViewModel<DataModel>() {
-    private val storage = StoryTallerApp.instance.gameStorage
+    private val app = StoryTallerApp.instance
+    private val storage = app.gameStorage
     private val levelGameLiveData = MutableLiveData<Int>()
 
     fun requestGameLevelFromStorage() {
@@ -39,11 +40,11 @@ class GameStartViewModel(private val game: Game) : BaseViewModel<DataModel>() {
             StatHelper.selectedLevelGame to level,
             StatHelper.createGameTime to getCurrentDateTime().getString()
         )
-        stat.riseEvent(StatHelper.onGameStartScreen, prop.toProperties())
+        app.stat.riseEvent(StatHelper.onGameStartScreen, prop.toProperties())
     }
 
     fun buttonStartClickedStatistic() {
-        stat.riseEvent(StatHelper.buttonStartClicked)
+        app.stat.riseEvent(StatHelper.buttonStartClicked)
     }
 
 }
