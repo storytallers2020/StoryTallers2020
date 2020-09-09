@@ -6,7 +6,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
-import ru.storytellers.model.entity.Player
 import ru.storytellers.model.repository.ILocationRepository
 import ru.storytellers.utils.StatHelper
 import ru.storytellers.utils.getCurrentDateTime
@@ -37,7 +36,7 @@ class LocationViewModel(private val locationRepository: ILocationRepository) :
         return onErrorLiveData
     }
 
-    fun setLocationGame(location: Location){
+    fun setLocationGame(location: Location) {
         StoryTallerApp.instance.gameStorage.setLocationGame(location)
     }
 
@@ -47,7 +46,7 @@ class LocationViewModel(private val locationRepository: ILocationRepository) :
             StatHelper.locationId to location.id.toString(),
             StatHelper.timeLocationChoice to getCurrentDateTime().getString()
         )
-        stat.riseEvent(StatHelper.onLocationChoice, prop.toProperties())
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.onLocationChoice, prop.toProperties())
     }
 
 }
