@@ -1,5 +1,7 @@
 package ru.storytellers.utils
 
+import ru.storytellers.application.StoryTallerApp
+
 class StatHelper {
     companion object {
         //LevelScreen
@@ -57,5 +59,31 @@ class StatHelper {
         const val saveStoryTime = "SaveStoryTime"
         const val saveStoryFailed = "SaveStoryFailed"
         const val buttonSaveStoryClicked = "ButtonSaveStoryClicked"
+        //GameEndScreen
+        const val onGameEndScreen = "GameEndScreen"
+        const val buttonCopyClicked = "ButtonCopyClicked"
+        const val buttonContinueClicked = "ButtonContinueClicked"
+        const val buttonSelectCoverClicked = "ButtonSelectCoverClicked"
+        const val buttonClickedTime = "ButtonClickedTime"
+        //LibraryScreen
+        const val libraryScreen = "LibraryScreen"
+        const val menuItemCopy = "MenuItemCopy"
+        const val menuItemDelete = "MenuItemCopy"
+        const val menuItemShare = "MenuItemCopy"
+        const val storySelected = "StorySelected"
+        const val toStartScreenClicked = "ToStartScreenClicked"
+        const val actionTime = "ActionTime"
+        //LibraryBook
+        const val libraryBookScreen = "LibraryBookScreen"
+
+         fun itemClickedStat(itemName:String, screenName:String){
+            val itemClicked="ItemClicked"
+            val prop = listOf(
+                itemName to itemClicked,
+                actionTime to getCurrentDateTime().getString()
+            )
+            StoryTallerApp.instance.stat.riseEvent(screenName, prop.toProperties())
+        }
+
     }
 }
