@@ -31,7 +31,7 @@ class LevelViewModel : BaseViewModel<DataModel>() {
             Pair(StatHelper.levelName, storage.level?.id.toString()),
             Pair(StatHelper.time, getCurrentDateTime().getString())
         )
-        stat.riseEvent(StatHelper.levelScreenNextClicked, prop.toProperties())
+        app.stat.riseEvent(StatHelper.levelScreenNextClicked, prop.toProperties())
     }
 
 }
