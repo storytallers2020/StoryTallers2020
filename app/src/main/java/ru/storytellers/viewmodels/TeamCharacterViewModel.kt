@@ -13,7 +13,7 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class TeamCharacterViewModel : BaseViewModel<DataModel>() {
     private var listPlayers: MutableList<Player> =
-    StoryTallerApp.instance.gameStorage.getPlayers()
+        StoryTallerApp.instance.gameStorage.getPlayers()
     private val playersLiveData = MutableLiveData<List<Player>>()
 
     fun subscribeOnPlayers(): LiveData<List<Player>> {
@@ -31,11 +31,14 @@ class TeamCharacterViewModel : BaseViewModel<DataModel>() {
             Pair(StatHelper.playerCount, listPlayers.count().toString()),
             Pair(StatHelper.time, getCurrentDateTime().getString())
         )
-        stat.riseEvent(StatHelper.characterScreenNextClicked, prop.toProperties())
+        StoryTallerApp.instance.stat.riseEvent(
+            StatHelper.characterScreenNextClicked,
+            prop.toProperties()
+        )
     }
 
     fun onGotoCharacterScreen() {
-        stat.riseEvent(StatHelper.addPlayerClicked)
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.addPlayerClicked)
     }
 
 }
