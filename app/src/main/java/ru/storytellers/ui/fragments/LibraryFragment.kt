@@ -33,6 +33,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
     }
 
     private val itemClickListener = { story: Story ->
+        model.storySelectedStat(story)
         navigateToLibraryBookScreen(story)
     }
     private val buttonMenuClickListener = { view: View, storyLocal: Story ->
@@ -51,7 +52,9 @@ class LibraryFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         rv_books.adapter = libraryAdapter
-        back_button_character.setOnClickListener { toStartScreen() }
+        back_button_character.setOnClickListener {
+            model.btnToStartScreenClickedStat()
+            toStartScreen() }
     }
 
     override fun onStart() {
@@ -114,6 +117,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
     private fun setMenuItemsClickListeners(view: View) {
         with(view) {
             btn_share.setOnClickListener {
+                model.itemShareClickedStat()
                 titleStory?.let { title ->
                     textStory?.let { text ->
                         with(concatTitleAndTextStory(title, text, getString(R.string.msg_share))) {
@@ -123,12 +127,14 @@ class LibraryFragment : BaseFragment<DataModel>() {
                 }
             }
             btn_copy.setOnClickListener {
+                model.itemCopyClickedStat()
                 textStory?.let { text ->
                     copyText(requireContext(), text)
                     toastShowLong(requireContext(), getString(R.string.msg_copy))
                 }
             }
             btn_delete.setOnClickListener {
+                model.itemDeleteClickedStat()
                 createAndShowAlertDialog()
             }
         }
