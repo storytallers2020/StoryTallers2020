@@ -8,7 +8,8 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.repository.IStoryRepository
-import ru.storytellers.utils.collectSentence
+import ru.storytellers.utils.*
+import ru.storytellers.utils.StatHelper.Companion.itemClickedStat
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import timber.log.Timber
 
@@ -91,5 +92,30 @@ class LibraryViewModel(
     fun onClearStorage() {
         StoryTallerApp.instance.gameStorage.clear()
     }
+    fun storySelectedStat(story:Story){
+        val storySelected ="StoryFromLibSelected"
+        val prop = listOf(
+            StatHelper.storySelected to storySelected,
+            StatHelper.storyName to story.name,
+            StatHelper.storyId to story.id.toString(),
+            StatHelper.actionTime to getCurrentDateTime().getString()
+        )
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.libraryScreen, prop.toProperties())
+    }
+
+    fun itemCopyClickedStat(){
+        itemClickedStat(StatHelper.menuItemCopy, StatHelper.libraryScreen)
+    }
+    fun itemDeleteClickedStat(){
+        itemClickedStat(StatHelper.menuItemDelete, StatHelper.libraryScreen)
+    }
+    fun itemShareClickedStat(){
+        itemClickedStat(StatHelper.menuItemShare, StatHelper.libraryScreen)
+    }
+    fun btnToStartScreenClickedStat(){
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.toStartScreenClicked)
+    }
+
+
 
 }
