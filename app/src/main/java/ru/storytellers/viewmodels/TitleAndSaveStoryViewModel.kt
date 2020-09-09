@@ -79,7 +79,7 @@ class TitleAndSaveStoryViewModel(
             StatHelper.storyId to story.id.toString(),
             StatHelper.saveStoryTime to getCurrentDateTime().getString()
         )
-        stat.riseEvent(StatHelper.onTitleAndSaveStoryScreen, prop.toProperties())
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.onTitleAndSaveStoryScreen, prop.toProperties())
     }
 
     private fun saveStoryFailedStatistic(story: Story, throwable: Throwable) {
@@ -89,11 +89,11 @@ class TitleAndSaveStoryViewModel(
             StatHelper.storyId to story.id.toString(),
             StatHelper.saveStoryTime to getCurrentDateTime().getString()
         )
-        stat.riseEvent(StatHelper.onTitleAndSaveStoryScreen, prop.toProperties())
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.onTitleAndSaveStoryScreen, prop.toProperties())
     }
 
     fun buttonSaveStoryClickedStatistic() {
-        stat.riseEvent(StatHelper.buttonSaveStoryClicked)
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.buttonSaveStoryClicked)
     }
 
 }
