@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
-                android:maxLength="15"
+                android:maxLength="@integer/max_length_name"
                 android:maxLines="1"
                 android:textColor="@color/white"
                 android:gravity="center_vertical"

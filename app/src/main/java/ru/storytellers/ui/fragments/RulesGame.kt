@@ -8,12 +8,11 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_rules.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
-import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.BackButtonListener
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 
-class RulesGame: Fragment(),BackButtonListener {
+class RulesGame: Fragment(), BackButtonListener {
     private lateinit var navigatorHolder: NavigatorHolder
     private lateinit var router: Router
     companion object {
@@ -42,7 +41,7 @@ class RulesGame: Fragment(),BackButtonListener {
     }
 
     override fun backClicked(): Boolean {
-        router.replaceScreen(Screens.StartScreen())
+        router.exit()
         return true
     }
 }
