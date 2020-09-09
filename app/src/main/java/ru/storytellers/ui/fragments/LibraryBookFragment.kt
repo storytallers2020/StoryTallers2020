@@ -74,6 +74,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
             setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.btn_share -> {
+                        model.itemShareClickedStat()
                         titleStory?.let { title ->
                             textStory?.let { text ->
                                 with(concatTitleAndTextStory(title, text, getString(R.string.msg_share))) {
@@ -84,6 +85,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                         true
                     }
                     R.id.btn_copy -> {
+                        model.itemCopyClickedStat()
                         textStory?.let { text ->
                             copyText(requireContext(), text)
                             toastShowLong(requireContext(), getString(R.string.msg_copy))
@@ -91,6 +93,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                         true
                     }
                     R.id.btn_delete -> {
+                        model.itemDeleteClickedStat()
                         createAndShowAlertDialog()
                         true
                     }
