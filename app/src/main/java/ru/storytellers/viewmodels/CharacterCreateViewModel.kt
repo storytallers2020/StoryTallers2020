@@ -9,6 +9,7 @@ import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.repository.ICharacterRepository
 import ru.storytellers.utils.*
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class CharacterCreateViewModel(
@@ -63,8 +64,8 @@ class CharacterCreateViewModel(
             Pair(StatHelper.playerName, player.name),
             Pair(StatHelper.playerId, player.id.toString()),
             Pair(StatHelper.characterName, player.character?.name ?: ""),
-            Pair(StatHelper.time, getCurrentDateTime().getString())
+            Pair(StatHelper.timeEvent, getCurrentDateTime().getString())
         )
-        app.stat.riseEvent(StatHelper.onPlayerAdded, prop.toProperties())
+        riseEvent(StatHelper.characterScreenBtnPlayerSaved, prop)
     }
 }
