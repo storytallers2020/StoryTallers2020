@@ -116,7 +116,6 @@ class LevelFragment : BaseFragment<DataModel>() {
 
     override fun backClicked(): Boolean {
         model.onBackClicked(this.javaClass.simpleName)
-
         router.exit()
         return true
     }
