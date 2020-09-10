@@ -8,6 +8,7 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.repository.ICoverRepository
 import ru.storytellers.utils.StatHelper
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.utils.getCurrentDateTime
 import ru.storytellers.utils.getString
 import ru.storytellers.utils.toProperties
@@ -44,11 +45,9 @@ class SelectCoverViewModel(
         val prop = listOf(
             StatHelper.coverName to cover.name,
             StatHelper.coverId to cover.id.toString(),
-            StatHelper.selectCoverTime to getCurrentDateTime().getString()
+            StatHelper.timeEvent to getCurrentDateTime().getString()
         )
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.onSelectCoverScreen, prop.toProperties())
+        riseEvent(StatHelper.selectCoverScreenCoverSelected, prop)
     }
-    fun coverSelectedStatistics(){
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.coverSelected)
-    }
+
 }
