@@ -9,6 +9,7 @@ import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
 import ru.storytellers.utils.*
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 
@@ -77,9 +78,9 @@ class TitleAndSaveStoryViewModel(
         val prop = listOf(
             StatHelper.storyName to story.name,
             StatHelper.storyId to story.id.toString(),
-            StatHelper.saveStoryTime to getCurrentDateTime().getString()
+            StatHelper.timeEvent to getCurrentDateTime().getString()
         )
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.onTitleAndSaveStoryScreen, prop.toProperties())
+        riseEvent(StatHelper.titleAndSaveScreenBtnSaveClicked, prop)
     }
 
     private fun saveStoryFailedStatistic(story: Story, throwable: Throwable) {
@@ -87,13 +88,8 @@ class TitleAndSaveStoryViewModel(
             StatHelper.saveStoryFailed to throwable.toString(),
             StatHelper.storyName to story.name,
             StatHelper.storyId to story.id.toString(),
-            StatHelper.saveStoryTime to getCurrentDateTime().getString()
+            StatHelper.timeEvent to getCurrentDateTime().getString()
         )
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.onTitleAndSaveStoryScreen, prop.toProperties())
+        riseEvent(StatHelper.titleAndSaveScreenBtnSaveClicked, prop)
     }
-
-    fun buttonSaveStoryClickedStatistic() {
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.buttonSaveStoryClicked)
-    }
-
 }
