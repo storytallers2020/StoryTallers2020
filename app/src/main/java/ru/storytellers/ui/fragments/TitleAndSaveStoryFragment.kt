@@ -40,7 +40,6 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         book_name.addTextChangedListener(textWatcher)
         back_button_character.setOnClickListener { backToSelectCoverScreen() }
         btn_next.setOnClickListener {
-            model.buttonSaveStoryClickedStatistic()
             saveStory()
         }
     }
@@ -84,10 +83,12 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
     }
 
     private fun backToSelectCoverScreen() {
+        model.onBackClicked(this.javaClass.simpleName)
         router.backTo(Screens.SelectCoverScreen())
     }
 
     override fun backClicked(): Boolean {
+        model.onBackClicked(this.javaClass.simpleName)
         router.exit()
         return true
     }
