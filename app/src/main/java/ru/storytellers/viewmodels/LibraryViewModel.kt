@@ -10,6 +10,7 @@ import ru.storytellers.model.entity.Story
 import ru.storytellers.model.repository.IStoryRepository
 import ru.storytellers.utils.*
 import ru.storytellers.utils.StatHelper.Companion.itemClickedStat
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import timber.log.Timber
 
@@ -93,27 +94,25 @@ class LibraryViewModel(
         StoryTallerApp.instance.gameStorage.clear()
     }
     fun storySelectedStat(story:Story){
-        val storySelected ="StoryFromLibSelected"
         val prop = listOf(
-            StatHelper.storySelected to storySelected,
             StatHelper.storyName to story.name,
             StatHelper.storyId to story.id.toString(),
-            StatHelper.actionTime to getCurrentDateTime().getString()
+            StatHelper.timeEvent to getCurrentDateTime().getString()
         )
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.libraryScreen, prop.toProperties())
+        riseEvent(StatHelper.libraryScreenStorySelected, prop)
     }
 
     fun itemCopyClickedStat(){
-        itemClickedStat(StatHelper.menuItemCopy, StatHelper.libraryScreen)
+        itemClickedStat(StatHelper.libraryScreenMenuItemCopyClicked)
     }
     fun itemDeleteClickedStat(){
-        itemClickedStat(StatHelper.menuItemDelete, StatHelper.libraryScreen)
+        itemClickedStat(StatHelper.libraryScreenMenuItemDeleteClicked)
     }
     fun itemShareClickedStat(){
-        itemClickedStat(StatHelper.menuItemShare, StatHelper.libraryScreen)
+        itemClickedStat(StatHelper.libraryScreenMenuItemShareClicked)
     }
     fun btnToStartScreenClickedStat(){
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.toStartScreenClicked)
+        StoryTallerApp.instance.stat.riseEvent(StatHelper.libraryScreenBtnStartScreenClicked)
     }
 
 
