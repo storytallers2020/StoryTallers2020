@@ -125,10 +125,12 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     }
 
     private fun backToLibraryScreen(){
+        model.onBackClicked(this.javaClass.simpleName)
         router.backTo(Screens.LibraryScreen())
     }
 
     override fun backClicked(): Boolean {
+        model.onBackClicked(this.javaClass.simpleName)
         router.exit()
         return true
     }
