@@ -8,9 +8,9 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.repository.ILocationRepository
 import ru.storytellers.utils.StatHelper
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.utils.getCurrentDateTime
 import ru.storytellers.utils.getString
-import ru.storytellers.utils.toProperties
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class LocationViewModel(private val locationRepository: ILocationRepository) :
@@ -42,11 +42,11 @@ class LocationViewModel(private val locationRepository: ILocationRepository) :
 
     fun onLocationChoiceStatistic(location: Location) {
         val prop = listOf(
+            StatHelper.timeEvent to getCurrentDateTime().getString(),
             StatHelper.locationName to location.name,
-            StatHelper.locationId to location.id.toString(),
-            StatHelper.timeLocationChoice to getCurrentDateTime().getString()
+            StatHelper.locationId to location.id.toString()
         )
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.onLocationChoice, prop.toProperties())
+        riseEvent(StatHelper.locationScreenLocationSelected, prop)
     }
 
 }
