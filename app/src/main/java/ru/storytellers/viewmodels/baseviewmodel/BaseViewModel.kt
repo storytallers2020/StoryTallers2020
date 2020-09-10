@@ -9,6 +9,6 @@ abstract class BaseViewModel<T : DataModel>(
 ): ViewModel() {
     fun onBackClicked(fragmentName: String) {
         StoryTallerApp.instance
-            .stat.riseEvent("$fragmentName ${StatHelper.levelScreenBackClicked}")
+            .stat.riseEvent("$fragmentName : ${StatHelper.buttonBackClicked}")
     }
 }
