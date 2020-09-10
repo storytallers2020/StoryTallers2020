@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.utils.*
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameEndViewModel : BaseViewModel<DataModel>() {
@@ -31,22 +32,22 @@ class GameEndViewModel : BaseViewModel<DataModel>() {
     }
 
     fun buttonSelectCoverClickedStat(){
-        buttonClickedStatistic(StatHelper.buttonSelectCoverClicked)
+        buttonClickedStatistic(StatHelper.gameEndScreenBtnSelectCoverClicked)
     }
     fun buttonContinueClickedStat(){
-        buttonClickedStatistic(StatHelper.buttonContinueClicked)
+        buttonClickedStatistic(StatHelper.gameEndScreenBtnContinueGameClicked)
     }
     fun buttonCopyClickedStat(){
-        buttonClickedStatistic(StatHelper.buttonCopyClicked)
+        buttonClickedStatistic(StatHelper.gameEndScreenBtnCopyClicked)
     }
 
     private fun buttonClickedStatistic(nameButton:String){
-        val clicked="clicked"
+        val clicked="Clicked"
         val prop = listOf(
             nameButton to clicked,
-            StatHelper.buttonClickedTime to getCurrentDateTime().getString()
+            StatHelper.timeEvent to getCurrentDateTime().getString()
         )
-        app.stat.riseEvent(StatHelper.onGameEndScreen, prop.toProperties())
+        riseEvent(nameButton, prop)
     }
 
 }
