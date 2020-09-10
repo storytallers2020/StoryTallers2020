@@ -6,9 +6,9 @@ import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Player
 import ru.storytellers.utils.StatHelper
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.utils.getCurrentDateTime
 import ru.storytellers.utils.getString
-import ru.storytellers.utils.toProperties
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class TeamCharacterViewModel : BaseViewModel<DataModel>() {
@@ -28,17 +28,13 @@ class TeamCharacterViewModel : BaseViewModel<DataModel>() {
 
     fun onGotoLocationScreen() {
         val prop = listOf(
-            Pair(StatHelper.playerCount, listPlayers.count().toString()),
-            Pair(StatHelper.time, getCurrentDateTime().getString())
+            StatHelper.playerCount to listPlayers.count().toString(),
+            StatHelper.timeEvent to getCurrentDateTime().getString()
         )
-        StoryTallerApp.instance.stat.riseEvent(
-            StatHelper.characterScreenNextClicked,
-            prop.toProperties()
-        )
+        riseEvent(StatHelper.teamScreenBtnToLocationScreen, prop)
     }
 
     fun onGotoCharacterScreen() {
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.addPlayerClicked)
+        riseEvent(StatHelper.teamScreenAddPlayerClicked)
     }
-
 }
