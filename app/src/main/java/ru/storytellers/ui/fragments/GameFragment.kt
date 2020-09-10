@@ -55,7 +55,6 @@ class GameFragment : BaseFragment<DataModel>() {
 
     private fun onButtonSendClicked() {
         model.onButtonSendClicked(sentence_line.text.toString())
-
         assistantFragment.hideKeyboard()
         scroll_view.smoothScrollTo(0, story_body.bottom)
         sentence_line.setText("")
