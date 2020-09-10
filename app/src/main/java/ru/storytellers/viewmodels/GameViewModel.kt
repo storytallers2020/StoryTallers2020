@@ -10,6 +10,7 @@ import ru.storytellers.model.entity.ContentTypeEnum
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.utils.*
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
@@ -37,11 +38,9 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
     fun subscribeOnEndGamePossibleChanged(): LiveData<Boolean> = isEndGamePossible
 
     fun onButtonSendClicked(content: String) {
-        app.stat.riseEvent(StatHelper.buttonSendClicked)
         val text = content
             .trimSentenceSpace()
             .addDotIfNeed()
-
         val sentence = createSentence(text)
         tryGotoNextTurn(sentence)
     }
@@ -98,10 +97,10 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
         val prop = listOf(
             StatHelper.gamePlayerId to sentence.player?.id.toString(),
             StatHelper.gamePlayerName to sentence.player?.name,
-            StatHelper.createSentenceTime to getCurrentDateTime().getString(),
+            StatHelper.timeEvent to getCurrentDateTime().getString(),
             StatHelper.turn to sentence.step.toString()
         )
-        app.stat.riseEvent(StatHelper.onGameScreen, (prop as List<Pair<String, String>>).toProperties())
+        riseEvent(StatHelper.gameScreenBtnSendClicked, prop as List<Pair<String, String>>)
     }
 
 }
