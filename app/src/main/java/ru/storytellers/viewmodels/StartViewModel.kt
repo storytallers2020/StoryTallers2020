@@ -4,16 +4,15 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import ru.storytellers.application.StoryTallerApp
-import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
-import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.repository.IStoryRepository
 import ru.storytellers.utils.StatHelper
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.utils.getCurrentDateTime
 import ru.storytellers.utils.getString
-import ru.storytellers.utils.toProperties
+import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
+
 
 class StartViewModel(
     private val storyRepository: IStoryRepository
@@ -29,40 +28,48 @@ class StartViewModel(
     fun subscribeOnError(): LiveData<DataModel.Error> {
         return onErrorliveData
     }
-    fun subscribeOnLoading() : LiveData<DataModel.Loading> {
+
+    fun subscribeOnLoading(): LiveData<DataModel.Loading> {
         return onLoadingliveData
     }
-    fun toRulesScreenStatistics(){
+
+    fun toRulesScreenStatistics() {
         val prop = listOf(
             StatHelper.userId to "userId", // заглушка пока что
-            StatHelper.timeOnRulesGame to getCurrentDateTime().getString()
+            StatHelper.timeEvent to getCurrentDateTime().getString()
         )
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.onRulesGame, prop.toProperties())
-    }
-    fun createTaleStatistics(){
-        val prop = listOf(
-            StatHelper.userId to "userId", // заглушка пока что
-            StatHelper.timeStartCreateTale to getCurrentDateTime().getString()
-        )
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.startCreateTale, prop.toProperties())
-    }
-    fun onLibraryScreenStatistics(){
-        val prop = listOf(
-            StatHelper.timeToLibraryScreen to getCurrentDateTime().getString()
-        )
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.onLibraryScreen,prop.toProperties())
-    }
-    fun onAboutScreenStatistics(){
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.onAboutScreen)
+        riseEvent(StatHelper.startScreenBtnToRulesGame, prop)
     }
 
-    fun getAllStory(){
+    fun createTaleStatistics() {
+        val prop = listOf(
+            StatHelper.timeEvent to getCurrentDateTime().getString(),
+            StatHelper.userId to "userId" // заглушка пока что
+        )
+        riseEvent(StatHelper.startScreenBtnToCreateTale, prop)
+    }
+
+    fun onLibraryScreenStatistics() {
+        val prop = listOf(
+            StatHelper.timeEvent to getCurrentDateTime().getString()
+        )
+        riseEvent(StatHelper.startScreenBtnToLibraryScreen, prop)
+    }
+
+    fun onAboutScreenStatistics() {
+        val prop = listOf(
+            StatHelper.timeEvent to getCurrentDateTime().getString()
+        )
+        riseEvent(StatHelper.startScreenBtnToAboutScreen, prop)
+    }
+
+    fun getAllStory() {
         storyRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                onSuccessliveData.value=DataModel.Success(it)
-            },{
-                onErrorliveData.value=DataModel.Error(it)
+                onSuccessliveData.value = DataModel.Success(it)
+            }, {
+                onErrorliveData.value = DataModel.Error(it)
             })
     }
 
