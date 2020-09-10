@@ -71,12 +71,12 @@ class LibraryBookViewModel(
             })
     }
     fun itemCopyClickedStat(){
-        itemClickedStat(StatHelper.menuItemCopy, StatHelper.libraryBookScreen)
+        itemClickedStat(StatHelper.libraryBookScreenMenuItemCopyClicked)
     }
     fun itemDeleteClickedStat(){
-        itemClickedStat(StatHelper.menuItemDelete, StatHelper.libraryBookScreen)
+        itemClickedStat(StatHelper.libraryBookScreenMenuItemDeleteClicked)
     }
     fun itemShareClickedStat(){
-        itemClickedStat(StatHelper.menuItemShare, StatHelper.libraryBookScreen)
+        itemClickedStat(StatHelper.libraryBookScreenMenuItemShareClicked)
     }
 }
