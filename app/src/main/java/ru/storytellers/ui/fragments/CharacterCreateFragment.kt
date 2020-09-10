@@ -112,13 +112,11 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
     private fun backToLevelScreen(){
         model.onBackClicked(this.javaClass.simpleName)
-
         router.backTo(Screens.LevelScreen())
     }
 
     override fun backClicked(): Boolean {
         model.onBackClicked(this.javaClass.simpleName)
-
         router.exit()
         return true
     }
