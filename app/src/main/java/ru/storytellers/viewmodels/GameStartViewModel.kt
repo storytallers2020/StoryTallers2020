@@ -5,6 +5,7 @@ import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.engine.Game
 import ru.storytellers.model.DataModel
 import ru.storytellers.utils.StatHelper
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.utils.getCurrentDateTime
 import ru.storytellers.utils.getString
 import ru.storytellers.utils.toProperties
@@ -25,26 +26,14 @@ class GameStartViewModel(private val game: Game) : BaseViewModel<DataModel>() {
         storage.level?.let { level ->
             game.newGame(storage.getPlayers(), level)
         }
-        gameStartStatistic()
-    }
 
-    private fun gameStartStatistic() {
-        val level = when (storage.level?.id) {
-            0 -> "Easy"
-            1 -> "Medium"
-            2 -> "Hard"
-            else -> "level not selected"
-        }
-        val prop = listOf(
-            StatHelper.numberOfPlayersGame to storage.getPlayers().count().toString(),
-            StatHelper.selectedLevelGame to level,
-            StatHelper.createGameTime to getCurrentDateTime().getString()
-        )
-        app.stat.riseEvent(StatHelper.onGameStartScreen, prop.toProperties())
     }
 
     fun buttonStartClickedStatistic() {
-        app.stat.riseEvent(StatHelper.buttonStartClicked)
+        val prop = listOf(
+            StatHelper.timeEvent to getCurrentDateTime().getString()
+        )
+        riseEvent(StatHelper.gameStartScreenBtnStartClicked, prop)
     }
 
 }
