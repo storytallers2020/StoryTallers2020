@@ -2,88 +2,76 @@ package ru.storytellers.utils
 
 import ru.storytellers.application.StoryTallerApp
 
+
 class StatHelper {
     companion object {
+        //Share
+        const val timeEvent= "TimeEvent"
+        const val buttonBackClicked = "BackClicked"
+        //StartScreen
+        const val startScreenBtnToRulesGame = "StartScreenBtnToRulesScreen"
+        const val userId = "userId"
+        const val startScreenBtnToCreateTale = "StartScreenBtnToCreateTale"
+        const val startScreenBtnToAboutScreen = "StartScreenBtnToAboutScreen"
+        const val startScreenBtnToLibraryScreen = "StartScreenBtnToLibraryScreen"
         //LevelScreen
-        const val levelScreenBackClicked = "levelScreenBackClicked"
-        const val levelScreenNextClicked = "levelScreenNextClicked"
+        const val levelScreenBtnToCharacterScreen = "LevelScreenBtnToCharacterScreen"
         const val levelName = "levelName"
-        const val time = "selectLevelTime"
         //CharacterCreateScreen
         const val playerName = "playerName"
         const val characterName = "characterName"
+        const val characterScreenBtnPlayerSaved = "CharacterScreenBtnPlayerSaved"
         //TeamCharacterScreen
-        const val playerId = "playerId"
-        const val playerCount = "playerCount"
-        const val addPlayerClicked = "addPlayerClicked"
-        const val onPlayerAdded = "onPlayerAdded"
-        const val characterScreenNextClicked = "characterScreenNextClicked"
-
-        //StartScreen
-        const val onRulesGame = "onRulesGame"
-        const val userId = "userId"
-        const val timeOnRulesGame = "toRulesGameTime"
-        const val timeStartCreateTale = "timeStartCreateTale"
-        const val startCreateTale = "StartCreateTale"
-        const val onAboutScreen = "onAboutScreen"
-        const val onLibraryScreen = "toLibraryScreen"
-        const val timeToLibraryScreen = "timeToLibraryScreen"
+        const val playerId = "PlayerId"
+        const val playerCount = "PlayerCount"
+        const val teamScreenAddPlayerClicked = "TeamScreenAddPlayerClicked"
+        const val teamScreenBtnToLocationScreen = "TeamScreenBtnToLocationScreen"
         //LocationScreen
-        const val onLocationChoice = "onLocationChoice"
+        const val locationScreenLocationSelected = "LocationScreenLocationSelected"
         const val locationName = "locationName"
-        const val timeLocationChoice = "timeLocationChoice"
         const val locationId = "locationId"
+        //GameStartScreen
+        const val gameStartScreenBtnStartClicked = "GameStartScreenBtnStartClicked"
         //GameScreen
-        const val onGameScreen = "GameScreen"
         const val gamePlayerId = "GamePlayerId"
         const val gamePlayerName = "GamePlayerName"
-        const val createSentenceTime = "CreateSentenceTime"
-        const val buttonSendClicked = "ButtonSendClicked"
+        const val gameScreenBtnSendClicked = "GameScreenBtnSendClicked"
         const val turn = "Turn"
+        //GameEndScreen
+        const val gameEndScreenBtnCopyClicked = "GameEndScreenBtnCopyClicked"
+        const val gameEndScreenBtnContinueGameClicked = "GameEndScreenBtnContinueGameClicked"
+        const val gameEndScreenBtnSelectCoverClicked = "GameEndScreenBtnSelectCoverClicked"
         //SelectCoverScreen
-        const val onSelectCoverScreen = "SelectCoverScreen"
-        const val coverSelected="CoverSelected"
-        const val selectCoverTime = "SelectCoverTime"
+        const val selectCoverScreenCoverSelected = "SelectCoverScreenCoverSelected"
         const val coverName = "CoverName"
         const val coverId = "CoverId"
-        //GameStartScreen
-        const val onGameStartScreen = "GameStartScreen"
-        const val buttonStartClicked = "ButtonStartGameClicked"
-        const val numberOfPlayersGame = "NumberOfPlayersGame"
-        const val selectedLevelGame = "SelectedLevelGame"
-        const val createGameTime = "CreateGameTime"
         //TitleAndSaveStoryScreen
-        const val onTitleAndSaveStoryScreen = "TitleAndSaveStoryScreen"
+        const val titleAndSaveScreenBtnSaveClicked = "TitleAndSaveScreenBtnSaveClicked"
         const val storyId = "StoryId"
         const val storyName = "StoryName"
-        const val saveStoryTime = "SaveStoryTime"
         const val saveStoryFailed = "SaveStoryFailed"
-        const val buttonSaveStoryClicked = "ButtonSaveStoryClicked"
-        //GameEndScreen
-        const val onGameEndScreen = "GameEndScreen"
-        const val buttonCopyClicked = "ButtonCopyClicked"
-        const val buttonContinueClicked = "ButtonContinueClicked"
-        const val buttonSelectCoverClicked = "ButtonSelectCoverClicked"
-        const val buttonClickedTime = "ButtonClickedTime"
         //LibraryScreen
-        const val libraryScreen = "LibraryScreen"
-        const val menuItemCopy = "MenuItemCopy"
-        const val menuItemDelete = "MenuItemCopy"
-        const val menuItemShare = "MenuItemCopy"
-        const val storySelected = "StorySelected"
-        const val toStartScreenClicked = "ToStartScreenClicked"
-        const val actionTime = "ActionTime"
+        const val libraryScreenStorySelected = "LibraryScreenStorySelected"
+        const val libraryScreenMenuItemCopyClicked = "LibraryScreenMenuItemCopyClicked"
+        const val libraryScreenMenuItemDeleteClicked = "LibraryScreenMenuItemDeleteClicked"
+        const val libraryScreenMenuItemShareClicked = "LibraryScreenMenuItemShareClicked"
+        const val libraryScreenBtnStartScreenClicked = "LibraryScreenBtnStartScreenClicked"
         //LibraryBook
-        const val libraryBookScreen = "LibraryBookScreen"
+        const val libraryBookScreenMenuItemCopyClicked = "LibraryBookScreenMenuItemCopyClicked"
+        const val libraryBookScreenMenuItemDeleteClicked = "LibraryBookScreenMenuItemDeleteClicked"
+        const val libraryBookScreenMenuItemShareClicked = "LibraryBookScreenMenuItemShareClicked"
 
-         fun itemClickedStat(itemName:String, screenName:String){
-            val itemClicked="ItemClicked"
+         fun itemClickedStat(itemName:String){
             val prop = listOf(
-                itemName to itemClicked,
-                actionTime to getCurrentDateTime().getString()
+                timeEvent to getCurrentDateTime().getString()
             )
-            StoryTallerApp.instance.stat.riseEvent(screenName, prop.toProperties())
+            StoryTallerApp.instance.stat.riseEvent(itemName, prop.toProperties())
         }
-
+        fun riseEvent(eventName: String,prop: List<Pair<String,String>>) {
+            StoryTallerApp.instance.stat.riseEvent(eventName, prop.toProperties())
+        }
+        fun riseEvent(eventName: String) {
+            StoryTallerApp.instance.stat.riseEvent(eventName)
+        }
     }
 }
