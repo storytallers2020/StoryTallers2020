@@ -119,6 +119,7 @@ class GameFragment : BaseFragment<DataModel>() {
     }
 
     private fun onButtonEndClicked() {
+        model.onButtonEndGameClickedStatistic()
         router.navigateTo(Screens.GameEndScreen())
     }
 
