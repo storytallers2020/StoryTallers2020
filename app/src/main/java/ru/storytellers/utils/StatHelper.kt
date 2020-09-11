@@ -7,10 +7,10 @@ class StatHelper {
     companion object {
         //Share
         const val timeEvent= "TimeEvent"
+        const val userId = "UserId"
         const val buttonBackClicked = "BackClicked"
         //StartScreen
         const val startScreenBtnToRulesGame = "StartScreen|BtnToRulesScreen"
-        const val userId = "userId"
         const val startScreenBtnToCreateTale = "StartScreen|BtnToCreateTale"
         const val startScreenBtnToAboutScreen = "StartScreen|BtnToAboutScreen"
         const val startScreenBtnToLibraryScreen = "StartScreen|BtnToLibraryScreen"
