@@ -82,6 +82,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_xs"
+        app:counterEnabled="false"
+        app:counterMaxLength="@integer/max_length_sentence"
+        app:counterTextAppearance="@style/WhiteCounter"
         app:boxCornerRadiusBottomEnd="@dimen/box_corner_radius"
         app:boxCornerRadiusBottomStart="@dimen/box_corner_radius"
         app:boxCornerRadiusTopEnd="@dimen/box_corner_radius"
@@ -100,7 +103,7 @@
             android:inputType="textCapSentences|textMultiLine|textAutoComplete|textAutoCorrect"
             android:padding="@dimen/margin_small"
             android:textSize="@dimen/text_standard"
-            android:maxLength="150"
+            android:maxLength="@integer/max_length_sentence"
             android:lineSpacingExtra="@dimen/line_spacing_extra" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,7 +112,8 @@
         android:layout_width="@dimen/icon_medium"
         android:layout_height="@dimen/icon_medium"
         android:visibility="gone"
-        android:src="@drawable/ic_send_bird"
+        android:src="@drawable/ic_send"
+        android:background="@color/no_color"
         android:contentDescription="@string/btn_send"
         app:layout_constraintBottom_toBottomOf="@id/et_step"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +131,7 @@
         android:textSize="@dimen/text_small"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

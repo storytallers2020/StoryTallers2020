@@ -7,6 +7,7 @@ import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.setBackgroundImage
 import ru.storytellers.viewmodels.GameStartViewModel
 
 class GameStartFragment : BaseFragment<DataModel>() {
@@ -19,6 +20,7 @@ class GameStartFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         iniViewModel()
+        handlerUriBackgroundImage()
         back_button_location.setOnClickListener { backToLocationScreen() }
     }
 
@@ -32,7 +34,14 @@ class GameStartFragment : BaseFragment<DataModel>() {
 
     override fun onStart() {
         super.onStart()
+        model.getUriBackgroundImage()
         model.requestGameLevelFromStorage()
+    }
+
+    private fun handlerUriBackgroundImage() {
+        model.subscribeOnBackgroundImageChanged().observe(viewLifecycleOwner, Observer {
+            setBackgroundImage(it, root_layout)
+        })
     }
 
     override fun onResume() {

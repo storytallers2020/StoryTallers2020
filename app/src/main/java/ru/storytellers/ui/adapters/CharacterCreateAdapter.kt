@@ -48,7 +48,6 @@ class CharacterCreateAdapter(val itemClickListener: (character: Character, posit
                 if (layoutPosition != RecyclerView.NO_POSITION) {
                     val avatar = if (isSelected) character.avatarUrlSelected else character.avatarUrl
                     resourceToUri(avatar)?.let { loadImage(it, image_character_iv) }
-                    name_character_tv.text = character.name
                     setOnClickListener { itemClickListener(character, layoutPosition) }
                 }
             }

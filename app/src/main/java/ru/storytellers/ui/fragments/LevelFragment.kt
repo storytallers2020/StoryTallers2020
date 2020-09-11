@@ -13,7 +13,6 @@ import ru.storytellers.utils.ResourceHelper
 import ru.storytellers.viewmodels.LevelViewModel
 
 class LevelFragment : BaseFragment<DataModel>() {
-    private val MAX_VALUE_RANGE_SEEK_BAR = 2
 
     override val model: LevelViewModel by inject()
     override val layoutRes = R.layout.fragment_level
@@ -39,10 +38,10 @@ class LevelFragment : BaseFragment<DataModel>() {
     private fun setClickListeners() {
         setBackButtonClickListener()
         btn_next.setOnClickListener { toCreateCharacterScreen() }
-
+        btn_help.setOnClickListener { toRulesScreen() }
         setEasyButtonClickListener()
-        setMediumClickListenerMediumBtn()
-        setClickListenerHardBtn()
+        setMediumButtonClickListener()
+        setHardButtonClickListener()
     }
 
     private fun setBackButtonClickListener() {
@@ -54,13 +53,15 @@ class LevelFragment : BaseFragment<DataModel>() {
 
     private fun toCreateCharacterScreen() {
         model.onNextScreen()
-
         if (model.isPlayerListNotEmpty()) router.navigateTo(Screens.TeamCharacterScreen())
         else router.navigateTo(Screens.CharacterCreateScreen())
     }
 
+    private fun toRulesScreen(){
+        router.navigateTo(Screens.RulesGameScreen())
+    }
+
     private fun initSeekBar() {
-        seekBar_lvl.max = MAX_VALUE_RANGE_SEEK_BAR
         seekBar_lvl.setOnSeekBarChangeListener(seekBarListener)
     }
 
@@ -70,13 +71,13 @@ class LevelFragment : BaseFragment<DataModel>() {
         }
     }
 
-    private fun setMediumClickListenerMediumBtn() {
+    private fun setMediumButtonClickListener() {
         medium_button.setOnClickListener {
             model.setLevelGame(resourceHelper.LEVEL_GAME_MEDIUM)
         }
     }
 
-    private fun setClickListenerHardBtn() {
+    private fun setHardButtonClickListener() {
         hard_button.setOnClickListener {
             model.setLevelGame(resourceHelper.LEVEL_GAME_HARD)
         }
@@ -97,19 +98,20 @@ class LevelFragment : BaseFragment<DataModel>() {
     private fun updateLevelBar(levelId: Int) {
         seekBar_lvl.progress = levelId
         description_level.text = resourceHelper.getLevelDescription(levelId)
-        easy_button.setTextColor(resourceHelper.getColorWhite())
-        medium_button.setTextColor(resourceHelper.getColorWhite())
-        hard_button.setTextColor(resourceHelper.getColorWhite())
+
+        easy_button.setColorFilter(resourceHelper.getColorWhite())
+        medium_button.setColorFilter(resourceHelper.getColorWhite())
+        hard_button.setColorFilter(resourceHelper.getColorWhite())
 
         when (levelId) {
             resourceHelper.LEVEL_GAME_HARD -> {
-                hard_button.setTextColor(resourceHelper.getColorYellow())
+                hard_button.setColorFilter(resourceHelper.getColorYellow())
             }
             resourceHelper.LEVEL_GAME_MEDIUM -> {
-                medium_button.setTextColor(resourceHelper.getColorYellow())
+                medium_button.setColorFilter(resourceHelper.getColorYellow())
             }
             else -> {
-                easy_button.setTextColor(resourceHelper.getColorYellow())
+                easy_button.setColorFilter(resourceHelper.getColorYellow())
             }
         }
     }

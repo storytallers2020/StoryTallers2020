@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_element_game_cl"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background_default"
     android:paddingHorizontal="@dimen/padding_layout_standard"
-    android:paddingVertical="@dimen/padding_layout_bottom">
+    android:paddingVertical="@dimen/padding_layout_bottom"
+    tools:background="@drawable/location_beach">
 
     <TextView
         android:id="@+id/reminder_intro"
@@ -18,62 +17,55 @@
         android:text="@string/intro_text"
         android:textColor="@color/white"
         android:textSize="@dimen/text_standard"
-        android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/sentence_input_layout" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/sentence_input_layout"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/game_field"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="visible"
-        android:layout_marginBottom="@dimen/margin_standard"
-        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:layout_marginBottom="@dimen/margin_small"
         app:layout_constraintBottom_toTopOf="@id/sentence_input_layout"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/background_transparent"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/intro_text"
-            app:layout_constraintBottom_toBottomOf="@id/scroll_view"
-            app:layout_constraintTop_toTopOf="@id/scroll_view" />
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:fillViewport="true"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <TextView
-                android:id="@+id/story_body"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/margin_small"
-                android:paddingVertical="@dimen/margin_xxs"
-                android:textSize="16sp"
-                android:gravity="bottom"
-                android:lineSpacingExtra="@dimen/line_spacing_extra"
-                android:textColor="@color/white"
-                tools:text="@string/tale_sample"/>
+                android:layout_height="@dimen/box_corner_radius"
+                android:background="@drawable/background_top"
+                android:layout_marginTop="@dimen/box_corner_radius"
+                android:adjustViewBounds="true"
+                tools:ignore="ContentDescription" />
 
-        </androidx.core.widget.NestedScrollView>
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/story_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/margin_small"
+                    android:paddingVertical="@dimen/margin_xxs"
+                    android:textSize="@dimen/text_standard"
+                    android:lineSpacingExtra="@dimen/line_spacing_extra"
+                    android:textColor="@color/white"
+                    android:background="@color/transparent_30"
+                    tools:text="@string/tale_sample" />
+            </androidx.core.widget.NestedScrollView>
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_shadows"
-            android:contentDescription="@string/title_choosing_cover"
-            app:layout_constraintBottom_toBottomOf="@id/scroll_view"
-            app:layout_constraintEnd_toEndOf="@id/scroll_view"
-            app:layout_constraintStart_toStartOf="@id/scroll_view"
-            app:layout_constraintTop_toTopOf="@id/scroll_view" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/box_corner_radius"
+                android:background="@drawable/background_bottom"
+                android:adjustViewBounds="true"
+                tools:ignore="ContentDescription" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     <include
         android:id="@+id/sentence_input_layout"

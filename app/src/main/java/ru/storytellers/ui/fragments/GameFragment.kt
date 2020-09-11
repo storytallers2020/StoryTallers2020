@@ -94,7 +94,7 @@ class GameFragment : BaseFragment<DataModel>() {
 
     private fun handlerUriBackgroundImage() {
         model.subscribeOnBackgroundImageChanged().observe(viewLifecycleOwner, Observer {
-            setBackgroundImage(it, root_element_game_cl)
+            setBackgroundImage(it, root_layout)
         })
     }
 
@@ -114,7 +114,11 @@ class GameFragment : BaseFragment<DataModel>() {
                 text = if (text.isBlank()) mandatoryWord
                 else "$text $mandatoryWord"
                 sentence_line.setText(text)
-                sentence_line.setSelection(text.length)
+                try {
+                    sentence_line.setSelection(text.length)
+                } catch (e: Exception){
+                    sentence_line.setSelection(resources.getInteger(R.integer.max_length_sentence))
+                }
             }
     }
 

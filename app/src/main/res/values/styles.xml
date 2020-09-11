@@ -37,11 +37,18 @@
 
     <style name="YellowButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="textAllCaps">false</item>
+        <item name="android:textStyle">italic</item>
         <item name="android:textSize">@dimen/text_button</item>
         <item name="android:textColor">@color/blueDark</item>
         <item name="cornerRadius">@dimen/button_corner_radius</item>
         <item name="android:padding">@dimen/padding_small</item>
         <item name="android:backgroundTint">@color/color_states_button</item>
+    </style>
+
+    <style name="TextButton">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/yellow</item>
     </style>
 
     <style name="WhiteCounter" parent="TextAppearance.Design.Counter">
@@ -58,7 +65,7 @@
     </style>
 
     <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
-        <item name="android:popupBackground">@drawable/popup_background</item>
+        <item name="android:popupBackground">@drawable/dialog_background</item>
     </style>
 
     <style name="myPopupMenuTextAppearanceLarge" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Large">

@@ -16,7 +16,7 @@ import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.LibraryViewModel
 
-private const val FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
+private const val FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092397"
 
 class LibraryFragment : BaseFragment<DataModel>() {
 
@@ -160,7 +160,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
 
     private fun createAndShowAlertDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this).show(fragMan, FRAGMENT_DIALOG_TAG)
+            AlertDialogFragment.newInstance(this, R.string.dialog_story).show(fragMan, FRAGMENT_DIALOG_TAG)
         }
     }
 

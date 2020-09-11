@@ -31,6 +31,7 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
                 btn_next.isEnabled = true
             } else {
                 context?.let { toastShowLong(it, it.getString(R.string.enter_title)) }
+                btn_next.isEnabled = false
             }
         }
     }
@@ -50,8 +51,8 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
     }
 
     override fun iniViewModel() {
-        model.subscribeOnCover().observe(viewLifecycleOwner, Observer {
-            resourceToUri(it.imageUrl)?.let {
+        model.subscribeOnCover().observe(viewLifecycleOwner, Observer { cover ->
+            resourceToUri(cover.imageUrl)?.let {
                 loadImage(it, iv_cover)
             }
         })
@@ -73,8 +74,7 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
             }
         })
     }
-
-    private fun saveStory() {
+    private fun saveStory(){
         model.createStoryTaller()
     }
 

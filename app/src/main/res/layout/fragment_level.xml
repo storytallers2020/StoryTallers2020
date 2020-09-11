@@ -45,7 +45,7 @@
             android:text="@string/title_level"
             android:textSize="@dimen/text_small"
             android:gravity="center"
-            android:drawableBottom="@drawable/slider_cup"
+            android:drawableBottom="@drawable/slider_level"
             android:textColor="@color/yellow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +70,7 @@
             android:alpha="0.5"
             android:gravity="center"
             android:textColor="@color/white"
-            android:drawableBottom="@drawable/slider_queen"
+            android:drawableBottom="@drawable/slider_team"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -94,11 +94,20 @@
             android:textSize="@dimen/text_small"
             android:alpha="0.5"
             android:gravity="center"
-            android:drawableBottom="@drawable/slider_mounts"
+            android:drawableBottom="@drawable/slider_location"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/btn_help"
+        android:layout_width="@dimen/icon_small"
+        android:layout_height="@dimen/icon_small"
+        android:background="@drawable/ic_help"
+        app:layout_constraintBottom_toTopOf="@id/description_level"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/btn_help" />
 
     <TextView
         android:id="@+id/description_level"
@@ -121,48 +130,56 @@
         app:layout_constraintBottom_toTopOf="@id/btn_next">
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/easy_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="start"
-            android:text="@string/btn_easy"
-            android:textColor="@color/yellow"
-            android:textSize="@dimen/text_standard" />
-        <TextView
-            android:id="@+id/medium_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="@string/btn_medium"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_standard" />
-        <TextView
-            android:id="@+id/hard_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="@string/btn_hard"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_standard" />
-    </LinearLayout>
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatSeekBar
+        <ImageButton
+            android:id="@+id/easy_button"
+            android:layout_width="@dimen/max_width"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_level_easy"
+            android:background="@color/no_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/btn_easy" />
+        <ImageButton
+            android:id="@+id/medium_button"
+            android:layout_width="@dimen/max_width"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_level_medium"
+            android:background="@color/no_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/hard_button"
+            app:layout_constraintStart_toEndOf="@id/easy_button"
+            android:contentDescription="@string/btn_medium"
+            tools:tint="@color/yellow" />
+        <ImageButton
+            android:id="@+id/hard_button"
+            android:layout_width="@dimen/max_width"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_level_hard"
+            android:background="@color/no_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/btn_hard" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <SeekBar
         android:id="@+id/seekBar_lvl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:max="2"
+        android:layout_marginHorizontal="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_standard"
-        android:progressBackgroundTint="@color/blue"
-        android:progressTint="@color/blue"
-        android:thumb="@drawable/slider_cup"
-        android:thumbOffset="@dimen/margin_xs" />
+        android:progressBackgroundTint="@color/white"
+        android:progressTint="@color/yellow"
+        android:thumb="@drawable/slider_level"
+        android:thumbOffset="@dimen/margin_xs"
+        tools:progress="1" />
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton

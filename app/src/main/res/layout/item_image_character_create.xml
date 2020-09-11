@@ -8,28 +8,14 @@
     android:layout_gravity="center"
     android:clickable="true"
     android:focusable="true"
-    tools:background="@color/blueDark"
-    tools:ignore="UseCompoundDrawables">
+    tools:background="@color/blueDark">
 
     <ImageView
         android:id="@+id/image_character_iv"
-        android:layout_width="@dimen/icon_medium"
-        android:layout_height="@dimen/icon_medium"
-        android:layout_margin="@dimen/margin_xs"
+        android:layout_width="@dimen/icon_large"
+        android:layout_height="@dimen/icon_large"
         android:layout_gravity="center"
         tools:src="@drawable/ic_bear"
         android:contentDescription="@string/char_icon" />
-
-    <TextView
-        android:id="@+id/name_character_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_chars"
-        android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:maxLines="1"
-        android:maxWidth="@dimen/max_width"
-        tools:text="Медведь Потапыч" />
 
 </LinearLayout>
