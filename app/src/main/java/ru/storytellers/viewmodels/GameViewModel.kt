@@ -61,7 +61,7 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
             storage.getSentences().add(sentence)
             onStartTurn()
             isSentenceCorrectLiveData.value = true
-            onGameStatistic(sentence)
+            onButtonSendClickedStatistic(sentence)
         } else {
             isSentenceCorrectLiveData.value = false
         }
@@ -93,7 +93,7 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
         isEndGamePossible.value = game.turn > storage.getPlayers().size
     }
 
-    private fun onGameStatistic(sentence: SentenceOfTale) {
+    private fun onButtonSendClickedStatistic(sentence: SentenceOfTale) {
         val prop = listOf(
             StatHelper.gamePlayerId to sentence.player?.id.toString(),
             StatHelper.gamePlayerName to sentence.player?.name,
@@ -101,6 +101,13 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
             StatHelper.turn to sentence.step.toString()
         )
         riseEvent(StatHelper.gameScreenBtnSendClicked, prop as List<Pair<String, String>>)
+    }
+     fun onButtonEndGameClickedStatistic() {
+        val prop = listOf(
+            StatHelper.totalNumberSentencesInStory to storage.getSentences().count().toString(),
+            StatHelper.timeEvent to getCurrentDateTime().getString()
+        )
+        riseEvent(StatHelper.gameScreenBtnEndGameClicked, prop )
     }
 
 }
