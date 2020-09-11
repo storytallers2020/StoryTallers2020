@@ -20,7 +20,6 @@ class StoryTallerApp: Application() {
     }
 
     val levels: Levels by inject()
-    val game: Game by inject()
     val  gameStorage: GameStorage by inject()
     val stat: AmplitudeWrapper by inject()
 

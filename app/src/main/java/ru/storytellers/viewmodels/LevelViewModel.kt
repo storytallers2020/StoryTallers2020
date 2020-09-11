@@ -3,9 +3,13 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryTallerApp
-import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import ru.storytellers.model.DataModel
-import ru.storytellers.utils.*
+import ru.storytellers.utils.StatHelper
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
+import ru.storytellers.utils.getCurrentDateTime
+import ru.storytellers.utils.getString
+import ru.storytellers.utils.toProperties
+import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 
 class LevelViewModel : BaseViewModel<DataModel>() {
@@ -22,16 +26,24 @@ class LevelViewModel : BaseViewModel<DataModel>() {
         levelLiveData.value = levelId
     }
 
-    fun getLevelGame() = StoryTallerApp.instance.gameStorage.level?.id ?: 0
+    fun getLevelGame() = storage.level?.id ?: 0
 
     fun isPlayerListNotEmpty() = StoryTallerApp.instance.gameStorage.getPlayers().isNotEmpty()
 
     fun onNextScreen() {
         val prop = listOf(
-            Pair(StatHelper.levelName, storage.level?.id.toString()),
-            Pair(StatHelper.time, getCurrentDateTime().getString())
+            StatHelper.levelName to getNameLevel(storage.level?.id),
+            StatHelper.timeEvent to getCurrentDateTime().getString()
         )
-        app.stat.riseEvent(StatHelper.levelScreenNextClicked, prop.toProperties())
+        riseEvent(StatHelper.levelScreenBtnToCharacterScreen, prop)
     }
+
+    private fun getNameLevel(levelId: Int?) = when (levelId) {
+        0 -> "Easy"
+        1 -> "Medium"
+        2 -> "Hard"
+        else -> "no name"
+    }
+
 
 }

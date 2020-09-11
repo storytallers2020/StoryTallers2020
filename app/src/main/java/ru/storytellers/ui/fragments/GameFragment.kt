@@ -22,7 +22,6 @@ class GameFragment : BaseFragment<DataModel>() {
     private val assistantFragment: GameFragmentAssistant by lazy { GameFragmentAssistant(this@GameFragment) }
     override val model: GameViewModel by inject()
     override val layoutRes = R.layout.fragment_game
-
     var inputMethodManager: Any? = null
 
     override fun backClicked(): Boolean = true
@@ -124,6 +123,7 @@ class GameFragment : BaseFragment<DataModel>() {
     }
 
     private fun onButtonEndClicked() {
+        model.onButtonEndGameClickedStatistic()
         router.navigateTo(Screens.GameEndScreen())
     }
 

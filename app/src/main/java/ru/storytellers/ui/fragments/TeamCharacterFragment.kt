@@ -36,7 +36,6 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
         createAndShowAlertDialog()
     }
 
-
     override fun init() {
         btn_next.setOnClickListener { navigateToLocationScreen() }
         back_button_character.setOnClickListener { navigateToLevelScreen() }
