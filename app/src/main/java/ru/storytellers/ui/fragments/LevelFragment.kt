@@ -38,10 +38,10 @@ class LevelFragment : BaseFragment<DataModel>() {
     private fun setClickListeners() {
         setBackButtonClickListener()
         btn_next.setOnClickListener { toCreateCharacterScreen() }
-
+        btn_help.setOnClickListener { toRulesScreen() }
         setEasyButtonClickListener()
-        setMediumClickListenerMediumBtn()
-        setClickListenerHardBtn()
+        setMediumButtonClickListener()
+        setHardButtonClickListener()
     }
 
     private fun setBackButtonClickListener() {
@@ -53,9 +53,12 @@ class LevelFragment : BaseFragment<DataModel>() {
 
     private fun toCreateCharacterScreen() {
         model.onNextScreen()
-
         if (model.isPlayerListNotEmpty()) router.navigateTo(Screens.TeamCharacterScreen())
         else router.navigateTo(Screens.CharacterCreateScreen())
+    }
+
+    private fun toRulesScreen(){
+        router.navigateTo(Screens.RulesGameScreen())
     }
 
     private fun initSeekBar() {
@@ -68,13 +71,13 @@ class LevelFragment : BaseFragment<DataModel>() {
         }
     }
 
-    private fun setMediumClickListenerMediumBtn() {
+    private fun setMediumButtonClickListener() {
         medium_button.setOnClickListener {
             model.setLevelGame(resourceHelper.LEVEL_GAME_MEDIUM)
         }
     }
 
-    private fun setClickListenerHardBtn() {
+    private fun setHardButtonClickListener() {
         hard_button.setOnClickListener {
             model.setLevelGame(resourceHelper.LEVEL_GAME_HARD)
         }
@@ -115,7 +118,6 @@ class LevelFragment : BaseFragment<DataModel>() {
 
     override fun backClicked(): Boolean {
         model.onBackClicked(this.javaClass.simpleName)
-
         router.exit()
         return true
     }

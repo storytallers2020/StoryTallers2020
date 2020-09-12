@@ -7,6 +7,7 @@ import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.setBackgroundImage
 import ru.storytellers.viewmodels.GameStartViewModel
 
 class GameStartFragment : BaseFragment<DataModel>() {
@@ -19,19 +20,28 @@ class GameStartFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         iniViewModel()
+        handlerUriBackgroundImage()
         back_button_location.setOnClickListener { backToLocationScreen() }
     }
 
     override fun iniViewModel() {
         btn_next.setOnClickListener {
             model.createNewGame()
+            model.buttonStartClickedStatistic()
             navigateToGameScreen()
         }
     }
 
     override fun onStart() {
         super.onStart()
+        model.getUriBackgroundImage()
         model.requestGameLevelFromStorage()
+    }
+
+    private fun handlerUriBackgroundImage() {
+        model.subscribeOnBackgroundImageChanged().observe(viewLifecycleOwner, Observer {
+            setBackgroundImage(it, root_layout)
+        })
     }
 
     override fun onResume() {
@@ -64,10 +74,12 @@ class GameStartFragment : BaseFragment<DataModel>() {
         router.navigateTo(Screens.GameScreen())
     }
     private fun backToLocationScreen() {
+        model.onBackClicked(this.javaClass.simpleName)
         router.backTo(Screens.LocationScreen())
     }
 
     override fun backClicked(): Boolean {
+        model.onBackClicked(this.javaClass.simpleName)
         router.exit()
         return true
     }

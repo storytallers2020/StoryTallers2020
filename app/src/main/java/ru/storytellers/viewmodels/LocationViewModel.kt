@@ -7,6 +7,10 @@ import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.repository.ILocationRepository
+import ru.storytellers.utils.StatHelper
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
+import ru.storytellers.utils.getCurrentDateTime
+import ru.storytellers.utils.getString
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class LocationViewModel(private val locationRepository: ILocationRepository) :
@@ -32,8 +36,17 @@ class LocationViewModel(private val locationRepository: ILocationRepository) :
         return onErrorLiveData
     }
 
-    fun setLocationGame(location: Location){
+    fun setLocationGame(location: Location) {
         StoryTallerApp.instance.gameStorage.setLocationGame(location)
+    }
+
+    fun onLocationChoiceStatistic(location: Location) {
+        val prop = listOf(
+            StatHelper.timeEvent to getCurrentDateTime().getString(),
+            StatHelper.locationName to location.name,
+            StatHelper.locationId to location.id.toString()
+        )
+        riseEvent(StatHelper.locationScreenLocationSelected, prop)
     }
 
 }

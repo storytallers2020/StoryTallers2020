@@ -22,7 +22,6 @@ class GameFragment : BaseFragment<DataModel>() {
     private val assistantFragment: GameFragmentAssistant by lazy { GameFragmentAssistant(this@GameFragment) }
     override val model: GameViewModel by inject()
     override val layoutRes = R.layout.fragment_game
-
     var inputMethodManager: Any? = null
 
     override fun backClicked(): Boolean = true
@@ -41,7 +40,6 @@ class GameFragment : BaseFragment<DataModel>() {
 
     override fun onStart() {
         super.onStart()
-
         model.getUriBackgroundImage()
         model.onStartTurn()
     }
@@ -57,7 +55,6 @@ class GameFragment : BaseFragment<DataModel>() {
 
     private fun onButtonSendClicked() {
         model.onButtonSendClicked(sentence_line.text.toString())
-
         assistantFragment.hideKeyboard()
         scroll_view.smoothScrollTo(0, story_body.bottom)
         sentence_line.setText("")
@@ -97,7 +94,7 @@ class GameFragment : BaseFragment<DataModel>() {
 
     private fun handlerUriBackgroundImage() {
         model.subscribeOnBackgroundImageChanged().observe(viewLifecycleOwner, Observer {
-            setBackgroundImage(it, root_element_game_cl)
+            setBackgroundImage(it, root_layout)
         })
     }
 
@@ -117,11 +114,16 @@ class GameFragment : BaseFragment<DataModel>() {
                 text = if (text.isBlank()) mandatoryWord
                 else "$text $mandatoryWord"
                 sentence_line.setText(text)
-                sentence_line.setSelection(text.length) // ошибка     java.lang.IndexOutOfBoundsException: setSpan (159 ... 159) ends beyond length 150
+                try {
+                    sentence_line.setSelection(text.length)
+                } catch (e: Exception){
+                    sentence_line.setSelection(resources.getInteger(R.integer.max_length_sentence))
+                }
             }
     }
 
     private fun onButtonEndClicked() {
+        model.onButtonEndGameClickedStatistic()
         router.navigateTo(Screens.GameEndScreen())
     }
 
