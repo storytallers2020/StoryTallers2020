@@ -68,8 +68,8 @@ class SentenceOfTaleDaoTest {
 
     @Test
     fun getSentenceById() {
-        sentenceDao.insert(testSentence)
         storyDao.insert(testStory)
+        sentenceDao.insert(testSentence)
         val sentenceFromDatabase = sentenceDao.getSentenceById(testSentence.id)
         Assert.assertEquals(testSentence, sentenceFromDatabase)
     }
