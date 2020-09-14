@@ -89,14 +89,14 @@
     <string name="btn_delete">Delete</string>
     <string name="msg_delete">Tale deleted</string>
     <string name="msg_saved_successfully">Saved successfully</string>
+    <string name="title_sample" translatable="false">Сказка про Ивана-дурака и Серого Волка за границей вашего воображения, но в рамках дозволенного законом</string>
     <string name="tale_sample" translatable="false">В некотором царстве, в некотором государстве жил-был царь, у царя было три сына. Вот дети и говорят ему:\n
         - Милостивый батюшка! Благослови нас, мы на охоту поедем.\n
         Отец благословил, и они поехали в разные стороны. Младший сын ездил, ездил и заплутался; выезжает на поляну, на поляне лежит палая лошадь,
         около этой падали собралось много всяких зверей, птиц и гадов. Поднялся сокол, прилетел к царевичу, сел ему на плечо и говорит:\n
         - Иван-царевич, раздели нам эту лошадь; лежит она здесь тридцать три года, а мы все спорим, а как поделить - не придумаем.\n
         Царевич слез с своего доброго коня и разделил падаль: зверям - кости, птицам - мясо, кожа - гадам, а голова - муравьям.\n
-        - Спасибо, Иван-царевич! - сказал сокол, - За эту услугу можешь ты обращаться ясным соколом и муравьем всякий раз, как захочешь.
-    </string>
+        - Спасибо, Иван-царевич! - сказал сокол, - За эту услугу можешь ты обращаться ясным соколом и муравьем всякий раз, как захочешь.</string>
     <string name="btn_menu">menu</string>
 
     // Dialog fragment
@@ -110,7 +110,9 @@
     <integer name="max_length_sentence">150</integer>
     <integer name="max_length_title">70</integer>
     <integer name="max_length_name">15</integer>
+    <integer name="max_lines_title">5</integer>
 
     // New strings... move them to the corresponding group above
+
 
 </resources>
