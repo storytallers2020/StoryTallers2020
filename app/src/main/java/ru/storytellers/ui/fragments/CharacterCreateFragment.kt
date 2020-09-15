@@ -13,6 +13,7 @@ import ru.storytellers.model.entity.Character
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.CharacterCreateAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.stringContainSymbols
 import ru.storytellers.viewmodels.CharacterCreateViewModel
 import timber.log.Timber
 
@@ -53,7 +54,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         }
 
         override fun afterTextChanged(text: Editable) {
-            if (text.toString().length > 2) {
+            if (text.toString().length > 2 && text.toString().stringContainSymbols()) {
                 isNameEntered = true
                 statusCheck()
                 model.setNamePlayer(text.toString())
