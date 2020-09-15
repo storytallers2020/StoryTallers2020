@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
-    android:paddingBottom="@dimen/padding_layout_bottom"
+    android:paddingBottom="@dimen/padding_small"
     android:layout_gravity="center_horizontal"
     android:background="@drawable/ic_background_default">
 

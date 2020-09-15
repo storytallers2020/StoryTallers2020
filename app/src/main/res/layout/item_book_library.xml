@@ -50,8 +50,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
-        android:layout_marginVertical="@dimen/margin_xs"
+        android:visibility="visible"
+        android:layout_marginVertical="@dimen/margin_xxs"
         android:layout_marginHorizontal="@dimen/margin_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_menu">
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_share"
             android:background="@color/no_color"
-            android:layout_marginVertical="@dimen/margin_xs"
+            android:layout_marginVertical="@dimen/margin_xxs"
             android:contentDescription="@string/btn_share" />
 
         <ImageButton
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_copy"
             android:background="@color/no_color"
-            android:layout_marginVertical="@dimen/margin_xs"
+            android:layout_marginVertical="@dimen/margin_xxs"
             android:contentDescription="@string/btn_copy" />
 
         <ImageButton
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_delete"
             android:background="@color/no_color"
-            android:layout_marginVertical="@dimen/margin_xs"
+            android:layout_marginVertical="@dimen/margin_xxs"
             android:contentDescription="@string/btn_delete" />
 
     </LinearLayout>
