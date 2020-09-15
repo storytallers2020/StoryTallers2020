@@ -93,8 +93,8 @@
     <string name="negative_answer">Отмена</string>
     <string name="agreement_dialog_title">Важно</string>
     <string name="agreement_dialog_text">Нажимая "Принять", я соглашаюсь с
-        <a href="https://ya.ru">Условиями использования</a> и
-        <a href="https://ya.ru">Политикой конфиденциальности</a>.</string>
+        <a href="https://storyheroes.flycricket.io/terms.html">Условиями использования</a> и
+        <a href="https://storyheroes.flycricket.io/privacy.html">Политикой конфиденциальности</a>.</string>
     <string name="accept_answer">Принять</string>
     <string name="decline_answer">Отклонить</string>
     <string name="msg_agreement_declined">Соглашения отклонены</string>
