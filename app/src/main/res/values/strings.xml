@@ -105,6 +105,14 @@
     <string name="dialog_character">Delete the character?</string>
     <string name="positive_answer">OK</string>
     <string name="negative_answer">Cancel</string>
+    <string name="agreement_dialog_title">Important</string>
+    <string name="agreement_dialog_text">By choosing "Accept", I agree with the
+        <a href="https://www.google.com">Terms of Use</a> and
+        <a href="http://ya.ru">Privacy Policy</a>.</string>
+    <string name="accept_answer">Accept</string>
+    <string name="decline_answer">Decline</string>
+    <string name="msg_agreement_declined">GAME OVER</string>
+
 
     // Integers
     <integer name="max_length_sentence">150</integer>
