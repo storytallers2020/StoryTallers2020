@@ -112,6 +112,7 @@
     <string name="accept_answer">Accept</string>
     <string name="decline_answer">Decline</string>
     <string name="msg_agreement_declined">GAME OVER</string>
+    <string name="msg_agreement_accepted">Agreements accepted</string>
 
 
     // Integers

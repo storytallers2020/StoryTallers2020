@@ -11,8 +11,8 @@ import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.AlertDialogFragment
 import ru.storytellers.utils.toastShowLong
+import ru.storytellers.utils.toastShowShort
 import ru.storytellers.viewmodels.StartViewModel
-import timber.log.Timber
 
 private const val FRAGMENT_DIALOG_TAG = "start-5d62-46bf-ab6"
 
@@ -85,10 +85,7 @@ class StartFragment : BaseFragment<DataModel>() {
 
     fun acceptAgreement() {
         sharedPreferences?.edit()?.putBoolean(FRAGMENT_DIALOG_TAG, true)?.apply()
-        Timber.e(
-            "Alert: AgreementAccepted: %s",
-            sharedPreferences?.getBoolean(FRAGMENT_DIALOG_TAG, false)
-        )
+        toastShowShort(context, getString(R.string.msg_agreement_accepted))
     }
 
     private fun navigateToRulesGame() {
