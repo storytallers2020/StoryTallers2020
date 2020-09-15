@@ -11,10 +11,14 @@
         <item name="buttonStyle">@style/YellowButton</item>
         <item name="android:fontFamily">@font/phil_fam</item>
         <item name="fontFamily">@font/phil_fam</item>
+        <item name="android:textAppearance">@style/Standard</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_standard</item>
         <item name="colorControlNormal">@color/yellow</item>
         <item name="android:alertDialogTheme">@style/AlertDialog</item>
         <item name="popupMenuStyle">@style/PopupMenu</item>
-        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge
+        </item>
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.NoActionBar">
@@ -23,21 +27,28 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="OutlinedBox">
-        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense</item>
-        <item name="android:textSize">@dimen/text_small</item>
-        <item name="android:textColorHint">@color/white</item>
-        <item name="colorAccent">@color/white</item>
+    <style name="Standard">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_standard</item>
         <item name="android:textColor">@color/white</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/box_corner_radius</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/box_corner_radius</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/box_corner_radius</item>
-        <item name="boxCornerRadiusTopStart">@dimen/box_corner_radius</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="Header" parent="Standard">
+        <item name="android:textSize">@dimen/text_standard_header</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="Cover" parent="Header">
+        <item name="android:textStyle">italic</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/margin_standard</item>
+        <item name="android:layout_marginBottom">@dimen/margin_small</item>
     </style>
 
     <style name="YellowButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="textAllCaps">false</item>
-        <item name="android:textStyle">italic</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:textSize">@dimen/text_button</item>
         <item name="android:textColor">@color/blueDark</item>
         <item name="cornerRadius">@dimen/button_corner_radius</item>
@@ -49,6 +60,20 @@
         <item name="textAllCaps">false</item>
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">@color/yellow</item>
+    </style>
+
+    <style name="OutlinedBox">
+        <item name="textInputStyle">
+            @style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense
+        </item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusTopStart">@dimen/box_corner_radius</item>
     </style>
 
     <style name="WhiteCounter" parent="TextAppearance.Design.Counter">
@@ -94,19 +119,6 @@
         <item name="android:textColor">#B3F9BE40</item>
     </style>
 
-    <style name="Header" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">@dimen/text_standard_header</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
 
-    <style name="SubHeader" parent="Header">
-        <item name="android:textStyle">italic</item>
-        <item name="android:textSize">@dimen/text_large</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:layout_marginTop">@dimen/margin_standard</item>
-        <item name="android:layout_marginBottom">@dimen/margin_small</item>
-    </style>
 
 </resources>

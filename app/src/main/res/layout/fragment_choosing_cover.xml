@@ -31,7 +31,8 @@
 
     <TextView
         android:id="@+id/subHeader"
-        style="@style/SubHeader"
+        style="@style/Standard"
+        android:layout_marginVertical="@dimen/margin_standard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/choosing_cover_choose"

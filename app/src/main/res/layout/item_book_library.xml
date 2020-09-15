@@ -20,10 +20,9 @@
 
     <TextView
         android:id="@+id/book_name"
+        style="@style/Standard"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:textSize="@dimen/text_standard"
-        android:textColor="@color/white"
         android:gravity="center"
         android:textAlignment="center"
         android:layout_margin="@dimen/margin_large"
