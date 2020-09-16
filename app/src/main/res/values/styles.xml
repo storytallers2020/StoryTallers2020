@@ -107,6 +107,7 @@
         <item name="android:buttonBarPositiveButtonStyle">@style/DialogButton</item>
         <item name="android:buttonBarNegativeButtonStyle">@style/DialogButtonPassive</item>
         <item name="android:buttonBarNeutralButtonStyle">@style/DialogButtonPassive</item>
+        <item name="android:textColorLink">@color/colorAccent</item>
     </style>
 
     <style name="DialogButton" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog">

@@ -86,6 +86,7 @@
                 android:background="@color/no_color"
                 android:maxLength="@integer/max_length_title"
                 tools:text="@string/tale_title_sample" />
+                android:maxLines="@integer/max_lines_title"
 
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.card.MaterialCardView>
