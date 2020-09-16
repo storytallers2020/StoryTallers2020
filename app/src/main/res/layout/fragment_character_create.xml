@@ -168,7 +168,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_save"
-        android:enabled="false"
+        android:enabled="true"
         android:layout_marginTop="@dimen/margin_standard"
         android:layout_marginHorizontal="@dimen/margin_standard"
         app:layout_constraintVertical_bias="1"
