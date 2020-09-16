@@ -54,6 +54,9 @@
         <string name="remove">remove</string>
         <string name="rv_players_underline" translatable="false">-----------------------</string>
         <string name="btn_choose_location">Choose location</string>
+        <string name="err_short_name">Name is too short</string>
+        <string name="err_name_is_gaps">No symbols</string>
+    <string name="err_character_not_selected">Сharacter not selected</string>
 
         // Location screen
         <string name="title_location">Location</string>
