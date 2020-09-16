@@ -55,7 +55,7 @@
                     android:lineSpacingExtra="@dimen/line_spacing_extra"
                     android:textColor="@color/white"
                     android:background="@color/transparent_30"
-                    tools:text="@string/tale_sample" />
+                    tools:text="@string/tale_text_sample" />
             </androidx.core.widget.NestedScrollView>
 
             <ImageView

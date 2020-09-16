@@ -31,7 +31,8 @@
 
     <TextView
         android:id="@+id/subHeader"
-        style="@style/SubHeader"
+        style="@style/Standard"
+        android:layout_marginVertical="@dimen/margin_standard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/choosing_cover_title"
@@ -84,8 +85,8 @@
                 android:inputType="textMultiLine|textCapSentences|textAutoComplete|textAutoCorrect"
                 android:background="@color/no_color"
                 android:maxLength="@integer/max_length_title"
-                tools:text="Сказка про Ивана-дурака и Серого Волка за границей вашего воображения,
-                но в рамках дозволенного законом" />
+                tools:text="@string/tale_title_sample" />
+                android:maxLines="@integer/max_lines_title"
 
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.card.MaterialCardView>

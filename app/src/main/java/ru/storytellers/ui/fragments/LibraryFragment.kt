@@ -16,7 +16,7 @@ import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.LibraryViewModel
 
-private const val FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092397"
+private const val FRAGMENT_DIALOG_TAG = "library-5d62-46bf-ab6"
 
 class LibraryFragment : BaseFragment<DataModel>() {
 
@@ -174,7 +174,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
     }
 
     override fun backClicked(): Boolean {
-        model.onBackClicked(this.javaClass.simpleName)
+//        model.onBackClicked(this.javaClass.simpleName)
         router.exit()
         return true
     }
