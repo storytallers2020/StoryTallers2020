@@ -44,7 +44,7 @@
     <string name="hint_enter_name">Введите имя</string>
     <string name="btn_save">Сохранить</string>
     <string name="msg_team_full">Максимум 8 игроков.</string>
-    <string name="msg_need_more_players">Игрок не может быть один</string>
+    <string name="msg_need_more_players">Необходимо не менее 2 игроков.</string>
     <string name="btn_edit">изменить</string>
     <string name="remove">удалить</string>
     <string name="btn_choose_location">Выбрать локацию</string>
@@ -91,6 +91,15 @@
     <string name="dialog_character">Удалить персонажа?</string>
     <string name="positive_answer">ОК</string>
     <string name="negative_answer">Отмена</string>
+    <string name="agreement_dialog_title">Важно</string>
+    <string name="agreement_dialog_text">Нажимая "Принять", я соглашаюсь с
+        <a href="https://storyheroes.flycricket.io/terms.html">Условиями использования</a> и
+        <a href="https://storyheroes.flycricket.io/privacy.html">Политикой конфиденциальности</a>.</string>
+    <string name="accept_answer">Принять</string>
+    <string name="decline_answer">Отклонить</string>
+    <string name="msg_agreement_declined">Соглашения отклонены</string>
+    <string name="msg_agreement_accepted">Соглашения приняты</string>
+
 
     // New strings... move them to the corresponding group above
 
