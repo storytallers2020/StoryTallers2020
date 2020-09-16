@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
-    android:paddingBottom="@dimen/padding_layout_bottom"
+    android:paddingBottom="@dimen/padding_small"
     android:background="@drawable/ic_background_default">
 
     <ImageView
@@ -30,17 +30,18 @@
 
     <TextView
         android:id="@+id/subHeader"
-        style="@style/SubHeader"
+        style="@style/Standard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/margin_standard"
         android:text="@string/subtitle_library"
-        app:layout_constraintBottom_toTopOf="@id/scroll_view"
         app:layout_constraintTop_toBottomOf="@id/screen_header" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/subHeader">
 

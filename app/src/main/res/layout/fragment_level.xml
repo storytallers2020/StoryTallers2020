@@ -69,7 +69,6 @@
             android:textSize="@dimen/text_small"
             android:alpha="0.5"
             android:gravity="center"
-            android:textColor="@color/white"
             android:drawableBottom="@drawable/slider_team"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +94,6 @@
             android:alpha="0.5"
             android:gravity="center"
             android:drawableBottom="@drawable/slider_location"
-            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -111,13 +109,12 @@
 
     <TextView
         android:id="@+id/description_level"
+        style="@style/Standard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:text="@string/rules_easy_description"
         android:textColor="@color/yellow"
         android:layout_marginVertical="@dimen/margin_standard"
-        android:textSize="@dimen/text_standard"
         app:layout_constraintBottom_toTopOf="@id/level_buttons"
         app:layout_constraintTop_toBottomOf="@id/slider" />
 
@@ -128,7 +125,6 @@
         android:orientation="vertical"
         android:layout_marginVertical="@dimen/margin_standard"
         app:layout_constraintBottom_toTopOf="@id/btn_next">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -25,12 +25,11 @@
         style="@style/Header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/game_start_title"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_rule_tv"
-        style="@style/SubHeader"
+        style="@style/Cover"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"
@@ -43,7 +42,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_start"
-        android:layout_marginHorizontal="@dimen/padding_layout_standard"
         android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent" />
 
