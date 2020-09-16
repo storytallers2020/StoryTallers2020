@@ -11,13 +11,17 @@ class PlayerCreator {
     private  var characterOfPlayer: Character?=null
     private  var player:Player?=null
 
-    fun getPlayer():Player?{
-        return if (createPlayer()) player
-        else null
-    }
+    fun getPlayer()= if (createPlayer()) player
+    else null
+
     private fun createPlayer(): Boolean {
         idPlayer=getUid()
-        characterOfPlayer?.let {player=Player(idPlayer,namePlayer,it)
+        characterOfPlayer?.let {
+            player=Player(
+                idPlayer,
+                namePlayer,
+                it
+            )
             idPlayer=0
             namePlayer="Player"
             characterOfPlayer=null
