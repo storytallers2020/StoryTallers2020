@@ -49,7 +49,9 @@
     <string name="remove">удалить</string>
     <string name="btn_choose_location">Выбрать локацию</string>
     <string name="err_short_name">Не менее 2 символов</string>
+    <string name="err_short_sentence">Предложение слишком короткое</string>
     <string name="err_name_is_gaps">Введите имя</string>
+    <string name="err_sentence_is_gaps">Введите предложение</string>
     <string name="err_character_not_selected">Выберите персонажа</string>
 
     // Location screen

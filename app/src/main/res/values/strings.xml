@@ -55,7 +55,9 @@
     <string name="rv_players_underline" translatable="false">-----------------------</string>
     <string name="btn_choose_location">Choose location</string>
     <string name="err_short_name">Minimum name length 2 characters</string>
+    <string name="err_short_sentence">Minimum sentence length 2 characters</string>
     <string name="err_name_is_gaps">Please, enter name</string>
+    <string name="err_sentence_is_gaps">Please, enter sentence</string>
     <string name="err_character_not_selected">Please, select your character</string>
 
     // Location screen

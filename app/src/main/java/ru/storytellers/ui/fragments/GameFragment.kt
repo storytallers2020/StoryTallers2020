@@ -68,10 +68,10 @@ class GameFragment : BaseFragment<DataModel>() {
         model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, Observer {
             when (it) {
                 1 -> {
-                    setError(getString(R.string.err_short_name))
+                    setError(getString(R.string.err_short_sentence))
                 }
                 2 -> {
-                    setError(getString(R.string.err_name_is_gaps))
+                    setError(getString(R.string.err_sentence_is_gaps))
                 }
                 else -> {
                     et_step.error = null
