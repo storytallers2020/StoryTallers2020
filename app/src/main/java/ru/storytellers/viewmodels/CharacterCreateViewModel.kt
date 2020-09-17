@@ -21,9 +21,7 @@ class CharacterCreateViewModel(
     var isCharacterSelected = false
     var isNameEntered = false
     private lateinit var namePlayer: String
-    private var flagNameIsNormal = 0
-    private var flagNameIsShort = 1
-    private var flagNameIsGaps = 2
+
     private val app = StoryTallerApp.instance
     private val storage = app.gameStorage
 
@@ -95,6 +93,9 @@ class CharacterCreateViewModel(
     }
 
     private fun namePlayerValidation(): Int {
+         val flagNameIsNormal = 0
+         val flagNameIsShort = 1
+         val flagNameIsGaps = 2
         if (namePlayer.length < 3) {
             isNameEntered = false
             setStatusNameEnteredLiveData(isNameEntered)
