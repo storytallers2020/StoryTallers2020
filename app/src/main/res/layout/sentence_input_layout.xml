@@ -111,14 +111,15 @@
         android:id="@+id/btn_send"
         android:layout_width="@dimen/icon_medium"
         android:layout_height="@dimen/icon_medium"
-        android:visibility="visible"
-        android:src="@drawable/ic_send"
+        android:layout_marginTop="@dimen/margin_xs"
         android:background="@color/no_color"
         android:contentDescription="@string/btn_send"
+        android:src="@drawable/ic_send"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/et_step"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/et_step"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_bias="0"
         tools:visibility="visible" />
 
     <TextView
