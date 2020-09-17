@@ -78,6 +78,10 @@ object Versions {
     const val runner = "1.2.0"
     const val ext = "1.1.1"
     const val espressoCore = "3.2.0"
+    const val coreTest="1.3.0"
+    const val robolectric = "4.4"
+    const val archCoreTest = "2.1.0"
+    const val junitKtx = "1.1.2"
 
     //Fragment
     const val lifecycle = "2.2.0"
@@ -163,6 +167,10 @@ object TestImpl {
 
     const val ext = "androidx.test.ext:junit:${Versions.ext}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+    const val coreTest = "androidx.test:core-ktx:${Versions.coreTest}"
+    const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
+    const val archCoreTesting = "androidx.arch.core:core-testing:${Versions.archCoreTest}"
+    const val junitKtx = "androidx.test.ext:junit-ktx:${Versions.junitKtx}"
 }
 
 object GifImageView {
