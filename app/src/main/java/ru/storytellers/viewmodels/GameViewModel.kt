@@ -14,6 +14,7 @@ import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
+    val inputValid: InputValidation by lazy { InputValidation() }
     private val app = StoryTallerApp.instance
     private val storage = app.gameStorage
 
@@ -38,11 +39,17 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
     fun subscribeOnEndGamePossibleChanged(): LiveData<Boolean> = isEndGamePossible
 
     fun onButtonSendClicked(content: String) {
-        val text = content
-            .trimSentenceSpace()
-            .addDotIfNeed()
-        val sentence = createSentence(text)
-        tryGotoNextTurn(sentence)
+        validationCheck(content)
+    }
+
+    private fun validationCheck(content: String) {
+        if (inputValid.inputValidation(content) == 0) {
+            val text = content
+                .trimSentenceSpace()
+                .addDotIfNeed()
+            val sentence = createSentence(text)
+            tryGotoNextTurn(sentence)
+        }
     }
 
     private fun createSentence(sentence: String): SentenceOfTale =
@@ -102,12 +109,13 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
         )
         riseEvent(StatHelper.gameScreenBtnSendClicked, prop as List<Pair<String, String>>)
     }
-     fun onButtonEndGameClickedStatistic() {
+
+    fun onButtonEndGameClickedStatistic() {
         val prop = listOf(
             StatHelper.totalNumberSentencesInStory to storage.getSentences().count().toString(),
             StatHelper.timeEvent to getCurrentDateTime().getString()
         )
-        riseEvent(StatHelper.gameScreenBtnEndGameClicked, prop )
+        riseEvent(StatHelper.gameScreenBtnEndGameClicked, prop)
     }
 
 }

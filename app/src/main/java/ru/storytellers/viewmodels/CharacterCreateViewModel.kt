@@ -17,19 +17,16 @@ class CharacterCreateViewModel(
     private val characterRepository: ICharacterRepository,
     private val playerCreator: PlayerCreator
 ) : BaseViewModel<DataModel>() {
+    val inputValid: InputValidation by lazy { InputValidation() }
 
     var isCharacterSelected = false
-    var isNameEntered = false
     private lateinit var namePlayer: String
-    private var flagNameIsNormal = 0
-    private var flagNameIsShort = 1
-    private var flagNameIsGaps = 2
+
     private val app = StoryTallerApp.instance
     private val storage = app.gameStorage
 
-    private val onStatusNameEnteredLiveData = MutableLiveData<Boolean>()
     private val onStatusCharacterSelectedLiveData = MutableLiveData<Boolean>()
-    private val onNameIncorrectLiveData = MutableLiveData<Int>()
+
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Character>>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 
@@ -43,14 +40,6 @@ class CharacterCreateViewModel(
         return onStatusCharacterSelectedLiveData
     }
 
-    fun subscribeOnStatusNameEntered(): LiveData<Boolean> {
-        return onStatusNameEnteredLiveData
-    }
-
-    fun subscribeOnNameIncorrect(): LiveData<Int> {
-        return onNameIncorrectLiveData
-    }
-
     fun subscribeOnError(): LiveData<DataModel.Error> {
         return onErrorLiveData
     }
@@ -60,7 +49,7 @@ class CharacterCreateViewModel(
     }
 
     private fun setNamePlayer(name: String) {
-        playerCreator.setNamePlayer(name)
+        playerCreator.setNamePlayer(name.trimSentenceSpace())
     }
 
     private fun setCharacterOfPlayer(character: Character) {
@@ -91,29 +80,14 @@ class CharacterCreateViewModel(
 
     fun transferNamePlayer(text: Editable?) {
         namePlayer = text.toString()
-        onNameIncorrectLiveData.value = namePlayerValidation()
+        validationCheck()
     }
 
-    private fun namePlayerValidation(): Int {
-        if (namePlayer.length < 3) {
-            isNameEntered = false
-            setStatusNameEnteredLiveData(isNameEntered)
-            return flagNameIsShort
+    private fun validationCheck() {
+        if (inputValid.inputValidation(namePlayer) == 0) {
+            setNamePlayer(namePlayer)
+            addPlayerLocal()
         }
-        if (namePlayer.stringNotContainSymbols()) {
-            isNameEntered = false
-            setStatusNameEnteredLiveData(isNameEntered)
-            return flagNameIsGaps
-        }
-        setNamePlayer(namePlayer)
-        addPlayerLocal()
-        isNameEntered = true
-        setStatusNameEnteredLiveData(isNameEntered)
-        return flagNameIsNormal
-    }
-
-    private fun setStatusNameEnteredLiveData(nameEntered: Boolean) {
-        onStatusNameEnteredLiveData.value = nameEntered
     }
 
     fun characterSelected(character: Character) {

@@ -73,11 +73,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
                 Observer { isCharacterSelected = it }
             )
 
-        model.subscribeOnStatusNameEntered().observe(viewLifecycleOwner, Observer {
-            isNameEntered = it
-        })
-
-        model.subscribeOnNameIncorrect().observe(viewLifecycleOwner, Observer {
+        model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, Observer {
             when (it) {
                 1 -> {
                     setError(getString(R.string.err_short_name))
@@ -87,6 +83,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
                 }
                 else -> {
                     enter_name_et_layout1.error = null
+                    isNameEntered=true
                 }
             }
         })
@@ -128,7 +125,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         model.transferNamePlayer(enter_name_field_et.text)
         if (statusCheck()) {
             model.isCharacterSelected = false
-            model.isNameEntered = false
+            isNameEntered = false
             router.navigateTo(Screens.TeamCharacterScreen())
         } else if (!isCharacterSelected) toastShowLong(
             context,

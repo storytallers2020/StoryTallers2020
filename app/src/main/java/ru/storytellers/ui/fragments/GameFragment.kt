@@ -23,13 +23,13 @@ class GameFragment : BaseFragment<DataModel>() {
     override val model: GameViewModel by inject()
     override val layoutRes = R.layout.fragment_game
     var inputMethodManager: Any? = null
+    private var isInputContentCorrect = false
 
     override fun backClicked(): Boolean = true
 
     override fun iniViewModel() {}
 
     override fun init() {
-        sentence_line.addTextChangedListener(assistantFragment.getTextWatcher())
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
         reminder_intro.post { View.FOCUS_DOWN }
         button_end.setOnClickListener { onButtonEndClicked() }
@@ -51,14 +51,35 @@ class GameFragment : BaseFragment<DataModel>() {
         handlerUriBackgroundImage()
         handlerWordChanged()
         handlerEndGamePossible()
+        handlerInputIncorrect()
     }
 
     private fun onButtonSendClicked() {
         model.onButtonSendClicked(sentence_line.text.toString())
         assistantFragment.hideKeyboard()
-        scroll_view.smoothScrollTo(0, story_body.bottom)
-        sentence_line.setText("")
-        assistantFragment.makeInVisibleBtnSend()
+        if (statusCheck()) {
+            scroll_view.smoothScrollTo(0, story_body.bottom)
+            sentence_line.setText("")
+            isInputContentCorrect = false
+        }
+    }
+
+    private fun handlerInputIncorrect() {
+        model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, Observer {
+            when (it) {
+                1 -> {
+                    setError(getString(R.string.err_short_name))
+                }
+                2 -> {
+                    setError(getString(R.string.err_name_is_gaps))
+                }
+                else -> {
+                    et_step.error = null
+                    et_step.isErrorEnabled = false
+                    isInputContentCorrect = true
+                }
+            }
+        })
     }
 
     private fun handlerEndGamePossible() {
@@ -116,11 +137,17 @@ class GameFragment : BaseFragment<DataModel>() {
                 sentence_line.setText(text)
                 try {
                     sentence_line.setSelection(text.length)
-                } catch (e: Exception){
+                } catch (e: Exception) {
                     sentence_line.setSelection(resources.getInteger(R.integer.max_length_sentence))
                 }
             }
     }
+
+    private fun setError(nameError: String) {
+        et_step.error = nameError
+    }
+
+    private fun statusCheck() = isInputContentCorrect
 
     private fun onButtonEndClicked() {
         model.onButtonEndGameClickedStatistic()

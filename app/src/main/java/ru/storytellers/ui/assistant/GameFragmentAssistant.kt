@@ -20,7 +20,7 @@ class GameFragmentAssistant(
         )
     }
 
-    fun makeEditextActive(editTextView: TextInputEditText, textInputLayout: TextInputLayout) {
+    fun makeEditTextActive(editTextView: TextInputEditText, textInputLayout: TextInputLayout) {
         editTextView.isEnabled = true
         textInputLayout.alpha = 1f
     }
