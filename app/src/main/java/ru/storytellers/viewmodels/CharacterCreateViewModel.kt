@@ -84,9 +84,9 @@ class CharacterCreateViewModel(
     }
 
     private fun validationCheck() {
-        if(inputValid.inputValidation(namePlayer)==0) {
-                setNamePlayer(namePlayer)
-                addPlayerLocal()
+        if (inputValid.inputValidation(namePlayer) == 0) {
+            setNamePlayer(namePlayer)
+            addPlayerLocal()
         }
     }
 
