@@ -45,5 +45,8 @@
     <integer name="max_length_sentence">150</integer>
     <integer name="max_length_title">70</integer>
     <integer name="max_length_name">15</integer>
+    <integer name="max_lines_title">5</integer>
+    <integer name="max_lines_sentence">3</integer>
+
 
 </resources>

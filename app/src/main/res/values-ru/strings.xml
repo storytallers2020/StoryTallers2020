@@ -48,9 +48,9 @@
     <string name="btn_edit">изменить</string>
     <string name="remove">удалить</string>
     <string name="btn_choose_location">Выбрать локацию</string>
-    <string name="err_short_name">Минимум два символа</string>
-    <string name="err_name_is_gaps">Нет ни одного символа</string>
-    <string name="err_character_not_selected">Персонаж не выбран</string>
+    <string name="err_short_name">Не менее 2 символов</string>
+    <string name="err_name_is_gaps">Введите имя</string>
+    <string name="err_character_not_selected">Выберите персонажа</string>
 
     // Location screen
     <string name="title_location">Локация</string>

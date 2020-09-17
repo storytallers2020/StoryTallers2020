@@ -126,17 +126,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
-                android:maxLength="@integer/max_length_name"
-                android:maxLines="1"
-                android:textColor="@color/white"
                 android:gravity="center_vertical"
-                android:paddingHorizontal="@dimen/padding_small"
-                android:singleLine="true"
                 android:imeOptions="actionDone"
                 android:inputType="textPersonName|textCapWords|textAutoComplete|textAutoCorrect"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="@dimen/text_standard">
-            </com.google.android.material.textfield.TextInputEditText>
+                android:maxLength="@integer/max_length_name"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/padding_small"
+                android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
