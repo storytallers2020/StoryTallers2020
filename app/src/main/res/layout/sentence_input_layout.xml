@@ -111,7 +111,7 @@
         android:id="@+id/btn_send"
         android:layout_width="@dimen/icon_medium"
         android:layout_height="@dimen/icon_medium"
-        android:visibility="gone"
+        android:visibility="visible"
         android:src="@drawable/ic_send"
         android:background="@color/no_color"
         android:contentDescription="@string/btn_send"
