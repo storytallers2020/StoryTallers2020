@@ -82,6 +82,8 @@ object Versions {
     const val robolectric = "4.4"
     const val archCoreTest = "2.1.0"
     const val junitKtx = "1.1.2"
+    const val koinTest = "2.0.1"
+    const val mockk = "1.10.0"
 
     //Fragment
     const val lifecycle = "2.2.0"
@@ -171,6 +173,8 @@ object TestImpl {
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
     const val archCoreTesting = "androidx.arch.core:core-testing:${Versions.archCoreTest}"
     const val junitKtx = "androidx.test.ext:junit-ktx:${Versions.junitKtx}"
+    const val koinTest = "org.koin:koin-test:${Versions.koinTest}"
+    const val mockk = "io.mockk:mockk:${Versions.mockk}"
 }
 
 object GifImageView {

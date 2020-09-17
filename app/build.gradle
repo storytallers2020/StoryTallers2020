@@ -89,8 +89,8 @@ dependencies {
     testImplementation TestImpl.robolectric
     testImplementation TestImpl.archCoreTesting
     testImplementation TestImpl.junitKtx
-    testImplementation 'io.mockk:mockk:1.10.0'
-    testImplementation 'org.koin:koin-test:2.0.1'
+    testImplementation TestImpl.mockk
+    testImplementation TestImpl.koinTest
 
     androidTestImplementation TestImpl.ext
     androidTestImplementation TestImpl.espresso
