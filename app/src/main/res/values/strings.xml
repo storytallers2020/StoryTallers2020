@@ -34,33 +34,35 @@
         // Level screen
         <string name="title_level">Level</string>
         <string name="btn_easy">Easy</string>
-        <string name="rules_easy_description">All previously composed sentences are visible to all participants in the game at any time.</string>
-        <string name="btn_medium">Medium</string>
-        <string name="rules_medium_description">The player sees only the last sentence composed by the player before him.</string>
-        <string name="btn_hard">Hard</string>
-        <string name="rules_hard_description">The player sees only the last sentence composed by the player before him. In his turn the player must use the randomly generated mandatory word.</string>
-        <string name="btn_next">Next</string>
+    <string name="rules_easy_description">All previously composed sentences are visible to all participants in the game at any time.</string>
+    <string name="btn_medium">Medium</string>
+    <string name="rules_medium_description">The player sees only the last sentence composed by the player before him.</string>
+    <string name="btn_hard">Hard</string>
+    <string name="rules_hard_description">The player sees only the last sentence composed by the player before him. In his turn the player must use the randomly generated mandatory word.</string>
+    <string name="btn_next">Next</string>
 
-        // Characters screen
-        <string name="title_character">Character</string>
-        <string name="btn_new_character"><u>Add new character +</u></string>
-        <string name="subtitle_heroes">Choose your role:</string>
-        <string name="char_icon" translatable="false">" =) "</string>
-        <string name="hint_enter_name">Name</string>
-        <string name="btn_save">Save</string>
-        <string name="msg_team_full">Maximum number of players reached.</string>
-        <string name="msg_need_more_players">The game can be played by 2 to 8 players.</string>
-        <string name="btn_edit">edit</string>
-        <string name="remove">remove</string>
-        <string name="rv_players_underline" translatable="false">-----------------------</string>
-        <string name="btn_choose_location">Choose location</string>
-        <string name="err_short_name">Least two simbols</string>
-        <string name="err_name_is_gaps">No symbols</string>
-    <string name="err_character_not_selected">Сharacter not selected</string>
+    // Characters screen
+    <string name="title_character">Character</string>
+    <string name="btn_new_character"><u>Add new character +</u></string>
+    <string name="subtitle_heroes">Choose your role:</string>
+    <string name="char_icon" translatable="false">" =) "</string>
+    <string name="hint_enter_name">Name</string>
+    <string name="btn_save">Save</string>
+    <string name="msg_team_full">Maximum number of players reached.</string>
+    <string name="msg_need_more_players">The game can be played by 2 to 8 players.</string>
+    <string name="btn_edit">edit</string>
+    <string name="remove">remove</string>
+    <string name="rv_players_underline" translatable="false">-----------------------</string>
+    <string name="btn_choose_location">Choose location</string>
+    <string name="err_short_name">Minimum name length 2 characters</string>
+    <string name="err_short_sentence">Minimum sentence length 2 characters</string>
+    <string name="err_name_is_gaps">Please, enter name</string>
+    <string name="err_sentence_is_gaps">Please, enter sentence</string>
+    <string name="err_character_not_selected">Please, select your character</string>
 
-        // Location screen
-        <string name="title_location">Location</string>
-        <string name="tale_begins">Your tale begins here:</string>
+    // Location screen
+    <string name="title_location">Location</string>
+    <string name="tale_begins">Your tale begins here:</string>
 
     // Game process screens
     <string name="game_start_title">The tale is about to begin…</string>

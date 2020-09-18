@@ -1,103 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/padding_layout_standard"
-    android:paddingTop="@dimen/padding_layout_standard"
-    android:paddingBottom="@dimen/padding_layout_bottom"
-    android:background="@drawable/ic_background_default">
+    android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/back_button_character"
-        style="@style/BackArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_arrow_back"
-        android:contentDescription="@string/arrow_back"
-        app:layout_constraintBottom_toBottomOf="@id/screen_header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/screen_header" />
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    <TextView
-        android:id="@+id/screen_header"
-        style="@style/Header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_choosing_cover"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingHorizontal="@dimen/padding_layout_standard"
+        android:paddingTop="@dimen/padding_layout_standard"
+        android:paddingBottom="@dimen/padding_layout_bottom"
+        android:background="@drawable/ic_background_default">
 
+        <ImageView
+            android:id="@+id/back_button_character"
+            style="@style/BackArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="@string/arrow_back"
+            app:layout_constraintBottom_toBottomOf="@id/screen_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/screen_header" />
 
-    <TextView
-        android:id="@+id/subHeader"
-        style="@style/Standard"
-        android:layout_marginVertical="@dimen/margin_standard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/choosing_cover_title"
-        app:layout_constraintTop_toBottomOf="@id/screen_header" />
-
-    <ImageView
-        android:id="@+id/iv_cover"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/cover_cave_of_wonders"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/location_cave_of_wonders_name"
-        android:layout_marginTop="@dimen/margin_large"
-        app:layout_constraintTop_toBottomOf="@id/subHeader"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_image_cover" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparent_30"
-        android:layout_margin="@dimen/margin_xl"
-        android:elevation="0dp"
-        app:cardCornerRadius="@dimen/card_corner_radius"
-        app:cardPreventCornerOverlap="true"
-        app:layout_constraintBottom_toBottomOf="@id/iv_cover"
-        app:layout_constraintEnd_toEndOf="@id/iv_cover"
-        app:layout_constraintStart_toStartOf="@id/iv_cover"
-        app:layout_constraintTop_toTopOf="@id/iv_cover">
-
-        <com.google.android.material.textfield.TextInputLayout
+        <TextView
+            android:id="@+id/screen_header"
+            style="@style/Header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_xxs"
-            android:textColorHint="@color/white"
-            app:counterEnabled="true"
-            app:counterMaxLength="@integer/max_length_title"
-            app:counterTextAppearance="@style/WhiteCounter">
+            android:text="@string/title_choosing_cover"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/book_name"
+
+        <TextView
+            android:id="@+id/subHeader"
+            style="@style/Standard"
+            android:layout_marginVertical="@dimen/margin_standard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choosing_cover_title"
+            app:layout_constraintTop_toBottomOf="@id/screen_header" />
+
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cover_cave_of_wonders"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/location_cave_of_wonders_name"
+            android:layout_marginTop="@dimen/margin_large"
+            app:layout_constraintTop_toBottomOf="@id/subHeader"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_image_cover" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/transparent_30"
+            android:layout_margin="@dimen/margin_xl"
+            android:elevation="0dp"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardPreventCornerOverlap="true"
+            app:layout_constraintBottom_toBottomOf="@id/iv_cover"
+            app:layout_constraintEnd_toEndOf="@id/iv_cover"
+            app:layout_constraintStart_toStartOf="@id/iv_cover"
+            app:layout_constraintTop_toTopOf="@id/iv_cover">
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="@dimen/margin_xs"
-                android:textSize="@dimen/text_standard"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:inputType="textMultiLine|textCapSentences|textAutoComplete|textAutoCorrect"
-                android:background="@color/no_color"
-                android:maxLength="@integer/max_length_title"
-                tools:text="@string/tale_title_sample" />
-                android:maxLines="@integer/max_lines_title"
+                android:layout_margin="@dimen/margin_xxs"
+                android:textColorHint="@color/white"
+                app:counterEnabled="true"
+                app:counterMaxLength="@integer/max_length_title"
+                app:counterTextAppearance="@style/WhiteCounter">
 
-        </com.google.android.material.textfield.TextInputLayout>
-    </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/book_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/no_color"
+                    android:inputType="textMultiLine|textCapSentences|textAutoComplete|textAutoCorrect"
+                    android:maxLength="@integer/max_length_title"
+                    android:maxLines="@integer/max_lines_title"
+                    android:padding="@dimen/margin_xs"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    tools:text="@string/tale_title_sample" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_save"
-        android:enabled="false"
-        android:layout_marginHorizontal="@dimen/padding_layout_standard"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/btn_save"
+            android:layout_marginTop="@dimen/margin_standard"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover"
+            app:layout_constraintVertical_bias="1" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/padding_layout_standard"
-    android:paddingVertical="@dimen/padding_layout_bottom"
+    android:paddingVertical="@dimen/padding_layout_standard"
     tools:background="@drawable/location_beach">
 
     <TextView

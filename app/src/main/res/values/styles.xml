@@ -66,10 +66,10 @@
         <item name="textInputStyle">
             @style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense
         </item>
-        <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColorHint">@color/white</item>
         <item name="colorAccent">@color/white</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/box_corner_radius</item>
         <item name="boxCornerRadiusBottomStart">@dimen/box_corner_radius</item>
         <item name="boxCornerRadiusTopEnd">@dimen/box_corner_radius</item>
@@ -119,7 +119,5 @@
     <style name="DialogButtonPassive" parent="DialogButton">
         <item name="android:textColor">#B3F9BE40</item>
     </style>
-
-
 
 </resources>
