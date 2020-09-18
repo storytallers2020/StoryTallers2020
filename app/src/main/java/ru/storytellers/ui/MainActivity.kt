@@ -1,6 +1,8 @@
 package ru.storytellers.ui
 
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -20,7 +22,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         injectDependencies()
+        turnOffFullScreen()
         router.replaceScreen(Screens.StartScreen())
+    }
+
+    private fun turnOffFullScreen() {
+        //fixes the bug with adjustResize not working with windowFullscreen
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
     }
 
     override fun onResumeFragments() {
