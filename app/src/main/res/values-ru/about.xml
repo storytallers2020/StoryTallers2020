@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    // About screen
+    <string name="title_about">О приложении</string>
+
+    <string name="team" translatable="false">Команда</string>
+
+
+</resources>

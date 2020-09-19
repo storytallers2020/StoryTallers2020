@@ -40,7 +40,7 @@ class AppInfoFragment : Fragment(), BackButtonListener {
         return ArrayList<View>().apply {
             for (i in 0 until v.childCount) {
                 val child = v.getChildAt(i)
-                if (child is TextView) {
+                if (child is TextView && child.text.contains("@")) {
                     child.movementMethod = LinkMovementMethod.getInstance()
                 }
                 ArrayList<View>().apply {
