@@ -2,6 +2,7 @@ package ru.storytellers.ui
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.android.ext.android.inject
@@ -32,6 +33,8 @@ class MainActivity : AppCompatActivity() {
             window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
             window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
     }
 
     override fun onResumeFragments() {

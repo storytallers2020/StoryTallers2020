@@ -1,5 +1,6 @@
 package ru.storytellers.ui.fragments
 
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game_end.*
 import org.koin.android.ext.android.inject
@@ -64,7 +65,8 @@ class GameEndFragment : BaseFragment<DataModel>() {
 
     private fun handlerUriBackgroundImage() {
         model.subscribeOnUriBackgroundImage().observe(viewLifecycleOwner, Observer {
-            setBackgroundImage(it, root_layout_cl)
+            val v: ConstraintLayout = requireActivity().findViewById(R.id.main_background)
+            setBackgroundImage(it, v)
         })
     }
 

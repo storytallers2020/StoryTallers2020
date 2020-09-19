@@ -2,6 +2,7 @@ package ru.storytellers.ui.fragments
 
 import android.content.Context
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.android.synthetic.main.sentence_input_layout.*
@@ -115,7 +116,8 @@ class GameFragment : BaseFragment<DataModel>() {
 
     private fun handlerUriBackgroundImage() {
         model.subscribeOnBackgroundImageChanged().observe(viewLifecycleOwner, Observer {
-            setBackgroundImage(it, root_layout)
+            val v: ConstraintLayout = requireActivity().findViewById(R.id.main_background)
+            setBackgroundImage(it, v)
         })
     }
 
