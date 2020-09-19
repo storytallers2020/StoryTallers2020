@@ -1,5 +1,6 @@
 package ru.storytellers.viewmodels
 
+import android.os.Looper
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.every
@@ -8,7 +9,9 @@ import io.reactivex.rxjava3.core.Single
 import org.junit.*
 import org.junit.runner.RunWith
 import org.koin.test.KoinTest
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 import ru.storytellers.model.datasource.resourcestorage.storage.CharacterStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
 import ru.storytellers.model.datasource.room.StoryDataSource
@@ -19,6 +22,7 @@ import ru.storytellers.model.repository.StoryRepository
 
 
 @RunWith(AndroidJUnit4::class)
+@LooperMode(LooperMode.Mode.PAUSED)
 @Config(sdk = [28])
 class StartViewModelTest : KoinTest {
 
@@ -34,7 +38,7 @@ class StartViewModelTest : KoinTest {
     }
 
     @Test
-    fun `try mockk it`() {
+    fun `StartViewModel give correct Stories list from Story Repo`() {
         val storyTest1 = mockk<Story>()
         val storyTest2 = mockk<Story>()
         val listStory = listOf(storyTest1, storyTest2)
@@ -43,39 +47,12 @@ class StartViewModelTest : KoinTest {
         every { storyRepo.getAll() } returns Single.just(listStory)
 
         val startViewModel = StartViewModel(storyRepo)
+        startViewModel.getAllStory()
 
-        Assert.assertEquals(startViewModel.subscribeOnSuccess().value?.data?.size, storyRepo.getAll())
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
 
+        val listStoryFromStoryRepo = startViewModel.subscribeOnSuccess().value?.data
+        Assert.assertEquals(listStory, listStoryFromStoryRepo)
     }
 
-
-//    @Test
-//    fun `WTF`() {
-//        val name: String = "name"
-//        val imageUrl: String = "imageUrl"
-//        val imageForRecycler: String = "image"
-//        val descriptions: String = "description"
-//
-//        val authors: String = "author"
-//        val coverUrl: String = "coverUrl"
-//        val sentences: List<SentenceOfTale>? = emptyList()
-//
-//
-//        val testLocation = Location(1, name, imageUrl, imageForRecycler, descriptions)
-//        val testStory1 = Story(1, name, authors, coverUrl, testLocation, sentences)
-//        val testStory2 = Story(2, name, authors, coverUrl, testLocation, sentences)
-//
-//        val listStory = listOf<Story>(testStory1, testStory2)
-//        storyRepo.insertOrReplace(testStory1)
-//        storyRepo.insertOrReplace(testStory2)
-////        val storyRepo = mockk<IStoryRepository>()
-////        every { storyRepo.getAll() } returns Single.just(listStory)
-//        var observe:List<Story> = emptyList()
-//        storyRepo.getAll().observeOn(AndroidSchedulers.mainThread()).subscribe({
-//            observe=it
-//        },{
-//            it.printStackTrace()
-//        })
-//        Assert.assertEquals(observe, listStory)
-//    }
 }

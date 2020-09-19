@@ -35,7 +35,8 @@ class LevelViewModelTest : KoinTest {
 
     @Test
     fun `on start level id should be 0`() {
-        Assert.assertEquals(0, levelViewModel.getLevelGame())
+        val startLevelId = levelViewModel.getLevelGame()
+        Assert.assertEquals(0, startLevelId)
     }
 
     @Test

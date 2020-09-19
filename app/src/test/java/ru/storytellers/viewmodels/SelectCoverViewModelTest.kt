@@ -59,8 +59,8 @@ class SelectCoverViewModelTest() : KoinTest {
 
         //прямо здесь выполняются все задачи, которые нужно отправить в основной поток
         shadowOf(Looper.getMainLooper()).idle()
-
-        assertEquals(selectCoverViewModel.subscribeOnSuccess().value?.data, listCover)
+        val listCoverFromCoverRepo = selectCoverViewModel.subscribeOnSuccess().value?.data
+        assertEquals(listCover, listCoverFromCoverRepo)
     }
 
     @Test
