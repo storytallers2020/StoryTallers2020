@@ -174,7 +174,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
     }
 
     override fun backClicked(): Boolean {
-//        model.onBackClicked(this.javaClass.simpleName)
+        model.onBackClicked(this.javaClass.simpleName)
         router.exit()
         return true
     }

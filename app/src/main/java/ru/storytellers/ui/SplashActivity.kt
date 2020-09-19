@@ -6,7 +6,6 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import pl.droidsonroids.gif.GifDrawable
 import ru.storytellers.R
-import timber.log.Timber
 
 class SplashActivity : AppCompatActivity() {
     val factor = 1.5
@@ -19,7 +18,6 @@ class SplashActivity : AppCompatActivity() {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
         }, getDelay())
-        Timber.e("${getDelay()}")
     }
 
     private fun getDelay() =
