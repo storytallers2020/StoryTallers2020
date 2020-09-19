@@ -9,12 +9,10 @@ import kotlinx.android.synthetic.main.fragment_rules.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.ui.BackButtonListener
-import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 
 class RulesGame: Fragment(), BackButtonListener {
-    private lateinit var navigatorHolder: NavigatorHolder
-    private lateinit var router: Router
+    private val router: Router by inject()
     companion object {
         fun newInstance() = RulesGame()
     }
@@ -24,7 +22,6 @@ class RulesGame: Fragment(), BackButtonListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        injectRouter()
         return inflater.inflate(R.layout.fragment_rules, container, false)
     }
 
@@ -32,12 +29,6 @@ class RulesGame: Fragment(), BackButtonListener {
         super.onViewCreated(view, savedInstanceState)
         back_button_rules.setOnClickListener { backClicked() }
 
-    }
-    private fun injectRouter() {
-        val navigHold: NavigatorHolder by inject()
-        navigatorHolder = navigHold
-        val rout: Router by inject()
-        router = rout
     }
 
     override fun backClicked(): Boolean {

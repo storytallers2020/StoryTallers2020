@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="team" translatable="false">Команда</string>
+
+    // About screen
+    <string name="title_about">About</string>
+
+    <string name="team">Team</string>
     <string name="telegram" translatable="false">Telegram</string>
 
     <string name="product_manager" translatable="false">Product Manager</string>

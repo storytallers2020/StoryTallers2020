@@ -2,6 +2,7 @@ package ru.storytellers.ui.fragments
 
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_choosing_title.*
 import org.koin.android.ext.android.inject
@@ -79,6 +80,8 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
     }
 
     private fun navigateToLibraryScreen() {
+        val v: ConstraintLayout = requireActivity().findViewById(R.id.main_background)
+        loadImage(R.drawable.ic_background_default, v)
         router.navigateTo(Screens.LibraryScreen())
     }
 

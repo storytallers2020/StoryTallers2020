@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_small"
     android:layout_gravity="center_horizontal"
-    android:background="@drawable/ic_background_default">
+    tools:background="@drawable/ic_background_default">
 
     <ImageView
         android:id="@+id/back_from_location"
