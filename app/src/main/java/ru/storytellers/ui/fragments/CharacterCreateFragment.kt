@@ -91,6 +91,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
 
     private fun setError(nameError: String) {
+        isNameEntered=false
         enter_name_et_layout1.error = nameError
     }
 
