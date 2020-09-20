@@ -7,35 +7,39 @@
     <string name="team">Team</string>
     <string name="telegram" translatable="false">Telegram</string>
 
-    <string name="product_manager" translatable="false">Product Manager</string>
+    <string name="product_manager">Product Management</string>
     <string name="pm1" translatable="false">Илья\nСевериненко</string>
     <string name="pm1t" translatable="false"><a href="https://t.me/ilya_Sever">@ilya_Sever</a></string>
     <string name="pm2" translatable="false">Сергей\nПатин</string>
     <string name="pm2t" translatable="false"><a href="https://t.me/sp0824">@sp0824</a></string>
 
-    <string name="project_manager" translatable="false">Project Manager</string>
+    <string name="project_manager">Project Management</string>
     <string name="pm3" translatable="false">Мария\nУстинова</string>
     <string name="pm3t" translatable="false"><a href="https://t.me/Deydra35">@Deydra35</a></string>
 
-    <string name="front_end" translatable="false">Frontend</string>
-    <string name="fe1" translatable="false">Виталий\nДорофеев</string>
-    <string name="fe1t" translatable="false"><a href="https://t.me/ten_bucks">@ten_bucks</a></string>
-    <string name="fe2" translatable="false">Екатерина\nЖаркова</string>
-    <string name="fe2t" translatable="false"><a href="https://t.me/Key_Key">@Key_Key</a></string>
+    <string name="android_dev">Android Development</string>
+    <string name="ad1" translatable="false">Василий\nЧернов</string>
+    <string name="ad1t" translatable="false"><a href="https://t.me/Vasyator">@Vasyator</a></string>
+    <string name="ad2" translatable="false">Виталий\nДорофеев</string>
+    <string name="ad2t" translatable="false"><a href="https://t.me/ten_bucks">@ten_bucks</a></string>
+    <string name="ad3" translatable="false">Егор\nЛеонов</string>
+    <string name="ad3t" translatable="false"><a href="https://t.me/leonov_egor">@leonov_egor</a></string>
+    <string name="ad4" translatable="false">Екатерина\nЖаркова</string>
+    <string name="ad4t" translatable="false"><a href="https://t.me/Key_Key">@Key_Key</a></string>
+    <string name="ad5" translatable="false">Константин\nПрохоров</string>
+    <string name="ad5t" translatable="false"><a href="https://t.me/falchio">@falchio</a></string>
+    <string name="ad6" translatable="false">Павел\nКузьмичев</string>
+    <string name="ad6t" translatable="false"><a href="https://t.me/Kuzmichev1995">@Kuzmichev1995</a></string>
 
-    <string name="back_end" translatable="false">Backend</string>
+    <string name="back_end">Backend Development</string>
     <string name="be1" translatable="false">Юрий\nБатюк</string>
     <string name="be1t" translatable="false"><a href="https://t.me/bagumg">@bagumg</a></string>
 
-    <string name="android_dev" translatable="false">Android developer</string>
-    <string name="ad1" translatable="false">Егор\nЛеонов</string>
-    <string name="ad1t" translatable="false"><a href="https://t.me/leonov_egor">@leonov_egor</a></string>
-
-    <string name="designer" translatable="false">Uх/Ui дизайнер</string>
+    <string name="designer">Uх/Ui Design</string>
     <string name="de1" translatable="false">Ирина\nКасевич</string>
     <string name="de1t" translatable="false"><a href="https://t.me/ira_k_ira">@ira_k_ira</a></string>
 
-    <string name="illustrators" translatable="false">Иллюстраторы</string>
+    <string name="illustrators">Illustrations</string>
     <string name="i1" translatable="false">Влада\nБережная</string>
     <string name="i1t" translatable="false"><a href="https://t.me/Vlashine">@Vlashine</a></string>
     <string name="i2" translatable="false">Юлия\nОникий</string>
@@ -57,11 +61,11 @@
     <string name="i10" translatable="false">Станислав\nГолушков</string>
     <string name="i10t" translatable="false"><a href="https://t.me/felixfelicis92">@felixfelicis92</a></string>
 
-    <string name="seo" translatable="false">SEO специалист</string>
+    <string name="seo">SEO Management</string>
     <string name="seo1" translatable="false">Кирилл\nПавлов</string>
     <string name="seo1t" translatable="false"><a href="https://t.me/PavlovKirill">@PavlovKirill</a></string>
 
-    <string name="digital_market" translatable="false">Digital-маркетолог</string>
+    <string name="digital_market">Digital Marketing</string>
     <string name="dm1" translatable="false">Ким\nВласов</string>
     <string name="dm1t" translatable="false"><a href="https://t.me/Kim1305">@Kim1305</a></string>
 

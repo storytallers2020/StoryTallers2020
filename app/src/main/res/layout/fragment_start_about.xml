@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_layout_standard"
-    tools:background="@drawable/ic_background_default">
+    tools:background="@drawable/ic_background_default"
+    tools:ignore="TooManyViews">
 
     <ImageView
         android:id="@+id/back_button_about"
@@ -48,7 +49,6 @@
             android:padding="@dimen/margin_small">
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -66,7 +66,6 @@
             </TableRow>
 
             <TableRow android:layout_marginTop="@dimen/margin_small">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -76,7 +75,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -93,7 +91,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -110,7 +107,6 @@
             </TableRow>
 
             <TableRow android:layout_marginTop="@dimen/margin_small">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -120,7 +116,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -137,78 +132,6 @@
             </TableRow>
 
             <TableRow android:layout_marginTop="@dimen/margin_small">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/front_end"
-                    android:textColor="@color/yellow" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/fe1" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_weight="1"
-                    android:text="@string/fe1t" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/fe2" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_weight="1"
-                    android:text="@string/fe2t" />
-            </TableRow>
-
-            <TableRow android:layout_marginTop="@dimen/margin_small">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/back_end"
-                    android:textColor="@color/yellow" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/be1" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_weight="1"
-                    android:text="@string/be1t" />
-            </TableRow>
-
-            <TableRow android:layout_marginTop="@dimen/margin_small">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -234,8 +157,118 @@
                     android:text="@string/ad1t" />
             </TableRow>
 
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ad2" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:text="@string/ad2t" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ad3" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:text="@string/ad3t" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ad4" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:text="@string/ad4t" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ad5" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:text="@string/ad5t" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ad6" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:text="@string/ad6t" />
+            </TableRow>
+
             <TableRow android:layout_marginTop="@dimen/margin_small">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/back_end"
+                    android:textColor="@color/yellow" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/be1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:text="@string/be1t" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="@dimen/margin_small">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -245,7 +278,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -262,7 +294,6 @@
             </TableRow>
 
             <TableRow android:layout_marginTop="@dimen/margin_small">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -272,7 +303,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -289,7 +319,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -306,7 +335,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -323,7 +351,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -340,7 +367,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -357,7 +383,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -374,7 +399,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -391,7 +415,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -408,7 +431,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -425,7 +447,6 @@
             </TableRow>
 
             <TableRow>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -442,7 +463,6 @@
             </TableRow>
 
             <TableRow android:layout_marginTop="@dimen/margin_small">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -457,8 +477,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/seo1"
-                    tools:ignore="TooManyViews" />
+                    android:text="@string/seo1" />
 
                 <TextView
                     android:layout_width="0dp"
