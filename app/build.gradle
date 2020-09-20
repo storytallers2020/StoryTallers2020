@@ -23,6 +23,12 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+
+    testOptions.unitTests {
+        includeAndroidResources = true
+
+        // ...
+    }
 }
 
 dependencies {
@@ -79,6 +85,12 @@ dependencies {
 
     //Test
     testImplementation TestImpl.junit
+    testImplementation TestImpl.coreTest
+    testImplementation TestImpl.robolectric
+    testImplementation TestImpl.archCoreTesting
+    testImplementation TestImpl.junitKtx
+    testImplementation TestImpl.mockk
+    testImplementation TestImpl.koinTest
 
     androidTestImplementation TestImpl.ext
     androidTestImplementation TestImpl.espresso
