@@ -1,5 +1,6 @@
 package ru.storytellers.ui.fragments
 
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game_end.*
 import org.koin.android.ext.android.inject
@@ -23,9 +24,13 @@ class GameEndFragment : BaseFragment<DataModel>() {
 
     override fun iniViewModel() {}
     override fun init() {
-        btn_select_cover.setOnClickListener { navigateToSelectCoverScreen() }
+        btn_select_cover.setOnClickListener {
+            model.buttonSelectCoverClickedStat()
+            navigateToSelectCoverScreen() }
         setResumeClickListener()
-        btn_copy.setOnClickListener { copyText() }
+        btn_copy.setOnClickListener {
+            model.buttonCopyClickedStat()
+            copyText() }
     }
 
     override fun onStart() {
@@ -42,6 +47,7 @@ class GameEndFragment : BaseFragment<DataModel>() {
 
     private fun setResumeClickListener() {
         tv_resume.setOnClickListener {
+            model.buttonContinueClickedStat()
             router.backTo(Screens.GameScreen())
         }
     }
@@ -59,11 +65,13 @@ class GameEndFragment : BaseFragment<DataModel>() {
 
     private fun handlerUriBackgroundImage() {
         model.subscribeOnUriBackgroundImage().observe(viewLifecycleOwner, Observer {
-            setBackgroundImage(it, root_layout_cl)
+            val v: ConstraintLayout = requireActivity().findViewById(R.id.main_background)
+            setBackgroundImage(it, v)
         })
     }
 
     override fun backClicked(): Boolean {
+        model.onBackClicked(this.javaClass.simpleName)
        // router.exit()
         return true
     }

@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_element_game_cl"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/padding_layout_standard"
-    android:paddingVertical="@dimen/padding_layout_bottom"
+    android:paddingVertical="@dimen/padding_layout_standard"
     tools:background="@drawable/location_beach">
 
     <TextView
@@ -55,7 +55,7 @@
                     android:lineSpacingExtra="@dimen/line_spacing_extra"
                     android:textColor="@color/white"
                     android:background="@color/transparent_30"
-                    tools:text="@string/tale_sample" />
+                    tools:text="@string/tale_text_sample" />
             </androidx.core.widget.NestedScrollView>
 
             <ImageView

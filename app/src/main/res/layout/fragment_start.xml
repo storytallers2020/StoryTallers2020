@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    android:background="@drawable/ic_background_default"
-    android:orientation="vertical">
+    tools:background="@drawable/ic_background_default">
 
     <TextView
         android:id="@+id/subHeader"
-        style="@style/SubHeader"
+        style="@style/Cover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/title_welcome"

@@ -3,12 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    tools:background="@drawable/ic_background_default">
+    tools:background="@drawable/location_magic_oak">
 
     <ImageView
         android:id="@+id/back_button_character"
@@ -43,7 +44,8 @@
 
     <TextView
         android:id="@+id/subHeader"
-        style="@style/SubHeader"
+        style="@style/Standard"
+        android:layout_marginVertical="@dimen/margin_standard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/screen_header"
@@ -70,7 +72,7 @@
             android:textSize="@dimen/text_standard"
             android:lineSpacingExtra="@dimen/line_spacing_extra"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/tale_sample" />
+            tools:text="@string/tale_text_sample" />
 
     </androidx.core.widget.NestedScrollView>
 

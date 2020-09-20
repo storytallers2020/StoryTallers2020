@@ -12,7 +12,7 @@ import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.LibraryBookViewModel
 
-private const val FRAGMENT_DIALOG_TAG1 = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092396"
+private const val FRAGMENT_DIALOG_TAG = "book-5d62-46bf-ab6"
 
 class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>() {
     override val model: LibraryBookViewModel by inject()
@@ -74,6 +74,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
             setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.btn_share -> {
+                        model.itemShareClickedStat()
                         titleStory?.let { title ->
                             textStory?.let { text ->
                                 with(concatTitleAndTextStory(title, text, getString(R.string.msg_share))) {
@@ -84,6 +85,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                         true
                     }
                     R.id.btn_copy -> {
+                        model.itemCopyClickedStat()
                         textStory?.let { text ->
                             copyText(requireContext(), text)
                             toastShowLong(requireContext(), getString(R.string.msg_copy))
@@ -91,6 +93,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                         true
                     }
                     R.id.btn_delete -> {
+                        model.itemDeleteClickedStat()
                         createAndShowAlertDialog()
                         true
                     }
@@ -112,7 +115,8 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
 
     private fun createAndShowAlertDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_story).show(fragMan, FRAGMENT_DIALOG_TAG1)
+            AlertDialogFragment.newInstance(this, R.string.dialog_story)
+                .show(fragMan, FRAGMENT_DIALOG_TAG)
         }
     }
 
@@ -123,10 +127,12 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     }
 
     private fun backToLibraryScreen(){
+        model.onBackClicked(this.javaClass.simpleName)
         router.backTo(Screens.LibraryScreen())
     }
 
     override fun backClicked(): Boolean {
+        model.onBackClicked(this.javaClass.simpleName)
         router.exit()
         return true
     }

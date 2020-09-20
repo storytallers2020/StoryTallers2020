@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
-    android:paddingBottom="@dimen/padding_layout_bottom"
+    android:paddingBottom="@dimen/padding_small"
     android:layout_gravity="center_horizontal"
-    android:background="@drawable/ic_background_default">
+    tools:background="@drawable/ic_background_default">
 
     <ImageView
         android:id="@+id/back_from_location"
@@ -102,6 +102,7 @@
 
     <TextView
         android:id="@+id/subHeader"
+        style="@style/Standard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/tale_begins"

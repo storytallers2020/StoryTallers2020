@@ -17,4 +17,5 @@
     <color name="menuSecondaryColor">#9A2C53</color>
     <color name="menuBackground">#F9BE40</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#fff</color>
+    <color name="ic_launcher_background">#00FFFFFF</color>
 </resources>

@@ -14,7 +14,7 @@ import ru.storytellers.utils.AlertDialogFragment
 import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.TeamCharacterViewModel
 
-private const val FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
+private const val FRAGMENT_DIALOG_TAG = "team-5d62-46bf-ab6"
 
 class TeamCharacterFragment : BaseFragment<DataModel>() {
     override val model: TeamCharacterViewModel by inject()
@@ -35,7 +35,6 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
         character = player
         createAndShowAlertDialog()
     }
-
 
     override fun init() {
         btn_next.setOnClickListener { navigateToLocationScreen() }

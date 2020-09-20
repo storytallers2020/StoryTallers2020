@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/padding_layout_standard"
         android:paddingBottom="@dimen/padding_layout_bottom"
-        android:background="@drawable/ic_background_default">
+        tools:background="@drawable/ic_background_default">
 
         <ImageView
             android:id="@+id/back_button_character"
@@ -126,17 +126,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
-                android:maxLength="15"
-                android:maxLines="1"
-                android:textColor="@color/white"
                 android:gravity="center_vertical"
-                android:paddingHorizontal="@dimen/padding_small"
-                android:singleLine="true"
                 android:imeOptions="actionDone"
                 android:inputType="textPersonName|textCapWords|textAutoComplete|textAutoCorrect"
-                android:textColorHint="@color/colorAccent"
-                android:textSize="@dimen/text_standard">
-            </com.google.android.material.textfield.TextInputEditText>
+                android:maxLength="@integer/max_length_name"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/padding_small"
+                android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -168,7 +164,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_save"
-        android:enabled="false"
+        android:enabled="true"
         android:layout_marginTop="@dimen/margin_standard"
         android:layout_marginHorizontal="@dimen/margin_standard"
         app:layout_constraintVertical_bias="1"
