@@ -1,6 +1,7 @@
 package ru.storytellers.ui.fragments
 
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
@@ -39,8 +40,8 @@ class GameFragment : BaseFragment<DataModel>() {
         assistantFragment.showIntro()
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         model.getUriBackgroundImage()
         model.onStartTurn()
     }
