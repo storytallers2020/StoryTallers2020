@@ -12,21 +12,22 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.LibraryAdapter
+import ru.storytellers.ui.assistant.LibraryFragmentAssistant
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.*
+import ru.storytellers.utils.AlertDialogFragment
+import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.LibraryViewModel
 
-private const val FRAGMENT_DIALOG_TAG = "library-5d62-46bf-ab6"
 
 class LibraryFragment : BaseFragment<DataModel>() {
 
     override val model: LibraryViewModel by inject()
+    private val assistant: LibraryFragmentAssistant by lazy { LibraryFragmentAssistant(this) }
     override val layoutRes = R.layout.fragment_library
     private var story: Story? = null
     private var textStory: String? = null
     private var titleStory: String? = null
     private var listStory: List<Story>? = null
-    private var removeStoryFlag =false
 
     companion object {
         fun newInstance() = LibraryFragment()
@@ -54,7 +55,8 @@ class LibraryFragment : BaseFragment<DataModel>() {
         rv_books.adapter = libraryAdapter
         back_button_character.setOnClickListener {
             model.btnToStartScreenClickedStat()
-            toStartScreen() }
+            toStartScreen()
+        }
     }
 
     override fun onStart() {
@@ -86,7 +88,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
             }
         })
 
-        model.subscribeOnRemoveStory().observe(viewLifecycleOwner, Observer {deleted ->
+        model.subscribeOnDeleteStory().observe(viewLifecycleOwner, Observer { deleted ->
             if (deleted != 0) {
                 context?.let { context ->
                     toastShowLong(context, context.getString(R.string.msg_delete))
@@ -110,39 +112,33 @@ class LibraryFragment : BaseFragment<DataModel>() {
     private fun togglePopupMenu(view: View) {
         with(view.popup_menu) {
             setMenuItemsClickListeners(view)
-            visibility = if(visibility == GONE) VISIBLE else GONE
+            visibility = if (visibility == GONE) VISIBLE else GONE
         }
     }
 
     private fun setMenuItemsClickListeners(view: View) {
         with(view) {
-            btn_share.setOnClickListener {
-                model.itemShareClickedStat()
-                titleStory?.let { title ->
-                    textStory?.let { text ->
-                        with(concatTitleAndTextStory(title, text, getString(R.string.msg_share))) {
-                            if (this.isNotBlank()) shareText(this@LibraryFragment, this)
-                        }
-                    }
-                }
-            }
-            btn_copy.setOnClickListener {
-                model.itemCopyClickedStat()
-                textStory?.let { text ->
-                    copyText(requireContext(), text)
-                    toastShowLong(requireContext(), getString(R.string.msg_copy))
-                }
-            }
-            btn_delete.setOnClickListener {
-                model.itemDeleteClickedStat()
-                createAndShowAlertDialog()
-            }
+            btn_share.setOnClickListener { btnShareClickListener() }
+            btn_copy.setOnClickListener { btnCopyClickListener() }
+            btn_delete.setOnClickListener { btnDeleteClickListener() }
         }
     }
 
-    fun setStateRemoveStoryFlag(){
-        removeStoryFlag=true
-        removeStory()
+
+    private fun btnShareClickListener() {
+        model.itemShareClickedStat()
+        assistant.shareText(textStory, titleStory)
+    }
+
+    private fun btnCopyClickListener() {
+        model.itemCopyClickedStat()
+        assistant.copyText(textStory)
+        toastShowLong(requireContext(), getString(R.string.msg_copy))
+    }
+
+    private fun btnDeleteClickListener() {
+        model.itemDeleteClickedStat()
+        assistant.createAndShowAlertDialog()
     }
 
     private fun getTitleStory() {
@@ -153,16 +149,19 @@ class LibraryFragment : BaseFragment<DataModel>() {
         story?.let { model.getTextStory(it) }
     }
 
-    private fun removeStory() {
-        story?.let { model.removeStory(it) }
-        removeStoryFlag=false
+    fun deleteStory() {
+        story?.let { model.deleteStory(it) }
     }
 
+    /*
     private fun createAndShowAlertDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_story).show(fragMan, FRAGMENT_DIALOG_TAG)
+            AlertDialogFragment.newInstance(this, R.string.dialog_story)
+                .show(fragMan, FRAGMENT_DIALOG_TAG)
         }
     }
+
+     */
 
     private fun navigateToLibraryBookScreen(story: Story) {
         router.navigateTo(Screens.LibraryBookScreen(story))
