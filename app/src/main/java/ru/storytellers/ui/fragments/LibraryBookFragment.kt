@@ -52,7 +52,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer { titleStoryLocal ->
             titleStoryLocal?.let { title ->
                 titleStory = title
-                subHeader.text = title
+                subHeader.setText(title)
             }
         })
         model.subscribeOnRemoveStory().observe(viewLifecycleOwner, Observer {

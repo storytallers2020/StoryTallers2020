@@ -86,6 +86,7 @@
     // Library screens
     <string name="title_library">Library</string>
     <string name="subtitle_library">My Fairy Tales</string>
+    <string name="btn_rename">Rename</string>
     <string name="btn_copy">"Copy "</string>
     <string name="msg_copy">Copied to clipboard</string>
     <string name="btn_share">"Share "</string>

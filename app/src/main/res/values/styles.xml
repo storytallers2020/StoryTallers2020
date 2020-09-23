@@ -87,10 +87,9 @@
     </style>
 
     <style name="BackArrow">
-        <item name="android:scaleType">centerInside</item>
-        <item name="android:scaleX">1.8</item>
-        <item name="android:scaleY">1.8</item>
-        <item name="android:layout_margin">@dimen/margin_xs</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:scaleX">1.3</item>
+        <item name="android:scaleY">1.3</item>
     </style>
 
     <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
