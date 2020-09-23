@@ -10,8 +10,8 @@ import ru.storytellers.utils.shareText
 private const val FRAGMENT_DIALOG_TAG = "library-5d62-46bf-ab6"
 
 class LibraryFragmentAssistant(private val fragment: LibraryFragment) {
-    private var storyTitle: String? = null
-    private var storyText: String? = null
+    private var storyTitle: String = ""
+    private var storyText: String = ""
 
     fun setStoryTitle(title: String) {
         storyTitle = title
@@ -22,21 +22,28 @@ class LibraryFragmentAssistant(private val fragment: LibraryFragment) {
     }
 
     fun shareText() {
-        storyTitle?.let { title ->
-            storyText?.let { text ->
-                with(concatTitleAndTextStory(title, text, fragment.getString(R.string.msg_share))) {
-                    if (this.isNotBlank()) shareText(
-                        fragment,
-                        this
-                    )
-                }
-            }
+        with(
+            concatTitleAndTextStory(
+                storyTitle,
+                storyText,
+                fragment.getString(R.string.msg_share)
+            )
+        ) {
+            if (this.isNotBlank())
+                shareText(fragment, this)
         }
     }
 
     fun copyText() {
-        storyText?.let { text ->
-            copyText(fragment.requireContext(), text)
+        with(
+            concatTitleAndTextStory(
+                storyTitle,
+                storyText,
+                fragment.getString(R.string.msg_share)
+            )
+        ) {
+            if (this.isNotBlank())
+                copyText(fragment.requireContext(), this)
         }
     }
 
