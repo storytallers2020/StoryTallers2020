@@ -39,7 +39,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
             .setPositiveButton(R.string.positive_answer) { _, _ ->
                 when (fragment) {
                     is LibraryFragment -> {
-                        fragment.setStateRemoveStoryFlag()
+                        fragment.deleteStory()
                     }
                     is LibraryBookFragment -> {
                         fragment.setStateRemoveStoryFlag()
