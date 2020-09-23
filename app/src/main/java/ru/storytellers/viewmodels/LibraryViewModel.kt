@@ -23,8 +23,9 @@ class LibraryViewModel(
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Story>>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
     private val onLoadingLiveData = MutableLiveData<DataModel.Loading>()
-
     private val onRemoveStoryLiveData = MutableLiveData<Int>()
+    private val onChangedListLiveData = MutableLiveData<List<Story>>()
+    private val storyLiveData = MutableLiveData<Story>()
     private val textStoryLiveData = MutableLiveData<String>()
     private val titleStoryLiveData = MutableLiveData<String>()
 
@@ -32,26 +33,29 @@ class LibraryViewModel(
         return onSuccessLiveData
     }
 
-    fun subscribeOnDeleteStory(): LiveData<Int> {
-        return onRemoveStoryLiveData
+    fun subscribeOnLoading(): LiveData<DataModel.Loading> {
+        return onLoadingLiveData
     }
 
     fun subscribeOnError(): LiveData<DataModel.Error> {
         return onErrorLiveData
     }
 
-    fun subscribeOnLoading(): LiveData<DataModel.Loading> {
-        return onLoadingLiveData
+    fun subscribeOnTitleStory(): LiveData<String> {
+        return titleStoryLiveData
     }
 
     fun subscribeOnTextStory(): LiveData<String> {
         return textStoryLiveData
     }
 
-    fun subscribeOnTitleStory(): LiveData<String> {
-        return titleStoryLiveData
+    fun subscribeOnDeleteStory(): LiveData<Int> {
+        return onRemoveStoryLiveData
     }
 
+    fun subscribeOnChangedList(): LiveData<List<Story>> {
+        return onChangedListLiveData
+    }
 
     fun getAllStory() {
         storyRepository.getAll()
@@ -63,34 +67,48 @@ class LibraryViewModel(
             })
     }
 
-    fun deleteStory(story: Story) {
-        storyRepository.deleteStoryById(story.id)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ storiesRemoved ->
-                onRemoveStoryLiveData.value = storiesRemoved
-            }, {
-                Timber.e(it, "Remove story throwable")
-            })
+    fun setStoryLiveData(story: Story) {
+        storyLiveData.value = story
+        setTitleStory()
+        setTextStory()
     }
 
-    fun getTextStory(story: Story) {
-        storyRepository.getStoryWithSentencesById(story.id)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                it.sentences?.let { sentences ->
-                    textStoryLiveData.value = mapToList(sentences).collectSentence()
-                }
-            }, {
-                onErrorLiveData.value = DataModel.Error(it)
-            })
+    private fun setTitleStory() {
+        titleStoryLiveData.value = storyLiveData.value?.name
+    }
+
+    private fun setTextStory() {
+        storyLiveData.value?.id?.let { id ->
+            storyRepository.getStoryWithSentencesById(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ story ->
+                    story.sentences?.let { sentences ->
+                        textStoryLiveData.value = mapToList(sentences).collectSentence()
+                    }
+                }, {
+                    onErrorLiveData.value = DataModel.Error(it)
+                })
+        }
     }
 
     private fun mapToList(sentences: List<SentenceOfTale>): List<String> =
         sentences.map { it.content }
 
-
-    fun getTitleStory(story: Story) {
-        titleStoryLiveData.value = story.name
+    fun deleteStory() {
+        storyLiveData.value?.let { story ->
+            storyRepository.deleteStoryById(story.id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ storiesRemoved ->
+                    onRemoveStoryLiveData.value = storiesRemoved
+                    onSuccessLiveData.value?.data?.apply {
+                        onChangedListLiveData.value = toMutableList().apply {
+                            remove(story)
+                        }
+                    }
+                }, {
+                    Timber.e(it, "Remove story throwable")
+                })
+        }
     }
 
     fun onClearStorage() {

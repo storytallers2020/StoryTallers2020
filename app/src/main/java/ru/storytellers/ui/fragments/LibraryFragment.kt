@@ -14,7 +14,6 @@ import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.LibraryAdapter
 import ru.storytellers.ui.assistant.LibraryFragmentAssistant
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.AlertDialogFragment
 import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.LibraryViewModel
 
@@ -24,31 +23,42 @@ class LibraryFragment : BaseFragment<DataModel>() {
     override val model: LibraryViewModel by inject()
     private val assistant: LibraryFragmentAssistant by lazy { LibraryFragmentAssistant(this) }
     override val layoutRes = R.layout.fragment_library
-    private var story: Story? = null
-    private var textStory: String? = null
-    private var titleStory: String? = null
-    private var listStory: List<Story>? = null
 
     companion object {
         fun newInstance() = LibraryFragment()
     }
 
+    private val libraryAdapter: LibraryAdapter by lazy {
+        LibraryAdapter(
+            itemClickListener,
+            buttonMenuClickListener,
+            buttonShareClickListener,
+            buttonCopyClickListener,
+            buttonDeleteClickListener
+        )
+    }
     private val itemClickListener = { story: Story ->
         model.storySelectedStat(story)
         navigateToLibraryBookScreen(story)
     }
-    private val buttonMenuClickListener = { view: View, storyLocal: Story ->
-        togglePopupMenu(view)
-        story = storyLocal
-        getTitleStory()
-        getTextStory()
+    private val buttonMenuClickListener = { view: View ->
+        togglePopupMenu(view.popup_menu)
     }
-
-    private val libraryAdapter: LibraryAdapter by lazy {
-        LibraryAdapter(
-            itemClickListener,
-            buttonMenuClickListener
-        )
+    private val buttonShareClickListener = { story: Story ->
+        setStoryClicked(story)
+        model.itemShareClickedStat()
+        assistant.shareText()
+    }
+    private val buttonCopyClickListener = { story: Story ->
+        setStoryClicked(story)
+        model.itemCopyClickedStat()
+        assistant.copyText()
+        toastShowLong(requireContext(), getString(R.string.msg_copy))
+    }
+    private val buttonDeleteClickListener = { story: Story ->
+        setStoryClicked(story)
+        model.itemDeleteClickedStat()
+        assistant.showAlertDialog()
     }
 
     override fun init() {
@@ -71,97 +81,56 @@ class LibraryFragment : BaseFragment<DataModel>() {
 
     override fun iniViewModel() {
         model.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
-            it.data?.let { listStoryLocal ->
-                if (listStoryLocal.isNotEmpty()) {
-                    listStory = listStoryLocal
-                    libraryAdapter.setData(listStory)
-                }
+            it.data?.let { list ->
+                renderData(list)
             }
         })
 
         model.subscribeOnError().observe(viewLifecycleOwner, Observer {
             activity?.let { context ->
-                toastShowLong(
-                    context,
-                    context.getString(R.string.something_went_wrong)
-                )
+                toastShowLong(context, context.getString(R.string.something_went_wrong))
             }
         })
 
         model.subscribeOnDeleteStory().observe(viewLifecycleOwner, Observer { deleted ->
+            libraryAdapter.notifyDataSetChanged()
             if (deleted != 0) {
                 context?.let { context ->
                     toastShowLong(context, context.getString(R.string.msg_delete))
                 }
-                listStory?.let {
-                    val changedList = it.toMutableList()
-                    changedList.remove(story)
-                    libraryAdapter.setData(changedList)
-                }
             }
         })
-        model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer { textStoryLocal ->
-            textStory = textStoryLocal
+
+        model.subscribeOnChangedList().observe(viewLifecycleOwner, Observer {
+            renderData(it)
         })
 
-        model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer { titleStoryLocal ->
-            titleStory = titleStoryLocal
+        model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer { storyText ->
+            assistant.setStoryText(storyText)
         })
+
+        model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer { storyTitle ->
+            assistant.setStoryTitle(storyTitle)
+        })
+    }
+
+    private fun renderData(data: List<Story>) {
+        if (data.isNotEmpty()) {
+            libraryAdapter.setData(data)
+        }
     }
 
     private fun togglePopupMenu(view: View) {
-        with(view.popup_menu) {
-            setMenuItemsClickListeners(view)
-            visibility = if (visibility == GONE) VISIBLE else GONE
-        }
+        view.visibility = if (view.visibility == GONE) VISIBLE else GONE
     }
 
-    private fun setMenuItemsClickListeners(view: View) {
-        with(view) {
-            btn_share.setOnClickListener { btnShareClickListener() }
-            btn_copy.setOnClickListener { btnCopyClickListener() }
-            btn_delete.setOnClickListener { btnDeleteClickListener() }
-        }
-    }
-
-
-    private fun btnShareClickListener() {
-        model.itemShareClickedStat()
-        assistant.shareText(textStory, titleStory)
-    }
-
-    private fun btnCopyClickListener() {
-        model.itemCopyClickedStat()
-        assistant.copyText(textStory)
-        toastShowLong(requireContext(), getString(R.string.msg_copy))
-    }
-
-    private fun btnDeleteClickListener() {
-        model.itemDeleteClickedStat()
-        assistant.createAndShowAlertDialog()
-    }
-
-    private fun getTitleStory() {
-        story?.let { model.getTitleStory(it) }
-    }
-
-    private fun getTextStory() {
-        story?.let { model.getTextStory(it) }
+    private fun setStoryClicked(story: Story) {
+        model.setStoryLiveData(story)
     }
 
     fun deleteStory() {
-        story?.let { model.deleteStory(it) }
+        model.deleteStory()
     }
-
-    /*
-    private fun createAndShowAlertDialog() {
-        activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_story)
-                .show(fragMan, FRAGMENT_DIALOG_TAG)
-        }
-    }
-
-     */
 
     private fun navigateToLibraryBookScreen(story: Story) {
         router.navigateTo(Screens.LibraryBookScreen(story))
