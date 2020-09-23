@@ -124,14 +124,15 @@
 
             <ImageButton
                 android:id="@+id/btn_add_player"
-                android:src="@drawable/ic_add"
-                android:background="@color/no_color"
                 android:layout_width="@dimen/icon_medium"
                 android:layout_height="@dimen/icon_medium"
                 android:layout_marginVertical="@dimen/margin_large"
+                android:background="@color/no_color"
                 android:contentDescription="@string/btn_new_character"
+                android:src="@drawable/ic_add"
                 app:layout_constraintBottom_toTopOf="@id/btn_next"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/player_list_rv"
                 app:layout_constraintVertical_bias="0"
                 tools:visibility="visible" />
