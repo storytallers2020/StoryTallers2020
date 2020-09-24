@@ -18,6 +18,7 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.di.amplitudeModule
 import ru.storytellers.di.gameEngine
 import ru.storytellers.engine.Game
 import ru.storytellers.engine.GameStorage
@@ -39,7 +40,7 @@ class GameViewModelTest() : KoinTest {
 
     @Before
     fun setUp() {
-        loadKoinModules(gameEngine)
+        loadKoinModules(listOf(gameEngine, amplitudeModule))
         storage = StoryTallerApp.instance.gameStorage
         game = Game()
         gameViewModel = GameViewModel(game)

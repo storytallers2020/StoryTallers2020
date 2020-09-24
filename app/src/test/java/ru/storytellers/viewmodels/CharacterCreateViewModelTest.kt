@@ -9,8 +9,11 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import io.reactivex.rxjava3.core.Single
-import org.junit.*
+import org.junit.After
 import org.junit.Assert.*
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.stopKoin
@@ -53,7 +56,7 @@ class CharacterCreateViewModelTest : KoinTest {
     fun `get all character from character repository`() {
         val testCharacter1 = mockk<Character>()
         val testCharacter2 = mockk<Character>()
-        val testListCharacter = listOf<Character>(testCharacter1, testCharacter2)
+        val testListCharacter = listOf(testCharacter1, testCharacter2)
 
         every { characterRepository.getAll() } returns Single.just(testListCharacter)
 
@@ -87,6 +90,8 @@ class CharacterCreateViewModelTest : KoinTest {
 
     @Test
     fun `when called CharacterCreateViewModel-transferNamePlayer called and setNamePlayer + getPlayer,`() {
+
+        //в этом методе падает AmplitudeClient, что-то не успевает закрыть, на прохождение теста не влияет
 
         val editable: Editable = SpannableStringBuilder("Editable")
         val char = mockk<Character>()
