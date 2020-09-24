@@ -9,6 +9,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:paddingTop="@dimen/padding_layout_standard"
         android:paddingBottom="@dimen/padding_layout_bottom"
         tools:background="@drawable/ic_background_default">
