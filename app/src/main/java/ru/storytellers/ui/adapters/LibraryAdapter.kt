@@ -12,7 +12,10 @@ import ru.storytellers.utils.resourceToUri
 
 class LibraryAdapter(
     val itemClickListener: (story: Story) -> Unit,
-    val btnMenuClickListener: (view: View, story: Story) -> Unit
+    val btnMenuClickListener: (view: View) -> Unit,
+    val btnShareClickListener: (story: Story) -> Unit,
+    val btnCopyClickListener: (story: Story) -> Unit,
+    val btnDeleteClickListener: (story: Story) -> Unit
 ) : RecyclerView.Adapter<LibraryAdapter.MyViewHolder>() {
     private var listStory = mutableListOf<Story>()
 
@@ -52,7 +55,16 @@ class LibraryAdapter(
                     itemClickListener(story)
                 }
                 btn_menu.setOnClickListener {
-                    btnMenuClickListener(this, story)
+                    btnMenuClickListener(this)
+                }
+                btn_share.setOnClickListener {
+                    btnShareClickListener(story)
+                }
+                btn_copy.setOnClickListener {
+                    btnCopyClickListener(story)
+                }
+                btn_delete.setOnClickListener {
+                    btnDeleteClickListener(story)
                 }
             }
         }

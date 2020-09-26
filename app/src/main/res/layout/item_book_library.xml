@@ -24,14 +24,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:textAlignment="center"
+        android:maxLines="@integer/max_lines_title"
         android:layout_margin="@dimen/margin_large"
-        android:padding="@dimen/margin_small"
+        android:paddingHorizontal="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Приключения трёх сыновей-королевичей в тридесятом царстве-государстве." />
+        tools:text="@string/tale_title_sample" />
 
     <ImageButton
         android:id="@+id/btn_menu"

@@ -25,6 +25,7 @@
     <dimen name="text_standard">20sp</dimen>
     <dimen name="text_standard_header">24sp</dimen>
     <dimen name="text_large">28sp</dimen>
+    <dimen name="max_title_height">120sp</dimen>
 
     //Line spacing
     <dimen name="line_spacing_extra">4dp</dimen>
