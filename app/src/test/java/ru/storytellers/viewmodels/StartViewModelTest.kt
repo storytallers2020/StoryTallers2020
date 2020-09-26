@@ -36,7 +36,7 @@ class StartViewModelTest {
 
     @After
     fun tearDown() {
-        stopKoin()
+        stopKoin() //Если убрать, то при массовом запуске тестов слоя ViewModel, часть тестов не выполнится
     }
 
     @Test
