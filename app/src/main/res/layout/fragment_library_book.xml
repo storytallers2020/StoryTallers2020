@@ -15,9 +15,9 @@
         android:id="@+id/back_button_character"
         style="@style/BackArrow"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_arrow_back"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/arrow_back"
+        android:src="@drawable/ic_arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/screen_header" />
@@ -25,9 +25,8 @@
     <ImageView
         android:id="@+id/btn_menu"
         style="@style/BackArrow"
-        android:layout_margin="@dimen/margin_xxs"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_menu_24"
         android:contentDescription="@string/btn_menu"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
@@ -42,36 +41,42 @@
         android:text="@string/title_library"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/subHeader"
-        style="@style/Standard"
-        android:layout_marginVertical="@dimen/margin_standard"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layout_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/screen_header"
-        tools:text="Хрустальная гора" />
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/margin_standard"
+        android:scrollbars="vertical"
+        app:layout_constraintHeight_max="@dimen/max_title_height"
+        app:layout_constraintTop_toBottomOf="@id/screen_header">
+
+        <TextView
+            android:id="@+id/subHeader"
+            style="@style/Standard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/no_color"
+            tools:text="@string/tale_title_sample" />
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/layout_tale"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/background_transparent"
-        android:paddingVertical="@dimen/margin_xxs"
         android:layout_marginTop="@dimen/margin_small"
+        android:background="@drawable/background_transparent"
         android:fillViewport="true"
+        android:paddingVertical="@dimen/margin_xxs"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/subHeader">
+        app:layout_constraintTop_toBottomOf="@id/layout_title">
 
         <TextView
             android:id="@+id/tv_tale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_small"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_standard"
             android:lineSpacingExtra="@dimen/line_spacing_extra"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/tale_text_sample" />
 
     </androidx.core.widget.NestedScrollView>

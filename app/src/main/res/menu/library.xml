@@ -5,6 +5,12 @@
     tools:context=".ui.MainActivity">
 
     <item
+        android:id="@+id/btn_rename"
+        android:title="@string/btn_rename"
+        android:icon="@drawable/ic_edit_24"
+        app:showAsAction="never|withText" />
+
+    <item
         android:id="@+id/btn_share"
         android:title="@string/btn_share"
         android:icon="@drawable/ic_share_24"

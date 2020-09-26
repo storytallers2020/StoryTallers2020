@@ -2,6 +2,7 @@ package ru.storytellers.ui.fragments
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_choosing_title.*
@@ -10,6 +11,7 @@ import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.hideSoftKey
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 import ru.storytellers.utils.toastShowLong
@@ -37,9 +39,16 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         }
     }
 
+    private val focusListener = View.OnFocusChangeListener { v, hasFocus ->
+        if (!hasFocus) {
+            hideSoftKey(v)
+        }
+    }
+
 
     override fun init() {
         book_name.addTextChangedListener(textWatcher)
+        book_name.onFocusChangeListener = focusListener
         back_button_character.setOnClickListener { backToSelectCoverScreen() }
         btn_next.setOnClickListener {
             saveStory()

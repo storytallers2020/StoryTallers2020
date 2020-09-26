@@ -1,8 +1,7 @@
 package ru.storytellers.ui.fragments
 
 import android.content.Context
-import android.text.Editable
-import android.view.inputmethod.InputMethodManager
+import android.view.View
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_character_create.*
 import org.koin.android.ext.android.inject
@@ -12,6 +11,7 @@ import ru.storytellers.model.entity.Character
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.CharacterCreateAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.hideSoftKey
 import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.CharacterCreateViewModel
 import timber.log.Timber
@@ -32,7 +32,13 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         model.characterSelected(character)
         characterAdapter.selectedPosition = position
         characterAdapter.notifyDataSetChanged()
-        hideKeyboard()
+        hideSoftKey(enter_name_field_et)
+    }
+
+    private val focusListener = View.OnFocusChangeListener { v, hasFocus ->
+        if (!hasFocus) {
+            hideSoftKey(v)
+        }
     }
 
     companion object {
@@ -53,8 +59,10 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
     override fun onStart() {
         super.onStart()
-        val editable = Editable.Factory.getInstance().newEditable("")
-        enter_name_field_et.text = editable
+        enter_name_field_et.apply {
+            setText("")
+            onFocusChangeListener = focusListener
+        }
         model.getAllCharacters()
     }
 
@@ -99,13 +107,6 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         if (it.data!!.isNotEmpty()) {
             characterAdapter.setData(it.data)
         }
-    }
-
-    private fun hideKeyboard() {
-        (inputMethodManager as? InputMethodManager)?.hideSoftInputFromWindow(
-            enter_name_field_et.windowToken,
-            InputMethodManager.HIDE_NOT_ALWAYS
-        )
     }
 
     private fun statusCheck() = isCharacterSelected && isNameEntered
