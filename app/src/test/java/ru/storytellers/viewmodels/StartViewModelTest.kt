@@ -8,6 +8,7 @@ import io.mockk.mockk
 import io.reactivex.rxjava3.core.Single
 import org.junit.*
 import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
@@ -24,7 +25,7 @@ import ru.storytellers.model.repository.StoryRepository
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 @Config(sdk = [28])
-class StartViewModelTest : KoinTest {
+class StartViewModelTest {
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -35,6 +36,7 @@ class StartViewModelTest : KoinTest {
 
     @After
     fun tearDown() {
+        stopKoin() //Если убрать, то при массовом запуске тестов слоя ViewModel, часть тестов не выполнится
     }
 
     @Test
