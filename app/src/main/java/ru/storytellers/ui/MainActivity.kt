@@ -53,6 +53,5 @@ class MainActivity : AppCompatActivity() {
                 return
             }
         }
-        router.exit()
     }
 }

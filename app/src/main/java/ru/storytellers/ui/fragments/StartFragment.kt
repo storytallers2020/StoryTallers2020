@@ -11,10 +11,10 @@ import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.AlertDialogFragment
 import ru.storytellers.utils.toastShowLong
-import ru.storytellers.utils.toastShowShort
 import ru.storytellers.viewmodels.StartViewModel
 
-private const val FRAGMENT_DIALOG_TAG = "start-5d62-46bf-ab6"
+const val DIALOG_TAG_EXIT = "start-fragment-exit-46bf-ab6"
+const val DIALOG_TAG_POLICY = "start-fragment-policy-46bf-ab6"
 
 class StartFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_start
@@ -69,23 +69,22 @@ class StartFragment : BaseFragment<DataModel>() {
     }
 
     private fun checkAgreement() {
-        sharedPreferences = activity?.getSharedPreferences(FRAGMENT_DIALOG_TAG, 0)
-        sharedPreferences?.getBoolean(FRAGMENT_DIALOG_TAG, false)?.let {
+        sharedPreferences = activity?.getSharedPreferences(DIALOG_TAG_POLICY, 0)
+        sharedPreferences?.getBoolean(DIALOG_TAG_POLICY, false)?.let {
             if (!it) {
-                showAlertDialog()
+                showAlertDialog(DIALOG_TAG_POLICY, 0)
             }
         }
     }
 
-    private fun showAlertDialog() {
-        activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this).show(fragMan, FRAGMENT_DIALOG_TAG)
+    private fun showAlertDialog(tag: String, title: Int) {
+        activity?.supportFragmentManager?.let { manager ->
+            AlertDialogFragment.newInstance(this, title).show(manager, tag)
         }
     }
 
     fun acceptAgreement() {
-        sharedPreferences?.edit()?.putBoolean(FRAGMENT_DIALOG_TAG, true)?.apply()
-        toastShowShort(context, getString(R.string.msg_agreement_accepted))
+        sharedPreferences?.edit()?.putBoolean(DIALOG_TAG_POLICY, true)?.apply()
     }
 
     private fun navigateToRulesGame() {
@@ -98,13 +97,17 @@ class StartFragment : BaseFragment<DataModel>() {
         router.navigateTo(Screens.AppInfoScreen())
     }
 
-    private fun navigateToLibraryScreen(){
+    private fun navigateToLibraryScreen() {
         model.onLibraryScreenStatistics()
         router.navigateTo(Screens.LibraryScreen())
     }
 
     override fun backClicked(): Boolean {
-        router.exit()
+        showAlertDialog(DIALOG_TAG_EXIT, R.string.dialog_exit)
         return false
+    }
+
+    fun closeApplication() {
+        router.exit()
     }
 }
