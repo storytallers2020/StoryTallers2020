@@ -10,10 +10,7 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import ru.storytellers.R
-import ru.storytellers.ui.fragments.LibraryBookFragment
-import ru.storytellers.ui.fragments.LibraryFragment
-import ru.storytellers.ui.fragments.StartFragment
-import ru.storytellers.ui.fragments.TeamCharacterFragment
+import ru.storytellers.ui.fragments.*
 
 class AlertDialogFragment(private val fragment: Fragment, private val title: Int) : AppCompatDialogFragment() {
 
@@ -24,10 +21,9 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = fragment.activity as FragmentActivity
-        return if (fragment is StartFragment) {
-            getAgreementDialog(context)
-        } else {
-            getAlertDialog(context, title)
+        return when (tag) {
+            DIALOG_TAG_POLICY -> getAgreementDialog(context)
+            else -> getAlertDialog(context, title)
         }
     }
 
@@ -36,7 +32,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
             .setTitle(header)
             .setCancelable(true)
             .setNegativeButton(R.string.negative_answer) { dialog, _ -> dialog.cancel() }
-            .setPositiveButton(R.string.positive_answer) { _, _ ->
+            .setPositiveButton(R.string.positive_answer) { dialog, _ ->
                 when (fragment) {
                     is LibraryFragment -> {
                         fragment.deleteStory()
@@ -47,28 +43,42 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                     is TeamCharacterFragment -> {
                         fragment.removeCharacter()
                     }
+                    is StartFragment -> {
+                        toastShowLong(context, getString(R.string.msg_on_exit))
+                        fragment.closeApplication()
+                    }
+                    else -> {
+                        toastShowLong(context, getString(R.string.something_went_wrong))
+                        dialog.dismiss()
+                    }
                 }
             }.create()
 
     private fun getAgreementDialog(context: Context): Dialog {
         isCancelable = false
-        val mView = layoutInflater.inflate(R.layout.layout_agreement, null)
-        (mView.findViewById(R.id.layout_agreement_text) as TextView).movementMethod =
-            LinkMovementMethod.getInstance()
-        return AlertDialog.Builder(context)
-            .setTitle(R.string.agreement_dialog_title)
-            .setView(mView)
-            .setNegativeButton(R.string.decline_answer) { dialog, _ ->
-                toastShowLong(context, getString(R.string.msg_agreement_declined))
-                if (fragment is StartFragment) fragment.backClicked()
-                dialog.cancel()
+        if (fragment is StartFragment) {
+            val mView = layoutInflater.inflate(R.layout.layout_agreement, null)
+            (mView.findViewById(R.id.layout_agreement_text) as TextView).movementMethod =
+                LinkMovementMethod.getInstance()
+            return AlertDialog.Builder(context)
+                .setTitle(R.string.agreement_dialog_title)
+                .setView(mView)
+                .setNegativeButton(R.string.decline_answer) { dialog, _ ->
+                    toastShowLong(context, getString(R.string.msg_agreement_declined))
+                    fragment.closeApplication()
+                    dialog.cancel()
 
-            }
-            .setPositiveButton(R.string.accept_answer) { dialog, _ ->
-                if (fragment is StartFragment) fragment.acceptAgreement()
-                dialog.dismiss()
-            }
-            .create()
+                }
+                .setPositiveButton(R.string.accept_answer) { dialog, _ ->
+                    toastShowShort(context, getString(R.string.msg_agreement_accepted))
+                    fragment.acceptAgreement()
+                    dialog.dismiss()
+                }
+                .create()
+        } else {
+            return getAlertDialog(context, R.string.dialog_title)
+        }
+
     }
 
 }

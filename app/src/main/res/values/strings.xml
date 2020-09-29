@@ -11,6 +11,7 @@
     <string name="btn_library">My Library</string>
     <string name="btn_about"><u>About</u></string>
     <string name="btn_help"><u>Rules</u></string>
+    <string name="msg_on_exit">See you soon!</string>
 
     // Rules screen
     <string name="title_rules">Rules</string>
@@ -106,9 +107,10 @@
     <string name="btn_menu">menu</string>
 
     // Dialog fragment
-    <string name="dialog_title">Delete?</string>
+    <string name="dialog_title">Are you sure?</string>
     <string name="dialog_story">Delete the story?</string>
     <string name="dialog_character">Delete the character?</string>
+    <string name="dialog_exit">Close Story Heroes?</string>
     <string name="positive_answer">OK</string>
     <string name="negative_answer">Cancel</string>
     <string name="agreement_dialog_title">Important</string>

@@ -11,6 +11,8 @@
     <string name="btn_library">Моя библиотека</string>
     <string name="btn_about"><u>О приложении</u></string>
     <string name="btn_help"><u>Правила</u></string>
+    <string name="msg_on_exit">До скорой встречи!</string>
+
 
     // Rules screen
     <string name="title_rules">Правила</string>
@@ -92,9 +94,10 @@
     <string name="btn_menu">меню</string>
 
     // Dialog fragment
-    <string name="dialog_title">Удалить?</string>
+    <string name="dialog_title">Вы уверены?</string>
     <string name="dialog_story">Удалить сказку?</string>
     <string name="dialog_character">Удалить персонажа?</string>
+    <string name="dialog_exit">Выйти из приложения?</string>
     <string name="positive_answer">ОК</string>
     <string name="negative_answer">Отмена</string>
     <string name="agreement_dialog_title">Важно</string>
