@@ -1,6 +1,6 @@
 # Story-Heroes
 
-![logo](./logo.png)
+![logo](./logo_new.png)
 
 **Story-Heroes** - это мобильное приложение,
 которое позволяет придумывать сказки,
