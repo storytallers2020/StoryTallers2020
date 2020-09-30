@@ -1,6 +1,6 @@
 # Story-Heroes
 
-![logo](https://github.com/storytallers2020/StoryTallers2020/blob/master/logo.png)
+![logo](https://github.com/storytallers2020/KatherineZharkova-update-screenshots/blob/master/logo.png)
 
 **Story-Heroes** - это мобильное приложение,
 которое позволяет придумывать сказки,
@@ -38,6 +38,6 @@
   - Amplitude
   
 ## Скриншоты приложения
-![screenshots](https://github.com/storytallers2020/StoryTallers2020/blob/master/screen02.png)    
-![screenshots](https://github.com/storytallers2020/StoryTallers2020/blob/master/screen03.png)    
-![screenshots](https://github.com/storytallers2020/StoryTallers2020/blob/master/screen04.png)    
+![screenshots](./screen01.png?raw=true)
+![screenshots](./screen02.png?raw=true)
+![screenshots](./screen03.png?raw=true)
