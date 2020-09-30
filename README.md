@@ -38,8 +38,6 @@
   - Amplitude
   
 ## Скриншоты приложения
-
-![screenshots](https://github.com/storytallers2020/StoryTallers2020/blob/master/storyTellers.png)
-![screenshots](https://github.com/storytallers2020/StoryTallers2020/blob/master/screen02.png)
-![screenshots](https://github.com/storytallers2020/StoryTallers2020/blob/master/screen03.png)
-![screenshots](https://github.com/storytallers2020/StoryTallers2020/blob/master/screen04.png)
+![screenshots](https://github.com/storytallers2020/StoryTallers2020/blob/master/screen02.png)    
+![screenshots](https://github.com/storytallers2020/StoryTallers2020/blob/master/screen03.png)    
+![screenshots](https://github.com/storytallers2020/StoryTallers2020/blob/master/screen04.png)    
