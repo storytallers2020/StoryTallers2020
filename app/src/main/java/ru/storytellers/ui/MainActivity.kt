@@ -1,7 +1,10 @@
 package ru.storytellers.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.di.injectDependencies
@@ -19,15 +22,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-
         injectDependencies()
+        turnOffFullScreen()
         router.replaceScreen(Screens.StartScreen())
+    }
+
+    private fun turnOffFullScreen() {
+        //fixes the bug with adjustResize not working with windowFullscreen
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
     }
 
     override fun onResumeFragments() {
         super.onResumeFragments()
         navigatorHolder.setNavigator(navigator)
     }
+
     override fun onPause() {
         super.onPause()
         navigatorHolder.removeNavigator()
@@ -35,10 +49,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         supportFragmentManager.fragments.forEach {
-            if(it is BackButtonListener && it.backClicked()){
+            if (it is BackButtonListener && it.backClicked()) {
                 return
             }
         }
-        router.exit()
     }
 }

@@ -1,59 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    android:background="@drawable/ic_background_default"
-    android:orientation="vertical">
+    tools:background="@drawable/ic_background_default">
 
     <TextView
         android:id="@+id/subHeader"
+        style="@style/Cover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/auth_welcome"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_large"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        android:text="@string/title_welcome"
+        app:layout_constraintBottom_toTopOf="@id/new_tale_button"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/new_tale_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_standard"
-        app:layout_constraintBottom_toTopOf="@id/rules_game_text_view"
-        app:layout_constraintTop_toBottomOf="@id/subHeader">
+        android:text="@string/btn_start_game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/new_tale_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_standard"
-            android:text="@string/auth_create_tale" />
-
-        <Button
-            android:id="@+id/library_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/auth_create_library"
-            android:layout_marginTop="@dimen/margin_standard"
-            android:visibility="gone" />
-
-    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/library_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_library"
+        android:layout_marginTop="@dimen/margin_large"
+        android:visibility="visible"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:layout_constraintTop_toBottomOf="@id/new_tale_button" />
 
     <TextView
-        android:id="@+id/rules_game_text_view"
+        android:id="@+id/about_button"
+        style="@style/TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/auth_help"
-        android:textColor="@color/yellow"
-        android:textSize="@dimen/text_small"
+        android:text="@string/btn_about"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/rules_button"
+        style="@style/TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_help"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

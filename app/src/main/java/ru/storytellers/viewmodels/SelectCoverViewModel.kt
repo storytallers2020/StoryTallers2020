@@ -7,6 +7,11 @@ import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.repository.ICoverRepository
+import ru.storytellers.utils.StatHelper
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
+import ru.storytellers.utils.getCurrentDateTime
+import ru.storytellers.utils.getString
+import ru.storytellers.utils.toProperties
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class SelectCoverViewModel(
@@ -36,4 +41,13 @@ class SelectCoverViewModel(
     fun setCoverStory(cover: Cover){
         StoryTallerApp.instance.gameStorage.setCoverStoryTaller(cover)
     }
+    fun coverStatistics(cover: Cover){
+        val prop = listOf(
+            StatHelper.coverName to cover.name,
+            StatHelper.coverId to cover.id.toString(),
+            StatHelper.timeEvent to getCurrentDateTime().getString()
+        )
+        riseEvent(StatHelper.selectCoverScreenCoverSelected, prop)
+    }
+
 }

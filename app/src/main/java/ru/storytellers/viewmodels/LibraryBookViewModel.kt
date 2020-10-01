@@ -3,23 +3,30 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.repository.IStoryRepository
-import ru.storytellers.utils.collectSentence
+import ru.storytellers.utils.*
+import ru.storytellers.utils.StatHelper.Companion.itemClickedStat
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
-import java.lang.StringBuilder
+import timber.log.Timber
 
 class LibraryBookViewModel(
     private val storyRepository: IStoryRepository
 ) : BaseViewModel<DataModel>() {
     private val textStoryLiveData = MutableLiveData<String>()
     private val titleStoryLiveData = MutableLiveData<String>()
-    private val onErrorliveData = MutableLiveData<DataModel.Error>()
+    private val onErrorLiveData = MutableLiveData<DataModel.Error>()
+    private val onRemoveStoryLiveData = MutableLiveData<Int>()
 
     fun subscribeOnTextStory(): LiveData<String> {
         return textStoryLiveData
+    }
+
+    fun subscribeOnRemoveStory(): LiveData<Int> {
+        return onRemoveStoryLiveData
     }
 
     fun subscribeOnTitleStory(): LiveData<String> {
@@ -27,20 +34,18 @@ class LibraryBookViewModel(
     }
 
     fun subscribeOnError(): LiveData<DataModel.Error> {
-        return onErrorliveData
+        return onErrorLiveData
     }
 
-    //TODO: Поменять на StoryId
-    fun getTextStory(story: Story) {
-        storyRepository.getStoryWithSentencesById(story.id)
+    fun getTextStory(storyId: Long) {
+        storyRepository.getStoryWithSentencesById(storyId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                //val textStory = extractTextFromStory(it)
-                it.sentences?.let {sentences ->
+                it.sentences?.let { sentences ->
                     textStoryLiveData.value = mapToList(sentences).collectSentence()
                 }
             }, {
-                onErrorliveData.value = DataModel.Error(it)
+                onErrorLiveData.value = DataModel.Error(it)
             })
 
     }
@@ -48,16 +53,30 @@ class LibraryBookViewModel(
     private fun mapToList(sentences: List<SentenceOfTale>): List<String> =
         sentences.map { it.content }
 
-
-    private fun extractTextFromStory(story: Story): String {
-        val textStory = StringBuilder()
-        story.sentences?.forEach {
-            textStory.append(it.content)
-        }
-        return textStory.toString()
+    fun getTitleStory(title: String) {
+        titleStoryLiveData.value = title
     }
 
     fun getTitleStory(story: Story) {
         titleStoryLiveData.value = story.name
+    }
+
+    fun removeStory(story: Story) {
+        storyRepository.deleteStoryById(story.id)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                onRemoveStoryLiveData.value = it
+            }, {
+                Timber.e(it, "Remove story throwable")
+            })
+    }
+    fun itemCopyClickedStat(){
+        itemClickedStat(StatHelper.libraryBookScreenMenuItemCopyClicked)
+    }
+    fun itemDeleteClickedStat(){
+        itemClickedStat(StatHelper.libraryBookScreenMenuItemDeleteClicked)
+    }
+    fun itemShareClickedStat(){
+        itemClickedStat(StatHelper.libraryBookScreenMenuItemShareClicked)
     }
 }

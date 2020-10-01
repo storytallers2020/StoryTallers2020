@@ -21,20 +21,30 @@ fun loadImage(resId: Int, container: ImageView) {
         .into(container)
 }
 
+fun loadImage(resId: Int, container: View) {
+    Glide.with(container.context)
+        .load(resId)
+        .into(object : CustomTarget<Drawable>() {
+            override fun onLoadCleared(placeholder: Drawable?) {}
+
+            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+                container.background = resource
+            }
+        })
+}
+
 fun loadImage(uri: Uri, container: ImageView) {
     Glide.with(container.context)
         .load(uri)
         .into(container)
 }
 
-fun setBackgroundImage(uri: Uri, container: View){
+fun setBackgroundImage(uri: Uri, container: View) {
     Glide.with(container.context)
         .asDrawable()
         .load(uri)
         .into(object : CustomTarget<Drawable>(){
-            override fun onLoadCleared(placeholder: Drawable?) {
-                val a=1 //заглушка
-            }
+            override fun onLoadCleared(placeholder: Drawable?) { }
 
             override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
                 container.background=resource

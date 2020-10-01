@@ -9,8 +9,8 @@ object Config {
 }
 
 object Releases {
-    const val version_code = 1
-    const val version_name = "1.0"
+    const val version_code = 4
+    const val version_name = "0.1.1"
 }
 
 
@@ -78,6 +78,12 @@ object Versions {
     const val runner = "1.2.0"
     const val ext = "1.1.1"
     const val espressoCore = "3.2.0"
+    const val coreTest="1.3.0"
+    const val robolectric = "4.4"
+    const val archCoreTest = "2.1.0"
+    const val junitKtx = "1.1.2"
+    const val koinTest = "2.0.1"
+    const val mockk = "1.10.0"
 
     //Fragment
     const val lifecycle = "2.2.0"
@@ -85,6 +91,9 @@ object Versions {
 
     //GifImageView
     const val gifImageView = "1.2.19"
+
+    //Amplitude
+    const val amplitudeVer = "2.23.2"
 }
 
 object Tools {
@@ -160,8 +169,18 @@ object TestImpl {
 
     const val ext = "androidx.test.ext:junit:${Versions.ext}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+    const val coreTest = "androidx.test:core-ktx:${Versions.coreTest}"
+    const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
+    const val archCoreTesting = "androidx.arch.core:core-testing:${Versions.archCoreTest}"
+    const val junitKtx = "androidx.test.ext:junit-ktx:${Versions.junitKtx}"
+    const val koinTest = "org.koin:koin-test:${Versions.koinTest}"
+    const val mockk = "io.mockk:mockk:${Versions.mockk}"
 }
 
 object GifImageView {
     const val gifImageView = "pl.droidsonroids.gif:android-gif-drawable:${Versions.gifImageView}"
+}
+
+object Amplitude {
+    const val amplitude = "com.amplitude:android-sdk:${Versions.amplitudeVer}"
 }

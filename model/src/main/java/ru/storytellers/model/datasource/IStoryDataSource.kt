@@ -8,6 +8,7 @@ import ru.storytellers.model.entity.Story
 
 interface IStoryDataSource {
     fun insertOrReplace(story: Story): @NonNull Completable
+    fun deleteStoryById(storyId: Long): Single<Int>
     fun getStoryById(storyId: Long): Single<Story>
     fun getStoryWithSentencesById(storyId: Long): Single<Story>
     fun getAll(): Single<List<Story>>

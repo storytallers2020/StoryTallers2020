@@ -7,8 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_xxs"
     android:scaleType="fitXY"
-    android:contentDescription="@string/location"
+    android:contentDescription="@string/title_location"
     android:adjustViewBounds="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:src="@drawable/cover_1_small" />
+    tools:src="@drawable/cover_cave_of_wonders" />

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    // About screen
+    <string name="title_about">О приложении</string>
+    <string name="team" translatable="false">Команда</string>
+    <string name="product_manager" translatable="false">Менеджеры продукта</string>
+    <string name="project_manager" translatable="false">Менеджер проекта</string>
+    <string name="android_dev" translatable="false">Android-разработчики</string>
+    <string name="back_end" translatable="false">Backend-разработчик</string>
+    <string name="designer" translatable="false">Uх/Ui дизайнер</string>
+    <string name="illustrators" translatable="false">Иллюстраторы</string>
+    <string name="seo" translatable="false">SEO-специалист</string>
+    <string name="digital_market" translatable="false">Digital-маркетолог</string>
+
+</resources>

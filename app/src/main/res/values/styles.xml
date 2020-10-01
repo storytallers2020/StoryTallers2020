@@ -1,32 +1,58 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="materialButtonStyle">@style/YellowButton</item>
         <item name="buttonStyle">@style/YellowButton</item>
-        <item name="fontFamily">@font/roboto_slab</item>
+        <item name="android:fontFamily">@font/phil_fam</item>
+        <item name="fontFamily">@font/phil_fam</item>
+        <item name="android:textAppearance">@style/Standard</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_standard</item>
+        <item name="colorControlNormal">@color/yellow</item>
+        <item name="android:alertDialogTheme">@style/AlertDialog</item>
+        <item name="popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/myPopupMenuTextAppearanceLarge
+        </item>
     </style>
 
-    <style name="OutlinedBox">
-        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense</item>
-        <item name="android:textSize">@dimen/text_small</item>
-        <item name="android:textColorHint">@color/white</item>
-        <item name="colorAccent">@color/white</item>
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Standard">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_standard</item>
         <item name="android:textColor">@color/white</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/box_corner_radius</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/box_corner_radius</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/box_corner_radius</item>
-        <item name="boxCornerRadiusTopStart">@dimen/box_corner_radius</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="Header" parent="Standard">
+        <item name="android:textSize">@dimen/text_standard_header</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="Cover" parent="Header">
+        <item name="android:textStyle">italic</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/margin_standard</item>
+        <item name="android:layout_marginBottom">@dimen/margin_small</item>
     </style>
 
     <style name="YellowButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:textSize">@dimen/text_button</item>
         <item name="android:textColor">@color/blueDark</item>
         <item name="cornerRadius">@dimen/button_corner_radius</item>
@@ -34,9 +60,67 @@
         <item name="android:backgroundTint">@color/color_states_button</item>
     </style>
 
+    <style name="TextButton">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/yellow</item>
+    </style>
+
+    <style name="OutlinedBox">
+        <item name="textInputStyle">
+            @style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense
+        </item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/box_corner_radius</item>
+        <item name="boxCornerRadiusTopStart">@dimen/box_corner_radius</item>
+    </style>
+
     <style name="WhiteCounter" parent="TextAppearance.Design.Counter">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/text_tip</item>
+        <item name="android:src">@drawable/ic_arrow_back</item>
+    </style>
+
+    <style name="BackArrow">
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:scaleX">1.3</item>
+        <item name="android:scaleY">1.3</item>
+    </style>
+
+    <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/dialog_background</item>
+    </style>
+
+    <style name="myPopupMenuTextAppearanceLarge" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Large">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_standard</item>
+    </style>
+
+    <style name="AlertDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing_extra</item>
+        <item name="android:textSize">@dimen/text_standard</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/DialogButton</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/DialogButtonPassive</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/DialogButtonPassive</item>
+        <item name="android:textColorLink">@color/colorAccent</item>
+    </style>
+
+    <style name="DialogButton" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/yellow</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:backgroundTint">@color/no_color</item>
+    </style>
+
+    <style name="DialogButtonPassive" parent="DialogButton">
+        <item name="android:textColor">#B3F9BE40</item>
     </style>
 
 </resources>

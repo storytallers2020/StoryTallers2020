@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">@color/blue</color>
+    <color name="colorPrimaryDark">#2A3353</color>
+    <color name="colorAccent">#F9BE40</color>
     <color name="blueDark">#2A3353</color>
     <color name="yellow">#F9BE40</color>
+    <color name="menu_button">#B3F9BE40</color>
     <color name="button">#F9BE40</color>
     <color name="white">#FFFFFF</color>
     <color name="blue">#188EFA</color>
@@ -12,5 +13,9 @@
     <color name="transparent_12">#1Effffff</color>
     <color name="transparent_30">#4DFFFFFF</color>
     <color name="transparent_50">#80FFFFFF</color>
+    <color name="menuPrimaryColor">#F24481</color>
+    <color name="menuSecondaryColor">#9A2C53</color>
+    <color name="menuBackground">#F9BE40</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#fff</color>
+    <color name="ic_launcher_background">#00FFFFFF</color>
 </resources>

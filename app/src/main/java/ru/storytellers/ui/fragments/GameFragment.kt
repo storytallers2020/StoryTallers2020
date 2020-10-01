@@ -1,8 +1,9 @@
 package ru.storytellers.ui.fragments
 
 import android.content.Context
-import android.text.TextWatcher
+import android.os.Bundle
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.android.synthetic.main.sentence_input_layout.*
@@ -24,57 +25,74 @@ class GameFragment : BaseFragment<DataModel>() {
     override val model: GameViewModel by inject()
     override val layoutRes = R.layout.fragment_game
     var inputMethodManager: Any? = null
-    private lateinit var textWatcher: TextWatcher
-    var textSentenceOfTale: String? = null
-    private var textResultStoryTaller: String? = null
+    private var isInputContentCorrect = false
 
-    companion object {
-        fun newInstance() = GameFragment()
-    }
-
-    override fun backClicked(): Boolean {
-        router.exit()
-        return true
-    }
+    override fun backClicked(): Boolean = true
 
     override fun iniViewModel() {}
 
     override fun init() {
-        model.createNewGame()
-        model.getCurrentPlayer()
-        model.getUriBackgroundImage()
-
-        textWatcher = assistantFragment.getTextWatcher()
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
         reminder_intro.post { View.FOCUS_DOWN }
-        button_end.setOnClickListener { navigateToGameEndScreen() }
-        btn_send.setOnClickListener { handlerBtnSend() }
-        sentence_line.addTextChangedListener(textWatcher)
+        button_end.setOnClickListener { onButtonEndClicked() }
+        btn_send.setOnClickListener { onButtonSendClicked() }
         assignSubscribers()
         assistantFragment.showIntro()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        model.getUriBackgroundImage()
         model.onStartTurn()
     }
 
     private fun assignSubscribers() {
         handlerCurrentPlayerLiveData()
-        handlerResultTextLiveData()
+        handlerTextChangedLiveData()
         handlerIsCorrectSentence()
         handlerUriBackgroundImage()
         handlerWordChanged()
+        handlerEndGamePossible()
+        handlerInputIncorrect()
     }
 
-    private fun handlerBtnSend() {
-        textSentenceOfTale?.let { model.createSentenceOfTale(it) }
+    private fun onButtonSendClicked() {
+        model.onButtonSendClicked(sentence_line.text.toString())
         assistantFragment.hideKeyboard()
-        scroll_view.smoothScrollTo(0, story_body.bottom)
-        sentence_line.setText("")
-        assistantFragment.makeInVisibleBtnSend()
-        assistantFragment.showGameField()
-        model.getCurrentPlayer()
+        if (statusCheck()) {
+            scroll_view.smoothScrollTo(0, story_body.bottom)
+            sentence_line.setText("")
+            isInputContentCorrect = false
+        }
+    }
+
+    private fun handlerInputIncorrect() {
+        model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, Observer {
+            when (it) {
+                1 -> {
+                    setError(getString(R.string.err_short_sentence))
+                }
+                2 -> {
+                    setError(getString(R.string.err_sentence_is_gaps))
+                }
+                else -> {
+                    et_step.error = null
+                    et_step.isErrorEnabled = false
+                    isInputContentCorrect = true
+                }
+            }
+        })
+    }
+
+    private fun handlerEndGamePossible() {
+        model.subscribeOnEndGamePossibleChanged().observe(viewLifecycleOwner, Observer {
+            if (it) button_end.visibility = View.VISIBLE
+            else button_end.visibility = View.GONE
+        })
     }
 
     private fun handlerCurrentPlayerLiveData() {
-        model.subscribeOnCurrentPlayer().observe(viewLifecycleOwner, Observer { player ->
+        model.subscribeOnPlayerChanged().observe(viewLifecycleOwner, Observer { player ->
             player_name.text = player.name
             player.character?.let {
                 resourceToUri(it.avatarUrl)?.let { uri ->
@@ -85,33 +103,57 @@ class GameFragment : BaseFragment<DataModel>() {
     }
 
     private fun handlerIsCorrectSentence() {
-        model.subscribeOnIsCorrectFlag().observe(viewLifecycleOwner, Observer {
-            context?.let { context -> toastShowLong(context, "Isn`t correct sentence") }
-            model.isCorrectFlag = true
+        model.subscribeOnSentenceChecked().observe(viewLifecycleOwner, Observer {
+            if (!it) toastShowLong(context, context?.getString(R.string.msg_incorrect_sentence))
         })
     }
 
-    private fun handlerResultTextLiveData() {
-        model.subscribeOnResultText().observe(viewLifecycleOwner, Observer {
-            textResultStoryTaller = it
+    private fun handlerTextChangedLiveData() {
+        model.subscribeOnTextChanged().observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty()) assistantFragment.showGameField()
             story_body.text = it
         })
     }
 
     private fun handlerUriBackgroundImage() {
-        model.subscribeOnUriBackgroundImage().observe(viewLifecycleOwner, Observer {
-            setBackgroundImage(it, root_element_game_cl)
+        model.subscribeOnBackgroundImageChanged().observe(viewLifecycleOwner, Observer {
+            val v: ConstraintLayout = requireActivity().findViewById(R.id.main_background)
+            setBackgroundImage(it, v)
         })
     }
 
     private fun handlerWordChanged() {
-        model.subscribeOnWord().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnWordChanged().observe(viewLifecycleOwner, Observer {
             mandatory_container.visibility = View.VISIBLE
             tv_mandatory_word.text = it
+            mandatoryClickListener()
         })
     }
 
-    private fun navigateToGameEndScreen() {
+    private fun mandatoryClickListener() {
+        if (!tv_mandatory_word.hasOnClickListeners())
+            tv_mandatory_word.setOnClickListener {
+                var text = sentence_line.text.toString()
+                val mandatoryWord = tv_mandatory_word.text.toString()
+                text = if (text.isBlank()) mandatoryWord
+                else "$text $mandatoryWord"
+                sentence_line.setText(text)
+                try {
+                    sentence_line.setSelection(text.length)
+                } catch (e: Exception) {
+                    sentence_line.setSelection(resources.getInteger(R.integer.max_length_sentence))
+                }
+            }
+    }
+
+    private fun setError(nameError: String) {
+        et_step.error = nameError
+    }
+
+    private fun statusCheck() = isInputContentCorrect
+
+    private fun onButtonEndClicked() {
+        model.onButtonEndGameClickedStatistic()
         router.navigateTo(Screens.GameEndScreen())
     }
 

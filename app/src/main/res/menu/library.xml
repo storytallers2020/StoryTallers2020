@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.MainActivity">
+
+    <!--    <item-->
+    <!--        android:id="@+id/btn_rename"-->
+    <!--        android:title="@string/btn_rename"-->
+    <!--        android:icon="@drawable/ic_edit_24"-->
+    <!--        app:showAsAction="never|withText" />-->
+
+    <item
+        android:id="@+id/btn_share"
+        android:title="@string/btn_share"
+        android:icon="@drawable/ic_share_24"
+        app:showAsAction="never|withText" />
+
+    <item
+        android:id="@+id/btn_copy"
+        android:title="@string/btn_copy"
+        android:icon="@drawable/ic_copy_24"
+        app:showAsAction="never|withText" />
+
+    <item
+        android:id="@+id/btn_delete"
+        android:title="@string/btn_delete"
+        android:icon="@drawable/ic_delete_24"
+        app:showAsAction="never|withText"/>
+</menu>

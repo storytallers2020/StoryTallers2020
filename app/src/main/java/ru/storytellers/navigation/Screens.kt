@@ -14,20 +14,17 @@ sealed class Screens {
     }
 
     class LevelScreen : SupportAppScreen(){
-        override fun getFragment() = LevelFragment.newInstance()
+        override fun getFragment() = LevelFragment()
     }
 
     class GameScreen : SupportAppScreen() {
-        override fun getFragment() = GameFragment.newInstance()
+        override fun getFragment() = GameFragment()
     }
 
     class GameStartScreen : SupportAppScreen() {
         override fun getFragment() = GameStartFragment.newInstance()
     }
 
-//    class GameEndScreen(private val textResultStoryTaller:String) : SupportAppScreen() {
-//        override fun getFragment() = GameEndFragment.newInstance(textResultStoryTaller)
-//    }
     class GameEndScreen() : SupportAppScreen() {
         override fun getFragment() = GameEndFragment.newInstance()
     }
@@ -58,6 +55,10 @@ sealed class Screens {
 
     class TeamCharacterScreen() : SupportAppScreen() {
         override fun getFragment() = TeamCharacterFragment.newInstance()
+    }
+
+    class AppInfoScreen : SupportAppScreen(){
+        override fun getFragment() = AppInfoFragment.newInstance()
     }
 
 }

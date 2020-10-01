@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    android:background="@drawable/ic_background_default">
+    tools:background="@drawable/location_beach">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/layout_tale"
@@ -26,21 +26,31 @@
             android:id="@+id/tv_tale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/margin_small"
-            android:paddingBottom="@dimen/margin_small"
+            android:padding="@dimen/margin_small"
             android:textColor="@color/white"
             android:textSize="@dimen/text_standard"
             android:lineSpacingExtra="@dimen/line_spacing_extra"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/tale_sample" />
+            tools:text="@string/tale_text_sample" />
 
     </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_shadows"
+        android:contentDescription="@string/title_choosing_cover"
+        app:layout_constraintBottom_toBottomOf="@id/layout_tale"
+        app:layout_constraintEnd_toEndOf="@id/layout_tale"
+        app:layout_constraintStart_toStartOf="@id/layout_tale"
+        app:layout_constraintTop_toTopOf="@id/layout_tale" />
 
     <TextView
         android:id="@+id/tv_resume"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/game_resume"
+        android:text="@string/btn_resume"
         android:layout_marginVertical="@dimen/margin_standard"
         android:textColor="@color/yellow"
         android:textSize="@dimen/text_small"
@@ -48,14 +58,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_tale"/>
 
-    <TextView
+    <ImageView
         android:id="@+id/btn_copy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableEnd="@drawable/ic_outline_file_copy_24"
-        android:textColor="@color/yellow"
-        android:text="@string/copy_file"
-        android:contentDescription="@string/copy_all"
+        android:src="@drawable/ic_copy"
+        android:contentDescription="@string/btn_copy"
         app:layout_constraintBottom_toBottomOf="@id/tv_resume"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_resume" />
@@ -64,7 +72,7 @@
         android:id="@+id/btn_select_cover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_cover"
+        android:text="@string/btn_select_cover"
         android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent" />
 

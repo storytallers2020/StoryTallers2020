@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <pl.droidsonroids.gif.GifImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/default_splash_background"
-    android:src="@drawable/splash_logo"
+    android:background="@drawable/ic_background_default"
+    android:contentDescription="@string/game_loading_msg"
     android:scaleType="fitXY"
-    android:contentDescription="@string/game_loading_msg" />
+    android:src="@drawable/splash_logo" />

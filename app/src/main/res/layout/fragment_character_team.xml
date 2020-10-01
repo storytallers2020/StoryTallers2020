@@ -7,30 +7,25 @@
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    android:background="@drawable/ic_background_default">
+    tools:background="@drawable/ic_background_default">
 
     <ImageView
         android:id="@+id/back_button_character"
+        style="@style/BackArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleX="2"
-        android:scaleY="2"
         android:contentDescription="@string/arrow_back"
         android:src="@drawable/ic_arrow_back"
-        android:layout_marginStart="@dimen/margin_xs"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/screen_header" />
 
     <TextView
         android:id="@+id/screen_header"
-        android:layout_width="wrap_content"
+        style="@style/Header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/character"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_standard_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/title_character"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
@@ -56,11 +51,11 @@
                     android:id="@+id/difficulty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/level"
+                    android:text="@string/title_level"
                     android:alpha="0.5"
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
-                    android:drawableBottom="@drawable/slider_cup"
+                    android:drawableBottom="@drawable/slider_level"
                     android:textColor="@color/yellow"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -80,11 +75,11 @@
                     android:id="@+id/hero"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/character"
+                    android:text="@string/title_character"
                     android:textSize="@dimen/text_small"
                     android:gravity="center"
                     android:textColor="@color/yellow"
-                    android:drawableBottom="@drawable/slider_queen"
+                    android:drawableBottom="@drawable/slider_team"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -104,12 +99,11 @@
                     android:id="@+id/location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/location"
+                    android:text="@string/title_location"
                     android:textSize="@dimen/text_small"
                     android:alpha="0.5"
                     android:gravity="center"
-                    android:drawableBottom="@drawable/slider_mounts"
-                    android:textColor="@color/white"
+                    android:drawableBottom="@drawable/slider_location"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -128,16 +122,19 @@
                 tools:itemCount="5"
                 tools:listitem="@layout/item_user_character_create" />
 
-            <TextView
+            <ImageButton
                 android:id="@+id/btn_add_player"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_new_character"
-                android:textColor="@color/yellow"
-                android:textSize="@dimen/text_standard"
-                android:layout_marginVertical="@dimen/margin_standard"
+                android:layout_width="@dimen/icon_medium"
+                android:layout_height="@dimen/icon_medium"
+                android:layout_marginVertical="@dimen/margin_large"
+                android:background="@color/no_color"
+                android:contentDescription="@string/btn_new_character"
+                android:src="@drawable/ic_add"
                 app:layout_constraintBottom_toTopOf="@id/btn_next"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/player_list_rv"
+                app:layout_constraintVertical_bias="0"
                 tools:visibility="visible" />
 
 
@@ -147,8 +144,10 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/yellow"
                 android:textSize="@dimen/text_standard"
+                android:textAlignment="center"
                 android:visibility="gone"
-                android:text="@string/maximum_players_reached"
+                android:layout_marginVertical="@dimen/margin_standard"
+                android:text="@string/msg_team_full"
                 app:layout_constraintBottom_toTopOf="@id/btn_next"
                 app:layout_constraintTop_toBottomOf="@id/player_list_rv"
                 tools:visibility="gone" />
@@ -157,7 +156,7 @@
                 android:id="@+id/btn_next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/choose_location"
+                android:text="@string/btn_choose_location"
                 android:layout_marginTop="@dimen/margin_standard"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_goneMarginTop="@dimen/margin_standard" />

@@ -33,7 +33,11 @@ interface StoryDao {
     //region Delete
 
     @Delete
-    fun delete(story: RoomStory)
+    fun delete(story: RoomStory): Int
+
+    //@Delete
+    @Query("DELETE FROM RoomStory WHERE id = :storyId")
+    fun deleteById(storyId: Long): Int
 
     //endregion Delete
 }

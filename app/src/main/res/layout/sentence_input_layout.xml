@@ -29,16 +29,16 @@
         android:paddingHorizontal="@dimen/margin_xxs"
         android:gravity="center_vertical"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_standard"
         app:layout_constraintBottom_toTopOf="@id/et_step"
         app:layout_constraintEnd_toStartOf="@id/avatar"
-        tools:text="Серый Волк" />
+        tools:text="Инопланетный таракан" />
 
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="@dimen/icon_medium"
         android:layout_height="@dimen/icon_medium"
-        android:src="@drawable/ic_wolf"
+        android:src="@drawable/ic_alien"
         android:contentDescription="@string/char_icon"
         app:layout_constraintBottom_toTopOf="@id/et_step"
         app:layout_constraintStart_toEndOf="@id/player_name" />
@@ -69,21 +69,27 @@
             android:textAlignment="textEnd"
             android:textColor="@color/yellow"
             android:textSize="@dimen/text_standard"
+            android:clickable="true"
+            android:focusable="true"
             tools:text="Батюшка" />
 
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_step"
-        android:theme="@style/OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_xs"
+        android:layout_marginBottom="@dimen/margin_xs"
+        android:theme="@style/OutlinedBox"
         app:boxCornerRadiusBottomEnd="@dimen/box_corner_radius"
         app:boxCornerRadiusBottomStart="@dimen/box_corner_radius"
         app:boxCornerRadiusTopEnd="@dimen/box_corner_radius"
         app:boxCornerRadiusTopStart="@dimen/box_corner_radius"
+        app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="@integer/max_length_sentence"
+        app:counterTextAppearance="@style/WhiteCounter"
         app:layout_constraintBottom_toTopOf="@id/button_end"
         app:layout_constraintEnd_toStartOf="@id/btn_send"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,26 +97,29 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/sentence_line"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:inputType="textCapSentences|textMultiLine|textAutoComplete|textAutoCorrect"
             android:padding="@dimen/margin_small"
-            android:textSize="@dimen/text_standard"
-            android:maxLength="150"
-            android:lineSpacingExtra="@dimen/line_spacing_extra" />
+            android:maxLength="@integer/max_length_sentence"
+            android:maxLines="@integer/max_lines_sentence"
+            android:lineSpacingExtra="@dimen/line_spacing_extra"
+            tools:text="@string/tale_title_sample" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
         android:id="@+id/btn_send"
         android:layout_width="@dimen/icon_medium"
         android:layout_height="@dimen/icon_medium"
-        android:visibility="gone"
-        android:src="@drawable/ic_send_bird"
-        android:contentDescription="@string/send"
+        android:layout_marginTop="@dimen/margin_xs"
+        android:background="@color/no_color"
+        android:contentDescription="@string/btn_send"
+        android:src="@drawable/ic_send"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/et_step"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/et_step"
-        app:layout_constraintVertical_bias="1"
+        app:layout_constraintVertical_bias="0"
         tools:visibility="visible" />
 
     <TextView
@@ -118,12 +127,12 @@
         android:background="@color/no_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/end_tale"
+        android:text="@string/btn_end"
         android:textColor="@color/yellow"
         android:textSize="@dimen/text_small"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

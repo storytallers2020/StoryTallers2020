@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    // Characters
+    <string name="character_boy_name">Мальчик</string>
+    <string name="character_girl_name">Девочка</string>
+    <string name="character_gnome_name">Гном</string>
+    <string name="character_fairy_name">Фея</string>
+    <string name="character_prince_name">Принц</string>
+    <string name="character_princess_name">Принцесса</string>
+    <string name="character_wizard_name">Волшебник</string>
+    <string name="character_witch_name">Ведьма</string>
+    <string name="character_robot_name">Робот</string>
+    <string name="character_cosmonaut_name">Космонавт</string>
+    <string name="character_pirate_name">Пират</string>
+    <string name="character_mermaid_name">Русалка</string>
+    <string name="character_bear_name">Медведь</string>
+    <string name="character_fox_name">Лиса</string>
+    <string name="character_dragon_name">Дракон</string>
+    <string name="character_fish_name">Рыбка</string>
+    <string name="character_skeleton_name">Скелет</string>
+    <string name="character_ghost_name">Привидение</string>
+    <string name="character_alien_name">Пришелец</string>
+    <string name="character_zombie_name">Зомби</string>
+
+    // Locations
+    <string name="location_swamp_name">Болото</string>
+    <string name="location_roses_name">Розочки</string>
+    <string name="location_blue_name">Узоры</string>
+    <string name="location_planets_name">Планеты</string>
+    <string name="location_amusement_park_name">Парк развлечений</string>
+    <string name="location_beach_name">Пляж</string>
+    <string name="location_castle_name">Замок</string>
+    <string name="location_cave_of_wonders_name">Пещера чудес</string>
+    <string name="location_chamber_of_secrets_name">Тайная комната</string>
+    <string name="location_city_name">Город</string>
+    <string name="location_dwarf_house_name">Домик гнома</string>
+    <string name="location_forest_name">Лес</string>
+    <string name="location_halloween_name">Хэллоуин</string>
+    <string name="location_house_of_magic_name">Волшебный дом</string>
+    <string name="location_tree_house_name">Дом на дереве</string>
+    <string name="location_kingdom_name">Королевство</string>
+    <string name="location_lighthouse_name">Маяк</string>
+    <string name="location_magic_oak_name">Волшебный дуб</string>
+    <string name="location_night_city_name">Ночной город</string>
+    <string name="location_paper_name">Бумага</string>
+    <string name="location_pirate_ship_name">Пиратский корабль</string>
+    <string name="location_playground_name">Игровая площадка</string>
+    <string name="location_sea_world_name">Морской мир</string>
+    <string name="location_skeletons_name">Скелеты</string>
+    <string name="location_space_name">Космос</string>
+    <string name="location_spaceship_name">Космический корабль</string>
+    <string name="location_swing_name">Качели</string>
+    <string name="location_waterfall_name">Водопад</string>
+    <string name="location_zombie_name">Зомби</string>
+    <string name="location_camp">Палатки</string>
+    <string name="location_witch_room_name">Комната ведьмы</string>
+    <string name="location_garden_name">Сад</string>
+</resources>

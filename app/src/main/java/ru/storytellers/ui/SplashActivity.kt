@@ -3,25 +3,23 @@ package ru.storytellers.ui
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.Window
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import pl.droidsonroids.gif.GifDrawable
 import ru.storytellers.R
 
 class SplashActivity : AppCompatActivity() {
+    val factor = 1.5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.requestFeature(Window.FEATURE_NO_TITLE)
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
         setContentView(R.layout.splash_activity)
 
         Handler().postDelayed({
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
-        }, 4000)
+        }, getDelay())
     }
+
+    private fun getDelay() =
+        (GifDrawable(resources, R.drawable.splash_logo).duration * factor).toLong()
 }

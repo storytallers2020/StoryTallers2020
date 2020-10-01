@@ -37,6 +37,8 @@ import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
+import com.amplitude.api.Amplitude
+import ru.storytellers.utils.AmplitudeWrapper
 
 fun injectDependencies() = loadModules
 private val loadModules by lazy {
@@ -48,6 +50,7 @@ private val loadModules by lazy {
             levelModel,
             characterCreateModule,
             locationModule,
+            gameEngine,
             gameModule,
             gameEndModule,
             selectCoverModule,
@@ -55,7 +58,8 @@ private val loadModules by lazy {
             libraryModule,
             libraryBookModule,
             teamCharacterModule,
-            gameStartModule
+            gameStartModule,
+            amplitudeModule
         )
     )
 }
@@ -80,7 +84,7 @@ val levelModel = module {
     viewModel { LevelViewModel() }
 }
 val gameStartModule = module {
-    viewModel { GameStartViewModel() }
+    viewModel { GameStartViewModel(get()) }
 }
 
 val characterCreateModule = module {
@@ -130,9 +134,11 @@ val titleAndSaveModule = module {
     single { TitleAndSaveModelAssistant(get()) }
     viewModel { TitleAndSaveStoryViewModel(get()) }
 }
-
-
 val gameModule = module {
+    viewModel { GameViewModel(get()) }
+}
+
+val gameEngine = module {
     single {
         val rule = Rules()
         rule.addRule(NoEmptySentenceRule())
@@ -182,5 +188,15 @@ val gameModule = module {
 
     single { Game() }
     single { GameStorage() }
-    viewModel { GameViewModel(get(), get()) }
+
+}
+
+val amplitudeModule = module {
+    single {
+        Amplitude
+            .getInstance()
+            .initialize(get(), "ab4e83e9cbfca24360e8972402b8a412")
+            .enableForegroundTracking(get())
+    }
+    single { AmplitudeWrapper(get()) }
 }

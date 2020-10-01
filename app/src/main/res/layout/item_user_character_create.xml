@@ -6,50 +6,54 @@
     android:clickable="true"
     android:focusable="true"
     android:layout_height="wrap_content"
-    tools:background="@color/blueDark">
-
-    <ImageView
-        android:id="@+id/remove_player_iv"
-        android:src="@drawable/ic_edit_bin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
-
-    <TextView
-        android:id="@+id/player_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_standard"
-        android:textAlignment="textEnd"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/pencil"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toEndOf="@id/remove_player_iv"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Плавалагуна" />
+    tools:background="@color/no_color">
 
     <ImageView
         android:id="@+id/character"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/icon_small"
         android:layout_height="@dimen/icon_small"
-        android:layout_margin="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_xxs"
         android:contentDescription="@string/char_icon"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/player_name_tv"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_alien_girl" />
+        tools:src="@drawable/ic_pirate" />
+
+    <TextView
+        android:id="@+id/player_name_tv"
+        style="@style/Standard"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_xxs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/character"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Боцман Супчик" />
+
+    <ImageView
+        android:id="@+id/remove_player_iv"
+        android:src="@drawable/ic_delete"
+        android:layout_width="@dimen/icon_small"
+        android:layout_height="@dimen/icon_small"
+        android:contentDescription="@string/remove"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_xxs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/pencil"
-        android:src="@drawable/ic_edit_pencil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit"
+        android:layout_width="@dimen/icon_small"
+        android:layout_height="@dimen/icon_small"
         android:visibility="gone"
-        android:contentDescription="@string/edit"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_xxs"
+        android:contentDescription="@string/btn_edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +62,7 @@
         android:background="@drawable/ic_underline"
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
-        android:contentDescription="@string/underline"
+        android:contentDescription="@string/rv_players_underline"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,9 @@
 package ru.storytellers.ui.fragments
 
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_location.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
-import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
 import ru.storytellers.navigation.Screens
@@ -20,7 +18,11 @@ class LocationFragment : BaseFragment<DataModel>() {
     override val model: LocationViewModel by inject()
 
     private val onListItemClickListener = { location: Location ->
-        StoryTallerApp.instance.gameStorage.setLocationGame(location)
+        with(location) {
+            model.setLocationGame(this)
+            model.onLocationChoiceStatistic(this)
+        }
+
         Timber.d(location.fieldsToLogString())
         router.navigateTo(Screens.GameStartScreen())
     }
@@ -31,9 +33,15 @@ class LocationFragment : BaseFragment<DataModel>() {
     }
 
     override fun init() {
-        iniViewModel()
         rv_covers.adapter = locationAdapter
-        back_from_location.setOnClickListener { backClicked() }
+        back_from_location.setOnClickListener {
+            backToTeamScreen()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        iniViewModel()
     }
 
     override fun iniViewModel() {
@@ -45,15 +53,14 @@ class LocationFragment : BaseFragment<DataModel>() {
     }
 
     override fun backClicked(): Boolean {
+        model.onBackClicked(this.javaClass.simpleName)
         router.exit()
         return true
     }
 
     private fun handlerOnSuccessResult(viewModel: LocationViewModel) {
         viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
-            it.let {
-                setLocationAdapter(it)
-            }
+            setLocationAdapter(it)
         })
     }
 
@@ -65,6 +72,11 @@ class LocationFragment : BaseFragment<DataModel>() {
 
     private fun setLocationAdapter(it: DataModel.Success<Location>) {
         locationAdapter.setData(it.data)
+    }
+
+    private fun backToTeamScreen() {
+        model.onBackClicked(this.javaClass.simpleName)
+        router.backTo(Screens.TeamCharacterScreen())
     }
 
 }

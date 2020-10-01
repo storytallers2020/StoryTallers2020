@@ -4,26 +4,22 @@ import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
-import ru.storytellers.utils.collectSentence
-import ru.storytellers.utils.getSortedList
-import ru.storytellers.utils.resourceToUri
-import ru.storytellers.utils.toListOfStrings
+import ru.storytellers.utils.*
+import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameEndViewModel : BaseViewModel<DataModel>() {
     private val textOfStoryTallerLiveData = MutableLiveData<String>()
     private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
-    private val gameStorage = StoryTallerApp.instance.gameStorage
+    private val app = StoryTallerApp.instance
+    private val gameStorage = app.gameStorage
 
     fun subscribeOnTextOfStoryTaller() = textOfStoryTallerLiveData
     fun subscribeOnUriBackgroundImage() = uriBackgroundImageLiveData
-//    fun setTextOfStoryTaller(textOfStoryTaller:String){
-//        StoryTallerApp.instance.gameStorage.getListSentenceOfTale()
-//    }
 
     fun setTextOfStoryTaller() {
-        val sentences = gameStorage.getListSentenceOfTale()
-        textOfStoryTallerLiveData.value = sentences
+        textOfStoryTallerLiveData.value = gameStorage
+            .getSentences()
             .getSortedList()
             .toListOfStrings()
             .collectSentence()
@@ -33,6 +29,25 @@ class GameEndViewModel : BaseViewModel<DataModel>() {
         gameStorage.getLocationGame()?.imageUrl?.let {
                 uriBackgroundImageLiveData.value = resourceToUri(it)
             }
+    }
+
+    fun buttonSelectCoverClickedStat(){
+        buttonClickedStatistic(StatHelper.gameEndScreenBtnSelectCoverClicked)
+    }
+    fun buttonContinueClickedStat(){
+        buttonClickedStatistic(StatHelper.gameEndScreenBtnContinueGameClicked)
+    }
+    fun buttonCopyClickedStat(){
+        buttonClickedStatistic(StatHelper.gameEndScreenBtnCopyClicked)
+    }
+
+    private fun buttonClickedStatistic(nameButton:String){
+        val clicked="Clicked"
+        val prop = listOf(
+            nameButton to clicked,
+            StatHelper.timeEvent to getCurrentDateTime().getString()
+        )
+        riseEvent(nameButton, prop)
     }
 
 }

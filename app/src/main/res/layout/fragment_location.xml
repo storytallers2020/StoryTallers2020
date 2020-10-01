@@ -6,32 +6,27 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
-    android:paddingBottom="@dimen/padding_layout_bottom"
+    android:paddingBottom="@dimen/padding_small"
     android:layout_gravity="center_horizontal"
-    android:background="@drawable/ic_background_default">
+    tools:background="@drawable/ic_background_default">
 
     <ImageView
         android:id="@+id/back_from_location"
+        style="@style/BackArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:src="@drawable/ic_arrow_back"
-        android:layout_marginStart="@dimen/margin_xs"
         android:contentDescription="@string/arrow_back"
+        android:src="@drawable/ic_arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/screen_header" />
 
     <TextView
         android:id="@+id/screen_header"
-        android:layout_width="wrap_content"
+        style="@style/Header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/location"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_standard_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/title_location"
         app:layout_constraintBottom_toTopOf="@id/slider"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,11 +41,11 @@
             android:id="@+id/difficulty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/level"
+            android:text="@string/title_level"
             android:alpha="0.5"
             android:textSize="@dimen/text_small"
             android:gravity="center"
-            android:drawableBottom="@drawable/slider_cup"
+            android:drawableBottom="@drawable/slider_level"
             android:textColor="@color/yellow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,12 +65,12 @@
             android:id="@+id/hero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/character"
+            android:text="@string/title_character"
             android:textSize="@dimen/text_small"
             android:alpha="0.5"
             android:gravity="center"
             android:textColor="@color/yellow"
-            android:drawableBottom="@drawable/slider_queen"
+            android:drawableBottom="@drawable/slider_team"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -95,10 +90,10 @@
             android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/location"
+            android:text="@string/title_location"
             android:textSize="@dimen/text_small"
             android:gravity="center"
-            android:drawableBottom="@drawable/slider_mounts"
+            android:drawableBottom="@drawable/slider_location"
             android:textColor="@color/yellow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -107,6 +102,7 @@
 
     <TextView
         android:id="@+id/subHeader"
+        style="@style/Standard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/tale_begins"
@@ -131,5 +127,16 @@
         app:spanCount="2"
         tools:itemCount="7"
         tools:listitem="@layout/item_location" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_shadows"
+        android:contentDescription="@string/title_choosing_cover"
+        app:layout_constraintBottom_toBottomOf="@id/rv_covers"
+        app:layout_constraintEnd_toEndOf="@id/rv_covers"
+        app:layout_constraintStart_toStartOf="@id/rv_covers"
+        app:layout_constraintTop_toTopOf="@id/rv_covers" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,9 +3,9 @@
     android:id="@+id/locationView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:src="@drawable/location_cosmos_small"
+    android:src="@drawable/location_space_small"
     android:layout_margin="@dimen/margin_xxs"
-    android:contentDescription="@string/location"
+    android:contentDescription="@string/title_location"
     android:layout_gravity="center"
     android:adjustViewBounds="true"
     android:scaleType="fitXY" />
