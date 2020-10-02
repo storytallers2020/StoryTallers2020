@@ -55,79 +55,80 @@ class CharacterStorage(context: Context) {
             context.getString(R.string.character_witch_name),
             resourceToString(context, R.drawable.ic_witch),
             resourceToString(context, R.drawable.ic_witch_selected)
-        ),
-        Character(
-            9,
-            context.getString(R.string.character_robot_name),
-            resourceToString(context, R.drawable.ic_robot),
-            resourceToString(context, R.drawable.ic_robot_selected)
-        ),
-        Character(
-            10,
-            context.getString(R.string.character_cosmonaut_name),
-            resourceToString(context, R.drawable.ic_cosmonaut),
-            resourceToString(context, R.drawable.ic_cosmonaut_selected)
-        ),
-        Character(
-            11,
-            context.getString(R.string.character_pirate_name),
-            resourceToString(context, R.drawable.ic_pirate),
-            resourceToString(context, R.drawable.ic_pirate_selected)
-        ),
-        Character(
-            12,
-            context.getString(R.string.character_mermaid_name),
-            resourceToString(context, R.drawable.ic_mermaid),
-            resourceToString(context, R.drawable.ic_mermaid_selected)
-        ),
-        Character(
-            13,
-            context.getString(R.string.character_bear_name),
-            resourceToString(context, R.drawable.ic_bear),
-            resourceToString(context, R.drawable.ic_bear_selected)
-        ),
-        Character(
-            14,
-            context.getString(R.string.character_fox_name),
-            resourceToString(context, R.drawable.ic_fox),
-            resourceToString(context, R.drawable.ic_fox_selected)
-        ),
-        Character(
-            15,
-            context.getString(R.string.character_dragon_name),
-            resourceToString(context, R.drawable.ic_dragon),
-            resourceToString(context, R.drawable.ic_dragon_selected)
-        ),
-        Character(
-            16,
-            context.getString(R.string.character_fish_name),
-            resourceToString(context, R.drawable.ic_fish),
-            resourceToString(context, R.drawable.ic_fish_selected)
-        ),
-        Character(
-            17,
-            context.getString(R.string.character_skeleton_name),
-            resourceToString(context, R.drawable.ic_skeleton),
-            resourceToString(context, R.drawable.ic_skeleton_selected)
-        ),
-        Character(
-            18,
-            context.getString(R.string.character_ghost_name),
-            resourceToString(context, R.drawable.ic_ghost),
-            resourceToString(context, R.drawable.ic_ghost_selected)
-        ),
-        Character(
-            19,
-            context.getString(R.string.character_alien_name),
-            resourceToString(context, R.drawable.ic_alien),
-            resourceToString(context, R.drawable.ic_alien_selected)
-        ),
-        Character(
-            20,
-            context.getString(R.string.character_zombie_name),
-            resourceToString(context, R.drawable.ic_zombie),
-            resourceToString(context, R.drawable.ic_zombie_selected)
         )
+//        ,
+//        Character(
+//            9,
+//            context.getString(R.string.character_robot_name),
+//            resourceToString(context, R.drawable.ic_robot),
+//            resourceToString(context, R.drawable.ic_robot_selected)
+//        ),
+//        Character(
+//            10,
+//            context.getString(R.string.character_cosmonaut_name),
+//            resourceToString(context, R.drawable.ic_cosmonaut),
+//            resourceToString(context, R.drawable.ic_cosmonaut_selected)
+//        ),
+//        Character(
+//            11,
+//            context.getString(R.string.character_pirate_name),
+//            resourceToString(context, R.drawable.ic_pirate),
+//            resourceToString(context, R.drawable.ic_pirate_selected)
+//        ),
+//        Character(
+//            12,
+//            context.getString(R.string.character_mermaid_name),
+//            resourceToString(context, R.drawable.ic_mermaid),
+//            resourceToString(context, R.drawable.ic_mermaid_selected)
+//        ),
+//        Character(
+//            13,
+//            context.getString(R.string.character_bear_name),
+//            resourceToString(context, R.drawable.ic_bear),
+//            resourceToString(context, R.drawable.ic_bear_selected)
+//        ),
+//        Character(
+//            14,
+//            context.getString(R.string.character_fox_name),
+//            resourceToString(context, R.drawable.ic_fox),
+//            resourceToString(context, R.drawable.ic_fox_selected)
+//        ),
+//        Character(
+//            15,
+//            context.getString(R.string.character_dragon_name),
+//            resourceToString(context, R.drawable.ic_dragon),
+//            resourceToString(context, R.drawable.ic_dragon_selected)
+//        ),
+//        Character(
+//            16,
+//            context.getString(R.string.character_fish_name),
+//            resourceToString(context, R.drawable.ic_fish),
+//            resourceToString(context, R.drawable.ic_fish_selected)
+//        ),
+//        Character(
+//            17,
+//            context.getString(R.string.character_skeleton_name),
+//            resourceToString(context, R.drawable.ic_skeleton),
+//            resourceToString(context, R.drawable.ic_skeleton_selected)
+//        ),
+//        Character(
+//            18,
+//            context.getString(R.string.character_ghost_name),
+//            resourceToString(context, R.drawable.ic_ghost),
+//            resourceToString(context, R.drawable.ic_ghost_selected)
+//        ),
+//        Character(
+//            19,
+//            context.getString(R.string.character_alien_name),
+//            resourceToString(context, R.drawable.ic_alien),
+//            resourceToString(context, R.drawable.ic_alien_selected)
+//        ),
+//        Character(
+//            20,
+//            context.getString(R.string.character_zombie_name),
+//            resourceToString(context, R.drawable.ic_zombie),
+//            resourceToString(context, R.drawable.ic_zombie_selected)
+//        )         // <== тут сокрыты платные ресурсы
     )
     //endregion
 

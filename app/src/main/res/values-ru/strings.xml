@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     // Application scope
-    <string name="app_name">Сказочники 2020</string>
     <string name="something_went_wrong">Что-то пошло не так</string>
 
     // Welcome screen

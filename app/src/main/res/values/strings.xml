@@ -1,6 +1,6 @@
 <resources>
     // Application scope
-    <string name="app_name">Story Heroes 2020</string>
+    <string name="app_name" translatable="false">Story Heroes</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="intent_text_plain" translatable="false">text/plain</string>
 
