@@ -56,9 +56,7 @@
     <string name="rv_players_underline" translatable="false">-----------------------</string>
     <string name="btn_choose_location">Choose location</string>
     <string name="err_short_name">Minimum name length 2 characters</string>
-    <string name="err_short_sentence">Minimum sentence length 2 characters</string>
     <string name="err_name_is_gaps">Please, enter name</string>
-    <string name="err_sentence_is_gaps">Please, enter sentence</string>
     <string name="err_character_not_selected">Please, select your character</string>
 
     // Location screen
@@ -76,7 +74,9 @@
     <string name="btn_end"><u>End the Tale</u></string>
     <string name="btn_resume"><u>Continue game</u></string>
     <string name="btn_select_cover">Select cover</string>
-    <string name="msg_incorrect_sentence">Isn`t correct sentence</string>
+    <string name="err_mandatory_word_missing">Please, use a mandatory word</string>
+    <string name="err_short_sentence">Minimum sentence length 2 characters</string>
+    <string name="err_sentence_is_gaps">Please, enter sentence</string>
 
     // Choosing Cover and Title screens
     <string name="title_choosing_cover">Choosing a cover</string>
