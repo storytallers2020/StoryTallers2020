@@ -152,14 +152,16 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_characters"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/margin_small"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/title_rv_characters"
             app:spanCount="2"
-            tools:itemCount="12"
+            tools:itemCount="8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:listitem="@layout/item_image_character_create" />
 
     <com.google.android.material.button.MaterialButton

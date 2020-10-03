@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     // Application scope
-    <string name="app_name">Сказочники 2020</string>
     <string name="something_went_wrong">Что-то пошло не так</string>
 
     // Welcome screen
@@ -51,9 +50,7 @@
     <string name="remove">удалить</string>
     <string name="btn_choose_location">Выбрать локацию</string>
     <string name="err_short_name">Не менее 2 символов</string>
-    <string name="err_short_sentence">Предложение слишком короткое</string>
     <string name="err_name_is_gaps">Введите имя</string>
-    <string name="err_sentence_is_gaps">Введите предложение</string>
     <string name="err_character_not_selected">Выберите персонажа</string>
 
     // Location screen
@@ -71,7 +68,9 @@
     <string name="btn_end"><u>Завершить сказку</u></string>
     <string name="btn_resume"><u>Продолжить игру</u></string>
     <string name="btn_select_cover">Выбрать обложку</string>
-    <string name="msg_incorrect_sentence">Неверное предложение</string>
+    <string name="err_mandatory_word_missing">Необходимо использовать обязательное слово</string>
+    <string name="err_short_sentence">Предложение слишком короткое</string>
+    <string name="err_sentence_is_gaps">Введите предложение</string>
 
     // Choosing Cover and Title screens
     <string name="title_choosing_cover">Выбор обложки</string>

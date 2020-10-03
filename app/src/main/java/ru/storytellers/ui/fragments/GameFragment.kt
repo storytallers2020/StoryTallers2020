@@ -16,7 +16,6 @@ import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 import ru.storytellers.utils.setBackgroundImage
-import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.GameViewModel
 
 class GameFragment : BaseFragment<DataModel>() {
@@ -59,7 +58,7 @@ class GameFragment : BaseFragment<DataModel>() {
     private fun onButtonSendClicked() {
         model.onButtonSendClicked(sentence_line.text.toString())
         assistantFragment.hideKeyboard()
-        if (statusCheck()) {
+        if (statusCheck() && handlerIsCorrectSentence()) {
             scroll_view.smoothScrollTo(0, story_body.bottom)
             sentence_line.setText("")
             isInputContentCorrect = false
@@ -102,10 +101,15 @@ class GameFragment : BaseFragment<DataModel>() {
         })
     }
 
-    private fun handlerIsCorrectSentence() {
+    private fun handlerIsCorrectSentence(): Boolean {
+        var isCorrect = true
         model.subscribeOnSentenceChecked().observe(viewLifecycleOwner, Observer {
-            if (!it) toastShowLong(context, context?.getString(R.string.msg_incorrect_sentence))
+            if (!it) {
+                setError(getString(R.string.err_mandatory_word_missing))
+            }
+            isCorrect = it
         })
+        return isCorrect
     }
 
     private fun handlerTextChangedLiveData() {
