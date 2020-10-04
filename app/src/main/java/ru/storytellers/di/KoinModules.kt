@@ -38,7 +38,18 @@ import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import com.amplitude.api.Amplitude
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.GsonBuilder
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import ru.storytellers.BuildConfig
+import ru.storytellers.model.datasource.remote.IRemoteDataSource
+import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.utils.AmplitudeWrapper
+import ru.storytellers.utils.NetworkStatus
 
 fun injectDependencies() = loadModules
 private val loadModules by lazy {
@@ -59,7 +70,8 @@ private val loadModules by lazy {
             libraryBookModule,
             teamCharacterModule,
             gameStartModule,
-            amplitudeModule
+            amplitudeModule,
+            remoteModule
         )
     )
 }
@@ -103,7 +115,8 @@ val locationModule = module {
     single { CharacterStorage(get()) }
     single { LocationStorage(get()) }
     single<ILocationDataSource> { LocationResDataSource(get()) }
-    single<ILocationRepository> { LocationRepository(get()) }
+ //   single<INetworkStatus> { NetworkStatus(get()) }
+    single<ILocationRepository> { LocationRepository(get(), get()) }
     viewModel { LocationViewModel(get()) }
 }
 
@@ -199,4 +212,38 @@ val amplitudeModule = module {
             .enableForegroundTracking(get())
     }
     single { AmplitudeWrapper(get()) }
+}
+
+val remoteModule = module {
+
+    val BASE_URL = " http://188.225.25.249/api/"
+
+    single {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = if (BuildConfig.DEBUG)
+                HttpLoggingInterceptor.Level.BODY
+            else
+                HttpLoggingInterceptor.Level.NONE
+
+        OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .build()
+    }
+
+    single {
+        GsonBuilder()
+            .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
+            .excludeFieldsWithoutExposeAnnotation()
+            .create()
+    }
+
+    single {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(get()))
+            .client(get())
+            .build()
+            .create(IRemoteDataSource::class.java)
+    }
 }

@@ -32,6 +32,7 @@ dependencies {
 
     //Retrofit 2
     implementation Retrofit.converter_gson
+    implementation Retrofit.logging_interceptor
     implementation Retrofit.adapter_rxjava
     implementation Retrofit.retrofit
 

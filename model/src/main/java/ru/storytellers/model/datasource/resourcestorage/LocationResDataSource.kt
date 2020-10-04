@@ -14,6 +14,11 @@ class LocationResDataSource(private val locationStorage: LocationStorage) : ILoc
             locationStorage.insertOrReplace(location)
         }.subscribeOn(Schedulers.io())
 
+    override fun insertOrReplace(locationList: List<Location>): Completable =
+        Completable.fromAction {
+            locationStorage.insertOrReplace(locationList)
+        }.subscribeOn(Schedulers.io())
+
     override fun getLocationById(locationId: Long): Single<Location> =
     Single.create<Location> { emitter ->
         locationStorage.getLocationById(locationId)?.let {

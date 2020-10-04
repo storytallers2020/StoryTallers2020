@@ -66,6 +66,12 @@ dependencies {
     implementation RxJava.rxjava
     implementation RxJava.rxandroid
 
+    //Retrofit 2
+    implementation Retrofit.converter_gson
+    implementation Retrofit.logging_interceptor
+    implementation Retrofit.adapter_rxjava
+    implementation Retrofit.retrofit
+
     //Fragment
     implementation Android_x.lifecycle
     implementation Android_x.fragment
