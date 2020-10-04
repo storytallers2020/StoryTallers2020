@@ -31,7 +31,7 @@ class LocationRepository(
 //    networkStatus.isOnlineSingle().flatMap { isOnline ->
 //        if (isOnline) {
             remoteDataSource.getLocations().flatMap { locationListApi ->
-                val BASE_URL = " http://188.225.25.249/api/"
+                val BASE_URL = "http://188.225.25.249/media/"
                 val locationList = locationListApi.locations.map {
                     Location(
                         it.id.toLong(),
