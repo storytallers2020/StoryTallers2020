@@ -21,7 +21,7 @@
         - Players make their moves in turns.\n
         - The order is determined in the beginning of the game and corresponds to the order in which the players were added to the game.\n
         - A player can come up with only one sentence.\n
-        - The sentence is limited to 80 characters.\n
+        - The sentence is limited to %1$d characters.\n
         - Any player can finish the game after each of the participants has made at least 1 move.\n\n
         There are 3 difficulty modes in the game:\n
         1. Easy. All previously composed sentences are visible to all participants in the game at any time.\n
