@@ -15,7 +15,7 @@ import ru.storytellers.viewmodels.GameStartViewModel
 class GameStartFragment : BaseFragment<DataModel>() {
     override val model: GameStartViewModel by inject()
     override val layoutRes = R.layout.fragment_game_start
-    lateinit var backgroundView: ConstraintLayout
+    private lateinit var backgroundView: ConstraintLayout
 
     companion object {
         fun newInstance() = GameStartFragment()

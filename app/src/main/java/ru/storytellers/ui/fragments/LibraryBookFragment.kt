@@ -21,7 +21,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     private var textStory: String? = null
     private var titleStory: String? = null
     private var removeStoryFlag = false
-    lateinit var backgroundView: ConstraintLayout
+    private lateinit var backgroundView: ConstraintLayout
 
     companion object {
         fun newInstance(story: Story) = LibraryBookFragment(story)
@@ -54,7 +54,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer { titleStoryLocal ->
             titleStoryLocal?.let { title ->
                 titleStory = title
-                subHeader.setText(title)
+                subHeader.text = title
             }
         })
 
@@ -108,7 +108,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                     }
                     R.id.btn_delete -> {
                         model.itemDeleteClickedStat()
-                        createAndShowAlertDialog()
+                        showAlertDialog()
                         true
                     }
                     else -> false
@@ -127,7 +127,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         removeStoryFlag = false
     }
 
-    private fun createAndShowAlertDialog() {
+    private fun showAlertDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
             AlertDialogFragment.newInstance(this, R.string.dialog_story)
                 .show(fragMan, FRAGMENT_DIALOG_TAG)
@@ -138,6 +138,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         super.onStop()
         textStory = null
         titleStory = null
+        loadImage(R.drawable.ic_background_default, backgroundView)
     }
 
     private fun backToLibraryScreen() {
