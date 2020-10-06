@@ -1,6 +1,7 @@
 package ru.storytellers.ui.fragments
 
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_library_book.*
 import org.koin.android.ext.android.inject
@@ -19,7 +20,8 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     override val layoutRes = R.layout.fragment_library_book
     private var textStory: String? = null
     private var titleStory: String? = null
-    private var removeStoryFlag =false
+    private var removeStoryFlag = false
+    private lateinit var backgroundView: ConstraintLayout
 
     companion object {
         fun newInstance(story: Story) = LibraryBookFragment(story)
@@ -52,17 +54,23 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer { titleStoryLocal ->
             titleStoryLocal?.let { title ->
                 titleStory = title
-                subHeader.setText(title)
+                subHeader.text = title
             }
         })
+
         model.subscribeOnRemoveStory().observe(viewLifecycleOwner, Observer {
             if (it != 0) {
                 context?.let { context ->
                     toastShowLong(context, context.getString(R.string.msg_delete))
                 }
-                story=null
+                story = null
                 backToLibraryScreen()
             }
+        })
+
+        model.subscribeOnLocationImage().observe(viewLifecycleOwner, Observer {
+            backgroundView = requireActivity().findViewById(R.id.main_background)
+            setBackgroundImage(it, backgroundView)
         })
     }
 
@@ -77,7 +85,13 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                         model.itemShareClickedStat()
                         titleStory?.let { title ->
                             textStory?.let { text ->
-                                with(concatTitleAndTextStory(title, text, getString(R.string.msg_share))) {
+                                with(
+                                    concatTitleAndTextStory(
+                                        title,
+                                        text,
+                                        getString(R.string.msg_share)
+                                    )
+                                ) {
                                     if (this.isNotBlank()) shareText(this@LibraryBookFragment, this)
                                 }
                             }
@@ -94,7 +108,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                     }
                     R.id.btn_delete -> {
                         model.itemDeleteClickedStat()
-                        createAndShowAlertDialog()
+                        showAlertDialog()
                         true
                     }
                     else -> false
@@ -103,17 +117,17 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         }
     }
 
-    fun setStateRemoveStoryFlag(){
-        removeStoryFlag=true
+    fun setStateRemoveStoryFlag() {
+        removeStoryFlag = true
         removeStory()
     }
 
     private fun removeStory() {
         story?.let { model.removeStory(it) }
-        removeStoryFlag=false
+        removeStoryFlag = false
     }
 
-    private fun createAndShowAlertDialog() {
+    private fun showAlertDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
             AlertDialogFragment.newInstance(this, R.string.dialog_story)
                 .show(fragMan, FRAGMENT_DIALOG_TAG)
@@ -124,9 +138,10 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         super.onStop()
         textStory = null
         titleStory = null
+        loadImage(R.drawable.ic_background_default, backgroundView)
     }
 
-    private fun backToLibraryScreen(){
+    private fun backToLibraryScreen() {
         model.onBackClicked(this.javaClass.simpleName)
         router.backTo(Screens.LibraryScreen())
     }
