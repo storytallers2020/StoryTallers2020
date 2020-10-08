@@ -32,7 +32,7 @@ class StatHelper {
         const val locationId = "locationId"
         //GameStartScreen
         const val gameStartScreenBtnStartClicked = "GameStartScreen|BtnStartClicked"
-        const val gameStartTimeFromGameCreation = "GameStartScreen|TimeFromGameCreation"
+        const val gameStartTimeFromGameCreation = "TimeFromGameCreation"
         //GameScreen
         const val gamePlayerId = "GamePlayerId"
         const val gamePlayerName = "GamePlayerName"
@@ -53,6 +53,7 @@ class StatHelper {
         const val storyId = "StoryId"
         const val storyName = "StoryName"
         const val saveStoryFailed = "SaveStoryFailed"
+        const val saveStoryTimeFromGameCreation = "TimeFromGameCreation"
         //LibraryScreen
         const val libraryScreenStorySelected = "LibraryScreen|StorySelected"
         const val libraryScreenMenuItemCopyClicked = "LibraryScreen|MenuItemCopyClicked"
