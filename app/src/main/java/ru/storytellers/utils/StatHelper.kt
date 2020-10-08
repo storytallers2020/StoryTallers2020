@@ -32,6 +32,7 @@ class StatHelper {
         const val locationId = "locationId"
         //GameStartScreen
         const val gameStartScreenBtnStartClicked = "GameStartScreen|BtnStartClicked"
+        const val gameStartTimeFromGameCreation = "GameStartScreen|TimeFromGameCreation"
         //GameScreen
         const val gamePlayerId = "GamePlayerId"
         const val gamePlayerName = "GamePlayerName"
