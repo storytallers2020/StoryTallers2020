@@ -36,6 +36,7 @@ class StartFragment : BaseFragment<DataModel>() {
 
     private fun navigateToLevelScreen() {
         model.createTaleStatistics()
+        model.timeCreateStory()
         router.navigateTo(Screens.LevelScreen())
     }
 
