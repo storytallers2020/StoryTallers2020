@@ -6,12 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.engine.Game
 import ru.storytellers.model.DataModel
-import ru.storytellers.utils.StatHelper
+import ru.storytellers.utils.*
 import ru.storytellers.utils.StatHelper.Companion.riseEvent
-import ru.storytellers.utils.getCurrentDateTime
-import ru.storytellers.utils.getString
-import ru.storytellers.utils.toProperties
-import ru.storytellers.utils.resourceToUri
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameStartViewModel(private val game: Game) : BaseViewModel<DataModel>() {
@@ -30,12 +26,13 @@ class GameStartViewModel(private val game: Game) : BaseViewModel<DataModel>() {
         storage.level?.let { level ->
             game.newGame(storage.getPlayers(), level)
         }
-
     }
 
     fun buttonStartClickedStatistic() {
+       val time= timeFromGameCreation(storage.getTimeCreateStory()).getStringForStatistics()
         val prop = listOf(
-            StatHelper.timeEvent to getCurrentDateTime().getString()
+            StatHelper.timeEvent to getCurrentDateTime().getString(),
+            StatHelper.gameStartTimeFromGameCreation to time //промежуток времени от момента создания сказки в минутах и секундах
         )
         riseEvent(StatHelper.gameStartScreenBtnStartClicked, prop)
     }
