@@ -13,9 +13,12 @@ class GameStorage {
     private val sentenceOfTaleList = mutableListOf<SentenceOfTale>()
     private var cover: Cover? = null
     private var title: String? = null
+    private var timeCreateStory: Long = 0
 
     var level: Level? = null
 
+    fun getTimeCreateStory()=timeCreateStory
+    fun setTimeCreateStory(timeCreate:Long){timeCreateStory=timeCreate}
     fun getTitleStory() = title
 
     fun setTitleStory(titleStory: String) {
@@ -29,6 +32,7 @@ class GameStorage {
         location = null
         sentenceOfTaleList.clear()
         level = null
+        timeCreateStory=0
     }
 
     fun getCoverStoryTaller() = cover
