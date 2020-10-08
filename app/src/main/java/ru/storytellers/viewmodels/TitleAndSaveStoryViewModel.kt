@@ -75,10 +75,17 @@ class TitleAndSaveStoryViewModel(
     }
 
     private fun saveStorySuccessStatistic(story: Story) {
+        val time= timeFromGameCreation(
+            StoryTallerApp.
+            instance.
+            gameStorage.
+            getTimeCreateStory()
+        ).getStringForStatistics()
         val prop = listOf(
             StatHelper.storyName to story.name,
             StatHelper.storyId to story.id.toString(),
-            StatHelper.timeEvent to getCurrentDateTime().getString()
+            StatHelper.timeEvent to getCurrentDateTime().getString(),
+            StatHelper.saveStoryTimeFromGameCreation to time
         )
         riseEvent(StatHelper.titleAndSaveScreenBtnSaveClicked, prop)
     }
