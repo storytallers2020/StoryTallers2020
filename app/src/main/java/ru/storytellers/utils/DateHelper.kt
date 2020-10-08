@@ -17,3 +17,7 @@ fun getCurrentDateTime(): Date {
 }
 
 fun timeMillisToDate(timeMillis:Long)=Date(timeMillis)
+fun Date.getStringForStatistics(
+    format: String = statisticTimeFormat,
+    locale: Locale = localeDefault
+): String = SimpleDateFormat(format, locale).format(this)
