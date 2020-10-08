@@ -21,3 +21,7 @@ fun Date.getStringForStatistics(
     format: String = statisticTimeFormat,
     locale: Locale = localeDefault
 ): String = SimpleDateFormat(format, locale).format(this)
+
+ fun timeFromGameCreation(timeCreationGame:Long)=
+     timeMillisToDate(getCurrentDateTime().time-timeCreationGame)
+
