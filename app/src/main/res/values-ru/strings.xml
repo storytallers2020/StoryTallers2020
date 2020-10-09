@@ -110,6 +110,7 @@
     <string name="decline_answer">Отклонить</string>
     <string name="msg_agreement_declined">Соглашения отклонены</string>
     <string name="msg_agreement_accepted">Соглашения приняты</string>
+    <string name="star_button">Оставить отзыв</string>
 
 
     // New strings... move them to the corresponding group above

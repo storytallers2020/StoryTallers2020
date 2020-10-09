@@ -126,6 +126,7 @@
     <string name="decline_answer">Decline</string>
     <string name="msg_agreement_declined">GAME OVER</string>
     <string name="msg_agreement_accepted">Agreements accepted</string>
+    <string name="star_button">leave a review</string>
 
     // New strings... move them to the corresponding group above
 

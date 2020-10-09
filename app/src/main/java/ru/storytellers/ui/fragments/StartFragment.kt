@@ -1,6 +1,8 @@
 package ru.storytellers.ui.fragments
 
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.view.View
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_start.*
@@ -32,6 +34,13 @@ class StartFragment : BaseFragment<DataModel>() {
         about_button.setOnClickListener { navigateToAboutScreen() }
         new_tale_button.setOnClickListener{ navigateToLevelScreen() }
         library_button.setOnClickListener { navigateToLibraryScreen() }
+        star_button.setOnClickListener {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://otvet.imgsmail.ru/download/1322343_931ab4fcd51a1727391920b934777a47_800.jpg")
+            )
+            startActivity(intent)
+        }
     }
 
     private fun navigateToLevelScreen() {

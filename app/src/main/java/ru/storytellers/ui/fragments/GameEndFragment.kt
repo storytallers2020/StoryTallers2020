@@ -7,6 +7,7 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
+import ru.storytellers.ui.MainActivity
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.setBackgroundImage
 import ru.storytellers.utils.setTextToClipboard
@@ -77,6 +78,12 @@ class GameEndFragment : BaseFragment<DataModel>() {
     }
 
     private fun navigateToSelectCoverScreen() {
-        router.navigateTo(Screens.SelectCoverScreen())
+        if (activity != null) {
+            val ma = activity as MainActivity?
+            if (ma != null) {
+                ma.doStuff2()
+            }
+        }
     }
+
 }
