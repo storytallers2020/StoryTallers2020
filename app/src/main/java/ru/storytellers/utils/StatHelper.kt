@@ -1,6 +1,8 @@
 package ru.storytellers.utils
 
 import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.model.entity.Player
+import java.lang.StringBuilder
 
 
 class StatHelper {
@@ -33,6 +35,10 @@ class StatHelper {
         //GameStartScreen
         const val gameStartScreenBtnStartClicked = "GameStartScreen|BtnStartClicked"
         const val gameStartTimeFromGameCreation = "TimeFromGameCreation"
+        const val gameStartLevelGame = "LevelGame"
+        const val gameStartNumberPlayersInGame ="NumberPlayersInGame"
+        const val gameStartLocationGame = "LocationGame"
+        const val gameStartNamePlayersAndCharacter ="NamePlayersAndCharacter"
         //GameScreen
         const val gamePlayerId = "GamePlayerId"
         const val gamePlayerName = "GamePlayerName"
@@ -76,6 +82,17 @@ class StatHelper {
         }
         fun riseEvent(eventName: String) {
             StoryTallerApp.instance.stat.riseEvent(eventName)
+        }
+
+        fun getNamePlayersAndCharacter(listPlayer:List<Player>): String{
+            val builder = StringBuilder()
+            listPlayer.forEach {player ->
+                builder.append(player.name)
+                    .append(" - ")
+                    .append(player.character?.name)
+                    .append("; ")
+            }
+            return builder.toString()
         }
     }
 }
