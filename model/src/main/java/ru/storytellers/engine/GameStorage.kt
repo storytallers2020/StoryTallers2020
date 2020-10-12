@@ -5,7 +5,6 @@ import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
-import ru.storytellers.utils.getSortedList
 
 class GameStorage {
     private val playerList = mutableListOf<Player>()
@@ -13,8 +12,14 @@ class GameStorage {
     private val sentenceOfTaleList = mutableListOf<SentenceOfTale>()
     private var cover: Cover? = null
     private var title: String? = null
+    private var timeCreateStory: Long = 0
 
     var level: Level? = null
+
+    fun getTimeCreateStory() = timeCreateStory
+    fun setTimeCreateStory(timeCreate: Long) {
+        timeCreateStory = timeCreate
+    }
 
     fun getTitleStory() = title
 
@@ -29,6 +34,7 @@ class GameStorage {
         location = null
         sentenceOfTaleList.clear()
         level = null
+        timeCreateStory = 0
     }
 
     fun getCoverStoryTaller() = cover

@@ -9,6 +9,7 @@ import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
 import ru.storytellers.utils.*
+import ru.storytellers.utils.StatHelper.Companion.getNumberSymbolsInStory
 import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
@@ -75,10 +76,21 @@ class TitleAndSaveStoryViewModel(
     }
 
     private fun saveStorySuccessStatistic(story: Story) {
+        val storage=StoryTallerApp.
+        instance.
+        gameStorage
+        val time= timeFromGameCreation(
+            storage.getTimeCreateStory()
+        ).getStringForStatistics()
         val prop = listOf(
             StatHelper.storyName to story.name,
             StatHelper.storyId to story.id.toString(),
-            StatHelper.timeEvent to getCurrentDateTime().getString()
+            StatHelper.timeEvent to getCurrentDateTime().getString(),
+            StatHelper.saveStoryTimeFromGameCreation to time,
+            StatHelper.saveStoryCoverId to storage.getCoverStoryTaller()!!.id.toString(),
+            StatHelper.saveStoryCoverName to storage.getCoverStoryTaller()!!.name,
+            StatHelper.saveStoryNumberSentenceInStory to story.sentences!!.count().toString(),
+            StatHelper.saveStoryNumberSymbolsInStory to getNumberSymbolsInStory(story.sentences!!).toString()
         )
         riseEvent(StatHelper.titleAndSaveScreenBtnSaveClicked, prop)
     }

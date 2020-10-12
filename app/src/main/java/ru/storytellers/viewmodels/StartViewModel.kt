@@ -4,6 +4,7 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.repository.IStoryRepository
@@ -56,11 +57,21 @@ class StartViewModel(
         riseEvent(StatHelper.startScreenBtnToLibraryScreen, prop)
     }
 
+    fun timeCreateStory(){
+        StoryTallerApp.instance.gameStorage.setTimeCreateStory(getCurrentDateTime().time)
+    }
+
     fun onAboutScreenStatistics() {
         val prop = listOf(
             StatHelper.timeEvent to getCurrentDateTime().getString()
         )
         riseEvent(StatHelper.startScreenBtnToAboutScreen, prop)
+    }
+    fun onStartScreenNumberOfTaleStat(numberOfTale:Int) {
+        val prop = listOf(
+            StatHelper.startScreenNumberOfTale to numberOfTale.toString()
+        )
+        riseEvent(StatHelper.startScreen, prop)
     }
 
     fun getAllStory() {

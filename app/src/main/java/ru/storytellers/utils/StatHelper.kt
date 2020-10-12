@@ -1,6 +1,9 @@
 package ru.storytellers.utils
 
 import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.model.entity.Player
+import ru.storytellers.model.entity.SentenceOfTale
+import java.lang.StringBuilder
 
 
 class StatHelper {
@@ -14,6 +17,8 @@ class StatHelper {
         const val startScreenBtnToCreateTale = "StartScreen|BtnToCreateTale"
         const val startScreenBtnToAboutScreen = "StartScreen|BtnToAboutScreen"
         const val startScreenBtnToLibraryScreen = "StartScreen|BtnToLibraryScreen"
+        const val startScreenNumberOfTale="StartScreen|NumberOfTale"
+        const val startScreen="StartScreen"
         //LevelScreen
         const val levelScreenBtnToCharacterScreen = "LevelScreen|BtnToCharacterScreen"
         const val levelName = "levelName"
@@ -32,6 +37,11 @@ class StatHelper {
         const val locationId = "locationId"
         //GameStartScreen
         const val gameStartScreenBtnStartClicked = "GameStartScreen|BtnStartClicked"
+        const val gameStartTimeFromGameCreation = "TimeFromGameCreation"
+        const val gameStartLevelGame = "LevelGame"
+        const val gameStartNumberPlayersInGame ="NumberPlayersInGame"
+        const val gameStartLocationGame = "LocationGame"
+        const val gameStartNamePlayersAndCharacter ="NamePlayersAndCharacter"
         //GameScreen
         const val gamePlayerId = "GamePlayerId"
         const val gamePlayerName = "GamePlayerName"
@@ -52,6 +62,12 @@ class StatHelper {
         const val storyId = "StoryId"
         const val storyName = "StoryName"
         const val saveStoryFailed = "SaveStoryFailed"
+        const val saveStoryTimeFromGameCreation = "TimeFromGameCreation"
+        const val saveStoryCoverId ="CoverId"
+        const val saveStoryCoverName = "CoverName"
+        const val saveStoryNumberSentenceInStory = "NumberSentenceInStory"
+        const val saveStoryNumberSymbolsInStory = "NumberSymbolsInStory"
+
         //LibraryScreen
         const val libraryScreenStorySelected = "LibraryScreen|StorySelected"
         const val libraryScreenMenuItemCopyClicked = "LibraryScreen|MenuItemCopyClicked"
@@ -74,6 +90,31 @@ class StatHelper {
         }
         fun riseEvent(eventName: String) {
             StoryTallerApp.instance.stat.riseEvent(eventName)
+        }
+
+        fun getNamePlayersAndCharacter(listPlayer:List<Player>): String{
+            val builder = StringBuilder()
+            listPlayer.forEach {player ->
+                builder.append(player.name)
+                    .append(" - ")
+                    .append(player.character?.name)
+                    .append("; ")
+            }
+            return builder.toString()
+        }
+
+        fun getNumberSymbolsInStory(listSentence:List<SentenceOfTale>):Int{
+            var counter=0
+            listSentence.forEach { sentenceOfTale->
+                counter+=sentenceOfTale.content.count()
+            }
+            return counter
+        }
+         fun getNameLevel(levelId: Int?) = when (levelId) {
+            0 -> "Easy"
+            1 -> "Medium"
+            2 -> "Hard"
+            else -> "no name"
         }
     }
 }
