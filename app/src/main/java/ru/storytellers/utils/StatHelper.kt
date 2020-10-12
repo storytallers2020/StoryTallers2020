@@ -17,6 +17,8 @@ class StatHelper {
         const val startScreenBtnToCreateTale = "StartScreen|BtnToCreateTale"
         const val startScreenBtnToAboutScreen = "StartScreen|BtnToAboutScreen"
         const val startScreenBtnToLibraryScreen = "StartScreen|BtnToLibraryScreen"
+        const val startScreenNumberOfTale="StartScreen|NumberOfTale"
+        const val startScreen="StartScreen"
         //LevelScreen
         const val levelScreenBtnToCharacterScreen = "LevelScreen|BtnToCharacterScreen"
         const val levelName = "levelName"
