@@ -7,7 +7,6 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
-import ru.storytellers.ui.MainActivity
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.setBackgroundImage
@@ -23,12 +22,7 @@ class GameStartFragment : BaseFragment<DataModel>() {
     }
 
     private fun navigateToGameScreen() {
-        if (activity != null) {
-            val ma = activity as MainActivity?
-            if (ma != null) {
-                ma.doStuff()
-            }
-        }
+        router.navigateTo(Screens.GameScreen())
     }
 
     override fun init() {

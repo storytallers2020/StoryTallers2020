@@ -127,6 +127,9 @@
     <string name="msg_agreement_declined">GAME OVER</string>
     <string name="msg_agreement_accepted">Agreements accepted</string>
     <string name="star_button">leave a review</string>
+    <string name="ad_key_test_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ad_key_id" translatable="false">ca-app-pub-8179777113013566/9995202148</string>
+
 
     // New strings... move them to the corresponding group above
 
