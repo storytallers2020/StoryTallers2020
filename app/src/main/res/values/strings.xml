@@ -79,6 +79,7 @@
     <string name="btn_end"><u>End the Tale</u></string>
     <string name="btn_resume"><u>Continue game</u></string>
     <string name="btn_select_cover">Select cover</string>
+    <string name="msg_incorrect_sentence">Isn`t correct sentence</string>
     <string name="err_mandatory_word_missing">Please, use a mandatory word</string>
     <string name="err_short_sentence">Minimum sentence length 2 characters</string>
     <string name="err_sentence_is_gaps">Please, enter sentence</string>
