@@ -110,5 +110,11 @@ class StatHelper {
             }
             return counter
         }
+         fun getNameLevel(levelId: Int?) = when (levelId) {
+            0 -> "Easy"
+            1 -> "Medium"
+            2 -> "Hard"
+            else -> "no name"
+        }
     }
 }
