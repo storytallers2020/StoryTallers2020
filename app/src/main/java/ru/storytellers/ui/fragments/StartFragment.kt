@@ -53,6 +53,7 @@ class StartFragment : BaseFragment<DataModel>() {
     override fun iniViewModel() {
         model.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
             it.data?.let { listStoryLocal ->
+                model.onStartScreenNumberOfTaleStat(listStoryLocal.count())
                 if (listStoryLocal.isNotEmpty()) {
                     library_button.visibility = View.VISIBLE
                 }
