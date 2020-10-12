@@ -2,6 +2,7 @@ package ru.storytellers.utils
 
 import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.entity.Player
+import ru.storytellers.model.entity.SentenceOfTale
 import java.lang.StringBuilder
 
 
@@ -60,6 +61,11 @@ class StatHelper {
         const val storyName = "StoryName"
         const val saveStoryFailed = "SaveStoryFailed"
         const val saveStoryTimeFromGameCreation = "TimeFromGameCreation"
+        const val saveStoryCoverId ="CoverId"
+        const val saveStoryCoverName = "CoverName"
+        const val saveStoryNumberSentenceInStory = "NumberSentenceInStory"
+        const val saveStoryNumberSymbolsInStory = "NumberSymbolsInStory"
+
         //LibraryScreen
         const val libraryScreenStorySelected = "LibraryScreen|StorySelected"
         const val libraryScreenMenuItemCopyClicked = "LibraryScreen|MenuItemCopyClicked"
@@ -93,6 +99,14 @@ class StatHelper {
                     .append("; ")
             }
             return builder.toString()
+        }
+
+        fun getNumberSymbolsInStory(listSentence:List<SentenceOfTale>):Int{
+            var counter=0
+            listSentence.forEach { sentenceOfTale->
+                counter+=sentenceOfTale.content.count()
+            }
+            return counter
         }
     }
 }
