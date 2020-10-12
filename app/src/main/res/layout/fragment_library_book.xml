@@ -63,8 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_small"
-        android:background="@drawable/background_transparent"
-        android:fillViewport="true"
+        android:background="@drawable/background_back"
         android:paddingVertical="@dimen/margin_xs"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -80,15 +79,15 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <!--    <ImageView-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:scaleType="fitXY"-->
-    <!--        android:src="@drawable/ic_shadows"-->
-    <!--        android:contentDescription="@string/title_choosing_cover"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@id/layout_tale"-->
-    <!--        app:layout_constraintEnd_toEndOf="@id/layout_tale"-->
-    <!--        app:layout_constraintStart_toStartOf="@id/layout_tale"-->
-    <!--        app:layout_constraintTop_toTopOf="@id/layout_tale" />-->
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/background_front"
+        android:contentDescription="@string/title_choosing_cover"
+        app:layout_constraintBottom_toBottomOf="@id/layout_tale"
+        app:layout_constraintEnd_toEndOf="@id/layout_tale"
+        app:layout_constraintStart_toStartOf="@id/layout_tale"
+        app:layout_constraintTop_toTopOf="@id/layout_tale" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
