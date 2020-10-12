@@ -67,6 +67,12 @@ class StartViewModel(
         )
         riseEvent(StatHelper.startScreenBtnToAboutScreen, prop)
     }
+    fun onStartScreenNumberOfTaleStat(numberOfTale:Int) {
+        val prop = listOf(
+            StatHelper.startScreenNumberOfTale to numberOfTale.toString()
+        )
+        riseEvent(StatHelper.startScreen, prop)
+    }
 
     fun getAllStory() {
         storyRepository.getAll()
