@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.utils.StatHelper
+import ru.storytellers.utils.StatHelper.Companion.getNameLevel
 import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.utils.getCurrentDateTime
 import ru.storytellers.utils.getString
@@ -32,18 +33,13 @@ class LevelViewModel : BaseViewModel<DataModel>() {
 
     fun onNextScreen() {
         val prop = listOf(
-            StatHelper.levelName to getNameLevel(storage.level?.id),
+            StatHelper.levelName to getNameLevel(storage.level!!.id),
             StatHelper.timeEvent to getCurrentDateTime().getString()
         )
         riseEvent(StatHelper.levelScreenBtnToCharacterScreen, prop)
     }
 
-    private fun getNameLevel(levelId: Int?) = when (levelId) {
-        0 -> "Easy"
-        1 -> "Medium"
-        2 -> "Hard"
-        else -> "no name"
-    }
+
 
 
 }
