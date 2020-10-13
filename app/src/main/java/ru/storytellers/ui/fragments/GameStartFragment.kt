@@ -21,6 +21,10 @@ class GameStartFragment : BaseFragment<DataModel>() {
         fun newInstance() = GameStartFragment()
     }
 
+    private fun navigateToGameScreen() {
+        router.navigateTo(Screens.GameScreen())
+    }
+
     override fun init() {
         iniViewModel()
         handlerUriBackgroundImage()
@@ -74,9 +78,6 @@ class GameStartFragment : BaseFragment<DataModel>() {
         rule?.let { text_rule_tv.text = it }
     }
 
-    private fun navigateToGameScreen() {
-        router.navigateTo(Screens.GameScreen())
-    }
     private fun backToLocationScreen() {
         setDefaultBackground()
         model.onBackClicked(this.javaClass.simpleName)

@@ -38,6 +38,18 @@
         android:layout_marginBottom="@dimen/margin_standard"
         app:layout_constraintTop_toBottomOf="@id/new_tale_button" />
 
+    <Button
+        android:id="@+id/star_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/star_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/library_button" />
+
+
     <TextView
         android:id="@+id/about_button"
         style="@style/TextButton"
