@@ -3,9 +3,6 @@
     // Application scope
     <string name="something_went_wrong">Что-то пошло не так</string>
 
-    //Splash screen
-    <string name="version">ВЕРСИЯ: %1$d (%2$s)</string>
-
     // Welcome screen
     <string name="game_loading_msg">Загрузка…</string>
     <string name="title_welcome">Добро пожаловать!</string>
