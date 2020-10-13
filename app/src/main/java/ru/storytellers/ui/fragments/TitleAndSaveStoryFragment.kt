@@ -32,6 +32,7 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
             if (text.toString().length > 1) {
                 model.setTitleStory(text.toString())
                 btn_next.isEnabled = true
+                book_title.isErrorEnabled = false
             } else {
                 btn_next.isEnabled = false
             }
@@ -44,18 +45,11 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         }
     }
 
-
     override fun init() {
         book_name.addTextChangedListener(textWatcher)
         book_name.onFocusChangeListener = focusListener
         back_button_character.setOnClickListener { backToSelectCoverScreen() }
-        btn_next.setOnClickListener {
-            if (book_name.text.isNullOrEmpty()) {
-                context?.let { toastShowLong(it, it.getString(R.string.enter_title)) }
-            } else {
-                saveStory()
-            }
-        }
+        btn_next.setOnClickListener { saveStory() }
     }
 
     override fun onStart() {
@@ -87,8 +81,9 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
             }
         })
     }
-    private fun saveStory(){
-        model.saveStory()
+    private fun saveStory() {
+        if (model.saveStory()) return
+        book_title.error = context?.getString(R.string.enter_title)
     }
 
     private fun navigateToLibraryScreen() {

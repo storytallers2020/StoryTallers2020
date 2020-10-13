@@ -31,18 +31,23 @@ class TitleAndSaveStoryViewModel(
         return coverLiveDate
     }
 
-    fun saveStory() {
+    fun saveStory(): Boolean {
         with(StoryHeroesApp.instance.gameStorage) {
-            sendStoryToRepo(
-                Story(
-                    getUid(),
-                    getTitle(this),
-                    getAuthors(this),
-                    getCoverStory()?.imageUrl!!,
-                    getLocationGame(),
-                    getSentences()
+            return if (getTitle(this).isEmpty()) {
+                false
+            } else {
+                sendStoryToRepo(
+                    Story(
+                        getUid(),
+                        getTitle(this),
+                        getAuthors(this),
+                        getCoverStory()?.imageUrl!!,
+                        getLocationGame(),
+                        getSentences()
+                    )
                 )
-            )
+                true
+            }
         }
     }
 
