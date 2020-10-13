@@ -64,6 +64,12 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
             }
         })
 
+        model.subscribeOnTitleAcceptable().observe(viewLifecycleOwner, Observer {
+            if (!it) {
+                book_title.error = context?.getString(R.string.enter_title)
+            }
+        })
+
         model.subscribeOnSuccessSaveFlag().observe(viewLifecycleOwner, Observer {
             if (it) {
                 activity?.let { context ->
@@ -82,8 +88,7 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         })
     }
     private fun saveStory() {
-        if (model.saveStory()) return
-        book_title.error = context?.getString(R.string.enter_title)
+        model.saveStory()
     }
 
     private fun navigateToLibraryScreen() {

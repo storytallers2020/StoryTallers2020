@@ -19,6 +19,7 @@ class TitleAndSaveStoryViewModel(
 ) : BaseViewModel<DataModel>() {
     private val coverLiveDate = MutableLiveData<Cover>()
     private val successSaveFlagLiveDate = MutableLiveData<Boolean>()
+    private val titleAcceptableLiveData = MutableLiveData<Boolean>()
 
     fun setTitleStory(title: String) {
         StoryHeroesApp.instance.gameStorage.setTitleStory(title)
@@ -26,15 +27,18 @@ class TitleAndSaveStoryViewModel(
 
     fun subscribeOnSuccessSaveFlag() = successSaveFlagLiveDate
 
+    fun subscribeOnTitleAcceptable() = titleAcceptableLiveData
+
     fun subscribeOnCover(): LiveData<Cover> {
         coverLiveDate.value = StoryHeroesApp.instance.gameStorage.getCoverStory()
         return coverLiveDate
     }
 
-    fun saveStory(): Boolean {
+    fun saveStory() {
         with(StoryHeroesApp.instance.gameStorage) {
-            return if (getTitle(this).isEmpty()) {
-                false
+            if (getTitle(this).isEmpty()) {
+                titleAcceptableLiveData.value = false
+                return
             } else {
                 sendStoryToRepo(
                     Story(
@@ -46,7 +50,6 @@ class TitleAndSaveStoryViewModel(
                         getSentences()
                     )
                 )
-                true
             }
         }
     }
