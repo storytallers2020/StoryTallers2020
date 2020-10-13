@@ -1,13 +1,10 @@
 package ru.storytellers.viewmodels
 
 import android.net.Uri
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.engine.Game
-import ru.storytellers.engine.level.Level
-import ru.storytellers.engine.wordRules.IWordRule
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.ContentTypeEnum
 import ru.storytellers.model.entity.Player
@@ -110,6 +107,7 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
             StatHelper.timeEvent to getCurrentDateTime().getString(),
             StatHelper.turn to sentence.step.toString()
         )
+        @Suppress("UNCHECKED_CAST")
         riseEvent(StatHelper.gameScreenBtnSendClicked, prop as List<Pair<String, String>>)
     }
 

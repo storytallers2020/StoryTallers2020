@@ -5,7 +5,7 @@ import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.utils.getPlayerNumByTurn
 
-class Game() {
+class Game {
 
     lateinit var level: Level
     private lateinit var players: List<Player>
@@ -25,18 +25,15 @@ class Game() {
     }
 
     fun nextStep(sentenceOfTale: SentenceOfTale): Boolean {
-        val res = level
-            .rules
-            .isSentenceCorrect(sentenceOfTale.content)
-
         val wordRes =
-            if (level.wordRule.isNeedUseWord())
+            if (level.wordRule.isNeedUseWord()) {
                 level.wordRule.checkWordExists(sentenceOfTale.content)
-            else true
+            } else
+                true
 
-        if (res && wordRes) turn++
+        if (wordRes) turn++
 
-        return res && wordRes
+        return wordRes
     }
 
 }
