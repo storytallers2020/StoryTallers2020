@@ -1,26 +1,24 @@
 package ru.storytellers.application
 
 import android.app.Application
-import com.amplitude.api.Amplitude
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import ru.storytellers.engine.Game
 import ru.storytellers.engine.GameStorage
 import ru.storytellers.engine.level.Levels
 import ru.storytellers.utils.AmplitudeWrapper
 import timber.log.Timber
 
-class StoryTallerApp: Application() {
+class StoryHeroesApp : Application() {
 
 
     companion object {
-        lateinit var instance: StoryTallerApp
+        lateinit var instance: StoryHeroesApp
             private set
     }
 
     val levels: Levels by inject()
-    val  gameStorage: GameStorage by inject()
+    val gameStorage: GameStorage by inject()
     val stat: AmplitudeWrapper by inject()
 
     override fun onCreate() {
@@ -28,7 +26,7 @@ class StoryTallerApp: Application() {
 
         instance = this
 
-        startKoin { androidContext(this@StoryTallerApp) }
+        startKoin { androidContext(this@StoryHeroesApp) }
         Timber.plant(Timber.DebugTree())
     }
 }

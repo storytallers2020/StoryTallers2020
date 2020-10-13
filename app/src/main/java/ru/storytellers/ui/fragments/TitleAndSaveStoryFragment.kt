@@ -33,7 +33,6 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
                 model.setTitleStory(text.toString())
                 btn_next.isEnabled = true
             } else {
-                context?.let { toastShowLong(it, it.getString(R.string.enter_title)) }
                 btn_next.isEnabled = false
             }
         }
@@ -51,7 +50,11 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         book_name.onFocusChangeListener = focusListener
         back_button_character.setOnClickListener { backToSelectCoverScreen() }
         btn_next.setOnClickListener {
-            saveStory()
+            if (book_name.text.isNullOrEmpty()) {
+                context?.let { toastShowLong(it, it.getString(R.string.enter_title)) }
+            } else {
+                saveStory()
+            }
         }
     }
 
@@ -85,7 +88,7 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         })
     }
     private fun saveStory(){
-        model.createStoryTaller()
+        model.saveStory()
     }
 
     private fun navigateToLibraryScreen() {

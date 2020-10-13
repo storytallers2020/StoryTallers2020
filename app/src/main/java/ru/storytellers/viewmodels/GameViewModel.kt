@@ -3,7 +3,7 @@ package ru.storytellers.viewmodels
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.engine.Game
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.ContentTypeEnum
@@ -15,7 +15,7 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
     val inputValid: InputValidation by lazy { InputValidation() }
-    private val app = StoryTallerApp.instance
+    private val app = StoryHeroesApp.instance
     private val storage = app.gameStorage
 
     private val currentPlayerLiveData = MutableLiveData<Player>()
