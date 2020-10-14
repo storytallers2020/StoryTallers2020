@@ -22,29 +22,31 @@ class LibraryFragmentAssistant(private val fragment: LibraryFragment) {
     }
 
     fun shareText() {
-        with(
-            concatTitleAndTextStory(
-                storyTitle,
-                storyText,
-                fragment.getString(R.string.msg_share)
-            )
-        ) {
-            if (this.isNotBlank())
+        with(prepareStory()) {
+            if (isNotBlank())
                 shareText(fragment, this)
         }
     }
 
     fun copyText() {
-        with(
-            concatTitleAndTextStory(
-                storyTitle,
-                storyText,
-                fragment.getString(R.string.msg_share)
-            )
-        ) {
-            if (this.isNotBlank())
+        with(prepareStory()) {
+            if (isNotBlank())
                 copyText(fragment.requireContext(), this)
         }
+    }
+
+    private fun prepareStory(): String {
+        return concatTitleAndTextStory(
+            storyTitle,
+            storyText,
+            fragment.getString(
+                R.string.msg_share,
+                fragment.getString(
+                    R.string.uri_to_http_google_play,
+                    fragment.context?.packageName
+                )
+            )
+        )
     }
 
     fun showAlertDialog() {

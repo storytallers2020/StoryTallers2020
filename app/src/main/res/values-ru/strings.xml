@@ -88,7 +88,7 @@
     <string name="share_bottom_sheet_title">Рассказать сказку…</string>
     <string name="btn_copy">"Копировать "</string>
     <string name="msg_copy">Сказка в буфере обмена</string>
-    <string name="msg_share">Попробуй сочинить свою сказку тут: \n<u>ссылка</u></string>
+    <string name="msg_share">Попробуй сочинить свою сказку тут: \n<u>%1$s</u></string>
     <string name="btn_delete">Удалить</string>
     <string name="msg_delete">Сказка удалена</string>
     <string name="msg_saved_successfully">Успешно сохранено</string>
