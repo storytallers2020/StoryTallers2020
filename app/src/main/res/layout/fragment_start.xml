@@ -32,23 +32,21 @@
         android:id="@+id/library_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_library"
         android:layout_marginTop="@dimen/margin_large"
-        android:visibility="visible"
         android:layout_marginBottom="@dimen/margin_standard"
+        android:text="@string/btn_library"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/new_tale_button" />
 
-    <Button
-        android:id="@+id/star_button"
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rate_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/star_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_standard"
+        android:visibility="visible"
+        android:text="@string/btn_rate"
         app:layout_constraintTop_toBottomOf="@+id/library_button" />
-
 
     <TextView
         android:id="@+id/about_button"
