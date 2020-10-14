@@ -1,11 +1,7 @@
 package ru.storytellers.ui.fragments
 
-import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_library.*
-import kotlinx.android.synthetic.main.item_book_library.view.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -41,22 +37,19 @@ class LibraryFragment : BaseFragment<DataModel>() {
         model.storySelectedStat(story)
         navigateToLibraryBookScreen(story)
     }
-    private val buttonMenuClickListener = { view: View ->
-        togglePopupMenu(view.popup_menu)
-    }
-    private val buttonShareClickListener = { story: Story ->
+    private val buttonMenuClickListener = { story: Story ->
         setStoryClicked(story)
+    }
+    private val buttonShareClickListener = {
         model.itemShareClickedStat()
         assistant.shareText()
     }
-    private val buttonCopyClickListener = { story: Story ->
-        setStoryClicked(story)
+    private val buttonCopyClickListener = {
         model.itemCopyClickedStat()
         assistant.copyText()
         toastShowLong(requireContext(), getString(R.string.msg_copy))
     }
-    private val buttonDeleteClickListener = { story: Story ->
-        setStoryClicked(story)
+    private val buttonDeleteClickListener = {
         model.itemDeleteClickedStat()
         assistant.showAlertDialog()
     }
@@ -118,10 +111,6 @@ class LibraryFragment : BaseFragment<DataModel>() {
         if (data.isNotEmpty()) {
             libraryAdapter.setData(data)
         }
-    }
-
-    private fun togglePopupMenu(view: View) {
-        view.visibility = if (view.visibility == GONE) VISIBLE else GONE
     }
 
     private fun setStoryClicked(story: Story) {
