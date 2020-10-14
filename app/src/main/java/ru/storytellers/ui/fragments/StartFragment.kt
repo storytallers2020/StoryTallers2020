@@ -46,12 +46,11 @@ class StartFragment : BaseFragment<DataModel>() {
 
     private fun navigateToGooglePlay() {
         val packageName = context?.packageName
-
         try {
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("market://details?id=$packageName")
+                    Uri.parse(getString(R.string.uri_to_market_google_play, packageName))
                 ).apply {
                     addFlags(
                         Intent.FLAG_ACTIVITY_NO_HISTORY or
@@ -64,7 +63,7 @@ class StartFragment : BaseFragment<DataModel>() {
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("http://play.google.com/store/apps/details?id=$packageName")
+                    Uri.parse(getString(R.string.uri_to_http_google_play, packageName))
                 )
             )
         }

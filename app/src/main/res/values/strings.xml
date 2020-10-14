@@ -130,6 +130,9 @@
     <string name="decline_answer">Decline</string>
     <string name="msg_agreement_declined">GAME OVER</string>
     <string name="msg_agreement_accepted">Agreements accepted</string>
+    <string name="uri_to_market_google_play" translatable="false">market://details?id=%1$s</string>
+    <string name="uri_to_http_google_play" translatable="false">http://play.google.com/store/apps/details?id=%1$s</string>
+
 
     // New strings... move them to the corresponding group above
 
