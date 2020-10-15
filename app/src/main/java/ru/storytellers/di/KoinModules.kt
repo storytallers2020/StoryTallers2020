@@ -115,8 +115,8 @@ val locationModule = module {
     single { CharacterStorage(get()) }
     single { LocationStorage(get()) }
     single<ILocationDataSource> { LocationResDataSource(get()) }
- //   single<INetworkStatus> { NetworkStatus(get()) }
-    single<ILocationRepository> { LocationRepository(get(), get()) }
+    single<INetworkStatus> { NetworkStatus(get()) }
+    single<ILocationRepository> { LocationRepository(get(), get(), get()) }
     viewModel { LocationViewModel(get()) }
 }
 

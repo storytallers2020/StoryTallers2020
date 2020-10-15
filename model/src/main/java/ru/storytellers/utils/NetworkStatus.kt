@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import ru.storytellers.model.network.INetworkStatus
 
-class NetworkStatus(private val context: Context): INetworkStatus {
+class NetworkStatus(context: Context): INetworkStatus {
 
     private val statusSubject = BehaviorSubject.create<Boolean>()
 

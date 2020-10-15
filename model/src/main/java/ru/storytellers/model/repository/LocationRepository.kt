@@ -7,10 +7,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.storytellers.model.datasource.ILocationDataSource
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
 import ru.storytellers.model.entity.Location
-import ru.storytellers.utils.NetworkStatus
+import ru.storytellers.model.network.INetworkStatus
 
 class LocationRepository(
-    //private val networkStatus: NetworkStatus,
+    private val networkStatus: INetworkStatus,
     private val remoteDataSource: IRemoteDataSource,
     private val localDataSource: ILocationDataSource
 ): ILocationRepository {
@@ -23,29 +23,17 @@ class LocationRepository(
         localDataSource.getLocationById(locationId)
             .subscribeOn(Schedulers.io())
 
-//    override fun getAll(): Single<List<Location>> =
-//        localDataSource.getAll()
-//            .subscribeOn(Schedulers.io())
-
     override fun getAll(): Single<List<Location>> =
-//    networkStatus.isOnlineSingle().flatMap { isOnline ->
-//        if (isOnline) {
+    networkStatus.isOnlineSingle().flatMap { isOnline ->
+        if (isOnline) {
             remoteDataSource.getLocations().flatMap { locationListApi ->
-                val BASE_URL = "http://188.225.25.249/media/"
-                val locationList = locationListApi.locations.map {
-                    Location(
-                        it.id.toLong(),
-                        it.name,
-                        BASE_URL + it.imageUrl,
-                        BASE_URL + it.imageForRecycler,
-                        it.descriptions
-                    )
-                }
-                localDataSource.insertOrReplace(locationList).toSingleDefault(locationList)
-            //}
-//        } else {
-//            localDataSource.getAll()
-//        }
+                localDataSource
+                    .insertOrReplace(locationListApi.locations)
+                    .toSingleDefault(locationListApi.locations)
+            }
+        } else {
+            localDataSource.getAll()
+        }
     }.subscribeOn(Schedulers.io())
 
 }
