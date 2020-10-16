@@ -2,19 +2,18 @@ package ru.storytellers.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.utils.StatHelper
 import ru.storytellers.utils.StatHelper.Companion.getNameLevel
 import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.utils.getCurrentDateTime
 import ru.storytellers.utils.getString
-import ru.storytellers.utils.toProperties
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 
 class LevelViewModel : BaseViewModel<DataModel>() {
-    private val app = StoryTallerApp.instance
+    private val app = StoryHeroesApp.instance
     private val storage = app.gameStorage
     private val levelLiveData = MutableLiveData<Int>()
 
@@ -29,7 +28,7 @@ class LevelViewModel : BaseViewModel<DataModel>() {
 
     fun getLevelGame() = storage.level?.id ?: 0
 
-    fun isPlayerListNotEmpty() = StoryTallerApp.instance.gameStorage.getPlayers().isNotEmpty()
+    fun isPlayerListNotEmpty() = StoryHeroesApp.instance.gameStorage.getPlayers().isNotEmpty()
 
     fun onNextScreen() {
         val prop = listOf(

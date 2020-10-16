@@ -4,7 +4,7 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.repository.IStoryRepository
@@ -58,7 +58,7 @@ class StartViewModel(
     }
 
     fun timeCreateStory(){
-        StoryTallerApp.instance.gameStorage.setTimeCreateStory(getCurrentDateTime().time)
+        StoryHeroesApp.instance.gameStorage.setTimeCreateStory(getCurrentDateTime().time)
     }
 
     fun onAboutScreenStatistics() {

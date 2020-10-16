@@ -29,9 +29,8 @@
     <string name="rules_full_description">
         The game can be played by 2 to 8 people.\n
         - Players make their moves in turns.\n
-        - The order is determined in the beginning of the game and corresponds to the order in which the players were added to the game.\n
-        - A player can come up with only one sentence.\n
-        - The sentence is limited to %1$d characters.\n
+        - The turns order is determined in the beginning of the game. It corresponds to the order in which the players were added to the team.\n
+        - A player comes up with a sentence limited to %1$d characters.\n
         - Any player can finish the game after each of the participants has made at least 1 move.\n\n
         There are 3 difficulty modes in the game:\n
         1. Easy. All previously composed sentences are visible to all participants in the game at any time.\n
@@ -42,9 +41,9 @@
     <string name="arrow_back" translatable="false"><![CDATA[<<<]]></string>
     <string name="dots_line" translatable="false">..............</string>
 
-        // Level screen
-        <string name="title_level">Level</string>
-        <string name="btn_easy">Easy</string>
+    // Level screen
+    <string name="title_level">Level</string>
+    <string name="btn_easy">Easy</string>
     <string name="rules_easy_description">All previously composed sentences are visible to all participants in the game at any time.</string>
     <string name="btn_medium">Medium</string>
     <string name="rules_medium_description">The player sees only the last sentence composed by the player before him.</string>

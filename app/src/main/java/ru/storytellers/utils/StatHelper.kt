@@ -1,9 +1,8 @@
 package ru.storytellers.utils
 
-import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
-import java.lang.StringBuilder
 
 
 class StatHelper {
@@ -83,13 +82,13 @@ class StatHelper {
             val prop = listOf(
                 timeEvent to getCurrentDateTime().getString()
             )
-            StoryTallerApp.instance.stat.riseEvent(itemName, prop.toProperties())
+             StoryHeroesApp.instance.stat.riseEvent(itemName, prop.toProperties())
         }
         fun riseEvent(eventName: String,prop: List<Pair<String,String>>) {
-            StoryTallerApp.instance.stat.riseEvent(eventName, prop.toProperties())
+            StoryHeroesApp.instance.stat.riseEvent(eventName, prop.toProperties())
         }
         fun riseEvent(eventName: String) {
-            StoryTallerApp.instance.stat.riseEvent(eventName)
+            StoryHeroesApp.instance.stat.riseEvent(eventName)
         }
 
         fun getNamePlayersAndCharacter(listPlayer:List<Player>): String{

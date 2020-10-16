@@ -1,6 +1,6 @@
 package ru.storytellers.engine.rules
 
-class Rules() {
+class Rules {
 
     private val rulesList = ArrayList<IRule>()
 

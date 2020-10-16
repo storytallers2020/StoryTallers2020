@@ -5,7 +5,7 @@ import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.utils.getPlayerNumByTurn
 
-class Game() {
+class Game {
 
     lateinit var level: Level
     private lateinit var players: List<Player>

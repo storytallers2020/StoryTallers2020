@@ -5,7 +5,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -17,7 +16,7 @@ import org.koin.test.KoinTest
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.di.amplitudeModule
 import ru.storytellers.di.gameEngine
 import ru.storytellers.engine.Game
@@ -27,7 +26,9 @@ import ru.storytellers.engine.rules.Rules
 import ru.storytellers.engine.showRules.ShowAllSentencesRule
 import ru.storytellers.engine.wordRules.RandomWordRule
 import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
-import ru.storytellers.model.entity.*
+import ru.storytellers.model.entity.Character
+import ru.storytellers.model.entity.Location
+import ru.storytellers.model.entity.Player
 
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.PAUSED)
@@ -41,7 +42,7 @@ class GameViewModelTest() : KoinTest {
     @Before
     fun setUp() {
         loadKoinModules(listOf(gameEngine, amplitudeModule))
-        storage = StoryTallerApp.instance.gameStorage
+        storage = StoryHeroesApp.instance.gameStorage
         game = Game()
         gameViewModel = GameViewModel(game)
 

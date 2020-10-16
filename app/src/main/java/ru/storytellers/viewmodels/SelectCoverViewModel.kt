@@ -3,7 +3,7 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.repository.ICoverRepository
@@ -11,7 +11,6 @@ import ru.storytellers.utils.StatHelper
 import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.utils.getCurrentDateTime
 import ru.storytellers.utils.getString
-import ru.storytellers.utils.toProperties
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class SelectCoverViewModel(
@@ -39,7 +38,7 @@ class SelectCoverViewModel(
     }
 
     fun setCoverStory(cover: Cover){
-        StoryTallerApp.instance.gameStorage.setCoverStoryTaller(cover)
+        StoryHeroesApp.instance.gameStorage.setCoverStory(cover)
     }
     fun coverStatistics(cover: Cover){
         val prop = listOf(

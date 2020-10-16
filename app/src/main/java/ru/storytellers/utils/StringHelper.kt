@@ -1,3 +1,3 @@
 package ru.storytellers.utils
 
-fun String.stringNotContainSymbols()=this.trim().isEmpty()
+fun String.stringContainsNoSymbols() = this.trim().isEmpty()

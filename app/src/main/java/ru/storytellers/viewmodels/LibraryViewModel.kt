@@ -3,7 +3,7 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
@@ -112,7 +112,7 @@ class LibraryViewModel(
     }
 
     fun onClearStorage() {
-        StoryTallerApp.instance.gameStorage.clear()
+        StoryHeroesApp.instance.gameStorage.clear()
     }
 
 
@@ -138,6 +138,6 @@ class LibraryViewModel(
     }
 
     fun btnToStartScreenClickedStat() {
-        StoryTallerApp.instance.stat.riseEvent(StatHelper.libraryScreenBtnStartScreenClicked)
+        StoryHeroesApp.instance.stat.riseEvent(StatHelper.libraryScreenBtnStartScreenClicked)
     }
 }
