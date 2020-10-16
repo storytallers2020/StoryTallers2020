@@ -37,10 +37,12 @@
         android:id="@+id/btn_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_menu"
-        android:background="@color/no_color"
         android:layout_margin="@dimen/margin_small"
+        android:background="@color/no_color"
         android:contentDescription="@string/btn_menu"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:src="@drawable/ic_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_marginVertical="@dimen/margin_xxs"
         android:layout_marginHorizontal="@dimen/margin_small"
         app:layout_constraintEnd_toEndOf="parent"

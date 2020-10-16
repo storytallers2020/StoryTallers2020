@@ -83,27 +83,12 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                 when (it.itemId) {
                     R.id.btn_share -> {
                         model.itemShareClickedStat()
-                        titleStory?.let { title ->
-                            textStory?.let { text ->
-                                with(
-                                    concatTitleAndTextStory(
-                                        title,
-                                        text,
-                                        getString(R.string.msg_share)
-                                    )
-                                ) {
-                                    if (this.isNotBlank()) shareText(this@LibraryBookFragment, this)
-                                }
-                            }
-                        }
+                        shareText()
                         true
                     }
                     R.id.btn_copy -> {
                         model.itemCopyClickedStat()
-                        textStory?.let { text ->
-                            copyText(requireContext(), text)
-                            toastShowLong(requireContext(), getString(R.string.msg_copy))
-                        }
+                        copyText()
                         true
                     }
                     R.id.btn_delete -> {
@@ -116,6 +101,36 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
             }
         }
     }
+
+    private fun shareText() {
+        with(prepareStory()) {
+            if (this.isNotBlank())
+                shareText(this@LibraryBookFragment, this)
+        }
+    }
+
+    private fun copyText() {
+        with(prepareStory()) {
+            if (this.isNotBlank())
+                copyText(requireContext(), this)
+        }
+    }
+
+    private fun prepareStory(): String = titleStory?.let { title ->
+        textStory?.let { text ->
+            concatTitleAndTextStory(
+                title,
+                text,
+                getString(
+                    R.string.msg_share,
+                    getString(
+                        R.string.uri_to_http_google_play,
+                        context?.packageName
+                    )
+                )
+            )
+        }
+    }.toString()
 
     fun setStateRemoveStoryFlag() {
         removeStoryFlag = true
