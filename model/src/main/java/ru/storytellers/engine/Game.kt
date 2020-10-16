@@ -25,15 +25,18 @@ class Game {
     }
 
     fun nextStep(sentenceOfTale: SentenceOfTale): Boolean {
+        val res = level
+            .rules
+            .isSentenceCorrect(sentenceOfTale.content)
+
         val wordRes =
-            if (level.wordRule.isNeedUseWord()) {
+            if (level.wordRule.isNeedUseWord())
                 level.wordRule.checkWordExists(sentenceOfTale.content)
-            } else
-                true
+            else true
 
-        if (wordRes) turn++
+        if (res && wordRes) turn++
 
-        return wordRes
+        return res && wordRes
     }
 
 }
