@@ -37,9 +37,9 @@ class GameStorage {
         timeCreateStory = 0
     }
 
-    fun getCoverStoryTaller() = cover
+    fun getCoverStory() = cover
 
-    fun setCoverStoryTaller(coverStory: Cover) {
+    fun setCoverStory(coverStory: Cover) {
         cover = coverStory
     }
 

@@ -112,7 +112,7 @@ class GameFragment : BaseFragment<DataModel>() {
         var isCorrect = true
         model.subscribeOnSentenceChecked().observe(viewLifecycleOwner, Observer {
             if (!it) {
-                setError(getString(R.string.msg_incorrect_sentence))
+                setError(getString(R.string.err_mandatory_word_missing))
             }
             isCorrect = it
         })

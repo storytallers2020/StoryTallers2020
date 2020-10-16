@@ -2,7 +2,7 @@ package ru.storytellers.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.engine.GameStorage
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Cover
@@ -17,43 +17,44 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 class TitleAndSaveStoryViewModel(
     private val assistantModel: TitleAndSaveModelAssistant
 ) : BaseViewModel<DataModel>() {
-    private var titleStory: String? = null
     private val coverLiveDate = MutableLiveData<Cover>()
     private val successSaveFlagLiveDate = MutableLiveData<Boolean>()
+    private val titleAcceptableLiveData = MutableLiveData<Boolean>()
 
     fun setTitleStory(title: String) {
-        titleStory = title
-        StoryTallerApp.instance.gameStorage.setTitleStory(titleStory!!)
+        StoryHeroesApp.instance.gameStorage.setTitleStory(title)
     }
 
     fun subscribeOnSuccessSaveFlag() = successSaveFlagLiveDate
 
+    fun subscribeOnTitleAcceptable() = titleAcceptableLiveData
+
     fun subscribeOnCover(): LiveData<Cover> {
-        coverLiveDate.value = StoryTallerApp.instance.gameStorage.getCoverStoryTaller()
+        coverLiveDate.value = StoryHeroesApp.instance.gameStorage.getCoverStory()
         return coverLiveDate
     }
 
-    fun createStoryTaller() {
-        var story: Story
-        val gameStorage = StoryTallerApp.instance.gameStorage
-        with(gameStorage) {
-            story = Story(
-                getUid(),
-                getTitle(this),
-                getAuthors(this),
-                this.getCoverStoryTaller()?.imageUrl!!,
-                this.getLocationGame(),
-                this.getSentences()
-            )
+    fun saveStory() {
+        with(StoryHeroesApp.instance.gameStorage) {
+            if (getTitle(this).isEmpty()) {
+                titleAcceptableLiveData.value = false
+                return
+            } else {
+                sendStoryToRepo(
+                    Story(
+                        getUid(),
+                        getTitle(this),
+                        getAuthors(this),
+                        getCoverStory()?.imageUrl!!,
+                        getLocationGame(),
+                        getSentences()
+                    )
+                )
+            }
         }
-        saveStory(story)
     }
 
-    private fun getTitle(storage: GameStorage): String {
-        var title = "no title"
-        storage.getTitleStory()?.let { title = it }
-        return title
-    }
+    private fun getTitle(storage: GameStorage): String = storage.getTitleStory().toString().trim()
 
     private fun getAuthors(storage: GameStorage): String {
         val namePlayers = StringBuilder()
@@ -64,7 +65,7 @@ class TitleAndSaveStoryViewModel(
         return namePlayers.toString()
     }
 
-    private fun saveStory(story: Story) {
+    private fun sendStoryToRepo(story: Story) {
         assistantModel.saveStory(story)
             .subscribe({
                 saveStorySuccessStatistic(story)
@@ -76,19 +77,15 @@ class TitleAndSaveStoryViewModel(
     }
 
     private fun saveStorySuccessStatistic(story: Story) {
-        val storage=StoryTallerApp.
-        instance.
-        gameStorage
-        val time= timeFromGameCreation(
-            storage.getTimeCreateStory()
-        ).getStringForStatistics()
+        val storage = StoryHeroesApp.instance.gameStorage
+        val time = timeFromGameCreation(storage.getTimeCreateStory()).getStringForStatistics()
         val prop = listOf(
             StatHelper.storyName to story.name,
             StatHelper.storyId to story.id.toString(),
             StatHelper.timeEvent to getCurrentDateTime().getString(),
             StatHelper.saveStoryTimeFromGameCreation to time,
-            StatHelper.saveStoryCoverId to storage.getCoverStoryTaller()!!.id.toString(),
-            StatHelper.saveStoryCoverName to storage.getCoverStoryTaller()!!.name,
+            StatHelper.saveStoryCoverId to storage.getCoverStory()!!.id.toString(),
+            StatHelper.saveStoryCoverName to storage.getCoverStory()!!.name,
             StatHelper.saveStoryNumberSentenceInStory to story.sentences!!.count().toString(),
             StatHelper.saveStoryNumberSymbolsInStory to getNumberSymbolsInStory(story.sentences!!).toString()
         )

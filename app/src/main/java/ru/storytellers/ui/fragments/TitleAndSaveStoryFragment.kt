@@ -31,8 +31,8 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
             if (text.toString().length > 1) {
                 model.setTitleStory(text.toString())
                 btn_next.isEnabled = true
+                book_title.isErrorEnabled = false
             } else {
-                context?.let { toastShowLong(it, it.getString(R.string.enter_title)) }
                 btn_next.isEnabled = false
             }
         }
@@ -44,14 +44,11 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         }
     }
 
-
     override fun init() {
         book_name.addTextChangedListener(textWatcher)
         book_name.onFocusChangeListener = focusListener
         back_button_character.setOnClickListener { backToSelectCoverScreen() }
-        btn_next.setOnClickListener {
-            saveStory()
-        }
+        btn_next.setOnClickListener { saveStory() }
     }
 
     override fun onStart() {
@@ -65,6 +62,12 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         model.subscribeOnCover().observe(viewLifecycleOwner, Observer { cover ->
             resourceToUri(cover.imageUrl)?.let {
                 loadImage(it, iv_cover)
+            }
+        })
+
+        model.subscribeOnTitleAcceptable().observe(viewLifecycleOwner, Observer {
+            if (!it) {
+                book_title.error = context?.getString(R.string.enter_title)
             }
         })
 
@@ -85,8 +88,8 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
             }
         })
     }
-    private fun saveStory(){
-        model.createStoryTaller()
+    private fun saveStory() {
+        model.saveStory()
     }
 
     private fun navigateToLibraryScreen() {
