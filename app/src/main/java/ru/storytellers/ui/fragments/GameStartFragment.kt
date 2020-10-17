@@ -15,10 +15,14 @@ import ru.storytellers.viewmodels.GameStartViewModel
 class GameStartFragment : BaseFragment<DataModel>() {
     override val model: GameStartViewModel by inject()
     override val layoutRes = R.layout.fragment_game_start
-    lateinit var backgroundView: ConstraintLayout
+    private lateinit var backgroundView: ConstraintLayout
 
     companion object {
         fun newInstance() = GameStartFragment()
+    }
+
+    private fun navigateToGameScreen() {
+        router.navigateTo(Screens.GameScreen())
     }
 
     override fun init() {
@@ -74,9 +78,6 @@ class GameStartFragment : BaseFragment<DataModel>() {
         rule?.let { text_rule_tv.text = it }
     }
 
-    private fun navigateToGameScreen() {
-        router.navigateTo(Screens.GameScreen())
-    }
     private fun backToLocationScreen() {
         setDefaultBackground()
         model.onBackClicked(this.javaClass.simpleName)

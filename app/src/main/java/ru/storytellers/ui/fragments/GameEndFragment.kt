@@ -79,4 +79,5 @@ class GameEndFragment : BaseFragment<DataModel>() {
     private fun navigateToSelectCoverScreen() {
         router.navigateTo(Screens.SelectCoverScreen())
     }
+
 }

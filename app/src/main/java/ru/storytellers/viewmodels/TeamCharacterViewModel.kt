@@ -2,7 +2,7 @@ package ru.storytellers.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Player
 import ru.storytellers.utils.StatHelper
@@ -13,7 +13,7 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class TeamCharacterViewModel : BaseViewModel<DataModel>() {
     private var listPlayers: MutableList<Player> =
-        StoryTallerApp.instance.gameStorage.getPlayers()
+        StoryHeroesApp.instance.gameStorage.getPlayers()
     private val playersLiveData = MutableLiveData<List<Player>>()
 
     fun subscribeOnPlayers(): LiveData<List<Player>> {

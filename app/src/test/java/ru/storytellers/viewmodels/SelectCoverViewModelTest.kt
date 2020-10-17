@@ -18,7 +18,7 @@ import org.koin.test.KoinTest
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.di.gameEngine
 import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.repository.ICoverRepository
@@ -67,7 +67,7 @@ class SelectCoverViewModelTest() : KoinTest {
     fun `try set Cover`() {
         loadKoinModules(gameEngine)
         selectCoverViewModel.setCoverStory(cover1)
-        val coverFromGameStorage = StoryTallerApp.instance.gameStorage.getCoverStoryTaller()
+        val coverFromGameStorage = StoryHeroesApp.instance.gameStorage.getCoverStory()
         assertEquals(cover1, coverFromGameStorage)
     }
 

@@ -4,6 +4,7 @@ package ru.storytellers.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.repository.IStoryRepository
@@ -17,20 +18,20 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 class StartViewModel(
     private val storyRepository: IStoryRepository
 ) : BaseViewModel<DataModel>() {
-    private val onSuccessliveData = MutableLiveData<DataModel.Success<Story>>()
-    private val onErrorliveData = MutableLiveData<DataModel.Error>()
-    private val onLoadingliveData = MutableLiveData<DataModel.Loading>()
+    private val onSuccessLiveData = MutableLiveData<DataModel.Success<Story>>()
+    private val onErrorLiveData = MutableLiveData<DataModel.Error>()
+    private val onLoadingLiveData = MutableLiveData<DataModel.Loading>()
 
     fun subscribeOnSuccess(): LiveData<DataModel.Success<Story>> {
-        return onSuccessliveData
+        return onSuccessLiveData
     }
 
     fun subscribeOnError(): LiveData<DataModel.Error> {
-        return onErrorliveData
+        return onErrorLiveData
     }
 
     fun subscribeOnLoading(): LiveData<DataModel.Loading> {
-        return onLoadingliveData
+        return onLoadingLiveData
     }
 
     fun toRulesScreenStatistics() {
@@ -56,6 +57,10 @@ class StartViewModel(
         riseEvent(StatHelper.startScreenBtnToLibraryScreen, prop)
     }
 
+    fun timeCreateStory(){
+        StoryHeroesApp.instance.gameStorage.setTimeCreateStory(getCurrentDateTime().time)
+    }
+
     fun onAboutScreenStatistics() {
         val prop = listOf(
             StatHelper.timeEvent to getCurrentDateTime().getString()
@@ -63,13 +68,20 @@ class StartViewModel(
         riseEvent(StatHelper.startScreenBtnToAboutScreen, prop)
     }
 
+    fun onStartScreenNumberOfTaleStat(numberOfTale:Int) {
+        val prop = listOf(
+            StatHelper.startScreenNumberOfTale to numberOfTale.toString()
+        )
+        riseEvent(StatHelper.startScreen, prop)
+    }
+
     fun getAllStory() {
         storyRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                onSuccessliveData.value = DataModel.Success(it)
+                onSuccessLiveData.value = DataModel.Success(it)
             }, {
-                onErrorliveData.value = DataModel.Error(it)
+                onErrorLiveData.value = DataModel.Error(it)
             })
     }
 

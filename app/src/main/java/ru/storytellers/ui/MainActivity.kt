@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         injectDependencies()
         turnOffFullScreen()
         router.replaceScreen(Screens.StartScreen())
+
     }
 
     private fun turnOffFullScreen() {

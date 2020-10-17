@@ -72,6 +72,7 @@
             app:layout_constraintTop_toTopOf="@id/iv_cover">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/book_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_xxs"

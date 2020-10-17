@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<pl.droidsonroids.gif.GifImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/splash"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background_default"
-    android:contentDescription="@string/game_loading_msg"
-    android:scaleType="fitXY"
-    android:src="@drawable/splash_logo" />
+    android:background="@drawable/ic_background_default">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/game_loading_msg"
+        android:scaleType="fitXY"
+        android:src="@drawable/splash_logo" />
+
+    <TextView
+        android:id="@+id/version_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_xs"
+        android:fontFamily="@font/phil_fam"
+        android:paddingHorizontal="@dimen/margin_xs"
+        android:textColor="@color/white"
+        tools:text="@string/version_tools" />
+
+</FrameLayout>

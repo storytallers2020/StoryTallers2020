@@ -27,6 +27,8 @@ class RulesGame: Fragment(), BackButtonListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val linesMax = resources.getInteger(R.integer.max_length_sentence)
+        rules_text.text = getString(R.string.rules_full_description, linesMax)
         back_button_rules.setOnClickListener { backClicked() }
 
     }

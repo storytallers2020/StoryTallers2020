@@ -1,6 +1,9 @@
 package ru.storytellers.ui.fragments
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.view.View
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_start.*
@@ -30,13 +33,40 @@ class StartFragment : BaseFragment<DataModel>() {
         checkAgreement()
         rules_button.setOnClickListener { navigateToRulesGame() }
         about_button.setOnClickListener { navigateToAboutScreen() }
-        new_tale_button.setOnClickListener{ navigateToLevelScreen() }
+        new_tale_button.setOnClickListener { navigateToLevelScreen() }
         library_button.setOnClickListener { navigateToLibraryScreen() }
+        rate_button.setOnClickListener { navigateToGooglePlay() }
     }
 
     private fun navigateToLevelScreen() {
         model.createTaleStatistics()
+        model.timeCreateStory()
         router.navigateTo(Screens.LevelScreen())
+    }
+
+    private fun navigateToGooglePlay() {
+        val packageName = context?.packageName
+        try {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(getString(R.string.uri_to_market_google_play, packageName))
+                ).apply {
+                    addFlags(
+                        Intent.FLAG_ACTIVITY_NO_HISTORY or
+                                Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                                Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                    )
+                }
+            )
+        } catch (e: ActivityNotFoundException) {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(getString(R.string.uri_to_http_google_play, packageName))
+                )
+            )
+        }
     }
 
     override fun onStart() {
@@ -52,6 +82,7 @@ class StartFragment : BaseFragment<DataModel>() {
     override fun iniViewModel() {
         model.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
             it.data?.let { listStoryLocal ->
+                model.onStartScreenNumberOfTaleStat(listStoryLocal.count())
                 if (listStoryLocal.isNotEmpty()) {
                     library_button.visibility = View.VISIBLE
                 }

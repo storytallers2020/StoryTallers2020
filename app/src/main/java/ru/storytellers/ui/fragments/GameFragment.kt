@@ -13,10 +13,10 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.assistant.GameFragmentAssistant
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.hideSoftKey
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 import ru.storytellers.utils.setBackgroundImage
-import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.GameViewModel
 
 class GameFragment : BaseFragment<DataModel>() {
@@ -26,6 +26,11 @@ class GameFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_game
     var inputMethodManager: Any? = null
     private var isInputContentCorrect = false
+    private val focusListener = View.OnFocusChangeListener { v, hasFocus ->
+        if (!hasFocus) {
+            hideSoftKey(v)
+        }
+    }
 
     override fun backClicked(): Boolean = true
 
@@ -33,6 +38,7 @@ class GameFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
+        sentence_line.onFocusChangeListener = focusListener
         reminder_intro.post { View.FOCUS_DOWN }
         button_end.setOnClickListener { onButtonEndClicked() }
         btn_send.setOnClickListener { onButtonSendClicked() }
@@ -59,7 +65,7 @@ class GameFragment : BaseFragment<DataModel>() {
     private fun onButtonSendClicked() {
         model.onButtonSendClicked(sentence_line.text.toString())
         assistantFragment.hideKeyboard()
-        if (statusCheck()) {
+        if (statusCheck() && handlerIsCorrectSentence()) {
             scroll_view.smoothScrollTo(0, story_body.bottom)
             sentence_line.setText("")
             isInputContentCorrect = false
@@ -102,10 +108,15 @@ class GameFragment : BaseFragment<DataModel>() {
         })
     }
 
-    private fun handlerIsCorrectSentence() {
+    private fun handlerIsCorrectSentence(): Boolean {
+        var isCorrect = true
         model.subscribeOnSentenceChecked().observe(viewLifecycleOwner, Observer {
-            if (!it) toastShowLong(context, context?.getString(R.string.msg_incorrect_sentence))
+            if (!it) {
+                setError(getString(R.string.err_mandatory_word_missing))
+            }
+            isCorrect = it
         })
+        return isCorrect
     }
 
     private fun handlerTextChangedLiveData() {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     // Application scope
-    <string name="app_name">Сказочники 2020</string>
     <string name="something_went_wrong">Что-то пошло не так</string>
+    <string name="btn_rate">Оценить</string>
 
     // Welcome screen
     <string name="game_loading_msg">Загрузка…</string>
@@ -20,7 +20,7 @@
     <string name="rules_full_description">
         В игру может играть от 2 до 8 человек.\n
         - Игроки ходят по очереди в порядке добавления их в команду в начале игры.\n
-        - Игрок может придумать только одно предложение длиной не более 80 символов.\n
+        - Игрок сочиняет предложение длиной не более %1$d символов.\n
         - Завершить игру может любой игрок после того, как каждый из участников игры сделал хотя бы по 1 ходу.\n\n
         Доступно три уровня сложности игры:\n
         1. Лёгкий. Все ранее сочинённые предложения видны всё время.\n
@@ -51,9 +51,7 @@
     <string name="remove">удалить</string>
     <string name="btn_choose_location">Выбрать локацию</string>
     <string name="err_short_name">Не менее 2 символов</string>
-    <string name="err_short_sentence">Предложение слишком короткое</string>
     <string name="err_name_is_gaps">Введите имя</string>
-    <string name="err_sentence_is_gaps">Введите предложение</string>
     <string name="err_character_not_selected">Выберите персонажа</string>
 
     // Location screen
@@ -72,6 +70,9 @@
     <string name="btn_resume"><u>Продолжить игру</u></string>
     <string name="btn_select_cover">Выбрать обложку</string>
     <string name="msg_incorrect_sentence">Неверное предложение</string>
+    <string name="err_mandatory_word_missing">Необходимо использовать обязательное слово</string>
+    <string name="err_short_sentence">Предложение слишком короткое</string>
+    <string name="err_sentence_is_gaps">Введите 1 предложение</string>
 
     // Choosing Cover and Title screens
     <string name="title_choosing_cover">Выбор обложки</string>
@@ -87,7 +88,7 @@
     <string name="share_bottom_sheet_title">Рассказать сказку…</string>
     <string name="btn_copy">"Копировать "</string>
     <string name="msg_copy">Сказка в буфере обмена</string>
-    <string name="msg_share">Попробуй сочинить свою сказку тут: \n<u>ссылка</u></string>
+    <string name="msg_share">Попробуй сочинить свою сказку тут: \n<u>%1$s</u></string>
     <string name="btn_delete">Удалить</string>
     <string name="msg_delete">Сказка удалена</string>
     <string name="msg_saved_successfully">Успешно сохранено</string>
@@ -108,7 +109,6 @@
     <string name="decline_answer">Отклонить</string>
     <string name="msg_agreement_declined">Соглашения отклонены</string>
     <string name="msg_agreement_accepted">Соглашения приняты</string>
-
 
     // New strings... move them to the corresponding group above
 
