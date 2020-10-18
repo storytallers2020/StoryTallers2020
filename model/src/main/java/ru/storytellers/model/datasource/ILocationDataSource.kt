@@ -7,6 +7,7 @@ import ru.storytellers.model.entity.Location
 
 interface ILocationDataSource {
     fun insertOrReplace(location: Location): @NonNull Completable
+    fun insertOrReplace(locationList: List<Location>): @NonNull Completable
     fun getLocationById(locationId: Long): Single<Location>
     fun getAll(): Single<List<Location>>
 }

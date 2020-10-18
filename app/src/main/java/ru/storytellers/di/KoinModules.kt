@@ -2,10 +2,18 @@ package ru.storytellers.di
 
 import androidx.room.Room
 import com.amplitude.api.Amplitude
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.GsonBuilder
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import ru.storytellers.BuildConfig
 import ru.storytellers.engine.Game
 import ru.storytellers.engine.GameStorage
 import ru.storytellers.engine.level.Level
@@ -18,6 +26,7 @@ import ru.storytellers.engine.showRules.ShowLastSentenceRule
 import ru.storytellers.engine.wordRules.IWordRule
 import ru.storytellers.engine.wordRules.RandomWordRule
 import ru.storytellers.model.datasource.*
+import ru.storytellers.model.datasource.remote.IRemoteDataSource
 import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
 import ru.storytellers.model.datasource.resourcestorage.CoverResDataSource
 import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
@@ -28,9 +37,11 @@ import ru.storytellers.model.datasource.room.PlayerDataSource
 import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
 import ru.storytellers.model.datasource.room.StoryDataSource
 import ru.storytellers.model.entity.room.db.AppDatabase
+import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.model.repository.*
 import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
 import ru.storytellers.utils.AmplitudeWrapper
+import ru.storytellers.utils.NetworkStatus
 import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
@@ -55,7 +66,8 @@ private val loadModules by lazy {
             libraryBookModule,
             teamCharacterModule,
             gameStartModule,
-            amplitudeModule
+            amplitudeModule,
+            remoteModule
         )
     )
 }
@@ -99,7 +111,8 @@ val locationModule = module {
     single { CharacterStorage(get()) }
     single { LocationStorage(get()) }
     single<ILocationDataSource> { LocationResDataSource(get()) }
-    single<ILocationRepository> { LocationRepository(get()) }
+    single<INetworkStatus> { NetworkStatus(get()) }
+    single<ILocationRepository> { LocationRepository(get(), get(), get()) }
     viewModel { LocationViewModel(get()) }
 }
 
@@ -195,4 +208,38 @@ val amplitudeModule = module {
             .enableForegroundTracking(get())
     }
     single { AmplitudeWrapper(get()) }
+}
+
+val remoteModule = module {
+
+    val BASE_URL = " http://188.225.25.249/api/"
+
+    single {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = if (BuildConfig.DEBUG)
+                HttpLoggingInterceptor.Level.BODY
+            else
+                HttpLoggingInterceptor.Level.NONE
+
+        OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .build()
+    }
+
+    single {
+        GsonBuilder()
+            .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
+            .excludeFieldsWithoutExposeAnnotation()
+            .create()
+    }
+
+    single {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(get()))
+            .client(get())
+            .build()
+            .create(IRemoteDataSource::class.java)
+    }
 }

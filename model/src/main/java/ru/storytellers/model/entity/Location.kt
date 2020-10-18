@@ -1,13 +1,13 @@
 package ru.storytellers.model.entity
 
+import com.google.gson.annotations.Expose
+
 data class Location(
-    val id: Long,
-    val name: String,
-    val imageUrl: String,
-    val imageForRecycler: String,
-    val descriptions: String
-
-
+    @Expose val id: Long,
+    @Expose val name: String,
+    @Expose val imageUrl: String,
+    @Expose val imageForRecycler: String,
+    @Expose val descriptions: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

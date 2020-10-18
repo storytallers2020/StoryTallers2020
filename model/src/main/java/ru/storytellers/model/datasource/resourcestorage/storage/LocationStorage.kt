@@ -214,6 +214,15 @@ class LocationStorage(context: Context)  {
         locationList.add(location)
     }
 
+    fun insertOrReplace(list: List<Location>) {
+        list.map {location ->
+            locationList.find { it.id == location.id }?.let { foundLocation ->
+                locationList.remove(foundLocation)
+            }
+            locationList.add(location)
+        }
+    }
+
     fun getLocationById(locationId: Long): Location? =
         locationList.find { it.id == locationId }
 

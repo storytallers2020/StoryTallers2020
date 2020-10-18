@@ -41,10 +41,9 @@ object Versions {
     const val coroutinesAndroid = "1.1.1"
 
     //Retrofit
-    const val retrofit = "2.6.0"
-    const val converterGson = "2.6.0"
-    const val interceptor = "3.12.1"
-    const val adapterCoroutines = "0.9.2"
+    const val retrofit = "2.8.1"
+    const val converterGson = "2.7.1"
+    const val interceptor = "4.4.0"
     const val adapter_rxjava = "3.0.0"
 
     //Koin
@@ -140,11 +139,8 @@ object RxJava{
 object Retrofit {
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.converterGson}"
-    const val adapter_coroutines =
-        "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.adapterCoroutines}"
     const val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.interceptor}"
     const val adapter_rxjava = "com.github.akarnokd:rxjava3-retrofit-adapter:${Versions.adapter_rxjava}"
-
 }
 
 object Koin {

@@ -32,6 +32,7 @@ dependencies {
 
     //Retrofit 2
     implementation Retrofit.converter_gson
+    implementation Retrofit.logging_interceptor
     implementation Retrofit.adapter_rxjava
     implementation Retrofit.retrofit
 
@@ -48,6 +49,9 @@ dependencies {
     androidTestImplementation TestImpl.espresso
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Timber
+    implementation Timber.timber
 
 }
 repositories {
