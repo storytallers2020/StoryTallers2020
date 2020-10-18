@@ -1,17 +1,24 @@
 package ru.storytellers.di
 
 import androidx.room.Room
+import com.amplitude.api.Amplitude
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.GsonBuilder
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import ru.storytellers.engine.GameStorage
-import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import ru.storytellers.BuildConfig
 import ru.storytellers.engine.Game
+import ru.storytellers.engine.GameStorage
 import ru.storytellers.engine.level.Level
 import ru.storytellers.engine.level.Levels
 import ru.storytellers.engine.rules.NoEmptySentenceRule
-import ru.storytellers.engine.rules.OneSentenceInTextRule
 import ru.storytellers.engine.rules.Rules
 import ru.storytellers.engine.showRules.IShowRule
 import ru.storytellers.engine.showRules.ShowAllSentencesRule
@@ -19,6 +26,8 @@ import ru.storytellers.engine.showRules.ShowLastSentenceRule
 import ru.storytellers.engine.wordRules.IWordRule
 import ru.storytellers.engine.wordRules.RandomWordRule
 import ru.storytellers.model.datasource.*
+import ru.storytellers.model.datasource.remote.IRemoteDataSource
+import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
 import ru.storytellers.model.datasource.resourcestorage.CoverResDataSource
 import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
 import ru.storytellers.model.datasource.resourcestorage.storage.CharacterStorage
@@ -27,29 +36,16 @@ import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
 import ru.storytellers.model.datasource.room.PlayerDataSource
 import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
 import ru.storytellers.model.datasource.room.StoryDataSource
-import ru.storytellers.viewmodels.LevelViewModel
-import ru.storytellers.viewmodels.LocationViewModel
-import ru.storytellers.viewmodels.StartViewModel
 import ru.storytellers.model.entity.room.db.AppDatabase
+import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.model.repository.*
 import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
+import ru.storytellers.utils.AmplitudeWrapper
+import ru.storytellers.utils.NetworkStatus
 import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
-import com.amplitude.api.Amplitude
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.GsonBuilder
-import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import ru.storytellers.BuildConfig
-import ru.storytellers.model.datasource.remote.IRemoteDataSource
-import ru.storytellers.model.network.INetworkStatus
-import ru.storytellers.utils.AmplitudeWrapper
-import ru.storytellers.utils.NetworkStatus
 
 fun injectDependencies() = loadModules
 private val loadModules by lazy {
