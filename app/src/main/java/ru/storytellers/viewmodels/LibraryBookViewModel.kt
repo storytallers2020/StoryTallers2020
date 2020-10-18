@@ -1,9 +1,9 @@
 package ru.storytellers.viewmodels
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import ru.storytellers.application.StoryTallerApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
@@ -18,6 +18,7 @@ class LibraryBookViewModel(
 ) : BaseViewModel<DataModel>() {
     private val textStoryLiveData = MutableLiveData<String>()
     private val titleStoryLiveData = MutableLiveData<String>()
+    private val locationImageLiveData = MutableLiveData<Uri>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
     private val onRemoveStoryLiveData = MutableLiveData<Int>()
 
@@ -33,6 +34,10 @@ class LibraryBookViewModel(
         return titleStoryLiveData
     }
 
+    fun subscribeOnLocationImage(): LiveData<Uri> {
+        return locationImageLiveData
+    }
+
     fun subscribeOnError(): LiveData<DataModel.Error> {
         return onErrorLiveData
     }
@@ -40,9 +45,12 @@ class LibraryBookViewModel(
     fun getTextStory(storyId: Long) {
         storyRepository.getStoryWithSentencesById(storyId)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                it.sentences?.let { sentences ->
+            .subscribe({story ->
+                story.sentences?.let { sentences ->
                     textStoryLiveData.value = mapToList(sentences).collectSentence()
+                }
+                story.location?.let { location ->
+                    locationImageLiveData.value = resourceToUri(location.imageUrl)
                 }
             }, {
                 onErrorLiveData.value = DataModel.Error(it)

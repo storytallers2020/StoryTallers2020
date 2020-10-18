@@ -109,6 +109,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation Amplitude.amplitude
+    implementation 'com.google.android.gms:play-services-ads:19.4.0'
 
 }
 repositories {

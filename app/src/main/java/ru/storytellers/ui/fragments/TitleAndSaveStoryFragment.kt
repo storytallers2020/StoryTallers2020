@@ -10,16 +10,15 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
+import ru.storytellers.ui.MainActivity
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.hideSoftKey
-import ru.storytellers.utils.loadImage
-import ru.storytellers.utils.resourceToUri
-import ru.storytellers.utils.toastShowLong
+import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.TitleAndSaveStoryViewModel
 
 class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
     override val model: TitleAndSaveStoryViewModel by inject()
     override val layoutRes = R.layout.fragment_choosing_title
+    private lateinit var adMobFragment : AdMobFragment
 
     companion object {
         fun newInstance() = TitleAndSaveStoryFragment()
@@ -32,8 +31,8 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
             if (text.toString().length > 1) {
                 model.setTitleStory(text.toString())
                 btn_next.isEnabled = true
+                book_title.isErrorEnabled = false
             } else {
-                context?.let { toastShowLong(it, it.getString(R.string.enter_title)) }
                 btn_next.isEnabled = false
             }
         }
@@ -45,25 +44,30 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         }
     }
 
-
     override fun init() {
         book_name.addTextChangedListener(textWatcher)
         book_name.onFocusChangeListener = focusListener
         back_button_character.setOnClickListener { backToSelectCoverScreen() }
-        btn_next.setOnClickListener {
-            saveStory()
-        }
+        btn_next.setOnClickListener { saveStory() }
     }
 
     override fun onStart() {
         super.onStart()
         iniViewModel()
+        adMobFragment = AdMobFragment.newInstance(this)
+        adMobFragment.buildAd()
     }
 
     override fun iniViewModel() {
         model.subscribeOnCover().observe(viewLifecycleOwner, Observer { cover ->
             resourceToUri(cover.imageUrl)?.let {
                 loadImage(it, iv_cover)
+            }
+        })
+
+        model.subscribeOnTitleAcceptable().observe(viewLifecycleOwner, Observer {
+            if (!it) {
+                book_title.error = context?.getString(R.string.enter_title)
             }
         })
 
@@ -84,13 +88,14 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
             }
         })
     }
-    private fun saveStory(){
-        model.createStoryTaller()
+    private fun saveStory() {
+        model.saveStory()
     }
 
     private fun navigateToLibraryScreen() {
         val v: ConstraintLayout = requireActivity().findViewById(R.id.main_background)
         loadImage(R.drawable.ic_background_default, v)
+        adMobFragment.startAd()
         router.navigateTo(Screens.LibraryScreen())
     }
 

@@ -17,11 +17,12 @@ class InputValidation {
         val flagInputIsGaps = 2 // входная строка состоит из одних пробелов
         if (content.length < 2) {
             setValueInputIncorrectLiveData(flagInputIsShort)
-            return flagInputIsShort }
-        if (content.stringNotContainSymbols()) {
-            setValueInputIncorrectLiveData(flagInputIsGaps)
-            return flagInputIsGaps
+            return flagInputIsShort
         }
+         if (content.stringContainsNoSymbols()) {
+             setValueInputIncorrectLiveData(flagInputIsGaps)
+             return flagInputIsGaps
+         }
          setValueInputIncorrectLiveData(flagInputIsNormal)
         return flagInputIsNormal
     }

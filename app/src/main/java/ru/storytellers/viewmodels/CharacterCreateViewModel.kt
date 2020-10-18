@@ -4,7 +4,7 @@ import android.text.Editable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import ru.storytellers.application.StoryTallerApp
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Player
@@ -22,7 +22,7 @@ class CharacterCreateViewModel(
     var isCharacterSelected = false
     private lateinit var namePlayer: String
 
-    private val app = StoryTallerApp.instance
+    private val app = StoryHeroesApp.instance
     private val storage = app.gameStorage
 
     private val onStatusCharacterSelectedLiveData = MutableLiveData<Boolean>()

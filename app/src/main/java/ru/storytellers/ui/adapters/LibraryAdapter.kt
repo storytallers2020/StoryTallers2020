@@ -12,10 +12,10 @@ import ru.storytellers.utils.resourceToUri
 
 class LibraryAdapter(
     val itemClickListener: (story: Story) -> Unit,
-    val btnMenuClickListener: (view: View) -> Unit,
-    val btnShareClickListener: (story: Story) -> Unit,
-    val btnCopyClickListener: (story: Story) -> Unit,
-    val btnDeleteClickListener: (story: Story) -> Unit
+    val btnMenuClickListener: (story: Story) -> Unit,
+    val btnShareClickListener: () -> Unit,
+    val btnCopyClickListener: () -> Unit,
+    val btnDeleteClickListener: () -> Unit
 ) : RecyclerView.Adapter<LibraryAdapter.MyViewHolder>() {
     private var listStory = mutableListOf<Story>()
 
@@ -50,21 +50,26 @@ class LibraryAdapter(
                     loadImage(it, book_cover_image)
                 }
                 book_name.text = story.name
-                popup_menu.visibility = View.GONE
+
                 setOnClickListener {
                     itemClickListener(story)
                 }
-                btn_menu.setOnClickListener {
-                    btnMenuClickListener(this)
+                btn_menu.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                    if (hasFocus) {
+                        popup_menu.visibility = View.VISIBLE
+                        btnMenuClickListener(story)
+                    } else {
+                        popup_menu.visibility = View.GONE
+                    }
                 }
                 btn_share.setOnClickListener {
-                    btnShareClickListener(story)
+                    btnShareClickListener()
                 }
                 btn_copy.setOnClickListener {
-                    btnCopyClickListener(story)
+                    btnCopyClickListener()
                 }
                 btn_delete.setOnClickListener {
-                    btnDeleteClickListener(story)
+                    btnDeleteClickListener()
                 }
             }
         }

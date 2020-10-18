@@ -5,7 +5,7 @@
     style="@style/AlertDialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/padding_layout_standard"
     android:text="@string/agreement_dialog_text"
     android:textSize="@dimen/text_small"
-    android:paddingHorizontal="@dimen/padding_layout_standard"
-    tools:background="@drawable/dialog_frame" />
+    tools:background="@color/blueDark" />

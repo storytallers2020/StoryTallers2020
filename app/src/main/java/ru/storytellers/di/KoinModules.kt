@@ -155,7 +155,7 @@ val gameEngine = module {
     single {
         val rule = Rules()
         rule.addRule(NoEmptySentenceRule())
-        rule.addRule(OneSentenceInTextRule())
+//        rule.addRule(OneSentenceInTextRule())
         rule
     }
 

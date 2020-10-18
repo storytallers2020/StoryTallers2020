@@ -13,6 +13,7 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.assistant.GameFragmentAssistant
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.hideSoftKey
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 import ru.storytellers.utils.setBackgroundImage
@@ -25,6 +26,11 @@ class GameFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_game
     var inputMethodManager: Any? = null
     private var isInputContentCorrect = false
+    private val focusListener = View.OnFocusChangeListener { v, hasFocus ->
+        if (!hasFocus) {
+            hideSoftKey(v)
+        }
+    }
 
     override fun backClicked(): Boolean = true
 
@@ -32,6 +38,7 @@ class GameFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
+        sentence_line.onFocusChangeListener = focusListener
         reminder_intro.post { View.FOCUS_DOWN }
         button_end.setOnClickListener { onButtonEndClicked() }
         btn_send.setOnClickListener { onButtonSendClicked() }

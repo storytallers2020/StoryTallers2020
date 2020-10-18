@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_layout"
@@ -9,7 +8,7 @@
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    tools:background="@drawable/location_magic_oak">
+    tools:background="@drawable/location_night_city">
 
     <ImageView
         android:id="@+id/back_button_character"
@@ -64,9 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_small"
-        android:background="@drawable/background_transparent"
-        android:fillViewport="true"
-        android:paddingVertical="@dimen/margin_xxs"
+        android:background="@drawable/background_back"
+        android:paddingVertical="@dimen/margin_xs"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_title">
@@ -85,7 +83,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_shadows"
+        android:src="@drawable/background_front"
         android:contentDescription="@string/title_choosing_cover"
         app:layout_constraintBottom_toBottomOf="@id/layout_tale"
         app:layout_constraintEnd_toEndOf="@id/layout_tale"
