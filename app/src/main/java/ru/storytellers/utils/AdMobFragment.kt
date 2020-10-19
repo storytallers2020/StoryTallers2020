@@ -19,12 +19,9 @@ class AdMobFragment (private var context: Context){
 
     fun buildAd() {
         MobileAds.initialize(context)
-
-
         mInterstitialAd = InterstitialAd(context)
-        mInterstitialAd.adUnitId = context.getString(R.string.ad_key_test_id)
-//        mInterstitialAd.adUnitId = context.getString(R.string.ad_key_id)
-//        для реальной рекламы
+//        mInterstitialAd.adUnitId = context.getString(R.string.ad_key_test_id) // для тестирования рекламы
+        mInterstitialAd.adUnitId = context.getString(R.string.ad_key_id)    // для реальной рекламы
         mInterstitialAd.loadAd(AdRequest.Builder().build())
     }
 
