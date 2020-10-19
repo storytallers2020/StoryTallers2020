@@ -24,7 +24,7 @@
         </activity>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8179777113013566~5377493806"/>
+            android:value="@string/ad_app_id" />
         <activity
             android:name="ru.storytellers.ui.MainActivity"
             android:theme="@style/AppTheme"
