@@ -2,6 +2,7 @@ package ru.storytellers.model.datasource.resourcestorage.storage
 
 import android.content.Context
 import ru.storytellers.model.entity.Character
+import ru.storytellers.model.entity.Location
 import ru.storytellers.resources.R
 import ru.storytellers.utils.resourceToString
 
@@ -137,6 +138,15 @@ class CharacterStorage(context: Context) {
             characterList.remove(foundCharacter)
         }
         characterList.add(character)
+    }
+
+    fun insertOrReplace(list: List<Character>) {
+        list.map {character ->
+            characterList.find { it.id == character.id }?.let { foundCharacter ->
+                characterList.remove(foundCharacter)
+            }
+            characterList.add(character)
+        }
     }
 
     fun getCharacterById(characterId: Long): Character? =

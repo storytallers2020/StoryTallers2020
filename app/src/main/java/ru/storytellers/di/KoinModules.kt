@@ -98,7 +98,7 @@ val gameStartModule = module {
 val characterCreateModule = module {
     single { PlayerCreator() }
     single<ICharacterDataSource> { CharacterResDataSource(get()) }
-    single<ICharacterRepository> { CharacterRepository(get()) }
+    single<ICharacterRepository> { CharacterRepository(get(), get(), get()) }
     viewModel { CharacterCreateViewModel(get(), get()) }
 }
 
