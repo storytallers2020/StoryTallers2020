@@ -109,6 +109,17 @@
     <string name="decline_answer">Отклонить</string>
     <string name="msg_agreement_declined">Соглашения отклонены</string>
     <string name="msg_agreement_accepted">Соглашения приняты</string>
+    <string name="stepText_1">Что бы начать играть нажмите Сочинить сказку</string>
+    <string name="stepOK2">Пропустить</string>
+    <string name="stepText_2">Выберите уровень сложности и нажмите Далее</string>
+    <string name="stepText_3">Введите имя, затем выберите героя и нажмите Сохранить</string>
+    <string name="stepText_4">Чтобы продолжить нажмите Выбрать локацию</string>
+    <string name="stepText_5">Выберите локацию где будет начинаться ваша сказка</string>
+    <string name="stepText_6">Придумайте сказку, после нажмите на Завершить сказку</string>
+    <string name="stepText_7">Выберите обложку для своей сказки</string>
+    <string name="stepText_8">Придумайте название для своей сказки и нажмите Сохранить</string>
+    <string name="stepOK">Спасибо, я все понял</string>
+    <string name="how_play">Как играть ?</string>
 
     // New strings... move them to the corresponding group above
 

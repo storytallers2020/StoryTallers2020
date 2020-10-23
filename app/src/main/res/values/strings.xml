@@ -131,6 +131,17 @@
     <string name="decline_answer">Decline</string>
     <string name="msg_agreement_declined">GAME OVER</string>
     <string name="msg_agreement_accepted">Agreements accepted</string>
+    <string name="stepText_1">To start playing, click "Compose a story"</string>
+    <string name="stepOK2">Skip</string>
+    <string name="stepText_2">Select the difficulty level and click Next</string>
+    <string name="stepText_3">Enter a name, then select the hero and click Save</string>
+    <string name="stepText_4">To continue, click the Choose location</string>
+    <string name="stepText_5">Choose the location where your fairy tale will begin</string>
+    <string name="stepText_6">Come up with a fairy tale, then click on Complete fairy tale</string>
+    <string name="stepText_7">Choose a cover for your fairy tale</string>
+    <string name="stepText_8">Come up with a name for your fairy tale and click Save</string>
+    <string name="stepOK">Thank you, I understand</string>
+    <string name="how_play">How to play ?</string>
 
 
     // New strings... move them to the corresponding group above
