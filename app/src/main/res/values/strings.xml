@@ -7,7 +7,8 @@
     <string name="uri_to_market_google_play" translatable="false">market://details?id=%1$s</string>
     <string name="uri_to_http_google_play" translatable="false">http://play.google.com/store/apps/details?id=%1$s</string>
     <string name="ad_key_test_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="ad_key_id" translatable="false">ca-app-pub-8179777113013566/9995202148</string>
+    <string name="ad_key_id" translatable="false">ca-app-pub-8179777113013566/4030574345</string>
+    <string name="ad_app_id" translatable="false">ca-app-pub-8179777113013566~5377493806</string>
 
     //Splash screen
     <string name="version" translatable="false">Version: %1$d (%2$s)</string>
