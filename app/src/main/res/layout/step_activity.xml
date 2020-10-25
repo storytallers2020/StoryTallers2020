@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@drawable/ic_background_default">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/how_play"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#77000000"
+        app:layout_constraintBottom_toTopOf="@+id/stepOK"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="223dp"
+                        android:layout_height="449dp"
+
+                        android:scaleType="fitXY"
+                        android:src="@drawable/srep_1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/stepText_1"
+                        android:layout_width="223dp"
+                        android:layout_height="78dp"
+                        android:gravity="center"
+                        android:text="@string/stepText_1"
+                        tools:layout_editor_absoluteX="50dp"
+                        tools:layout_editor_absoluteY="549dp" />
+
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="223dp"
+                        android:layout_height="449dp"
+
+                        android:scaleType="fitXY"
+                        android:src="@drawable/step_2"
+                        app:layout_constraintStart_toEndOf="@+id/imageView1"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/stepText_2"
+                        android:layout_width="217dp"
+                        android:layout_height="84dp"
+                        android:gravity="center"
+                        android:text="@string/stepText_2"
+                        tools:layout_editor_absoluteX="326dp"
+                        tools:layout_editor_absoluteY="549dp" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="223dp"
+                        android:layout_height="449dp"
+
+                        android:scaleType="fitXY"
+                        android:src="@drawable/step_3"
+                        app:layout_constraintStart_toEndOf="@+id/imageView2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/stepText_3"
+                        android:layout_width="214dp"
+                        android:layout_height="82dp"
+                        android:gravity="center"
+                        android:text="@string/stepText_3"
+                        tools:layout_editor_absoluteX="601dp"
+                        tools:layout_editor_absoluteY="549dp" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="223dp"
+                        android:layout_height="449dp"
+
+                        android:scaleType="fitXY"
+                        android:src="@drawable/step_4"
+                        app:layout_constraintStart_toEndOf="@+id/imageView3"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+
+                        android:id="@+id/stepText_4"
+                        android:layout_width="208dp"
+                        android:layout_height="81dp"
+                        android:gravity="center"
+                        android:text="@string/stepText_4"
+                        tools:layout_editor_absoluteX="877dp"
+                        tools:layout_editor_absoluteY="549dp" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="223dp"
+                        android:layout_height="449dp"
+
+                        android:scaleType="fitXY"
+                        android:src="@drawable/step_5"
+                        app:layout_constraintStart_toEndOf="@+id/imageView4"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/stepText_5"
+                        android:layout_width="217dp"
+                        android:layout_height="85dp"
+                        android:gravity="center"
+                        android:text="@string/stepText_5"
+                        tools:layout_editor_absoluteX="1145dp"
+                        tools:layout_editor_absoluteY="549dp" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="223dp"
+                        android:layout_height="449dp"
+
+                        android:scaleType="fitXY"
+                        android:src="@drawable/step_6"
+                        app:layout_constraintStart_toEndOf="@+id/imageView5"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/stepText_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="85dp"
+                        android:gravity="center"
+                        android:text="@string/stepText_6"
+                        tools:layout_editor_absoluteX="1418dp"
+                        tools:layout_editor_absoluteY="549dp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="223dp"
+                        android:layout_height="449dp"
+
+                        android:scaleType="fitXY"
+                        android:src="@drawable/step_7"
+                        app:layout_constraintStart_toEndOf="@+id/imageView6"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/stepText_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="73dp"
+                        android:gravity="center"
+                        android:text="@string/stepText_7"
+                        tools:layout_editor_absoluteX="1693dp"
+                        tools:layout_editor_absoluteY="549dp" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="223dp"
+                        android:layout_height="449dp"
+
+                        android:scaleType="fitXY"
+                        android:src="@drawable/step_8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView7"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/stepText_8"
+                        android:layout_width="214dp"
+                        android:layout_height="83dp"
+                        android:gravity="center"
+                        android:text="@string/stepText_8"
+                        tools:layout_editor_absoluteX="1966dp"
+                        tools:layout_editor_absoluteY="549dp" />
+
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/stepOK"
+        android:layout_width="386dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:backgroundTint="#00FFFFFF"
+        android:gravity="center_horizontal"
+        android:text="@string/stepOK"
+        android:textColor="#FFEA00"
+        android:textColorLink="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
