@@ -31,6 +31,7 @@ import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
 import ru.storytellers.model.datasource.resourcestorage.CoverResDataSource
 import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
 import ru.storytellers.model.datasource.resourcestorage.storage.CharacterStorage
+import ru.storytellers.model.datasource.resourcestorage.storage.CoverStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
 import ru.storytellers.model.datasource.room.PlayerDataSource
@@ -95,17 +96,16 @@ val gameStartModule = module {
     viewModel { GameStartViewModel(get()) }
 }
 
+val teamCharacterModule = module {
+    viewModel { TeamCharacterViewModel() }
+}
+
 val characterCreateModule = module {
     single { PlayerCreator() }
     single<ICharacterDataSource> { CharacterResDataSource(get()) }
     single<ICharacterRepository> { CharacterRepository(get(), get(), get()) }
     viewModel { CharacterCreateViewModel(get(), get()) }
 }
-
-val teamCharacterModule = module {
-    viewModel { TeamCharacterViewModel() }
-}
-
 
 val locationModule = module {
     single { CharacterStorage(get()) }
@@ -114,6 +114,13 @@ val locationModule = module {
     single<INetworkStatus> { NetworkStatus(get()) }
     single<ILocationRepository> { LocationRepository(get(), get(), get()) }
     viewModel { LocationViewModel(get()) }
+}
+
+val selectCoverModule = module {
+    single { CoverStorage(get()) }
+    single<ICoverDataSource> { CoverResDataSource(get()) }
+    single<ICoverRepository> { CoverRepository(get(), get(), get()) }
+    viewModel { SelectCoverViewModel(get()) }
 }
 
 val databaseModule = module {
@@ -131,11 +138,7 @@ val databaseModule = module {
 val gameEndModule = module {
     viewModel { GameEndViewModel() }
 }
-val selectCoverModule = module {
-    single<ICoverDataSource> { CoverResDataSource(get()) }
-    single<ICoverRepository> { CoverRepository(get()) }
-    viewModel { SelectCoverViewModel(get()) }
-}
+
 
 val titleAndSaveModule = module {
     single<IStoryDataSource> { StoryDataSource(get(), get(), get()) }
@@ -212,7 +215,7 @@ val amplitudeModule = module {
 
 val remoteModule = module {
 
-    val BASE_URL = " http://188.225.25.249/api/"
+    val BASE_URL = "http://storyheroes.online/api/"
 
     single {
         val interceptor = HttpLoggingInterceptor()

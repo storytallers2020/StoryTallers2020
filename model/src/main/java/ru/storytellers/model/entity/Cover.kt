@@ -1,8 +1,10 @@
 package ru.storytellers.model.entity
 
+import com.google.gson.annotations.Expose
+
 data class Cover(
-    val id: Long,
-    val name: String,
-    val imageUrl: String,
-    val imagePreview: String
+    @Expose val id: Long,
+    @Expose val name: String,
+    @Expose val imageUrl: String,
+    @Expose val imagePreview: String
 )
