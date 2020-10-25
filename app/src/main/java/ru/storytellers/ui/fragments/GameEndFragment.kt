@@ -1,5 +1,6 @@
 package ru.storytellers.ui.fragments
 
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game_end.*
@@ -37,16 +38,19 @@ class GameEndFragment : BaseFragment<DataModel>() {
         super.onStart()
         model.getUriBackgroundImage()
         model.setTextOfStoryTaller()
+        model.getResumeBtnVisibility()
     }
 
     override fun onResume() {
         super.onResume()
         handlerTextOfStoryTaller()
         handlerUriBackgroundImage()
+        handlerIsResumeClicked()
     }
 
     private fun setResumeClickListener() {
         tv_resume.setOnClickListener {
+            model.setResumeClicked()
             model.buttonContinueClickedStat()
             router.backTo(Screens.GameScreen())
         }
@@ -70,9 +74,17 @@ class GameEndFragment : BaseFragment<DataModel>() {
         })
     }
 
+    private fun handlerIsResumeClicked() {
+        model.subscribeOnResumeClicked().observe(viewLifecycleOwner, Observer {
+            if (it) {
+                tv_resume.visibility = View.GONE
+            }
+        })
+    }
+
     override fun backClicked(): Boolean {
         model.onBackClicked(this.javaClass.simpleName)
-       // router.exit()
+        // router.exit()
         return true
     }
 
