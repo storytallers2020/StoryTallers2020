@@ -13,6 +13,8 @@ class GameStorage {
     private var cover: Cover? = null
     private var title: String? = null
     private var timeCreateStory: Long = 0
+    private var gameEnded: Int =
+        0  //  needed to let players resume the game only once after ending it
 
     var level: Level? = null
 
@@ -35,6 +37,7 @@ class GameStorage {
         sentenceOfTaleList.clear()
         level = null
         timeCreateStory = 0
+        gameEnded = 0
     }
 
     fun getCoverStory() = cover
@@ -51,6 +54,12 @@ class GameStorage {
 
     fun setLocationGame(location: Location) {
         this.location = location
+    }
+
+    fun getGameEnded() = gameEnded
+
+    fun setGameEnded() {
+        gameEnded++
     }
 
 }

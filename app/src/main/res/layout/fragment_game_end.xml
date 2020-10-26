@@ -19,7 +19,8 @@
         android:layout_marginTop="@dimen/margin_small"
         android:fillViewport="true"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@id/tv_resume"
+        app:layout_goneMarginBottom="@dimen/margin_large"
+        app:layout_constraintBottom_toTopOf="@id/btn_copy"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -51,29 +52,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_resume"
-        android:layout_marginVertical="@dimen/margin_standard"
         android:textColor="@color/yellow"
         android:textSize="@dimen/text_small"
         app:layout_constraintBottom_toTopOf="@id/btn_select_cover"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_tale"/>
+        app:layout_constraintTop_toBottomOf="@id/layout_tale" />
 
     <ImageView
         android:id="@+id/btn_copy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_copy"
+        android:layout_marginVertical="@dimen/margin_xs"
         android:contentDescription="@string/btn_copy"
-        app:layout_constraintBottom_toBottomOf="@id/tv_resume"
+        android:src="@drawable/ic_copy"
+        app:layout_constraintBottom_toTopOf="@id/btn_select_cover"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_resume" />
+        app:layout_constraintTop_toBottomOf="@id/layout_tale" />
 
     <Button
         android:id="@+id/btn_select_cover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_select_cover"
-        android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
