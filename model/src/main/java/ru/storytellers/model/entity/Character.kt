@@ -1,8 +1,10 @@
 package ru.storytellers.model.entity
 
+import com.google.gson.annotations.Expose
+
 data class Character(
-    val id: Long,
-    val name: String,
-    val avatarUrl: String,
-    val avatarUrlSelected: String
+    @Expose val id: Long,
+    @Expose val name: String,
+    @Expose val avatarUrl: String,
+    @Expose val avatarUrlSelected: String
 )

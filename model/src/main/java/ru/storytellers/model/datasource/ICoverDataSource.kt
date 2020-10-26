@@ -7,6 +7,7 @@ import ru.storytellers.model.entity.Cover
 
 interface ICoverDataSource {
     fun insertOrReplace(cover: Cover): @NonNull Completable
+    fun insertOrReplace(coverList: List<Cover>): @NonNull Completable
     fun getCoverById(coverId: Long): Single<Cover>
     fun getAll(): Single<List<Cover>>
 }
