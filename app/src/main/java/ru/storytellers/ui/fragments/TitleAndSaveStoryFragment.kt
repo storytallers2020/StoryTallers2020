@@ -10,7 +10,6 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
-import ru.storytellers.ui.MainActivity
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.TitleAndSaveStoryViewModel
@@ -53,12 +52,12 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
 
     override fun onStart() {
         super.onStart()
-        iniViewModel()
+        initViewModel()
         adMobFragment = AdMobFragment.newInstance(this)
         adMobFragment.buildAd()
     }
 
-    override fun iniViewModel() {
+    override fun initViewModel() {
         model.subscribeOnCover().observe(viewLifecycleOwner, Observer { cover ->
             resourceToUri(cover.imageUrl)?.let {
                 loadImage(it, iv_cover)

@@ -23,15 +23,17 @@ class GameEndFragment : BaseFragment<DataModel>() {
         fun newInstance() = GameEndFragment()
     }
 
-    override fun iniViewModel() {}
+    override fun initViewModel() {}
     override fun init() {
         btn_select_cover.setOnClickListener {
             model.buttonSelectCoverClickedStat()
-            navigateToSelectCoverScreen() }
+            navigateToSelectCoverScreen()
+        }
         setResumeClickListener()
         btn_copy.setOnClickListener {
             model.buttonCopyClickedStat()
-            copyText() }
+            copyText()
+        }
     }
 
     override fun onStart() {

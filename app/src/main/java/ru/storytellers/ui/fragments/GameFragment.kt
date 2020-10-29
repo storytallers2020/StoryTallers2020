@@ -34,7 +34,7 @@ class GameFragment : BaseFragment<DataModel>() {
 
     override fun backClicked(): Boolean = true
 
-    override fun iniViewModel() {}
+    override fun initViewModel() {}
 
     override fun init() {
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)

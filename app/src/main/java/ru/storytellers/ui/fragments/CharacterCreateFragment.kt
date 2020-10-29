@@ -47,12 +47,12 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
     override fun init() {
         rv_characters.adapter = characterAdapter
-        iniViewModel()
+        initViewModel()
         back_button_character.setOnClickListener { backToLevelScreen() }
         btn_next.setOnClickListener { handlerBtnNext() }
     }
 
-    override fun iniViewModel() {
+    override fun initViewModel() {
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
         //screen_header.post { View.FOCUS_DOWN }
     }

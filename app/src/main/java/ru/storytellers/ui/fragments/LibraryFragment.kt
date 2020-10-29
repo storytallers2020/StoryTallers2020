@@ -69,10 +69,10 @@ class LibraryFragment : BaseFragment<DataModel>() {
 
     override fun onResume() {
         super.onResume()
-        iniViewModel()
+        initViewModel()
     }
 
-    override fun iniViewModel() {
+    override fun initViewModel() {
         model.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
             it.data?.let { list ->
                 renderData(list)

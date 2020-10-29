@@ -85,11 +85,11 @@ class LevelFragment : BaseFragment<DataModel>() {
 
     override fun onResume() {
         super.onResume()
-        iniViewModel()
+        initViewModel()
         model.setLevelGame(model.getLevelGame()) //Инициализация состояния
     }
 
-    override fun iniViewModel() {
+    override fun initViewModel() {
         model.subscribeOnChangeLevel().observe(viewLifecycleOwner, Observer {
             updateLevelBar(it)
         })
