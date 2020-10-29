@@ -9,7 +9,7 @@ sealed class Screens {
         override fun getFragment() = StartFragment.newInstance()
     }
 
-    class CharacterCreateScreen() : SupportAppScreen(){
+    class CharacterCreateScreen : SupportAppScreen() {
         override fun getFragment() = CharacterCreateFragment.newInstance()
     }
 
@@ -25,7 +25,7 @@ sealed class Screens {
         override fun getFragment() = GameStartFragment.newInstance()
     }
 
-    class GameEndScreen() : SupportAppScreen() {
+    class GameEndScreen : SupportAppScreen() {
         override fun getFragment() = GameEndFragment.newInstance()
     }
 
@@ -45,7 +45,7 @@ sealed class Screens {
         override fun getFragment() = TitleAndSaveStoryFragment.newInstance()
     }
 
-    class LibraryScreen() : SupportAppScreen() {
+    class LibraryScreen : SupportAppScreen() {
         override fun getFragment() = LibraryFragment.newInstance()
     }
 
@@ -53,12 +53,16 @@ sealed class Screens {
         override fun getFragment() = LibraryBookFragment.newInstance(story)
     }
 
-    class TeamCharacterScreen() : SupportAppScreen() {
+    class TeamCharacterScreen : SupportAppScreen() {
         override fun getFragment() = TeamCharacterFragment.newInstance()
     }
 
-    class AppInfoScreen : SupportAppScreen(){
-        override fun getFragment() = AppInfoFragment.newInstance()
+    class AboutDevelopersScreen : SupportAppScreen() {
+        override fun getFragment() = AboutDevelopersFragment.newInstance()
+    }
+
+    class AboutAppScreen : SupportAppScreen() {
+        override fun getFragment() = AboutAppFragment.newInstance()
     }
 
 }

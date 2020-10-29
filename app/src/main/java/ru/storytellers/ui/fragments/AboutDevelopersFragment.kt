@@ -7,16 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_start_about.*
+import kotlinx.android.synthetic.main.fragment_about_developers.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.ui.BackButtonListener
 import ru.terrakok.cicerone.Router
 
-class AppInfoFragment : Fragment(), BackButtonListener {
+class AboutDevelopersFragment : Fragment(), BackButtonListener {
     private val router: Router by inject()
+
     companion object {
-        fun newInstance() = AppInfoFragment()
+        fun newInstance() = AboutDevelopersFragment()
     }
 
     override fun onCreateView(
@@ -24,12 +25,12 @@ class AppInfoFragment : Fragment(), BackButtonListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_start_about, container, false)
+        return inflater.inflate(R.layout.fragment_about_developers, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        back_button_about.setOnClickListener { backClicked() }
+        back_btn.setOnClickListener { backClicked() }
         setAllLinksClickable(view)
     }
 

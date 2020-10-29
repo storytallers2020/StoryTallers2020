@@ -2,7 +2,6 @@
     // Application scope
     <string name="app_name" translatable="false">Story Heroes</string>
     <string name="something_went_wrong">Something went wrong</string>
-    <string name="intent_text_plain" translatable="false">text/plain</string>
     <string name="btn_rate">Rate App</string>
     <string name="uri_to_market_google_play" translatable="false">market://details?id=%1$s</string>
     <string name="uri_to_http_google_play" translatable="false">http://play.google.com/store/apps/details?id=%1$s</string>
@@ -11,7 +10,7 @@
 
     //Splash screen
     <string name="version" translatable="false">Version: %1$d (%2$s)</string>
-    <string name="version_tools" translatable="false">VERSION: 5 (0.1.2)</string>
+    <string name="version_tools" translatable="false">Version: 5 (0.1.2)</string>
     <string name="factor" translatable="false">1.5</string>
 
     // Welcome screen

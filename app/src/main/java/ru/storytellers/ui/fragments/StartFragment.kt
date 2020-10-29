@@ -131,7 +131,7 @@ class StartFragment : BaseFragment<DataModel>() {
 
     private fun navigateToAboutScreen() {
         model.onAboutScreenStatistics()
-        router.navigateTo(Screens.AppInfoScreen())
+        router.navigateTo(Screens.AboutAppScreen())
     }
 
     private fun navigateToLibraryScreen() {
