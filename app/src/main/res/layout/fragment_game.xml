@@ -28,47 +28,37 @@
         android:id="@+id/game_field"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="visible"
-        android:orientation="vertical"
-        android:gravity="bottom"
         android:layout_marginBottom="@dimen/margin_small"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/sentence_input_layout"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
+        app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/box_corner_radius"
-                android:background="@drawable/background_top"
-                android:layout_marginTop="@dimen/box_corner_radius"
-                android:adjustViewBounds="true"
-                tools:ignore="ContentDescription" />
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/scroll_view"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/transparent_30"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="0dp">
+
                 <TextView
                     android:id="@+id/story_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/margin_small"
-                    android:paddingVertical="@dimen/margin_xxs"
-                    android:textSize="@dimen/text_standard"
+                    android:layout_margin="@dimen/margin_small"
                     android:lineSpacingExtra="@dimen/line_spacing_extra"
-                    android:textColor="@color/white"
-                    android:background="@color/transparent_30"
                     tools:text="@string/tale_text_sample" />
-            </androidx.core.widget.NestedScrollView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/box_corner_radius"
-                android:background="@drawable/background_bottom"
-                android:adjustViewBounds="true"
-                tools:ignore="ContentDescription" />
+        </androidx.core.widget.NestedScrollView>
 
-        </LinearLayout>
+    </LinearLayout>
 
     <include
         android:id="@+id/sentence_input_layout"

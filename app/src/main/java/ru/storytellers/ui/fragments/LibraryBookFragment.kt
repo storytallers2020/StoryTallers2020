@@ -36,14 +36,15 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         super.onStart()
         story?.let { model.getTextStory(it.id) }
         story?.let { model.getTitleStory(it.name) }
+        backgroundView = requireActivity().findViewById(R.id.main_background)
     }
 
     override fun onResume() {
         super.onResume()
-        iniViewModel()
+        initViewModel()
     }
 
-    override fun iniViewModel() {
+    override fun initViewModel() {
         model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer { textStoryLocal ->
             textStoryLocal?.let { text ->
                 textStory = text
@@ -69,7 +70,6 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         })
 
         model.subscribeOnLocationImage().observe(viewLifecycleOwner, Observer {
-            backgroundView = requireActivity().findViewById(R.id.main_background)
             setBackgroundImage(it, backgroundView)
         })
     }

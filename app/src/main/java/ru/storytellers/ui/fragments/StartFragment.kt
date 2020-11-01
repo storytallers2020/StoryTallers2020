@@ -82,10 +82,10 @@ class StartFragment : BaseFragment<DataModel>() {
 
     override fun onResume() {
         super.onResume()
-        iniViewModel()
+        initViewModel()
     }
 
-    override fun iniViewModel() {
+    override fun initViewModel() {
         model.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
             it.data?.let { listStoryLocal ->
                 model.onStartScreenNumberOfTaleStat(listStoryLocal.count())
@@ -131,7 +131,7 @@ class StartFragment : BaseFragment<DataModel>() {
 
     private fun navigateToAboutScreen() {
         model.onAboutScreenStatistics()
-        router.navigateTo(Screens.AppInfoScreen())
+        router.navigateTo(Screens.AboutAppScreen())
     }
 
     private fun navigateToLibraryScreen() {

@@ -108,7 +108,7 @@
 
     <TextView
         android:id="@+id/description_level"
-        style="@style/Standard"
+        style="@style/SubHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/rules_easy_description"

@@ -40,10 +40,10 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
         btn_next.setOnClickListener { navigateToLocationScreen() }
         back_button_character.setOnClickListener { navigateToLevelScreen() }
         player_list_rv.adapter = teamAdapter
-        iniViewModel()
+        initViewModel()
     }
 
-    override fun iniViewModel() {
+    override fun initViewModel() {
         btn_add_player.setOnClickListener { backToCharacterCreateScreen() }
     }
 

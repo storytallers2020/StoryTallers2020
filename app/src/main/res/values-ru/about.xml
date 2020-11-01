@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    // About screen
+    // About App screen
     <string name="title_about">О приложении</string>
+
+    <string name="game_version">Версия игры</string>
+    <string name="rate_game">Оценить игру</string>
+    <string name="rate_game_details">Оставьте позитивный отзыв в Google Play</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="terms_of_use">Условия использования</string>
+    <string name="developers_team">Команда разработки</string>
+    <string name="web_page">Сайт</string>
+    <string name="instagram">Instagram</string>
+    <string name="vkontakte">ВКонтакте</string>
+    <string name="odnoklassniki">Одноклассники</string>
+    <string name="facebook">Facebook</string>
+    <string name="contact_us">Написать нам</string>
+    <string name="email_chooser_title">Написать e-mail…</string>
+    <string name="email_subject">Отзыв о Story Heroes</string>
+    <string name="share_app">Поделиться</string>
+    <string name="share_body">Давай сыграем в <b>Story Heroes</b>! 🤩 \nДержи ссылку: %1$s</string>
+
+    // About Developers screen
     <string name="team">Команда</string>
     <string name="product_manager">Менеджеры продукта</string>
     <string name="project_manager">Менеджер проекта</string>

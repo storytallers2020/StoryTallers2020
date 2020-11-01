@@ -26,12 +26,12 @@ class GameStartFragment : BaseFragment<DataModel>() {
     }
 
     override fun init() {
-        iniViewModel()
+        initViewModel()
         handlerUriBackgroundImage()
         back_button_location.setOnClickListener { backToLocationScreen() }
     }
 
-    override fun iniViewModel() {
+    override fun initViewModel() {
         btn_next.setOnClickListener {
             model.createNewGame()
             model.buttonStartClickedStatistic()

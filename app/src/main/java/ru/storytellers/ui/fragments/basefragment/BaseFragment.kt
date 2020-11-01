@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.koin.android.ext.android.inject
+import ru.storytellers.model.DataModel
 import ru.storytellers.ui.BackButtonListener
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
-import ru.storytellers.model.DataModel
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 
@@ -33,5 +33,5 @@ abstract class BaseFragment<T : DataModel> : Fragment(), BackButtonListener {
 
     protected abstract fun init()
 
-    protected abstract fun iniViewModel()
+    protected abstract fun initViewModel()
 }

@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    // About screen
+    // About App screen
     <string name="title_about">About</string>
 
+    <string name="game_version">Game Version</string>
+    <string name="version_template" translatable="false">%1$d (%2$s)</string>
+    <string name="rate_game">Rate Us</string>
+    <string name="rate_game_details">Please give us 5 stars</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_policy_link" translatable="false">https://storyheroes.flycricket.io/privacy.html</string>
+    <string name="terms_of_use">Terms of Use</string>
+    <string name="terms_of_use_link" translatable="false">https://storyheroes.flycricket.io/terms.html</string>
+    <string name="developers_team">Developers Team</string>
+    <string name="web_page">Web Page</string>
+    <string name="web_page_link" translatable="false">http://storyheroes.ru/</string>
+    <string name="instagram">Instagram</string>
+    <string name="instagram_link" translatable="false">https://www.instagram.com/story__heroes/</string>
+    <string name="vkontakte">VKontakte</string>
+    <string name="vkontakte_link" translatable="false">https://vk.com/storyheroes</string>
+    <string name="odnoklassniki">Odnoklassniki</string>
+    <string name="odnoklassniki_link" translatable="false">https://ok.ru/group/57938784682075</string>
+    <string name="facebook">Facebook</string>
+    <string name="facebook_link" translatable="false">https://www.facebook.com/storyhero.yes/?ref=page_internal</string>
+
+    <string name="contact_us">Contact Us</string>
+    <string name="email_chooser_title">Send email…</string>
+    <string name="intent_text_plain" translatable="false">text/plain</string>
+    <string name="to" translatable="false">to</string>
+    <string name="subject" translatable="false">subject</string>
+    <string name="mailto" translatable="false">mailto:</string>
+    <string name="email_address" translatable="false">storyhrs@gmail.com</string>
+    <string name="email_subject">Review on Story Heroes App</string>
+
+    <string name="share_app">Share App</string>
+    <string name="share_body">Let\'s play <b>Story Heroes</b> together 🤩 \nHere\'s a link: %1$s</string>
+
+    // About Developers screen
     <string name="team">Team</string>
     <string name="telegram" translatable="false">Telegram</string>
 

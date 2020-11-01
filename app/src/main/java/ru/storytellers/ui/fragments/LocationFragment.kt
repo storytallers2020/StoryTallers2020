@@ -41,10 +41,10 @@ class LocationFragment : BaseFragment<DataModel>() {
 
     override fun onStart() {
         super.onStart()
-        iniViewModel()
+        initViewModel()
     }
 
-    override fun iniViewModel() {
+    override fun initViewModel() {
         model.apply {
             getAllLocations()
             handlerOnSuccessResult(this)

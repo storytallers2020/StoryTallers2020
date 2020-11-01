@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_layout_standard"
+    tools:background="@drawable/ic_background_default">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        style="@style/BackArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
+
+    <TextView
+        android:id="@+id/screen_header"
+        style="@style/Header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_about"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingVertical="@dimen/margin_xxs"
+        android:layout_marginTop="@dimen/margin_small"
+        android:clipToPadding="true"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/screen_header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/transparent_30"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_xxs">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="@dimen/margin_small"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="@string/char_icon"
+                            android:src="@drawable/ic_info" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/game_version" />
+
+                            <TextView
+                                android:id="@+id/version"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/text_tip"
+                                android:textColor="@color/browser_actions_bg_grey"
+                                tools:text="@string/version_tools" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/rate_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_xxs">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="@dimen/margin_small"
+                            android:adjustViewBounds="true"
+                            android:contentDescription="@string/char_icon"
+                            android:src="@drawable/ic_rate" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/rate_game" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/text_tip"
+                                android:textColor="@color/browser_actions_bg_grey"
+                                android:text="@string/rate_game_details" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/privacy_policy_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_small"
+                        android:layout_marginVertical="@dimen/margin_xxs"
+                        android:drawableStart="@drawable/ic_privacy_policy"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:autoLink="all"
+                        android:linksClickable="true"
+                        android:text="@string/privacy_policy" />
+
+                    <TextView
+                        android:id="@+id/terms_of_use_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_small"
+                        android:layout_marginVertical="@dimen/margin_xxs"
+                        android:drawableStart="@drawable/ic_terms_of_use"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="@string/terms_of_use" />
+
+                    <TextView
+                        android:id="@+id/developers_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_small"
+                        android:layout_marginVertical="@dimen/margin_xxs"
+                        android:drawableStart="@drawable/ic_team"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="@string/developers_team" />
+
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_small"
+                app:cardBackgroundColor="@color/transparent_30"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/web_page_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_small"
+                        android:layout_marginVertical="@dimen/margin_xxs"
+                        android:drawableStart="@drawable/ic_web_page"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="@string/web_page" />
+
+                    <TextView
+                        android:id="@+id/instagram_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_small"
+                        android:layout_marginVertical="@dimen/margin_xxs"
+                        android:drawableStart="@drawable/ic_instagram"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="@string/instagram" />
+
+                    <TextView
+                        android:id="@+id/vkontakte_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_small"
+                        android:layout_marginVertical="@dimen/margin_xxs"
+                        android:drawableStart="@drawable/ic_vkontakte"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="@string/vkontakte" />
+
+                    <TextView
+                        android:id="@+id/odnoklassniki_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_small"
+                        android:layout_marginVertical="@dimen/margin_xxs"
+                        android:drawableStart="@drawable/ic_odnoklassniki"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="@string/odnoklassniki" />
+
+                    <TextView
+                        android:id="@+id/facebook_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_small"
+                        android:layout_marginVertical="@dimen/margin_xxs"
+                        android:drawableStart="@drawable/ic_facebook"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="@string/facebook" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/transparent_30"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/contact_us_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_small"
+                        android:layout_marginVertical="@dimen/margin_xxs"
+                        android:drawableStart="@drawable/ic_mail"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="@string/contact_us" />
+
+                    <TextView
+                        android:id="@+id/share_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_small"
+                        android:layout_marginVertical="@dimen/margin_xxs"
+                        android:drawableStart="@drawable/ic_share_about"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:text="@string/share_app" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
