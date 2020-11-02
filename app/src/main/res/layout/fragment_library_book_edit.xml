@@ -5,17 +5,21 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/padding_layout_standard"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingTop="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
     tools:background="@drawable/location_night_city">
 
     <ImageView
-        android:id="@+id/back_button_character"
+        android:id="@+id/back_button"
         style="@style/BackArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/arrow_back"
+        android:src="@drawable/ic_arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/screen_header" />
@@ -25,8 +29,8 @@
         style="@style/BackArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_menu_24"
         android:contentDescription="@string/btn_menu"
+        android:src="@drawable/ic_menu_24"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/screen_header" />
@@ -48,35 +52,31 @@
         app:layout_constraintHeight_max="@dimen/max_title_height"
         app:layout_constraintTop_toBottomOf="@id/screen_header">
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/subHeader"
             style="@style/SubHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/no_color"
+            android:gravity="center"
             tools:text="@string/tale_title_sample" />
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/layout_tale"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_sentences"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_small"
-        android:background="@drawable/background_back"
-        android:paddingVertical="@dimen/margin_xs"
-        android:scrollbars="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:lineSpacingExtra="@dimen/line_spacing_extra"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_xs"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_title">
-
-        <TextView
-            android:id="@+id/tv_tale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_small"
-            android:lineSpacingExtra="@dimen/line_spacing_extra"
-            tools:text="@string/tale_text_sample" />
-
-    </androidx.core.widget.NestedScrollView>
+        app:layout_constraintTop_toBottomOf="@id/layout_title"
+        tools:listitem="@layout/item_book_sentence" />
 
     <ImageView
         android:layout_width="0dp"
@@ -84,9 +84,9 @@
         android:scaleType="fitXY"
         android:src="@drawable/background_front"
         android:contentDescription="@string/title_choosing_cover"
-        app:layout_constraintBottom_toBottomOf="@id/layout_tale"
-        app:layout_constraintEnd_toEndOf="@id/layout_tale"
-        app:layout_constraintStart_toStartOf="@id/layout_tale"
-        app:layout_constraintTop_toTopOf="@id/layout_tale" />
+        app:layout_constraintBottom_toBottomOf="@id/rv_sentences"
+        app:layout_constraintEnd_toEndOf="@id/rv_sentences"
+        app:layout_constraintStart_toStartOf="@id/rv_sentences"
+        app:layout_constraintTop_toTopOf="@id/rv_sentences" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

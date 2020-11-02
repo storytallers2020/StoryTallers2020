@@ -117,7 +117,8 @@
 
     // Dialog fragment
     <string name="dialog_title">Are you sure?</string>
-    <string name="dialog_story">Delete the story?</string>
+    <string name="dialog_delete_story">Delete the story?</string>
+    <string name="dialog_save_story">Save changes to the story?</string>
     <string name="dialog_character">Delete the character?</string>
     <string name="dialog_exit">Close Story Heroes?</string>
     <string name="positive_answer">OK</string>

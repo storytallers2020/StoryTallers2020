@@ -96,7 +96,8 @@
 
     // Dialog fragment
     <string name="dialog_title">Вы уверены?</string>
-    <string name="dialog_story">Удалить сказку?</string>
+    <string name="dialog_delete_story">Удалить сказку?</string>
+    <string name="dialog_save_story">Сохранить изменения в сказке?</string>
     <string name="dialog_character">Удалить персонажа?</string>
     <string name="dialog_exit">Выйти из приложения?</string>
     <string name="positive_answer">ОК</string>

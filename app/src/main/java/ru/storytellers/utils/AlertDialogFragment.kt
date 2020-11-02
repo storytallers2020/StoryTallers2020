@@ -41,7 +41,10 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                         fragment.deleteStory()
                     }
                     is LibraryBookFragment -> {
-                        fragment.setStateRemoveStoryFlag()
+                        when (tag) {
+                            DIALOG_TAG_DELETE -> fragment.setStateRemoveStoryFlag()
+                            DIALOG_TAG_SAVE -> fragment.saveChangedStory()
+                        }
                     }
                     is TeamCharacterFragment -> {
                         fragment.removeCharacter()

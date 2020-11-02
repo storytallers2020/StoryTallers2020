@@ -3,40 +3,79 @@ package ru.storytellers.ui.fragments
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.fragment_library_book.*
+import kotlinx.android.synthetic.main.fragment_library_book_edit.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
 import ru.storytellers.navigation.Screens
+import ru.storytellers.ui.adapters.SentencesAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.LibraryBookViewModel
+import timber.log.Timber
 
-private const val FRAGMENT_DIALOG_TAG = "book-5d62-46bf-ab6"
+const val DIALOG_TAG_DELETE = "book-delete-46bf-ab6"
+const val DIALOG_TAG_SAVE = "book-save-46bf-ab6"
 
 class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>() {
     override val model: LibraryBookViewModel by inject()
-    override val layoutRes = R.layout.fragment_library_book
+    override val layoutRes = R.layout.fragment_library_book_edit
     private var textStory: String? = null
     private var titleStory: String? = null
     private var removeStoryFlag = false
     private lateinit var backgroundView: ConstraintLayout
+
+    private val sentencesAdapter: SentencesAdapter by lazy {
+        SentencesAdapter(
+            onItemClickListener,
+            sentenceFocusListener
+        )
+    }
+
+    private val onItemClickListener = { itemView: View, position: Int ->
+        sentencesAdapter.selectedPosition = position
+        sentencesAdapter.notifyDataSetChanged()
+    }
+
+    private val titleFocusListener = View.OnFocusChangeListener { v, hasFocus ->
+        if (!hasFocus) {
+            // todo: тут можно сохранять название при смене фокуса
+            hideSoftKey(v)
+            Timber.e("TITLE lost focus")
+        }
+    }
+
+    private val sentenceFocusListener = View.OnFocusChangeListener { v: View, hasFocus: Boolean ->
+        if (!hasFocus) {
+            // todo: тут можно сохранять измененное предложение при смене фокуса
+            hideSoftKey(v)
+            Timber.e("RV lost focus")
+        }
+    }
 
     companion object {
         fun newInstance(story: Story) = LibraryBookFragment(story)
     }
 
     override fun init() {
-        back_button_character.setOnClickListener { backToLibraryScreen() }
+        back_button.setOnClickListener {
+            // todo: если сохраняется не по 1 предложению, а вся история сразу,
+            //  то тут нужна проверка, что история изменилась по сравнению с тем что было.
+            //  если (есть изменения) { showSaveDialog() } else { backToLibraryScreen() }
+            backToLibraryScreen()
+        }
         btn_menu.setOnClickListener { showPopupMenu(it) }
+        rv_sentences.adapter = sentencesAdapter
+        subHeader.onFocusChangeListener = titleFocusListener
     }
 
     override fun onStart() {
         super.onStart()
-        story?.let { model.getTextStory(it.id) }
-        story?.let { model.getTitleStory(it.name) }
-        backgroundView = requireActivity().findViewById(R.id.main_background)
+        story?.let {
+            model.getTextStory(it.id)
+            model.getTitleStory(it.name)
+        }
     }
 
     override fun onResume() {
@@ -45,24 +84,25 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     }
 
     override fun initViewModel() {
-        model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer { textStoryLocal ->
-            textStoryLocal?.let { text ->
-                textStory = text
-                tv_tale.text = text
-            }
+        model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer {
+            textStory = it
+        })
+
+        model.subscribeOnSentences().observe(viewLifecycleOwner, Observer {
+            sentencesAdapter.setData(it)
         })
 
         model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer { titleStoryLocal ->
             titleStoryLocal?.let { title ->
                 titleStory = title
-                subHeader.text = title
+                subHeader.setText(title)
             }
         })
 
         model.subscribeOnRemoveStory().observe(viewLifecycleOwner, Observer {
             if (it != 0) {
                 context?.let { context ->
-                    toastShowLong(context, context.getString(R.string.msg_delete))
+                    toastShowShort(context, context.getString(R.string.msg_delete))
                 }
                 story = null
                 backToLibraryScreen()
@@ -144,9 +184,21 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
 
     private fun showAlertDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_story)
-                .show(fragMan, FRAGMENT_DIALOG_TAG)
+            AlertDialogFragment.newInstance(this, R.string.dialog_delete_story)
+                .show(fragMan, DIALOG_TAG_DELETE)
         }
+    }
+
+    private fun showSaveDialog() {
+        activity?.supportFragmentManager?.let { fragMan ->
+            AlertDialogFragment.newInstance(this, R.string.dialog_save_story)
+                .show(fragMan, DIALOG_TAG_SAVE)
+        }
+    }
+
+    fun saveChangedStory() {
+        // todo: для сохранения сказки целиком по нажатию ОК в диалоге
+        backToLibraryScreen()
     }
 
     override fun onStop() {
