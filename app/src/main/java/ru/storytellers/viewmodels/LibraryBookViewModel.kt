@@ -7,6 +7,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
+import ru.storytellers.model.repository.ISentenceOfTaleRepository
 import ru.storytellers.model.repository.IStoryRepository
 import ru.storytellers.utils.StatHelper
 import ru.storytellers.utils.StatHelper.Companion.itemClickedStat
@@ -16,7 +17,8 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import timber.log.Timber
 
 class LibraryBookViewModel(
-    private val storyRepository: IStoryRepository
+    private val storyRepository: IStoryRepository,
+    private val sentenceOfTaleRepository: ISentenceOfTaleRepository
 ) : BaseViewModel<DataModel>() {
     private val textStoryLiveData = MutableLiveData<String>()
     private val sentencesLiveData = MutableLiveData<List<SentenceOfTale>>()
@@ -24,9 +26,13 @@ class LibraryBookViewModel(
     private val locationImageLiveData = MutableLiveData<Uri>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
     private val onRemoveStoryLiveData = MutableLiveData<Int>()
+    private val editSentenceLiveData = MutableLiveData<Boolean>()
 
     fun subscribeOnTextStory(): LiveData<String> {
         return textStoryLiveData
+    }
+    fun subscribeOnEditSentence(): LiveData<Boolean> {
+        return editSentenceLiveData
     }
 
     fun subscribeOnSentences(): LiveData<List<SentenceOfTale>> {
@@ -75,6 +81,22 @@ class LibraryBookViewModel(
 
     fun getTitleStory(story: Story) {
         titleStoryLiveData.value = story.name
+    }
+
+    fun editSentence(storyId: Long, sourceSentence: SentenceOfTale, newText:String){
+        if(sourceSentence.content != newText && newText.isNotEmpty()){
+            sourceSentence.content=newText
+            sentenceOfTaleRepository.insertOrReplace(storyId,sourceSentence)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    editSentenceLiveData.value=true
+                },
+                    {
+                        editSentenceLiveData.value=false
+                    })
+
+        }
+
     }
 
     fun removeStory(story: Story) {
