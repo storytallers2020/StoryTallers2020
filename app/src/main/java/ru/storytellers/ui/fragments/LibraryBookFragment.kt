@@ -4,9 +4,11 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_library_book_edit.*
+import kotlinx.android.synthetic.main.item_book_sentence.view.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
+import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.SentencesAdapter
@@ -25,6 +27,9 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     private var titleStory: String? = null
     private var removeStoryFlag = false
     private lateinit var backgroundView: ConstraintLayout
+    private lateinit var tatgetView: View
+    private var position: Int = -1
+    private lateinit var sourceListSentences : List<SentenceOfTale>
 
     private val sentencesAdapter: SentencesAdapter by lazy {
         SentencesAdapter(
@@ -36,6 +41,8 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     private val onItemClickListener = { itemView: View, position: Int ->
         sentencesAdapter.selectedPosition = position
         sentencesAdapter.notifyDataSetChanged()
+        tatgetView=itemView
+        this.position=position
     }
 
     private val titleFocusListener = View.OnFocusChangeListener { v, hasFocus ->
@@ -49,6 +56,9 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     private val sentenceFocusListener = View.OnFocusChangeListener { v: View, hasFocus: Boolean ->
         if (!hasFocus) {
             // todo: тут можно сохранять измененное предложение при смене фокуса
+            var newText=tatgetView.sentence.text.toString()
+            var sourceSentence= sourceListSentences[position]
+            model.editSentence(story?.id!!,sourceSentence,newText)
             hideSoftKey(v)
             Timber.e("RV lost focus")
         }
@@ -75,6 +85,8 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         story?.let {
             model.getTextStory(it.id)
             model.getTitleStory(it.name)
+            val asd="asd"
+            backgroundView = requireActivity().findViewById(R.id.main_background)
         }
     }
 
@@ -90,6 +102,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
 
         model.subscribeOnSentences().observe(viewLifecycleOwner, Observer {
             sentencesAdapter.setData(it)
+            sourceListSentences=it
         })
 
         model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer { titleStoryLocal ->
@@ -111,6 +124,14 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
 
         model.subscribeOnLocationImage().observe(viewLifecycleOwner, Observer {
             setBackgroundImage(it, backgroundView)
+        })
+
+        model.subscribeOnEditSentence().observe(viewLifecycleOwner, Observer {
+            if(it) {
+                toastShowLong(context, "Изменения сохранены")
+                sentencesAdapter.setData(sourceListSentences)
+                // model.getTextStory(it.id)
+            } else toastShowLong(context, "Именения не сохранены")
         })
     }
 
