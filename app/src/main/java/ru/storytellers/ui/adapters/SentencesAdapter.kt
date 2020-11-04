@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_book_sentence.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.SentenceOfTale
+import ru.storytellers.utils.hideSoftKey
 
 class SentencesAdapter(
-    val itemClickListener: (itemView: View, position: Int) -> Unit?,
-    val itemFocusListener: View.OnFocusChangeListener
+    val btnClickListener: (itemView: View, position: Int) -> Unit?,
+    val itemSelectedListener: (sentence: String, position: Int) -> Unit?
 ) : RecyclerView.Adapter<SentencesAdapter.CCViewHolder>() {
 
     private var listOfSentences = mutableListOf<SentenceOfTale>()
@@ -38,26 +39,25 @@ class SentencesAdapter(
     override fun getItemCount() = listOfSentences.count()
 
     override fun onBindViewHolder(holder: CCViewHolder, position: Int) {
-        with(holder.itemView) {
-            with(sentence) {
-                isFocusable = true
-                isFocusableInTouchMode = true
-                onFocusChangeListener = itemFocusListener
-            }
-
-            isSelected = selectedPosition == position
-        }
-
+        holder.itemView.isSelected = selectedPosition == position
         holder.bind(listOfSentences[position])
     }
 
     inner class CCViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(sentenceOfTale: SentenceOfTale) {
-            with(itemView) {
-                if (layoutPosition != RecyclerView.NO_POSITION) {
-                    sentence.setText(sentenceOfTale.content)
-                    setOnClickListener { itemClickListener(itemView, layoutPosition) }
+            with (itemView) {
+                val sentenceText = sentenceOfTale.content
+                sentence.setText(sentenceText)
+                sentence.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+                    itemSelectedListener(sentenceText, layoutPosition)
+                    if (hasFocus) {
+                        btn_send.visibility = View.VISIBLE
+                    } else {
+                        btn_send.visibility = View.GONE
+                        hideSoftKey(view)
+                    }
                 }
+                btn_send.setOnClickListener { btnClickListener(this, layoutPosition) }
             }
         }
     }

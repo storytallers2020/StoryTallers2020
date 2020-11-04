@@ -89,10 +89,9 @@ class LibraryBookViewModel(
             sentenceOfTaleRepository.insertOrReplace(storyId,sourceSentence)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    editSentenceLiveData.value=true
-                },
-                    {
-                        editSentenceLiveData.value=false
+                    editSentenceLiveData.value = true
+                }, {
+                        editSentenceLiveData.value = false
                     })
 
         }
