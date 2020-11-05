@@ -27,12 +27,19 @@ class LibraryBookViewModel(
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
     private val onRemoveStoryLiveData = MutableLiveData<Int>()
     private val editSentenceLiveData = MutableLiveData<Boolean>()
+    private val updateTitleStoryLiveData = MutableLiveData<Int>()
+    private val onErrorUpdateTitleStoryLiveData = MutableLiveData<Throwable>()
 
     fun subscribeOnTextStory(): LiveData<String> {
         return textStoryLiveData
     }
+
     fun subscribeOnEditSentence(): LiveData<Boolean> {
         return editSentenceLiveData
+    }
+
+    fun subscribeOnUpdateTitleStory(): LiveData<Int> {
+        return updateTitleStoryLiveData
     }
 
     fun subscribeOnSentences(): LiveData<List<SentenceOfTale>> {
@@ -72,6 +79,16 @@ class LibraryBookViewModel(
 
     }
 
+    fun updateTitleStory(titleStory: String, storyId: Long) {
+        storyRepository.updateTitleStory(titleStory, storyId)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                updateTitleStoryLiveData.value = it
+            }, {
+                onErrorUpdateTitleStoryLiveData.value = it
+            })
+    }
+
     private fun mapToList(sentences: List<SentenceOfTale>): List<String> =
         sentences.map { it.content }
 
@@ -83,16 +100,16 @@ class LibraryBookViewModel(
         titleStoryLiveData.value = story.name
     }
 
-    fun editSentence(storyId: Long, sourceSentence: SentenceOfTale, newText:String){
-        if(sourceSentence.content != newText && newText.isNotEmpty()){
-            sourceSentence.content=newText
-            sentenceOfTaleRepository.insertOrReplace(storyId,sourceSentence)
+    fun editSentence(storyId: Long, sourceSentence: SentenceOfTale, newText: String) {
+        if (sourceSentence.content != newText && newText.isNotEmpty()) {
+            sourceSentence.content = newText
+            sentenceOfTaleRepository.insertOrReplace(storyId, sourceSentence)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     editSentenceLiveData.value = true
                 }, {
-                        editSentenceLiveData.value = false
-                    })
+                    editSentenceLiveData.value = false
+                })
 
         }
 
@@ -107,13 +124,16 @@ class LibraryBookViewModel(
                 Timber.e(it, "Remove story throwable")
             })
     }
-    fun itemCopyClickedStat(){
+
+    fun itemCopyClickedStat() {
         itemClickedStat(StatHelper.libraryBookScreenMenuItemCopyClicked)
     }
-    fun itemDeleteClickedStat(){
+
+    fun itemDeleteClickedStat() {
         itemClickedStat(StatHelper.libraryBookScreenMenuItemDeleteClicked)
     }
-    fun itemShareClickedStat(){
+
+    fun itemShareClickedStat() {
         itemClickedStat(StatHelper.libraryBookScreenMenuItemShareClicked)
     }
 }
