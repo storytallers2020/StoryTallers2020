@@ -7,13 +7,13 @@ import ru.storytellers.model.datasource.remote.api.CoverListApi
 import ru.storytellers.model.datasource.remote.api.LocationListApi
 
 interface IRemoteDataSource {
-    @GET("locations/getAll")
+    @GET("locations/getOnlyActive")
     fun getLocations(): Single<LocationListApi>
 
-    @GET("characters/getAll")
+    @GET("characters/getOnlyActive")
     fun getCharacters(): Single<CharactersListApi>
 
-    @GET("covers/getAll")
+    @GET("covers/getOnlyActive")
     fun getCovers(): Single<CoverListApi>
 
 }
