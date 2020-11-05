@@ -2,7 +2,7 @@ package ru.storytellers.ui.fragments
 
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.Observer
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_library_book_edit.*
 import kotlinx.android.synthetic.main.item_book_sentence.view.*
 import org.koin.android.ext.android.inject
@@ -27,8 +27,8 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     private var textStory: String? = null
     private var titleStory: String? = null
     private var sentenceStory: String? = null
-    private lateinit var sourceListSentences : List<SentenceOfTale>
-    private lateinit var sourceSentence : SentenceOfTale
+    private lateinit var sourceListSentences: List<SentenceOfTale>
+    private lateinit var sourceSentence: SentenceOfTale
     private var sentencePosition: Int = -1
     private var removeStoryFlag = false
     private lateinit var backgroundView: ConstraintLayout
@@ -49,18 +49,27 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
 
     private val titleFocusListener = View.OnFocusChangeListener { v, hasFocus ->
         if (!hasFocus) {
+            var newTitle = (v as TextInputEditText).text.toString()
+            if (newTitle != story?.name) {
+                story?.name = newTitle
+                showSaveTitleDialog()
+            }
             hideSoftKey(v)
-            showSaveTitleDialog()
             Timber.e("TITLE lost focus: ${subHeader.text}")
         }
     }
 
     private val onItemSelectedListener = { text: String, position: Int ->
-        sentencesAdapter.notifyItemChanged(sentencePosition)
-        sentenceStory = text
-        sentencePosition = position
-        sentencesAdapter.selectedPosition = position
-        Timber.e("RV has focus: [$sentencePosition] $sentenceStory")
+        try {
+            sentencesAdapter.notifyItemChanged(sentencePosition)
+        } catch (e: IllegalStateException) {
+            e.printStackTrace()
+        } finally {
+            sentenceStory = text
+            sentencePosition = position
+            sentencesAdapter.selectedPosition = position
+            Timber.e("RV has focus: [$sentencePosition] $sentenceStory")
+        }
     }
 
     companion object {
@@ -89,23 +98,23 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     }
 
     override fun initViewModel() {
-        model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnTextStory().observe(viewLifecycleOwner, {
             textStory = it
         })
 
-        model.subscribeOnSentences().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnSentences().observe(viewLifecycleOwner, {
             sentencesAdapter.setData(it)
             sourceListSentences = it
         })
 
-        model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer { titleStoryLocal ->
+        model.subscribeOnTitleStory().observe(viewLifecycleOwner, { titleStoryLocal ->
             titleStoryLocal?.let { title ->
                 titleStory = title
                 subHeader.setText(title)
             }
         })
 
-        model.subscribeOnRemoveStory().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnRemoveStory().observe(viewLifecycleOwner, {
             if (it != 0) {
                 context?.let { context ->
                     toastShowShort(context, context.getString(R.string.msg_delete))
@@ -115,19 +124,26 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
             }
         })
 
-        model.subscribeOnLocationImage().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnLocationImage().observe(viewLifecycleOwner, {
             setBackgroundImage(it, backgroundView)
         })
 
-        model.subscribeOnEditSentence().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnEditSentence().observe(viewLifecycleOwner, {
             // Виталий, может убрать этот метод совсем? Уведомление не особо нужно.
             // Игрок никоуда не выходит и прямо там видит, что все сохранилось:
             // при переключении на другой item данные не возвращаются в исходное состояние, если схранить,
             // и возвращаются в первоначальное состояние, если не соханить и сменить фокус
-            if(it) {
-                toastShowLong(context, "Изменения сохранены")
+            if (it) {
+                Timber.i("Changes saved")
             } else {
-                toastShowLong(context, "Именения не сохранены")
+                Timber.i("Changes don't saved")
+            }
+        })
+        model.subscribeOnUpdateTitleStory().observe(viewLifecycleOwner, {
+            if (it > 0) {
+                Timber.i("Title story updated")
+            } else {
+                Timber.i("Title story don't updated ")
             }
         })
     }
@@ -210,12 +226,12 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     private fun showSaveTitleDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
             AlertDialogFragment.newInstance(this, R.string.dialog_save_story)
-                .show(fragMan, DIALOG_TAG_SAVE_SENTENCE)
+                .show(fragMan, DIALOG_TAG_SAVE_TITLE)
         }
     }
 
     fun saveChangedTitle() {
-        // TODO: сохранение нового заголовка
+        story?.let { model.updateTitleStory(it.name, it.id) }
     }
 
     private fun showSaveSentenceDialog() {
