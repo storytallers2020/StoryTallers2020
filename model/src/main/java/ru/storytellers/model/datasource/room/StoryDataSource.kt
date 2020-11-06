@@ -5,8 +5,8 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.storytellers.model.datasource.IStoryDataSource
-import ru.storytellers.model.datasource.resourcestorage.storage.CharacterStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
+import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
@@ -16,8 +16,7 @@ import ru.storytellers.utils.*
 
 class StoryDataSource(
     private val database: AppDatabase,
-    private val locationStorage: LocationStorage,
-    private val characterStorage: CharacterStorage
+    private val locationStorage: LocationStorage
 ) : IStoryDataSource {
 
     override fun insertOrReplace(story: Story): @NonNull Completable =
@@ -47,7 +46,7 @@ class StoryDataSource(
     }
 
     override fun deleteStoryById(storyId: Long): Single<Int> =
-        Single.create<Int> { emitter ->
+        Single.create { emitter ->
             try {
                 val count = database.storyDao.deleteById(storyId)
                 emitter.onSuccess(count)
@@ -89,9 +88,12 @@ class StoryDataSource(
 
     private fun getPlayer(playerId: Long): Player? =
         database.playerDao.getPlayerById(playerId)?.let { roomPlayer ->
-            val character = characterStorage.getCharacterById(roomPlayer.characterId)
+            val character = getCharacter(roomPlayer.characterId)
             roomPlayer.toPlayer(character)
         }
+
+    private fun getCharacter(characterId: Long): Character? =
+        database.characterDao.getCharacterById(characterId)?.toCharacter()
 
     override fun getAll(): Single<List<Story>> =
         Single.create { emitter ->
@@ -104,5 +106,4 @@ class StoryDataSource(
                 emitter.onError(RuntimeException("No such story in database"))
             }
         }
-
 }
