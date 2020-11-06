@@ -31,8 +31,9 @@
 
     <ImageButton
         android:id="@+id/btn_send"
-        android:layout_width="@dimen/icon_medium"
-        android:layout_height="@dimen/icon_medium"
+        android:layout_width="@dimen/icon_small"
+        android:layout_height="@dimen/icon_small"
+        android:scaleType="fitXY"
         android:layout_marginTop="@dimen/margin_xs"
         android:background="@color/no_color"
         android:contentDescription="@string/btn_send"
@@ -42,7 +43,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/sentence"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

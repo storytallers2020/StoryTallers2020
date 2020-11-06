@@ -9,7 +9,6 @@ import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import ru.storytellers.R
 import ru.storytellers.ui.StepActivity
 import ru.storytellers.ui.fragments.*
@@ -23,7 +22,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val context = fragment.activity as FragmentActivity
+        val context = this.requireActivity()
         return when (tag) {
             DIALOG_TAG_POLICY -> getAgreementDialog(context)
             else -> getAlertDialog(context, title)
@@ -34,7 +33,12 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
         AlertDialog.Builder(context)
             .setTitle(header)
             .setCancelable(true)
-            .setNegativeButton(R.string.negative_answer) { dialog, _ -> dialog.cancel() }
+            .setNegativeButton(R.string.negative_answer) { dialog, _ ->
+                if (fragment is LibraryBookFragment) {
+                    fragment.restoreTitle()
+                }
+                dialog.cancel()
+            }
             .setPositiveButton(R.string.positive_answer) { dialog, _ ->
                 when (fragment) {
                     is LibraryFragment -> {
@@ -42,7 +46,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                     }
                     is LibraryBookFragment -> {
                         when (tag) {
-                            DIALOG_TAG_DELETE -> fragment.setStateRemoveStoryFlag()
+                            DIALOG_TAG_DELETE -> fragment.removeStory()
                             DIALOG_TAG_SAVE_TITLE -> fragment.saveChangedTitle()
                             DIALOG_TAG_SAVE_SENTENCE -> fragment.saveChangedSentence()
                         }

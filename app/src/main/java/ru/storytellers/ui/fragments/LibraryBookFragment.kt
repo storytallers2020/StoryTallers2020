@@ -2,7 +2,6 @@ package ru.storytellers.ui.fragments
 
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_library_book_edit.*
 import kotlinx.android.synthetic.main.item_book_sentence.view.*
 import org.koin.android.ext.android.inject
@@ -49,7 +48,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
 
     private val titleFocusListener = View.OnFocusChangeListener { v, hasFocus ->
         if (!hasFocus) {
-            var newTitle = (v as TextInputEditText).text.toString()
+            val newTitle = subHeader.text.toString()
             if (newTitle != story?.name) {
                 story?.name = newTitle
                 showSaveTitleDialog()
@@ -59,16 +58,24 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         }
     }
 
-    private val onItemSelectedListener = { text: String, position: Int ->
+    private val onItemSelectedListener = { view: View, position: Int, hasFocus: Boolean ->
+
         try {
             sentencesAdapter.notifyItemChanged(sentencePosition)
         } catch (e: IllegalStateException) {
             e.printStackTrace()
         } finally {
-            sentenceStory = text
-            sentencePosition = position
-            sentencesAdapter.selectedPosition = position
-            Timber.e("RV has focus: [$sentencePosition] $sentenceStory")
+            if (!hasFocus) {
+                sentenceStory = view.sentence.text.toString()
+                sourceSentence = sourceListSentences[position]
+                if(sentenceStory != sourceSentence.content) {
+                    showSaveSentenceDialog()
+                }
+                Timber.e("RV lost focus: [$position] $sentenceStory - ${sourceSentence.content}")
+            } else {
+                val text = view.sentence.text.toString()
+                Timber.e("RV has focus: [$position] $text")
+            }
         }
     }
 
@@ -129,21 +136,17 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         })
 
         model.subscribeOnEditSentence().observe(viewLifecycleOwner, {
-            // Виталий, может убрать этот метод совсем? Уведомление не особо нужно.
-            // Игрок никоуда не выходит и прямо там видит, что все сохранилось:
-            // при переключении на другой item данные не возвращаются в исходное состояние, если схранить,
-            // и возвращаются в первоначальное состояние, если не соханить и сменить фокус
             if (it) {
-                Timber.i("Changes saved")
+                Timber.i("Sentence updated")
             } else {
-                Timber.i("Changes don't saved")
+                Timber.i("Sentence update failed")
             }
         })
         model.subscribeOnUpdateTitleStory().observe(viewLifecycleOwner, {
             if (it > 0) {
-                Timber.i("Title story updated")
+                Timber.i("Title updated")
             } else {
-                Timber.i("Title story don't updated ")
+                Timber.i("Title update failed")
             }
         })
     }
@@ -206,21 +209,15 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         }
     }.toString()
 
-    fun setStateRemoveStoryFlag() {
-        removeStoryFlag = true
-        removeStory()
-    }
-
-    private fun removeStory() {
-        story?.let { model.removeStory(it) }
-        removeStoryFlag = false
-    }
-
     private fun showDeleteDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
             AlertDialogFragment.newInstance(this, R.string.dialog_delete_story)
                 .show(fragMan, DIALOG_TAG_DELETE)
         }
+    }
+
+    fun removeStory() {
+        story?.let { model.removeStory(it) }
     }
 
     private fun showSaveTitleDialog() {
@@ -234,6 +231,10 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         story?.let { model.updateTitleStory(it.name, it.id) }
     }
 
+    fun restoreTitle() {
+        subHeader.setText(titleStory)
+    }
+
     private fun showSaveSentenceDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
             AlertDialogFragment.newInstance(this, R.string.dialog_save_story)
@@ -242,10 +243,9 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     }
 
     fun saveChangedSentence() {
-        val oldSentence = sourceListSentences[sentencePosition]
         story?.id?.let { storyId ->
             sentenceStory?.let { newSentence ->
-                model.editSentence(storyId, oldSentence, newSentence)
+                model.editSentence(storyId, sourceSentence, newSentence)
                 Timber.e("saving sentence: [$sentencePosition] $newSentence")
             }
         }
