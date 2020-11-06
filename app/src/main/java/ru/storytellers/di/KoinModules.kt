@@ -27,13 +27,12 @@ import ru.storytellers.engine.wordRules.IWordRule
 import ru.storytellers.engine.wordRules.RandomWordRule
 import ru.storytellers.model.datasource.*
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
-import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
 import ru.storytellers.model.datasource.resourcestorage.CoverResDataSource
 import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
-import ru.storytellers.model.datasource.resourcestorage.storage.CharacterStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.CoverStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
+import ru.storytellers.model.datasource.room.CharacterDataSource
 import ru.storytellers.model.datasource.room.PlayerDataSource
 import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
 import ru.storytellers.model.datasource.room.StoryDataSource
@@ -54,6 +53,8 @@ private val loadModules by lazy {
         listOf(
             ciceroneModule,
             databaseModule,
+            dataSourceModule,
+            repositoryModule,
             startModule,
             levelModel,
             characterCreateModule,
@@ -76,6 +77,7 @@ private val loadModules by lazy {
 val libraryModule = module {
     viewModel { LibraryViewModel(get()) }
 }
+
 val libraryBookModule = module {
     viewModel { LibraryBookViewModel(get()) }
 }
@@ -89,9 +91,11 @@ val ciceroneModule = module {
 val startModule = module {
     viewModel { StartViewModel(get()) }
 }
+
 val levelModel = module {
     viewModel { LevelViewModel() }
 }
+
 val gameStartModule = module {
     viewModel { GameStartViewModel(get()) }
 }
@@ -102,13 +106,11 @@ val teamCharacterModule = module {
 
 val characterCreateModule = module {
     single { PlayerCreator() }
-    single<ICharacterDataSource> { CharacterResDataSource(get()) }
-    single<ICharacterRepository> { CharacterRepository(get(), get(), get()) }
     viewModel { CharacterCreateViewModel(get(), get()) }
 }
 
 val locationModule = module {
-    single { CharacterStorage(get()) }
+    //single { CharacterStorage(get()) }
     single { LocationStorage(get()) }
     single<ILocationDataSource> { LocationResDataSource(get()) }
     single<INetworkStatus> { NetworkStatus(get()) }
@@ -121,6 +123,14 @@ val selectCoverModule = module {
     single<ICoverDataSource> { CoverResDataSource(get()) }
     single<ICoverRepository> { CoverRepository(get(), get(), get()) }
     viewModel { SelectCoverViewModel(get()) }
+}
+
+val dataSourceModule = module {
+    single<ICharacterDataSource> { CharacterDataSource(get()) }
+}
+
+val repositoryModule = module {
+    single<ICharacterRepository> { CharacterRepository(get(), get(), get()) }
 }
 
 val databaseModule = module {
@@ -139,13 +149,13 @@ val gameEndModule = module {
     viewModel { GameEndViewModel() }
 }
 
-
 val titleAndSaveModule = module {
-    single<IStoryDataSource> { StoryDataSource(get(), get(), get()) }
+    single<IStoryDataSource> { StoryDataSource(get(), get()) }
     single<IStoryRepository> { StoryRepository(get()) }
     single { TitleAndSaveModelAssistant(get()) }
     viewModel { TitleAndSaveStoryViewModel(get()) }
 }
+
 val gameModule = module {
     viewModel { GameViewModel(get()) }
 }
@@ -220,9 +230,9 @@ val remoteModule = module {
     single {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = if (BuildConfig.DEBUG)
-                HttpLoggingInterceptor.Level.BODY
-            else
-                HttpLoggingInterceptor.Level.NONE
+            HttpLoggingInterceptor.Level.BODY
+        else
+            HttpLoggingInterceptor.Level.NONE
 
         OkHttpClient.Builder()
             .addInterceptor(interceptor)
