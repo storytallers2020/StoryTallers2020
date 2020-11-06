@@ -22,4 +22,3 @@ fun RoomCharacter.toCharacter() =
 fun List<RoomCharacter>.toCharacterList() = this.map { it.toCharacter() }
 
 fun List<Character>.toRoomCharacterList() = this.map { it.toRoomCharacter() }
-

@@ -28,14 +28,9 @@ import ru.storytellers.engine.wordRules.RandomWordRule
 import ru.storytellers.model.datasource.*
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
 import ru.storytellers.model.datasource.resourcestorage.CoverResDataSource
-import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
 import ru.storytellers.model.datasource.resourcestorage.storage.CoverStorage
-import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
-import ru.storytellers.model.datasource.room.CharacterDataSource
-import ru.storytellers.model.datasource.room.PlayerDataSource
-import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
-import ru.storytellers.model.datasource.room.StoryDataSource
+import ru.storytellers.model.datasource.room.*
 import ru.storytellers.model.entity.room.db.AppDatabase
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.model.repository.*
@@ -110,11 +105,6 @@ val characterCreateModule = module {
 }
 
 val locationModule = module {
-    //single { CharacterStorage(get()) }
-    single { LocationStorage(get()) }
-    single<ILocationDataSource> { LocationResDataSource(get()) }
-    single<INetworkStatus> { NetworkStatus(get()) }
-    single<ILocationRepository> { LocationRepository(get(), get(), get()) }
     viewModel { LocationViewModel(get()) }
 }
 
@@ -127,10 +117,14 @@ val selectCoverModule = module {
 
 val dataSourceModule = module {
     single<ICharacterDataSource> { CharacterDataSource(get()) }
+    single<ILocationDataSource> { LocationDataSource(get()) }
+    single<IStoryDataSource> { StoryDataSource(get()) }
 }
 
 val repositoryModule = module {
     single<ICharacterRepository> { CharacterRepository(get(), get(), get()) }
+    single<ILocationRepository> { LocationRepository(get(), get(), get()) }
+    single<IStoryRepository> { StoryRepository(get()) }
 }
 
 val databaseModule = module {
@@ -150,8 +144,6 @@ val gameEndModule = module {
 }
 
 val titleAndSaveModule = module {
-    single<IStoryDataSource> { StoryDataSource(get(), get()) }
-    single<IStoryRepository> { StoryRepository(get()) }
     single { TitleAndSaveModelAssistant(get()) }
     viewModel { TitleAndSaveStoryViewModel(get()) }
 }
@@ -224,6 +216,8 @@ val amplitudeModule = module {
 }
 
 val remoteModule = module {
+
+    single<INetworkStatus> { NetworkStatus(get()) }
 
     val BASE_URL = "http://storyheroes.online/api/"
 
