@@ -29,7 +29,6 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     private lateinit var sourceListSentences: List<SentenceOfTale>
     private lateinit var sourceSentence: SentenceOfTale
     private var sentencePosition: Int = -1
-    private var removeStoryFlag = false
     private lateinit var backgroundView: ConstraintLayout
 
     private val sentencesAdapter: SentencesAdapter by lazy {
@@ -40,10 +39,9 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     }
 
     private val sendBtnClickListener = { itemView: View, position: Int ->
-        sourceSentence = sourceListSentences[position]
-        sentenceStory = itemView.sentence.text.toString()
-        showSaveSentenceDialog()
-        Timber.e("sentenceStory = [$position] $sentenceStory")
+        itemView.clearFocus()
+        val text = itemView.sentence.text
+        Timber.e("sentenceStory = [$position] $text")
     }
 
     private val titleFocusListener = View.OnFocusChangeListener { v, hasFocus ->
@@ -59,23 +57,17 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     }
 
     private val onItemSelectedListener = { view: View, position: Int, hasFocus: Boolean ->
-
-        try {
-            sentencesAdapter.notifyItemChanged(sentencePosition)
-        } catch (e: IllegalStateException) {
-            e.printStackTrace()
-        } finally {
-            if (!hasFocus) {
-                sentenceStory = view.sentence.text.toString()
-                sourceSentence = sourceListSentences[position]
-                if(sentenceStory != sourceSentence.content) {
-                    showSaveSentenceDialog()
-                }
-                Timber.e("RV lost focus: [$position] $sentenceStory - ${sourceSentence.content}")
-            } else {
-                val text = view.sentence.text.toString()
-                Timber.e("RV has focus: [$position] $text")
+        if (!hasFocus) {
+            sentenceStory = view.sentence.text.toString()
+            sentencePosition = position
+            sourceSentence = sourceListSentences[position]
+            if(sentenceStory != sourceSentence.content) {
+                showSaveSentenceDialog()
             }
+            Timber.e("RV lost focus: [$position] ${sourceSentence.content} -> $sentenceStory")
+        } else {
+            val text = view.sentence.text.toString()
+            Timber.e("RV has focus: [$position] $text")
         }
     }
 
@@ -249,6 +241,10 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                 Timber.e("saving sentence: [$sentencePosition] $newSentence")
             }
         }
+    }
+
+    fun restoreSentence() {
+        sentencesAdapter.notifyItemChanged(sentencePosition)
     }
 
     override fun onStop() {

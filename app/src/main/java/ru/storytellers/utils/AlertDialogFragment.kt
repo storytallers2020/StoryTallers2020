@@ -35,7 +35,10 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
             .setCancelable(true)
             .setNegativeButton(R.string.negative_answer) { dialog, _ ->
                 if (fragment is LibraryBookFragment) {
-                    fragment.restoreTitle()
+                    when (tag) {
+                        DIALOG_TAG_SAVE_TITLE -> fragment.restoreTitle()
+                        DIALOG_TAG_SAVE_SENTENCE -> fragment.restoreSentence()
+                    }
                 }
                 dialog.cancel()
             }
