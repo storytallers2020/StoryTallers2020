@@ -1,8 +1,6 @@
 package ru.storytellers.ui.fragments
 
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_library_book.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -21,7 +19,6 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     private var textStory: String? = null
     private var titleStory: String? = null
     private var removeStoryFlag = false
-    private lateinit var backgroundView: ConstraintLayout
 
     companion object {
         fun newInstance(story: Story) = LibraryBookFragment(story)
@@ -36,7 +33,6 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         super.onStart()
         story?.let { model.getTextStory(it.id) }
         story?.let { model.getTitleStory(it.name) }
-        backgroundView = requireActivity().findViewById(R.id.main_background)
     }
 
     override fun onResume() {
@@ -45,21 +41,21 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     }
 
     override fun initViewModel() {
-        model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer { textStoryLocal ->
+        model.subscribeOnTextStory().observe(viewLifecycleOwner, { textStoryLocal ->
             textStoryLocal?.let { text ->
                 textStory = text
                 tv_tale.text = text
             }
         })
 
-        model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer { titleStoryLocal ->
+        model.subscribeOnTitleStory().observe(viewLifecycleOwner, { titleStoryLocal ->
             titleStoryLocal?.let { title ->
                 titleStory = title
                 subHeader.text = title
             }
         })
 
-        model.subscribeOnRemoveStory().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnRemoveStory().observe(viewLifecycleOwner, {
             if (it != 0) {
                 context?.let { context ->
                     toastShowLong(context, context.getString(R.string.msg_delete))
@@ -69,8 +65,8 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
             }
         })
 
-        model.subscribeOnLocationImage().observe(viewLifecycleOwner, Observer {
-            setBackgroundImage(it, backgroundView)
+        model.subscribeOnLocationImage().observe(viewLifecycleOwner, {
+            setBackground(it)
         })
     }
 
@@ -153,7 +149,6 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
         super.onStop()
         textStory = null
         titleStory = null
-        loadImage(R.drawable.ic_background_default, backgroundView)
     }
 
     private fun backToLibraryScreen() {

@@ -16,7 +16,6 @@ import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.hideSoftKey
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
-import ru.storytellers.utils.setBackgroundImage
 import ru.storytellers.viewmodels.GameViewModel
 
 class GameFragment : BaseFragment<DataModel>() {
@@ -73,7 +72,7 @@ class GameFragment : BaseFragment<DataModel>() {
     }
 
     private fun handlerInputIncorrect() {
-        model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, Observer {
+        model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, {
             when (it) {
                 1 -> {
                     setError(getString(R.string.err_short_sentence))
@@ -91,14 +90,14 @@ class GameFragment : BaseFragment<DataModel>() {
     }
 
     private fun handlerEndGamePossible() {
-        model.subscribeOnEndGamePossibleChanged().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnEndGamePossibleChanged().observe(viewLifecycleOwner, {
             if (it) button_end.visibility = View.VISIBLE
             else button_end.visibility = View.GONE
         })
     }
 
     private fun handlerCurrentPlayerLiveData() {
-        model.subscribeOnPlayerChanged().observe(viewLifecycleOwner, Observer { player ->
+        model.subscribeOnPlayerChanged().observe(viewLifecycleOwner, { player ->
             player_name.text = player.name
             player.character?.let {
                 resourceToUri(it.avatarUrl)?.let { uri ->
@@ -110,7 +109,7 @@ class GameFragment : BaseFragment<DataModel>() {
 
     private fun handlerIsCorrectSentence(): Boolean {
         var isCorrect = true
-        model.subscribeOnSentenceChecked().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnSentenceChecked().observe(viewLifecycleOwner, {
             if (!it) {
                 setError(getString(R.string.err_mandatory_word_missing))
             }
@@ -120,21 +119,20 @@ class GameFragment : BaseFragment<DataModel>() {
     }
 
     private fun handlerTextChangedLiveData() {
-        model.subscribeOnTextChanged().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnTextChanged().observe(viewLifecycleOwner, {
             if (it.isNotEmpty()) assistantFragment.showGameField()
             story_body.text = it
         })
     }
 
     private fun handlerUriBackgroundImage() {
-        model.subscribeOnBackgroundImageChanged().observe(viewLifecycleOwner, Observer {
-            val v: ConstraintLayout = requireActivity().findViewById(R.id.main_background)
-            setBackgroundImage(it, v)
+        model.subscribeOnBackgroundImageChanged().observe(viewLifecycleOwner, {
+            setBackground(it)
         })
     }
 
     private fun handlerWordChanged() {
-        model.subscribeOnWordChanged().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnWordChanged().observe(viewLifecycleOwner, {
             mandatory_container.visibility = View.VISIBLE
             tv_mandatory_word.text = it
             mandatoryClickListener()
