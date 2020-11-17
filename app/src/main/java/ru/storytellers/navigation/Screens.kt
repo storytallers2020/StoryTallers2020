@@ -1,5 +1,7 @@
 package ru.storytellers.navigation
 
+import android.net.Uri
+import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.fragments.*
 import ru.terrakok.cicerone.android.support.SupportAppScreen
@@ -51,6 +53,20 @@ sealed class Screens {
 
     class LibraryBookScreen(private val story: Story) : SupportAppScreen() {
         override fun getFragment() = LibraryBookFragment.newInstance(story)
+    }
+
+    class EditingFairyTaleScreen(
+        private val story: Story,
+        private val sourceListSentences: List<SentenceOfTale>,
+        private val titleStory: String,
+        private val uriLocationImage: Uri
+    ) : SupportAppScreen() {
+        override fun getFragment() = EditingFairyTaleFragment.newInstance(
+            story,
+            sourceListSentences,
+            titleStory,
+            uriLocationImage
+        )
     }
 
     class TeamCharacterScreen : SupportAppScreen() {
