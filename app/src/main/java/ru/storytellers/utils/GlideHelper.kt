@@ -26,7 +26,6 @@ fun loadImage(resId: Int, container: View) {
         .load(resId)
         .into(object : CustomTarget<Drawable>() {
             override fun onLoadCleared(placeholder: Drawable?) {}
-
             override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
                 container.background = resource
             }
@@ -46,7 +45,7 @@ fun loadImage(uri: Uri, container: View) {
         .into(object : CustomTarget<Drawable>(){
             override fun onLoadCleared(placeholder: Drawable?) { }
             override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-                container.background=resource
+                container.background = resource
             }
         })
 }

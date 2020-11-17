@@ -31,7 +31,6 @@ class LevelFragment : BaseFragment<DataModel>() {
     }
 
     override fun init() {
-        setDefaultBackground()
         setClickListeners()
         initSeekBar()
     }

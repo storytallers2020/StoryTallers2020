@@ -3,8 +3,6 @@ package ru.storytellers.ui.fragments
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.android.synthetic.main.sentence_input_layout.*
 import org.koin.android.ext.android.inject

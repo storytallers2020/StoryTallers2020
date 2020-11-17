@@ -1,15 +1,12 @@
 package ru.storytellers.ui.fragments
 
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game_end.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.setTextToClipboard
 import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.GameEndViewModel
