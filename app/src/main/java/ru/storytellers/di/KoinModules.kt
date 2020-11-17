@@ -41,6 +41,7 @@ import ru.storytellers.model.entity.room.db.AppDatabase
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.model.repository.*
 import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
+import ru.storytellers.ui.fragments.EditingFairyTaleFragment
 import ru.storytellers.utils.AmplitudeWrapper
 import ru.storytellers.utils.NetworkStatus
 import ru.storytellers.utils.PlayerCreator
@@ -65,6 +66,7 @@ private val loadModules by lazy {
             titleAndSaveModule,
             libraryModule,
             libraryBookModule,
+            editingFairyTaleModule,
             teamCharacterModule,
             gameStartModule,
             amplitudeModule,
@@ -78,6 +80,10 @@ val libraryModule = module {
 }
 val libraryBookModule = module {
     viewModel { LibraryBookViewModel(get(),get()) }
+}
+
+val editingFairyTaleModule = module {
+    viewModel { EditingFairyTaleViewModel(get(),get()) }
 }
 
 val ciceroneModule = module {
