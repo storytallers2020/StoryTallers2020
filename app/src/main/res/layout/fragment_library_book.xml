@@ -1,6 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingTop="@dimen/padding_layout_standard"
+    android:paddingBottom="@dimen/padding_layout_bottom"
+    tools:background="@drawable/location_night_city">
+
+    <ImageView
+        android:id="@+id/back_button"
+        style="@style/BackArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/arrow_back"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
+
+    <ImageView
+        android:id="@+id/btn_menu"
+        style="@style/BackArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/btn_menu"
+        android:src="@drawable/ic_menu_24"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
+
+    <TextView
+        android:id="@+id/screen_header"
+        style="@style/Header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_library"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/margin_standard"
+        android:scrollbars="vertical"
+        app:layout_constraintHeight_max="@dimen/max_title_height"
+        app:layout_constraintTop_toBottomOf="@id/screen_header">
+
+        <TextView
+            android:id="@+id/sub_header"
+            style="@style/SubHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/no_color"
+            android:gravity="center"
+            tools:text="@string/tale_title_sample" />
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/text_story_field"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_xs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_title"
+         />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/background_front"
+        android:contentDescription="@string/title_choosing_cover"
+        app:layout_constraintBottom_toBottomOf="@id/text_story_field"
+        app:layout_constraintEnd_toEndOf="@id/text_story_field"
+        app:layout_constraintStart_toStartOf="@id/text_story_field"
+        app:layout_constraintTop_toTopOf="@id/text_story_field" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
