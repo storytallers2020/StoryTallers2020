@@ -41,7 +41,6 @@ import ru.storytellers.model.entity.room.db.AppDatabase
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.model.repository.*
 import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
-import ru.storytellers.ui.fragments.EditingFairyTaleFragment
 import ru.storytellers.utils.AmplitudeWrapper
 import ru.storytellers.utils.NetworkStatus
 import ru.storytellers.utils.PlayerCreator
@@ -79,11 +78,11 @@ val libraryModule = module {
     viewModel { LibraryViewModel(get()) }
 }
 val libraryBookModule = module {
-    viewModel { LibraryBookViewModel(get(),get()) }
+    viewModel { LibraryBookShowViewModel(get(),get()) }
 }
 
 val editingFairyTaleModule = module {
-    viewModel { EditingFairyTaleViewModel(get(),get()) }
+    viewModel { LibraryBookEditViewModel(get(),get()) }
 }
 
 val ciceroneModule = module {

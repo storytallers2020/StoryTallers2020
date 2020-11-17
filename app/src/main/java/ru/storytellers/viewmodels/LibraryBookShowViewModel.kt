@@ -18,7 +18,7 @@ import ru.storytellers.utils.resourceToUri
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import timber.log.Timber
 
-class LibraryBookViewModel(
+class LibraryBookShowViewModel(
     private val storyRepository: IStoryRepository,
     private val sentenceOfTaleRepository: ISentenceOfTaleRepository
 ) : BaseViewModel<DataModel>() {

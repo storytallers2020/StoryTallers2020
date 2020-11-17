@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/subHeader"
+        android:id="@+id/sub_header"
         style="@style/SubHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         android:fillViewport="true"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/subHeader">
+        app:layout_constraintTop_toBottomOf="@id/sub_header">
 
         <TextView
             android:id="@+id/rules_text"

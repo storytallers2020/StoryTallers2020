@@ -17,19 +17,19 @@ import ru.storytellers.utils.AlertDialogFragment
 import ru.storytellers.utils.hideSoftKey
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.setBackgroundImage
-import ru.storytellers.viewmodels.EditingFairyTaleViewModel
+import ru.storytellers.viewmodels.LibraryBookEditViewModel
 import timber.log.Timber
 
 const val DIALOG_TAG_SAVE_TITLE = "book-save-title-ab6"
 const val DIALOG_TAG_SAVE_SENTENCE = "book-save-sentence-ab6"
 
-class EditingFairyTaleFragment(
+class LibraryBookEditFragment(
     private var story: Story?,
     private var sourceListSentences: List<SentenceOfTale>?,
     private var titleStory: String?,
     private var uriLocationImage: Uri?
 ) : BaseFragment<DataModel>() {
-    override val model: EditingFairyTaleViewModel by inject()
+    override val model: LibraryBookEditViewModel by inject()
     override val layoutRes= R.layout.fragment_library_book_edit
     private lateinit var sourceSentence: SentenceOfTale
     private var sentencePosition: Int = -1
@@ -50,13 +50,13 @@ class EditingFairyTaleFragment(
 
     private val titleFocusListener = View.OnFocusChangeListener { v, hasFocus ->
         if (!hasFocus) {
-            val newTitle = subHeader.text.toString()
+            val newTitle = sub_header.text.toString()
             if (newTitle != story?.name) {
                 story?.name = newTitle
                 showSaveTitleDialog()
             }
             hideSoftKey(v)
-            Timber.e("TITLE lost focus: ${subHeader.text}")
+            Timber.e("TITLE lost focus: ${sub_header.text}")
         }
     }
 
@@ -85,13 +85,13 @@ class EditingFairyTaleFragment(
             titleStory: String,
             uriLocationImage: Uri,
             ) =
-            EditingFairyTaleFragment(story,sourceListSentences,titleStory,uriLocationImage)
+            LibraryBookEditFragment(story,sourceListSentences,titleStory,uriLocationImage)
     }
 
     override fun init() {
         back_button.setOnClickListener { backToLibraryBookScreen() }
         rv_sentences.adapter = sentencesAdapter
-        subHeader.onFocusChangeListener = titleFocusListener
+        sub_header.onFocusChangeListener = titleFocusListener
     }
     override fun onStart() {
         super.onStart()
@@ -103,7 +103,7 @@ class EditingFairyTaleFragment(
     }
 
     override fun initViewModel() {
-        subHeader.setText(titleStory)
+        sub_header.setText(titleStory)
         sentencesAdapter.setData(sourceListSentences)
         uriLocationImage?.let {uriLocationImg ->
             setBackgroundImage(uriLocationImg, backgroundView) }
@@ -153,7 +153,7 @@ class EditingFairyTaleFragment(
     }
 
     fun restoreTitle() {
-        subHeader.setText(titleStory)
+        sub_header.setText(titleStory)
     }
 
     fun restoreSentence() {

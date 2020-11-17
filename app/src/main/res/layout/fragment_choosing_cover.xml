@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/subHeader"
+        android:id="@+id/sub_header"
         style="@style/SubHeader"
         android:layout_marginVertical="@dimen/margin_standard"
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
         android:layout_marginTop="@dimen/margin_small"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/subHeader"
+        app:layout_constraintTop_toBottomOf="@id/sub_header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:spanCount="2"
         tools:itemCount="9"

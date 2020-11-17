@@ -53,12 +53,11 @@
         app:layout_constraintTop_toBottomOf="@id/screen_header">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/subHeader"
+            android:id="@+id/sub_header"
             style="@style/SubHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/no_color"
-            android:gravity="center"
             tools:text="@string/tale_title_sample" />
     </androidx.core.widget.NestedScrollView>
 

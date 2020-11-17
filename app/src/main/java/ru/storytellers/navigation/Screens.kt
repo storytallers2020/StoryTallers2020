@@ -52,7 +52,7 @@ sealed class Screens {
     }
 
     class LibraryBookScreen(private val story: Story) : SupportAppScreen() {
-        override fun getFragment() = LibraryBookFragment.newInstance(story)
+        override fun getFragment() = LibraryBookShowFragment.newInstance(story)
     }
 
     class EditingFairyTaleScreen(
@@ -61,7 +61,7 @@ sealed class Screens {
         private val titleStory: String,
         private val uriLocationImage: Uri
     ) : SupportAppScreen() {
-        override fun getFragment() = EditingFairyTaleFragment.newInstance(
+        override fun getFragment() = LibraryBookEditFragment.newInstance(
             story,
             sourceListSentences,
             titleStory,

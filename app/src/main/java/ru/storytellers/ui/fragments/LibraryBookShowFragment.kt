@@ -4,29 +4,22 @@ import android.net.Uri
 import android.view.MenuItem
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import kotlinx.android.synthetic.main.fragment_library_book.*
-import kotlinx.android.synthetic.main.fragment_library_book_edit.*
-import kotlinx.android.synthetic.main.fragment_library_book_edit.back_button
-import kotlinx.android.synthetic.main.fragment_library_book_edit.btn_menu
-import kotlinx.android.synthetic.main.fragment_library_book_edit.subHeader
-import kotlinx.android.synthetic.main.item_book_sentence.view.*
+import kotlinx.android.synthetic.main.fragment_library_book_show.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
 import ru.storytellers.navigation.Screens
-import ru.storytellers.ui.adapters.SentencesAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.*
-import ru.storytellers.viewmodels.LibraryBookViewModel
-import timber.log.Timber
+import ru.storytellers.viewmodels.LibraryBookShowViewModel
 
 const val DIALOG_TAG_DELETE = "book-delete-46bf-ab6"
 
-class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>() {
-    override val model: LibraryBookViewModel by inject()
-    override val layoutRes = R.layout.fragment_library_book
+class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataModel>() {
+    override val model: LibraryBookShowViewModel by inject()
+    override val layoutRes = R.layout.fragment_library_book_show
     private var textStory: String? = null
     private var titleStory: String? = null
     private var uriLocationImage: Uri? = null
@@ -34,7 +27,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     private lateinit var backgroundView: ConstraintLayout
 
     companion object {
-        fun newInstance(story: Story) = LibraryBookFragment(story)
+        fun newInstance(story: Story) = LibraryBookShowFragment(story)
     }
 
     override fun init() {
@@ -87,10 +80,6 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
                 backToLibraryScreen()
             }
         })
-
-
-
-
     }
 
     private fun showPopupMenu(view: View) {
@@ -147,7 +136,7 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     private fun shareText() {
         with(prepareStory()) {
             if (this.isNotBlank())
-                shareText(this@LibraryBookFragment, this)
+                shareText(this@LibraryBookShowFragment, this)
         }
     }
 

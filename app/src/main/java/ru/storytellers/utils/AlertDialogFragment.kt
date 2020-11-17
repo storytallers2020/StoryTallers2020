@@ -34,7 +34,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
             .setTitle(header)
             .setCancelable(true)
             .setNegativeButton(R.string.negative_answer) { dialog, _ ->
-                if (fragment is EditingFairyTaleFragment) {
+                if (fragment is LibraryBookEditFragment) {
                     when (tag) {
                         DIALOG_TAG_SAVE_TITLE -> fragment.restoreTitle()
                         DIALOG_TAG_SAVE_SENTENCE -> fragment.restoreSentence()
@@ -47,7 +47,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                     is LibraryFragment -> {
                         fragment.deleteStory()
                     }
-                    is LibraryBookFragment -> {
+                    is LibraryBookShowFragment -> {
                         when (tag) {
                             DIALOG_TAG_DELETE -> fragment.removeStory()
                         }
@@ -55,7 +55,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                     is TeamCharacterFragment -> {
                         fragment.removeCharacter()
                     }
-                    is EditingFairyTaleFragment ->{
+                    is LibraryBookEditFragment ->{
                         when (tag) {
                             DIALOG_TAG_SAVE_TITLE -> fragment.saveChangedTitle()
                             DIALOG_TAG_SAVE_SENTENCE -> fragment.saveChangedSentence()

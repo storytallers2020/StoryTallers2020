@@ -9,7 +9,7 @@ import ru.storytellers.model.repository.ISentenceOfTaleRepository
 import ru.storytellers.model.repository.IStoryRepository
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
-class EditingFairyTaleViewModel(
+class LibraryBookEditViewModel(
     private val storyRepository: IStoryRepository,
     private val sentenceOfTaleRepository: ISentenceOfTaleRepository
 ): BaseViewModel<DataModel>() {
