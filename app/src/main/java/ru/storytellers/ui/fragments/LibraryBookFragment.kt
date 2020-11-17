@@ -1,8 +1,14 @@
 package ru.storytellers.ui.fragments
 
+import android.net.Uri
+import android.view.MenuItem
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import kotlinx.android.synthetic.main.fragment_library_book.*
 import kotlinx.android.synthetic.main.fragment_library_book_edit.*
+import kotlinx.android.synthetic.main.fragment_library_book_edit.back_button
+import kotlinx.android.synthetic.main.fragment_library_book_edit.btn_menu
+import kotlinx.android.synthetic.main.fragment_library_book_edit.subHeader
 import kotlinx.android.synthetic.main.item_book_sentence.view.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -17,59 +23,15 @@ import ru.storytellers.viewmodels.LibraryBookViewModel
 import timber.log.Timber
 
 const val DIALOG_TAG_DELETE = "book-delete-46bf-ab6"
-const val DIALOG_TAG_SAVE_TITLE = "book-save-title-ab6"
-const val DIALOG_TAG_SAVE_SENTENCE = "book-save-sentence-ab6"
 
 class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>() {
     override val model: LibraryBookViewModel by inject()
-    override val layoutRes = R.layout.fragment_library_book_edit
+    override val layoutRes = R.layout.fragment_library_book
     private var textStory: String? = null
     private var titleStory: String? = null
-    private var sentenceStory: String? = null
+    private var uriLocationImage: Uri? = null
     private lateinit var sourceListSentences: List<SentenceOfTale>
-    private lateinit var sourceSentence: SentenceOfTale
-    private var sentencePosition: Int = -1
     private lateinit var backgroundView: ConstraintLayout
-
-    private val sentencesAdapter: SentencesAdapter by lazy {
-        SentencesAdapter(
-            sendBtnClickListener,
-            onItemSelectedListener
-        )
-    }
-
-    private val sendBtnClickListener = { itemView: View, position: Int ->
-        itemView.clearFocus()
-        val text = itemView.sentence.text
-        Timber.e("sentenceStory = [$position] $text")
-    }
-
-    private val titleFocusListener = View.OnFocusChangeListener { v, hasFocus ->
-        if (!hasFocus) {
-            val newTitle = subHeader.text.toString()
-            if (newTitle != story?.name) {
-                story?.name = newTitle
-                showSaveTitleDialog()
-            }
-            hideSoftKey(v)
-            Timber.e("TITLE lost focus: ${subHeader.text}")
-        }
-    }
-
-    private val onItemSelectedListener = { view: View, position: Int, hasFocus: Boolean ->
-        if (!hasFocus) {
-            sentenceStory = view.sentence.text.toString()
-            sentencePosition = position
-            sourceSentence = sourceListSentences[position]
-            if(sentenceStory != sourceSentence.content) {
-                showSaveSentenceDialog()
-            }
-            Timber.e("RV lost focus: [$position] ${sourceSentence.content} -> $sentenceStory")
-        } else {
-            val text = view.sentence.text.toString()
-            Timber.e("RV has focus: [$position] $text")
-        }
-    }
 
     companion object {
         fun newInstance(story: Story) = LibraryBookFragment(story)
@@ -78,8 +40,6 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     override fun init() {
         back_button.setOnClickListener { backToLibraryScreen() }
         btn_menu.setOnClickListener { showPopupMenu(it) }
-        rv_sentences.adapter = sentencesAdapter
-        subHeader.onFocusChangeListener = titleFocusListener
     }
 
     override fun onStart() {
@@ -97,24 +57,29 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
     }
 
     override fun initViewModel() {
-        model.subscribeOnTextStory().observe(viewLifecycleOwner, {
-            textStory = it
+        model.subscribeOnTextStory().observe(viewLifecycleOwner, {textStoryLocal ->
+            textStory = textStoryLocal
+            text_story_field.text = textStoryLocal
         })
 
-        model.subscribeOnSentences().observe(viewLifecycleOwner, {
-            sentencesAdapter.setData(it)
-            sourceListSentences = it
+        model.subscribeOnSentences().observe(viewLifecycleOwner, {listSentences ->
+            sourceListSentences = listSentences
         })
 
         model.subscribeOnTitleStory().observe(viewLifecycleOwner, { titleStoryLocal ->
             titleStoryLocal?.let { title ->
                 titleStory = title
-                subHeader.setText(title)
+                sub_header.text = title
             }
         })
 
-        model.subscribeOnRemoveStory().observe(viewLifecycleOwner, {
-            if (it != 0) {
+        model.subscribeOnLocationImage().observe(viewLifecycleOwner, {uri ->
+            uriLocationImage = uri
+            setBackgroundImage(uri, backgroundView)
+        })
+
+        model.subscribeOnRemoveStory().observe(viewLifecycleOwner, {numberDeletedRecords ->
+            if (numberDeletedRecords != 0) {
                 context?.let { context ->
                     toastShowShort(context, context.getString(R.string.msg_delete))
                 }
@@ -123,52 +88,60 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
             }
         })
 
-        model.subscribeOnLocationImage().observe(viewLifecycleOwner, {
-            setBackgroundImage(it, backgroundView)
-        })
 
-        model.subscribeOnEditSentence().observe(viewLifecycleOwner, {
-            if (it) {
-                Timber.i("Sentence updated")
-            } else {
-                Timber.i("Sentence update failed")
-            }
-        })
-        model.subscribeOnUpdateTitleStory().observe(viewLifecycleOwner, {
-            if (it > 0) {
-                Timber.i("Title updated")
-            } else {
-                Timber.i("Title update failed")
-            }
-        })
+
+
     }
 
     private fun showPopupMenu(view: View) {
-        context?.let {
-            CustomPopupMenu(it, view, R.menu.library)
+        context?.let {localContext ->
+            CustomPopupMenu(localContext, view, R.menu.library)
         }?.apply {
             start()
-            setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.btn_share -> {
-                        model.itemShareClickedStat()
-                        shareText()
-                        true
-                    }
-                    R.id.btn_copy -> {
-                        model.itemCopyClickedStat()
-                        copyText()
-                        true
-                    }
-                    R.id.btn_delete -> {
-                        model.itemDeleteClickedStat()
-                        showDeleteDialog()
-                        true
-                    }
-                    else -> false
-                }
+            setOnMenuItemClickListener {menuItem ->
+                processingSelectedMenuItem(menuItem)
             }
         }
+    }
+
+    private fun processingSelectedMenuItem(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.btn_edit -> {
+                 model.itemEditClickedStat()
+                toEditStoryScreen()
+                true
+            }
+            R.id.btn_share -> {
+                model.itemShareClickedStat()
+                shareText()
+                true
+            }
+            R.id.btn_copy -> {
+                model.itemCopyClickedStat()
+                copyText()
+                true
+            }
+            R.id.btn_delete -> {
+                model.itemDeleteClickedStat()
+                showDeleteDialog()
+                true
+            }
+            else -> false
+        }
+    }
+
+    private fun toEditStoryScreen(){
+        router.navigateTo(story?.let {storyLocal->
+            titleStory?.let { titleStoryLocal ->
+                uriLocationImage?.let {uriLocationImg ->
+                    Screens.EditingFairyTaleScreen(
+                        storyLocal,
+                        sourceListSentences,
+                        titleStoryLocal,
+                        uriLocationImg
+                    )
+                }
+        } })
     }
 
     private fun shareText() {
@@ -210,41 +183,6 @@ class LibraryBookFragment(private var story: Story?) : BaseFragment<DataModel>()
 
     fun removeStory() {
         story?.let { model.removeStory(it) }
-    }
-
-    private fun showSaveTitleDialog() {
-        activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_save_story)
-                .show(fragMan, DIALOG_TAG_SAVE_TITLE)
-        }
-    }
-
-    fun saveChangedTitle() {
-        story?.let { model.updateTitleStory(it.name, it.id) }
-    }
-
-    fun restoreTitle() {
-        subHeader.setText(titleStory)
-    }
-
-    private fun showSaveSentenceDialog() {
-        activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_save_story)
-                .show(fragMan, DIALOG_TAG_SAVE_SENTENCE)
-        }
-    }
-
-    fun saveChangedSentence() {
-        story?.id?.let { storyId ->
-            sentenceStory?.let { newSentence ->
-                model.editSentence(storyId, sourceSentence, newSentence)
-                Timber.e("saving sentence: [$sentencePosition] $newSentence")
-            }
-        }
-    }
-
-    fun restoreSentence() {
-        sentencesAdapter.notifyItemChanged(sentencePosition)
     }
 
     override fun onStop() {
