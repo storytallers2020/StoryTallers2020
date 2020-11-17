@@ -77,6 +77,7 @@ class StatHelper {
         const val libraryBookScreenMenuItemCopyClicked = "LibraryBookScreen|MenuItemCopyClicked"
         const val libraryBookScreenMenuItemDeleteClicked = "LibraryBookScreen|MenuItemDeleteClicked"
         const val libraryBookScreenMenuItemShareClicked = "LibraryBookScreen|MenuItemShareClicked"
+        const val libraryBookScreenMenuItemEditClicked = "LibraryBookScreen|MenuItemEditClicked"
 
          fun itemClickedStat(itemName:String){
             val prop = listOf(
