@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
@@ -12,6 +13,7 @@ import ru.storytellers.model.repository.IStoryRepository
 import ru.storytellers.utils.StatHelper
 import ru.storytellers.utils.StatHelper.Companion.itemClickedStat
 import ru.storytellers.utils.collectSentence
+import ru.storytellers.utils.concatTitleAndTextStory
 import ru.storytellers.utils.resourceToUri
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import timber.log.Timber
@@ -28,7 +30,7 @@ class LibraryBookViewModel(
     private val onRemoveStoryLiveData = MutableLiveData<Int>()
     private val editSentenceLiveData = MutableLiveData<Boolean>()
     private val updateTitleStoryLiveData = MutableLiveData<Int>()
-    private val onErrorUpdateTitleStoryLiveData = MutableLiveData<Throwable>()
+
 
     fun subscribeOnTextStory(): LiveData<String> {
         return textStoryLiveData
@@ -79,16 +81,6 @@ class LibraryBookViewModel(
 
     }
 
-    fun updateTitleStory(titleStory: String, storyId: Long) {
-        storyRepository.updateTitleStory(titleStory, storyId)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                updateTitleStoryLiveData.value = it
-            }, {
-                onErrorUpdateTitleStoryLiveData.value = it
-            })
-    }
-
     private fun mapToList(sentences: List<SentenceOfTale>): List<String> =
         sentences.map { it.content }
 
@@ -100,33 +92,22 @@ class LibraryBookViewModel(
         titleStoryLiveData.value = story.name
     }
 
-    fun editSentence(storyId: Long, sourceSentence: SentenceOfTale, newText: String) {
-        if (sourceSentence.content != newText && newText.isNotEmpty()) {
-            sourceSentence.content = newText
-            sentenceOfTaleRepository.insertOrReplace(storyId, sourceSentence)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    editSentenceLiveData.value = true
-                }, {
-                    editSentenceLiveData.value = false
-                })
-
-        }
-
-    }
-
     fun removeStory(story: Story) {
         storyRepository.deleteStoryById(story.id)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                onRemoveStoryLiveData.value = it
-            }, {
-                Timber.e(it, "Remove story throwable")
+            .subscribe({numberDeletedRecords ->
+                onRemoveStoryLiveData.value = numberDeletedRecords
+            }, {error ->
+                Timber.e(error, "Remove story throwable")
             })
     }
 
     fun itemCopyClickedStat() {
         itemClickedStat(StatHelper.libraryBookScreenMenuItemCopyClicked)
+    }
+
+    fun itemEditClickedStat() {
+        itemClickedStat(StatHelper.libraryBookScreenMenuItemEditClicked)
     }
 
     fun itemDeleteClickedStat() {
