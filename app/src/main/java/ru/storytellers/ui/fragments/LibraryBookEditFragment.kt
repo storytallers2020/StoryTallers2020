@@ -30,7 +30,7 @@ class LibraryBookEditFragment(
     private var uriLocationImage: Uri?
 ) : BaseFragment<DataModel>() {
     override val model: LibraryBookEditViewModel by inject()
-    override val layoutRes= R.layout.fragment_library_book_edit
+    override val layoutRes = R.layout.fragment_library_book_edit
     private lateinit var sourceSentence: SentenceOfTale
     private var sentencePosition: Int = -1
     private var sentenceStory: String? = null
@@ -64,11 +64,11 @@ class LibraryBookEditFragment(
         if (!hasFocus) {
             sentenceStory = view.sentence.text.toString()
             sentencePosition = position
-            sourceListSentences?.let{listSentence ->
+            sourceListSentences?.let { listSentence ->
                 sourceSentence = listSentence[position]
             }
 
-            if(sentenceStory != sourceSentence.content) {
+            if (sentenceStory != sourceSentence.content) {
                 showSaveSentenceDialog()
             }
             Timber.e("RV lost focus: [$position] ${sourceSentence.content} -> $sentenceStory")
@@ -84,19 +84,23 @@ class LibraryBookEditFragment(
             sourceListSentences: List<SentenceOfTale>,
             titleStory: String,
             uriLocationImage: Uri,
-            ) =
-            LibraryBookEditFragment(story,sourceListSentences,titleStory,uriLocationImage)
+        ) = LibraryBookEditFragment(story, sourceListSentences, titleStory, uriLocationImage)
     }
 
     override fun init() {
+        backgroundView = requireActivity().findViewById(R.id.main_background)
         back_button.setOnClickListener { backToLibraryBookScreen() }
         rv_sentences.adapter = sentencesAdapter
         sub_header.onFocusChangeListener = titleFocusListener
     }
+
     override fun onStart() {
         super.onStart()
-            backgroundView = requireActivity().findViewById(R.id.main_background)
+        uriLocationImage?.let { uriLocationImg ->
+            setBackgroundImage(uriLocationImg, backgroundView)
+        }
     }
+
     override fun onResume() {
         super.onResume()
         initViewModel()
@@ -105,8 +109,7 @@ class LibraryBookEditFragment(
     override fun initViewModel() {
         sub_header.setText(titleStory)
         sentencesAdapter.setData(sourceListSentences)
-        uriLocationImage?.let {uriLocationImg ->
-            setBackgroundImage(uriLocationImg, backgroundView) }
+
 
         model.subscribeOnEditSentence().observe(viewLifecycleOwner, {
             if (it) {
@@ -133,7 +136,8 @@ class LibraryBookEditFragment(
 
     fun saveChangedTitle() {
         story?.let {
-            model.updateTitleStory(it.name, it.id) }
+            model.updateTitleStory(it.name, it.id)
+        }
     }
 
     private fun showSaveSentenceDialog() {
@@ -162,17 +166,22 @@ class LibraryBookEditFragment(
 
     override fun onStop() {
         super.onStop()
-        story=null
+        loadImage(R.drawable.ic_background_default, backgroundView)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        story = null
         titleStory = null
         sourceListSentences = null
         uriLocationImage = null
-        loadImage(R.drawable.ic_background_default, backgroundView)
     }
 
     private fun backToLibraryBookScreen() {
         model.onBackClicked(this.javaClass.simpleName)
-        story?.let {storyLocal ->
-            router.backTo(Screens.LibraryBookScreen(storyLocal))}
+        story?.let { storyLocal ->
+            router.backTo(Screens.LibraryBookScreen(storyLocal))
+        }
     }
 
     override fun backClicked(): Boolean {
