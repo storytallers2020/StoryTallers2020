@@ -80,6 +80,9 @@
     <string name="choosing_cover_title">Придумайте название сказки</string>
     <string name="enter_title">Введите заголовок</string>
 
+    //Editing story
+    <string name="title_edit">Редактирование сказки</string>
+
     // Library screens
     <string name="title_library">Библиотека</string>
     <string name="subtitle_library">Мои сказки</string>
