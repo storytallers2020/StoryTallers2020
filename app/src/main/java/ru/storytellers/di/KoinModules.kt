@@ -64,8 +64,8 @@ private val loadModules by lazy {
             selectCoverModule,
             titleAndSaveModule,
             libraryModule,
-            libraryBookModule,
-            editingFairyTaleModule,
+            libraryBookShowModule,
+            libraryBookEditModule,
             teamCharacterModule,
             gameStartModule,
             amplitudeModule,
@@ -77,11 +77,11 @@ private val loadModules by lazy {
 val libraryModule = module {
     viewModel { LibraryViewModel(get()) }
 }
-val libraryBookModule = module {
-    viewModel { LibraryBookShowViewModel(get(),get()) }
+val libraryBookShowModule = module {
+    viewModel { LibraryBookShowViewModel(get()) }
 }
 
-val editingFairyTaleModule = module {
+val libraryBookEditModule = module {
     viewModel { LibraryBookEditViewModel(get(),get()) }
 }
 
