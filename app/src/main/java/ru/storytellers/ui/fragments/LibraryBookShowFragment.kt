@@ -50,12 +50,12 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
     }
 
     override fun initViewModel() {
-        model.subscribeOnTextStory().observe(viewLifecycleOwner, {textStoryLocal ->
+        model.subscribeOnTextStory().observe(viewLifecycleOwner, { textStoryLocal ->
             textStory = textStoryLocal
             text_story_field.text = textStoryLocal
         })
 
-        model.subscribeOnSentences().observe(viewLifecycleOwner, {listSentences ->
+        model.subscribeOnSentences().observe(viewLifecycleOwner, { listSentences ->
             sourceListSentences = listSentences
         })
 
@@ -66,12 +66,12 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
             }
         })
 
-        model.subscribeOnLocationImage().observe(viewLifecycleOwner, {uri ->
+        model.subscribeOnLocationImage().observe(viewLifecycleOwner, { uri ->
             uriLocationImage = uri
             setBackgroundImage(uri, backgroundView)
         })
 
-        model.subscribeOnRemoveStory().observe(viewLifecycleOwner, {numberDeletedRecords ->
+        model.subscribeOnRemoveStory().observe(viewLifecycleOwner, { numberDeletedRecords ->
             if (numberDeletedRecords != 0) {
                 context?.let { context ->
                     toastShowShort(context, context.getString(R.string.msg_delete))
@@ -83,11 +83,11 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
     }
 
     private fun showPopupMenu(view: View) {
-        context?.let {localContext ->
+        context?.let { localContext ->
             CustomPopupMenu(localContext, view, R.menu.library)
         }?.apply {
             start()
-            setOnMenuItemClickListener {menuItem ->
+            setOnMenuItemClickListener { menuItem ->
                 processingSelectedMenuItem(menuItem)
             }
         }
@@ -96,7 +96,7 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
     private fun processingSelectedMenuItem(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.btn_edit -> {
-                 model.itemEditClickedStat()
+                model.itemEditClickedStat()
                 toEditStoryScreen()
                 true
             }
@@ -119,10 +119,10 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
         }
     }
 
-    private fun toEditStoryScreen(){
-        router.navigateTo(story?.let {storyLocal->
+    private fun toEditStoryScreen() {
+        router.navigateTo(story?.let { storyLocal ->
             titleStory?.let { titleStoryLocal ->
-                uriLocationImage?.let {uriLocationImg ->
+                uriLocationImage?.let { uriLocationImg ->
                     Screens.EditingFairyTaleScreen(
                         storyLocal,
                         sourceListSentences,
@@ -130,7 +130,8 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
                         uriLocationImg
                     )
                 }
-        } })
+            }
+        })
     }
 
     private fun shareText() {
