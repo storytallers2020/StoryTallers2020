@@ -24,23 +24,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/screen_header" />
 
-    <ImageView
-        android:id="@+id/btn_menu"
-        style="@style/BackArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/btn_menu"
-        android:src="@drawable/ic_menu_24"
-        app:layout_constraintBottom_toBottomOf="@id/screen_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/screen_header" />
-
     <TextView
         android:id="@+id/screen_header"
         style="@style/Header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_library"
+        android:text="@string/title_edit"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
@@ -80,9 +69,9 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/title_choosing_cover"
         android:scaleType="fitXY"
         android:src="@drawable/background_front"
-        android:contentDescription="@string/title_choosing_cover"
         app:layout_constraintBottom_toBottomOf="@id/rv_sentences"
         app:layout_constraintEnd_toEndOf="@id/rv_sentences"
         app:layout_constraintStart_toStartOf="@id/rv_sentences"
