@@ -3,8 +3,6 @@ package ru.storytellers.ui.fragments
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_choosing_title.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -58,19 +56,19 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
     }
 
     override fun initViewModel() {
-        model.subscribeOnCover().observe(viewLifecycleOwner, Observer { cover ->
+        model.subscribeOnCover().observe(viewLifecycleOwner, { cover ->
             resourceToUri(cover.imageUrl)?.let {
                 loadImage(it, iv_cover)
             }
         })
 
-        model.subscribeOnTitleAcceptable().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnTitleAcceptable().observe(viewLifecycleOwner, {
             if (!it) {
                 book_title.error = context?.getString(R.string.enter_title)
             }
         })
 
-        model.subscribeOnSuccessSaveFlag().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnSuccessSaveFlag().observe(viewLifecycleOwner, {
             if (it) {
                 activity?.let { context ->
                     toastShowLong(
@@ -92,8 +90,6 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
     }
 
     private fun navigateToLibraryScreen() {
-        val v: ConstraintLayout = requireActivity().findViewById(R.id.main_background)
-        loadImage(R.drawable.ic_background_default, v)
         adMobFragment.startAd()
         router.navigateTo(Screens.LibraryScreen())
     }

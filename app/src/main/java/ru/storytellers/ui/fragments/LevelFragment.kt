@@ -90,7 +90,7 @@ class LevelFragment : BaseFragment<DataModel>() {
     }
 
     override fun initViewModel() {
-        model.subscribeOnChangeLevel().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnChangeLevel().observe(viewLifecycleOwner, {
             updateLevelBar(it)
         })
     }
