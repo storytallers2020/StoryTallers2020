@@ -2,7 +2,6 @@ package ru.storytellers.ui.fragments
 
 import android.net.Uri
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.fragment_library_book_edit.*
 import kotlinx.android.synthetic.main.item_book_sentence.view.*
 import org.koin.android.ext.android.inject
@@ -15,8 +14,6 @@ import ru.storytellers.ui.adapters.SentencesAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.AlertDialogFragment
 import ru.storytellers.utils.hideSoftKey
-import ru.storytellers.utils.loadImage
-import ru.storytellers.utils.setBackgroundImage
 import ru.storytellers.viewmodels.LibraryBookEditViewModel
 import timber.log.Timber
 
@@ -34,7 +31,6 @@ class LibraryBookEditFragment(
     private lateinit var sourceSentence: SentenceOfTale
     private var sentencePosition: Int = -1
     private var sentenceStory: String? = null
-    private lateinit var backgroundView: ConstraintLayout
 
     private val sentencesAdapter: SentencesAdapter by lazy {
         SentencesAdapter(
@@ -88,7 +84,6 @@ class LibraryBookEditFragment(
     }
 
     override fun init() {
-        backgroundView = requireActivity().findViewById(R.id.main_background)
         back_button.setOnClickListener { backToLibraryBookScreen() }
         rv_sentences.adapter = sentencesAdapter
         sub_header.onFocusChangeListener = titleFocusListener
@@ -97,7 +92,7 @@ class LibraryBookEditFragment(
     override fun onStart() {
         super.onStart()
         uriLocationImage?.let { uriLocationImg ->
-            setBackgroundImage(uriLocationImg, backgroundView)
+            setBackground(uriLocationImg)
         }
     }
 
@@ -162,11 +157,6 @@ class LibraryBookEditFragment(
 
     fun restoreSentence() {
         sentencesAdapter.notifyItemChanged(sentencePosition)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        loadImage(R.drawable.ic_background_default, backgroundView)
     }
 
     override fun onDestroy() {

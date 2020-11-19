@@ -3,7 +3,6 @@ package ru.storytellers.ui.fragments
 import android.net.Uri
 import android.view.MenuItem
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.fragment_library_book_show.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -24,7 +23,6 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
     private var titleStory: String? = null
     private var uriLocationImage: Uri? = null
     private lateinit var sourceListSentences: List<SentenceOfTale>
-    private lateinit var backgroundView: ConstraintLayout
 
     companion object {
         fun newInstance(story: Story) = LibraryBookShowFragment(story)
@@ -40,7 +38,6 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
         story?.let {
             model.getTextStory(it.id)
             model.getTitleStory(it.name)
-            backgroundView = requireActivity().findViewById(R.id.main_background)
         }
     }
 
@@ -68,7 +65,7 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
 
         model.subscribeOnLocationImage().observe(viewLifecycleOwner, { uri ->
             uriLocationImage = uri
-            setBackgroundImage(uri, backgroundView)
+            setBackground(uri)
         })
 
         model.subscribeOnRemoveStory().observe(viewLifecycleOwner, { numberDeletedRecords ->
@@ -179,7 +176,6 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
         super.onStop()
         textStory = null
         titleStory = null
-        loadImage(R.drawable.ic_background_default, backgroundView)
     }
 
     private fun backToLibraryScreen() {
