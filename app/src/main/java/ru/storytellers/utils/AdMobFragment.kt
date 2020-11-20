@@ -13,15 +13,20 @@ class AdMobFragment (private var context: Context){
 
     companion object {
         fun newInstance(context: Fragment): AdMobFragment {
-            return context.requireActivity().baseContext.let { AdMobFragment(it) }
+            return context.requireActivity().baseContext.let {
+                AdMobFragment(it).apply {
+                    buildAd()
+                }
+            }
         }
     }
 
-    fun buildAd() {
+    private fun buildAd() {
         MobileAds.initialize(context)
-        mInterstitialAd = InterstitialAd(context)
-        mInterstitialAd.adUnitId = context.getString(R.string.ad_key_id)
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
+        mInterstitialAd = InterstitialAd(context).apply {
+            adUnitId = context.getString(R.string.ad_key_id)
+            loadAd(AdRequest.Builder().build())
+        }
     }
 
     fun startAd() {
