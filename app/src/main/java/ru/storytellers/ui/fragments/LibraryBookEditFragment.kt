@@ -38,10 +38,8 @@ class LibraryBookEditFragment(
             onItemSelectedListener
         )
     }
-    private val sendBtnClickListener = { itemView: View, position: Int ->
+    private val sendBtnClickListener = { itemView: View, _: Int ->
         itemView.clearFocus()
-        val text = itemView.sentence.text
-        Timber.e("sentenceStory = [$position] $text")
     }
 
     private val titleFocusListener = View.OnFocusChangeListener { v, hasFocus ->
@@ -50,9 +48,12 @@ class LibraryBookEditFragment(
             if (newTitle != story?.name) {
                 story?.name = newTitle
                 showSaveTitleDialog()
+            } else {
+                enableBackButton(true)
             }
             hideSoftKey(v)
-            Timber.e("TITLE lost focus: ${sub_header.text}")
+        } else {
+            enableBackButton(false)
         }
     }
 
@@ -66,11 +67,11 @@ class LibraryBookEditFragment(
 
             if (sentenceStory != sourceSentence.content) {
                 showSaveSentenceDialog()
+            } else {
+                enableBackButton(true)
             }
-            Timber.e("RV lost focus: [$position] ${sourceSentence.content} -> $sentenceStory")
         } else {
-            val text = view.sentence.text.toString()
-            Timber.e("RV has focus: [$position] $text")
+            enableBackButton(false)
         }
     }
 
@@ -133,6 +134,7 @@ class LibraryBookEditFragment(
         story?.let {
             model.updateTitleStory(it.name, it.id)
         }
+        enableBackButton(true)
     }
 
     private fun showSaveSentenceDialog() {
@@ -146,17 +148,19 @@ class LibraryBookEditFragment(
         story?.id?.let { storyId ->
             sentenceStory?.let { newSentence ->
                 model.editSentence(storyId, sourceSentence, newSentence)
-                Timber.e("saving sentence: [$sentencePosition] $newSentence")
             }
         }
+        enableBackButton(true)
     }
 
     fun restoreTitle() {
         sub_header.setText(titleStory)
+        enableBackButton(true)
     }
 
     fun restoreSentence() {
         sentencesAdapter.notifyItemChanged(sentencePosition)
+        enableBackButton(true)
     }
 
     override fun onDestroy() {
@@ -165,6 +169,11 @@ class LibraryBookEditFragment(
         titleStory = null
         sourceListSentences = null
         uriLocationImage = null
+    }
+
+    private fun enableBackButton(isClickable: Boolean) {
+        back_button.isClickable = isClickable
+        Timber.e("back_button.isClickable = ${back_button.isClickable}")
     }
 
     private fun backToLibraryBookScreen() {
