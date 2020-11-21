@@ -22,3 +22,14 @@ fun RoomCharacter.toCharacter() =
 fun List<RoomCharacter>.toCharacterList() = this.map { it.toCharacter() }
 
 fun List<Character>.toRoomCharacterList() = this.map { it.toRoomCharacter() }
+
+fun List<Character>.toAvatarList(): List<String> {
+    val list = ArrayList<String>()
+
+    this.map {
+        list.add(it.avatarUrl)
+        list.add(it.avatarUrlSelected)
+    }
+    return list
+}
+

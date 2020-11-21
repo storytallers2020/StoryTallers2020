@@ -14,7 +14,8 @@ import ru.storytellers.utils.EnumHelper
         RoomSentenceOfTale::class,
         RoomStory::class,
         RoomUser::class,
-        RoomPlayer::class],
+        RoomPlayer::class,
+        RoomCachedImage::class],
     version = 1,
     exportSchema = false
 )
@@ -26,4 +27,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val storyDao: StoryDao
     abstract val userDao: UserDao
     abstract val playerDao: PlayerDao
+    abstract val imageDao: ImageDao
 }
