@@ -155,6 +155,8 @@ class LibraryBookEditFragment(
 
     fun restoreTitle() {
         sub_header.setText(titleStory)
+        titleStory?.let{
+            story?.name = it}
         enableBackButton(true)
     }
 
