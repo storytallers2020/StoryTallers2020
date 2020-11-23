@@ -94,7 +94,7 @@
     <string name="enter_title">Enter title</string>
 
     //Editing story
-    <string name="title_edit">Editing story</string>
+    <string name="title_edit">Please, edit your story…</string>
 
     // Library screens
     <string name="title_library">Library</string>

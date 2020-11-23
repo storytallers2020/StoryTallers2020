@@ -3,13 +3,13 @@ package ru.storytellers.ui.fragments
 import android.net.Uri
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_library_book_edit.*
+import kotlinx.android.synthetic.main.item_book_sentence.*
 import kotlinx.android.synthetic.main.item_book_sentence.view.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
-import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.SentencesAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.AlertDialogFragment
@@ -22,9 +22,9 @@ const val DIALOG_TAG_SAVE_SENTENCE = "book-save-sentence-ab6"
 
 class LibraryBookEditFragment(
     private var story: Story?,
-    private var sourceListSentences: List<SentenceOfTale>?,
-    private var titleStory: String?,
-    private var uriLocationImage: Uri?
+    private var sentencesList: List<SentenceOfTale>?,
+    private var storyTitle: String?,
+    private var locationImageUri: Uri?
 ) : BaseFragment<DataModel>() {
     override val model: LibraryBookEditViewModel by inject()
     override val layoutRes = R.layout.fragment_library_book_edit
@@ -43,35 +43,38 @@ class LibraryBookEditFragment(
     }
 
     private val titleFocusListener = View.OnFocusChangeListener { v, hasFocus ->
+        checkEditing()
         if (!hasFocus) {
             val newTitle = sub_header.text.toString()
             if (newTitle != story?.name) {
                 story?.name = newTitle
                 showSaveTitleDialog()
             } else {
-                enableBackButton(true)
+                Timber.e("title lost focus")
+                enableBackButton()
             }
             hideSoftKey(v)
         } else {
-            enableBackButton(false)
+            Timber.e("title gained focus")
+            enableBackButton()
         }
     }
 
     private val onItemSelectedListener = { view: View, position: Int, hasFocus: Boolean ->
+        checkEditing()
         if (!hasFocus) {
             sentenceStory = view.sentence.text.toString()
             sentencePosition = position
-            sourceListSentences?.let { listSentence ->
-                sourceSentence = listSentence[position]
-            }
-
+            sentencesList?.let { sourceSentence = it[position] }
             if (sentenceStory != sourceSentence.content) {
                 showSaveSentenceDialog()
             } else {
-                enableBackButton(true)
+                Timber.e("sentence lost focus")
+                enableBackButton()
             }
         } else {
-            enableBackButton(false)
+            Timber.e("sentence gained focus")
+            enableBackButton()
         }
     }
 
@@ -86,27 +89,20 @@ class LibraryBookEditFragment(
 
     override fun init() {
         back_button.setOnClickListener { backToLibraryBookScreen() }
-        rv_sentences.adapter = sentencesAdapter
-        sub_header.onFocusChangeListener = titleFocusListener
-    }
-
-    override fun onStart() {
-        super.onStart()
-        uriLocationImage?.let { uriLocationImg ->
-            setBackground(uriLocationImg)
+        with (sub_header) {
+            setText(storyTitle)
+            onFocusChangeListener = titleFocusListener
         }
+        rv_sentences.adapter = sentencesAdapter.apply { setData(sentencesList) }
     }
 
     override fun onResume() {
         super.onResume()
         initViewModel()
+        locationImageUri?.let { uri -> setBackground(uri) }
     }
 
     override fun initViewModel() {
-        sub_header.setText(titleStory)
-        sentencesAdapter.setData(sourceListSentences)
-
-
         model.subscribeOnEditSentence().observe(viewLifecycleOwner, {
             if (it) {
                 Timber.i("Sentence updated")
@@ -134,7 +130,8 @@ class LibraryBookEditFragment(
         story?.let {
             model.updateTitleStory(it.name, it.id)
         }
-        enableBackButton(true)
+        enableBackButton()
+        Timber.e("saveChangedTitle()")
     }
 
     private fun showSaveSentenceDialog() {
@@ -150,44 +147,54 @@ class LibraryBookEditFragment(
                 model.editSentence(storyId, sourceSentence, newSentence)
             }
         }
-        enableBackButton(true)
+        enableBackButton()
+        Timber.e("saveChangedSentence()")
     }
 
     fun restoreTitle() {
-        sub_header.setText(titleStory)
-        titleStory?.let{
-            story?.name = it}
-        enableBackButton(true)
+        sub_header?.setText(storyTitle)
+        storyTitle?.let { story?.name = it}
+        sub_header.requestFocus()
+        view?.clearFocus()
+        Timber.e("restoreTitle() = ${sub_header.isFocused}")
     }
 
     fun restoreSentence() {
         sentencesAdapter.notifyItemChanged(sentencePosition)
-        enableBackButton(true)
+        sub_header.requestFocus()
+        view?.clearFocus()
+        Timber.e("restoreSentence()")
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        story = null
-        titleStory = null
-        sourceListSentences = null
-        uriLocationImage = null
+    private fun checkEditing() : Boolean {
+        val focusedViewName = view?.findFocus()?.javaClass?.simpleName ?: "null"
+        return focusedViewName.contains("EditText")
     }
 
-    private fun enableBackButton(isClickable: Boolean) {
-        back_button.isClickable = isClickable
-        Timber.e("back_button.isClickable = ${back_button.isClickable}")
-    }
+    private fun enableBackButton() {
+        back_button?.let {
+            it.isClickable = !checkEditing()
+            it.isEnabled = !checkEditing()
 
-    private fun backToLibraryBookScreen() {
-        model.onBackClicked(this.javaClass.simpleName)
-        story?.let { storyLocal ->
-            router.backTo(Screens.LibraryBookScreen(storyLocal))
+            Timber.e("${
+                if (checkEditing()) { "is EditText" } else { "not EditText" }
+            } && ${
+                if (it.isClickable) { "button ON" } else { "button OFF" }
+            }")
         }
     }
 
+    private fun backToLibraryBookScreen() {
+        backClicked()
+    }
+
     override fun backClicked(): Boolean {
-        model.onBackClicked(this.javaClass.simpleName)
-        router.exit()
+        if (back_button.isClickable) {
+            model.onBackClicked(this.javaClass.simpleName)
+            router.exit()
+        } else {
+            view?.clearFocus()
+        }
         return true
     }
 

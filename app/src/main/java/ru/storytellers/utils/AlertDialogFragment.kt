@@ -3,6 +3,7 @@ package ru.storytellers.utils
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import ru.storytellers.R
 import ru.storytellers.ui.StepActivity
 import ru.storytellers.ui.fragments.*
+import timber.log.Timber
 
 
 class AlertDialogFragment(private val fragment: Fragment, private val title: Int) : AppCompatDialogFragment() {
@@ -33,15 +35,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
         AlertDialog.Builder(context)
             .setTitle(header)
             .setCancelable(true)
-            .setNegativeButton(R.string.negative_answer) { dialog, _ ->
-                if (fragment is LibraryBookEditFragment) {
-                    when (tag) {
-                        DIALOG_TAG_SAVE_TITLE -> fragment.restoreTitle()
-                        DIALOG_TAG_SAVE_SENTENCE -> fragment.restoreSentence()
-                    }
-                }
-                dialog.cancel()
-            }
+            .setNegativeButton(R.string.negative_answer) { dialog, _ -> dialog.cancel() }
             .setPositiveButton(R.string.positive_answer) { dialog, _ ->
                 when (fragment) {
                     is LibraryFragment -> {
@@ -72,6 +66,16 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                 }
             }.create()
 
+    override fun onCancel(dialog: DialogInterface) {
+        // on
+        if (fragment is LibraryBookEditFragment) {
+            when (tag) {
+                DIALOG_TAG_SAVE_TITLE -> fragment.restoreTitle()
+                DIALOG_TAG_SAVE_SENTENCE -> fragment.restoreSentence()
+            }
+        }
+    }
+
     private fun getAgreementDialog(context: Context): Dialog {
         isCancelable = false
         if (fragment is StartFragment) {
@@ -81,11 +85,9 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
             return AlertDialog.Builder(context)
                 .setTitle(R.string.agreement_dialog_title)
                 .setView(mView)
-                .setNegativeButton(R.string.decline_answer) { dialog, _ ->
+                .setNegativeButton(R.string.decline_answer) { _, _ ->
                     toastShowLong(context, getString(R.string.msg_agreement_declined))
                     fragment.closeApplication()
-                    dialog.cancel()
-
                 }
                 .setPositiveButton(R.string.accept_answer) { dialog, _ ->
                     toastShowShort(context, getString(R.string.msg_agreement_accepted))
@@ -94,8 +96,6 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                     intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
                     context.startActivity(intent)
                     dialog.dismiss()
-
-
                 }
                 .create()
         } else {

@@ -50,31 +50,34 @@
             tools:text="@string/tale_title_sample" />
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_sentences"
+    <FrameLayout
+        android:id="@+id/frame_rv_sentences"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_small"
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:lineSpacingExtra="@dimen/line_spacing_extra"
-        android:orientation="vertical"
         android:padding="@dimen/margin_xs"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_title"
-        tools:listitem="@layout/item_book_sentence" />
+        app:layout_constraintVertical_bias="0">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_sentences"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/line_spacing_extra"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_book_sentence" />
+    </FrameLayout>
 
     <ImageView
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:contentDescription="@string/title_choosing_cover"
         android:scaleType="fitXY"
         android:src="@drawable/background_front"
-        app:layout_constraintBottom_toBottomOf="@id/rv_sentences"
-        app:layout_constraintEnd_toEndOf="@id/rv_sentences"
-        app:layout_constraintStart_toStartOf="@id/rv_sentences"
-        app:layout_constraintTop_toTopOf="@id/rv_sentences" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/frame_rv_sentences" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

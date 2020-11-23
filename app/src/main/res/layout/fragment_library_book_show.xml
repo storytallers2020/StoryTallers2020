@@ -61,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_small"
+        android:paddingVertical="@dimen/margin_xs"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_title">
@@ -69,8 +70,8 @@
             android:id="@+id/text_story_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_xs"
             android:lineSpacingExtra="@dimen/line_spacing_extra"
-            android:padding="@dimen/margin_xs"
             tools:text="@string/tale_text_sample" />
 
     </androidx.core.widget.NestedScrollView>
