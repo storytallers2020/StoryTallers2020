@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/padding_layout_standard"
+    android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingBottom="@dimen/padding_layout_bottom"
+    tools:background="@drawable/location_night_city">
+
+    <ImageView
+        android:id="@+id/back_button"
+        style="@style/BackArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
+
+    <ImageView
+        android:id="@+id/btn_menu"
+        style="@style/BackArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/btn_menu"
+        android:src="@drawable/ic_menu_24"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
+
+    <TextView
+        android:id="@+id/screen_header"
+        style="@style/Header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_library"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/margin_standard"
+        android:scrollbars="vertical"
+        app:layout_constraintHeight_max="@dimen/max_title_height"
+        app:layout_constraintTop_toBottomOf="@id/screen_header">
+
+        <TextView
+            android:id="@+id/sub_header"
+            style="@style/SubHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/tale_title_sample" />
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layout_tale"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@drawable/background_back"
+        android:paddingVertical="@dimen/margin_xs"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_title">
+
+        <TextView
+            android:id="@+id/text_story_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_xs"
+            android:lineSpacingExtra="@dimen/line_spacing_extra"
+            tools:text="@string/tale_text_sample" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/background_front"
+        android:contentDescription="@string/title_choosing_cover"
+        app:layout_constraintBottom_toBottomOf="@id/layout_tale"
+        app:layout_constraintEnd_toEndOf="@id/layout_tale"
+        app:layout_constraintStart_toStartOf="@id/layout_tale"
+        app:layout_constraintTop_toTopOf="@id/layout_tale" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

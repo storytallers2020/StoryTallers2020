@@ -37,7 +37,7 @@
 
 
         <TextView
-            android:id="@+id/subHeader"
+            android:id="@+id/sub_header"
             style="@style/SubHeader"
             android:layout_marginVertical="@dimen/margin_standard"
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/location_cave_of_wonders_name"
             android:layout_marginTop="@dimen/margin_large"
-            app:layout_constraintTop_toBottomOf="@id/subHeader" />
+            app:layout_constraintTop_toBottomOf="@id/sub_header" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"

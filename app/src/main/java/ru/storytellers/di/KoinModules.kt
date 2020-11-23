@@ -64,7 +64,8 @@ private val loadModules by lazy {
             selectCoverModule,
             titleAndSaveModule,
             libraryModule,
-            libraryBookModule,
+            libraryBookShowModule,
+            libraryBookEditModule,
             teamCharacterModule,
             gameStartModule,
             amplitudeModule,
@@ -76,8 +77,12 @@ private val loadModules by lazy {
 val libraryModule = module {
     viewModel { LibraryViewModel(get()) }
 }
-val libraryBookModule = module {
-    viewModel { LibraryBookViewModel(get()) }
+val libraryBookShowModule = module {
+    viewModel { LibraryBookShowViewModel(get()) }
+}
+
+val libraryBookEditModule = module {
+    viewModel { LibraryBookEditViewModel(get(),get()) }
 }
 
 val ciceroneModule = module {
@@ -196,8 +201,7 @@ val gameEngine = module {
 
     single<IPlayerDataSource> { PlayerDataSource(get(), get()) }
     single<ISentenceOfTaleDataSource> { SentenceOfTaleDataSource(get(), get()) }
-    single { SentenceOfTaleRepository(get()) }
-
+    single<ISentenceOfTaleRepository>{ SentenceOfTaleRepository(get()) }
     single { Game() }
     single { GameStorage() }
 

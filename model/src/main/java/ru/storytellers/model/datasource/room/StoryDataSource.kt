@@ -55,6 +55,15 @@ class StoryDataSource(
                 emitter.onError(e)
             }
         }
+    override fun updateTitleStory(titleStory: String, storyId: Long):Single<Int> =
+        Single.create<Int> { emitter ->
+            try {
+                val count = database.storyDao.updateTitleStory(titleStory, storyId)
+                emitter.onSuccess(count)
+            } catch (e: Throwable) {
+                emitter.onError(e)
+            }
+        }
 
     override fun getStoryById(storyId: Long): Single<Story> =
         Single.create { emitter ->

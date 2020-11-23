@@ -100,7 +100,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/subHeader"
+        android:id="@+id/sub_header"
         style="@style/SubHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/subHeader"
+        app:layout_constraintTop_toBottomOf="@id/sub_header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0"
         app:spanCount="2"

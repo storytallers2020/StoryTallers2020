@@ -27,6 +27,8 @@ interface StoryDao {
 
     @Update
     fun update(story: RoomStory)
+    @Query("UPDATE  RoomStory SET name = :titleStory WHERE id = :storyId")
+    fun updateTitleStory(titleStory: String, storyId: Long): Int
 
     //endregion Update
 

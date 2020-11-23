@@ -11,7 +11,7 @@
     tools:background="@drawable/ic_background_default">
 
     <TextView
-        android:id="@+id/subHeader"
+        android:id="@+id/sub_header"
         style="@style/Cover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

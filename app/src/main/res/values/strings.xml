@@ -93,10 +93,14 @@
     <string name="choosing_cover_title">Come up with the title</string>
     <string name="enter_title">Enter title</string>
 
+    //Editing screen
+    <string name="title_edit">Please, edit your story…</string>
+    <string name="edit_text_view_name" translatable="false">EditText</string>
+
     // Library screens
     <string name="title_library">Library</string>
     <string name="subtitle_library">My Fairy Tales</string>
-    <string name="btn_rename">Rename</string>
+    <string name="btn_edit_story">Edit</string>
     <string name="btn_copy">"Copy "</string>
     <string name="msg_copy">Copied to clipboard</string>
     <string name="btn_share">"Share "</string>
@@ -117,7 +121,8 @@
 
     // Dialog fragment
     <string name="dialog_title">Are you sure?</string>
-    <string name="dialog_story">Delete the story?</string>
+    <string name="dialog_delete_story">Delete the story?</string>
+    <string name="dialog_save_story">Save changes to the story?</string>
     <string name="dialog_character">Delete the character?</string>
     <string name="dialog_exit">Close Story Heroes?</string>
     <string name="positive_answer">OK</string>

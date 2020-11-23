@@ -5,30 +5,23 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/padding_layout_standard"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingHorizontal="@dimen/padding_layout_standard"
+    android:paddingTop="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
     tools:background="@drawable/location_night_city">
 
-    <ImageView
-        android:id="@+id/back_button_character"
+    <ImageButton
+        android:id="@+id/back_button"
         style="@style/BackArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/no_color"
         android:contentDescription="@string/arrow_back"
         app:layout_constraintBottom_toBottomOf="@id/screen_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/screen_header" />
-
-    <ImageView
-        android:id="@+id/btn_menu"
-        style="@style/BackArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_menu_24"
-        android:contentDescription="@string/btn_menu"
-        app:layout_constraintBottom_toBottomOf="@id/screen_header"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/screen_header" />
 
     <TextView
@@ -36,7 +29,7 @@
         style="@style/Header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_library"
+        android:text="@string/title_edit"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
@@ -48,8 +41,8 @@
         app:layout_constraintHeight_max="@dimen/max_title_height"
         app:layout_constraintTop_toBottomOf="@id/screen_header">
 
-        <TextView
-            android:id="@+id/subHeader"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/sub_header"
             style="@style/SubHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,36 +50,35 @@
             tools:text="@string/tale_title_sample" />
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/layout_tale"
+    <FrameLayout
+        android:id="@+id/frame_rv_sentences"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_small"
+        android:padding="@dimen/margin_xs"
         android:background="@drawable/background_back"
-        android:paddingVertical="@dimen/margin_xs"
-        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_title">
+        app:layout_constraintTop_toBottomOf="@id/layout_title"
+        app:layout_constraintVertical_bias="0">
 
-        <TextView
-            android:id="@+id/tv_tale"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_sentences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_small"
             android:lineSpacingExtra="@dimen/line_spacing_extra"
-            tools:text="@string/tale_text_sample" />
-
-    </androidx.core.widget.NestedScrollView>
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_book_sentence" />
+    </FrameLayout>
 
     <ImageView
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:contentDescription="@string/title_choosing_cover"
         android:scaleType="fitXY"
         android:src="@drawable/background_front"
-        android:contentDescription="@string/title_choosing_cover"
-        app:layout_constraintBottom_toBottomOf="@id/layout_tale"
-        app:layout_constraintEnd_toEndOf="@id/layout_tale"
-        app:layout_constraintStart_toStartOf="@id/layout_tale"
-        app:layout_constraintTop_toTopOf="@id/layout_tale" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/frame_rv_sentences" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
