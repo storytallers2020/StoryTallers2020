@@ -1,16 +1,15 @@
-# Story-Heroes
+# Story Heroes
 ![logo](./logo_new.png)
 
-**Story-Heroes** - это мобильное приложение, позволяющее в игровом формате сочинять сказки.
+**Story Heroes** - это мобильное приложение, позволяющее в игровом формате сочинять сказки.
 Основная миссия проекта - организация позитивного общения и совместного времяпрепровождения семьи.
 
 ## Установка
-Скоро в открытом бесплатном доступе на Android PlayMarket! 
-Ориентировочно - конец октября 2020г. 
+Доступно для скачивания на GooglePlay -> [Story Heroes](https://play.google.com/store/apps/details?id=ru.storytellers)
 
 ## Документация
   - Документация на игру встроена в приложение и отображается игроку во время игры.
-  - API на интеграцию с серсерной частью представлена в разделе wiki: [Ссылка](https://github.com/storytallers2020/StoryTallers2020/wiki/API)
+  - API на интеграцию с серверной частью представлена в разделе wiki: [Ссылка](https://github.com/storytallers2020/StoryTallers2020/wiki/API)
   - Презентация приложения [Ссылка](https://drive.google.com/file/d/18P6bNSjD47sSN4RLomjxJYT3X7njozrR/view)
   
 ## Требования к системе
