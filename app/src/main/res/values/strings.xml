@@ -93,8 +93,9 @@
     <string name="choosing_cover_title">Come up with the title</string>
     <string name="enter_title">Enter title</string>
 
-    //Editing story
+    //Editing screen
     <string name="title_edit">Please, edit your story…</string>
+    <string name="edit_text_view_name" translatable="false">EditText</string>
 
     // Library screens
     <string name="title_library">Library</string>

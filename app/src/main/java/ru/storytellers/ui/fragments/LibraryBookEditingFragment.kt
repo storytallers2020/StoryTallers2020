@@ -3,7 +3,6 @@ package ru.storytellers.ui.fragments
 import android.net.Uri
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_library_book_edit.*
-import kotlinx.android.synthetic.main.item_book_sentence.*
 import kotlinx.android.synthetic.main.item_book_sentence.view.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -20,7 +19,7 @@ import timber.log.Timber
 const val DIALOG_TAG_SAVE_TITLE = "book-save-title-ab6"
 const val DIALOG_TAG_SAVE_SENTENCE = "book-save-sentence-ab6"
 
-class LibraryBookEditFragment(
+class LibraryBookEditingFragment(
     private var story: Story?,
     private var sentencesList: List<SentenceOfTale>?,
     private var storyTitle: String?,
@@ -43,25 +42,23 @@ class LibraryBookEditFragment(
     }
 
     private val titleFocusListener = View.OnFocusChangeListener { v, hasFocus ->
-        checkEditing()
+        isFocusingEditText()
         if (!hasFocus) {
             val newTitle = sub_header.text.toString()
             if (newTitle != story?.name) {
                 story?.name = newTitle
                 showSaveTitleDialog()
             } else {
-                Timber.e("title lost focus")
                 enableBackButton()
             }
             hideSoftKey(v)
         } else {
-            Timber.e("title gained focus")
             enableBackButton()
         }
     }
 
     private val onItemSelectedListener = { view: View, position: Int, hasFocus: Boolean ->
-        checkEditing()
+        isFocusingEditText()
         if (!hasFocus) {
             sentenceStory = view.sentence.text.toString()
             sentencePosition = position
@@ -69,11 +66,9 @@ class LibraryBookEditFragment(
             if (sentenceStory != sourceSentence.content) {
                 showSaveSentenceDialog()
             } else {
-                Timber.e("sentence lost focus")
                 enableBackButton()
             }
         } else {
-            Timber.e("sentence gained focus")
             enableBackButton()
         }
     }
@@ -84,7 +79,7 @@ class LibraryBookEditFragment(
             sourceListSentences: List<SentenceOfTale>,
             titleStory: String,
             uriLocationImage: Uri,
-        ) = LibraryBookEditFragment(story, sourceListSentences, titleStory, uriLocationImage)
+        ) = LibraryBookEditingFragment(story, sourceListSentences, titleStory, uriLocationImage)
     }
 
     override fun init() {
@@ -131,7 +126,6 @@ class LibraryBookEditFragment(
             model.updateTitleStory(it.name, it.id)
         }
         enableBackButton()
-        Timber.e("saveChangedTitle()")
     }
 
     private fun showSaveSentenceDialog() {
@@ -148,39 +142,28 @@ class LibraryBookEditFragment(
             }
         }
         enableBackButton()
-        Timber.e("saveChangedSentence()")
     }
 
     fun restoreTitle() {
         sub_header?.setText(storyTitle)
         storyTitle?.let { story?.name = it}
-        sub_header.requestFocus()
-        view?.clearFocus()
-        Timber.e("restoreTitle() = ${sub_header.isFocused}")
+        enableBackButton()
     }
 
     fun restoreSentence() {
         sentencesAdapter.notifyItemChanged(sentencePosition)
-        sub_header.requestFocus()
-        view?.clearFocus()
-        Timber.e("restoreSentence()")
+        enableBackButton()
     }
 
-    private fun checkEditing() : Boolean {
-        val focusedViewName = view?.findFocus()?.javaClass?.simpleName ?: "null"
-        return focusedViewName.contains("EditText")
+    private fun isFocusingEditText() : Boolean {
+        val focusedViewName = view?.findFocus()?.javaClass?.simpleName ?: null.toString()
+        return focusedViewName.contains(getString(R.string.edit_text_view_name))
     }
 
     private fun enableBackButton() {
-        back_button?.let {
-            it.isClickable = !checkEditing()
-            it.isEnabled = !checkEditing()
-
-            Timber.e("${
-                if (checkEditing()) { "is EditText" } else { "not EditText" }
-            } && ${
-                if (it.isClickable) { "button ON" } else { "button OFF" }
-            }")
+        with(back_button) {
+            isClickable = !isFocusingEditText()
+            isEnabled = !isFocusingEditText()
         }
     }
 

@@ -73,19 +73,19 @@ class LibraryFragment : BaseFragment<DataModel>() {
     }
 
     override fun initViewModel() {
-        model.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnSuccess().observe(viewLifecycleOwner, {
             it.data?.let { list ->
                 renderData(list)
             }
         })
 
-        model.subscribeOnError().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnError().observe(viewLifecycleOwner, {
             activity?.let { context ->
                 toastShowLong(context, context.getString(R.string.something_went_wrong))
             }
         })
 
-        model.subscribeOnDeleteStory().observe(viewLifecycleOwner, Observer { deleted ->
+        model.subscribeOnDeleteStory().observe(viewLifecycleOwner, { deleted ->
             libraryAdapter.notifyDataSetChanged()
             if (deleted != 0) {
                 context?.let { context ->
@@ -94,15 +94,15 @@ class LibraryFragment : BaseFragment<DataModel>() {
             }
         })
 
-        model.subscribeOnChangedList().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnChangedList().observe(viewLifecycleOwner, {
             renderData(it)
         })
 
-        model.subscribeOnTextStory().observe(viewLifecycleOwner, Observer { storyText ->
+        model.subscribeOnTextStory().observe(viewLifecycleOwner, { storyText ->
             assistant.setStoryText(storyText)
         })
 
-        model.subscribeOnTitleStory().observe(viewLifecycleOwner, Observer { storyTitle ->
+        model.subscribeOnTitleStory().observe(viewLifecycleOwner, { storyTitle ->
             assistant.setStoryTitle(storyTitle)
         })
     }
@@ -122,7 +122,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
     }
 
     private fun navigateToLibraryBookScreen(story: Story) {
-        router.navigateTo(Screens.LibraryBookScreen(story))
+        router.navigateTo(Screens.BookReadingScreen(story))
     }
 
     private fun toStartScreen() {

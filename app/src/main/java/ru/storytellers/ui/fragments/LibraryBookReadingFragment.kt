@@ -16,7 +16,7 @@ import ru.storytellers.viewmodels.LibraryBookShowViewModel
 
 const val DIALOG_TAG_DELETE = "book-delete-46bf-ab6"
 
-class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataModel>() {
+class LibraryBookReadingFragment(private var story: Story?) : BaseFragment<DataModel>() {
     override val model: LibraryBookShowViewModel by inject()
     override val layoutRes = R.layout.fragment_library_book_show
     private var textStory: String? = null
@@ -25,7 +25,7 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
     private lateinit var sourceListSentences: List<SentenceOfTale>
 
     companion object {
-        fun newInstance(story: Story) = LibraryBookShowFragment(story)
+        fun newInstance(story: Story) = LibraryBookReadingFragment(story)
     }
 
     override fun init() {
@@ -120,7 +120,7 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
         router.navigateTo(story?.let { storyLocal ->
             titleStory?.let { titleStoryLocal ->
                 uriLocationImage?.let { uriLocationImg ->
-                    Screens.EditingFairyTaleScreen(
+                    Screens.BookEditingScreen(
                         storyLocal,
                         sourceListSentences,
                         titleStoryLocal,
@@ -134,7 +134,7 @@ class LibraryBookShowFragment(private var story: Story?) : BaseFragment<DataMode
     private fun shareText() {
         with(prepareStory()) {
             if (this.isNotBlank())
-                shareText(this@LibraryBookShowFragment, this)
+                shareText(this@LibraryBookReadingFragment, this)
         }
     }
 

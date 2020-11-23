@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import ru.storytellers.R
 import ru.storytellers.ui.StepActivity
 import ru.storytellers.ui.fragments.*
-import timber.log.Timber
 
 
 class AlertDialogFragment(private val fragment: Fragment, private val title: Int) : AppCompatDialogFragment() {
@@ -41,7 +40,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                     is LibraryFragment -> {
                         fragment.deleteStory()
                     }
-                    is LibraryBookShowFragment -> {
+                    is LibraryBookReadingFragment -> {
                         when (tag) {
                             DIALOG_TAG_DELETE -> fragment.removeStory()
                         }
@@ -49,7 +48,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                     is TeamCharacterFragment -> {
                         fragment.removeCharacter()
                     }
-                    is LibraryBookEditFragment ->{
+                    is LibraryBookEditingFragment ->{
                         when (tag) {
                             DIALOG_TAG_SAVE_TITLE -> fragment.saveChangedTitle()
                             DIALOG_TAG_SAVE_SENTENCE -> fragment.saveChangedSentence()
@@ -68,7 +67,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
 
     override fun onCancel(dialog: DialogInterface) {
         // on
-        if (fragment is LibraryBookEditFragment) {
+        if (fragment is LibraryBookEditingFragment) {
             when (tag) {
                 DIALOG_TAG_SAVE_TITLE -> fragment.restoreTitle()
                 DIALOG_TAG_SAVE_SENTENCE -> fragment.restoreSentence()
