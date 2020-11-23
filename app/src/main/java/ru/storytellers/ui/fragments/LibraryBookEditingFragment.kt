@@ -49,11 +49,11 @@ class LibraryBookEditingFragment(
                 story?.name = newTitle
                 showSaveTitleDialog()
             } else {
-                enableBackButton()
+                toggleBackButton()
             }
             hideSoftKey(v)
         } else {
-            enableBackButton()
+            toggleBackButton()
         }
     }
 
@@ -66,10 +66,10 @@ class LibraryBookEditingFragment(
             if (sentenceStory != sourceSentence.content) {
                 showSaveSentenceDialog()
             } else {
-                enableBackButton()
+                toggleBackButton()
             }
         } else {
-            enableBackButton()
+            toggleBackButton()
         }
     }
 
@@ -124,8 +124,15 @@ class LibraryBookEditingFragment(
     fun saveChangedTitle() {
         story?.let {
             model.updateTitleStory(it.name, it.id)
+            storyTitle = it.name
         }
-        enableBackButton()
+        toggleBackButton()
+    }
+
+    fun restoreTitle() {
+        sub_header?.setText(storyTitle)
+        storyTitle?.let { story?.name = it}
+        toggleBackButton()
     }
 
     private fun showSaveSentenceDialog() {
@@ -141,18 +148,12 @@ class LibraryBookEditingFragment(
                 model.editSentence(storyId, sourceSentence, newSentence)
             }
         }
-        enableBackButton()
-    }
-
-    fun restoreTitle() {
-        sub_header?.setText(storyTitle)
-        storyTitle?.let { story?.name = it}
-        enableBackButton()
+        toggleBackButton()
     }
 
     fun restoreSentence() {
         sentencesAdapter.notifyItemChanged(sentencePosition)
-        enableBackButton()
+        toggleBackButton()
     }
 
     private fun isFocusingEditText() : Boolean {
@@ -160,7 +161,7 @@ class LibraryBookEditingFragment(
         return focusedViewName.contains(getString(R.string.edit_text_view_name))
     }
 
-    private fun enableBackButton() {
+    private fun toggleBackButton() {
         with(back_button) {
             isClickable = !isFocusingEditText()
             isEnabled = !isFocusingEditText()
