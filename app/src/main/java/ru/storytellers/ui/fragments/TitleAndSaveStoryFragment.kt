@@ -52,7 +52,6 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         super.onStart()
         initViewModel()
         adMobFragment = AdMobFragment.newInstance(this)
-        adMobFragment.buildAd()
     }
 
     override fun initViewModel() {
