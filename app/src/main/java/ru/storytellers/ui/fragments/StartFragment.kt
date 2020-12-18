@@ -11,7 +11,6 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
-import ru.storytellers.ui.StepActivity
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.AlertDialogFragment
 import ru.storytellers.utils.toastShowLong
@@ -37,11 +36,6 @@ class StartFragment : BaseFragment<DataModel>() {
         new_tale_button.setOnClickListener { navigateToLevelScreen() }
         library_button.setOnClickListener { navigateToLibraryScreen() }
         rate_button.setOnClickListener { navigateToGooglePlay() }
-        how_play_button.setOnClickListener {
-            val intent = Intent(context, StepActivity::class.java)
-            startActivity(intent)
-        }
-
     }
 
     private fun navigateToLevelScreen() {
@@ -86,7 +80,7 @@ class StartFragment : BaseFragment<DataModel>() {
     }
 
     override fun initViewModel() {
-        model.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnSuccess().observe(viewLifecycleOwner, {
             it.data?.let { listStoryLocal ->
                 model.onStartScreenNumberOfTaleStat(listStoryLocal.count())
                 if (listStoryLocal.isNotEmpty()) {
@@ -95,7 +89,7 @@ class StartFragment : BaseFragment<DataModel>() {
             }
         })
 
-        model.subscribeOnError().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnError().observe(viewLifecycleOwner, {
             activity?.let { context ->
                 toastShowLong(
                     context,

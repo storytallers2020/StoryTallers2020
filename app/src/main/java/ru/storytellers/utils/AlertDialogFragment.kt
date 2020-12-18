@@ -4,14 +4,12 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.Fragment
 import ru.storytellers.R
-import ru.storytellers.ui.StepActivity
 import ru.storytellers.ui.fragments.*
 
 
@@ -91,16 +89,12 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                 .setPositiveButton(R.string.accept_answer) { dialog, _ ->
                     toastShowShort(context, getString(R.string.msg_agreement_accepted))
                     fragment.acceptAgreement()
-                    val intent = Intent(context, StepActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-                    context.startActivity(intent)
                     dialog.dismiss()
                 }
                 .create()
         } else {
             return getAlertDialog(context, R.string.dialog_title)
         }
-
     }
 
 }

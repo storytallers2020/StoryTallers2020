@@ -6,7 +6,8 @@
     <string name="uri_to_market_google_play" translatable="false">market://details?id=%1$s</string>
     <string name="uri_to_http_google_play" translatable="false">http://play.google.com/store/apps/details?id=%1$s</string>
     <string name="ad_key_test_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="ad_key_id" translatable="false">ca-app-pub-8179777113013566/9995202148</string>
+    <string name="ad_key_id" translatable="false">ca-app-pub-8179777113013566/4030574345</string>
+    <string name="ad_app_id" translatable="false">ca-app-pub-8179777113013566~5377493806</string>
 
     //Splash screen
     <string name="version" translatable="false">Version: %1$d (%2$s)</string>
@@ -136,18 +137,6 @@
     <string name="msg_agreement_declined">GAME OVER</string>
     <string name="msg_agreement_accepted">Agreements accepted</string>
 
-    // Tutorial fragment
-    <string name="btn_tutorial"><u>How to play?</u></string>
-    <string name="btn_ok">Thank you, I understand</string>
-    <string name="btn_skip">Skip</string>
-    <string name="stepText_1">Click "Create a fairy tale" to start.</string>
-    <string name="stepText_2">Select the difficulty level and click Next</string>
-    <string name="stepText_3">Enter a name, then select the hero and click Save</string>
-    <string name="stepText_4">To continue, click the Choose location</string>
-    <string name="stepText_5">Choose the location where your fairy tale will begin</string>
-    <string name="stepText_6">Come up with a fairy tale, then click on Complete fairy tale</string>
-    <string name="stepText_7">Choose a cover for your fairy tale</string>
-    <string name="stepText_8">Come up with a title for your fairy tale and click Save</string>
 
     // New strings... move them to the corresponding group above
 
