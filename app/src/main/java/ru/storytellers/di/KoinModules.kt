@@ -14,6 +14,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.storytellers.BuildConfig
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.engine.Game
 import ru.storytellers.engine.GameStorage
 import ru.storytellers.engine.level.Level
@@ -41,6 +42,7 @@ import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
+import java.io.File
 
 fun injectDependencies() = loadModules
 private val loadModules by lazy {
@@ -64,7 +66,8 @@ private val loadModules by lazy {
             teamCharacterModule,
             gameStartModule,
             amplitudeModule,
-            remoteModule
+            remoteModule,
+            cacheModule
         )
     )
 }
@@ -119,10 +122,11 @@ val dataSourceModule = module {
     single<ICharacterDataSource> { CharacterDataSource(get()) }
     single<ILocationDataSource> { LocationDataSource(get()) }
     single<IStoryDataSource> { StoryDataSource(get()) }
+    single<ICashImageDataSource> { CashImageDataSource(get(), file()) }
 }
 
 val repositoryModule = module {
-    single<ICharacterRepository> { CharacterRepository(get(), get(), get()) }
+    single<ICharacterRepository> { CharacterRepository(get(), get(), get(), get()) }
     single<ILocationRepository> { LocationRepository(get(), get(), get()) }
     single<IStoryRepository> { StoryRepository(get()) }
 }
@@ -249,4 +253,20 @@ val remoteModule = module {
             .build()
             .create(IRemoteDataSource::class.java)
     }
+}
+
+val cacheModule = module {
+
+    single {
+        val file = file()
+        fun file(): File {
+            val app = StoryHeroesApp.instance
+            val path = (app.externalCacheDir?.path
+                ?: app.getExternalFilesDir(null)?.path
+                ?: app.filesDir.path) + File.separator + "image_cache"
+
+            return File(path)
+        }
+    }
+
 }
