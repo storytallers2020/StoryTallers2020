@@ -5,10 +5,8 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.storytellers.model.datasource.ICashImageDataSource
 import ru.storytellers.model.datasource.ICharacterDataSource
-import ru.storytellers.model.datasource.ILocationDataSource
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
 import ru.storytellers.model.entity.Character
-import ru.storytellers.model.entity.Location
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.utils.toAvatarList
 

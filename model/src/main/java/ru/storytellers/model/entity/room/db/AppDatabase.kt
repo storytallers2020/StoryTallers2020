@@ -16,7 +16,7 @@ import ru.storytellers.utils.EnumHelper
         RoomUser::class,
         RoomPlayer::class,
         RoomCachedImage::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(EnumHelper::class)

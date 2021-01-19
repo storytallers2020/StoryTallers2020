@@ -33,6 +33,7 @@ import ru.storytellers.model.datasource.resourcestorage.storage.CoverStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
 import ru.storytellers.model.datasource.room.*
 import ru.storytellers.model.entity.room.db.AppDatabase
+import ru.storytellers.model.entity.room.db.MIGRATION_1_2
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.model.repository.*
 import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
@@ -42,7 +43,6 @@ import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
-import java.io.File
 
 fun injectDependencies() = loadModules
 private val loadModules by lazy {
@@ -67,7 +67,6 @@ private val loadModules by lazy {
             gameStartModule,
             amplitudeModule,
             remoteModule,
-            cacheModule
         )
     )
 }
@@ -119,10 +118,12 @@ val selectCoverModule = module {
 }
 
 val dataSourceModule = module {
+    val file = StoryHeroesApp.instance.imageCashDir
+
     single<ICharacterDataSource> { CharacterDataSource(get()) }
     single<ILocationDataSource> { LocationDataSource(get()) }
     single<IStoryDataSource> { StoryDataSource(get()) }
-    single<ICashImageDataSource> { CashImageDataSource(get(), file()) }
+    single<ICashImageDataSource> { CashImageDataSource(get(), file) }
 }
 
 val repositoryModule = module {
@@ -134,6 +135,7 @@ val repositoryModule = module {
 val databaseModule = module {
     single {
         Room.databaseBuilder(get(), AppDatabase::class.java, "StoryTellers.db")
+            .addMigrations(MIGRATION_1_2)
             .build()
     }
     single { get<AppDatabase>().characterDao }
@@ -253,20 +255,4 @@ val remoteModule = module {
             .build()
             .create(IRemoteDataSource::class.java)
     }
-}
-
-val cacheModule = module {
-
-    single {
-        val file = file()
-        fun file(): File {
-            val app = StoryHeroesApp.instance
-            val path = (app.externalCacheDir?.path
-                ?: app.getExternalFilesDir(null)?.path
-                ?: app.filesDir.path) + File.separator + "image_cache"
-
-            return File(path)
-        }
-    }
-
 }
