@@ -12,4 +12,5 @@ interface IStoryDataSource {
     fun getStoryById(storyId: Long): Single<Story>
     fun getStoryWithSentencesById(storyId: Long): Single<Story>
     fun getAll(): Single<List<Story>>
+    fun updateTitleStory(titleStory: String, storyId: Long):Single<Int>
 }

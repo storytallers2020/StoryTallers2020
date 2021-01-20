@@ -3,15 +3,13 @@ package ru.storytellers.utils
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import ru.storytellers.R
-import ru.storytellers.ui.StepActivity
 import ru.storytellers.ui.fragments.*
 
 
@@ -23,7 +21,7 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val context = fragment.activity as FragmentActivity
+        val context = this.requireActivity()
         return when (tag) {
             DIALOG_TAG_POLICY -> getAgreementDialog(context)
             else -> getAlertDialog(context, title)
@@ -40,11 +38,19 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                     is LibraryFragment -> {
                         fragment.deleteStory()
                     }
-                    is LibraryBookFragment -> {
-                        fragment.setStateRemoveStoryFlag()
+                    is LibraryBookReadingFragment -> {
+                        when (tag) {
+                            DIALOG_TAG_DELETE -> fragment.removeStory()
+                        }
                     }
                     is TeamCharacterFragment -> {
                         fragment.removeCharacter()
+                    }
+                    is LibraryBookEditingFragment ->{
+                        when (tag) {
+                            DIALOG_TAG_SAVE_TITLE -> fragment.saveChangedTitle()
+                            DIALOG_TAG_SAVE_SENTENCE -> fragment.saveChangedSentence()
+                        }
                     }
                     is StartFragment -> {
                         toastShowLong(context, getString(R.string.msg_on_exit))
@@ -57,6 +63,16 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
                 }
             }.create()
 
+    override fun onCancel(dialog: DialogInterface) {
+        // on
+        if (fragment is LibraryBookEditingFragment) {
+            when (tag) {
+                DIALOG_TAG_SAVE_TITLE -> fragment.restoreTitle()
+                DIALOG_TAG_SAVE_SENTENCE -> fragment.restoreSentence()
+            }
+        }
+    }
+
     private fun getAgreementDialog(context: Context): Dialog {
         isCancelable = false
         if (fragment is StartFragment) {
@@ -66,27 +82,19 @@ class AlertDialogFragment(private val fragment: Fragment, private val title: Int
             return AlertDialog.Builder(context)
                 .setTitle(R.string.agreement_dialog_title)
                 .setView(mView)
-                .setNegativeButton(R.string.decline_answer) { dialog, _ ->
+                .setNegativeButton(R.string.decline_answer) { _, _ ->
                     toastShowLong(context, getString(R.string.msg_agreement_declined))
                     fragment.closeApplication()
-                    dialog.cancel()
-
                 }
                 .setPositiveButton(R.string.accept_answer) { dialog, _ ->
                     toastShowShort(context, getString(R.string.msg_agreement_accepted))
                     fragment.acceptAgreement()
-                    val intent = Intent(context, StepActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-                    context.startActivity(intent)
                     dialog.dismiss()
-
-
                 }
                 .create()
         } else {
             return getAlertDialog(context, R.string.dialog_title)
         }
-
     }
 
 }

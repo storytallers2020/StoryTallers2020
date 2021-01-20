@@ -11,10 +11,10 @@ import ru.storytellers.R
 import ru.storytellers.ui.BackButtonListener
 import ru.terrakok.cicerone.Router
 
-class RulesGame: Fragment(), BackButtonListener {
+class RulesFragment: Fragment(), BackButtonListener {
     private val router: Router by inject()
     companion object {
-        fun newInstance() = RulesGame()
+        fun newInstance() = RulesFragment()
     }
 
     override fun onCreateView(
@@ -30,7 +30,6 @@ class RulesGame: Fragment(), BackButtonListener {
         val linesMax = resources.getInteger(R.integer.max_length_sentence)
         rules_text.text = getString(R.string.rules_full_description, linesMax)
         back_button_rules.setOnClickListener { backClicked() }
-
     }
 
     override fun backClicked(): Boolean {

@@ -1,15 +1,12 @@
 package ru.storytellers.ui.fragments
 
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_game_end.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.setBackgroundImage
 import ru.storytellers.utils.setTextToClipboard
 import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.GameEndViewModel
@@ -64,20 +61,19 @@ class GameEndFragment : BaseFragment<DataModel>() {
     }
 
     private fun handlerTextOfStoryTaller() {
-        model.subscribeOnTextOfStoryTaller().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnTextOfStoryTaller().observe(viewLifecycleOwner, {
             tv_tale.text = it
         })
     }
 
     private fun handlerUriBackgroundImage() {
-        model.subscribeOnUriBackgroundImage().observe(viewLifecycleOwner, Observer {
-            val v: ConstraintLayout = requireActivity().findViewById(R.id.main_background)
-            setBackgroundImage(it, v)
+        model.subscribeOnUriBackgroundImage().observe(viewLifecycleOwner, {
+            setBackground(it)
         })
     }
 
     private fun handlerIsResumeClicked() {
-        model.subscribeOnResumeClicked().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnResumeClicked().observe(viewLifecycleOwner, {
             if (it) {
                 tv_resume.visibility = View.GONE
             }

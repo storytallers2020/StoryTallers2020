@@ -28,4 +28,8 @@ class StoryRepository(private val localDataSource: IStoryDataSource): IStoryRepo
         localDataSource.getAll()
             .subscribeOn(Schedulers.io())
 
+    override fun updateTitleStory(titleStory: String, storyId: Long): Single<Int> =
+        localDataSource.updateTitleStory(titleStory, storyId)
+            .subscribeOn(Schedulers.io())
+
 }

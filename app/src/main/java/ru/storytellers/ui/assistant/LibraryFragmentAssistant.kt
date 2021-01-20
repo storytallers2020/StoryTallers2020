@@ -51,7 +51,7 @@ class LibraryFragmentAssistant(private val fragment: LibraryFragment) {
 
     fun showAlertDialog() {
         fragment.activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(fragment, R.string.dialog_story)
+            AlertDialogFragment.newInstance(fragment, R.string.dialog_delete_story)
                 .show(fragMan, FRAGMENT_DIALOG_TAG)
         }
     }

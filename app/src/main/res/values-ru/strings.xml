@@ -80,10 +80,13 @@
     <string name="choosing_cover_title">Придумайте название сказки</string>
     <string name="enter_title">Введите заголовок</string>
 
+    //Editing screen
+    <string name="title_edit">Редактирование сказки</string>
+
     // Library screens
     <string name="title_library">Библиотека</string>
     <string name="subtitle_library">Мои сказки</string>
-    <string name="btn_rename">Переименовать</string>
+    <string name="btn_edit_story">Редактировать</string>
     <string name="btn_share">"Поделиться "</string>
     <string name="share_bottom_sheet_title">Рассказать сказку…</string>
     <string name="btn_copy">"Копировать "</string>
@@ -96,7 +99,8 @@
 
     // Dialog fragment
     <string name="dialog_title">Вы уверены?</string>
-    <string name="dialog_story">Удалить сказку?</string>
+    <string name="dialog_delete_story">Удалить сказку?</string>
+    <string name="dialog_save_story">Сохранить изменения в сказке?</string>
     <string name="dialog_character">Удалить персонажа?</string>
     <string name="dialog_exit">Выйти из приложения?</string>
     <string name="positive_answer">ОК</string>

@@ -1,5 +1,7 @@
 package ru.storytellers.navigation
 
+import android.net.Uri
+import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.fragments.*
 import ru.terrakok.cicerone.android.support.SupportAppScreen
@@ -34,7 +36,7 @@ sealed class Screens {
     }
 
     class RulesGameScreen : SupportAppScreen() {
-        override fun getFragment() = RulesGame.newInstance()
+        override fun getFragment() = RulesFragment.newInstance()
     }
 
     class SelectCoverScreen : SupportAppScreen() {
@@ -49,8 +51,22 @@ sealed class Screens {
         override fun getFragment() = LibraryFragment.newInstance()
     }
 
-    class LibraryBookScreen(private val story: Story) : SupportAppScreen() {
-        override fun getFragment() = LibraryBookFragment.newInstance(story)
+    class BookReadingScreen(private val story: Story) : SupportAppScreen() {
+        override fun getFragment() = LibraryBookReadingFragment.newInstance(story)
+    }
+
+    class BookEditingScreen(
+        private val story: Story,
+        private val sourceListSentences: List<SentenceOfTale>,
+        private val titleStory: String,
+        private val uriLocationImage: Uri
+    ) : SupportAppScreen() {
+        override fun getFragment() = LibraryBookEditingFragment.newInstance(
+            story,
+            sourceListSentences,
+            titleStory,
+            uriLocationImage
+        )
     }
 
     class TeamCharacterScreen : SupportAppScreen() {
