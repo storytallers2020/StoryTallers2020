@@ -28,12 +28,11 @@ import ru.storytellers.engine.wordRules.IWordRule
 import ru.storytellers.engine.wordRules.RandomWordRule
 import ru.storytellers.model.datasource.*
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
-import ru.storytellers.model.datasource.resourcestorage.CoverResDataSource
-import ru.storytellers.model.datasource.resourcestorage.storage.CoverStorage
-import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
+import ru.storytellers.model.datasource.storage.WordStorage
 import ru.storytellers.model.datasource.room.*
 import ru.storytellers.model.entity.room.db.AppDatabase
 import ru.storytellers.model.entity.room.db.MIGRATION_1_2
+import ru.storytellers.model.entity.room.db.MIGRATION_2_3
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.model.repository.*
 import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
@@ -111,9 +110,6 @@ val locationModule = module {
 }
 
 val selectCoverModule = module {
-    single { CoverStorage(get()) }
-    single<ICoverDataSource> { CoverResDataSource(get()) }
-    single<ICoverRepository> { CoverRepository(get(), get(), get()) }
     viewModel { SelectCoverViewModel(get()) }
 }
 
@@ -123,19 +119,21 @@ val dataSourceModule = module {
     single<ICharacterDataSource> { CharacterDataSource(get()) }
     single<ILocationDataSource> { LocationDataSource(get()) }
     single<IStoryDataSource> { StoryDataSource(get()) }
+    single<ICoverDataSource> { CoverDataSource(get()) }
     single<ICashImageDataSource> { CashImageDataSource(get(), file) }
 }
 
 val repositoryModule = module {
     single<ICharacterRepository> { CharacterRepository(get(), get(), get(), get()) }
-    single<ILocationRepository> { LocationRepository(get(), get(), get()) }
+    single<ILocationRepository> { LocationRepository(get(), get(), get(), get()) }
     single<IStoryRepository> { StoryRepository(get()) }
+    single<ICoverRepository> { CoverRepository(get(), get(), get(), get()) }
 }
 
 val databaseModule = module {
     single {
         Room.databaseBuilder(get(), AppDatabase::class.java, "StoryTellers.db")
-            .addMigrations(MIGRATION_1_2)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
             .build()
     }
     single { get<AppDatabase>().characterDao }

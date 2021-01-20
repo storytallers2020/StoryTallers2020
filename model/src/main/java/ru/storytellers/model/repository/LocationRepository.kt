@@ -4,15 +4,18 @@ import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import ru.storytellers.model.datasource.ICashImageDataSource
 import ru.storytellers.model.datasource.ILocationDataSource
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.network.INetworkStatus
+import ru.storytellers.utils.toCashedLocationList
 
 class LocationRepository(
     private val networkStatus: INetworkStatus,
     private val remoteDataSource: IRemoteDataSource,
-    private val localDataSource: ILocationDataSource
+    private val localDataSource: ILocationDataSource,
+    private val cashImageDataSource: ICashImageDataSource
 ): ILocationRepository {
 
     override fun insertOrReplace(location: Location): @NonNull Completable =
@@ -27,6 +30,7 @@ class LocationRepository(
     networkStatus.isOnlineSingle().flatMap { isOnline ->
         if (isOnline) {
             remoteDataSource.getLocations().flatMap { locationListApi ->
+                cashImageDataSource.add(locationListApi.locations.toCashedLocationList())
                 localDataSource
                     .insertOrReplace(locationListApi.locations)
                     .toSingleDefault(locationListApi.locations)

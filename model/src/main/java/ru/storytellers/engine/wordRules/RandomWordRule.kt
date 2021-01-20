@@ -1,6 +1,6 @@
 package ru.storytellers.engine.wordRules
 
-import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
+import ru.storytellers.model.datasource.storage.WordStorage
 
 class RandomWordRule(
     private val needShowWord: Boolean,

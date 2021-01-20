@@ -15,8 +15,9 @@ import ru.storytellers.utils.EnumHelper
         RoomStory::class,
         RoomUser::class,
         RoomPlayer::class,
-        RoomCachedImage::class],
-    version = 2,
+        RoomCachedImage::class,
+        RoomCover::class],
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(EnumHelper::class)
@@ -28,4 +29,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val userDao: UserDao
     abstract val playerDao: PlayerDao
     abstract val imageDao: ImageDao
+    abstract val coverDao: CoverDao
 }

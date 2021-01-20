@@ -25,7 +25,7 @@ import ru.storytellers.engine.level.Level
 import ru.storytellers.engine.rules.Rules
 import ru.storytellers.engine.showRules.ShowAllSentencesRule
 import ru.storytellers.engine.wordRules.RandomWordRule
-import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
+import ru.storytellers.model.datasource.storage.WordStorage
 import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.entity.Player

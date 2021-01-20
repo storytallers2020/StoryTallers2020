@@ -1,29 +1,29 @@
-package ru.storytellers.model.datasource.resourcestorage
+package ru.storytellers.model.datasource.room
 
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.storytellers.model.datasource.ICoverDataSource
-import ru.storytellers.model.datasource.resourcestorage.storage.CoverStorage
 import ru.storytellers.model.entity.Cover
+import ru.storytellers.model.entity.room.db.AppDatabase
+import ru.storytellers.utils.*
 
-class CoverResDataSource(private val coverStorage: CoverStorage) : ICoverDataSource {
+class CoverDataSource(private val database: AppDatabase) : ICoverDataSource {
 
     override fun insertOrReplace(cover: Cover): Completable =
         Completable.fromAction {
-            coverStorage.insertOrReplace(cover)
+            database.coverDao.insert(cover.toRoomCover())
         }
 
     override fun insertOrReplace(coverList: List<Cover>): Completable =
         Completable.fromAction {
-            coverStorage.insertOrReplace(coverList)
-        }.subscribeOn(Schedulers.io())
+            database.coverDao.insert(coverList.toRoomCoverList())
+        }
 
 
     override fun getCoverById(coverId: Long): Single<Cover> =
         Single.create { emitter ->
-            coverStorage.getCoverById(coverId)?.let {
-                emitter.onSuccess(it)
+            database.coverDao.getCoverById(coverId)?.let {
+                emitter.onSuccess(it.toCover())
             } ?: let {
                 emitter.onError(RuntimeException("No such cover in resource"))
             }
@@ -31,7 +31,10 @@ class CoverResDataSource(private val coverStorage: CoverStorage) : ICoverDataSou
 
     override fun getAll(): Single<List<Cover>> =
         Single.create { emitter ->
-            emitter.onSuccess(coverStorage.getAll())
+            database.coverDao.getAll()?.let { roomCoverList ->
+                emitter.onSuccess(roomCoverList.toCoverList())
+            } ?: let {
+                emitter.onError(RuntimeException("No such cover in database"))
+            }
         }
-
 }

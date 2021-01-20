@@ -1,5 +1,6 @@
 package ru.storytellers.utils
 
+import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.entity.room.RoomLocation
 
@@ -24,3 +25,13 @@ fun RoomLocation.toLocation() =
 fun List<RoomLocation>.toLocationList() = this.map { it.toLocation() }
 
 fun List<Location>.toRoomLocationList() = this.map { it.toRoomLocation() }
+
+fun List<Location>.toCashedLocationList(): List<String> {
+    val list = ArrayList<String>()
+
+    this.map {
+        list.add(it.imageUrl)
+        list.add(it.imageForRecycler)
+    }
+    return list
+}

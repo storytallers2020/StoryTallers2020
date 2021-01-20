@@ -1,4 +1,4 @@
-package ru.storytellers.model.datasource.resourcestorage.storage
+package ru.storytellers.model.datasource.storage
 
 import android.content.Context
 import ru.storytellers.resources.R

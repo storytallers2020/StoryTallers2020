@@ -8,7 +8,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
+import ru.storytellers.model.datasource.storage.WordStorage
 
 @RunWith(AndroidJUnit4::class)
 class WordStorageTest {
