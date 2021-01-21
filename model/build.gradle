@@ -20,6 +20,10 @@ dependencies {
     //Kotlin
     implementation Kotlin.core
     implementation Kotlin.stdlib
+    implementation Kotlin.reflect
+
+    //Timber
+    implementation Timber.timber
 
     //Room
     implementation Room.runtime

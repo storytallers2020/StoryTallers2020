@@ -66,7 +66,7 @@ private val loadModules by lazy {
             teamCharacterModule,
             gameStartModule,
             amplitudeModule,
-            remoteModule,
+            remoteModule
         )
     )
 }
@@ -75,8 +75,6 @@ val libraryModule = module {
     viewModel { LibraryViewModel(get()) }
 }
 
-val libraryBookModule = module {
-    viewModel { LibraryBookViewModel(get()) }
 val libraryBookShowModule = module {
     viewModel { LibraryBookShowViewModel(get()) }
 }
