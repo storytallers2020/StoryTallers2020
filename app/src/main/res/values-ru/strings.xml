@@ -114,19 +114,9 @@
     <string name="msg_agreement_declined">Соглашения отклонены</string>
     <string name="msg_agreement_accepted">Соглашения приняты</string>
 
-    // Tutorial fragment
-    <string name="btn_tutorial">Как играть ?</string>
-    <string name="btn_ok">Спасибо, я все понял</string>
-    <string name="btn_skip">Пропустить</string>
-    <string name="stepText_1">Что бы начать играть нажмите Сочинить сказку</string>
-    <string name="stepText_2">Выберите уровень сложности и нажмите Далее</string>
-    <string name="stepText_3">Введите имя, затем выберите героя и нажмите Сохранить</string>
-    <string name="stepText_4">Чтобы продолжить нажмите Выбрать локацию</string>
-    <string name="stepText_5">Выберите локацию где будет начинаться ваша сказка</string>
-    <string name="stepText_6">Придумайте сказку, после нажмите на Завершить сказку</string>
-    <string name="stepText_7">Выберите обложку для своей сказки</string>
-    <string name="stepText_8">Придумайте название для своей сказки и нажмите Сохранить</string>
 
     // New strings... move them to the corresponding group above
+    // TitleAndSaveStory screen
+    <string name="text_error_length_title">От 2 до 70 символов</string>
 
 </resources>

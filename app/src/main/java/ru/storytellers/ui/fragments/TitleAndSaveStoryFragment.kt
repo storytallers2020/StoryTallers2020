@@ -25,14 +25,20 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
         override fun afterTextChanged(text: Editable) {
-            if (text.toString().length > 1) {
-                model.setTitleStory(text.toString())
-                btn_next.isEnabled = true
-                book_title.isErrorEnabled = false
+            val titleText = text.toString()
+            if (titleText.length in 2..69) {
+                model.setTitleStory(titleText)
+                initBtnNextAndBookTitle(true,null)
             } else {
-                btn_next.isEnabled = false
+                val textError= getString(R.string.text_error_length_title)
+                initBtnNextAndBookTitle(false,textError)
             }
         }
+    }
+    private fun initBtnNextAndBookTitle(enabled: Boolean, textError: String?){
+        btn_next.isEnabled = enabled
+        book_title.isErrorEnabled = !enabled
+        book_title.error = textError
     }
 
     private val focusListener = View.OnFocusChangeListener { v, hasFocus ->

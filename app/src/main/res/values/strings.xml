@@ -137,8 +137,11 @@
     <string name="msg_agreement_declined">GAME OVER</string>
     <string name="msg_agreement_accepted">Agreements accepted</string>
 
-
+    from 2 to 70 characters
     // New strings... move them to the corresponding group above
+
+    // TitleAndSaveStory screen
+    <string name="text_error_length_title">From 2 to 70 characters</string>
 
 
 </resources>
