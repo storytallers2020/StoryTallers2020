@@ -18,7 +18,7 @@ import ru.storytellers.viewmodels.LibraryBookShowViewModel
 const val DIALOG_TAG_DELETE = "book-delete-46bf-ab6"
 const val STORY_KEY = "Story"
 
-class LibraryBookReadingFragment() : BaseFragment<DataModel>() {
+class LibraryBookReadingFragment : BaseFragment<DataModel>() {
     override val model: LibraryBookShowViewModel by inject()
     override val layoutRes = R.layout.fragment_library_book_show
     private var textStory: String? = null
