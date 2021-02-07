@@ -1,6 +1,7 @@
 package ru.storytellers.ui.fragments
 
 import android.net.Uri
+import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_library_book_show.*
@@ -15,22 +16,28 @@ import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.LibraryBookShowViewModel
 
 const val DIALOG_TAG_DELETE = "book-delete-46bf-ab6"
+const val STORY_KEY = "Story"
 
-class LibraryBookReadingFragment(private var story: Story?) : BaseFragment<DataModel>() {
+class LibraryBookReadingFragment() : BaseFragment<DataModel>() {
     override val model: LibraryBookShowViewModel by inject()
     override val layoutRes = R.layout.fragment_library_book_show
     private var textStory: String? = null
     private var titleStory: String? = null
     private var uriLocationImage: Uri? = null
     private lateinit var sourceListSentences: List<SentenceOfTale>
+    private var story: Story? = null
 
     companion object {
-        fun newInstance(story: Story) = LibraryBookReadingFragment(story)
+        fun newInstance(story: Story) = LibraryBookReadingFragment().apply {
+            arguments = Bundle().apply { putParcelable(STORY_KEY, story) }
+        }
     }
 
     override fun init() {
         back_button.setOnClickListener { backToLibraryScreen() }
         btn_menu.setOnClickListener { showPopupMenu(it) }
+
+        story = arguments?.getParcelable(STORY_KEY)
     }
 
     override fun onStart() {
