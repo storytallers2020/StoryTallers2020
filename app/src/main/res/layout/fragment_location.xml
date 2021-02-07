@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_small"
-    android:layout_gravity="center_horizontal"
     tools:background="@drawable/ic_background_default">
 
     <ImageView
@@ -40,20 +40,20 @@
             android:id="@+id/difficulty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_level"
             android:alpha="0.5"
-            android:textSize="@dimen/text_small"
-            android:gravity="center"
             android:drawableBottom="@drawable/slider_level"
+            android:gravity="center"
+            android:text="@string/title_level"
             android:textColor="@color/yellow"
+            android:textSize="@dimen/text_small"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/slider_line_yellow_fade"
             android:contentDescription="@string/dots_line"
+            android:src="@drawable/slider_line_yellow_fade"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/hero"
             app:layout_constraintStart_toEndOf="@id/difficulty"
@@ -64,12 +64,12 @@
             android:id="@+id/hero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_character"
-            android:textSize="@dimen/text_small"
             android:alpha="0.5"
-            android:gravity="center"
-            android:textColor="@color/yellow"
             android:drawableBottom="@drawable/slider_team"
+            android:gravity="center"
+            android:text="@string/title_character"
+            android:textColor="@color/yellow"
+            android:textSize="@dimen/text_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -77,8 +77,8 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/slider_line_yellow_fade"
             android:contentDescription="@string/dots_line"
+            android:src="@drawable/slider_line_yellow_fade"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/location"
             app:layout_constraintStart_toEndOf="@id/hero"
@@ -89,11 +89,11 @@
             android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_location"
-            android:textSize="@dimen/text_small"
-            android:gravity="center"
             android:drawableBottom="@drawable/slider_location"
+            android:gravity="center"
+            android:text="@string/title_location"
             android:textColor="@color/yellow"
+            android:textSize="@dimen/text_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,12 +104,26 @@
         style="@style/SubHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_standard"
         android:text="@string/tale_begins"
         android:textColor="@color/white"
-        android:layout_marginTop="@dimen/margin_standard"
         android:textSize="@dimen/text_standard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/slider" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sub_header"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_covers"
@@ -118,24 +132,14 @@
         android:layout_marginVertical="@dimen/margin_small"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sub_header"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0"
         app:spanCount="2"
         tools:itemCount="7"
-        tools:listitem="@layout/item_location" />
-
-    <!--    <ImageView-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:scaleType="fitXY"-->
-    <!--        android:src="@drawable/ic_shadows"-->
-    <!--        android:contentDescription="@string/title_choosing_cover"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@id/rv_covers"-->
-    <!--        app:layout_constraintEnd_toEndOf="@id/rv_covers"-->
-    <!--        app:layout_constraintStart_toStartOf="@id/rv_covers"-->
-    <!--        app:layout_constraintTop_toTopOf="@id/rv_covers" />-->
+        tools:listitem="@layout/item_location"
+        tools:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

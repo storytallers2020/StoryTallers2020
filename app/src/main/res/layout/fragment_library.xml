@@ -39,13 +39,28 @@
         android:text="@string/subtitle_library"
         app:layout_constraintTop_toBottomOf="@id/screen_header" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sub_header"
+        tools:visibility="visible" />
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sub_header">
+        app:layout_constraintTop_toBottomOf="@id/sub_header"
+        tools:visibility="invisible">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_books"

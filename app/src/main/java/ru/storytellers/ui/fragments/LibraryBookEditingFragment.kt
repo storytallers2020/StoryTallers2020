@@ -1,8 +1,11 @@
 package ru.storytellers.ui.fragments
 
 import android.net.Uri
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_library_book_edit.*
+import kotlinx.android.synthetic.main.fragment_library_book_edit.book_title_text
 import kotlinx.android.synthetic.main.item_book_sentence.view.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -44,7 +47,7 @@ class LibraryBookEditingFragment(
     private val titleFocusListener = View.OnFocusChangeListener { v, hasFocus ->
         isFocusingEditText()
         if (!hasFocus) {
-            val newTitle = sub_header.text.toString()
+            val newTitle = book_title_text.text.toString()
             if (newTitle != story?.name) {
                 story?.name = newTitle
                 showSaveTitleDialog()
@@ -54,6 +57,19 @@ class LibraryBookEditingFragment(
             hideSoftKey(v)
         } else {
             toggleBackButton()
+        }
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun afterTextChanged(text: Editable) {
+            if (text.toString().length > 1) {
+                saveChangedTitle()
+                book_title_layout.isErrorEnabled = false
+            } else {
+                book_title_layout.error = context?.getString(R.string.enter_title)
+            }
         }
     }
 
@@ -84,9 +100,10 @@ class LibraryBookEditingFragment(
 
     override fun init() {
         back_button.setOnClickListener { backToLibraryBookScreen() }
-        with (sub_header) {
+        with (book_title_text) {
             setText(storyTitle)
             onFocusChangeListener = titleFocusListener
+            addTextChangedListener(textWatcher)
         }
         rv_sentences.adapter = sentencesAdapter.apply { setData(sentencesList) }
     }
@@ -122,7 +139,7 @@ class LibraryBookEditingFragment(
     }
 
     fun saveChangedTitle() {
-        story?.let {
+            story?.let {
             model.updateTitleStory(it.name, it.id)
             storyTitle = it.name
         }
@@ -130,7 +147,7 @@ class LibraryBookEditingFragment(
     }
 
     fun restoreTitle() {
-        sub_header?.setText(storyTitle)
+        book_title_text?.setText(storyTitle)
         storyTitle?.let { story?.name = it}
         toggleBackButton()
     }
