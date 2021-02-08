@@ -15,7 +15,7 @@ import ru.storytellers.viewmodels.TitleAndSaveStoryViewModel
 class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
     override val model: TitleAndSaveStoryViewModel by inject()
     override val layoutRes = R.layout.fragment_choosing_title
-    private lateinit var adMobFragment : AdMobFragment
+    private lateinit var adMobFragment: AdMobFragment
 
     companion object {
         fun newInstance() = TitleAndSaveStoryFragment()
@@ -25,20 +25,14 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
         override fun afterTextChanged(text: Editable) {
-            val titleText = text.toString()
-            if (titleText.length in 2..69) {
-                model.setTitleStory(titleText)
-                initBtnNextAndBookTitle(true,null)
+            if (text.toString().length > 1) {
+                model.setTitleStory(text.toString())
+                btn_next.isEnabled = true
+                book_title.isErrorEnabled = false
             } else {
-                val textError= getString(R.string.text_error_length_title)
-                initBtnNextAndBookTitle(false,textError)
+                btn_next.isEnabled = false
             }
         }
-    }
-    private fun initBtnNextAndBookTitle(enabled: Boolean, textError: String?){
-        btn_next.isEnabled = enabled
-        book_title.isErrorEnabled = !enabled
-        book_title.error = textError
     }
 
     private val focusListener = View.OnFocusChangeListener { v, hasFocus ->
@@ -90,6 +84,7 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
             }
         })
     }
+
     private fun saveStory() {
         model.saveStory()
     }

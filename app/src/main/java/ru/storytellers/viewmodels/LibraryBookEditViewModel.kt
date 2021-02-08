@@ -16,12 +16,15 @@ class LibraryBookEditViewModel(
 
     private val updateTitleStoryLiveData = MutableLiveData<Int>()
     private val onErrorUpdateTitleStoryLiveData = MutableLiveData<Throwable>()
+    private val titleAcceptableLiveData = MutableLiveData<Boolean>()
     private val editSentenceLiveData = MutableLiveData<Boolean>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 
     fun subscribeOnUpdateTitleStory(): LiveData<Int> {
         return updateTitleStoryLiveData
     }
+    fun subscribeOnTitleAcceptable() = titleAcceptableLiveData
+
     fun subscribeOnEditSentence(): LiveData<Boolean> {
         return editSentenceLiveData
     }
@@ -45,12 +48,17 @@ class LibraryBookEditViewModel(
 
 
     fun updateTitleStory(titleStory: String, storyId: Long) {
-        storyRepository.updateTitleStory(titleStory, storyId)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ numberUpdatedRecords ->
-                updateTitleStoryLiveData.value = numberUpdatedRecords
-            }, {error ->
-                onErrorUpdateTitleStoryLiveData.value = error
-            })
+        if (titleStory.trim().length > 1) {
+            storyRepository.updateTitleStory(titleStory, storyId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ numberUpdatedRecords ->
+                    updateTitleStoryLiveData.value = numberUpdatedRecords
+                }, {error ->
+                    onErrorUpdateTitleStoryLiveData.value = error
+                })
+            titleAcceptableLiveData.value = true
+        } else {
+            titleAcceptableLiveData.value = false
+        }
     }
 }

@@ -65,7 +65,6 @@ class LibraryBookEditingFragment(
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
         override fun afterTextChanged(text: Editable) {
             if (text.toString().length > 1) {
-                saveChangedTitle()
                 book_title_layout.isErrorEnabled = false
             } else {
                 book_title_layout.error = context?.getString(R.string.enter_title)
@@ -127,6 +126,11 @@ class LibraryBookEditingFragment(
                 Timber.i("Title updated")
             } else {
                 Timber.i("Title update failed")
+            }
+        })
+        model.subscribeOnTitleAcceptable().observe(viewLifecycleOwner, {
+            if (!it) {
+                restoreTitle()
             }
         })
     }
