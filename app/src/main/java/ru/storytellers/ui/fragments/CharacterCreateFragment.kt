@@ -85,8 +85,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
                 if (isEnabled) {
                     enabledProgressBar(progress_bar,rv_characters)
                 } else disabledProgressBar(progress_bar,rv_characters)
-            }
-        )
+            })
 
         model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, {
             when (it) {
