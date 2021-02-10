@@ -2,7 +2,6 @@ package ru.storytellers.ui.fragments
 
 import android.content.Context
 import android.view.View
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_character_create.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -68,20 +67,28 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
     override fun onResume() {
         super.onResume()
-        model.subscribeOnError().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnError().observe(viewLifecycleOwner, {
             Timber.e(it.error)
         })
 
-        model.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnSuccess().observe(viewLifecycleOwner, {
             setDataCharacterAdapter(it)
         })
         model.subscribeOnCharacterSelected()
             .observe(
                 viewLifecycleOwner,
-                Observer { isCharacterSelected = it }
+                { isCharacterSelected = it }
             )
 
-        model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnProgressEnableLiveData()
+            .observe(viewLifecycleOwner, { isEnabled ->
+                if (isEnabled) {
+                    enabledProgressBar(progress_bar,rv_characters)
+                } else disabledProgressBar(progress_bar,rv_characters)
+            }
+        )
+
+        model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, {
             when (it) {
                 1 -> {
                     setError(getString(R.string.err_short_name))
