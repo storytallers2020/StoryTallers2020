@@ -58,12 +58,15 @@ class LibraryViewModel(
     }
 
     fun getAllStory() {
+        setTrueInProgressEnableLiveData()
         storyRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 onSuccessLiveData.value = DataModel.Success(it)
+                setFalseInProgressEnableLiveData()
             }, {
                 onErrorLiveData.value = DataModel.Error(it)
+                setFalseInProgressEnableLiveData()
             })
     }
 
