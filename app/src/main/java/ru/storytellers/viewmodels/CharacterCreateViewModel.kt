@@ -70,7 +70,7 @@ class CharacterCreateViewModel(
                 setFalseInProgressEnableLiveData()
             })
     }
-    
+
     private fun onPlayerAddedStat(player: Player) {
         val prop = listOf(
             Pair(StatHelper.playerName, player.name),
