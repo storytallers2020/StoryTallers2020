@@ -1,7 +1,10 @@
 package ru.storytellers.ui.fragments
 
 import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.fragment_character_create.*
 import kotlinx.android.synthetic.main.fragment_library.*
+import kotlinx.android.synthetic.main.fragment_library.back_button_character
+import kotlinx.android.synthetic.main.fragment_library.progress_bar
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -78,6 +81,14 @@ class LibraryFragment : BaseFragment<DataModel>() {
                 renderData(list)
             }
         })
+
+        model.subscribeOnProgressEnableLiveData()
+            .observe(viewLifecycleOwner, { isEnabled ->
+                if (isEnabled) {
+                    enabledProgressBar(progress_bar,rv_books)
+                } else disabledProgressBar(progress_bar,rv_books)
+            }
+            )
 
         model.subscribeOnError().observe(viewLifecycleOwner, {
             activity?.let { context ->
