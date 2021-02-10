@@ -20,12 +20,15 @@ class SelectCoverViewModel(
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 
     fun getAllCover() {
+        setTrueInProgressEnableLiveData()
         coverRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 onSuccessLiveData.value = DataModel.Success(it)
+                setFalseInProgressEnableLiveData()
             }, {
                 onErrorLiveData.value = DataModel.Error(it)
+                setFalseInProgressEnableLiveData()
             })
     }
 
