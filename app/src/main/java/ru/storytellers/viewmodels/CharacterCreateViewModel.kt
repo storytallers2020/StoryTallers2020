@@ -59,15 +59,18 @@ class CharacterCreateViewModel(
     private fun getPlayer() = playerCreator.getPlayer()
 
     fun getAllCharacters() {
+        setTrueInProgressEnableLiveData()
         characterRepository.getAll()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
                 onSuccessLiveData.value = DataModel.Success(it)
+                setFalseInProgressEnableLiveData()
             }, {
                 onErrorLiveData.value = DataModel.Error(it)
+                setFalseInProgressEnableLiveData()
             })
     }
-
+    
     private fun onPlayerAddedStat(player: Player) {
         val prop = listOf(
             Pair(StatHelper.playerName, player.name),
