@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -41,6 +43,16 @@ abstract class BaseFragment<T : DataModel> : Fragment(), BackButtonListener {
 
     private fun setDefaultBackground() {
         loadImage(R.drawable.ic_background_default, backgroundView)
+    }
+
+    protected fun enabledProgressBar(progressBar : ProgressBar, recyclerView: RecyclerView){
+        recyclerView.visibility=View.GONE
+        progressBar.visibility=View.VISIBLE
+    }
+
+    protected fun disabledProgressBar(progressBar : ProgressBar, recyclerView: RecyclerView){
+        recyclerView.visibility=View.VISIBLE
+        progressBar.visibility=View.GONE
     }
 
     protected abstract fun init()
