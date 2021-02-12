@@ -5,26 +5,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.DataModel
-import ru.storytellers.model.entity.Character
 import ru.storytellers.utils.StatHelper
 
 abstract class BaseViewModel<T : DataModel>(
-): ViewModel() {
-    protected  val onProgressEnableLiveData = MutableLiveData<Boolean>()
+) : ViewModel() {
+    private val loadingStateLiveData = MutableLiveData<Boolean>()
     fun onBackClicked(fragmentName: String) {
         StoryHeroesApp.instance
             .stat.riseEvent("$fragmentName : ${StatHelper.buttonBackClicked}")
     }
 
-    protected fun setFalseInProgressEnableLiveData(){
-        onProgressEnableLiveData.value=false
+    protected fun setLoadingStateLiveData(isLoading: Boolean) {
+        loadingStateLiveData.value = isLoading
     }
 
-    protected fun setTrueInProgressEnableLiveData(){
-        onProgressEnableLiveData.value=true
-    }
-
-     fun subscribeOnProgressEnableLiveData(): LiveData<Boolean> {
-        return onProgressEnableLiveData
+    fun subscribeOnProgressEnableLiveData(): LiveData<Boolean> {
+        return loadingStateLiveData
     }
 }

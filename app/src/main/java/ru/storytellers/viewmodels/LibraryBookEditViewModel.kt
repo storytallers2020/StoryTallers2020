@@ -12,7 +12,7 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 class LibraryBookEditViewModel(
     private val storyRepository: IStoryRepository,
     private val sentenceOfTaleRepository: ISentenceOfTaleRepository
-): BaseViewModel<DataModel>() {
+) : BaseViewModel<DataModel>() {
 
     private val updateTitleStoryLiveData = MutableLiveData<Int>()
     private val onErrorUpdateTitleStoryLiveData = MutableLiveData<Throwable>()
@@ -23,6 +23,7 @@ class LibraryBookEditViewModel(
     fun subscribeOnUpdateTitleStory(): LiveData<Int> {
         return updateTitleStoryLiveData
     }
+
     fun subscribeOnTitleAcceptable() = titleAcceptableLiveData
 
     fun subscribeOnEditSentence(): LiveData<Boolean> {
@@ -53,7 +54,7 @@ class LibraryBookEditViewModel(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ numberUpdatedRecords ->
                     updateTitleStoryLiveData.value = numberUpdatedRecords
-                }, {error ->
+                }, { error ->
                     onErrorUpdateTitleStoryLiveData.value = error
                 })
             titleAcceptableLiveData.value = true

@@ -53,7 +53,6 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
     override fun initViewModel() {
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
-        //screen_header.post { View.FOCUS_DOWN }
     }
 
     override fun onStart() {
@@ -83,8 +82,10 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         model.subscribeOnProgressEnableLiveData()
             .observe(viewLifecycleOwner, { isEnabled ->
                 if (isEnabled) {
-                    enabledProgressBar(progress_bar,rv_characters)
-                } else disabledProgressBar(progress_bar,rv_characters)
+                    showProgressBar(progress_bar, rv_characters)
+                } else {
+                    hideProgressBar(progress_bar, rv_characters)
+                }
             })
 
         model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, {
@@ -97,7 +98,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
                 }
                 else -> {
                     enter_name_et_layout1.error = null
-                    isNameEntered=true
+                    isNameEntered = true
                 }
             }
         })
@@ -105,7 +106,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
 
     private fun setError(nameError: String) {
-        isNameEntered=false
+        isNameEntered = false
         enter_name_et_layout1.error = nameError
     }
 

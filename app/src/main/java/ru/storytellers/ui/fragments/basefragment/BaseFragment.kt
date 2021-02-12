@@ -37,7 +37,7 @@ abstract class BaseFragment<T : DataModel> : Fragment(), BackButtonListener {
         setDefaultBackground()
     }
 
-    fun setBackground(uri: Uri) {
+    protected fun setBackground(uri: Uri) {
         loadImage(uri, backgroundView)
     }
 
@@ -45,14 +45,14 @@ abstract class BaseFragment<T : DataModel> : Fragment(), BackButtonListener {
         loadImage(R.drawable.ic_background_default, backgroundView)
     }
 
-    protected fun enabledProgressBar(progressBar : ProgressBar, recyclerView: RecyclerView){
-        recyclerView.visibility=View.GONE
-        progressBar.visibility=View.VISIBLE
+    protected fun showProgressBar(progressBar: ProgressBar, recyclerView: RecyclerView) {
+        recyclerView.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
     }
 
-    protected fun disabledProgressBar(progressBar : ProgressBar, recyclerView: RecyclerView){
-        recyclerView.visibility=View.VISIBLE
-        progressBar.visibility=View.GONE
+    protected fun hideProgressBar(progressBar: ProgressBar, recyclerView: RecyclerView) {
+        recyclerView.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
     }
 
     protected abstract fun init()

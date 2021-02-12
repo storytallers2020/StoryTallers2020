@@ -65,8 +65,8 @@ class SelectCoverFragment : BaseFragment<DataModel>() {
         viewModel.subscribeOnProgressEnableLiveData()
             .observe(viewLifecycleOwner, { isEnabled ->
                 if (isEnabled) {
-                    enabledProgressBar(progress_bar,rv_covers)
-                } else disabledProgressBar(progress_bar,rv_covers)
+                    showProgressBar(progress_bar,rv_covers)
+                } else hideProgressBar(progress_bar,rv_covers)
             })
     }
 

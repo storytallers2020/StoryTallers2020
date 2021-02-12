@@ -99,7 +99,7 @@ class LibraryBookEditingFragment(
 
     override fun init() {
         back_button.setOnClickListener { backToLibraryBookScreen() }
-        with (book_title_text) {
+        with(book_title_text) {
             setText(storyTitle)
             onFocusChangeListener = titleFocusListener
             addTextChangedListener(textWatcher)
@@ -143,7 +143,7 @@ class LibraryBookEditingFragment(
     }
 
     fun saveChangedTitle() {
-            story?.let {
+        story?.let {
             model.updateTitleStory(it.name, it.id)
             storyTitle = it.name
         }
@@ -152,7 +152,7 @@ class LibraryBookEditingFragment(
 
     fun restoreTitle() {
         book_title_text?.setText(storyTitle)
-        storyTitle?.let { story?.name = it}
+        storyTitle?.let { story?.name = it }
         toggleBackButton()
     }
 
@@ -177,7 +177,7 @@ class LibraryBookEditingFragment(
         toggleBackButton()
     }
 
-    private fun isFocusingEditText() : Boolean {
+    private fun isFocusingEditText(): Boolean {
         val focusedViewName = view?.findFocus()?.javaClass?.simpleName ?: null.toString()
         return focusedViewName.contains(getString(R.string.edit_text_view_name))
     }

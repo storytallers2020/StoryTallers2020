@@ -15,20 +15,20 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class SelectCoverViewModel(
     private val coverRepository: ICoverRepository
-): BaseViewModel<DataModel>() {
+) : BaseViewModel<DataModel>() {
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Cover>>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 
     fun getAllCover() {
-        setTrueInProgressEnableLiveData()
+        setLoadingStateLiveData(true)
         coverRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 onSuccessLiveData.value = DataModel.Success(it)
-                setFalseInProgressEnableLiveData()
+                setLoadingStateLiveData(false)
             }, {
                 onErrorLiveData.value = DataModel.Error(it)
-                setFalseInProgressEnableLiveData()
+                setLoadingStateLiveData(false)
             })
     }
 
@@ -40,10 +40,11 @@ class SelectCoverViewModel(
         return onErrorLiveData
     }
 
-    fun setCoverStory(cover: Cover){
+    fun setCoverStory(cover: Cover) {
         StoryHeroesApp.instance.gameStorage.setCoverStory(cover)
     }
-    fun coverStatistics(cover: Cover){
+
+    fun coverStatistics(cover: Cover) {
         val prop = listOf(
             StatHelper.coverName to cover.name,
             StatHelper.coverId to cover.id.toString(),
