@@ -83,8 +83,10 @@ class LibraryFragment : BaseFragment<DataModel>() {
         model.subscribeOnProgressEnableLiveData()
             .observe(viewLifecycleOwner, { isEnabled ->
                 if (isEnabled) {
-                    showProgressBar(progress_bar,rv_books)
-                } else hideProgressBar(progress_bar,rv_books)
+                    showProgressBar(progress_bar, rv_books)
+                } else {
+                    hideProgressBar(progress_bar, rv_books)
+                }
             }
             )
 
