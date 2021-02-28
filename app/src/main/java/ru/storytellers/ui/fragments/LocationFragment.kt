@@ -1,8 +1,6 @@
 package ru.storytellers.ui.fragments
 
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_location.*
-import kotlinx.android.synthetic.main.fragment_location.progress_bar
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -34,7 +32,7 @@ class LocationFragment : BaseFragment<DataModel>() {
     }
 
     override fun init() {
-        rv_covers.adapter = locationAdapter
+        rv_locations.adapter = locationAdapter
         back_from_location.setOnClickListener {
             backToTeamScreen()
         }
@@ -46,11 +44,11 @@ class LocationFragment : BaseFragment<DataModel>() {
     }
 
     override fun initViewModel() {
-        model.apply {
+        model.run {
             getAllLocations()
             handlerOnSuccessResult(this)
+            handlerOnLoadingResult(this)
             handlerOnErrorResult(this)
-            handlerEnabledProgressBar(this)
         }
     }
 
@@ -60,26 +58,24 @@ class LocationFragment : BaseFragment<DataModel>() {
         return true
     }
 
-    private fun handlerEnabledProgressBar(viewModel: LocationViewModel) {
-        viewModel.subscribeOnProgressEnableLiveData()
-            .observe(viewLifecycleOwner, { isEnabled ->
-                if (isEnabled) {
-                    showProgressBar(progress_bar, rv_covers)
-                } else {
-                    hideProgressBar(progress_bar, rv_covers)
-                }
-            })
-    }
-
 
     private fun handlerOnSuccessResult(viewModel: LocationViewModel) {
-        viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
+        viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, {
             setLocationAdapter(it)
         })
     }
 
+    private fun handlerOnLoadingResult(viewModel: LocationViewModel) {
+        viewModel.subscribeOnLoading().observe(viewLifecycleOwner, {
+            when (it.progress ?: 0) {
+                in 1..99 -> showProgressBar(progress_bar, rv_locations)
+                else -> hideProgressBar(progress_bar, rv_locations)
+            }
+        })
+    }
+
     private fun handlerOnErrorResult(viewModel: LocationViewModel) {
-        viewModel.subscribeOnError().observe(viewLifecycleOwner, Observer {
+        viewModel.subscribeOnError().observe(viewLifecycleOwner, {
             Timber.e(it.error)
         })
     }

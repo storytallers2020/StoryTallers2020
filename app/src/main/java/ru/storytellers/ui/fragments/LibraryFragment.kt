@@ -80,15 +80,12 @@ class LibraryFragment : BaseFragment<DataModel>() {
             }
         })
 
-        model.subscribeOnProgressEnableLiveData()
-            .observe(viewLifecycleOwner, { isEnabled ->
-                if (isEnabled) {
-                    showProgressBar(progress_bar, rv_books)
-                } else {
-                    hideProgressBar(progress_bar, rv_books)
-                }
+        model.subscribeOnLoading().observe(viewLifecycleOwner, {
+            when (it.progress ?: 0) {
+                in 1..99 -> showProgressBar(progress_bar, rv_books)
+                else -> hideProgressBar(progress_bar, rv_books)
             }
-            )
+        })
 
         model.subscribeOnError().observe(viewLifecycleOwner, {
             activity?.let { context ->

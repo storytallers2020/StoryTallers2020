@@ -16,23 +16,28 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 class LocationViewModel(private val locationRepository: ILocationRepository) :
     BaseViewModel<DataModel>() {
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Location>>()
+    private val onLoadingLiveData = MutableLiveData<DataModel.Loading>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 
     fun getAllLocations() {
-        setLoadingStateLiveData(true)
+        onLoadingLiveData.value = DataModel.Loading(1)
         locationRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 onSuccessLiveData.value = DataModel.Success(it)
-                setLoadingStateLiveData(false)
+                onLoadingLiveData.value = DataModel.Loading(100)
             }, {
                 onErrorLiveData.value = DataModel.Error(it)
-                setLoadingStateLiveData(false)
+                onLoadingLiveData.value = DataModel.Loading(-1)
             })
     }
 
     fun subscribeOnSuccess(): LiveData<DataModel.Success<Location>> {
         return onSuccessLiveData
+    }
+
+    fun subscribeOnLoading(): LiveData<DataModel.Loading> {
+        return onLoadingLiveData
     }
 
     fun subscribeOnError(): LiveData<DataModel.Error> {

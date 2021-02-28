@@ -3,6 +3,9 @@ package ru.storytellers.ui.fragments
 import android.content.Context
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_character_create.*
+import kotlinx.android.synthetic.main.fragment_character_create.back_button_character
+import kotlinx.android.synthetic.main.fragment_character_create.progress_bar
+import kotlinx.android.synthetic.main.fragment_library.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -79,14 +82,12 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
                 { isCharacterSelected = it }
             )
 
-        model.subscribeOnProgressEnableLiveData()
-            .observe(viewLifecycleOwner, { isEnabled ->
-                if (isEnabled) {
-                    showProgressBar(progress_bar, rv_characters)
-                } else {
-                    hideProgressBar(progress_bar, rv_characters)
-                }
-            })
+        model.subscribeOnLoading().observe(viewLifecycleOwner, {
+            when (it.progress ?: 0) {
+                in 1..99 -> showProgressBar(progress_bar, rv_characters)
+                else -> hideProgressBar(progress_bar, rv_characters)
+            }
+        })
 
         model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, {
             when (it) {

@@ -28,12 +28,17 @@ class CharacterCreateViewModel(
     private val onStatusCharacterSelectedLiveData = MutableLiveData<Boolean>()
 
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Character>>()
+    private val onLoadingLiveData = MutableLiveData<DataModel.Loading>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 
     private var listPlayers: MutableList<Player> = storage.getPlayers()
 
     fun subscribeOnSuccess(): LiveData<DataModel.Success<Character>> {
         return onSuccessLiveData
+    }
+
+    fun subscribeOnLoading(): LiveData<DataModel.Loading> {
+        return onLoadingLiveData
     }
 
     fun subscribeOnCharacterSelected(): LiveData<Boolean> {
@@ -59,15 +64,15 @@ class CharacterCreateViewModel(
     private fun getPlayer() = playerCreator.getPlayer()
 
     fun getAllCharacters() {
-        setLoadingStateLiveData(true)
+        onLoadingLiveData.value = DataModel.Loading(1)
         characterRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 onSuccessLiveData.value = DataModel.Success(it)
-                setLoadingStateLiveData(false)
+                onLoadingLiveData.value = DataModel.Loading(100)
             }, {
                 onErrorLiveData.value = DataModel.Error(it)
-                setLoadingStateLiveData(false)
+                onLoadingLiveData.value = DataModel.Loading(-1)
             })
     }
 

@@ -17,23 +17,28 @@ class SelectCoverViewModel(
     private val coverRepository: ICoverRepository
 ) : BaseViewModel<DataModel>() {
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Cover>>()
+    private val onLoadingLiveData = MutableLiveData<DataModel.Loading>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 
     fun getAllCover() {
-        setLoadingStateLiveData(true)
+        onLoadingLiveData.value = DataModel.Loading(1)
         coverRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 onSuccessLiveData.value = DataModel.Success(it)
-                setLoadingStateLiveData(false)
+                onLoadingLiveData.value = DataModel.Loading(100)
             }, {
                 onErrorLiveData.value = DataModel.Error(it)
-                setLoadingStateLiveData(false)
+                onLoadingLiveData.value = DataModel.Loading(-1)
             })
     }
 
     fun subscribeOnSuccess(): LiveData<DataModel.Success<Cover>> {
         return onSuccessLiveData
+    }
+
+    fun subscribeOnLoading(): LiveData<DataModel.Loading> {
+        return onLoadingLiveData
     }
 
     fun subscribeOnError(): LiveData<DataModel.Error> {
