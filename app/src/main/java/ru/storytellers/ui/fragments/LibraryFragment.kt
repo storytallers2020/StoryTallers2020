@@ -119,6 +119,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
 
     fun deleteStory() {
         model.deleteStory()
+        model.getAllStory()
     }
 
     private fun navigateToLibraryBookScreen(story: Story) {
