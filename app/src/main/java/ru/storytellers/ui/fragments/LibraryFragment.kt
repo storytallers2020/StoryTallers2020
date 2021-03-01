@@ -1,6 +1,5 @@
 package ru.storytellers.ui.fragments
 
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_library.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -26,11 +25,11 @@ class LibraryFragment : BaseFragment<DataModel>() {
 
     private val libraryAdapter: LibraryAdapter by lazy {
         LibraryAdapter(
-            itemClickListener,
-            buttonMenuClickListener,
-            buttonShareClickListener,
-            buttonCopyClickListener,
-            buttonDeleteClickListener
+                itemClickListener,
+                buttonMenuClickListener,
+                buttonShareClickListener,
+                buttonCopyClickListener,
+                buttonDeleteClickListener
         )
     }
     private val itemClickListener = { story: Story ->
@@ -78,6 +77,15 @@ class LibraryFragment : BaseFragment<DataModel>() {
                 renderData(list)
             }
         })
+
+        model.subscribeOnProgressEnableLiveData()
+                .observe(viewLifecycleOwner, { loadingState ->
+                    if (loadingState.progress == 100) {
+                        showProgressBar(progress_bar, rv_books)
+                    } else {
+                        hideProgressBar(progress_bar, rv_books)
+                    }
+                })
 
         model.subscribeOnError().observe(viewLifecycleOwner, {
             activity?.let { context ->

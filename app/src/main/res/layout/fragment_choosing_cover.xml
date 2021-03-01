@@ -30,11 +30,25 @@
     <TextView
         android:id="@+id/sub_header"
         style="@style/SubHeader"
-        android:layout_marginVertical="@dimen/margin_standard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/margin_standard"
         android:text="@string/choosing_cover_choose"
         app:layout_constraintTop_toBottomOf="@id/screen_header" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sub_header"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_covers"
@@ -43,21 +57,11 @@
         android:layout_marginTop="@dimen/margin_small"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/sub_header"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sub_header"
         app:spanCount="2"
         tools:itemCount="9"
-        tools:listitem="@layout/item_image_cover" />
-
-    <!--    <ImageView-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:scaleType="fitXY"-->
-    <!--        android:src="@drawable/ic_shadows"-->
-    <!--        android:contentDescription="@string/title_choosing_cover"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@id/rv_covers"-->
-    <!--        app:layout_constraintEnd_toEndOf="@id/rv_covers"-->
-    <!--        app:layout_constraintStart_toStartOf="@id/rv_covers"-->
-    <!--        app:layout_constraintTop_toTopOf="@id/rv_covers" />-->
+        tools:listitem="@layout/item_image_cover"
+        tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

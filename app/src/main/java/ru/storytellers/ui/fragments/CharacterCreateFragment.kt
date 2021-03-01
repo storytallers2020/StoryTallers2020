@@ -2,7 +2,6 @@ package ru.storytellers.ui.fragments
 
 import android.content.Context
 import android.view.View
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_character_create.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -24,7 +23,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_character_create
     private val characterAdapter: CharacterCreateAdapter by lazy {
         CharacterCreateAdapter(
-            onItemClickListener
+                onItemClickListener
         )
     }
 
@@ -54,34 +53,37 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
     override fun initViewModel() {
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
-        //screen_header.post { View.FOCUS_DOWN }
     }
 
     override fun onStart() {
         super.onStart()
-        enter_name_field_et.apply {
-            setText("")
-            onFocusChangeListener = focusListener
-        }
+        enter_name_field_et.onFocusChangeListener = focusListener
         model.getAllCharacters()
     }
 
     override fun onResume() {
         super.onResume()
-        model.subscribeOnError().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnError().observe(viewLifecycleOwner, {
             Timber.e(it.error)
         })
 
-        model.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnSuccess().observe(viewLifecycleOwner, {
             setDataCharacterAdapter(it)
         })
-        model.subscribeOnCharacterSelected()
-            .observe(
-                viewLifecycleOwner,
-                Observer { isCharacterSelected = it }
-            )
+        model.subscribeOnCharacterSelected().observe(viewLifecycleOwner,
+                { isCharacterSelected = it }
+        )
 
-        model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnProgressEnableLiveData()
+                .observe(viewLifecycleOwner, { loadingState ->
+                    if (loadingState.progress == 100) {
+                        showProgressBar(progress_bar, rv_characters)
+                    } else {
+                        hideProgressBar(progress_bar, rv_characters)
+                    }
+                })
+
+        model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, {
             when (it) {
                 1 -> {
                     setError(getString(R.string.err_short_name))
@@ -91,7 +93,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
                 }
                 else -> {
                     enter_name_et_layout1.error = null
-                    isNameEntered=true
+                    isNameEntered = true
                 }
             }
         })
@@ -99,7 +101,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
 
     private fun setError(nameError: String) {
-        isNameEntered=false
+        isNameEntered = false
         enter_name_et_layout1.error = nameError
     }
 
@@ -130,8 +132,8 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
             isNameEntered = false
             router.navigateTo(Screens.TeamCharacterScreen())
         } else if (!isCharacterSelected) toastShowLong(
-            context,
-            getString(R.string.err_character_not_selected)
+                context,
+                getString(R.string.err_character_not_selected)
         )
     }
 }

@@ -19,12 +19,15 @@ class LocationViewModel(private val locationRepository: ILocationRepository) :
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
 
     fun getAllLocations() {
+        loadingStateLiveData.value=DataModel.Loading(100)
         locationRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 onSuccessLiveData.value = DataModel.Success(it)
+                loadingStateLiveData.value=DataModel.Loading(50)
             }, {
                 onErrorLiveData.value = DataModel.Error(it)
+                loadingStateLiveData.value=DataModel.Loading(1)
             })
     }
 

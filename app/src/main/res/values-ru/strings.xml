@@ -80,8 +80,9 @@
     <string name="choosing_cover_title">Придумайте название сказки</string>
     <string name="enter_title">Введите заголовок</string>
 
-    //Editing screen
+    // Editing screen
     <string name="title_edit">Редактирование сказки</string>
+    <string name="text_error_length_title">От 2 до 70 символов</string>
 
     // Library screens
     <string name="title_library">Библиотека</string>
@@ -114,9 +115,6 @@
     <string name="msg_agreement_declined">Соглашения отклонены</string>
     <string name="msg_agreement_accepted">Соглашения приняты</string>
 
-
     // New strings... move them to the corresponding group above
-    // TitleAndSaveStory screen
-    <string name="text_error_length_title">От 2 до 70 символов</string>
 
 </resources>
