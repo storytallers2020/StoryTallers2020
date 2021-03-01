@@ -60,7 +60,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         enter_name_field_et.onFocusChangeListener = focusListener
         model.getAllCharacters()
     }
-    
+
     override fun onResume() {
         super.onResume()
         model.subscribeOnError().observe(viewLifecycleOwner, {
