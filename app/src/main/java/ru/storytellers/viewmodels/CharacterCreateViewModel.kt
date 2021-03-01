@@ -59,15 +59,15 @@ class CharacterCreateViewModel(
     private fun getPlayer() = playerCreator.getPlayer()
 
     fun getAllCharacters() {
-        setLoadingStateLiveData(true)
+        loadingStateLiveData.value=DataModel.Loading(100)
         characterRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 onSuccessLiveData.value = DataModel.Success(it)
-                setLoadingStateLiveData(false)
+                loadingStateLiveData.value=DataModel.Loading(50)
             }, {
                 onErrorLiveData.value = DataModel.Error(it)
-                setLoadingStateLiveData(false)
+                loadingStateLiveData.value=DataModel.Loading(1)
             })
     }
 
