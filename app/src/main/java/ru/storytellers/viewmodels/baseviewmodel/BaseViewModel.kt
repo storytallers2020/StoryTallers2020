@@ -9,17 +9,13 @@ import ru.storytellers.utils.StatHelper
 
 abstract class BaseViewModel<T : DataModel>(
 ) : ViewModel() {
-    private val loadingStateLiveData = MutableLiveData<Boolean>()
+    protected val loadingStateLiveData = MutableLiveData<DataModel.Loading>()
     fun onBackClicked(fragmentName: String) {
         StoryHeroesApp.instance
             .stat.riseEvent("$fragmentName : ${StatHelper.buttonBackClicked}")
     }
 
-    protected fun setLoadingStateLiveData(isLoading: Boolean) {
-        loadingStateLiveData.value = isLoading
-    }
-
-    fun subscribeOnProgressEnableLiveData(): LiveData<Boolean> {
+    fun subscribeOnProgressEnableLiveData(): LiveData<DataModel.Loading> {
         return loadingStateLiveData
     }
 }
