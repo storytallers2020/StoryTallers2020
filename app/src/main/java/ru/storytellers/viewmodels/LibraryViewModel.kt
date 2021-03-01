@@ -58,15 +58,15 @@ class LibraryViewModel(
     }
 
     fun getAllStory() {
-        setLoadingStateLiveData(true)
+        loadingStateLiveData.value=DataModel.Loading(100)
         storyRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 onSuccessLiveData.value = DataModel.Success(it)
-                setLoadingStateLiveData(false)
+                loadingStateLiveData.value=DataModel.Loading(50)
             }, {
                 onErrorLiveData.value = DataModel.Error(it)
-                setLoadingStateLiveData(false)
+                loadingStateLiveData.value=DataModel.Loading(1)
             })
     }
 
