@@ -62,8 +62,8 @@ class LocationFragment : BaseFragment<DataModel>() {
 
     private fun handlerEnabledProgressBar(viewModel: LocationViewModel) {
         viewModel.subscribeOnProgressEnableLiveData()
-            .observe(viewLifecycleOwner, { isEnabled ->
-                if (isEnabled) {
+            .observe(viewLifecycleOwner, { loadingState ->
+                if (loadingState.progress==100) {
                     showProgressBar(progress_bar, rv_covers)
                 } else {
                     hideProgressBar(progress_bar, rv_covers)
