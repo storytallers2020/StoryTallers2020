@@ -23,7 +23,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_character_create
     private val characterAdapter: CharacterCreateAdapter by lazy {
         CharacterCreateAdapter(
-            onItemClickListener
+                onItemClickListener
         )
     }
 
@@ -57,13 +57,10 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
     override fun onStart() {
         super.onStart()
-        enter_name_field_et.apply {
-            setText("")
-            onFocusChangeListener = focusListener
-        }
+        enter_name_field_et.onFocusChangeListener = focusListener
         model.getAllCharacters()
     }
-
+    
     override fun onResume() {
         super.onResume()
         model.subscribeOnError().observe(viewLifecycleOwner, {
@@ -73,20 +70,18 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
         model.subscribeOnSuccess().observe(viewLifecycleOwner, {
             setDataCharacterAdapter(it)
         })
-        model.subscribeOnCharacterSelected()
-            .observe(
-                viewLifecycleOwner,
+        model.subscribeOnCharacterSelected().observe(viewLifecycleOwner,
                 { isCharacterSelected = it }
-            )
+        )
 
         model.subscribeOnProgressEnableLiveData()
-            .observe(viewLifecycleOwner, { isEnabled ->
-                if (isEnabled) {
-                    showProgressBar(progress_bar, rv_characters)
-                } else {
-                    hideProgressBar(progress_bar, rv_characters)
-                }
-            })
+                .observe(viewLifecycleOwner, { loadingState ->
+                    if (loadingState.progress == 100) {
+                        showProgressBar(progress_bar, rv_characters)
+                    } else {
+                        hideProgressBar(progress_bar, rv_characters)
+                    }
+                })
 
         model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, {
             when (it) {
@@ -137,8 +132,8 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
             isNameEntered = false
             router.navigateTo(Screens.TeamCharacterScreen())
         } else if (!isCharacterSelected) toastShowLong(
-            context,
-            getString(R.string.err_character_not_selected)
+                context,
+                getString(R.string.err_character_not_selected)
         )
     }
 }
