@@ -1,8 +1,6 @@
 package ru.storytellers.ui.fragments
 
 import kotlinx.android.synthetic.main.fragment_library.*
-import kotlinx.android.synthetic.main.fragment_library.back_button_character
-import kotlinx.android.synthetic.main.fragment_library.progress_bar
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -27,11 +25,11 @@ class LibraryFragment : BaseFragment<DataModel>() {
 
     private val libraryAdapter: LibraryAdapter by lazy {
         LibraryAdapter(
-            itemClickListener,
-            buttonMenuClickListener,
-            buttonShareClickListener,
-            buttonCopyClickListener,
-            buttonDeleteClickListener
+                itemClickListener,
+                buttonMenuClickListener,
+                buttonShareClickListener,
+                buttonCopyClickListener,
+                buttonDeleteClickListener
         )
     }
     private val itemClickListener = { story: Story ->
@@ -81,14 +79,13 @@ class LibraryFragment : BaseFragment<DataModel>() {
         })
 
         model.subscribeOnProgressEnableLiveData()
-            .observe(viewLifecycleOwner, { isEnabled ->
-                if (isEnabled) {
-                    showProgressBar(progress_bar, rv_books)
-                } else {
-                    hideProgressBar(progress_bar, rv_books)
-                }
-            }
-            )
+                .observe(viewLifecycleOwner, { loadingState ->
+                    if (loadingState.progress == 100) {
+                        showProgressBar(progress_bar, rv_books)
+                    } else {
+                        hideProgressBar(progress_bar, rv_books)
+                    }
+                })
 
         model.subscribeOnError().observe(viewLifecycleOwner, {
             activity?.let { context ->
