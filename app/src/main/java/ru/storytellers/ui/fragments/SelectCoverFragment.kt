@@ -63,13 +63,13 @@ class SelectCoverFragment : BaseFragment<DataModel>() {
 
     private fun handlerEnabledProgressBar(viewModel: SelectCoverViewModel) {
         viewModel.subscribeOnProgressEnableLiveData()
-            .observe(viewLifecycleOwner, { isEnabled ->
-                if (isEnabled) {
-                    showProgressBar(progress_bar, rv_covers)
-                } else {
-                    hideProgressBar(progress_bar, rv_covers)
-                }
-            })
+            .observe(viewLifecycleOwner, { loadingState ->
+            if (loadingState.progress==100) {
+                showProgressBar(progress_bar, rv_covers)
+            } else {
+                hideProgressBar(progress_bar, rv_covers)
+            }
+        })
     }
 
     private fun handlerOnErrorResult(viewModel: SelectCoverViewModel) {
