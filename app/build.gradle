@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -78,9 +79,15 @@ dependencies {
 
     //Room
     implementation Room.runtime
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.3'
+
     kapt Room.compiler
     implementation Room.room_ktx
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //SignIn with Google
+    implementation platform('com.google.firebase:firebase-bom:26.7.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     //Glide
     implementation Glide.glide
