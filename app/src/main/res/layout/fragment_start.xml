@@ -19,6 +19,15 @@
         app:layout_constraintBottom_toTopOf="@id/new_tale_button"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/new_tale_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sub_header" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/new_tale_button"
         android:layout_width="match_parent"
@@ -36,6 +45,7 @@
         android:layout_marginBottom="@dimen/margin_standard"
         android:text="@string/btn_library"
         android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintTop_toBottomOf="@id/new_tale_button" />
 
     <com.google.android.material.button.MaterialButton
