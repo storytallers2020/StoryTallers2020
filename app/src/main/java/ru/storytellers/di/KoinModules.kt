@@ -2,11 +2,14 @@ package ru.storytellers.di
 
 import androidx.room.Room
 import com.amplitude.api.Amplitude
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.qualifier.named
@@ -14,6 +17,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.storytellers.BuildConfig
+import ru.storytellers.R
 import ru.storytellers.engine.Game
 import ru.storytellers.engine.GameStorage
 import ru.storytellers.engine.level.Level
@@ -69,9 +73,24 @@ private val loadModules by lazy {
             teamCharacterModule,
             gameStartModule,
             amplitudeModule,
-            remoteModule
+            remoteModule,
+            signInGoogle
         )
     )
+}
+
+val signInGoogle = module {
+    single {
+        GoogleSignInOptions
+            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(androidContext().getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+    }
+    single {
+        GoogleSignIn.getClient(androidContext(), get())
+    }
+
 }
 
 val libraryModule = module {
@@ -82,7 +101,7 @@ val libraryBookShowModule = module {
 }
 
 val libraryBookEditModule = module {
-    viewModel { LibraryBookEditViewModel(get(),get()) }
+    viewModel { LibraryBookEditViewModel(get(), get()) }
 }
 
 val ciceroneModule = module {
@@ -201,7 +220,7 @@ val gameEngine = module {
 
     single<IPlayerDataSource> { PlayerDataSource(get(), get()) }
     single<ISentenceOfTaleDataSource> { SentenceOfTaleDataSource(get(), get()) }
-    single<ISentenceOfTaleRepository>{ SentenceOfTaleRepository(get()) }
+    single<ISentenceOfTaleRepository> { SentenceOfTaleRepository(get()) }
     single { Game() }
     single { GameStorage() }
 
@@ -224,9 +243,9 @@ val remoteModule = module {
     single {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = if (BuildConfig.DEBUG)
-                HttpLoggingInterceptor.Level.BODY
-            else
-                HttpLoggingInterceptor.Level.NONE
+            HttpLoggingInterceptor.Level.BODY
+        else
+            HttpLoggingInterceptor.Level.NONE
 
         OkHttpClient.Builder()
             .addInterceptor(interceptor)
