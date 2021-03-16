@@ -84,7 +84,6 @@ class StartFragment : BaseFragment<DataModel>() {
         val account = activity?.let { GoogleSignIn.getLastSignedInAccount(it) }
         account?.apply {
             sign_in_button.visibility = View.GONE
-            //getUserDataFromAccount(this)
         }
         model.getAllStory()
     }
