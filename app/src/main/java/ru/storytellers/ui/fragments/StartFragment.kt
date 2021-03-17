@@ -5,17 +5,14 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.view.View
-import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.fragment_start.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
-import ru.storytellers.model.entity.UserAccountData
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.AlertDialogFragment
@@ -30,8 +27,7 @@ class StartFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_start
     override val model: StartViewModel by inject()
     private var sharedPreferences: SharedPreferences? = null
-    private val googleSignInClient: GoogleSignInClient by inject()
-
+    private val googleSignInOptions: GoogleSignInOptions by inject()
 
     companion object {
         fun newInstance() = StartFragment()
@@ -47,7 +43,6 @@ class StartFragment : BaseFragment<DataModel>() {
         rate_button.setOnClickListener { navigateToGooglePlay() }
     }
 
-
     private fun navigateToLevelScreen() {
         model.createTaleStatistics()
         model.timeCreateStory()
@@ -58,23 +53,23 @@ class StartFragment : BaseFragment<DataModel>() {
         val packageName = context?.packageName
         try {
             startActivity(
-                    Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse(getString(R.string.uri_to_market_google_play, packageName))
-                    ).apply {
-                        addFlags(
-                                Intent.FLAG_ACTIVITY_NO_HISTORY or
-                                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
-                                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-                        )
-                    }
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(getString(R.string.uri_to_market_google_play, packageName))
+                ).apply {
+                    addFlags(
+                        Intent.FLAG_ACTIVITY_NO_HISTORY or
+                                Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                                Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                    )
+                }
             )
         } catch (e: ActivityNotFoundException) {
             startActivity(
-                    Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse(getString(R.string.uri_to_http_google_play, packageName))
-                    )
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(getString(R.string.uri_to_http_google_play, packageName))
+                )
             )
         }
     }
@@ -82,9 +77,7 @@ class StartFragment : BaseFragment<DataModel>() {
     override fun onStart() {
         super.onStart()
         val account = activity?.let { GoogleSignIn.getLastSignedInAccount(it) }
-        account?.apply {
-            sign_in_button.visibility = View.GONE
-        }
+        model.checkLastSignedInAccount(account)
         model.getAllStory()
     }
 
@@ -94,7 +87,8 @@ class StartFragment : BaseFragment<DataModel>() {
     }
 
     private fun onSignInClick() {
-        val signInIntent = googleSignInClient.signInIntent
+        val signInIntent =
+            activity?.let { GoogleSignIn.getClient(it, googleSignInOptions).signInIntent }
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
@@ -102,34 +96,15 @@ class StartFragment : BaseFragment<DataModel>() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleSignInResult(task)
+            model.getUserAccount(task)
         }
-    }
-
-
-    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        try {
-            val account: GoogleSignInAccount? = completedTask.getResult(ApiException::class.java)
-            account?.let { getUserDataFromAccount(it) }
-        } catch (er: ApiException) {
-            Toast.makeText(activity, er.message, Toast.LENGTH_LONG).show()
-        }
-
-    }
-
-    private fun getUserDataFromAccount(account: GoogleSignInAccount) {
-        val userAccountData = account?.run {
-            UserAccountData(
-                    displayName ?: "No name",
-                    email ?: "No email",
-                    id ?: "No id",
-                    idToken ?: "No idToken",
-                    photoUrl
-            )
-         }
     }
 
     override fun initViewModel() {
+        model.subscribeOnAccountExists().observe(viewLifecycleOwner, {
+            sign_in_button.visibility = if (it) View.GONE else View.VISIBLE
+        })
+
         model.subscribeOnSuccess().observe(viewLifecycleOwner, {
             it.data?.let { listStoryLocal ->
                 model.onStartScreenNumberOfTaleStat(listStoryLocal.count())
@@ -142,8 +117,8 @@ class StartFragment : BaseFragment<DataModel>() {
         model.subscribeOnError().observe(viewLifecycleOwner, {
             activity?.let { context ->
                 toastShowLong(
-                        context,
-                        context.getString(R.string.something_went_wrong)
+                    context,
+                    context.getString(R.string.something_went_wrong)
                 )
             }
         })
