@@ -2,7 +2,6 @@ package ru.storytellers.di
 
 import androidx.room.Room
 import com.amplitude.api.Amplitude
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
@@ -48,6 +47,7 @@ import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
 import ru.storytellers.utils.AmplitudeWrapper
 import ru.storytellers.utils.NetworkStatus
 import ru.storytellers.utils.PlayerCreator
+import ru.storytellers.utils.SignInGoogleHandler
 import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
@@ -87,10 +87,7 @@ val signInGoogle = module {
             .requestEmail()
             .build()
     }
-    single {
-        GoogleSignIn.getClient(androidContext(), get())
-    }
-
+    factory { SignInGoogleHandler() }
 }
 
 val libraryModule = module {
@@ -111,7 +108,7 @@ val ciceroneModule = module {
 }
 
 val startModule = module {
-    viewModel { StartViewModel(get()) }
+    viewModel { StartViewModel(get(), get()) }
 }
 val levelModel = module {
     viewModel { LevelViewModel() }
