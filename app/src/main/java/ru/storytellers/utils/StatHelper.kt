@@ -10,6 +10,7 @@ class StatHelper {
         //Share
         const val timeEvent= "TimeEvent"
         const val userId = "UserId"
+        const val userName = "UserName"
         const val buttonBackClicked = "BackClicked"
         //StartScreen
         const val startScreenBtnToRulesGame = "StartScreen|BtnToRulesScreen"
