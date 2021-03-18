@@ -9,31 +9,20 @@ import ru.storytellers.model.network.INetworkStatus
 import timber.log.Timber
 
 class ImageLoader(
-    override val cache: IImageCache,
-    private val networkStatus: INetworkStatus
+    override val cache: IImageCache
 ) : IImageLoader {
 
     override fun loadInto(url: String, defaultResource: Int, container: ImageView) {
-        networkStatus.isOnlineSingle()
+        cache.getBytes(url)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { isOnline ->
-                if (isOnline) {
-                    Glide.with(container.context)
-                        .load(url)
-                        .into(container)
-                } else {
-                    cache.getBytes(url)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ byteArray ->
-                            Glide.with(container.context)
-                                .asBitmap()
-                                .error(defaultResource)
-                                .load(byteArray)
-                                .into(container)
-                        }, {
-                            Timber.e(it)
-                        })
-                }
-            }
+            .subscribe({ byteArray ->
+                Glide.with(container.context)
+                    .asBitmap()
+                    .error(defaultResource)
+                    .load(byteArray)
+                    .into(container)
+            }, {
+                Timber.e(it)
+            })
     }
 }

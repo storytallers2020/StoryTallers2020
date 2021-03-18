@@ -5,22 +5,49 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.splash_activity.*
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 import pl.droidsonroids.gif.GifDrawable
 import ru.storytellers.BuildConfig
 import ru.storytellers.R
+import ru.storytellers.di.injectDependencies
+import ru.storytellers.viewmodels.SplashViewModel
 
 class SplashActivity : AppCompatActivity() {
+
+    val model: SplashViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_activity)
         setVersionText()
-        startActivityWithDelay(getDelay())
+
+        injectDependencies()
+
+        setEvents()
+        model.loadResource()
     }
 
     private fun setVersionText() {
         version_text.text =
             getString(R.string.version, BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME)
+    }
+
+
+    private fun setEvents() {
+        model.subscribeOnSuccess().observe(this, {
+            startActivityWithDelay(getDelay())
+        })
+
+        model.subscribeOnError().observe(this, {
+            //TODO: Show Error Message
+            startActivityWithDelay(getDelay())
+        })
+
+        model.subscribeOnLoading().observe(this, {
+            //TODO: Add loading progress to xml
+            version_text.text = "loading"
+        })
     }
 
     private fun startActivityWithDelay(delay: Long) {
@@ -35,5 +62,4 @@ class SplashActivity : AppCompatActivity() {
         val durationFactor = getString(R.string.factor).toDouble()
         return (splashGifDuration * durationFactor).toLong()
     }
-
 }

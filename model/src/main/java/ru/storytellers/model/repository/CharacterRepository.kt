@@ -12,11 +12,8 @@ import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.utils.toAvatarList
 
 class CharacterRepository(
-    private val networkStatus: INetworkStatus,
-    private val remoteDataSource: IRemoteDataSource,
     private val localDataSource: ICharacterDataSource,
-    private val cacheImageDataSource: ICashImageDataSource
-): ICharacterRepository {
+) : ICharacterRepository {
 
     override fun insertOrReplace(character: Character): Completable =
         localDataSource.insertOrReplace(character)
@@ -27,16 +24,6 @@ class CharacterRepository(
             .subscribeOn(Schedulers.io())
 
     override fun getAll(): Single<List<Character>> =
-        networkStatus.isOnlineSingle().flatMap { isOnline ->
-            if (isOnline) {
-                remoteDataSource.getCharacters().flatMap { characterListApi ->
-                    cacheImageDataSource.add(characterListApi.characters.toAvatarList())
-                    localDataSource
-                        .insertOrReplace(characterListApi.characters)
-                        .toSingleDefault(characterListApi.characters)
-                }
-            } else {
-                localDataSource.getAll()
-            }
-        }.subscribeOn(Schedulers.io())
+        localDataSource.getAll()
+            .subscribeOn(Schedulers.io())
 }

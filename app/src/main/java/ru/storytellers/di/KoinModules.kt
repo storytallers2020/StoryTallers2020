@@ -42,6 +42,8 @@ import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
 import ru.storytellers.ui.image.ImageLoader
 import ru.storytellers.utils.AmplitudeWrapper
 import ru.storytellers.model.cache.ImageCache
+import ru.storytellers.model.repository.remote.RemoteRepository
+import ru.storytellers.model.repository.remote.IRemoteRepository
 import ru.storytellers.utils.NetworkStatus
 import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.*
@@ -58,6 +60,7 @@ private val loadModules by lazy {
             cacheModule,
             dataSourceModule,
             repositoryModule,
+            splashModule,
             startModule,
             levelModel,
             characterCreateModule,
@@ -96,6 +99,10 @@ val ciceroneModule = module {
     single { get<Cicerone<Router>>().navigatorHolder }
 }
 
+val splashModule = module {
+    viewModel { SplashViewModel(get()) }
+}
+
 val startModule = module {
     viewModel { StartViewModel(get()) }
 }
@@ -132,7 +139,7 @@ val cacheModule = module {
     val file = StoryHeroesApp.instance.imageCashDir
 
     single<IImageCache> { ImageCache(get(), file) }
-    single<IImageLoader> { ImageLoader(get(), get()) }
+    single<IImageLoader> { ImageLoader(get()) }
 }
 
 val dataSourceModule = module {
@@ -145,7 +152,8 @@ val dataSourceModule = module {
 }
 
 val repositoryModule = module {
-    single<ICharacterRepository> { CharacterRepository(get(), get(), get(), get()) }
+    single<IRemoteRepository> { RemoteRepository(get(), get(), get(), get()) }
+    single<ICharacterRepository> { CharacterRepository(get()) }
     single<ILocationRepository> { LocationRepository(get(), get(), get(), get()) }
     single<IStoryRepository> { StoryRepository(get()) }
     single<ICoverRepository> { CoverRepository(get(), get(), get(), get()) }
