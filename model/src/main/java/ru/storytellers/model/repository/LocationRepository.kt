@@ -4,7 +4,7 @@ import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import ru.storytellers.model.datasource.ICashImageDataSource
+import ru.storytellers.model.cache.ICashImageDataSource
 import ru.storytellers.model.datasource.ILocationDataSource
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
 import ru.storytellers.model.entity.Location

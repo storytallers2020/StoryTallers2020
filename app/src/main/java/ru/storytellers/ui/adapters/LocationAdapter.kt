@@ -4,14 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.item_image_character_create.view.*
 import kotlinx.android.synthetic.main.item_location.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Location
+import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 
-class LocationAdapter(val clickListener: (location: Location) -> Unit) :
-    RecyclerView.Adapter<LocationAdapter.MyViewHolder>() {
+class LocationAdapter(
+    val imageLoader: IImageLoader,
+    val clickListener: (location: Location) -> Unit
+) : RecyclerView.Adapter<LocationAdapter.MyViewHolder>() {
     private var locationList = mutableListOf<Location>()
 
     fun setData(dataListCharacters: List<Location>?) {
@@ -39,10 +43,15 @@ class LocationAdapter(val clickListener: (location: Location) -> Unit) :
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(location: Location) {
-            resourceToUri(location.imageForRecycler)?.let {
-                loadImage(it, itemView.locationView)
-            }
-            itemView.setOnClickListener{
+            imageLoader.loadInto(
+                location.imageForRecycler,
+                R.drawable.location_stub,
+                itemView.locationView)
+
+//            resourceToUri(location.imageForRecycler)?.let {
+//                loadImage(it, itemView.locationView)
+//            }
+            itemView.setOnClickListener {
                 clickListener(location)
             }
         }

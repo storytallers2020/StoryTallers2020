@@ -6,6 +6,7 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Location
+import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.LocationAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
@@ -26,7 +27,10 @@ class LocationFragment : BaseFragment<DataModel>() {
         Timber.d(location.fieldsToLogString())
         router.navigateTo(Screens.GameStartScreen())
     }
-    private val locationAdapter: LocationAdapter by lazy { LocationAdapter(onListItemClickListener) }
+    private val locationAdapter: LocationAdapter by lazy {
+        val imageLoader: IImageLoader by inject()
+        LocationAdapter(imageLoader, onListItemClickListener)
+    }
 
     companion object {
         fun newInstance() = LocationFragment()

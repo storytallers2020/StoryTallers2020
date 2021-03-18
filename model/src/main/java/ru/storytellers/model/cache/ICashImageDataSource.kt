@@ -1,5 +1,4 @@
-package ru.storytellers.model.datasource
-
+package ru.storytellers.model.cache
 
 interface ICashImageDataSource {
     fun add(urlList: List<String>)

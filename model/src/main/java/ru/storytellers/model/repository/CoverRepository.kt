@@ -4,14 +4,11 @@ import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import ru.storytellers.model.datasource.ICashImageDataSource
-import ru.storytellers.model.datasource.ICharacterDataSource
+import ru.storytellers.model.cache.ICashImageDataSource
 import ru.storytellers.model.datasource.ICoverDataSource
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
-import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.network.INetworkStatus
-import ru.storytellers.utils.toAvatarList
 import ru.storytellers.utils.toCachedCoverList
 
 class CoverRepository(

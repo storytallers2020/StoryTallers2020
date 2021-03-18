@@ -3,7 +3,8 @@ package ru.storytellers.model.repository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import ru.storytellers.model.datasource.ICashImageDataSource
+import ru.storytellers.model.cache.ICashImageDataSource
+import ru.storytellers.model.cache.IImageCache
 import ru.storytellers.model.datasource.ICharacterDataSource
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
 import ru.storytellers.model.entity.Character
@@ -14,7 +15,7 @@ class CharacterRepository(
     private val networkStatus: INetworkStatus,
     private val remoteDataSource: IRemoteDataSource,
     private val localDataSource: ICharacterDataSource,
-    private val cashImageDataSource: ICashImageDataSource
+    private val cacheImageDataSource: ICashImageDataSource
 ): ICharacterRepository {
 
     override fun insertOrReplace(character: Character): Completable =
@@ -29,7 +30,7 @@ class CharacterRepository(
         networkStatus.isOnlineSingle().flatMap { isOnline ->
             if (isOnline) {
                 remoteDataSource.getCharacters().flatMap { characterListApi ->
-                    cashImageDataSource.add(characterListApi.characters.toAvatarList())
+                    cacheImageDataSource.add(characterListApi.characters.toAvatarList())
                     localDataSource
                         .insertOrReplace(characterListApi.characters)
                         .toSingleDefault(characterListApi.characters)

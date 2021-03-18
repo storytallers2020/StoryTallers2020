@@ -26,17 +26,22 @@ import ru.storytellers.engine.showRules.ShowAllSentencesRule
 import ru.storytellers.engine.showRules.ShowLastSentenceRule
 import ru.storytellers.engine.wordRules.IWordRule
 import ru.storytellers.engine.wordRules.RandomWordRule
+import ru.storytellers.model.cache.ICashImageDataSource
+import ru.storytellers.model.cache.IImageCache
 import ru.storytellers.model.datasource.*
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
-import ru.storytellers.model.datasource.storage.WordStorage
 import ru.storytellers.model.datasource.room.*
+import ru.storytellers.model.datasource.storage.WordStorage
 import ru.storytellers.model.entity.room.db.AppDatabase
 import ru.storytellers.model.entity.room.db.MIGRATION_1_2
 import ru.storytellers.model.entity.room.db.MIGRATION_2_3
+import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.model.repository.*
 import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
+import ru.storytellers.ui.image.ImageLoader
 import ru.storytellers.utils.AmplitudeWrapper
+import ru.storytellers.model.cache.ImageCache
 import ru.storytellers.utils.NetworkStatus
 import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.*
@@ -49,6 +54,8 @@ private val loadModules by lazy {
         listOf(
             ciceroneModule,
             databaseModule,
+            networkStatusModule,
+            cacheModule,
             dataSourceModule,
             repositoryModule,
             startModule,
@@ -80,7 +87,7 @@ val libraryBookShowModule = module {
 }
 
 val libraryBookEditModule = module {
-    viewModel { LibraryBookEditViewModel(get(),get()) }
+    viewModel { LibraryBookEditViewModel(get(), get()) }
 }
 
 val ciceroneModule = module {
@@ -117,15 +124,24 @@ val locationModule = module {
 val selectCoverModule = module {
     viewModel { SelectCoverViewModel(get()) }
 }
+val networkStatusModule = module {
+    single<INetworkStatus> { NetworkStatus(get()) }
+}
 
-val dataSourceModule = module {
+val cacheModule = module {
     val file = StoryHeroesApp.instance.imageCashDir
 
+    single<IImageCache> { ImageCache(get(), file) }
+    single<IImageLoader> { ImageLoader(get(), get()) }
+}
+
+val dataSourceModule = module {
     single<ICharacterDataSource> { CharacterDataSource(get()) }
     single<ILocationDataSource> { LocationDataSource(get()) }
     single<IStoryDataSource> { StoryDataSource(get()) }
     single<ICoverDataSource> { CoverDataSource(get()) }
-    single<ICashImageDataSource> { CashImageDataSource(get(), file) }
+
+    single<ICashImageDataSource> { CashImageDataSource(get(), get()) }
 }
 
 val repositoryModule = module {
@@ -207,7 +223,7 @@ val gameEngine = module {
 
     single<IPlayerDataSource> { PlayerDataSource(get(), get()) }
     single<ISentenceOfTaleDataSource> { SentenceOfTaleDataSource(get(), get()) }
-    single<ISentenceOfTaleRepository>{ SentenceOfTaleRepository(get()) }
+    single<ISentenceOfTaleRepository> { SentenceOfTaleRepository(get()) }
     single { Game() }
     single { GameStorage() }
 
@@ -224,8 +240,6 @@ val amplitudeModule = module {
 }
 
 val remoteModule = module {
-
-    single<INetworkStatus> { NetworkStatus(get()) }
 
     val BASE_URL = "http://storyheroes.online/api/"
 

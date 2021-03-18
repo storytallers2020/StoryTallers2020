@@ -8,6 +8,7 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Character
+import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.CharacterCreateAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
@@ -20,12 +21,14 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
     private var isCharacterSelected = false
     private var isNameEntered = false
     override val model: CharacterCreateViewModel by inject()
+
+
     private var inputMethodManager: Any? = null
     override val layoutRes = R.layout.fragment_character_create
+
     private val characterAdapter: CharacterCreateAdapter by lazy {
-        CharacterCreateAdapter(
-            onItemClickListener
-        )
+        val imageLoader: IImageLoader by inject()
+        CharacterCreateAdapter(imageLoader, onItemClickListener)
     }
 
     private val onItemClickListener = { character: Character, position: Int ->
@@ -91,7 +94,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
                 }
                 else -> {
                     enter_name_et_layout1.error = null
-                    isNameEntered=true
+                    isNameEntered = true
                 }
             }
         })
@@ -99,7 +102,7 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
 
     private fun setError(nameError: String) {
-        isNameEntered=false
+        isNameEntered = false
         enter_name_et_layout1.error = nameError
     }
 
