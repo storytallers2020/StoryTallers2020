@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.splash_activity.*
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import pl.droidsonroids.gif.GifDrawable
 import ru.storytellers.BuildConfig
@@ -46,7 +45,8 @@ class SplashActivity : AppCompatActivity() {
 
         model.subscribeOnLoading().observe(this, {
             //TODO: Add loading progress to xml
-            version_text.text = "loading"
+            val percent = "$it%"
+            version_text.text = percent
         })
     }
 

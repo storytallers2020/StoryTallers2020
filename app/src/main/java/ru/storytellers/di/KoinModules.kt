@@ -42,6 +42,7 @@ import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
 import ru.storytellers.ui.image.ImageLoader
 import ru.storytellers.utils.AmplitudeWrapper
 import ru.storytellers.model.cache.ImageCache
+import ru.storytellers.model.entity.room.db.MIGRATION_3_4
 import ru.storytellers.model.repository.remote.RemoteRepository
 import ru.storytellers.model.repository.remote.IRemoteRepository
 import ru.storytellers.utils.NetworkStatus
@@ -100,7 +101,7 @@ val ciceroneModule = module {
 }
 
 val splashModule = module {
-    viewModel { SplashViewModel(get()) }
+    viewModel { SplashViewModel(get(), get()) }
 }
 
 val startModule = module {
@@ -147,6 +148,7 @@ val dataSourceModule = module {
     single<ILocationDataSource> { LocationDataSource(get()) }
     single<IStoryDataSource> { StoryDataSource(get()) }
     single<ICoverDataSource> { CoverDataSource(get()) }
+    single<IVersionDataSource> { VersionDataSource(get()) }
 
     single<ICashImageDataSource> { CashImageDataSource(get(), get()) }
 }
@@ -157,12 +159,13 @@ val repositoryModule = module {
     single<ILocationRepository> { LocationRepository(get(), get(), get(), get()) }
     single<IStoryRepository> { StoryRepository(get()) }
     single<ICoverRepository> { CoverRepository(get(), get(), get(), get()) }
+    single<IVersionRepository> { VersionRepository(get(), get()) }
 }
 
 val databaseModule = module {
     single {
         Room.databaseBuilder(get(), AppDatabase::class.java, "StoryTellers.db")
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
             .build()
     }
     single { get<AppDatabase>().characterDao }
@@ -170,6 +173,7 @@ val databaseModule = module {
     single { get<AppDatabase>().locationDao }
     single { get<AppDatabase>().storyDao }
     single { get<AppDatabase>().userDao }
+    single { get<AppDatabase>().versionsDao }
 }
 
 val gameEndModule = module {

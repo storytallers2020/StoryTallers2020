@@ -2,9 +2,7 @@ package ru.storytellers.model.datasource.remote
 
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
-import ru.storytellers.model.datasource.remote.api.CharactersListApi
-import ru.storytellers.model.datasource.remote.api.CoverListApi
-import ru.storytellers.model.datasource.remote.api.LocationListApi
+import ru.storytellers.model.datasource.remote.api.*
 
 interface IRemoteDataSource {
     @GET("locations/getOnlyActive")
@@ -15,5 +13,8 @@ interface IRemoteDataSource {
 
     @GET("covers/getOnlyActive")
     fun getCovers(): Single<CoverListApi>
+
+    @GET("versions/getAll")
+    fun getVersions(): Single<VersionsApiList>
 
 }

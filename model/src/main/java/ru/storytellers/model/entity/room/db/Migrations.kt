@@ -23,3 +23,17 @@ val MIGRATION_2_3 = object : Migration(2, 3) {
                 "imagePreview TEXT NOT NULL);")
     }
 }
+
+val MIGRATION_3_4 = object : Migration(3, 4) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("DROP TABLE IF EXISTS RoomVersions;")
+        database.execSQL("CREATE TABLE IF NOT EXISTS RoomVersions (" +
+                "id INTEGER NOT NULL PRIMARY KEY," +
+                "characterVersion INTEGER NOT NULL," +
+                "locationVersion INTEGER NOT NULL," +
+                "coverVersion INTEGER NOT NULL," +
+                "rusWordVersion INTEGER NOT NULL," +
+                "engWordVersion INTEGER NOT NULL," +
+                "thirdLevelWordVersion INTEGER NOT NULL);")
+    }
+}
