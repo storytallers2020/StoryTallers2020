@@ -137,6 +137,7 @@
     <string name="decline_answer">Decline</string>
     <string name="msg_agreement_declined">GAME OVER</string>
     <string name="msg_agreement_accepted">Agreements accepted</string>
+    <string name="user_greeting_text" translatable="false">Welcoming </string>
 
     // New strings... move them to the corresponding group above
 
