@@ -53,6 +53,14 @@
         <item name="android:layout_marginBottom">@dimen/margin_small</item>
     </style>
 
+    <style name="user_greeting">
+        <item name="android:textSize">@dimen/text_standard_header</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/margin_standard</item>
+        <item name="android:layout_marginBottom">@dimen/margin_small</item>
+    </style>
+
     <style name="YellowButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="textAllCaps">false</item>
         <item name="android:textStyle">normal</item>
