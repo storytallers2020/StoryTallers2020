@@ -105,6 +105,15 @@ class StartFragment : BaseFragment<DataModel>() {
             sign_in_button.visibility = if (it) View.GONE else View.VISIBLE
         })
 
+        model.subscribeOnUserName().observe(viewLifecycleOwner, { userName ->
+            userName?.let {
+                user_greeting.apply {
+                    visibility = View.VISIBLE
+                    text = (getString(R.string.user_greeting_text) + " " + it)
+                }
+            } ?: let { user_greeting.visibility = View.GONE }
+        })
+
         model.subscribeOnSuccess().observe(viewLifecycleOwner, {
             it.data?.let { listStoryLocal ->
                 model.onStartScreenNumberOfTaleStat(listStoryLocal.count())
