@@ -11,6 +11,17 @@
     tools:background="@drawable/ic_background_default">
 
     <TextView
+        android:id="@+id/user_greeting"
+        style="@style/user_greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/user_greeting_text"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/sub_header"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <TextView
         android:id="@+id/sub_header"
         style="@style/Cover"
         android:layout_width="match_parent"
