@@ -28,10 +28,15 @@ class StartViewModel(
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
     private val onLoadingLiveData = MutableLiveData<DataModel.Loading>()
     private val accountExistsLiveData = MutableLiveData<Boolean>()
+    private val userNameLiveData = MutableLiveData<String>()
     private var userAccount: UserAccount? = null
 
     fun subscribeOnAccountExists(): LiveData<Boolean> {
         return accountExistsLiveData
+    }
+
+    fun subscribeOnUserName(): LiveData<String> {
+        return userNameLiveData
     }
 
     fun subscribeOnSuccess(): LiveData<DataModel.Success<Story>> {
@@ -47,7 +52,12 @@ class StartViewModel(
     }
 
     fun checkLastSignedInAccount(account: GoogleSignInAccount?) {
-        accountExistsLiveData.value = account?.let { true } ?: false
+        accountExistsLiveData.value = account?.let {
+            userAccount = signInGoogleHandler.getUserDataFromAccount(account)
+            userNameLiveData.value = userAccount?.name
+            true
+        } ?: false
+
     }
 
     fun toRulesScreenStatistics() {
@@ -61,11 +71,9 @@ class StartViewModel(
     fun createTaleStatistics() {
         val prop = listOf<Pair<String, String>>()
         userAccount?.let {
-            with(prop) {
-                plus(StatHelper.timeEvent to getCurrentDateTime().getString())
-                plus(StatHelper.userId to it.id)
-                plus(StatHelper.userName to it.name)
-            }
+            prop.plus(StatHelper.timeEvent to getCurrentDateTime().getString())
+                .plus(StatHelper.userId to it.id)
+                .plus(StatHelper.userName to it.name)
         }
         riseEvent(StatHelper.startScreenBtnToCreateTale, prop)
     }
@@ -97,7 +105,13 @@ class StartViewModel(
 
     fun getUserAccount(completedTask: Task<GoogleSignInAccount>) {
         userAccount = signInGoogleHandler.getUserAccount(completedTask)
-        Timber.d(userAccount?.name)
+        userAccount?.let {
+            userNameLiveData.value = it.name
+            accountExistsLiveData.value = true
+            Timber.d(it.name)
+        }
+
+
     }
 
     fun getAllStory() {
