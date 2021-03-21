@@ -8,8 +8,8 @@ import timber.log.Timber
 
 class SignInGoogleHandler {
 
-    fun getUserAccount(completedTask: Task<GoogleSignInAccount>) : UserAccount? {
-        var userAccountData : UserAccount? = null
+    fun getUserAccount(completedTask: Task<GoogleSignInAccount>): UserAccount? {
+        var userAccountData: UserAccount? = null
         try {
             val account = completedTask.getResult(ApiException::class.java)
             userAccountData = getUserDataFromAccount(account)
@@ -19,13 +19,13 @@ class SignInGoogleHandler {
         return userAccountData
     }
 
-    private fun getUserDataFromAccount(account: GoogleSignInAccount) = account.run {
-            UserAccount(
-                displayName ?: "No name",
-                email ?: "No email",
-                id ?: "No id",
-                idToken ?: "No idToken",
-                photoUrl
-            )
-        }
+    fun getUserDataFromAccount(account: GoogleSignInAccount) = account.run {
+        UserAccount(
+            displayName ?: "No name",
+            email ?: "No email",
+            id ?: "No id",
+            idToken ?: "No idToken",
+            photoUrl
+        )
+    }
 }
