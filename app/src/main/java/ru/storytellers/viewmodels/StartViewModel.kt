@@ -11,6 +11,7 @@ import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.entity.UserAccount
 import ru.storytellers.model.repository.IStoryRepository
+import ru.storytellers.model.repository.IUserAccountRepository
 import ru.storytellers.utils.SignInGoogleHandler
 import ru.storytellers.utils.StatHelper
 import ru.storytellers.utils.StatHelper.Companion.riseEvent
@@ -22,7 +23,8 @@ import timber.log.Timber
 
 class StartViewModel(
     private val storyRepository: IStoryRepository,
-    private val signInGoogleHandler: SignInGoogleHandler
+    private val signInGoogleHandler: SignInGoogleHandler,
+    private val userAccountRepository: IUserAccountRepository
 ) : BaseViewModel<DataModel>() {
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Story>>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
@@ -30,6 +32,10 @@ class StartViewModel(
     private val accountExistsLiveData = MutableLiveData<Boolean>()
     private val userNameLiveData = MutableLiveData<String>()
     private var userAccount: UserAccount? = null
+
+    init {
+        accountExistsLiveData.value = false
+    }
 
     fun subscribeOnAccountExists(): LiveData<Boolean> {
         return accountExistsLiveData
@@ -51,13 +57,21 @@ class StartViewModel(
         return onLoadingLiveData
     }
 
-    fun checkLastSignedInAccount(account: GoogleSignInAccount?) {
-        accountExistsLiveData.value = account?.let {
-            userAccount = signInGoogleHandler.getUserDataFromAccount(account)
-            userNameLiveData.value = userAccount?.name
-            true
-        } ?: false
+    fun getUserDataFromLastSignedAccount(account: GoogleSignInAccount) {
+        userAccount = signInGoogleHandler.getUserDataFromAccount(account)
+        userNameLiveData.value = userAccount?.name
+        userAccount?.let { saveUserAccount(it) }
+        accountExistsLiveData.value = true
+    }
 
+    fun getUserDataFromGoogleAccount(completedTask: Task<GoogleSignInAccount>) {
+        userAccount = signInGoogleHandler.getUserAccount(completedTask)
+        userAccount?.let {
+            userNameLiveData.value = it.name
+            saveUserAccount(it)
+            accountExistsLiveData.value = true
+            Timber.d(it.name)
+        }
     }
 
     fun toRulesScreenStatistics() {
@@ -103,15 +117,19 @@ class StartViewModel(
         riseEvent(StatHelper.startScreen, prop)
     }
 
-    fun getUserAccount(completedTask: Task<GoogleSignInAccount>) {
-        userAccount = signInGoogleHandler.getUserAccount(completedTask)
-        userAccount?.let {
-            userNameLiveData.value = it.name
-            accountExistsLiveData.value = true
-            Timber.d(it.name)
-        }
 
-
+    private fun saveUserAccount(userAccount: UserAccount) {
+        var saved = false
+        userAccountRepository.saveUserAccountCompletable(userAccount)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    saved = true
+                },
+                {
+                    Timber.e(it)
+                }
+            )
     }
 
     fun getAllStory() {
