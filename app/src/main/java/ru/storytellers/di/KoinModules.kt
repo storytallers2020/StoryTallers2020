@@ -108,7 +108,8 @@ val ciceroneModule = module {
 }
 
 val startModule = module {
-    viewModel { StartViewModel(get(), get()) }
+    single<IUserAccountRepository> { UserAccountRepository(get(), get()) }
+    viewModel { StartViewModel(get(), get(),get()) }
 }
 val levelModel = module {
     viewModel { LevelViewModel() }
