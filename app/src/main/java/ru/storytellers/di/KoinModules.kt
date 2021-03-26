@@ -154,7 +154,7 @@ val dataSourceModule = module {
 }
 
 val repositoryModule = module {
-    single<IRemoteRepository> { RemoteRepository(get(), get(), get(), get()) }
+    single<IRemoteRepository> { RemoteRepository(get(), get(), get(), get(), get(), get()) }
     single<ICharacterRepository> { CharacterRepository(get()) }
     single<ILocationRepository> { LocationRepository(get(), get(), get(), get()) }
     single<IStoryRepository> { StoryRepository(get()) }

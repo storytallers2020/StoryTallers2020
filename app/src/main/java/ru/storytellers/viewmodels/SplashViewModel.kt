@@ -35,7 +35,7 @@ class SplashViewModel(
         versionRepository.getVersions()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                onLoadingLiveData.value = 10
+                onLoadingLiveData.value = 20
                 versionProcessing(it)
             }, {
                 onErrorLiveData.value = it
@@ -44,14 +44,17 @@ class SplashViewModel(
     }
 
     private fun versionProcessing(versions: VersionsComparator) {
-        if (!versions.isCharacterActual) cacheCharacters(versions)
+        //if (!versions.isCharacterActual)
+        cacheResources(versions)
     }
 
-    private fun cacheCharacters(versions: VersionsComparator) {
+    private fun cacheResources(versions: VersionsComparator) {
         remoteRepository.cacheCharacters()
+            .andThen(remoteRepository.cacheLocations())
+            .andThen(remoteRepository.cacheCovers())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                onLoadingLiveData.value = 30
+                onLoadingLiveData.value = 50
                 updateLocalVersion(versions)
             }, {
                 onErrorLiveData.value = it
@@ -59,13 +62,13 @@ class SplashViewModel(
     }
 
     private fun updateLocalVersion(versions: VersionsComparator) {
-        versions.localVersions.characterVersion = versions.remoteVersions.characterVersion
-        versionRepository.insertOrReplace(versions.localVersions)
+        versionRepository.insertOrReplace(versions.remoteVersions)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-            onLoadingLiveData.value = 40
-        }, {
-            onErrorLiveData.value = it
-        })
+                onLoadingLiveData.value = 100
+                onSuccessLiveData.value = true
+            }, {
+                onErrorLiveData.value = it
+            })
     }
 }

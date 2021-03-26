@@ -39,7 +39,7 @@ class SplashActivity : AppCompatActivity() {
         })
 
         model.subscribeOnError().observe(this, {
-            //TODO: Show Error Message
+            //TODO: Show Error Message and exit
             startActivityWithDelay(getDelay())
         })
 
