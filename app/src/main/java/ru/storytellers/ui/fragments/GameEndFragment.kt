@@ -67,7 +67,7 @@ class GameEndFragment : BaseFragment<DataModel>() {
     }
 
     private fun handlerUriBackgroundImage() {
-        model.subscribeOnUriBackgroundImage().observe(viewLifecycleOwner, {
+        model.subscribeOnBackgroundImageUri().observe(viewLifecycleOwner, {
             setBackground(it)
         })
     }

@@ -3,12 +3,9 @@ package ru.storytellers.utils
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
-import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import timber.log.Timber
 
 
 //fun loadImage(url: String, container: ImageView) {
@@ -18,11 +15,11 @@ import timber.log.Timber
 //}
 //
 
-fun loadImage(resId: Int, container: ImageView) {
-    Glide.with(container.context)
-        .load(resId)
-        .into(container)
-}
+//fun loadImage(resId: Int, container: ImageView) {
+//    Glide.with(container.context)
+//        .load(resId)
+//        .into(container)
+//}
 
 
 fun loadImage(resId: Int, container: View) {
@@ -39,6 +36,10 @@ fun loadImage(resId: Int, container: View) {
         })
 }
 
+@Deprecated(
+    message = "Используйте класс imageLoader и интерфейс IImageLoader",
+    replaceWith = ReplaceWith("imageLoader.loadInto()")
+)
 fun loadImage(uri: Uri, container: View) {
     Glide.with(container.context)
         .asDrawable()

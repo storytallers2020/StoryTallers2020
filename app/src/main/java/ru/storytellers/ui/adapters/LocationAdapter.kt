@@ -48,9 +48,6 @@ class LocationAdapter(
                 R.drawable.location_stub,
                 itemView.locationView)
 
-//            resourceToUri(location.imageForRecycler)?.let {
-//                loadImage(it, itemView.locationView)
-//            }
             itemView.setOnClickListener {
                 clickListener(location)
             }

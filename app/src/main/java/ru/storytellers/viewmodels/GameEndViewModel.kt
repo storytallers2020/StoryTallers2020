@@ -10,13 +10,13 @@ import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
 class GameEndViewModel : BaseViewModel<DataModel>() {
     private val textOfStoryTallerLiveData = MutableLiveData<String>()
-    private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
+    private val BackgroundImageUriLiveData = MutableLiveData<Uri>()
     private val isResumeClickedLiveData = MutableLiveData<Boolean>()
     private val app = StoryHeroesApp.instance
     private val gameStorage = app.gameStorage
 
     fun subscribeOnTextOfStoryTaller() = textOfStoryTallerLiveData
-    fun subscribeOnUriBackgroundImage() = uriBackgroundImageLiveData
+    fun subscribeOnBackgroundImageUri() = BackgroundImageUriLiveData
     fun subscribeOnResumeClicked() = isResumeClickedLiveData
 
     fun setTextOfStoryTaller() {
@@ -29,7 +29,7 @@ class GameEndViewModel : BaseViewModel<DataModel>() {
 
     fun getUriBackgroundImage() {
         gameStorage.getLocationGame()?.imageUrl?.let {
-            uriBackgroundImageLiveData.value = resourceToUri(it)
+            BackgroundImageUriLiveData.value = resourceToUri(it)
         }
     }
 

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
+import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.ui.BackButtonListener
 import ru.storytellers.utils.loadImage
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
@@ -20,6 +21,7 @@ abstract class BaseFragment<T : DataModel> : Fragment(), BackButtonListener {
     abstract val model: BaseViewModel<T>
     abstract val layoutRes: Int
     protected val router: Router by inject()
+    protected val imageLoader: IImageLoader by inject()
     private val navigatorHolder: NavigatorHolder by inject()
     private val backgroundView: View by lazy { requireActivity().findViewById(R.id.main_background) }
 

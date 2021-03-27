@@ -4,9 +4,9 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.storytellers.model.cache.ICashImageDataSource
 import ru.storytellers.model.datasource.ICharacterDataSource
+import ru.storytellers.model.datasource.ICoverDataSource
 import ru.storytellers.model.datasource.ILocationDataSource
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
-import ru.storytellers.model.datasource.room.CoverDataSource
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.utils.toAvatarList
 import ru.storytellers.utils.toCachedCoverList
@@ -17,7 +17,7 @@ class RemoteRepository(
     private val remoteDataSource: IRemoteDataSource,
     private val characterDataSource: ICharacterDataSource,
     private val locationDataSource: ILocationDataSource,
-    private val coverDataSource: CoverDataSource,
+    private val coverDataSource: ICoverDataSource,
     private val cacheImageDataSource: ICashImageDataSource
 ) : IRemoteRepository {
 
@@ -56,5 +56,4 @@ class RemoteRepository(
                 Completable.complete()
             }
         }.subscribeOn(Schedulers.io())
-
 }

@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.fragment_choosing_title.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
+import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.*
@@ -15,6 +16,7 @@ import ru.storytellers.viewmodels.TitleAndSaveStoryViewModel
 class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
     override val model: TitleAndSaveStoryViewModel by inject()
     override val layoutRes = R.layout.fragment_choosing_title
+
     private lateinit var adMobFragment : AdMobFragment
 
     companion object {
@@ -56,9 +58,10 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
 
     override fun initViewModel() {
         model.subscribeOnCover().observe(viewLifecycleOwner, { cover ->
-            resourceToUri(cover.imageUrl)?.let {
-                loadImage(it, iv_cover)
-            }
+            imageLoader.loadInto(cover.imageUrl, R.drawable.cover_recycler_stub, iv_cover)
+//            resourceToUri(cover.imageUrl)?.let {
+//                loadImage(it, iv_cover)
+//            }
         })
 
         model.subscribeOnTitleAcceptable().observe(viewLifecycleOwner, {

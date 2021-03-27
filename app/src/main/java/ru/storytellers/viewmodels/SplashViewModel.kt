@@ -44,6 +44,7 @@ class SplashViewModel(
     }
 
     private fun versionProcessing(versions: VersionsComparator) {
+        //TODO: Не забыть убрать и сделать проверку на всех
         //if (!versions.isCharacterActual)
         cacheResources(versions)
     }

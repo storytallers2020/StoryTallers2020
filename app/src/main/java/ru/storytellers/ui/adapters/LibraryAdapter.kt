@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_book_library.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Story
+import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.utils.loadImage
 import ru.storytellers.utils.resourceToUri
 
 class LibraryAdapter(
+    val imageLoader: IImageLoader,
     val itemClickListener: (story: Story) -> Unit,
     val btnMenuClickListener: (story: Story) -> Unit,
     val btnShareClickListener: () -> Unit,
@@ -46,9 +48,10 @@ class LibraryAdapter(
 
         fun bind(story: Story) {
             with(itemView) {
-                resourceToUri(story.coverUrl)?.let {
-                    loadImage(it, book_cover_image)
-                }
+                imageLoader.loadInto(story.coverUrl, R.drawable.cover_recycler_stub, book_cover_image)
+//                resourceToUri(story.coverUrl)?.let {
+//                    loadImage(it, book_cover_image)
+//                }
                 book_name.text = story.name
 
                 setOnClickListener {

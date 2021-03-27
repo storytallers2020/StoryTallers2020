@@ -7,6 +7,7 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Player
+import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.TeamCharacterAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
@@ -21,9 +22,7 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_character_team
     private var character: Player? = null
     private val teamAdapter: TeamCharacterAdapter by lazy {
-        TeamCharacterAdapter(
-            onRemovePlayerListener
-        )
+        TeamCharacterAdapter(imageLoader, onRemovePlayerListener)
     }
     private var sizeListPlayer = 0
 
@@ -51,7 +50,7 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
         super.onStart()
         model.subscribeOnPlayers().observe(
             viewLifecycleOwner,
-            Observer {
+            {
                 sizeListPlayer = it.size
                 setPlayersToPlayerAdapter(it)
                 if (it.size >= 8) {

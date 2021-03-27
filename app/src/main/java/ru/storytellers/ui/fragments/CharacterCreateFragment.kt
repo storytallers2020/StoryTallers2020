@@ -27,7 +27,6 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
     override val layoutRes = R.layout.fragment_character_create
 
     private val characterAdapter: CharacterCreateAdapter by lazy {
-        val imageLoader: IImageLoader by inject()
         CharacterCreateAdapter(imageLoader, onItemClickListener)
     }
 

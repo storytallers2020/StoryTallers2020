@@ -49,10 +49,6 @@ class CoverAdapter(
                 itemView.book_cover_image
             )
 
-//            resourceToUri(cover.imagePreview)?.let {
-//                loadImage(it, itemView.book_cover_image)
-//            }
-
             itemView.book_cover_image.setOnClickListener {
                 val positionIndex: Int = adapterPosition
                 clickListener.onItemClick(coverList[positionIndex])

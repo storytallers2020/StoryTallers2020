@@ -26,6 +26,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
 
     private val libraryAdapter: LibraryAdapter by lazy {
         LibraryAdapter(
+            imageLoader,
             itemClickListener,
             buttonMenuClickListener,
             buttonShareClickListener,
