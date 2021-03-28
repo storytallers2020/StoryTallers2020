@@ -18,7 +18,7 @@ import ru.storytellers.viewmodels.LibraryBookShowViewModel
 const val DIALOG_TAG_DELETE = "book-delete-46bf-ab6"
 const val STORY_KEY = "Story"
 
-class LibraryBookReadingFragment : BaseFragment<DataModel>() {
+class LibraryBookReadingFragment : BaseFragment<DataModel>(), DialogCaller {
     override val model: LibraryBookShowViewModel by inject()
     override val layoutRes = R.layout.fragment_library_book_show
     private var textStory: String? = null
@@ -170,7 +170,7 @@ class LibraryBookReadingFragment : BaseFragment<DataModel>() {
 
     private fun showDeleteDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_delete_story)
+            CustomAlertDialog(this, R.string.dialog_delete_story)
                 .show(fragMan, DIALOG_TAG_DELETE)
         }
     }
@@ -195,4 +195,13 @@ class LibraryBookReadingFragment : BaseFragment<DataModel>() {
         router.exit()
         return true
     }
+
+    override fun onDialogPositiveButton(tag: String?) {
+        removeStory()
+    }
+
+    override fun onDialogNegativeButton(tag: String?) {
+        // do nothing
+    }
+
 }

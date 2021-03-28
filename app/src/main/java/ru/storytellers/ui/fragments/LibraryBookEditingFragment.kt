@@ -11,7 +11,8 @@ import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.adapters.SentencesAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.AlertDialogFragment
+import ru.storytellers.utils.CustomAlertDialog
+import ru.storytellers.utils.DialogCaller
 import ru.storytellers.utils.hideSoftKey
 import ru.storytellers.viewmodels.LibraryBookEditViewModel
 import timber.log.Timber
@@ -19,12 +20,12 @@ import timber.log.Timber
 const val DIALOG_TAG_SAVE_TITLE = "book-save-title-ab6"
 const val DIALOG_TAG_SAVE_SENTENCE = "book-save-sentence-ab6"
 
-class LibraryBookEditingFragment(
+class LibraryBookEditingFragment (
     private var story: Story?,
     private var sentencesList: List<SentenceOfTale>?,
     private var storyTitle: String?,
     private var locationImageUri: Uri?
-) : BaseFragment<DataModel>() {
+) : BaseFragment<DataModel>(), DialogCaller {
     override val model: LibraryBookEditViewModel by inject()
     override val layoutRes = R.layout.fragment_library_book_edit
     private lateinit var sourceSentence: SentenceOfTale
@@ -116,7 +117,7 @@ class LibraryBookEditingFragment(
 
     private fun showSaveTitleDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_save_story)
+            CustomAlertDialog(this, R.string.dialog_save_story)
                 .show(fragMan, DIALOG_TAG_SAVE_TITLE)
         }
     }
@@ -137,7 +138,7 @@ class LibraryBookEditingFragment(
 
     private fun showSaveSentenceDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_save_story)
+            CustomAlertDialog(this, R.string.dialog_save_story)
                 .show(fragMan, DIALOG_TAG_SAVE_SENTENCE)
         }
     }
@@ -180,6 +181,20 @@ class LibraryBookEditingFragment(
             view?.clearFocus()
         }
         return true
+    }
+
+    override fun onDialogPositiveButton(tag: String?) {
+        when (tag) {
+            DIALOG_TAG_SAVE_TITLE -> saveChangedTitle()
+            DIALOG_TAG_SAVE_SENTENCE -> saveChangedSentence()
+        }
+    }
+
+    override fun onDialogNegativeButton(tag: String?) {
+        when (tag) {
+            DIALOG_TAG_SAVE_TITLE -> restoreTitle()
+            DIALOG_TAG_SAVE_SENTENCE -> restoreSentence()
+        }
     }
 
 }

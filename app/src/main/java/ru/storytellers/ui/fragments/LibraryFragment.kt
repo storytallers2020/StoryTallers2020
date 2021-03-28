@@ -1,6 +1,5 @@
 package ru.storytellers.ui.fragments
 
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_library.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -10,11 +9,12 @@ import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.LibraryAdapter
 import ru.storytellers.ui.assistant.LibraryFragmentAssistant
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.DialogCaller
 import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.LibraryViewModel
 
 
-class LibraryFragment : BaseFragment<DataModel>() {
+class LibraryFragment : BaseFragment<DataModel>(), DialogCaller {
 
     override val model: LibraryViewModel by inject()
     private val assistant: LibraryFragmentAssistant by lazy { LibraryFragmentAssistant(this) }
@@ -135,5 +135,13 @@ class LibraryFragment : BaseFragment<DataModel>() {
         model.onBackClicked(this.javaClass.simpleName)
         router.exit()
         return true
+    }
+
+    override fun onDialogPositiveButton(tag: String?) {
+        deleteStory()
+    }
+
+    override fun onDialogNegativeButton(tag: String?) {
+        // do nothing
     }
 }
