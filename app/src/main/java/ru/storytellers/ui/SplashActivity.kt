@@ -45,21 +45,18 @@ class SplashActivity : AppCompatActivity(), DialogCaller{
         model.subscribeOnError().observe(this, {
             //TODO: Show Error Message and exit
             supportFragmentManager.let { fragMan ->
-                CustomAlertDialog(StartFragment(), R.string.dialog_character).show(fragMan, "TAG")
+                CustomAlertDialog(this, R.string.game_loading_msg).show(fragMan, "TAG")
             }
             startActivityWithDelay(getDelay())
         })
 
         model.subscribeOnLoading().observe(this, {
             val percent = "$it%"
-            progress_bar.visibility = View.VISIBLE
-            progress_bar.progress = it
             loading_text.text = percent
         })
     }
 
     private fun startActivityWithDelay(delay: Long) {
-        progress_bar.visibility = View.GONE
         Handler().postDelayed({
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
