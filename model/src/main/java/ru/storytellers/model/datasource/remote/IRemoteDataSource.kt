@@ -24,11 +24,6 @@ interface IRemoteDataSource {
     @GET("covers/getOnlyActive")
     fun getCovers(): Single<CoverListApi>
 
-    @Headers("Content-type: application/json")
-    @POST("v1/full-data")
-    fun saveUserAccount(@Body userAccount : UserAccountApi) : Single<Response<UserAccountApi>>
-
-   // @Headers("Content-type: application/json")
     @POST("v1/full-data/")
-    fun saveUserAccountCompletable(@Body userAccount : UserAccountApi) : Completable
+    fun saveUser(@Body userAccount : UserAccountApi) : Completable
 }
