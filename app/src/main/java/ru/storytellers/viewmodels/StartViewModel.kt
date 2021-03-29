@@ -60,7 +60,6 @@ class StartViewModel(
     fun getUserDataFromLastSignedAccount(account: GoogleSignInAccount) {
         userAccount = signInGoogleHandler.getUserDataFromAccount(account)
         userNameLiveData.value = userAccount?.name
-        userAccount?.let { saveUserAccount(it) }
         accountExistsLiveData.value = true
     }
 
@@ -120,7 +119,7 @@ class StartViewModel(
 
     private fun saveUserAccount(userAccount: UserAccount) {
         var saved = false
-        userAccountRepository.saveUserAccountCompletable(userAccount)
+        userAccountRepository.saveUser(userAccount)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
