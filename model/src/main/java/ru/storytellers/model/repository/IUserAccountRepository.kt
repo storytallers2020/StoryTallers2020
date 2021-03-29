@@ -6,6 +6,5 @@ import org.jetbrains.annotations.NotNull
 import ru.storytellers.model.entity.UserAccount
 
 interface IUserAccountRepository {
-    fun saveUserAccount(userAccount : UserAccount) : Single<UserAccount>
-    fun saveUserAccountCompletable(userAccount : UserAccount) : @NotNull Completable
+    fun saveUser(userAccount : UserAccount) : @NotNull Completable
 }
