@@ -76,6 +76,8 @@ class StartFragment : BaseFragment<DataModel>() {
 
     override fun onStart() {
         super.onStart()
+        val account = activity?.let { GoogleSignIn.getLastSignedInAccount(it) }
+        account?.let{ model.getUserDataFromLastSignedAccount(it)}
         model.getAllStory()
     }
 
@@ -85,14 +87,9 @@ class StartFragment : BaseFragment<DataModel>() {
     }
 
     private fun onSignInClick() {
-        val account = activity?.let { GoogleSignIn.getLastSignedInAccount(it) }
-        account?.let{
-            model.getUserDataFromLastSignedAccount(it)} ?:
-        run {
             val signInIntent =
                 activity?.let { GoogleSignIn.getClient(it, googleSignInOptions).signInIntent }
             startActivityForResult(signInIntent, RC_SIGN_IN)
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
