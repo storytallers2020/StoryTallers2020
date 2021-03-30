@@ -1,23 +1,22 @@
 package ru.storytellers.ui.fragments
 
 import android.view.View
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_character_team.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Player
-import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.TeamCharacterAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.AlertDialogFragment
+import ru.storytellers.utils.CustomAlertDialog
+import ru.storytellers.utils.DialogCaller
 import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.TeamCharacterViewModel
 
 private const val FRAGMENT_DIALOG_TAG = "team-5d62-46bf-ab6"
 
-class TeamCharacterFragment : BaseFragment<DataModel>() {
+class TeamCharacterFragment : BaseFragment<DataModel>(), DialogCaller {
     override val model: TeamCharacterViewModel by inject()
     override val layoutRes = R.layout.fragment_character_team
     private var character: Player? = null
@@ -103,7 +102,16 @@ class TeamCharacterFragment : BaseFragment<DataModel>() {
 
     private fun createAndShowAlertDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_character).show(fragMan, FRAGMENT_DIALOG_TAG)
+            CustomAlertDialog(this, R.string.dialog_character).show(fragMan, FRAGMENT_DIALOG_TAG)
         }
     }
+
+    override fun onDialogPositiveButton(tag: String?) {
+        removeCharacter()
+    }
+
+    override fun onDialogNegativeButton(tag: String?) {
+        // do nothing
+    }
+
 }
