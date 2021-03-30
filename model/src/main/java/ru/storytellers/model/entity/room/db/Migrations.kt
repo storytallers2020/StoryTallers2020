@@ -37,3 +37,13 @@ val MIGRATION_3_4 = object : Migration(3, 4) {
                 "thirdLevelWordVersion INTEGER NOT NULL);")
     }
 }
+
+val MIGRATION_4_5 = object : Migration(4, 5) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("DROP TABLE IF EXISTS RoomWord;")
+        database.execSQL("CREATE TABLE IF NOT EXISTS RoomWord (" +
+                "id INTEGER NOT NULL PRIMARY KEY," +
+                "word TEXT NOT NULL," +
+                "lang TEXT NOT NULL);")
+    }
+}

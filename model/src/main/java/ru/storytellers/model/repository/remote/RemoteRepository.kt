@@ -6,11 +6,13 @@ import ru.storytellers.model.cache.ICashImageDataSource
 import ru.storytellers.model.datasource.ICharacterDataSource
 import ru.storytellers.model.datasource.ICoverDataSource
 import ru.storytellers.model.datasource.ILocationDataSource
+import ru.storytellers.model.datasource.IWordDataSource
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.utils.toAvatarList
 import ru.storytellers.utils.toCachedCoverList
 import ru.storytellers.utils.toCashedLocationList
+import ru.storytellers.utils.toRoomWordList
 
 class RemoteRepository(
     private val networkStatus: INetworkStatus,
@@ -18,6 +20,7 @@ class RemoteRepository(
     private val characterDataSource: ICharacterDataSource,
     private val locationDataSource: ILocationDataSource,
     private val coverDataSource: ICoverDataSource,
+    private val wordDataSource: IWordDataSource,
     private val cacheImageDataSource: ICashImageDataSource
 ) : IRemoteRepository {
 
@@ -56,4 +59,16 @@ class RemoteRepository(
                 Completable.complete()
             }
         }.subscribeOn(Schedulers.io())
+
+    override fun cacheWords(lang: String): Completable =
+        networkStatus.isOnlineSingle().flatMapCompletable { isOnline ->
+            if (isOnline) {
+                remoteDataSource.getWords(lang).flatMapCompletable { wordsListApi ->
+                    wordDataSource.insertOrReplace(wordsListApi.words, lang)
+                }
+            } else {
+                Completable.complete()
+            }
+        }.subscribeOn(Schedulers.io())
+
 }

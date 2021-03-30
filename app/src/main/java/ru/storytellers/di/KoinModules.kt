@@ -32,9 +32,6 @@ import ru.storytellers.model.datasource.*
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
 import ru.storytellers.model.datasource.room.*
 import ru.storytellers.model.datasource.storage.WordStorage
-import ru.storytellers.model.entity.room.db.AppDatabase
-import ru.storytellers.model.entity.room.db.MIGRATION_1_2
-import ru.storytellers.model.entity.room.db.MIGRATION_2_3
 import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.model.repository.*
@@ -42,7 +39,7 @@ import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
 import ru.storytellers.ui.image.ImageLoader
 import ru.storytellers.utils.AmplitudeWrapper
 import ru.storytellers.model.cache.ImageCache
-import ru.storytellers.model.entity.room.db.MIGRATION_3_4
+import ru.storytellers.model.entity.room.db.*
 import ru.storytellers.model.repository.remote.RemoteRepository
 import ru.storytellers.model.repository.remote.IRemoteRepository
 import ru.storytellers.utils.NetworkStatus
@@ -149,12 +146,13 @@ val dataSourceModule = module {
     single<IStoryDataSource> { StoryDataSource(get()) }
     single<ICoverDataSource> { CoverDataSource(get()) }
     single<IVersionDataSource> { VersionDataSource(get()) }
+    single<IWordDataSource> { WordDataSource(get()) }
 
     single<ICashImageDataSource> { CashImageDataSource(get(), get()) }
 }
 
 val repositoryModule = module {
-    single<IRemoteRepository> { RemoteRepository(get(), get(), get(), get(), get(), get()) }
+    single<IRemoteRepository> { RemoteRepository(get(), get(), get(), get(), get(), get(), get()) }
     single<ICharacterRepository> { CharacterRepository(get()) }
     single<ILocationRepository> { LocationRepository(get() ) }
     single<IStoryRepository> { StoryRepository(get()) }
@@ -165,7 +163,7 @@ val repositoryModule = module {
 val databaseModule = module {
     single {
         Room.databaseBuilder(get(), AppDatabase::class.java, "StoryTellers.db")
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
             .build()
     }
     single { get<AppDatabase>().characterDao }
@@ -174,6 +172,7 @@ val databaseModule = module {
     single { get<AppDatabase>().storyDao }
     single { get<AppDatabase>().userDao }
     single { get<AppDatabase>().versionsDao }
+    single { get<AppDatabase>().wordDao }
 }
 
 val gameEndModule = module {

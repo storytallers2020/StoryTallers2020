@@ -6,4 +6,5 @@ interface IRemoteRepository {
     fun cacheCharacters(): Completable
     fun cacheLocations(): Completable
     fun cacheCovers(): Completable
+    fun cacheWords(lang: String): Completable
 }
