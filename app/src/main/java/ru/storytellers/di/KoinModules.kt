@@ -106,7 +106,7 @@ val startModule = module {
 }
 
 val levelModel = module {
-    viewModel { LevelViewModel() }
+    viewModel { LevelViewModel(get(), get()) }
 }
 
 val gameStartModule = module {
@@ -157,6 +157,8 @@ val repositoryModule = module {
     single<ILocationRepository> { LocationRepository(get() ) }
     single<IStoryRepository> { StoryRepository(get()) }
     single<ICoverRepository> { CoverRepository(get()) }
+    single<IWordRepository> { WordRepository(get())}
+
     single<IVersionRepository> { VersionRepository(get(), get()) }
 }
 
@@ -185,7 +187,7 @@ val titleAndSaveModule = module {
 }
 
 val gameModule = module {
-    viewModel { GameViewModel(get()) }
+    viewModel { GameViewModel(get(), get()) }
 }
 
 val gameEngine = module {
@@ -199,9 +201,9 @@ val gameEngine = module {
     single<IShowRule>(named("ShowAllSentencesRule")) { ShowAllSentencesRule() }
     single<IShowRule>(named("ShowLastSentenceRule")) { ShowLastSentenceRule() }
 
-    single { WordStorage(get()) }
-    single<IWordRule>(named("NoNeedWord")) { RandomWordRule(false, get()) }
-    single<IWordRule>(named("NeedWord")) { RandomWordRule(true, get()) }
+    single { WordStorage() }
+    single<IWordRule>(named("NoNeedWord")) { RandomWordRule(false) }
+    single<IWordRule>(named("NeedWord")) { RandomWordRule(true) }
 
     single {
         Levels().apply {
@@ -235,7 +237,7 @@ val gameEngine = module {
     single<IPlayerDataSource> { PlayerDataSource(get(), get()) }
     single<ISentenceOfTaleDataSource> { SentenceOfTaleDataSource(get(), get()) }
     single<ISentenceOfTaleRepository> { SentenceOfTaleRepository(get()) }
-    single { Game() }
+    single { Game(get()) }
     single { GameStorage() }
 
 }

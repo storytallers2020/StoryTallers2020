@@ -20,19 +20,11 @@ class VersionsComparator (
             return localVersions.coverVersion == remoteVersions.coverVersion
         }
 
-    val isRusWordActual: Boolean
+    val isWordActual: Boolean
         get() {
             return localVersions.rusWordVersion == remoteVersions.rusWordVersion
         }
 
-    val isEngWordActual: Boolean
-        get() {
-            return localVersions.engWordVersion == remoteVersions.engWordVersion
-        }
-
-    val isThirdLevelWordActual: Boolean
-        get() {
-            return localVersions.thirdLevelWordVersion == remoteVersions.thirdLevelWordVersion
-        }
-
+    fun isActual(): Boolean =
+        isCoverActual && isLocationActual && isCharacterActual && isWordActual
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.engine.Game
 import ru.storytellers.model.DataModel
+import ru.storytellers.model.datasource.storage.WordStorage
 import ru.storytellers.model.entity.ContentTypeEnum
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
@@ -13,7 +14,10 @@ import ru.storytellers.utils.*
 import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
-class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
+class GameViewModel(
+    private val game: Game,
+    private val wordsStorage: WordStorage
+    ) : BaseViewModel<DataModel>() {
     val inputValid: InputValidation by lazy { InputValidation() }
     private val app = StoryHeroesApp.instance
     private val storage = app.gameStorage
@@ -24,6 +28,8 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
     private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
     private val wordLiveData = MutableLiveData<String>()
     private val isEndGamePossible = MutableLiveData<Boolean>()
+
+    private var currentWord = ""
 
     fun getUriBackgroundImage() {
         storage.location?.let {
@@ -61,8 +67,20 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
             ContentTypeEnum.TEXT
         )
 
+    fun onStartTurn() {
+        updateStoryText()
+        currentPlayerLiveData.value = game.getCurrentPlayer()
+
+        storage.level?.let { level ->
+            if (level.wordRule.isNeedUseWord()) {
+                currentWord = wordsStorage.getRandomWord()
+                wordLiveData.value = currentWord
+            }
+        }
+    }
+
     private fun tryGotoNextTurn(sentence: SentenceOfTale) {
-        val result = game.nextStep(sentence)
+        val result = game.nextStep(sentence, currentWord)
         if (result) {
             checkIsEndGamePossible()
             storage.getSentences().add(sentence)
@@ -71,16 +89,6 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
             onButtonSendClickedStatistic(sentence)
         } else {
             isSentenceCorrectLiveData.value = false
-        }
-    }
-
-    fun onStartTurn() {
-        updateStoryText()
-        currentPlayerLiveData.value = game.getCurrentPlayer()
-
-        storage.level?.let { level ->
-            if (level.wordRule.isNeedUseWord())
-                wordLiveData.value = level.wordRule.getRandomWord()
         }
     }
 

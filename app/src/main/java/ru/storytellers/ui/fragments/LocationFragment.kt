@@ -19,10 +19,8 @@ class LocationFragment : BaseFragment<DataModel>() {
     override val model: LocationViewModel by inject()
 
     private val onListItemClickListener = { location: Location ->
-        with(location) {
-            model.setLocationGame(this)
-            model.onLocationChoiceStatistic(this)
-        }
+        model.setLocationGame(location)
+        model.onLocationChoiceStatistic(location)
 
         Timber.d(location.fieldsToLogString())
         router.navigateTo(Screens.GameStartScreen())

@@ -7,7 +7,5 @@ class VersionApi(
     @Expose val characterVersion: Int,
     @Expose val locationVersion: Int,
     @Expose val coverVersion: Int,
-    @Expose val rusWordVersion: Int,
-    @Expose val engWordVersion: Int,
-    @Expose val thirdLevelWordVersion: Int
+    @Expose val rusWordVersion: Int
 )

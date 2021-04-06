@@ -14,9 +14,9 @@ class WordDataSource(private val database: AppDatabase) : IWordDataSource {
             database.wordDao.insert(wordList.toRoomWordList(lang))
         }
 
-    override fun getAll(): Single<List<String>> =
+    override fun getAll(lang: String): Single<List<String>> =
         Single.create { emitter ->
-            database.wordDao.getAll()?.let { roomWordList ->
+            database.wordDao.getAll(lang)?.let { roomWordList ->
                 emitter.onSuccess(roomWordList.toWordList())
             } ?: let {
                 emitter.onError(RuntimeException("No such word in database"))

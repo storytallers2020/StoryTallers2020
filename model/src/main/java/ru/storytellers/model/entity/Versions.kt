@@ -5,7 +5,5 @@ data class Versions (
     var characterVersion: Int,
     var locationVersion: Int,
     var coverVersion: Int,
-    var rusWordVersion: Int,
-    var engWordVersion: Int,
-    var thirdLevelWordVersion: Int
+    var rusWordVersion: Int
 )

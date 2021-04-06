@@ -1,22 +1,22 @@
 package ru.storytellers.model.datasource.storage
 
-import android.content.Context
-import ru.storytellers.resources.R
 import kotlin.random.Random
 
-class WordStorage(context: Context) {
+class WordStorage {
 
-    private var wordList : MutableList<String>
+    private val words = mutableListOf<String>()
 
-    init {
-        val str = context.getString(R.string.word)
-        wordList = str.lines().toMutableList()
+    fun setWords(wordList: List<String>) {
+        words.clear()
+        words.addAll(wordList)
     }
 
     fun getRandomWord(): String {
-        val index = Random.nextInt(0, wordList.size - 1)
-        return wordList[index]
+        val index = Random.nextInt(0, words.size - 1)
+        return words[index]
     }
 
-    fun getAll(): List<String> = wordList
+    fun checkWordExists(sentenceText: String, currentWord: String): Boolean =
+        sentenceText.contains(currentWord, true)
+
 }

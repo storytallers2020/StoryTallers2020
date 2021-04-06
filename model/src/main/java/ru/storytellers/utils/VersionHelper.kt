@@ -11,8 +11,8 @@ fun Versions.toRoomVersion() =
         this.locationVersion,
         this.coverVersion,
         this.rusWordVersion,
-        this.engWordVersion,
-        this.thirdLevelWordVersion
+        0,
+        0
     )
 
 fun RoomVersions.toVersions() =
@@ -21,9 +21,7 @@ fun RoomVersions.toVersions() =
         this.characterVersion,
         this.locationVersion,
         this.coverVersion,
-        this.rusWordVersion,
-        this.engWordVersion,
-        this.thirdLevelWordVersion
+        this.rusWordVersion
     )
 
 fun VersionApi.toVersions() =
@@ -32,9 +30,7 @@ fun VersionApi.toVersions() =
         this.characterVersion,
         this.locationVersion,
         this.coverVersion,
-        this.rusWordVersion,
-        this.engWordVersion,
-        this.thirdLevelWordVersion
+        this.rusWordVersion
     )
 
 fun Versions.toVersionApi() =
@@ -43,14 +39,10 @@ fun Versions.toVersionApi() =
         this.characterVersion,
         this.locationVersion,
         this.coverVersion,
-        this.rusWordVersion,
-        this.engWordVersion,
-        this.thirdLevelWordVersion
+        this.rusWordVersion
     )
 
 fun defaultVersions() = Versions(
-    0,
-    0,
     0,
     0,
     0,

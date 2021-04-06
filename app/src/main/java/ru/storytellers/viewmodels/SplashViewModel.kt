@@ -40,19 +40,20 @@ class SplashViewModel(
             }, {
                 onErrorLiveData.value = it
             })
-
     }
 
     private fun versionProcessing(versions: VersionsComparator) {
         //TODO: Не забыть убрать и сделать проверку на всех
-        //if (!versions.isCharacterActual)
+        //if (!versions.isActual())
         cacheResources(versions)
     }
 
+    //TODO: Сделать выбор языка приложения
     private fun cacheResources(versions: VersionsComparator) {
         remoteRepository.cacheCharacters()
             .andThen(remoteRepository.cacheLocations())
             .andThen(remoteRepository.cacheCovers())
+            .andThen(remoteRepository.cacheWords("rus"))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 onLoadingLiveData.value = 50

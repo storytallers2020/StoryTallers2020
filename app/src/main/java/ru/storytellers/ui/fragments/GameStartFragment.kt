@@ -49,8 +49,8 @@ class GameStartFragment : BaseFragment<DataModel>() {
 
     override fun onResume() {
         super.onResume()
-        model.subscribeOnLevelGame().observe(viewLifecycleOwner, {
-            when (it) {
+        model.subscribeOnLevelGame().observe(viewLifecycleOwner, {levelNumber ->
+            when (levelNumber) {
                 0 -> {
                     getRuleFromResources(R.string.rules_easy_description)
                 }
