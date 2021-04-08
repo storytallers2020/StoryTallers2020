@@ -37,9 +37,7 @@ import ru.storytellers.model.datasource.resourcestorage.storage.CharacterStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.CoverStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
 import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
-import ru.storytellers.model.datasource.room.PlayerDataSource
-import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
-import ru.storytellers.model.datasource.room.StoryDataSource
+import ru.storytellers.model.datasource.room.*
 import ru.storytellers.model.entity.room.db.AppDatabase
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.model.repository.*
@@ -108,8 +106,10 @@ val ciceroneModule = module {
 }
 
 val startModule = module {
+    single<IUserDataSource> { UserRoomDataSource(get()) }
+    single<IUserRepository> { UserRepository(get()) }
     single<IUserAccountRepository> { UserAccountRepository(get(), get()) }
-    viewModel { StartViewModel(get(), get(),get()) }
+    viewModel { StartViewModel(get(), get(),get(),get()) }
 }
 val levelModel = module {
     viewModel { LevelViewModel() }
