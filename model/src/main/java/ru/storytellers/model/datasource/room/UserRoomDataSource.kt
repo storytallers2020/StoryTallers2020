@@ -14,9 +14,7 @@ class UserRoomDataSource(private val database: AppDatabase): IUserDataSource {
     override fun insertOrReplace(user: User): @NonNull Completable = Completable.fromAction {
         val roomUser = RoomUser(
             user.id,
-            user.nickName,
-            user.login,
-            user.pass,
+            user.name,
             user.email,
             user.avatarUrl
         )
@@ -30,12 +28,9 @@ class UserRoomDataSource(private val database: AppDatabase): IUserDataSource {
                 emitter.onSuccess(
                     User(
                         roomUser.id,
-                        roomUser.nickName,
-                        roomUser.login,
-                        roomUser.pass,
+                        roomUser.name,
                         roomUser.email,
-                        roomUser.avatarUrl,
-                        ""
+                        roomUser.avatarUrl
                     )
                 )
             } ?: let {
