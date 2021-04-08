@@ -1,3 +1,10 @@
 package ru.storytellers.model.datasource.remote.api
 
-data class UserApi()
+import com.google.gson.annotations.Expose
+
+data class UserApi(
+    @Expose val name: String,
+    @Expose val userId: Long,
+    @Expose val avatarUrl: String
+
+)
