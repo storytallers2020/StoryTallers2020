@@ -9,14 +9,12 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
-import ru.storytellers.model.entity.UserAccount
+import ru.storytellers.model.entity.User
 import ru.storytellers.model.repository.IStoryRepository
 import ru.storytellers.model.repository.IUserAccountRepository
-import ru.storytellers.utils.SignInGoogleHandler
-import ru.storytellers.utils.StatHelper
+import ru.storytellers.model.repository.IUserRepository
+import ru.storytellers.utils.*
 import ru.storytellers.utils.StatHelper.Companion.riseEvent
-import ru.storytellers.utils.getCurrentDateTime
-import ru.storytellers.utils.getString
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import timber.log.Timber
 
@@ -24,14 +22,15 @@ import timber.log.Timber
 class StartViewModel(
     private val storyRepository: IStoryRepository,
     private val signInGoogleHandler: SignInGoogleHandler,
-    private val userAccountRepository: IUserAccountRepository
+    private val userAccountRepository: IUserAccountRepository,
+    private val userRepositoryLocal: IUserRepository
 ) : BaseViewModel<DataModel>() {
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Story>>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
     private val onLoadingLiveData = MutableLiveData<DataModel.Loading>()
     private val accountExistsLiveData = MutableLiveData<Boolean>()
     private val userNameLiveData = MutableLiveData<String>()
-    private var userAccount: UserAccount? = null
+    private var user: User? = null
 
     init {
         accountExistsLiveData.value = false
@@ -58,24 +57,28 @@ class StartViewModel(
     }
 
     fun getUserDataFromLastSignedAccount(account: GoogleSignInAccount) {
-        userAccount = signInGoogleHandler.getUserDataFromAccount(account)
-        userNameLiveData.value = userAccount?.name
+        val userAccount = signInGoogleHandler.getUserDataFromAccount(account)
+        user = convertAccountToUser(userAccount)
+        userNameLiveData.value = user?.name
         accountExistsLiveData.value = true
     }
 
     fun getUserDataFromGoogleAccount(completedTask: Task<GoogleSignInAccount>) {
-        userAccount = signInGoogleHandler.getUserAccount(completedTask)
-        userAccount?.let {
+        val userAccount = signInGoogleHandler.getUserAccount(completedTask)
+        user = userAccount?.let { convertAccountToUser(it) }
+        user?.let {
             userNameLiveData.value = it.name
-            saveUserAccount(it)
+            //saveUserAccount(it)
+            getUser(it)
             accountExistsLiveData.value = true
+            saveUserToRoom(it)
             Timber.d(it.name)
         }
     }
 
     fun toRulesScreenStatistics() {
         val prop = listOf(
-            StatHelper.userId to "userId", // заглушка пока что
+            StatHelper.userId to user?.id.toString(),
             StatHelper.timeEvent to getCurrentDateTime().getString()
         )
         riseEvent(StatHelper.startScreenBtnToRulesGame, prop)
@@ -83,7 +86,7 @@ class StartViewModel(
 
     fun createTaleStatistics() {
         val prop = listOf<Pair<String, String>>()
-        userAccount?.let {
+        user?.let {
             prop.plus(StatHelper.timeEvent to getCurrentDateTime().getString())
                 .plus(StatHelper.userId to it.id)
                 .plus(StatHelper.userName to it.name)
@@ -116,10 +119,21 @@ class StartViewModel(
         riseEvent(StatHelper.startScreen, prop)
     }
 
+    private fun saveUserToRoom(user: User) {
+        userRepositoryLocal.addUser(user)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Timber.d("Saved to database")
+            },
+                {
+                    Timber.e(it)
+                })
+    }
 
-    private fun saveUserAccount(userAccount: UserAccount) {
+
+    private fun saveUserAccount(user: User) {
         var saved = false
-        userAccountRepository.saveUser(userAccount)
+        userAccountRepository.saveUser(user)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
@@ -129,6 +143,15 @@ class StartViewModel(
                     Timber.e(it)
                 }
             )
+    }
+
+    private fun getUser(user: User) {
+        userAccountRepository.getUser(user)
+            .subscribe({ usApi ->
+                val b = usApi
+            }, {
+                val t = it
+            })
     }
 
     fun getAllStory() {
