@@ -5,6 +5,6 @@ import com.google.gson.annotations.Expose
 
 data class UserAccountApi(
     @Expose val name: String,
-    @Expose val idToken: String,
+    @Expose val userId: String,
     @Expose val avatarUrl: String
 )
