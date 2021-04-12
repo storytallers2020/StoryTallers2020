@@ -8,8 +8,6 @@ import kotlinx.android.synthetic.main.item_book_library.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.image.IImageLoader
-import ru.storytellers.utils.loadImage
-import ru.storytellers.utils.resourceToUri
 
 class LibraryAdapter(
     val imageLoader: IImageLoader,

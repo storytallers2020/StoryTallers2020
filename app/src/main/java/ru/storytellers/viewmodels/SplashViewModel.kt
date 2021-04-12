@@ -17,6 +17,7 @@ class SplashViewModel(
     private val onSuccessLiveData = MutableLiveData<Boolean>()
     private val onErrorLiveData = MutableLiveData<Throwable>()
     private val onLoadingLiveData = MutableLiveData<Int>()
+    private val onCloseApp = MutableLiveData<Boolean>()
 
     fun subscribeOnSuccess(): LiveData<Boolean> {
         return onSuccessLiveData
@@ -28,6 +29,10 @@ class SplashViewModel(
 
     fun subscribeOnLoading(): LiveData<Int> {
         return onLoadingLiveData
+    }
+
+    fun subscribeOnCloseApp(): LiveData<Boolean> {
+        return onCloseApp
     }
 
     fun loadResource() {
@@ -43,12 +48,15 @@ class SplashViewModel(
     }
 
     private fun versionProcessing(versions: VersionsComparator) {
-        //TODO: Не забыть убрать и сделать проверку на всех
-        //if (!versions.isActual())
-        cacheResources(versions)
+        if (!versions.isActual())
+            cacheResources(versions)
+        else {
+            onLoadingLiveData.value = 100
+            onSuccessLiveData.value = true
+        }
     }
 
-    //TODO: Сделать выбор языка приложения
+    //TODO: Сделать выбор языка обязательных слов приложения (после появления личного кабинета)
     private fun cacheResources(versions: VersionsComparator) {
         remoteRepository.cacheCharacters()
             .andThen(remoteRepository.cacheLocations())
@@ -72,5 +80,13 @@ class SplashViewModel(
             }, {
                 onErrorLiveData.value = it
             })
+    }
+
+    fun onUserSelectClose() {
+        onCloseApp.value = true
+    }
+
+    fun onUserSelectContinue() {
+        onSuccessLiveData.value = true
     }
 }

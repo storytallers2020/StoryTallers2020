@@ -8,8 +8,6 @@ import kotlinx.android.synthetic.main.item_user_character_create.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.image.IImageLoader
-import ru.storytellers.utils.loadImage
-import ru.storytellers.utils.resourceToUri
 
 
 class TeamCharacterAdapter(

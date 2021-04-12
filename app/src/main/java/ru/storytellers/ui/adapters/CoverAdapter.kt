@@ -4,13 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_image_character_create.view.*
 import kotlinx.android.synthetic.main.item_image_cover.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Cover
 import ru.storytellers.model.image.IImageLoader
-import ru.storytellers.utils.loadImage
-import ru.storytellers.utils.resourceToUri
 
 class CoverAdapter(
     val imageLoader: IImageLoader,

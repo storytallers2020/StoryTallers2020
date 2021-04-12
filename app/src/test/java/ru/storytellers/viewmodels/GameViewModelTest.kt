@@ -43,8 +43,9 @@ class GameViewModelTest() : KoinTest {
     fun setUp() {
         loadKoinModules(listOf(gameEngine, amplitudeModule))
         storage = StoryHeroesApp.instance.gameStorage
-        game = Game()
-        gameViewModel = GameViewModel(game)
+        val storage = WordStorage()
+        game = Game(storage)
+        gameViewModel = GameViewModel(game, storage)
 
         val testCharacter1 = Character(1, "CharName", "AvatarUrl", "AvatarUrlSelected?")
         val testCharacter2 = Character(2, "CharName", "AvatarUrl", "AvatarUrlSelected?")
@@ -55,7 +56,7 @@ class GameViewModelTest() : KoinTest {
             1,
             Rules(),
             ShowAllSentencesRule(),
-            RandomWordRule(false, WordStorage(ApplicationProvider.getApplicationContext()))
+            RandomWordRule(false)
         )
         game.newGame(listPlayer, level)
 

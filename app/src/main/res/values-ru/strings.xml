@@ -126,6 +126,7 @@
     <string name="stepText_6">Придумайте сказку, после нажмите на Завершить сказку</string>
     <string name="stepText_7">Выберите обложку для своей сказки</string>
     <string name="stepText_8">Придумайте название для своей сказки и нажмите Сохранить</string>
+    <string name="update_resource_error">Не удалось обновить ресурсы. Продолжить?</string>
 
     // New strings... move them to the corresponding group above
 

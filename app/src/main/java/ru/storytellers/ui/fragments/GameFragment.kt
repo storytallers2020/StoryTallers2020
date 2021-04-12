@@ -8,13 +8,10 @@ import kotlinx.android.synthetic.main.sentence_input_layout.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
-import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.assistant.GameFragmentAssistant
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.hideSoftKey
-import ru.storytellers.utils.loadImage
-import ru.storytellers.utils.resourceToUri
 import ru.storytellers.viewmodels.GameViewModel
 
 class GameFragment : BaseFragment<DataModel>() {

@@ -37,6 +37,7 @@ abstract class BaseFragment<T : DataModel> : Fragment(), BackButtonListener {
         setDefaultBackground()
     }
 
+    //TODO: Заменить!!!
     fun setBackground(uri: Uri) {
         loadImage(uri, backgroundView)
     }

@@ -3,7 +3,6 @@ package ru.storytellers.ui
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.splash_activity.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -11,10 +10,10 @@ import pl.droidsonroids.gif.GifDrawable
 import ru.storytellers.BuildConfig
 import ru.storytellers.R
 import ru.storytellers.di.injectDependencies
-import ru.storytellers.ui.fragments.StartFragment
 import ru.storytellers.utils.CustomAlertDialog
 import ru.storytellers.utils.DialogCaller
 import ru.storytellers.viewmodels.SplashViewModel
+import kotlin.system.exitProcess
 
 class SplashActivity : AppCompatActivity(), DialogCaller{
 
@@ -43,16 +42,23 @@ class SplashActivity : AppCompatActivity(), DialogCaller{
         })
 
         model.subscribeOnError().observe(this, {
-            //TODO: Show Error Message and exit
+            loading_text.text = it.message
             supportFragmentManager.let { fragMan ->
-                CustomAlertDialog(this, R.string.game_loading_msg).show(fragMan, "TAG")
+                CustomAlertDialog(this, R.string.update_resource_error)
+                    .show(fragMan, "TAG")
             }
-            startActivityWithDelay(getDelay())
         })
 
         model.subscribeOnLoading().observe(this, {
             val percent = "$it%"
             loading_text.text = percent
+        })
+
+        model.subscribeOnCloseApp().observe(this, { close ->
+            if (close) {
+                moveTaskToBack(true)
+                exitProcess(-1)
+            }
         })
     }
 
@@ -70,10 +76,10 @@ class SplashActivity : AppCompatActivity(), DialogCaller{
     }
 
     override fun onDialogPositiveButton(tag: String?) {
-        TODO("Not yet implemented")
+        model.onUserSelectContinue()
     }
 
     override fun onDialogNegativeButton(tag: String?) {
-        TODO("Not yet implemented")
+        model.onUserSelectClose()
     }
 }

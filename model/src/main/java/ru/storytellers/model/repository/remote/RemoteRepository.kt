@@ -12,7 +12,6 @@ import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.utils.toAvatarList
 import ru.storytellers.utils.toCachedCoverList
 import ru.storytellers.utils.toCashedLocationList
-import ru.storytellers.utils.toRoomWordList
 
 class RemoteRepository(
     private val networkStatus: INetworkStatus,

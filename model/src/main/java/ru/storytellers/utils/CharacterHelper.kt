@@ -1,7 +1,6 @@
 package ru.storytellers.utils
 
 import ru.storytellers.model.entity.Character
-import ru.storytellers.model.entity.ImageType
 import ru.storytellers.model.entity.room.RoomCharacter
 
 fun Character.toRoomCharacter() =

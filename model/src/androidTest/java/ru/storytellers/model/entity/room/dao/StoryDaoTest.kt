@@ -62,7 +62,7 @@ class StoryDaoTest {
     fun insertStory() {
         storyDao.insert(storyForTests)
         val storyFromDatabase = storyDao.getStoryById(testId)
-        assert(storyForTests.equals(storyFromDatabase))
+        assert(storyForTests == storyFromDatabase)
     }
 
     @Test

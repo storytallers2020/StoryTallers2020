@@ -6,7 +6,6 @@ import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.loadImage
 import ru.storytellers.viewmodels.GameStartViewModel
 
 class GameStartFragment : BaseFragment<DataModel>() {

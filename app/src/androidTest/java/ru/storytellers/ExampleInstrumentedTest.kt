@@ -18,13 +18,4 @@ class ExampleInstrumentedTest {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("ru.storytellers", appContext.packageName)
     }
-
-    @Test
-    fun testSeparateString()  {
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        val storage = WordStorage(appContext)
-        val count = storage.getAll().count()
-
-        Assert.assertTrue(count > 1)
-    }
 }

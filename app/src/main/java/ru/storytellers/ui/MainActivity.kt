@@ -7,7 +7,6 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
-import ru.storytellers.di.injectDependencies
 import ru.storytellers.navigation.Screens
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router

@@ -8,7 +8,6 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Character
-import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.CharacterCreateAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment

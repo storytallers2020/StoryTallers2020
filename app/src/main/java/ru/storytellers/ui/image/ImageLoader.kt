@@ -5,7 +5,6 @@ import com.bumptech.glide.Glide
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import ru.storytellers.model.cache.IImageCache
 import ru.storytellers.model.image.IImageLoader
-import ru.storytellers.model.network.INetworkStatus
 import timber.log.Timber
 
 class ImageLoader(

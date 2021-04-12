@@ -1,7 +1,6 @@
 package ru.storytellers.utils
 
 import ru.storytellers.model.entity.Cover
-import ru.storytellers.model.entity.ImageType
 import ru.storytellers.model.entity.room.RoomCover
 
 fun Cover.toRoomCover() =
