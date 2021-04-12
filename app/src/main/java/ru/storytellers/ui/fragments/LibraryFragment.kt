@@ -80,6 +80,15 @@ class LibraryFragment : BaseFragment<DataModel>(), DialogCaller {
             }
         })
 
+        model.subscribeOnProgressEnableLiveData()
+                .observe(viewLifecycleOwner, { loadingState ->
+                    if (loadingState.progress == 100) {
+                        showProgressBar(progress_bar, rv_books)
+                    } else {
+                        hideProgressBar(progress_bar, rv_books)
+                    }
+                })
+
         model.subscribeOnError().observe(viewLifecycleOwner, {
             activity?.let { context ->
                 toastShowLong(context, context.getString(R.string.something_went_wrong))

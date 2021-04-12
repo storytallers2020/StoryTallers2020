@@ -60,9 +60,6 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
     override fun initViewModel() {
         model.subscribeOnCover().observe(viewLifecycleOwner, { cover ->
             imageLoader.loadInto(cover.imageUrl, R.drawable.cover_recycler_stub, iv_cover)
-//            resourceToUri(cover.imageUrl)?.let {
-//                loadImage(it, iv_cover)
-//            }
         })
 
         model.subscribeOnTitleAcceptable().observe(viewLifecycleOwner, {
@@ -88,6 +85,7 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
             }
         })
     }
+
     private fun saveStory() {
         model.saveStory()
     }

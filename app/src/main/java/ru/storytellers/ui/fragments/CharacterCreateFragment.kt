@@ -55,34 +55,37 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
 
     override fun initViewModel() {
         inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE)
-        //screen_header.post { View.FOCUS_DOWN }
     }
 
     override fun onStart() {
         super.onStart()
-        enter_name_field_et.apply {
-            setText("")
-            onFocusChangeListener = focusListener
-        }
+        enter_name_field_et.onFocusChangeListener = focusListener
         model.getAllCharacters()
     }
 
     override fun onResume() {
         super.onResume()
-        model.subscribeOnError().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnError().observe(viewLifecycleOwner, {
             Timber.e(it.error)
         })
 
-        model.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnSuccess().observe(viewLifecycleOwner, {
             setDataCharacterAdapter(it)
         })
-        model.subscribeOnCharacterSelected()
-            .observe(
-                viewLifecycleOwner,
-                Observer { isCharacterSelected = it }
-            )
+        model.subscribeOnCharacterSelected().observe(viewLifecycleOwner,
+                { isCharacterSelected = it }
+        )
 
-        model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, Observer {
+        model.subscribeOnProgressEnableLiveData()
+                .observe(viewLifecycleOwner, { loadingState ->
+                    if (loadingState.progress == 100) {
+                        showProgressBar(progress_bar, rv_characters)
+                    } else {
+                        hideProgressBar(progress_bar, rv_characters)
+                    }
+                })
+
+        model.inputValid.subscribeOnInputIncorrect().observe(viewLifecycleOwner, {
             when (it) {
                 1 -> {
                     setError(getString(R.string.err_short_name))
@@ -131,8 +134,8 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
             isNameEntered = false
             router.navigateTo(Screens.TeamCharacterScreen())
         } else if (!isCharacterSelected) toastShowLong(
-            context,
-            getString(R.string.err_character_not_selected)
+                context,
+                getString(R.string.err_character_not_selected)
         )
     }
 }

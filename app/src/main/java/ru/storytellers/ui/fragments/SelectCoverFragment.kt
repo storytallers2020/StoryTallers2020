@@ -1,7 +1,8 @@
 package ru.storytellers.ui.fragments
 
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_choosing_cover.*
+import kotlinx.android.synthetic.main.fragment_choosing_cover.back_button_character
+import kotlinx.android.synthetic.main.fragment_choosing_cover.progress_bar
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -50,6 +51,7 @@ class SelectCoverFragment : BaseFragment<DataModel>() {
             getAllCover()
             handlerOnSuccessResult(this)
             handlerOnErrorResult(this)
+            handlerEnabledProgressBar(this)
         }
     }
 
@@ -58,13 +60,24 @@ class SelectCoverFragment : BaseFragment<DataModel>() {
     }
 
     private fun handlerOnSuccessResult(viewModel: SelectCoverViewModel) {
-        viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
+        viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, {
             setLocationAdapter(it)
         })
     }
 
+    private fun handlerEnabledProgressBar(viewModel: SelectCoverViewModel) {
+        viewModel.subscribeOnProgressEnableLiveData()
+            .observe(viewLifecycleOwner, { loadingState ->
+            if (loadingState.progress==100) {
+                showProgressBar(progress_bar, rv_covers)
+            } else {
+                hideProgressBar(progress_bar, rv_covers)
+            }
+        })
+    }
+
     private fun handlerOnErrorResult(viewModel: SelectCoverViewModel) {
-        viewModel.subscribeOnError().observe(viewLifecycleOwner, Observer {
+        viewModel.subscribeOnError().observe(viewLifecycleOwner, {
             Timber.e(it.error)
         })
     }

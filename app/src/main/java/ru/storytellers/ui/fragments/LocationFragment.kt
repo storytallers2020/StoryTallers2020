@@ -2,6 +2,7 @@ package ru.storytellers.ui.fragments
 
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_location.*
+import kotlinx.android.synthetic.main.fragment_location.progress_bar
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
@@ -51,6 +52,7 @@ class LocationFragment : BaseFragment<DataModel>() {
             getAllLocations()
             handlerOnSuccessResult(this)
             handlerOnErrorResult(this)
+            handlerEnabledProgressBar(this)
         }
     }
 
@@ -59,6 +61,18 @@ class LocationFragment : BaseFragment<DataModel>() {
         router.exit()
         return true
     }
+
+    private fun handlerEnabledProgressBar(viewModel: LocationViewModel) {
+        viewModel.subscribeOnProgressEnableLiveData()
+            .observe(viewLifecycleOwner, { loadingState ->
+                if (loadingState.progress==100) {
+                    showProgressBar(progress_bar, rv_covers)
+                } else {
+                    hideProgressBar(progress_bar, rv_covers)
+                }
+            })
+    }
+
 
     private fun handlerOnSuccessResult(viewModel: LocationViewModel) {
         viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {

@@ -92,11 +92,12 @@
     <string name="title_choosing_cover">Choosing a cover</string>
     <string name="choosing_cover_choose">Choose a cover for your fairy tale</string>
     <string name="choosing_cover_title">Come up with the title</string>
-    <string name="enter_title">Enter title</string>
+    <string name="enter_title">Please, enter title</string>
 
     //Editing screen
     <string name="title_edit">Please, edit your story…</string>
     <string name="edit_text_view_name" translatable="false">EditText</string>
+    <string name="text_error_length_title">From 2 to 70 characters</string>
 
     // Library screens
     <string name="title_library">Library</string>
@@ -138,8 +139,6 @@
     <string name="msg_agreement_accepted">Agreements accepted</string>
     <string name="update_resource_error">Unable to update resources. Continue?</string>
 
-
     // New strings... move them to the corresponding group above
-
 
 </resources>
