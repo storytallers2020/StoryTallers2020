@@ -1,6 +1,5 @@
 package ru.storytellers.ui.fragments.basefragment
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
+import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.ui.BackButtonListener
 import ru.storytellers.utils.loadImage
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
@@ -22,6 +22,7 @@ abstract class BaseFragment<T : DataModel> : Fragment(), BackButtonListener {
     abstract val model: BaseViewModel<T>
     abstract val layoutRes: Int
     protected val router: Router by inject()
+    protected val imageLoader: IImageLoader by inject()
     private val navigatorHolder: NavigatorHolder by inject()
     private val backgroundView: View by lazy { requireActivity().findViewById(R.id.main_background) }
 
@@ -37,8 +38,8 @@ abstract class BaseFragment<T : DataModel> : Fragment(), BackButtonListener {
         setDefaultBackground()
     }
 
-    protected fun setBackground(uri: Uri) {
-        loadImage(uri, backgroundView)
+    protected fun setBackground(url: String) {
+        imageLoader.loadBackground(url, backgroundView)
     }
 
     private fun setDefaultBackground() {

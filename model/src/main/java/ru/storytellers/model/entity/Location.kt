@@ -1,14 +1,17 @@
 package ru.storytellers.model.entity
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Location(
     @Expose val id: Long,
     @Expose val name: String,
     @Expose val imageUrl: String,
     @Expose val imageForRecycler: String,
     @Expose val descriptions: String
-) {
+): Parcelable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

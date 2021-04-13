@@ -5,21 +5,20 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.view.View
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_start.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.AlertDialogFragment
-import ru.storytellers.utils.toastShowLong
+import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.StartViewModel
+import timber.log.Timber
 
 const val DIALOG_TAG_EXIT = "start-fragment-exit-46bf-ab6"
 const val DIALOG_TAG_POLICY = "start-fragment-policy-46bf-ab6"
 
-class StartFragment : BaseFragment<DataModel>() {
+class StartFragment : BaseFragment<DataModel>(), DialogCaller {
     override val layoutRes = R.layout.fragment_start
     override val model: StartViewModel by inject()
     private var sharedPreferences: SharedPreferences? = null
@@ -48,23 +47,23 @@ class StartFragment : BaseFragment<DataModel>() {
         val packageName = context?.packageName
         try {
             startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(getString(R.string.uri_to_market_google_play, packageName))
-                ).apply {
-                    addFlags(
-                        Intent.FLAG_ACTIVITY_NO_HISTORY or
-                                Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
-                                Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-                    )
-                }
+                    Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(getString(R.string.uri_to_market_google_play, packageName))
+                    ).apply {
+                        addFlags(
+                                Intent.FLAG_ACTIVITY_NO_HISTORY or
+                                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                        )
+                    }
             )
         } catch (e: ActivityNotFoundException) {
             startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(getString(R.string.uri_to_http_google_play, packageName))
-                )
+                    Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(getString(R.string.uri_to_http_google_play, packageName))
+                    )
             )
         }
     }
@@ -92,8 +91,8 @@ class StartFragment : BaseFragment<DataModel>() {
         model.subscribeOnError().observe(viewLifecycleOwner, {
             activity?.let { context ->
                 toastShowLong(
-                    context,
-                    context.getString(R.string.something_went_wrong)
+                        context,
+                        context.getString(R.string.something_went_wrong)
                 )
             }
         })
@@ -103,18 +102,14 @@ class StartFragment : BaseFragment<DataModel>() {
         sharedPreferences = activity?.getSharedPreferences(DIALOG_TAG_POLICY, 0)
         sharedPreferences?.getBoolean(DIALOG_TAG_POLICY, false)?.let {
             if (!it) {
-                showAlertDialog(DIALOG_TAG_POLICY, 0)
+                activity?.supportFragmentManager?.let { manager ->
+                    CustomAgreementDialog(this).show(manager, DIALOG_TAG_POLICY)
+                }
             }
         }
     }
 
-    private fun showAlertDialog(tag: String, title: Int) {
-        activity?.supportFragmentManager?.let { manager ->
-            AlertDialogFragment.newInstance(this, title).show(manager, tag)
-        }
-    }
-
-    fun acceptAgreement() {
+    private fun acceptAgreement() {
         sharedPreferences?.edit()?.putBoolean(DIALOG_TAG_POLICY, true)?.apply()
     }
 
@@ -134,11 +129,41 @@ class StartFragment : BaseFragment<DataModel>() {
     }
 
     override fun backClicked(): Boolean {
-        showAlertDialog(DIALOG_TAG_EXIT, R.string.dialog_exit)
+        activity?.supportFragmentManager?.let { manager ->
+            CustomAlertDialog(this, R.string.dialog_exit).show(manager, DIALOG_TAG_EXIT)
+        }
         return false
     }
 
-    fun closeApplication() {
+    private fun closeApplication() {
         router.exit()
     }
+
+    override fun onDialogPositiveButton(tag: String?) {
+        Timber.d("onPositiveButton($tag)")
+        when (tag) {
+            DIALOG_TAG_POLICY -> {
+                toastShowShort(context, getString(R.string.msg_agreement_accepted))
+                acceptAgreement()
+            }
+            DIALOG_TAG_EXIT -> {
+                toastShowLong(context, getString(R.string.msg_on_exit))
+                closeApplication()
+            }
+        }
+    }
+
+    override fun onDialogNegativeButton(tag: String?) {
+        Timber.d("onNegativeButton($tag)")
+        when (tag) {
+            DIALOG_TAG_POLICY -> {
+                toastShowLong(context, getString(R.string.msg_agreement_declined))
+                closeApplication()
+            }
+            DIALOG_TAG_EXIT -> {
+                // do nothing
+            }
+        }
+    }
+
 }

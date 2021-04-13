@@ -11,4 +11,4 @@
     android:adjustViewBounds="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:src="@drawable/cover_cave_of_wonders" />
+    tools:src="@drawable/cover_recycler_stub" />

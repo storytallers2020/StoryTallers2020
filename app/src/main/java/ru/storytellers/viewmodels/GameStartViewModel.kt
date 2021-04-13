@@ -1,6 +1,5 @@
 package ru.storytellers.viewmodels
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryHeroesApp
@@ -16,7 +15,7 @@ class GameStartViewModel(private val game: Game) : BaseViewModel<DataModel>() {
     private val app = StoryHeroesApp.instance
     private val storage = app.gameStorage
     private val levelGameLiveData = MutableLiveData<Int>()
-    private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
+    private val uriBackgroundImageLiveData = MutableLiveData<String>()
 
     fun requestGameLevelFromStorage() {
         levelGameLiveData.value = StoryHeroesApp.instance.gameStorage.level?.id ?: 0
@@ -46,10 +45,10 @@ class GameStartViewModel(private val game: Game) : BaseViewModel<DataModel>() {
 
     fun getUriBackgroundImage() {
         storage.location?.let {
-            uriBackgroundImageLiveData.value = resourceToUri(it.imageUrl)
+            uriBackgroundImageLiveData.value = it.imageUrl
         }
     }
 
-    fun subscribeOnBackgroundImageChanged(): LiveData<Uri> = uriBackgroundImageLiveData
+    fun subscribeOnBackgroundImageChanged(): LiveData<String> = uriBackgroundImageLiveData
 
 }

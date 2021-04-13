@@ -14,7 +14,8 @@ class RulesUnitTest {
     private val str4 = "Предложение 1... так нельзя."
     private val str5 = ""
 
-    lateinit var rule: IRule
+    private lateinit var rule: IRule
+
     @Before
     fun before() {
         rule = OneSentenceInTextRule()

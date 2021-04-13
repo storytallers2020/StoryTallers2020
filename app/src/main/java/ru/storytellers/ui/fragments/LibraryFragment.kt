@@ -9,11 +9,12 @@ import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.LibraryAdapter
 import ru.storytellers.ui.assistant.LibraryFragmentAssistant
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
+import ru.storytellers.utils.DialogCaller
 import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.LibraryViewModel
 
 
-class LibraryFragment : BaseFragment<DataModel>() {
+class LibraryFragment : BaseFragment<DataModel>(), DialogCaller {
 
     override val model: LibraryViewModel by inject()
     private val assistant: LibraryFragmentAssistant by lazy { LibraryFragmentAssistant(this) }
@@ -25,11 +26,12 @@ class LibraryFragment : BaseFragment<DataModel>() {
 
     private val libraryAdapter: LibraryAdapter by lazy {
         LibraryAdapter(
-                itemClickListener,
-                buttonMenuClickListener,
-                buttonShareClickListener,
-                buttonCopyClickListener,
-                buttonDeleteClickListener
+            imageLoader,
+            itemClickListener,
+            buttonMenuClickListener,
+            buttonShareClickListener,
+            buttonCopyClickListener,
+            buttonDeleteClickListener
         )
     }
     private val itemClickListener = { story: Story ->
@@ -125,7 +127,7 @@ class LibraryFragment : BaseFragment<DataModel>() {
         model.setStoryLiveData(story)
     }
 
-    fun deleteStory() {
+    private fun deleteStory() {
         model.deleteStory()
     }
 
@@ -142,5 +144,13 @@ class LibraryFragment : BaseFragment<DataModel>() {
         model.onBackClicked(this.javaClass.simpleName)
         router.exit()
         return true
+    }
+
+    override fun onDialogPositiveButton(tag: String?) {
+        deleteStory()
+    }
+
+    override fun onDialogNegativeButton(tag: String?) {
+        // do nothing
     }
 }

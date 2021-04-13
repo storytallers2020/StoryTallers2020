@@ -1,5 +1,9 @@
 package ru.storytellers.model.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Story (
     val id: Long,
     var name: String,
@@ -7,4 +11,4 @@ data class Story (
     var coverUrl: String,
     var location: Location?,
     var sentences: List<SentenceOfTale>?
-)
+): Parcelable

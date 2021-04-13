@@ -10,7 +10,7 @@
     android:focusableInTouchMode="true"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingVertical="@dimen/padding_layout_standard"
-    tools:background="@drawable/location_beach">
+    tools:background="@drawable/location_stub">
 
     <TextView
         android:id="@+id/reminder_intro"

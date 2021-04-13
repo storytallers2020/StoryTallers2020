@@ -24,8 +24,8 @@ class GameEndViewModelTest : KoinTest {
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
-    val storage:GameStorage by inject()
-    val gameEndViewModel : GameEndViewModel by inject()
+    private val storage:GameStorage by inject()
+    private val gameEndViewModel : GameEndViewModel by inject()
 
     @Before
     fun setUp() {
@@ -46,7 +46,7 @@ class GameEndViewModelTest : KoinTest {
         every { location.imageUrl } returns testUrl
         storage.setLocationGame(location)
         gameEndViewModel.getUriBackgroundImage()
-        val urlFromViewModel = gameEndViewModel.subscribeOnUriBackgroundImage().value.toString()
+        val urlFromViewModel = gameEndViewModel.subscribeOnBackgroundImageUri().value.toString()
         Assert.assertEquals(testUrl, urlFromViewModel)
     }
 

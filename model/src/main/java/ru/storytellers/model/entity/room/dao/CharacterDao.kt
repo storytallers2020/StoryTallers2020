@@ -21,6 +21,9 @@ interface CharacterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(character: RoomCharacter)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(characterList: List<RoomCharacter>)
+
     //endregion Insert
 
     //region Update

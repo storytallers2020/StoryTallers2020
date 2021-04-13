@@ -12,8 +12,6 @@ import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.assistant.GameFragmentAssistant
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
 import ru.storytellers.utils.hideSoftKey
-import ru.storytellers.utils.loadImage
-import ru.storytellers.utils.resourceToUri
 import ru.storytellers.viewmodels.GameViewModel
 
 class GameFragment : BaseFragment<DataModel>() {
@@ -21,6 +19,7 @@ class GameFragment : BaseFragment<DataModel>() {
     private val assistantFragment: GameFragmentAssistant by lazy { GameFragmentAssistant(this@GameFragment) }
     override val model: GameViewModel by inject()
     override val layoutRes = R.layout.fragment_game
+
     var inputMethodManager: Any? = null
     private var isInputContentCorrect = false
     private val focusListener = View.OnFocusChangeListener { v, hasFocus ->
@@ -98,9 +97,10 @@ class GameFragment : BaseFragment<DataModel>() {
         model.subscribeOnPlayerChanged().observe(viewLifecycleOwner, { player ->
             player_name.text = player.name
             player.character?.let {
-                resourceToUri(it.avatarUrl)?.let { uri ->
-                    loadImage(uri, avatar)
-                }
+                imageLoader.loadInto(it.avatarUrl, R.drawable.avatar_stub, avatar)
+//                resourceToUri(it.avatarUrl)?.let { uri ->
+//                    loadImage(uri, avatar)
+//                }
             }
         })
     }

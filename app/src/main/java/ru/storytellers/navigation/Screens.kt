@@ -1,6 +1,5 @@
 package ru.storytellers.navigation
 
-import android.net.Uri
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.fragments.*
@@ -59,13 +58,13 @@ sealed class Screens {
         private val story: Story,
         private val sourceListSentences: List<SentenceOfTale>,
         private val titleStory: String,
-        private val uriLocationImage: Uri
+        private val locationImageUrl: String
     ) : SupportAppScreen() {
         override fun getFragment() = LibraryBookEditingFragment.newInstance(
             story,
             sourceListSentences,
             titleStory,
-            uriLocationImage
+            locationImageUrl
         )
     }
 

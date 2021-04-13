@@ -16,6 +16,7 @@ class GameStorage {
     private var gameEnded: Int =
         0  //  needed to let players resume the game only once after ending it
 
+
     var level: Level? = null
 
     fun getTimeCreateStory() = timeCreateStory
@@ -61,5 +62,4 @@ class GameStorage {
     fun setGameEnded() {
         gameEnded++
     }
-
 }

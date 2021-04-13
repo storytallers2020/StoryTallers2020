@@ -7,6 +7,7 @@ import org.koin.android.ext.android.inject
 import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Cover
+import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.adapters.CoverAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
@@ -30,7 +31,10 @@ class SelectCoverFragment : BaseFragment<DataModel>() {
             router.navigateTo(Screens.TitleAndSaveStoryScreen())
         }
     }
-    private val coverAdapter: CoverAdapter by lazy { CoverAdapter(onListItemClickListener) }
+    private val coverAdapter: CoverAdapter by lazy {
+        val imageLoader: IImageLoader by inject()
+        CoverAdapter(imageLoader, onListItemClickListener)
+    }
 
     override fun init() {
         back_button_character.setOnClickListener { backToGameEndScreen() }

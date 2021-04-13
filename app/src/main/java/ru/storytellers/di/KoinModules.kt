@@ -14,6 +14,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.storytellers.BuildConfig
+import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.engine.Game
 import ru.storytellers.engine.GameStorage
 import ru.storytellers.engine.level.Level
@@ -25,23 +26,22 @@ import ru.storytellers.engine.showRules.ShowAllSentencesRule
 import ru.storytellers.engine.showRules.ShowLastSentenceRule
 import ru.storytellers.engine.wordRules.IWordRule
 import ru.storytellers.engine.wordRules.RandomWordRule
+import ru.storytellers.model.cache.ICashImageDataSource
+import ru.storytellers.model.cache.IImageCache
 import ru.storytellers.model.datasource.*
 import ru.storytellers.model.datasource.remote.IRemoteDataSource
-import ru.storytellers.model.datasource.resourcestorage.CharacterResDataSource
-import ru.storytellers.model.datasource.resourcestorage.CoverResDataSource
-import ru.storytellers.model.datasource.resourcestorage.LocationResDataSource
-import ru.storytellers.model.datasource.resourcestorage.storage.CharacterStorage
-import ru.storytellers.model.datasource.resourcestorage.storage.CoverStorage
-import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
-import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
-import ru.storytellers.model.datasource.room.PlayerDataSource
-import ru.storytellers.model.datasource.room.SentenceOfTaleDataSource
-import ru.storytellers.model.datasource.room.StoryDataSource
-import ru.storytellers.model.entity.room.db.AppDatabase
+import ru.storytellers.model.datasource.room.*
+import ru.storytellers.model.datasource.storage.WordStorage
+import ru.storytellers.model.image.IImageLoader
 import ru.storytellers.model.network.INetworkStatus
 import ru.storytellers.model.repository.*
 import ru.storytellers.ui.assistant.TitleAndSaveModelAssistant
+import ru.storytellers.ui.image.ImageLoader
 import ru.storytellers.utils.AmplitudeWrapper
+import ru.storytellers.model.cache.ImageCache
+import ru.storytellers.model.entity.room.db.*
+import ru.storytellers.model.repository.remote.RemoteRepository
+import ru.storytellers.model.repository.remote.IRemoteRepository
 import ru.storytellers.utils.NetworkStatus
 import ru.storytellers.utils.PlayerCreator
 import ru.storytellers.viewmodels.*
@@ -54,6 +54,11 @@ private val loadModules by lazy {
         listOf(
             ciceroneModule,
             databaseModule,
+            networkStatusModule,
+            cacheModule,
+            dataSourceModule,
+            repositoryModule,
+            splashModule,
             startModule,
             levelModel,
             characterCreateModule,
@@ -77,12 +82,13 @@ private val loadModules by lazy {
 val libraryModule = module {
     viewModel { LibraryViewModel(get()) }
 }
+
 val libraryBookShowModule = module {
     viewModel { LibraryBookShowViewModel(get()) }
 }
 
 val libraryBookEditModule = module {
-    viewModel { LibraryBookEditViewModel(get(),get()) }
+    viewModel { LibraryBookEditViewModel(get(), get()) }
 }
 
 val ciceroneModule = module {
@@ -91,12 +97,18 @@ val ciceroneModule = module {
     single { get<Cicerone<Router>>().navigatorHolder }
 }
 
+val splashModule = module {
+    viewModel { SplashViewModel(get(), get()) }
+}
+
 val startModule = module {
     viewModel { StartViewModel(get()) }
 }
+
 val levelModel = module {
-    viewModel { LevelViewModel() }
+    viewModel { LevelViewModel(get(), get()) }
 }
+
 val gameStartModule = module {
     viewModel { GameStartViewModel(get()) }
 }
@@ -107,30 +119,53 @@ val teamCharacterModule = module {
 
 val characterCreateModule = module {
     single { PlayerCreator() }
-    single<ICharacterDataSource> { CharacterResDataSource(get()) }
-    single<ICharacterRepository> { CharacterRepository(get(), get(), get()) }
     viewModel { CharacterCreateViewModel(get(), get()) }
 }
 
 val locationModule = module {
-    single { CharacterStorage(get()) }
-    single { LocationStorage(get()) }
-    single<ILocationDataSource> { LocationResDataSource(get()) }
-    single<INetworkStatus> { NetworkStatus(get()) }
-    single<ILocationRepository> { LocationRepository(get(), get(), get()) }
     viewModel { LocationViewModel(get()) }
 }
 
 val selectCoverModule = module {
-    single { CoverStorage(get()) }
-    single<ICoverDataSource> { CoverResDataSource(get()) }
-    single<ICoverRepository> { CoverRepository(get(), get(), get()) }
     viewModel { SelectCoverViewModel(get()) }
+}
+val networkStatusModule = module {
+    single<INetworkStatus> { NetworkStatus(get()) }
+}
+
+val cacheModule = module {
+    val file = StoryHeroesApp.instance.imageCashDir
+
+    single<IImageCache> { ImageCache(get(), file) }
+    single<IImageLoader> { ImageLoader(get()) }
+}
+
+val dataSourceModule = module {
+    single<ICharacterDataSource> { CharacterDataSource(get()) }
+    single<ILocationDataSource> { LocationDataSource(get()) }
+    single<IStoryDataSource> { StoryDataSource(get()) }
+    single<ICoverDataSource> { CoverDataSource(get()) }
+    single<IVersionDataSource> { VersionDataSource(get()) }
+    single<IWordDataSource> { WordDataSource(get()) }
+
+    single<ICashImageDataSource> { CashImageDataSource(get(), get()) }
+}
+
+val repositoryModule = module {
+    single<IRemoteRepository> { RemoteRepository(get(), get(), get(), get(), get(), get(), get()) }
+    single<ICharacterRepository> { CharacterRepository(get()) }
+    single<ILocationRepository> { LocationRepository(get() ) }
+    single<IStoryRepository> { StoryRepository(get()) }
+    single<ICoverRepository> { CoverRepository(get()) }
+    single<IWordRepository> { WordRepository(get())}
+
+    single<IVersionRepository> { VersionRepository(get(), get(), get()) }
 }
 
 val databaseModule = module {
     single {
         Room.databaseBuilder(get(), AppDatabase::class.java, "StoryTellers.db")
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
             .build()
     }
     single { get<AppDatabase>().characterDao }
@@ -138,21 +173,21 @@ val databaseModule = module {
     single { get<AppDatabase>().locationDao }
     single { get<AppDatabase>().storyDao }
     single { get<AppDatabase>().userDao }
+    single { get<AppDatabase>().versionsDao }
+    single { get<AppDatabase>().wordDao }
 }
 
 val gameEndModule = module {
     viewModel { GameEndViewModel() }
 }
 
-
 val titleAndSaveModule = module {
-    single<IStoryDataSource> { StoryDataSource(get(), get(), get()) }
-    single<IStoryRepository> { StoryRepository(get()) }
     single { TitleAndSaveModelAssistant(get()) }
     viewModel { TitleAndSaveStoryViewModel(get()) }
 }
+
 val gameModule = module {
-    viewModel { GameViewModel(get()) }
+    viewModel { GameViewModel(get(), get()) }
 }
 
 val gameEngine = module {
@@ -166,9 +201,9 @@ val gameEngine = module {
     single<IShowRule>(named("ShowAllSentencesRule")) { ShowAllSentencesRule() }
     single<IShowRule>(named("ShowLastSentenceRule")) { ShowLastSentenceRule() }
 
-    single { WordStorage(get()) }
-    single<IWordRule>(named("NoNeedWord")) { RandomWordRule(false, get()) }
-    single<IWordRule>(named("NeedWord")) { RandomWordRule(true, get()) }
+    single { WordStorage() }
+    single<IWordRule>(named("NoNeedWord")) { RandomWordRule(false) }
+    single<IWordRule>(named("NeedWord")) { RandomWordRule(true) }
 
     single {
         Levels().apply {
@@ -201,8 +236,8 @@ val gameEngine = module {
 
     single<IPlayerDataSource> { PlayerDataSource(get(), get()) }
     single<ISentenceOfTaleDataSource> { SentenceOfTaleDataSource(get(), get()) }
-    single<ISentenceOfTaleRepository>{ SentenceOfTaleRepository(get()) }
-    single { Game() }
+    single<ISentenceOfTaleRepository> { SentenceOfTaleRepository(get()) }
+    single { Game(get()) }
     single { GameStorage() }
 
 }
@@ -224,9 +259,9 @@ val remoteModule = module {
     single {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = if (BuildConfig.DEBUG)
-                HttpLoggingInterceptor.Level.BODY
-            else
-                HttpLoggingInterceptor.Level.NONE
+            HttpLoggingInterceptor.Level.BODY
+        else
+            HttpLoggingInterceptor.Level.NONE
 
         OkHttpClient.Builder()
             .addInterceptor(interceptor)

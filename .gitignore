@@ -19,3 +19,5 @@
 *.tab.values.at
 misc.xml
 gradle.xml
+/.idea/compiler.xml
+/.idea/

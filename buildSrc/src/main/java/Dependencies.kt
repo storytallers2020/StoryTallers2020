@@ -39,6 +39,7 @@ object Versions {
     const val stdlib = "1.3.41"
     const val coroutinesCore = "1.2.1"
     const val coroutinesAndroid = "1.1.1"
+    const val reflect = "1.4.21"
 
     //Retrofit
     const val retrofit = "2.8.1"
@@ -125,6 +126,7 @@ object Kotlin {
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.stdlib}"
     const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesCore}"
     const val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesAndroid}"
+    const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.reflect}"
 }
 
 object Timber{

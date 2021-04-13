@@ -7,8 +7,7 @@ import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.utils.StatHelper
 
-abstract class BaseViewModel<T : DataModel>(
-) : ViewModel() {
+abstract class BaseViewModel<T : DataModel> : ViewModel() {
     protected val loadingStateLiveData = MutableLiveData<DataModel.Loading>()
     fun onBackClicked(fragmentName: String) {
         StoryHeroesApp.instance

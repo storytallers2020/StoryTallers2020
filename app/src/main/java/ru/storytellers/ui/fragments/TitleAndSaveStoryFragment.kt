@@ -9,13 +9,16 @@ import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.*
+import ru.storytellers.utils.AdMobFragment
+import ru.storytellers.utils.hideSoftKey
+import ru.storytellers.utils.toastShowLong
 import ru.storytellers.viewmodels.TitleAndSaveStoryViewModel
 
 class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
     override val model: TitleAndSaveStoryViewModel by inject()
     override val layoutRes = R.layout.fragment_choosing_title
-    private lateinit var adMobFragment: AdMobFragment
+
+    private lateinit var adMobFragment : AdMobFragment
 
     companion object {
         fun newInstance() = TitleAndSaveStoryFragment()
@@ -56,9 +59,7 @@ class TitleAndSaveStoryFragment : BaseFragment<DataModel>() {
 
     override fun initViewModel() {
         model.subscribeOnCover().observe(viewLifecycleOwner, { cover ->
-            resourceToUri(cover.imageUrl)?.let {
-                loadImage(it, iv_cover)
-            }
+            imageLoader.loadInto(cover.imageUrl, R.drawable.cover_recycler_stub, iv_cover)
         })
 
         model.subscribeOnTitleAcceptable().observe(viewLifecycleOwner, {
