@@ -6,5 +6,5 @@ import io.reactivex.rxjava3.core.Single
 
 interface IWordDataSource {
     fun insertOrReplace(wordList: List<String>, lang: String): @NonNull Completable
-    fun getAll(land: String): Single<List<String>>
+    fun getAll(language: String): Single<List<String>>
 }

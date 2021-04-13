@@ -96,7 +96,7 @@ class TeamCharacterFragment : BaseFragment<DataModel>(), DialogCaller {
         }
     }
 
-    fun removeCharacter() {
+    private fun removeCharacter() {
         character?.let { model.removePlayer(it) }
     }
 

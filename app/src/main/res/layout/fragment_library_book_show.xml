@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    tools:background="@drawable/location_night_city">
+    tools:background="@drawable/location_stub">
 
     <ImageView
         android:id="@+id/back_button"

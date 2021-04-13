@@ -174,7 +174,7 @@ class LibraryBookReadingFragment : BaseFragment<DataModel>(), DialogCaller {
         }
     }
 
-    fun removeStory() {
+    private fun removeStory() {
         story?.let { model.removeStory(it) }
     }
 

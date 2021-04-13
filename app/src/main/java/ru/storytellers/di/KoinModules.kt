@@ -159,7 +159,7 @@ val repositoryModule = module {
     single<ICoverRepository> { CoverRepository(get()) }
     single<IWordRepository> { WordRepository(get())}
 
-    single<IVersionRepository> { VersionRepository(get(), get()) }
+    single<IVersionRepository> { VersionRepository(get(), get(), get()) }
 }
 
 val databaseModule = module {

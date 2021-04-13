@@ -2,7 +2,6 @@ package ru.storytellers.ui.fragments
 
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
-import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_level.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R

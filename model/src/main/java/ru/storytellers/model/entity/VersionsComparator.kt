@@ -2,25 +2,25 @@ package ru.storytellers.model.entity
 
 class VersionsComparator (
     val remoteVersions: Versions,
-    val localVersions: Versions
+    private val localVersions: Versions
 )
 {
-    val isCharacterActual: Boolean
+    private val isCharacterActual: Boolean
         get() {
             return localVersions.characterVersion == remoteVersions.characterVersion
         }
 
-    val isLocationActual: Boolean
+    private val isLocationActual: Boolean
         get() {
             return localVersions.locationVersion == remoteVersions.locationVersion
         }
 
-    val isCoverActual: Boolean
+    private val isCoverActual: Boolean
         get() {
             return localVersions.coverVersion == remoteVersions.coverVersion
         }
 
-    val isWordActual: Boolean
+    private val isWordActual: Boolean
         get() {
             return localVersions.rusWordVersion == remoteVersions.rusWordVersion
         }

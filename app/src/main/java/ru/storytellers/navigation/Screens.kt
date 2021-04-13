@@ -1,6 +1,5 @@
 package ru.storytellers.navigation
 
-import android.net.Uri
 import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.fragments.*

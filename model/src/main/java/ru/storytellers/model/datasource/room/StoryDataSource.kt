@@ -48,7 +48,7 @@ class StoryDataSource(private val database: AppDatabase) : IStoryDataSource {
             }
         }
     override fun updateTitleStory(titleStory: String, storyId: Long):Single<Int> =
-        Single.create<Int> { emitter ->
+        Single.create { emitter ->
             try {
                 val count = database.storyDao.updateTitleStory(titleStory, storyId)
                 emitter.onSuccess(count)

@@ -1,11 +1,9 @@
 package ru.storytellers.ui.fragments
 
-import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_library_book_edit.*
-import kotlinx.android.synthetic.main.fragment_library_book_edit.book_title_text
 import kotlinx.android.synthetic.main.item_book_sentence.view.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -143,7 +141,7 @@ class LibraryBookEditingFragment (
         }
     }
 
-    fun saveChangedTitle() {
+    private fun saveChangedTitle() {
         story?.let {
             model.updateTitleStory(it.name, it.id)
             storyTitle = it.name
@@ -151,7 +149,7 @@ class LibraryBookEditingFragment (
         toggleBackButton()
     }
 
-    fun restoreTitle() {
+    private fun restoreTitle() {
         book_title_text?.setText(storyTitle)
         storyTitle?.let { story?.name = it }
         toggleBackButton()
@@ -164,7 +162,7 @@ class LibraryBookEditingFragment (
         }
     }
 
-    fun saveChangedSentence() {
+    private fun saveChangedSentence() {
         story?.id?.let { storyId ->
             sentenceStory?.let { newSentence ->
                 model.editSentence(storyId, sourceSentence, newSentence)
@@ -173,7 +171,7 @@ class LibraryBookEditingFragment (
         toggleBackButton()
     }
 
-    fun restoreSentence() {
+    private fun restoreSentence() {
         sentencesAdapter.notifyItemChanged(sentencePosition)
         toggleBackButton()
     }

@@ -1,7 +1,6 @@
 package ru.storytellers.viewmodels
 
 import android.os.Looper
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.every
 import io.mockk.mockk
@@ -33,10 +32,10 @@ import ru.storytellers.model.entity.Player
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 @Config(sdk = [28])
-class GameViewModelTest() : KoinTest {
-    lateinit var game: Game
-    lateinit var gameViewModel: GameViewModel
-    lateinit var storage: GameStorage
+class GameViewModelTest : KoinTest {
+    private lateinit var game: Game
+    private lateinit var gameViewModel: GameViewModel
+    private lateinit var storage: GameStorage
 
 
     @Before

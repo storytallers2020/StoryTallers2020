@@ -1,6 +1,5 @@
 package ru.storytellers.viewmodels
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryHeroesApp

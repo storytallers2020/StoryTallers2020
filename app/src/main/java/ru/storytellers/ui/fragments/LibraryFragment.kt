@@ -127,7 +127,7 @@ class LibraryFragment : BaseFragment<DataModel>(), DialogCaller {
         model.setStoryLiveData(story)
     }
 
-    fun deleteStory() {
+    private fun deleteStory() {
         model.deleteStory()
     }
 

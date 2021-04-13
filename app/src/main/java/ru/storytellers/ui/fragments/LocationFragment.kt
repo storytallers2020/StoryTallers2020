@@ -75,13 +75,13 @@ class LocationFragment : BaseFragment<DataModel>() {
 
 
     private fun handlerOnSuccessResult(viewModel: LocationViewModel) {
-        viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, Observer {
+        viewModel.subscribeOnSuccess().observe(viewLifecycleOwner, {
             setLocationAdapter(it)
         })
     }
 
     private fun handlerOnErrorResult(viewModel: LocationViewModel) {
-        viewModel.subscribeOnError().observe(viewLifecycleOwner, Observer {
+        viewModel.subscribeOnError().observe(viewLifecycleOwner, {
             Timber.e(it.error)
         })
     }

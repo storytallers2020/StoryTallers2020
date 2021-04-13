@@ -27,15 +27,15 @@ import ru.storytellers.model.repository.ICoverRepository
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 @Config(sdk = [28])
-class SelectCoverViewModelTest() : KoinTest {
+class SelectCoverViewModelTest : KoinTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private var coverRepo = mockk<ICoverRepository>()
     private var selectCoverViewModel = SelectCoverViewModel(coverRepo)
-    lateinit var cover1: Cover
-    lateinit var cover2: Cover
-    lateinit var listCover: List<Cover>
+    private lateinit var cover1: Cover
+    private lateinit var cover2: Cover
+    private lateinit var listCover: List<Cover>
 
 
     @Before
