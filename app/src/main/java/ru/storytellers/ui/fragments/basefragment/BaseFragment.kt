@@ -1,6 +1,5 @@
 package ru.storytellers.ui.fragments.basefragment
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,9 +38,8 @@ abstract class BaseFragment<T : DataModel> : Fragment(), BackButtonListener {
         setDefaultBackground()
     }
 
-    //TODO: Заменить!!!
-    protected fun setBackground(uri: Uri) {
-        loadImage(uri, backgroundView)
+    protected fun setBackground(url: String) {
+        imageLoader.loadBackground(url, backgroundView)
     }
 
     private fun setDefaultBackground() {

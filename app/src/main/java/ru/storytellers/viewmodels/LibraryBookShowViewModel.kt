@@ -11,7 +11,6 @@ import ru.storytellers.model.repository.IStoryRepository
 import ru.storytellers.utils.StatHelper
 import ru.storytellers.utils.StatHelper.Companion.itemClickedStat
 import ru.storytellers.utils.collectSentence
-import ru.storytellers.utils.resourceToUri
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 import timber.log.Timber
 
@@ -21,7 +20,7 @@ class LibraryBookShowViewModel(
     private val textStoryLiveData = MutableLiveData<String>()
     private val sentencesLiveData = MutableLiveData<List<SentenceOfTale>>()
     private val titleStoryLiveData = MutableLiveData<String>()
-    private val locationImageLiveData = MutableLiveData<Uri>()
+    private val locationImageLiveData = MutableLiveData<String>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
     private val onRemoveStoryLiveData = MutableLiveData<Int>()
 
@@ -41,7 +40,7 @@ class LibraryBookShowViewModel(
         return titleStoryLiveData
     }
 
-    fun subscribeOnLocationImage(): LiveData<Uri> {
+    fun subscribeOnLocationImage(): LiveData<String> {
         return locationImageLiveData
     }
 
@@ -58,7 +57,7 @@ class LibraryBookShowViewModel(
                     textStoryLiveData.value = mapToList(sentences).collectSentence()
                 }
                 story.location?.let { location ->
-                    locationImageLiveData.value = resourceToUri(location.imageUrl)
+                    locationImageLiveData.value = location.imageUrl
                 }
             }, {
                 onErrorLiveData.value = DataModel.Error(it)

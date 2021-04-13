@@ -59,13 +59,13 @@ sealed class Screens {
         private val story: Story,
         private val sourceListSentences: List<SentenceOfTale>,
         private val titleStory: String,
-        private val uriLocationImage: Uri
+        private val locationImageUrl: String
     ) : SupportAppScreen() {
         override fun getFragment() = LibraryBookEditingFragment.newInstance(
             story,
             sourceListSentences,
             titleStory,
-            uriLocationImage
+            locationImageUrl
         )
     }
 

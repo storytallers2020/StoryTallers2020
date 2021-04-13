@@ -1,9 +1,6 @@
 package ru.storytellers.model.entity.room.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import ru.storytellers.model.entity.room.RoomVersions
 
 @Dao
@@ -14,4 +11,7 @@ interface VersionsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(versions: RoomVersions)
+
+    @Query("DELETE FROM RoomVersions")
+    fun deleteAll()
 }

@@ -13,6 +13,7 @@ class VersionDataSource(private val database: AppDatabase) : IVersionDataSource 
 
     override fun insertOrReplace(version: Versions): Completable =
         Completable.fromAction {
+            database.versionsDao.deleteAll()
             database.versionsDao.insert(version.toRoomVersion())
         }
 

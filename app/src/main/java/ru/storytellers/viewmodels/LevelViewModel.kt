@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import ru.storytellers.application.StoryHeroesApp
-import ru.storytellers.engine.level.Level
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.datasource.storage.WordStorage
 import ru.storytellers.model.repository.IWordRepository

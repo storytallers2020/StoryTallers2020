@@ -25,7 +25,7 @@ class GameViewModel(
     private val currentPlayerLiveData = MutableLiveData<Player>()
     private val storyTextLiveData = MutableLiveData<String>()
     private val isSentenceCorrectLiveData = MutableLiveData<Boolean>()
-    private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
+    private val uriBackgroundImageLiveData = MutableLiveData<String>()
     private val wordLiveData = MutableLiveData<String>()
     private val isEndGamePossible = MutableLiveData<Boolean>()
 
@@ -33,14 +33,14 @@ class GameViewModel(
 
     fun getUriBackgroundImage() {
         storage.location?.let {
-            uriBackgroundImageLiveData.value = resourceToUri(it.imageUrl)
+            uriBackgroundImageLiveData.value = it.imageUrl
         }
     }
 
     fun subscribeOnPlayerChanged(): LiveData<Player> = currentPlayerLiveData
     fun subscribeOnTextChanged(): LiveData<String> = storyTextLiveData
     fun subscribeOnSentenceChecked(): LiveData<Boolean> = isSentenceCorrectLiveData
-    fun subscribeOnBackgroundImageChanged(): LiveData<Uri> = uriBackgroundImageLiveData
+    fun subscribeOnBackgroundImageChanged(): LiveData<String> = uriBackgroundImageLiveData
     fun subscribeOnWordChanged(): LiveData<String> = wordLiveData
     fun subscribeOnEndGamePossibleChanged(): LiveData<Boolean> = isEndGamePossible
 

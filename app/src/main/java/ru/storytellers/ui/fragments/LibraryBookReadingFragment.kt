@@ -1,6 +1,5 @@
 package ru.storytellers.ui.fragments
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -23,7 +22,7 @@ class LibraryBookReadingFragment : BaseFragment<DataModel>(), DialogCaller {
     override val layoutRes = R.layout.fragment_library_book_show
     private var textStory: String? = null
     private var titleStory: String? = null
-    private var uriLocationImage: Uri? = null
+    private var locationImageUrl: String? = null
     private lateinit var sourceListSentences: List<SentenceOfTale>
     private var story: Story? = null
 
@@ -70,9 +69,9 @@ class LibraryBookReadingFragment : BaseFragment<DataModel>(), DialogCaller {
             }
         })
 
-        model.subscribeOnLocationImage().observe(viewLifecycleOwner, { uri ->
-            uriLocationImage = uri
-            setBackground(uri)
+        model.subscribeOnLocationImage().observe(viewLifecycleOwner, { url ->
+            locationImageUrl = url
+            setBackground(url)
         })
 
         model.subscribeOnRemoveStory().observe(viewLifecycleOwner, { numberDeletedRecords ->
@@ -126,7 +125,7 @@ class LibraryBookReadingFragment : BaseFragment<DataModel>(), DialogCaller {
     private fun toEditStoryScreen() {
         router.navigateTo(story?.let { storyLocal ->
             titleStory?.let { titleStoryLocal ->
-                uriLocationImage?.let { uriLocationImg ->
+                locationImageUrl?.let { uriLocationImg ->
                     Screens.BookEditingScreen(
                         storyLocal,
                         sourceListSentences,

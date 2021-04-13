@@ -27,7 +27,7 @@ class LibraryBookEditingFragment (
     private var story: Story?,
     private var sentencesList: List<SentenceOfTale>?,
     private var storyTitle: String?,
-    private var locationImageUri: Uri?
+    private var locationImageUrl: String?
 ) : BaseFragment<DataModel>(), DialogCaller {
     override val model: LibraryBookEditViewModel by inject()
     override val layoutRes = R.layout.fragment_library_book_edit
@@ -94,8 +94,8 @@ class LibraryBookEditingFragment (
             story: Story,
             sourceListSentences: List<SentenceOfTale>,
             titleStory: String,
-            uriLocationImage: Uri,
-        ) = LibraryBookEditingFragment(story, sourceListSentences, titleStory, uriLocationImage)
+            locationImageUrl: String,
+        ) = LibraryBookEditingFragment(story, sourceListSentences, titleStory, locationImageUrl)
     }
 
     override fun init() {
@@ -111,7 +111,7 @@ class LibraryBookEditingFragment (
     override fun onResume() {
         super.onResume()
         initViewModel()
-        locationImageUri?.let { uri -> setBackground(uri) }
+        locationImageUrl?.let { uri -> setBackground(uri) }
     }
 
     override fun initViewModel() {
