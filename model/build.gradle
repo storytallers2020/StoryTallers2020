@@ -13,7 +13,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(Modules.resources)
+    //implementation project(Modules.resources)
 
     implementation Design.appcompat
 

@@ -49,10 +49,8 @@
             android:id="@+id/iv_cover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/cover_cave_of_wonders"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/location_cave_of_wonders_name"
             android:layout_marginTop="@dimen/margin_large"
             app:layout_constraintTop_toBottomOf="@id/sub_header" />
 
