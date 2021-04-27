@@ -1,11 +1,9 @@
 package ru.storytellers.ui.fragments
 
-import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_library_book_edit.*
-import kotlinx.android.synthetic.main.fragment_library_book_edit.book_title_text
 import kotlinx.android.synthetic.main.item_book_sentence.view.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -14,7 +12,8 @@ import ru.storytellers.model.entity.SentenceOfTale
 import ru.storytellers.model.entity.Story
 import ru.storytellers.ui.adapters.SentencesAdapter
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.AlertDialogFragment
+import ru.storytellers.utils.CustomAlertDialog
+import ru.storytellers.utils.DialogCaller
 import ru.storytellers.utils.hideSoftKey
 import ru.storytellers.viewmodels.LibraryBookEditViewModel
 import timber.log.Timber
@@ -22,12 +21,12 @@ import timber.log.Timber
 const val DIALOG_TAG_SAVE_TITLE = "book-save-title-ab6"
 const val DIALOG_TAG_SAVE_SENTENCE = "book-save-sentence-ab6"
 
-class LibraryBookEditingFragment(
+class LibraryBookEditingFragment (
     private var story: Story?,
     private var sentencesList: List<SentenceOfTale>?,
     private var storyTitle: String?,
-    private var locationImageUri: Uri?
-) : BaseFragment<DataModel>() {
+    private var locationImageUrl: String?
+) : BaseFragment<DataModel>(), DialogCaller {
     override val model: LibraryBookEditViewModel by inject()
     override val layoutRes = R.layout.fragment_library_book_edit
     private lateinit var sourceSentence: SentenceOfTale
@@ -93,8 +92,8 @@ class LibraryBookEditingFragment(
             story: Story,
             sourceListSentences: List<SentenceOfTale>,
             titleStory: String,
-            uriLocationImage: Uri,
-        ) = LibraryBookEditingFragment(story, sourceListSentences, titleStory, uriLocationImage)
+            locationImageUrl: String,
+        ) = LibraryBookEditingFragment(story, sourceListSentences, titleStory, locationImageUrl)
     }
 
     override fun init() {
@@ -110,7 +109,7 @@ class LibraryBookEditingFragment(
     override fun onResume() {
         super.onResume()
         initViewModel()
-        locationImageUri?.let { uri -> setBackground(uri) }
+        locationImageUrl?.let { uri -> setBackground(uri) }
     }
 
     override fun initViewModel() {
@@ -137,12 +136,12 @@ class LibraryBookEditingFragment(
 
     private fun showSaveTitleDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_save_story)
+            CustomAlertDialog(this, R.string.dialog_save_story)
                 .show(fragMan, DIALOG_TAG_SAVE_TITLE)
         }
     }
 
-    fun saveChangedTitle() {
+    private fun saveChangedTitle() {
         story?.let {
             model.updateTitleStory(it.name, it.id)
             storyTitle = it.name
@@ -150,7 +149,7 @@ class LibraryBookEditingFragment(
         toggleBackButton()
     }
 
-    fun restoreTitle() {
+    private fun restoreTitle() {
         book_title_text?.setText(storyTitle)
         storyTitle?.let { story?.name = it }
         toggleBackButton()
@@ -158,12 +157,12 @@ class LibraryBookEditingFragment(
 
     private fun showSaveSentenceDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_save_story)
+            CustomAlertDialog(this, R.string.dialog_save_story)
                 .show(fragMan, DIALOG_TAG_SAVE_SENTENCE)
         }
     }
 
-    fun saveChangedSentence() {
+    private fun saveChangedSentence() {
         story?.id?.let { storyId ->
             sentenceStory?.let { newSentence ->
                 model.editSentence(storyId, sourceSentence, newSentence)
@@ -172,7 +171,7 @@ class LibraryBookEditingFragment(
         toggleBackButton()
     }
 
-    fun restoreSentence() {
+    private fun restoreSentence() {
         sentencesAdapter.notifyItemChanged(sentencePosition)
         toggleBackButton()
     }
@@ -201,6 +200,20 @@ class LibraryBookEditingFragment(
             view?.clearFocus()
         }
         return true
+    }
+
+    override fun onDialogPositiveButton(tag: String?) {
+        when (tag) {
+            DIALOG_TAG_SAVE_TITLE -> saveChangedTitle()
+            DIALOG_TAG_SAVE_SENTENCE -> saveChangedSentence()
+        }
+    }
+
+    override fun onDialogNegativeButton(tag: String?) {
+        when (tag) {
+            DIALOG_TAG_SAVE_TITLE -> restoreTitle()
+            DIALOG_TAG_SAVE_SENTENCE -> restoreSentence()
+        }
     }
 
 }

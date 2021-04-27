@@ -5,20 +5,12 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.storytellers.model.datasource.IStoryDataSource
-import ru.storytellers.model.datasource.resourcestorage.storage.CharacterStorage
-import ru.storytellers.model.datasource.resourcestorage.storage.LocationStorage
-import ru.storytellers.model.entity.Player
-import ru.storytellers.model.entity.SentenceOfTale
-import ru.storytellers.model.entity.Story
+import ru.storytellers.model.entity.*
 import ru.storytellers.model.entity.room.RoomPlayer
 import ru.storytellers.model.entity.room.db.AppDatabase
 import ru.storytellers.utils.*
 
-class StoryDataSource(
-    private val database: AppDatabase,
-    private val locationStorage: LocationStorage,
-    private val characterStorage: CharacterStorage
-) : IStoryDataSource {
+class StoryDataSource(private val database: AppDatabase) : IStoryDataSource {
 
     override fun insertOrReplace(story: Story): @NonNull Completable =
         Completable.fromAction {
@@ -47,7 +39,7 @@ class StoryDataSource(
     }
 
     override fun deleteStoryById(storyId: Long): Single<Int> =
-        Single.create<Int> { emitter ->
+        Single.create { emitter ->
             try {
                 val count = database.storyDao.deleteById(storyId)
                 emitter.onSuccess(count)
@@ -56,7 +48,7 @@ class StoryDataSource(
             }
         }
     override fun updateTitleStory(titleStory: String, storyId: Long):Single<Int> =
-        Single.create<Int> { emitter ->
+        Single.create { emitter ->
             try {
                 val count = database.storyDao.updateTitleStory(titleStory, storyId)
                 emitter.onSuccess(count)
@@ -68,19 +60,21 @@ class StoryDataSource(
     override fun getStoryById(storyId: Long): Single<Story> =
         Single.create { emitter ->
             database.storyDao.getStoryById(storyId)?.let { roomStory ->
-                val location = locationStorage.getLocationById(roomStory.locationId)
-                Single.fromCallable {
-                    emitter.onSuccess(roomStory.toStory(location, null))
-                }
+                val location = getLocation(roomStory.locationId)
+
+                emitter.onSuccess(roomStory.toStory(location, null))
             } ?: let {
                 emitter.onError(RuntimeException("No such story in database"))
             }
         }
 
+    private fun getLocation(locationId: Long): Location? =
+        database.locationDao.getLocationById(locationId)?.toLocation()
+
     override fun getStoryWithSentencesById(storyId: Long): Single<Story> =
         Single.create<Story> { emitter ->
             database.storyDao.getStoryById(storyId)?.let { roomStory ->
-                val location = locationStorage.getLocationById(roomStory.locationId)
+                val location = getLocation(roomStory.locationId)
                 val sentences = getSentences(roomStory.id)
 
                 emitter.onSuccess(roomStory.toStory(location, sentences))
@@ -98,9 +92,12 @@ class StoryDataSource(
 
     private fun getPlayer(playerId: Long): Player? =
         database.playerDao.getPlayerById(playerId)?.let { roomPlayer ->
-            val character = characterStorage.getCharacterById(roomPlayer.characterId)
+            val character = getCharacter(roomPlayer.characterId)
             roomPlayer.toPlayer(character)
         }
+
+    private fun getCharacter(characterId: Long): Character? =
+        database.characterDao.getCharacterById(characterId)?.toCharacter()
 
     override fun getAll(): Single<List<Story>> =
         Single.create { emitter ->
@@ -113,5 +110,4 @@ class StoryDataSource(
                 emitter.onError(RuntimeException("No such story in database"))
             }
         }
-
 }

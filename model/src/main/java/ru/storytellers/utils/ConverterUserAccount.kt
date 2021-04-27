@@ -5,16 +5,16 @@ import ru.storytellers.model.entity.User
 import ru.storytellers.model.entity.UserAccount
 
 
-fun convertUserToUserApi(user : User) : UserApi =
-user.run{
-    UserApi(
-        name = name,
-        userId = id,
-        avatarUrl = avatarUrl
-    )
-}
+fun convertUserToUserApi(user: User): UserApi =
+    user.run {
+        UserApi(
+            name = name,
+            userId = id,
+            avatarUrl = avatarUrl
+        )
+    }
 
-fun convertAccountToUser(userAccount: UserAccount) : User =
+fun convertAccountToUser(userAccount: UserAccount): User =
     userAccount.run {
         User(
             id = email.hashCode().toLong(),

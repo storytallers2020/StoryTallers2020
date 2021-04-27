@@ -6,13 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.Task
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.model.DataModel
 import ru.storytellers.model.entity.Story
 import ru.storytellers.model.entity.User
 import ru.storytellers.model.repository.IStoryRepository
-import ru.storytellers.model.repository.IUserAccountRepository
-import ru.storytellers.model.repository.IUserRepository
+import ru.storytellers.model.repository.IUserLocalRepository
+import ru.storytellers.model.repository.IUserRemoteRepository
 import ru.storytellers.utils.*
 import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
@@ -22,9 +23,10 @@ import timber.log.Timber
 class StartViewModel(
     private val storyRepository: IStoryRepository,
     private val signInGoogleHandler: SignInGoogleHandler,
-    private val userAccountRepository: IUserAccountRepository,
-    private val userRepositoryLocal: IUserRepository
+    private val userRemoteRepository: IUserRemoteRepository,
+    private val userLocalRepository: IUserLocalRepository
 ) : BaseViewModel<DataModel>() {
+    private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
     private val onSuccessLiveData = MutableLiveData<DataModel.Success<Story>>()
     private val onErrorLiveData = MutableLiveData<DataModel.Error>()
     private val onLoadingLiveData = MutableLiveData<DataModel.Loading>()
@@ -59,6 +61,12 @@ class StartViewModel(
     fun getUserDataFromLastSignedAccount(account: GoogleSignInAccount) {
         val userAccount = signInGoogleHandler.getUserDataFromAccount(account)
         user = convertAccountToUser(userAccount)
+        /*
+        user?.let {
+            getUserFromLocalDB(it)
+            getUserFromBackend(it)
+        }
+         */
         userNameLiveData.value = user?.name
         accountExistsLiveData.value = true
     }
@@ -68,12 +76,60 @@ class StartViewModel(
         user = userAccount?.let { convertAccountToUser(it) }
         user?.let {
             userNameLiveData.value = it.name
-            //saveUserAccount(it)
-            getUser(it)
+            saveUserToBackend(it)
             accountExistsLiveData.value = true
-            saveUserToRoom(it)
-            Timber.d(it.name)
+            saveUserToLocalDB(it)
         }
+    }
+
+    private fun saveUserToLocalDB(user: User) {
+        compositeDisposable.add(
+            userLocalRepository.addUser(user)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    Timber.d("Saved to database")
+                },
+                    {
+                        Timber.e(it)
+                    })
+        )
+    }
+
+    private fun getUserFromLocalDB(user: User) {
+        compositeDisposable.add(
+            userLocalRepository.getUserById(user.id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ user ->
+                    Timber.d(user.name)
+                },
+                    {
+                        Timber.e(it)
+                    })
+        )
+    }
+
+
+    private fun saveUserToBackend(user: User) {
+        compositeDisposable.add(userRemoteRepository.saveUser(user)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {},
+                {
+                    Timber.e(it)
+                }
+            )
+        )
+    }
+
+    private fun getUserFromBackend(user: User) {
+        compositeDisposable.add(
+            userRemoteRepository.getUser(user)
+                .subscribe({
+
+                }, {
+
+                })
+        )
     }
 
     fun toRulesScreenStatistics() {
@@ -119,41 +175,6 @@ class StartViewModel(
         riseEvent(StatHelper.startScreen, prop)
     }
 
-    private fun saveUserToRoom(user: User) {
-        userRepositoryLocal.addUser(user)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Timber.d("Saved to database")
-            },
-                {
-                    Timber.e(it)
-                })
-    }
-
-
-    private fun saveUserAccount(user: User) {
-        var saved = false
-        userAccountRepository.saveUser(user)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    saved = true
-                },
-                {
-                    Timber.e(it)
-                }
-            )
-    }
-
-    private fun getUser(user: User) {
-        userAccountRepository.getUser(user)
-            .subscribe({ usApi ->
-                val b = usApi
-            }, {
-                val t = it
-            })
-    }
-
     fun getAllStory() {
         storyRepository.getAll()
             .observeOn(AndroidSchedulers.mainThread())
@@ -162,6 +183,11 @@ class StartViewModel(
             }, {
                 onErrorLiveData.value = DataModel.Error(it)
             })
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
     }
 
 }

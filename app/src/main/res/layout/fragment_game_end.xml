@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/padding_layout_standard"
     android:paddingHorizontal="@dimen/padding_layout_standard"
     android:paddingBottom="@dimen/padding_layout_bottom"
-    tools:background="@drawable/location_beach">
+    tools:background="@drawable/location_stub">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/layout_tale"

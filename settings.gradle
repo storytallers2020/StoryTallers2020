@@ -1,4 +1,3 @@
-include ':resources'
 include ':model'
 rootProject.name='StoryTallers2020'
 include ':app'

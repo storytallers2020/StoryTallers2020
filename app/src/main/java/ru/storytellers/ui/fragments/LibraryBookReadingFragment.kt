@@ -1,6 +1,6 @@
 package ru.storytellers.ui.fragments
 
-import android.net.Uri
+import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_library_book_show.*
@@ -15,22 +15,28 @@ import ru.storytellers.utils.*
 import ru.storytellers.viewmodels.LibraryBookShowViewModel
 
 const val DIALOG_TAG_DELETE = "book-delete-46bf-ab6"
+const val STORY_KEY = "Story"
 
-class LibraryBookReadingFragment(private var story: Story?) : BaseFragment<DataModel>() {
+class LibraryBookReadingFragment : BaseFragment<DataModel>(), DialogCaller {
     override val model: LibraryBookShowViewModel by inject()
     override val layoutRes = R.layout.fragment_library_book_show
     private var textStory: String? = null
     private var titleStory: String? = null
-    private var uriLocationImage: Uri? = null
+    private var locationImageUrl: String? = null
     private lateinit var sourceListSentences: List<SentenceOfTale>
+    private var story: Story? = null
 
     companion object {
-        fun newInstance(story: Story) = LibraryBookReadingFragment(story)
+        fun newInstance(story: Story) = LibraryBookReadingFragment().apply {
+            arguments = Bundle().apply { putParcelable(STORY_KEY, story) }
+        }
     }
 
     override fun init() {
         back_button.setOnClickListener { backToLibraryScreen() }
         btn_menu.setOnClickListener { showPopupMenu(it) }
+
+        story = arguments?.getParcelable(STORY_KEY)
     }
 
     override fun onStart() {
@@ -63,9 +69,9 @@ class LibraryBookReadingFragment(private var story: Story?) : BaseFragment<DataM
             }
         })
 
-        model.subscribeOnLocationImage().observe(viewLifecycleOwner, { uri ->
-            uriLocationImage = uri
-            setBackground(uri)
+        model.subscribeOnLocationImage().observe(viewLifecycleOwner, { url ->
+            locationImageUrl = url
+            setBackground(url)
         })
 
         model.subscribeOnRemoveStory().observe(viewLifecycleOwner, { numberDeletedRecords ->
@@ -119,7 +125,7 @@ class LibraryBookReadingFragment(private var story: Story?) : BaseFragment<DataM
     private fun toEditStoryScreen() {
         router.navigateTo(story?.let { storyLocal ->
             titleStory?.let { titleStoryLocal ->
-                uriLocationImage?.let { uriLocationImg ->
+                locationImageUrl?.let { uriLocationImg ->
                     Screens.BookEditingScreen(
                         storyLocal,
                         sourceListSentences,
@@ -163,12 +169,12 @@ class LibraryBookReadingFragment(private var story: Story?) : BaseFragment<DataM
 
     private fun showDeleteDialog() {
         activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(this, R.string.dialog_delete_story)
+            CustomAlertDialog(this, R.string.dialog_delete_story)
                 .show(fragMan, DIALOG_TAG_DELETE)
         }
     }
 
-    fun removeStory() {
+    private fun removeStory() {
         story?.let { model.removeStory(it) }
     }
 
@@ -188,4 +194,13 @@ class LibraryBookReadingFragment(private var story: Story?) : BaseFragment<DataM
         router.exit()
         return true
     }
+
+    override fun onDialogPositiveButton(tag: String?) {
+        removeStory()
+    }
+
+    override fun onDialogNegativeButton(tag: String?) {
+        // do nothing
+    }
+
 }

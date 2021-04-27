@@ -1,11 +1,11 @@
 package ru.storytellers.viewmodels
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.storytellers.application.StoryHeroesApp
 import ru.storytellers.engine.Game
 import ru.storytellers.model.DataModel
+import ru.storytellers.model.datasource.storage.WordStorage
 import ru.storytellers.model.entity.ContentTypeEnum
 import ru.storytellers.model.entity.Player
 import ru.storytellers.model.entity.SentenceOfTale
@@ -13,7 +13,10 @@ import ru.storytellers.utils.*
 import ru.storytellers.utils.StatHelper.Companion.riseEvent
 import ru.storytellers.viewmodels.baseviewmodel.BaseViewModel
 
-class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
+class GameViewModel(
+    private val game: Game,
+    private val wordsStorage: WordStorage
+    ) : BaseViewModel<DataModel>() {
     val inputValid: InputValidation by lazy { InputValidation() }
     private val app = StoryHeroesApp.instance
     private val storage = app.gameStorage
@@ -21,20 +24,22 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
     private val currentPlayerLiveData = MutableLiveData<Player>()
     private val storyTextLiveData = MutableLiveData<String>()
     private val isSentenceCorrectLiveData = MutableLiveData<Boolean>()
-    private val uriBackgroundImageLiveData = MutableLiveData<Uri>()
+    private val uriBackgroundImageLiveData = MutableLiveData<String>()
     private val wordLiveData = MutableLiveData<String>()
     private val isEndGamePossible = MutableLiveData<Boolean>()
 
+    private var currentWord = ""
+
     fun getUriBackgroundImage() {
         storage.location?.let {
-            uriBackgroundImageLiveData.value = resourceToUri(it.imageUrl)
+            uriBackgroundImageLiveData.value = it.imageUrl
         }
     }
 
     fun subscribeOnPlayerChanged(): LiveData<Player> = currentPlayerLiveData
     fun subscribeOnTextChanged(): LiveData<String> = storyTextLiveData
     fun subscribeOnSentenceChecked(): LiveData<Boolean> = isSentenceCorrectLiveData
-    fun subscribeOnBackgroundImageChanged(): LiveData<Uri> = uriBackgroundImageLiveData
+    fun subscribeOnBackgroundImageChanged(): LiveData<String> = uriBackgroundImageLiveData
     fun subscribeOnWordChanged(): LiveData<String> = wordLiveData
     fun subscribeOnEndGamePossibleChanged(): LiveData<Boolean> = isEndGamePossible
 
@@ -61,8 +66,20 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
             ContentTypeEnum.TEXT
         )
 
+    fun onStartTurn() {
+        updateStoryText()
+        currentPlayerLiveData.value = game.getCurrentPlayer()
+
+        storage.level?.let { level ->
+            if (level.wordRule.isNeedUseWord()) {
+                currentWord = wordsStorage.getRandomWord()
+                wordLiveData.value = currentWord
+            }
+        }
+    }
+
     private fun tryGotoNextTurn(sentence: SentenceOfTale) {
-        val result = game.nextStep(sentence)
+        val result = game.nextStep(sentence, currentWord)
         if (result) {
             checkIsEndGamePossible()
             storage.getSentences().add(sentence)
@@ -71,16 +88,6 @@ class GameViewModel(private val game: Game) : BaseViewModel<DataModel>() {
             onButtonSendClickedStatistic(sentence)
         } else {
             isSentenceCorrectLiveData.value = false
-        }
-    }
-
-    fun onStartTurn() {
-        updateStoryText()
-        currentPlayerLiveData.value = game.getCurrentPlayer()
-
-        storage.level?.let { level ->
-            if (level.wordRule.isNeedUseWord())
-                wordLiveData.value = level.wordRule.getRandomWord()
         }
     }
 

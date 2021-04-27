@@ -19,12 +19,13 @@ class CharacterCreateFragment : BaseFragment<DataModel>() {
     private var isCharacterSelected = false
     private var isNameEntered = false
     override val model: CharacterCreateViewModel by inject()
+
+
     private var inputMethodManager: Any? = null
     override val layoutRes = R.layout.fragment_character_create
+
     private val characterAdapter: CharacterCreateAdapter by lazy {
-        CharacterCreateAdapter(
-                onItemClickListener
-        )
+        CharacterCreateAdapter(imageLoader, onItemClickListener)
     }
 
     private val onItemClickListener = { character: Character, position: Int ->

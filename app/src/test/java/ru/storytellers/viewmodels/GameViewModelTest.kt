@@ -1,7 +1,6 @@
 package ru.storytellers.viewmodels
 
 import android.os.Looper
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.every
 import io.mockk.mockk
@@ -25,7 +24,7 @@ import ru.storytellers.engine.level.Level
 import ru.storytellers.engine.rules.Rules
 import ru.storytellers.engine.showRules.ShowAllSentencesRule
 import ru.storytellers.engine.wordRules.RandomWordRule
-import ru.storytellers.model.datasource.resourcestorage.storage.WordStorage
+import ru.storytellers.model.datasource.storage.WordStorage
 import ru.storytellers.model.entity.Character
 import ru.storytellers.model.entity.Location
 import ru.storytellers.model.entity.Player
@@ -33,18 +32,19 @@ import ru.storytellers.model.entity.Player
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 @Config(sdk = [28])
-class GameViewModelTest() : KoinTest {
-    lateinit var game: Game
-    lateinit var gameViewModel: GameViewModel
-    lateinit var storage: GameStorage
+class GameViewModelTest : KoinTest {
+    private lateinit var game: Game
+    private lateinit var gameViewModel: GameViewModel
+    private lateinit var storage: GameStorage
 
 
     @Before
     fun setUp() {
         loadKoinModules(listOf(gameEngine, amplitudeModule))
         storage = StoryHeroesApp.instance.gameStorage
-        game = Game()
-        gameViewModel = GameViewModel(game)
+        val storage = WordStorage()
+        game = Game(storage)
+        gameViewModel = GameViewModel(game, storage)
 
         val testCharacter1 = Character(1, "CharName", "AvatarUrl", "AvatarUrlSelected?")
         val testCharacter2 = Character(2, "CharName", "AvatarUrl", "AvatarUrlSelected?")
@@ -55,7 +55,7 @@ class GameViewModelTest() : KoinTest {
             1,
             Rules(),
             ShowAllSentencesRule(),
-            RandomWordRule(false, WordStorage(ApplicationProvider.getApplicationContext()))
+            RandomWordRule(false)
         )
         game.newGame(listPlayer, level)
 

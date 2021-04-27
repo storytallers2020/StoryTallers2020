@@ -16,7 +16,7 @@ class SentencesAdapter(
 ) : RecyclerView.Adapter<SentencesAdapter.CCViewHolder>() {
 
     private var listOfSentences = mutableListOf<SentenceOfTale>()
-    var selectedPosition = -1
+    private var selectedPosition = -1
 
     fun setData(dataListOfSentences: List<SentenceOfTale>?) {
         dataListOfSentences?.let {

@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_image_character_create.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Character
-import ru.storytellers.utils.loadImage
-import ru.storytellers.utils.resourceToUri
+import ru.storytellers.model.image.IImageLoader
 
-class CharacterCreateAdapter(val itemClickListener: (character: Character, position:Int ) -> Unit?)
-    : RecyclerView.Adapter<CharacterCreateAdapter.CCViewHolder>(){
+class CharacterCreateAdapter(
+    val imageLoader: IImageLoader,
+    val itemClickListener: (character: Character, position: Int) -> Unit?
+) : RecyclerView.Adapter<CharacterCreateAdapter.CCViewHolder>() {
 
     private var listCharacters = mutableListOf<Character>()
     var selectedPosition = -1
@@ -35,7 +36,7 @@ class CharacterCreateAdapter(val itemClickListener: (character: Character, posit
         )
     }
 
-    override fun getItemCount()= listCharacters.count()
+    override fun getItemCount() = listCharacters.count()
 
     override fun onBindViewHolder(holder: CCViewHolder, position: Int) {
         holder.itemView.isSelected = selectedPosition == position
@@ -46,8 +47,10 @@ class CharacterCreateAdapter(val itemClickListener: (character: Character, posit
         fun bind(character: Character) {
             with(itemView) {
                 if (layoutPosition != RecyclerView.NO_POSITION) {
-                    val avatar = if (isSelected) character.avatarUrlSelected else character.avatarUrl
-                    resourceToUri(avatar)?.let { loadImage(it, image_character_iv) }
+                    val avatar =
+                        if (isSelected) character.avatarUrlSelected
+                        else character.avatarUrl
+                    imageLoader.loadInto(avatar, R.drawable.avatar_stub, image_character_iv)
                     setOnClickListener { itemClickListener(character, layoutPosition) }
                 }
             }

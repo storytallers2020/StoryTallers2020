@@ -2,7 +2,7 @@ package ru.storytellers.ui.assistant
 
 import ru.storytellers.R
 import ru.storytellers.ui.fragments.LibraryFragment
-import ru.storytellers.utils.AlertDialogFragment
+import ru.storytellers.utils.CustomAlertDialog
 import ru.storytellers.utils.concatTitleAndTextStory
 import ru.storytellers.utils.copyText
 import ru.storytellers.utils.shareText
@@ -51,7 +51,7 @@ class LibraryFragmentAssistant(private val fragment: LibraryFragment) {
 
     fun showAlertDialog() {
         fragment.activity?.supportFragmentManager?.let { fragMan ->
-            AlertDialogFragment.newInstance(fragment, R.string.dialog_delete_story)
+            CustomAlertDialog(fragment, R.string.dialog_delete_story)
                 .show(fragMan, FRAGMENT_DIALOG_TAG)
         }
     }

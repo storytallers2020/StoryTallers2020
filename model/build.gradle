@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 
-
 android {
     defaultConfig {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -14,13 +13,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(Modules.resources)
+    //implementation project(Modules.resources)
 
     implementation Design.appcompat
 
     //Kotlin
     implementation Kotlin.core
     implementation Kotlin.stdlib
+    implementation Kotlin.reflect
+
+    //Timber
+    implementation Timber.timber
 
     //Room
     implementation Room.runtime

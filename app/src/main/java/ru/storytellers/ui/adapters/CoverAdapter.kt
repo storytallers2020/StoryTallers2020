@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_image_cover.view.*
 import ru.storytellers.R
 import ru.storytellers.model.entity.Cover
-import ru.storytellers.utils.loadImage
-import ru.storytellers.utils.resourceToUri
+import ru.storytellers.model.image.IImageLoader
 
-class CoverAdapter(val clickListener: OnListItemClickListener) :
-    RecyclerView.Adapter<CoverAdapter.MyViewHolder>() {
+class CoverAdapter(
+    val imageLoader: IImageLoader,
+    val clickListener: OnListItemClickListener
+) : RecyclerView.Adapter<CoverAdapter.MyViewHolder>() {
     private var coverList = mutableListOf<Cover>()
 
     fun setData(dataListCharacters: List<Cover>?) {
@@ -39,9 +40,11 @@ class CoverAdapter(val clickListener: OnListItemClickListener) :
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(cover: Cover) {
-            resourceToUri(cover.imagePreview)?.let {
-                loadImage(it, itemView.book_cover_image)
-            }
+            imageLoader.loadInto(
+                cover.imagePreview,
+                R.drawable.cover_recycler_stub,
+                itemView.book_cover_image
+            )
 
             itemView.book_cover_image.setOnClickListener {
                 val positionIndex: Int = adapterPosition

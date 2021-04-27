@@ -2,6 +2,9 @@ package ru.storytellers.model.datasource.remote
 
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import retrofit2.http.GET
+import retrofit2.http.Query
+import ru.storytellers.model.datasource.remote.api.*
 import org.jetbrains.annotations.NotNull
 import retrofit2.Response
 import retrofit2.http.*
@@ -18,6 +21,13 @@ interface IRemoteDataSource {
 
     @GET("covers/getOnlyActive")
     fun getCovers(): Single<CoverListApi>
+
+    @GET("words/getAll")
+    fun getWords(@Query("lang") lang: String): Single<WordListApi>
+
+
+    @GET("versions/getAll")
+    fun getVersions(): Single<VersionsApiList>
 
     @POST("v1/full-data/")
     fun saveUser(@Body user : UserApi) : Completable

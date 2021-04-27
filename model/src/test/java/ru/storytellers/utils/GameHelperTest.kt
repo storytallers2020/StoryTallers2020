@@ -1,10 +1,7 @@
 package ru.storytellers.utils
 
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
-import ru.storytellers.engine.rules.IRule
-import ru.storytellers.engine.rules.OneSentenceInTextRule
 
 class GameHelperTest {
 

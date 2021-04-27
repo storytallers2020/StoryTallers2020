@@ -6,7 +6,6 @@ import ru.storytellers.R
 import ru.storytellers.model.DataModel
 import ru.storytellers.navigation.Screens
 import ru.storytellers.ui.fragments.basefragment.BaseFragment
-import ru.storytellers.utils.loadImage
 import ru.storytellers.viewmodels.GameStartViewModel
 
 class GameStartFragment : BaseFragment<DataModel>() {
@@ -49,8 +48,8 @@ class GameStartFragment : BaseFragment<DataModel>() {
 
     override fun onResume() {
         super.onResume()
-        model.subscribeOnLevelGame().observe(viewLifecycleOwner, {
-            when (it) {
+        model.subscribeOnLevelGame().observe(viewLifecycleOwner, {levelNumber ->
+            when (levelNumber) {
                 0 -> {
                     getRuleFromResources(R.string.rules_easy_description)
                 }

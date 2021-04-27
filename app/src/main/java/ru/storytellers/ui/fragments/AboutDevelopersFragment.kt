@@ -34,7 +34,7 @@ class AboutDevelopersFragment : Fragment(), BackButtonListener {
         setAllLinksClickable(view)
     }
 
-    private fun setAllLinksClickable(v: View): ArrayList<View>? {
+    private fun setAllLinksClickable(v: View): ArrayList<View> {
         if (v !is ViewGroup) {
             return ArrayList<View>().apply { add(v) }
         }
@@ -46,7 +46,7 @@ class AboutDevelopersFragment : Fragment(), BackButtonListener {
                 }
                 ArrayList<View>().apply {
                     add(v)
-                    addAll(setAllLinksClickable(child)!!)
+                    addAll(setAllLinksClickable(child))
                     addAll(this)
                 }
             }

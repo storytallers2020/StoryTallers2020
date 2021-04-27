@@ -21,6 +21,9 @@ interface LocationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(location: RoomLocation)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(locationList: List<RoomLocation>)
+
     //endregion Insert
 
     //region Update

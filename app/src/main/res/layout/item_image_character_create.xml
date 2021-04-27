@@ -15,7 +15,6 @@
         android:layout_width="@dimen/icon_large"
         android:layout_height="@dimen/icon_large"
         android:layout_gravity="center"
-        tools:src="@drawable/ic_bear"
         android:contentDescription="@string/char_icon" />
 
 </LinearLayout>
