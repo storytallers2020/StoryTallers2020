@@ -106,9 +106,9 @@ val ciceroneModule = module {
 }
 
 val startModule = module {
-    single<IUserDataSource> { UserRoomDataSource(get()) }
-    single<IUserRepository> { UserRepository(get()) }
-    single<IUserAccountRepository> { UserAccountRepository(get(), get()) }
+    single<IUserRoomDataSource> { UserRoomDataSource(get()) }
+    single<IUserLocalRepository> { UserLocalRepository(get()) }
+    single<IUserRemoteRepository> { UserRemoteRepository(get(), get()) }
     viewModel { StartViewModel(get(), get(),get(),get()) }
 }
 val levelModel = module {
