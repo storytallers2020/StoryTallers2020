@@ -27,6 +27,16 @@
         2. Средний. Игрок видит только последнее предложение предыдущего игрока.\n
         3. Сложный. Игрок видит только последнее предложение предыдущего игрока и должен использовать обязательное слово.</string>
 
+    // Settings screen
+    <string name="title_settings">Настройки</string>
+    <string name="user_name">Имя</string>
+    <string name="language">Язык</string>
+    <string-array name="languages_choice">
+        <item>По умолчанию</item>
+        <item>Русский</item>
+        <item>Английский</item>
+    </string-array>
+
     // Game creation screens
 
     // Level screen

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_layout_standard"
+    tools:background="@color/blueDark"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        style="@style/BackArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/arrow_back"
+        app:layout_constraintBottom_toBottomOf="@id/screen_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/screen_header" />
+
+    <TextView
+        android:id="@+id/screen_header"
+        style="@style/Header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_settings"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/max_width"
+        android:layout_marginVertical="@dimen/margin_large"
+        android:src="@drawable/avatar_stub"
+        app:layout_constraintBottom_toTopOf="@id/scroll_view"
+        app:layout_constraintTop_toBottomOf="@id/screen_header" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:clipToPadding="true"
+        android:fillViewport="true"
+        android:paddingVertical="@dimen/margin_xxs"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_avatar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/icon_medium" />
+
+            <ImageView
+                android:id="@+id/name_icon"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
+                android:src="@drawable/ic_user_name"
+                app:layout_constraintBottom_toBottomOf="@id/name"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/name_title" />
+
+            <TextView
+                android:id="@+id/name_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xs"
+                android:paddingTop="@dimen/padding_small"
+                android:text="@string/user_name"
+                android:textColor="@color/transparent_50"
+                android:textSize="@dimen/text_small"
+                app:layout_constraintEnd_toStartOf="@id/edit_name_btn"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xs"
+                android:paddingBottom="@dimen/margin_xs"
+                app:layout_constraintEnd_toStartOf="@id/edit_name_btn"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/name_title"
+                tools:text="Константин" />
+
+            <ImageView
+                android:id="@+id/edit_name_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit_24"
+                app:layout_constraintBottom_toBottomOf="@id/name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/name_title" />
+
+            <ImageView
+                android:id="@+id/name_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_underline"
+                android:backgroundTint="@color/transparent_30"
+                android:contentDescription="@string/rv_players_underline"
+                app:layout_constraintTop_toBottomOf="@id/name" />
+
+            <ImageView
+                android:id="@+id/id_icon"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
+                android:src="@drawable/ic_id"
+                app:layout_constraintBottom_toBottomOf="@id/id"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/id_title" />
+
+            <TextView
+                android:id="@+id/id_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xs"
+                android:paddingTop="@dimen/padding_small"
+                android:text="@string/user_id"
+                android:textColor="@color/transparent_50"
+                android:textSize="@dimen/text_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/name" />
+
+            <TextView
+                android:id="@+id/id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xs"
+                android:paddingBottom="@dimen/margin_xs"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/id_title"
+                tools:text="8 (916) 123-45-67" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_underline"
+                android:backgroundTint="@color/transparent_30"
+                android:contentDescription="@string/rv_players_underline"
+                app:layout_constraintTop_toBottomOf="@id/id" />
+
+            <ImageView
+                android:id="@+id/email_icon"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
+                android:src="@drawable/ic_email"
+                app:layout_constraintBottom_toBottomOf="@id/email"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/email_title" />
+
+            <TextView
+                android:id="@+id/email_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xs"
+                android:paddingTop="@dimen/padding_small"
+                android:text="@string/user_email"
+                android:textColor="@color/transparent_50"
+                android:textSize="@dimen/text_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/id" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xs"
+                android:paddingBottom="@dimen/margin_xs"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/email_title"
+                tools:text="konstantin@gmail.com" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_underline"
+                android:backgroundTint="@color/transparent_30"
+                android:contentDescription="@string/rv_players_underline"
+                app:layout_constraintTop_toBottomOf="@id/email" />
+
+            <ImageView
+                android:id="@+id/language_icon"
+                android:layout_width="@dimen/icon_small"
+                android:layout_height="@dimen/icon_small"
+                android:src="@drawable/ic_language"
+                app:layout_constraintBottom_toBottomOf="@id/language"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/language_title" />
+
+            <TextView
+                android:id="@+id/language_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xs"
+                android:paddingTop="@dimen/padding_small"
+                android:text="@string/language"
+                android:textColor="@color/transparent_50"
+                android:textSize="@dimen/text_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/email" />
+
+            <Spinner
+                android:id="@+id/language"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/languages_choice"
+                android:paddingBottom="@dimen/margin_xs"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/language_title" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/ic_underline"
+                android:backgroundTint="@color/transparent_30"
+                android:contentDescription="@string/rv_players_underline"
+                app:layout_constraintTop_toBottomOf="@id/language" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
