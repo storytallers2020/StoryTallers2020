@@ -129,6 +129,7 @@ class LibraryFragment : BaseFragment<DataModel>(), DialogCaller {
 
     private fun deleteStory() {
         model.deleteStory()
+        model.getAllStory()
     }
 
     private fun navigateToLibraryBookScreen(story: Story) {

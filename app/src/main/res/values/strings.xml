@@ -37,6 +37,19 @@
         2. Medium. The player sees only the last sentence composed by the player before him.\n
         3. Hard. The player sees only the last sentence composed by the player before him. In his turn the player must use the randomly generated mandatory word.</string>
 
+    // Settings screen
+    <string name="title_settings">Settings</string>
+    <string name="user_name">Name</string>
+    <string name="user_id" translatable="false">ID</string>
+    <string name="user_email" translatable="false">E-mail</string>
+    <string name="language">Language</string>
+    <string-array name="languages_choice">
+        <item>Default</item>
+        <item>Russian</item>
+        <item>English</item>
+    </string-array>
+
+
     // Game creation screens
     <string name="arrow_back" translatable="false"><![CDATA[<<<]]></string>
     <string name="dots_line" translatable="false">..............</string>
@@ -77,8 +90,8 @@
     <string name="level_rules_short">Players make their moves in turns and \n can only come up with one sentence</string>
     <string name="intro_text">Start composing your tale…</string>
     <string name="btn_start">Start</string>
-    <string name="game_turn">"Turn for "</string>
-    <string name="mandatory_word">"Mandatory word:"</string>
+    <string name="game_turn">Turn for </string>
+    <string name="mandatory_word">Mandatory word:</string>
     <string name="btn_send">send</string>
     <string name="btn_end"><u>End the Tale</u></string>
     <string name="btn_resume"><u>Continue game</u></string>
