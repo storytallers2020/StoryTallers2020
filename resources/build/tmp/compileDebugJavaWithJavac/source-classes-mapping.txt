@@ -1,0 +1,2 @@
+ru/storytellers/resources/BuildConfig.java
+ ru.storytellers.resources.BuildConfig

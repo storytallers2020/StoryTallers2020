@@ -2,11 +2,13 @@ package ru.storytellers.di
 
 import androidx.room.Room
 import com.amplitude.api.Amplitude
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.qualifier.named
@@ -15,6 +17,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.storytellers.BuildConfig
 import ru.storytellers.application.StoryHeroesApp
+import ru.storytellers.R
 import ru.storytellers.engine.Game
 import ru.storytellers.engine.GameStorage
 import ru.storytellers.engine.level.Level
@@ -44,6 +47,7 @@ import ru.storytellers.model.repository.remote.RemoteRepository
 import ru.storytellers.model.repository.remote.IRemoteRepository
 import ru.storytellers.utils.NetworkStatus
 import ru.storytellers.utils.PlayerCreator
+import ru.storytellers.utils.SignInGoogleHandler
 import ru.storytellers.viewmodels.*
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
@@ -74,9 +78,21 @@ private val loadModules by lazy {
             teamCharacterModule,
             gameStartModule,
             amplitudeModule,
-            remoteModule
+            remoteModule,
+            signInGoogle
         )
     )
+}
+
+val signInGoogle = module {
+    single {
+        GoogleSignInOptions
+            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(androidContext().getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+    }
+    factory { SignInGoogleHandler() }
 }
 
 val libraryModule = module {
@@ -102,7 +118,10 @@ val splashModule = module {
 }
 
 val startModule = module {
-    viewModel { StartViewModel(get()) }
+    single<IUserRoomDataSource> { UserRoomDataSource(get()) }
+    single<IUserLocalRepository> { UserLocalRepository(get()) }
+    single<IUserRemoteRepository> { UserRemoteRepository(get(), get()) }
+    viewModel { StartViewModel(get(), get(),get(),get()) }
 }
 
 val levelModel = module {

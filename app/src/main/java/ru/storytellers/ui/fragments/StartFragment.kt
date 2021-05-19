@@ -5,6 +5,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.view.View
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.fragment_start.*
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
@@ -17,12 +21,13 @@ import timber.log.Timber
 
 const val DIALOG_TAG_EXIT = "start-fragment-exit-46bf-ab6"
 const val DIALOG_TAG_POLICY = "start-fragment-policy-46bf-ab6"
+const val RC_SIGN_IN = 4242
 
 class StartFragment : BaseFragment<DataModel>(), DialogCaller {
     override val layoutRes = R.layout.fragment_start
     override val model: StartViewModel by inject()
     private var sharedPreferences: SharedPreferences? = null
-
+    private val googleSignInOptions: GoogleSignInOptions by inject()
 
     companion object {
         fun newInstance() = StartFragment()
@@ -30,6 +35,7 @@ class StartFragment : BaseFragment<DataModel>(), DialogCaller {
 
     override fun init() {
         checkAgreement()
+        sign_in_button.setOnClickListener { onSignInClick() }
         rules_button.setOnClickListener { navigateToRulesGame() }
         about_button.setOnClickListener { navigateToAboutScreen() }
         new_tale_button.setOnClickListener { navigateToLevelScreen() }
@@ -70,6 +76,8 @@ class StartFragment : BaseFragment<DataModel>(), DialogCaller {
 
     override fun onStart() {
         super.onStart()
+        val account = activity?.let { GoogleSignIn.getLastSignedInAccount(it) }
+        account?.let{ model.getUserDataFromLastSignedAccount(it)}
         model.getAllStory()
     }
 
@@ -78,7 +86,34 @@ class StartFragment : BaseFragment<DataModel>(), DialogCaller {
         initViewModel()
     }
 
+    private fun onSignInClick() {
+            val signInIntent =
+                activity?.let { GoogleSignIn.getClient(it, googleSignInOptions).signInIntent }
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            model.getUserDataFromGoogleAccount(task)
+        }
+    }
+
     override fun initViewModel() {
+        model.subscribeOnAccountExists().observe(viewLifecycleOwner, {
+            sign_in_button.visibility = if (it) View.GONE else View.VISIBLE
+        })
+
+        model.subscribeOnUserName().observe(viewLifecycleOwner, { userName ->
+            userName?.let {
+                user_greeting.apply {
+                    visibility = View.VISIBLE
+                    text = (getString(R.string.user_greeting_text) + " " + it)
+                }
+            } ?: let { user_greeting.visibility = View.GONE }
+        })
+
         model.subscribeOnSuccess().observe(viewLifecycleOwner, {
             it.data?.let { listStoryLocal ->
                 model.onStartScreenNumberOfTaleStat(listStoryLocal.count())

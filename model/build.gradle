@@ -44,11 +44,20 @@ dependencies {
     implementation Glide.glide
     kapt Glide.glide_compiler
 
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.4.10"
+
     //Test
     testImplementation TestImpl.junit
 
     androidTestImplementation TestImpl.ext
     androidTestImplementation TestImpl.espresso
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Timber
+    implementation Timber.timber
+
+
 }
 repositories {
     mavenCentral()
