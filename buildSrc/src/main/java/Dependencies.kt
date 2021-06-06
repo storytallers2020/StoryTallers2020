@@ -9,19 +9,24 @@ object Config {
 }
 
 object Releases {
-    /** versions naming rule
-     * VERSION_CODE must be updated with EACH build for GooglePlay.
-     * VER_RELEASE is a release counter. Update when merging Dev to Master.
-     * VER_PATCH is a patches counter. Update when merge user visible or significant features.
-     * VER_MERGE is a counter for simple merges. Update when merge minor updates to Dev.
+    /**
+     * ### Versions naming rule
+     *
+     * [VERSION_CODE] must be updated with ***each*** build for GooglePlay.
+     *
+     * [VER_RELEASE] is a release counter. Update when merging Dev to Master.
+     *
+     * [VER_PATCH] is a patches counter. Update when merge user visible or significant features.
+     *
+     * [VER_MERGE] is a counter for simple merges. Update when merge minor updates to Dev.
      */
-    private const val VERSION_CODE = 11
+    private const val VERSION_CODE = 12
     private const val VER_RELEASE = 1
-    private const val VER_FEATURE = 4
-    private const val VER_BUILD = 0
+    private const val VER_PATCH = 4
+    private const val VER_MERGE = 1
 
     const val version_code = VERSION_CODE
-    const val version_name = "$VER_RELEASE.$VER_FEATURE.$VER_BUILD"
+    const val version_name = "$VER_RELEASE.$VER_PATCH.$VER_MERGE"
 }
 
 
