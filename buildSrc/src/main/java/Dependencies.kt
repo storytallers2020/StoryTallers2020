@@ -26,7 +26,7 @@ object Releases {
     private const val VER_MERGE = 2
 
     const val version_code = VERSION_CODE
-    const val version_name = "($VERSION_CODE) $VER_RELEASE.$VER_PATCH.$VER_MERGE"
+    const val version_name = "$VER_RELEASE.$VER_PATCH.$VER_MERGE"
 }
 
 
