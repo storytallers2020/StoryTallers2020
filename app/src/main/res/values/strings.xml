@@ -10,7 +10,7 @@
     <string name="ad_app_id" translatable="false">ca-app-pub-8179777113013566~5377493806</string>
 
     //Splash screen
-    <string name="version" translatable="false">Version: %1$d (%2$s)</string>
+    <string name="version" translatable="false">Version: %1$s</string>
     <string name="version_tools" translatable="false">Version: 5 (0.1.2)</string>
     <string name="factor" translatable="false">1.5</string>
 

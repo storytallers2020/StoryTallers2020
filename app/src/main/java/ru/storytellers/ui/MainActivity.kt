@@ -1,5 +1,6 @@
 package ru.storytellers.ui
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.android.ext.android.inject
 import ru.storytellers.R
+import ru.storytellers.di.injectDependencies
 import ru.storytellers.navigation.Screens
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -22,10 +24,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+        injectDependencies()
+        showSplashScreen()
 
         turnOffFullScreen()
         router.replaceScreen(Screens.StartScreen())
 
+    }
+
+    private fun showSplashScreen() {
+        startActivity(Intent(this, SplashActivity::class.java))
     }
 
     private fun turnOffFullScreen() {

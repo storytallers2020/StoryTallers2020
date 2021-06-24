@@ -142,8 +142,7 @@ class LibraryFragment : BaseFragment<DataModel>(), DialogCaller {
     }
 
     override fun backClicked(): Boolean {
-        model.onBackClicked(this.javaClass.simpleName)
-        router.exit()
+        toStartScreen()
         return true
     }
 

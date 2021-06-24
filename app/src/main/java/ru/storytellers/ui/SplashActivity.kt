@@ -31,8 +31,7 @@ class SplashActivity : AppCompatActivity(), DialogCaller{
     }
 
     private fun setVersionText() {
-        version_text.text =
-            getString(R.string.version, BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME)
+        version_text.text = getString(R.string.version, BuildConfig.VERSION_NAME)
     }
 
 
@@ -64,7 +63,6 @@ class SplashActivity : AppCompatActivity(), DialogCaller{
 
     private fun startActivityWithDelay(delay: Long) {
         Handler().postDelayed({
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
         }, delay)
     }
