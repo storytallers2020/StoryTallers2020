@@ -20,10 +20,10 @@ object Releases {
      *
      * [VER_MERGE] is a counter for simple merges. Update when merge minor updates to Dev.
      */
-    private const val VERSION_CODE = 12
+    private const val VERSION_CODE = 13
     private const val VER_RELEASE = 1
     private const val VER_PATCH = 4
-    private const val VER_MERGE = 1
+    private const val VER_MERGE = 2
 
     const val version_code = VERSION_CODE
     const val version_name = "($VERSION_CODE) $VER_RELEASE.$VER_PATCH.$VER_MERGE"

@@ -63,7 +63,6 @@ class SplashActivity : AppCompatActivity(), DialogCaller{
 
     private fun startActivityWithDelay(delay: Long) {
         Handler().postDelayed({
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
         }, delay)
     }
