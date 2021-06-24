@@ -102,7 +102,7 @@ class StartFragment : BaseFragment<DataModel>(), DialogCaller {
 
     override fun initViewModel() {
         model.subscribeOnAccountExists().observe(viewLifecycleOwner, {
-            sign_in_button.visibility = if (it) View.GONE else View.VISIBLE
+//            sign_in_button.visibility = if (it) View.GONE else View.VISIBLE
         })
 
         model.subscribeOnUserName().observe(viewLifecycleOwner, { userName ->
